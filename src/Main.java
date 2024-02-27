@@ -6,7 +6,7 @@ import rule.impl.enforcer.MinimumEnforcer;
 import rule.impl.ConditionalRule;
 import state.board.Position;
 import state.State;
-import state.board.Tank;
+import state.board.unit.Tank;
 
 import java.util.List;
 
@@ -22,16 +22,18 @@ public class Main {
         // Test IEnforceable
         s.getBoard().putUnit(t);
         t.setDurability(-1);
-        System.out.println(t);
+        System.out.println(t.toInfoString());
         enforcerRuleset.enforceRules(s, t);
-        System.out.println(t);
+        System.out.println(t.toInfoString());
 
 
         // Test IApplicableRule
         ApplicableRuleset applicableRuleset = new ApplicableRuleset();
-        applicableRuleset.put(Tank.class, new ConditionalRule<>((x, y) -> x.getDurability() == 0, (x, y) -> System.out.println("DEAD")));
+        applicableRuleset.put(Tank.class, new ConditionalRule<>(
+                (x, y) -> x.getDurability() == 0, (x, y) -> System.out.println("Conditional rules work"))
+        );
 
-        for (Tank tank : s.getBoard().gather(Tank.class)) {
+        for (Tank tank : s.getBoard().gatherUnits(Tank.class)) {
             applicableRuleset.applyRules(s, tank);
         }
 
@@ -48,11 +50,14 @@ public class Main {
         t.setGold(3);
         possibleActions = possiblePlayerActions.applicableConditionalRules(Tank.class, s, t);
         System.out.println("Applicable actions: " + possibleActions.size());
-        System.out.println(t);
+        System.out.println(t.toInfoString());
         for (IConditionalRule<Tank> action  : possibleActions) {
             action.apply(s, t);
         }
-        System.out.println(t);
+        System.out.println(t.toInfoString());
+
+        System.out.println(s.getBoard().toUnitString());
+        System.out.println(s.getBoard().toFloorString());
 
     }
 }

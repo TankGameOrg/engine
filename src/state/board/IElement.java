@@ -1,3 +1,5 @@
 package state.board;
 
-public interface IElement { }
+public interface IElement {
+
+}

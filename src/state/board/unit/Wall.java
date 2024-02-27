@@ -1,4 +1,7 @@
-package state.board;
+package state.board.unit;
+
+import state.board.AbstractDestroyable;
+import state.board.Position;
 
 public class Wall extends AbstractDestroyable {
 
@@ -13,5 +16,10 @@ public class Wall extends AbstractDestroyable {
     @Override
     public void handleDestruction() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "W";
     }
 }

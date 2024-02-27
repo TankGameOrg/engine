@@ -1,9 +1,8 @@
 package state.board;
 
-import state.board.IDestroyable;
-import state.board.Position;
+import state.board.unit.IDurable;
 
-public abstract class AbstractDestroyable implements IDestroyable {
+public abstract class AbstractDestroyable implements IDurable {
 
     protected Position position;
     protected int durability;

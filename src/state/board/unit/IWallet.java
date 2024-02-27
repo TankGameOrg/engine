@@ -1,4 +1,4 @@
-package state.board;
+package state.board.unit;
 
 public interface IWallet {
     int getGold();

@@ -1,9 +1,12 @@
-package state.board;
+package state.board.unit;
 
 import rule.type.IPlayerElement;
 import rule.type.ITickElement;
+import state.board.AbstractDestroyable;
+import state.board.Position;
+import state.board.IMovable;
 
-public class Tank extends AbstractDestroyable implements IMovable, IDestroyable, IWallet, IRanged, ITickElement, IPlayerElement {
+public class Tank extends AbstractDestroyable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable {
 
     int actions;
     int gold;
@@ -60,6 +63,10 @@ public class Tank extends AbstractDestroyable implements IMovable, IDestroyable,
 
     @Override
     public String toString() {
+        return "T";
+    }
+
+    public String toInfoString() {
         return "Tank{" +
                 "actions=" + actions +
                 ", gold=" + gold +
