@@ -1,4 +1,4 @@
 package state.board.unit;
 
-public interface IWalkable {
+public interface IWalkable extends IUnit {
 }

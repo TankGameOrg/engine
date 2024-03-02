@@ -1,12 +1,7 @@
 package state.board;
 
-import state.board.Position;
-import state.board.unit.IUnit;
-
-public interface IMovable extends IUnit {
+public interface IMovable extends IElement {
 
     void setPosition(Position position);
-
-    void onMove();
 
 }

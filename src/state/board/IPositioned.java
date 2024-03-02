@@ -1,5 +1,5 @@
 package state.board;
 
-public interface IPositioned {
+public interface IPositioned extends IElement {
     Position getPosition();
 }

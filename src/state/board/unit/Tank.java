@@ -2,11 +2,10 @@ package state.board.unit;
 
 import rule.type.IPlayerElement;
 import rule.type.ITickElement;
-import state.board.AbstractDestroyable;
 import state.board.Position;
 import state.board.IMovable;
 
-public class Tank extends AbstractDestroyable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable {
+public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable {
 
     int actions;
     int gold;
@@ -34,6 +33,10 @@ public class Tank extends AbstractDestroyable implements IMovable, IWallet, IRan
         return range;
     }
 
+    public boolean isDead() {
+        return dead;
+    }
+
     @Override
     public void setPosition(Position position) {
         this.position = position;
@@ -51,14 +54,8 @@ public class Tank extends AbstractDestroyable implements IMovable, IWallet, IRan
         this.range = range;
     }
 
-    @Override
-    public void handleDestruction() {
-
-    }
-
-    @Override
-    public void onMove() {
-
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 
     @Override

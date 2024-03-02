@@ -3,10 +3,11 @@ package state.board;
 import state.board.floor.IFloor;
 import state.board.floor.StandardFloor;
 import state.board.unit.IUnit;
-import state.board.unit.NullUnit;
+import state.board.unit.EmptyUnit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Board {
 
@@ -22,33 +23,58 @@ public class Board {
     private final IUnit[][] unitBoard;
     private final IFloor[][] floorBoard;
 
+    private final int width;
+    private final int height;
+
     public Board(int width, int height) {
         assert width > 0;
         assert height > 0;
+        this.width = width;
+        this.height = height;
         this.unitBoard = new IUnit[width][height];
         this.floorBoard = new IFloor[width][height];
         for (int i = 0; i < width; ++i) {
             for (int j = 0; j < height; ++j) {
-                unitBoard[i][j] = new NullUnit();
+                unitBoard[i][j] = new EmptyUnit(new Position(i, j));
                 floorBoard[i][j] = new StandardFloor(new Position(i, j));
             }
         }
     }
 
-    public void putUnit(IUnit unit) {
-        unitBoard[unit.getPosition().x()][unit.getPosition().y()] = unit;
+    private boolean validPosition(Position p) {
+        return (p.x() >= 0 && p.y() >= 0 && p.x() < width && p.y() < height);
     }
 
-    public IUnit getUnit(Position p) {
-        return unitBoard[p.x()][p.y()];
+
+    private <T extends IPositioned> boolean putElementOnBoard(T[][] board, T element) {
+        if (validPosition(element.getPosition())) {
+            board[element.getPosition().x()][element.getPosition().y()] = element;
+            return true;
+        }
+        return false;
     }
 
-    public void putFloor(IFloor floor) {
-        floorBoard[floor.getPosition().x()][floor.getPosition().y()] = floor;
+    private <T extends IPositioned> Optional<T> getElementOnBoard(T[][] board, Position p) {
+        if (validPosition(p)) {
+            return Optional.of(board[p.x()][p.y()]);
+        }
+        return Optional.empty();
     }
 
-    public IFloor getFloor(Position p) {
-        return floorBoard[p.x()][p.y()];
+    public boolean putUnit(IUnit unit) {
+        return putElementOnBoard(unitBoard, unit);
+    }
+
+    public Optional<IUnit> getUnit(Position p) {
+        return getElementOnBoard(unitBoard, p);
+    }
+
+    public boolean putFloor(IFloor floor) {
+        return putElementOnBoard(floorBoard, floor);
+    }
+
+    public Optional<IFloor> getFloor(Position p) {
+        return getElementOnBoard(floorBoard, p);
     }
 
 

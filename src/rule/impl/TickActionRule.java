@@ -5,11 +5,11 @@ import state.State;
 
 import java.util.function.BiConsumer;
 
-public class TickAction<T extends ITickElement> implements IApplicableRule<T> {
+public class TickActionRule<T extends ITickElement> implements IApplicableRule<T> {
 
     private final BiConsumer<T, State> consumer;
 
-    public TickAction(BiConsumer<T, State> consumer) {
+    public TickActionRule(BiConsumer<T, State> consumer) {
         this.consumer = consumer;
     }
 

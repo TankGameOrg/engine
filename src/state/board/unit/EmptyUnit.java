@@ -2,14 +2,17 @@ package state.board.unit;
 
 import state.board.Position;
 
-public class NullUnit implements IUnit, IWalkable {
+public class EmptyUnit implements IWalkable {
 
-    public NullUnit() {
+    private Position position;
+
+    public EmptyUnit(Position position) {
+        this.position = position;
     }
 
     @Override
     public Position getPosition() {
-        throw new Error("Attempted to get position of null unit");
+        return position;
     }
 
     @Override

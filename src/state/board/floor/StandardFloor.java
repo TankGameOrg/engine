@@ -6,7 +6,7 @@ import state.board.Position;
 public class StandardFloor extends ConditionallyWalkableFloor {
 
     public StandardFloor(Position position) {
-        super(position, (f, b) -> b.getUnit(f.getPosition()) instanceof IWalkable);
+        super(position, (f, b) -> b.getUnit(f.getPosition()).orElse(null) instanceof IWalkable);
     }
 
     @Override

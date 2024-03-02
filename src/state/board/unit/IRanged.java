@@ -1,6 +1,6 @@
 package state.board.unit;
 
-public interface IRanged {
+public interface IRanged extends IUnit {
 
     public int getRange();
     public void setRange(int range);
