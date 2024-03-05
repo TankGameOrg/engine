@@ -9,7 +9,6 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
     private final ITriConsumer<T, U, State> consumer;
 
 
-
     public PlayerActionRule(ITriPredicate<T, U, State> predicate, ITriConsumer<T, U, State> consumer) {
         this.predicate = predicate;
         this.consumer = consumer;

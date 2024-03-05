@@ -10,10 +10,7 @@ import state.board.Position;
 import state.State;
 import state.board.Util;
 import state.board.floor.GoldMine;
-import state.board.unit.EmptyUnit;
-import state.board.unit.IDurable;
-import state.board.unit.Tank;
-import state.board.unit.Wall;
+import state.board.unit.*;
 
 import java.util.*;
 
@@ -48,6 +45,91 @@ public class Main {
             }
         }
         return output;
+    }
+
+    private static boolean pointsSeparated(int a, int b, int c, Position p1, Position p2) {
+        int fx1 = a * p1.x() + b * p1.y() - c;
+        int fx2 = a * p2.x() + b * p2.y() - c;
+
+        System.out.printf("%s %s %d %d\n", p1, p2, fx1, fx2);
+
+        // points are separated by the line if the signs are opposite, or points hit a corner if fx1 == fx2
+        return (fx1 * fx2) < 0 || fx1 == fx2;
+    }
+
+    private static boolean lineOfSight(State s, Position p1, Position p2) {
+        int minx = Math.min(p1.x(), p2.x());
+        int maxx = Math.max(p1.x(), p2.x());
+        int miny = Math.min(p1.y(), p2.y());
+        int maxy = Math.max(p1.y(), p2.y());
+
+        int dx = p1.x() - p2.x();
+        int dy = p1.y() - p2.y();
+
+        Set<Position> points = new HashSet<>();
+
+        // handle undefined slope
+        if (dx == 0) {
+            for (int y = miny + 1; y < maxy; ++y) {
+                // we can use minx here since minx == maxx
+                points.add(new Position(minx, y));
+            }
+        } else if (dy == 0) {
+            for (int x = minx + 1; x < maxx; ++x) {
+                // we can use miny here since miny == maxy
+                points.add(new Position(x, miny));
+            }
+        } else {
+            float slope = dx / (float) dy;
+
+            // y - p1.y() = slope * (x - p1.x())
+            // y - (dy/dx) * x - p1.y() + (dy/dx) * p1.x() = 0
+            // dx*y - dy*x - dx*p1.y() + dy*p1.x() = 0
+            // dy*x - dx*y + (dy*p1.x() - dx*p1.y()) = 0
+            // Ax + By + C = 0
+            int a = dy;
+            int b = -dx;
+            int c = dx * p1.y() - dy * p1.x();
+
+
+            for (int x = minx; x <= maxx; ++x) {
+                for (int y = miny; y <= maxy; ++y) {
+                    // p1|p2 are eiter A|C or B|D
+                    // A--B
+                    // |  |
+                    // D--C
+                    // A is +0,+0
+                    // B is +1,+0
+                    // C is +1,+1
+                    // D is +0,+1
+                    // use A|C if slope is positive or zero
+                    // use B|D if the slope is negative
+                    Position q1, q2;
+                    if (slope >= 0) {
+                        q1 = new Position(x, y);
+                        q2 = new Position(x + 1, y + 1);
+                    } else {
+                        q1 = new Position(x + 1, y);
+                        q2 = new Position(x, y + 1);
+                    }
+                    if (pointsSeparated(a, b, c, q1, q2)) {
+                        points.add(new Position(x, y));
+                    }
+                }
+            }
+        }
+
+        points.remove(p1);
+        points.remove(p2);
+
+        System.out.println(points);
+
+        for (Position p : points) {
+            if (!(s.getBoard().getUnit(p).orElse(null) instanceof IWalkable)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -192,6 +274,8 @@ public class Main {
             action.apply(s, t, t);
         }
         System.out.println(t.toInfoString());
+
+        lineOfSight(s, new Position(0,0), new Position(2,2));
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());

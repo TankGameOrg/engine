@@ -51,13 +51,15 @@ public class PlayerRuleset {
 
     public <T extends IPlayerElement> List<IPlayerRule<T, ?>> getAllRulesForSubject(Class<T> t) {
         return rules.keySet().stream().filter(k -> k.getLeftClass().equals(t))
-                .map(k -> (IPlayerRule<T, ?>) rules.get(k))
+                .map(k -> (List<IPlayerRule<T, ?>>) ((Object)rules.get(k)))
+                .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
 
     public <T extends IPlayerElement> List<IPlayerRule<?, T>> getAllRulesForTarget(Class<T> t) {
         return rules.keySet().stream().filter(k -> k.getRightClass().equals(t))
-                .map(k -> (IPlayerRule<?, T>) rules.get(k))
+                .map(k -> (List<IPlayerRule<?, T>>) ((Object)rules.get(k)))
+                .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
 
