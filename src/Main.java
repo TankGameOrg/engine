@@ -47,17 +47,15 @@ public class Main {
         return output;
     }
 
-    private static boolean pointsSeparated(int a, int b, int c, Position p1, Position p2) {
-        int fx1 = a * p1.x() + b * p1.y() - c;
-        int fx2 = a * p2.x() + b * p2.y() - c;
-
-        System.out.printf("%s %s %d %d\n", p1, p2, fx1, fx2);
+    private static boolean pointsSeparated(int a, int b, int c, float x1, float y1, float x2, float y2) {
+        float fx1 = a * x1 + b * y1 - c;
+        float fx2 = a * x2 + b * y2 - c;
 
         // points are separated by the line if the signs are opposite, or points hit a corner if fx1 == fx2
         return (fx1 * fx2) < 0 || fx1 == fx2;
     }
 
-    private static boolean lineOfSight(State s, Position p1, Position p2) {
+    private static Set<Position> pointsBetweenLineOfSight(State s, Position p1, Position p2) {
         int minx = Math.min(p1.x(), p2.x());
         int maxx = Math.max(p1.x(), p2.x());
         int miny = Math.min(p1.y(), p2.y());
@@ -95,24 +93,32 @@ public class Main {
             for (int x = minx; x <= maxx; ++x) {
                 for (int y = miny; y <= maxy; ++y) {
                     // p1|p2 are eiter A|C or B|D
-                    // A--B
-                    // |  |
-                    // D--C
-                    // A is +0,+0
-                    // B is +1,+0
-                    // C is +1,+1
-                    // D is +0,+1
+                    // A---B
+                    // | X |
+                    // D---C
+                    // A is -.5,-.5
+                    // B is +.5,-.5
+                    // C is +.5,+.5
+                    // D is -.5,+.5
                     // use A|C if slope is positive or zero
                     // use B|D if the slope is negative
-                    Position q1, q2;
+                    float x1, y1, x2, y2;
                     if (slope >= 0) {
-                        q1 = new Position(x, y);
-                        q2 = new Position(x + 1, y + 1);
+                        // A
+                        x1 = x-0.5f;
+                        y1 = y-0.5f;
+                        // C
+                        x2 = x+0.5f;
+                        y2 = y+0.5f;
                     } else {
-                        q1 = new Position(x + 1, y);
-                        q2 = new Position(x, y + 1);
+                        // B
+                        x1 = x+0.5f;
+                        y1 = y-0.5f;
+                        // D
+                        x2 = x-0.5f;
+                        y2 = y+0.5f;
                     }
-                    if (pointsSeparated(a, b, c, q1, q2)) {
+                    if (pointsSeparated(a, b, c, x1, y1, x2, y2)) {
                         points.add(new Position(x, y));
                     }
                 }
@@ -122,9 +128,11 @@ public class Main {
         points.remove(p1);
         points.remove(p2);
 
-        System.out.println(points);
+        return points;
+    }
 
-        for (Position p : points) {
+    private static boolean hasLineOfSight(State s, Position p1, Position p2) {
+        for (Position p : pointsBetweenLineOfSight(s, p1, p2)) {
             if (!(s.getBoard().getUnit(p).orElse(null) instanceof IWalkable)) {
                 return false;
             }
@@ -275,7 +283,16 @@ public class Main {
         }
         System.out.println(t.toInfoString());
 
-        lineOfSight(s, new Position(0,0), new Position(2,2));
+
+        Position zero = new Position(0, 0);
+        // horizontal, no interrupt
+        System.out.printf("line of sight (expect true): %b\n", hasLineOfSight(s, zero, new Position(5,0)));
+        // vertical, yes interrupt
+        System.out.printf("line of sight (expect false): %b\n", hasLineOfSight(s, zero, new Position(0,5)));
+        // diagonal, check corners, yes interrupt
+        System.out.printf("line of sight (expect false): %b\n", hasLineOfSight(s, zero, new Position(1,1)));
+        // adjacent horizontal, implicit no interrupt
+        System.out.printf("line of sight (expect true): %b\n", hasLineOfSight(s, zero, new Position(0,1)));
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
