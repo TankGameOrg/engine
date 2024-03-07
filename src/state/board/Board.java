@@ -11,15 +11,6 @@ import java.util.Optional;
 
 public class Board {
 
-    /*
-     * Visual board representation
-     *  +----X
-     *  |
-     *  |
-     *  |
-     *  |
-     *  Y
-     */
     private final IUnit[][] unitBoard;
     private final IFloor[][] floorBoard;
 
@@ -48,7 +39,7 @@ public class Board {
 
     private <T extends IPositioned> boolean putElementOnBoard(T[][] board, T element) {
         if (validPosition(element.getPosition())) {
-            board[element.getPosition().x()][element.getPosition().y()] = element;
+            board[element.getPosition().y()][element.getPosition().x()] = element;
             return true;
         }
         return false;
@@ -56,7 +47,7 @@ public class Board {
 
     private <T extends IPositioned> Optional<T> getElementOnBoard(T[][] board, Position p) {
         if (validPosition(p)) {
-            return Optional.of(board[p.x()][p.y()]);
+            return Optional.of(board[p.y()][p.x()]);
         }
         return Optional.empty();
     }

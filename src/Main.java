@@ -47,15 +47,16 @@ public class Main {
         return output;
     }
 
-    private static boolean pointsSeparated(int a, int b, int c, float x1, float y1, float x2, float y2) {
-        float fx1 = a * x1 + b * y1 - c;
-        float fx2 = a * x2 + b * y2 - c;
+    private static boolean pointsSeparated(int a, int b, int c, int x1, int y1, int x2, int y2) {
+        int fx1 = a * x1 + b * y1 + c;
+        int fx2 = a * x2 + b * y2 + c;
+        int corner = a * x1 + b * y2 + c;
 
-        // points are separated by the line if the signs are opposite, or points hit a corner if fx1 == fx2
-        return (fx1 * fx2) < 0 || fx1 == fx2;
+        // points are separated by the line if the signs are opposite; detect if a corner is hit
+        return (fx1 * fx2) <= 0 || corner == 0;
     }
 
-    private static Set<Position> pointsBetweenLineOfSight(State s, Position p1, Position p2) {
+    private static Set<Position> pointsBetweenLineOfSight(Position p1, Position p2) {
         int minx = Math.min(p1.x(), p2.x());
         int maxx = Math.max(p1.x(), p2.x());
         int miny = Math.min(p1.y(), p2.y());
@@ -78,8 +79,6 @@ public class Main {
                 points.add(new Position(x, miny));
             }
         } else {
-            float slope = dx / (float) dy;
-
             // y - p1.y() = slope * (x - p1.x())
             // y - (dy/dx) * x - p1.y() + (dy/dx) * p1.x() = 0
             // dx*y - dy*x - dx*p1.y() + dy*p1.x() = 0
@@ -89,34 +88,39 @@ public class Main {
             int b = -dx;
             int c = dx * p1.y() - dy * p1.x();
 
-
             for (int x = minx; x <= maxx; ++x) {
                 for (int y = miny; y <= maxy; ++y) {
-                    // p1|p2 are eiter A|C or B|D
+                    // X represents the given position of the square
+                    // each position represents a square given by XABC as shown below
                     // A---B
-                    // | X |
-                    // D---C
-                    // A is -.5,-.5
-                    // B is +.5,-.5
-                    // C is +.5,+.5
-                    // D is -.5,+.5
-                    // use A|C if slope is positive or zero
-                    // use B|D if the slope is negative
-                    float x1, y1, x2, y2;
-                    if (slope >= 0) {
+                    // |   |
+                    // X---C
+                    // x1y1|x2y2 are thus eiter A|C or X|B
+                    // X is +0,+0
+                    // A is +0,+1
+                    // B is +1,+1
+                    // C is +1,+0
+                    // we need to check if the line divides two corners of the square
+                    // use A|C if slope's sign is positive or zero
+                    // use X|B if the slope's sign is negative
+                    int x1, y1, x2, y2;
+
+                    // dy/dx is the slope but dy*dx has the same sign but is safer and faster
+                    int sign = dy * dx;
+                    if (sign >= 0) {
                         // A
-                        x1 = x-0.5f;
-                        y1 = y-0.5f;
+                        x1 = x;
+                        y1 = y+1;
                         // C
-                        x2 = x+0.5f;
-                        y2 = y+0.5f;
+                        x2 = x+1;
+                        y2 = y;
                     } else {
+                        // X
+                        x1 = x;
+                        y1 = y;
                         // B
-                        x1 = x+0.5f;
-                        y1 = y-0.5f;
-                        // D
-                        x2 = x-0.5f;
-                        y2 = y+0.5f;
+                        x2 = x+1;
+                        y2 = y+1;
                     }
                     if (pointsSeparated(a, b, c, x1, y1, x2, y2)) {
                         points.add(new Position(x, y));
@@ -132,7 +136,7 @@ public class Main {
     }
 
     private static boolean hasLineOfSight(State s, Position p1, Position p2) {
-        for (Position p : pointsBetweenLineOfSight(s, p1, p2)) {
+        for (Position p : pointsBetweenLineOfSight(p1, p2)) {
             if (!(s.getBoard().getUnit(p).orElse(null) instanceof IWalkable)) {
                 return false;
             }
@@ -293,6 +297,10 @@ public class Main {
         System.out.printf("line of sight (expect false): %b\n", hasLineOfSight(s, zero, new Position(1,1)));
         // adjacent horizontal, implicit no interrupt
         System.out.printf("line of sight (expect true): %b\n", hasLineOfSight(s, zero, new Position(0,1)));
+
+        // corner case, yes interrupt
+        s.getBoard().putUnit(new Tank(new Position(5, 1), 0, 0, 3, 2));
+        System.out.printf("line of sight (expect false): %b\n", hasLineOfSight(s, zero, new Position(5,2)));
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
