@@ -11,6 +11,7 @@ import state.State;
 import state.board.Util;
 import state.board.floor.GoldMine;
 import state.board.unit.*;
+import state.meta.Council;
 
 import java.util.*;
 
@@ -56,7 +57,7 @@ public class Main {
         return (fx1 * fx2) <= 0 || corner == 0;
     }
 
-    private static Set<Position> pointsBetweenLineOfSight(Position p1, Position p2) {
+    private static Set<Position> allPointsBetweenLineOfSight(Position p1, Position p2) {
         int minx = Math.min(p1.x(), p2.x());
         int maxx = Math.max(p1.x(), p2.x());
         int miny = Math.min(p1.y(), p2.y());
@@ -136,7 +137,7 @@ public class Main {
     }
 
     private static boolean hasLineOfSight(State s, Position p1, Position p2) {
-        for (Position p : pointsBetweenLineOfSight(p1, p2)) {
+        for (Position p : allPointsBetweenLineOfSight(p1, p2)) {
             if (!(s.getBoard().getUnit(p).orElse(null) instanceof IWalkable)) {
                 return false;
             }
@@ -154,9 +155,10 @@ public class Main {
         unitInvariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
         unitInvariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
         unitInvariants.put(Wall.class, new MinimumEnforcer<>(Wall::getDurability, Wall::setDurability, 0));
+        unitInvariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
 
 
-        State s = new State(11, 11);
+        State s = new State(11, 11, new HashSet<>());
         Tank t = new Tank(new Position(0, 0), 3, 0, 3, 2);
         s.getBoard().putUnit(new Tank(new Position(0, 1), 3, 0, 3, 2));
         s.getBoard().putFloor(new GoldMine(new Position(0, 0)));
@@ -226,29 +228,37 @@ public class Main {
         t.setDurability(1);
 
 
-        // Test IPlayerRule
+        // Test IPlayerRule with v3 player actions
         PlayerRuleset possiblePlayerActions = new PlayerRuleset();
+
+        // Buy 1 action
         possiblePlayerActions.putSelfRule(Tank.class,
                 new PlayerSelfActionRule<>((x, y) -> x.getGold() >= 3, (x, y) -> {
                     x.setActions(x.getActions() + 1);
                     x.setGold(x.getGold()-3);
         }));
+
+        // Buy 2 actions
         possiblePlayerActions.putSelfRule(Tank.class,
                 new PlayerSelfActionRule<>((x, y) -> x.getGold() >= 5, (x, y) -> {
                     x.setActions(x.getActions() + 2);
                     x.setGold(x.getGold()-5);
         }));
+
+        // Upgrade range
         possiblePlayerActions.putSelfRule(Tank.class,
                 new PlayerSelfActionRule<>((x, y) -> x.getGold() >= 8, (x, y) -> {
                     x.setRange(x.getRange() + 1);
                     x.setGold(x.getGold()-8);
                 }));
+
+        // Shoot
         possiblePlayerActions.put(Tank.class, Position.class, new PlayerActionRule<>((x, y, z) ->
-            x.getActions() >= 1 && x.getPosition().distanceFrom(y) <= x.getRange()
+            x.getActions() >= 1 && x.getPosition().distanceFrom(y) <= x.getRange() && hasLineOfSight(s, x.getPosition(), y)
                     && z.getBoard().getUnit(y).orElse(null) instanceof IDurable,
                 (x, y, z) -> {
-            x.setActions(x.getActions() - 1);
             if (z.getBoard().getUnit(y).orElse(null) instanceof IDurable unit) {
+                x.setActions(x.getActions() - 1);
                 if (unit instanceof Tank tank) {
                     boolean hit = false;
                     Random random = new Random(System.currentTimeMillis());
@@ -289,6 +299,7 @@ public class Main {
 
 
         Position zero = new Position(0, 0);
+
         // horizontal, no interrupt
         System.out.printf("line of sight (expect true): %b\n", hasLineOfSight(s, zero, new Position(5,0)));
         // vertical, yes interrupt

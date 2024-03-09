@@ -1,12 +1,11 @@
 package rule.impl.enforcer;
 
-import state.board.IElement;
 import state.State;
 
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-public class PredicateEnforcer<T extends IElement, U extends Comparable<U>> implements IEnforceable<T, U> {
+public class PredicateEnforcer<T, U extends Comparable<U>> implements IEnforceable<T> {
 
     private final Predicate<T> predicate;
     private final BiConsumer<T, U> setter;

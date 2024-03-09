@@ -4,17 +4,29 @@ import rule.type.IPlayerElement;
 import rule.type.ITickElement;
 import state.board.Position;
 import state.board.IMovable;
+import state.meta.Player;
 
 public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable {
 
-    int actions;
-    int gold;
-    int range;
+    private final Player player;
+    private int actions;
+    private int gold;
+    private int range;
 
-    boolean dead;
+    private boolean dead;
+
+    public Tank(Player player, Position position, int actions, int gold, int durability, int range) {
+        super(position, durability);
+        this.player = player;
+        this.actions = actions;
+        this.gold = gold;
+        this.range = range;
+        this.dead = false;
+    }
 
     public Tank(Position position, int actions, int gold, int durability, int range) {
         super(position, durability);
+        this.player = new Player("Test");
         this.actions = actions;
         this.gold = gold;
         this.range = range;
@@ -72,5 +84,10 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
                 ", position=" + position +
                 ", durability=" + durability +
                 '}';
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 }

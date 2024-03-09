@@ -1,5 +1,7 @@
 package rule.type;
 
-public interface IPlayerElement {
+import state.meta.Player;
 
+public interface IPlayerElement {
+    Player getPlayer();
 }

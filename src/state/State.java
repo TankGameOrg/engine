@@ -1,21 +1,34 @@
 package state;
 
 import state.board.Board;
+import state.meta.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 public class State {
 
     private final Board board;
+    private Map<String, Player> players;
     private int tick;
 
-    public State(int boardWidth, int boardHeight) {
+    public State(int boardWidth, int boardHeight, Set<String> players) {
         this.board = new Board(boardWidth, boardHeight);
+        this.players = new HashMap<>();
+        for (String player : players) {
+            this.players.put(player, new Player(player));
+        }
         this.tick = 0;
     }
 
-    public void noop() {}
-
     public Board getBoard() {
         return board;
+    }
+
+    public Optional<Player> getPlayer(String name) {
+        return Optional.ofNullable(players.get(name));
     }
 
     public int getTick() {
