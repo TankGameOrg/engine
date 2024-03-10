@@ -1,17 +1,17 @@
 package rule.annotation;
 
 import rule.definition.TickActionRule;
-import rule.definition.player.ITriConsumer;
-import rule.definition.player.ITriPredicate;
+import util.ITriConsumer;
+import util.ITriPredicate;
 import rule.impl.Version3;
 import state.State;
 import state.board.Position;
 import state.board.unit.Tank;
 import util.Pair;
+import util.ReflectionUtil;
 import util.Triple;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -56,19 +56,19 @@ public class AnnotationProcessor {
                 String id = annotation.id();
                 switch (annotation.type()) {
                     case ENFORCEABLE -> {
-                        BiConsumer<?, State> consumer = toBiConsumer(method);
+                        BiConsumer<?, State> consumer = ReflectionUtil.toBiConsumer(method);
                         enforceableRules.put(id, Pair.of(method.getParameters()[1].getType(), consumer));
                     }
                     case TICK -> {
-                        BiConsumer<?, State> consumer = toBiConsumer(method);
+                        BiConsumer<?, State> consumer = ReflectionUtil.toBiConsumer(method);
                         tickRules.put(id, Pair.of(method.getParameters()[1].getType(), consumer));
                     }
                     case CONDITIONAL -> {
-                        BiConsumer<?, State> consumer = toBiConsumer(method);
+                        BiConsumer<?, State> consumer = ReflectionUtil.toBiConsumer(method);
                         conditionalRules.put(id, Pair.of(method.getParameters()[1].getType(), consumer));
                     }
                     case PLAYER -> {
-                        ITriConsumer<? , ?, State> predicate = toTriConsumer(method);
+                        ITriConsumer<? , ?, State> predicate = ReflectionUtil.toTriConsumer(method);
                         playerRules.put(id, Triple.of(method.getParameters()[1].getType(), method.getParameters()[2].getType(), predicate));
                     }
                 }
@@ -77,11 +77,11 @@ public class AnnotationProcessor {
                 String id = annotation.id();
                 switch (annotation.type()) {
                     case CONDITIONAL -> {
-                        BiPredicate<?, State> predicate = toBiPredicate(method);
+                        BiPredicate<?, State> predicate = ReflectionUtil.toBiPredicate(method);
                         conditionalConditions.put(id, Pair.of(method.getParameters()[1].getType(), predicate));
                     }
                     case PLAYER -> {
-                        ITriPredicate<? , ?, State> predicate = toTriPredicate(method);
+                        ITriPredicate<? , ?, State> predicate = ReflectionUtil.toTriPredicate(method);
                         playerConditions.put(id, Triple.of(method.getParameters()[1].getType(), method.getParameters()[2].getType(), predicate));
                     }
                 }
@@ -104,89 +104,6 @@ public class AnnotationProcessor {
 
     public static Optional<RulesetDescription> getRuleset(int version) {
         return Optional.ofNullable(rulesets.get(version));
-    }
-
-    // TODO move all functions below to a utility class
-    private static void expectParameters(Method method, int argc) {
-        assert argc > 0;
-        Parameter[] parameters = method.getParameters();
-        if (parameters.length != argc) {
-            System.err.printf("Method `%s` does not have exactly %d fields\n", method.getName(), argc);
-            System.exit(1);
-        } else if (!parameters[argc-1].getType().equals(State.class)) {
-            System.err.printf("Method `%s` does does not consume a State as its last parameter\n", method.getName());
-            System.exit(1);
-        }
-    }
-
-    private static <T> void expectReturnType(Method method, Class<T> clazz) {
-        if (!method.getReturnType().equals(clazz)) {
-            System.err.printf("Method `%s` does does not return type `%s` as expected\n",
-                    method.getName(), clazz.getName());
-            System.exit(1);
-        }
-    }
-
-    private static <T> BiConsumer<T, State> toBiConsumer(Method method) {
-        expectParameters(method, 2);
-        expectReturnType(method, void.class);
-        return (t, u) -> {
-            try {
-                method.invoke(null, t, u);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s` and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
-            }
-        };
-    }
-
-    private static <T, U> ITriConsumer<T, U, State> toTriConsumer(Method method) {
-        expectParameters(method, 3);
-        expectReturnType(method, void.class);
-        return (t, u, v) -> {
-            try {
-                method.invoke(null, t, u, v);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s`, `%s`, and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName(), v.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
-            }
-        };
-    }
-
-    private static <T> BiPredicate<T, State> toBiPredicate(Method method) {
-        expectParameters(method, 2);
-        expectReturnType(method, boolean.class);
-        return (t, u) -> {
-            try {
-                return (boolean) method.invoke(null, t, u);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s` and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
-            }
-            return false;
-        };
-    }
-
-    private static <T, U, V> ITriPredicate<T, U, V> toTriPredicate(Method method) {
-        expectParameters(method, 3);
-        expectReturnType(method, boolean.class);
-        return (t, u, v) -> {
-            try {
-                return (boolean) method.invoke(null, t, u);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s`, `%s`, and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName(), v.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
-            }
-            return false;
-        };
     }
 
 }

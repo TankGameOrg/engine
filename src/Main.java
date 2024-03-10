@@ -1,3 +1,4 @@
+import rule.annotation.RulesetDescription;
 import rule.definition.*;
 import rule.definition.enforcer.EnforcerRuleset;
 import rule.definition.enforcer.MaximumEnforcer;
@@ -335,6 +336,8 @@ public class Main {
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
 
-        getRuleset(3);
+        RulesetDescription ruleset = getRuleset(3).get();
+
+
     }
 }

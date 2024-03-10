@@ -2,6 +2,8 @@ package rule.definition.player;
 
 import rule.type.IPlayerElement;
 import state.State;
+import util.ITriConsumer;
+import util.ITriPredicate;
 
 public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRule<T, U> {
 
