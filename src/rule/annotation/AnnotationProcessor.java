@@ -8,7 +8,7 @@ import state.State;
 import state.board.Position;
 import state.board.unit.Tank;
 import util.Pair;
-import util.Trio;
+import util.Triple;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -47,9 +47,9 @@ public class AnnotationProcessor {
         Map<String, Pair<Class<?>, BiConsumer<?, State>>> enforceableRules = new HashMap<>();
         Map<String, Pair<Class<?>, BiConsumer<?, State>>> tickRules = new HashMap<>();
         Map<String, Pair<Class<?>, BiConsumer<?, State>>> conditionalRules = new HashMap<>();
-        Map<String, Trio<Class<?>, Class<?>, ITriConsumer<?, ?, State>>> playerRules = new HashMap<>();
+        Map<String, Triple<Class<?>, Class<?>, ITriConsumer<?, ?, State>>> playerRules = new HashMap<>();
         Map<String, Pair<Class<?>, BiPredicate<?, State>>> conditionalConditions = new HashMap<>();
-        Map<String, Trio<Class<?>, Class<?>, ITriPredicate<?, ?, State>>> playerConditions = new HashMap<>();
+        Map<String, Triple<Class<?>, Class<?>, ITriPredicate<?, ?, State>>> playerConditions = new HashMap<>();
         for (Method method : methods) {
             if (method.isAnnotationPresent(RuleFunction.class)) {
                 RuleFunction annotation = method.getAnnotation(RuleFunction.class);
@@ -69,7 +69,7 @@ public class AnnotationProcessor {
                     }
                     case PLAYER -> {
                         ITriConsumer<? , ?, State> predicate = toTriConsumer(method);
-                        playerRules.put(id, Trio.of(method.getParameters()[1].getType(), method.getParameters()[2].getType(), predicate));
+                        playerRules.put(id, Triple.of(method.getParameters()[1].getType(), method.getParameters()[2].getType(), predicate));
                     }
                 }
             } else if (method.isAnnotationPresent(RulePredicateFunction.class)) {
@@ -82,7 +82,7 @@ public class AnnotationProcessor {
                     }
                     case PLAYER -> {
                         ITriPredicate<? , ?, State> predicate = toTriPredicate(method);
-                        playerConditions.put(id, Trio.of(method.getParameters()[1].getType(), method.getParameters()[2].getType(), predicate));
+                        playerConditions.put(id, Triple.of(method.getParameters()[1].getType(), method.getParameters()[2].getType(), predicate));
                     }
                 }
             }
