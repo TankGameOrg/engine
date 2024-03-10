@@ -1,4 +1,4 @@
-package rule.impl.enforcer;
+package rule.definition.enforcer;
 
 import java.util.function.*;
 

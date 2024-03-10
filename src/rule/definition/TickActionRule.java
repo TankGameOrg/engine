@@ -1,4 +1,4 @@
-package rule.impl;
+package rule.definition;
 
 import rule.type.ITickElement;
 import state.State;

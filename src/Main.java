@@ -1,19 +1,22 @@
-import rule.impl.*;
-import rule.impl.enforcer.EnforcerRuleset;
-import rule.impl.enforcer.MaximumEnforcer;
-import rule.impl.enforcer.MinimumEnforcer;
-import rule.impl.player.IPlayerRule;
-import rule.impl.player.PlayerActionRule;
-import rule.impl.player.PlayerRuleset;
-import rule.impl.player.PlayerSelfActionRule;
+import rule.definition.*;
+import rule.definition.enforcer.EnforcerRuleset;
+import rule.definition.enforcer.MaximumEnforcer;
+import rule.definition.enforcer.MinimumEnforcer;
+import rule.definition.player.IPlayerRule;
+import rule.definition.player.PlayerActionRule;
+import rule.definition.player.PlayerRuleset;
+import rule.definition.player.PlayerSelfActionRule;
 import state.board.Position;
 import state.State;
 import state.board.Util;
 import state.board.floor.GoldMine;
 import state.board.unit.*;
 import state.meta.Council;
+import state.meta.Player;
 
 import java.util.*;
+
+import static rule.annotation.AnnotationProcessor.getRuleset;
 
 public class Main {
 
@@ -175,12 +178,12 @@ public class Main {
         System.out.println(t.toInfoString());
         unitInvariants.enforceRules(s, t);
         System.out.println(t.toInfoString());
+        assert t.getActions() == 0;
 
 
         // Test TickActionRule
         ApplicableRuleset tickRules = new ApplicableRuleset();
         tickRules.put(Tank.class, new TickActionRule<>((x, y) -> {
-            System.out.println("Tick rules work");
             if (!x.isDead()) {
                 x.setActions(x.getActions() + 1);
                 if (y.getBoard().getFloor(x.getPosition()).orElse(null) instanceof GoldMine) {
@@ -198,20 +201,28 @@ public class Main {
         }
 
         System.out.println(t.toInfoString());
+        assert t.getGold() == 3;
 
         // Test IConditionalRule
         ApplicableRuleset conditionalRules = new ApplicableRuleset();
+
+        // Handle tank destruction
         conditionalRules.put(Tank.class, new ConditionalRule<>((x, y) -> x.getDurability() == 0, (x, y) -> {
-            System.out.println("Conditional rules work");
             if (x.isDead()) {
                 y.getBoard().putUnit(new EmptyUnit(x.getPosition()));
+                Player tankPlayer = x.getPlayer();
+                y.getCouncil().getCouncillors().remove(tankPlayer);
+                y.getCouncil().getSenators().add(tankPlayer);
             } else {
                 x.setDead(true);
                 x.setActions(0);
                 x.setGold(0);
                 x.setDurability(3);
+                y.getCouncil().getCouncillors().add(x.getPlayer());
             }
         }));
+
+        // Handle wall destruction
         conditionalRules.put(Wall.class, new ConditionalRule<>((x, y) -> x.getDurability() == 0, (x, y) -> {
             y.getBoard().putUnit(new EmptyUnit(x.getPosition()));
             if (isOrthAdjToGoldMine(y, x.getPosition())) {
@@ -223,6 +234,10 @@ public class Main {
             conditionalRules.applyRules(s, tank);
         }
 
+        System.out.println(s.getCouncil().getCouncillors());
+        assert s.getCouncil().getCouncillors().contains(t.getPlayer());
+        assert !s.getCouncil().getSenators().contains(t.getPlayer());
+
         System.out.println(t.toInfoString());
         t.setDead(false);
         t.setDurability(1);
@@ -233,46 +248,50 @@ public class Main {
 
         // Buy 1 action
         possiblePlayerActions.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((x, y) -> x.getGold() >= 3, (x, y) -> {
+                new PlayerSelfActionRule<>((x, y) -> !x.isDead() && x.getGold() >= 3, (x, y) -> {
                     x.setActions(x.getActions() + 1);
                     x.setGold(x.getGold()-3);
         }));
 
         // Buy 2 actions
         possiblePlayerActions.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((x, y) -> x.getGold() >= 5, (x, y) -> {
+                new PlayerSelfActionRule<>((x, y) -> !x.isDead() && x.getGold() >= 5, (x, y) -> {
                     x.setActions(x.getActions() + 2);
                     x.setGold(x.getGold()-5);
         }));
 
         // Upgrade range
         possiblePlayerActions.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((x, y) -> x.getGold() >= 8, (x, y) -> {
+                new PlayerSelfActionRule<>((x, y) -> !x.isDead() && x.getGold() >= 8, (x, y) -> {
                     x.setRange(x.getRange() + 1);
                     x.setGold(x.getGold()-8);
                 }));
 
         // Shoot
         possiblePlayerActions.put(Tank.class, Position.class, new PlayerActionRule<>((x, y, z) ->
-            x.getActions() >= 1 && x.getPosition().distanceFrom(y) <= x.getRange() && hasLineOfSight(s, x.getPosition(), y)
-                    && z.getBoard().getUnit(y).orElse(null) instanceof IDurable,
+            !x.isDead() && x.getActions() >= 1 && x.getPosition().distanceFrom(y) <= x.getRange()
+                    && hasLineOfSight(s, x.getPosition(), y)  && z.getBoard().getUnit(y).orElse(null) instanceof IDurable,
                 (x, y, z) -> {
             if (z.getBoard().getUnit(y).orElse(null) instanceof IDurable unit) {
                 x.setActions(x.getActions() - 1);
                 if (unit instanceof Tank tank) {
-                    boolean hit = false;
-                    Random random = new Random(System.currentTimeMillis());
-                    for (int i = x.getPosition().distanceFrom(y); i <= x.getRange(); ++i) {
-                        if (random.nextBoolean()) {
-                            hit = true;
-                            break;
-                        }
-                    }
-                    if (hit) {
+                    if (tank.isDead()) {
                         tank.setDurability(tank.getDurability() - 1);
-                        if (tank.getDurability() == 0) {
-                            x.setGold(x.getGold() + tank.getGold());
-                            tank.setGold(0);
+                    } else {
+                        boolean hit = false;
+                        Random random = new Random(System.currentTimeMillis());
+                        for (int i = x.getPosition().distanceFrom(y); i <= x.getRange(); ++i) {
+                            if (random.nextBoolean()) {
+                                hit = true;
+                                break;
+                            }
+                        }
+                        if (hit) {
+                            tank.setDurability(tank.getDurability() - 1);
+                            if (tank.getDurability() == 0) {
+                                x.setGold(x.getGold() + tank.getGold());
+                                tank.setGold(0);
+                            }
                         }
                     }
                 } else if (unit instanceof Wall wall) {
@@ -315,5 +334,7 @@ public class Main {
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
+
+        getRuleset(3);
     }
 }

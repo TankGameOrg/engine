@@ -1,4 +1,4 @@
-package rule.impl.player;
+package rule.definition.player;
 
 import state.State;
 

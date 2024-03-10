@@ -15,6 +15,10 @@ public class Council {
         this.senators = new HashSet<>();
     }
 
+    public Council() {
+        this(0);
+    }
+
     public int getCoffer() {
         return coffer;
     }

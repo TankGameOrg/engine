@@ -1,4 +1,4 @@
-package rule.impl.player;
+package rule.definition.player;
 
 import rule.type.IPlayerElement;
 import state.State;
