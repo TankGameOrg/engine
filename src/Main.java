@@ -1,69 +1,21 @@
-import rule.annotation.RulesetDescription;
-import rule.definition.*;
-import rule.definition.enforcer.EnforcerRuleset;
-import rule.definition.enforcer.MaximumEnforcer;
-import rule.definition.enforcer.MinimumEnforcer;
+import rule.definition.RulesetDescription;
 import rule.definition.player.IPlayerRule;
-import rule.definition.player.PlayerActionRule;
-import rule.definition.player.PlayerRuleset;
-import rule.definition.player.PlayerSelfActionRule;
+import rule.impl.IRuleset;
+import rule.impl.Version3;
 import state.board.Position;
 import state.State;
-import state.board.Util;
 import state.board.floor.GoldMine;
 import state.board.unit.*;
-import state.meta.Council;
-import state.meta.Player;
 
 import java.util.*;
 
-import static rule.annotation.AnnotationProcessor.getRuleset;
+import static util.LineOfSight.hasLineOfSight;
 
 public class Main {
 
-    private static boolean isOrthAdjToMine(State state, Position p) {
-        for (Position x : Util.orthogonallyAdjacentPositions(p)) {
-            if (state.getBoard().getFloor(x).orElse(null) instanceof GoldMine) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void findAllConnectedMines(Set<Position> positions, State state, Position p) {
-        if (!positions.contains(p)) {
-            positions.add(p);
-            Arrays.stream(Util.orthogonallyAdjacentPositions(p))
-                    .filter((x) -> state.getBoard().getFloor(x).orElse(null) instanceof GoldMine)
-                    .forEach((x) -> findAllConnectedMines(positions, state, x));
-        }
-    }
-
-    private static Set<Position> getSpacesInRange(Position p, int range){
-        Set<Position> output = new HashSet<>();
-        for (int i = 0; i <= range; ++i) {
-            for (int j = 0; j <= range; ++j) {
-                output.add(new Position(p.x() + i, p.y() + j));
-                output.add(new Position(p.x() - i, p.y() - j));
-                output.add(new Position(p.x() - i, p.y() + j));
-                output.add(new Position(p.x() + i, p.y() - j));
-            }
-        }
-        return output;
-    }
-
     public static void main(String[] args) {
 
-        EnforcerRuleset unitInvariants = new EnforcerRuleset();
-
-        unitInvariants.put(Tank.class, new MinimumEnforcer<>(Tank::getDurability, Tank::setDurability, 0));
-        unitInvariants.put(Tank.class, new MinimumEnforcer<>(Tank::getRange, Tank::setRange, 0));
-        unitInvariants.put(Tank.class, new MinimumEnforcer<>(Tank::getGold, Tank::setGold, 0));
-        unitInvariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
-        unitInvariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
-        unitInvariants.put(Wall.class, new MinimumEnforcer<>(Wall::getDurability, Wall::setDurability, 0));
-        unitInvariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
-
+        RulesetDescription ruleset = IRuleset.getRuleset(new Version3());
 
         State s = new State(11, 11, new HashSet<>());
         Tank t = new Tank(new Position(0, 0), 3, 0, 3, 2);
@@ -76,144 +28,46 @@ public class Main {
         s.getBoard().putFloor(new GoldMine(new Position(0, 5)));
 
 
-        // Test IEnforceable
+        // Test enforcer rules
         s.getBoard().putUnit(t);
         t.setDurability(-1);
         System.out.println(t.toInfoString());
-        unitInvariants.enforceRules(s, t);
+        ruleset.getEnforcerRules().enforceRules(s, t);
         System.out.println(t.toInfoString());
         assert t.getActions() == 0;
 
 
-        // Test TickActionRule
-        ApplicableRuleset tickRules = new ApplicableRuleset();
-        tickRules.put(Tank.class, new TickActionRule<>((x, y) -> {
-            if (!x.isDead()) {
-                x.setActions(x.getActions() + 1);
-                if (y.getBoard().getFloor(x.getPosition()).orElse(null) instanceof GoldMine) {
-                    Set<Position> mines = new HashSet<>();
-                    findAllConnectedMines(mines, y, x.getPosition());
-                    int tanks = (int) mines.stream().filter((a) -> y.getBoard().getUnit(a).orElse(null) instanceof Tank).count();
-                    int goldToGain = mines.size() / tanks;
-                    x.setGold(x.getGold() + goldToGain);
-                }
-            }
-        }));
-
+        // Test tick rules
         for (Tank tank : s.getBoard().gatherUnits(Tank.class)) {
-            tickRules.applyRules(s, tank);
+            ruleset.getTickRules().applyRules(s, tank);
         }
 
         System.out.println(t.toInfoString());
         assert t.getGold() == 3;
 
-        // Test IConditionalRule
-        ApplicableRuleset conditionalRules = new ApplicableRuleset();
 
-        // Handle tank destruction
-        conditionalRules.put(Tank.class, new ConditionalRule<>((x, y) -> x.getDurability() == 0, (x, y) -> {
-            if (x.isDead()) {
-                y.getBoard().putUnit(new EmptyUnit(x.getPosition()));
-                Player tankPlayer = x.getPlayer();
-                y.getCouncil().getCouncillors().remove(tankPlayer);
-                y.getCouncil().getSenators().add(tankPlayer);
-            } else {
-                x.setDead(true);
-                x.setActions(0);
-                x.setGold(0);
-                x.setDurability(3);
-                y.getCouncil().getCouncillors().add(x.getPlayer());
-            }
-        }));
-
-        // Handle wall destruction
-        conditionalRules.put(Wall.class, new ConditionalRule<>((x, y) -> x.getDurability() == 0, (x, y) -> {
-            y.getBoard().putUnit(new EmptyUnit(x.getPosition()));
-            if (isOrthAdjToMine(y, x.getPosition())) {
-                y.getBoard().putFloor(new GoldMine(x.getPosition()));
-            }
-        }));
-
+        // Test conditional rules
         for (Tank tank : s.getBoard().gatherUnits(Tank.class)) {
-            conditionalRules.applyRules(s, tank);
+            ruleset.getConditionalRules().applyRules(s, tank);
         }
 
         System.out.println(s.getCouncil().getCouncillors());
-        assert s.getCouncil().getCouncillors().contains(t.getPlayer());
-        assert !s.getCouncil().getSenators().contains(t.getPlayer());
+        assert s.getCouncil().getCouncillors().contains(t.getPlayers());
+        assert !s.getCouncil().getSenators().contains(t.getPlayers());
 
         System.out.println(t.toInfoString());
         t.setDead(false);
         t.setDurability(1);
 
 
-        // Test IPlayerRule with v3 player actions
-        PlayerRuleset possiblePlayerActions = new PlayerRuleset();
-
-        // Buy 1 action
-        possiblePlayerActions.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((x, y) -> !x.isDead() && x.getGold() >= 3, (x, y) -> {
-                    x.setActions(x.getActions() + 1);
-                    x.setGold(x.getGold()-3);
-        }));
-
-        // Buy 2 actions
-        possiblePlayerActions.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((x, y) -> !x.isDead() && x.getGold() >= 5, (x, y) -> {
-                    x.setActions(x.getActions() + 2);
-                    x.setGold(x.getGold()-5);
-        }));
-
-        // Upgrade range
-        possiblePlayerActions.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((x, y) -> !x.isDead() && x.getGold() >= 8, (x, y) -> {
-                    x.setRange(x.getRange() + 1);
-                    x.setGold(x.getGold()-8);
-                }));
-
-        // Shoot
-        possiblePlayerActions.put(Tank.class, Position.class, new PlayerActionRule<>((x, y, z) ->
-            !x.isDead() && x.getActions() >= 1 && x.getPosition().distanceFrom(y) <= x.getRange()
-                    && hasLineOfSight(s, x.getPosition(), y)  && z.getBoard().getUnit(y).orElse(null) instanceof IDurable,
-                (x, y, z) -> {
-            if (z.getBoard().getUnit(y).orElse(null) instanceof IDurable unit) {
-                x.setActions(x.getActions() - 1);
-                if (unit instanceof Tank tank) {
-                    if (tank.isDead()) {
-                        tank.setDurability(tank.getDurability() - 1);
-                    } else {
-                        boolean hit = false;
-                        Random random = new Random(System.currentTimeMillis());
-                        for (int i = x.getPosition().distanceFrom(y); i <= x.getRange(); ++i) {
-                            if (random.nextBoolean()) {
-                                hit = true;
-                                break;
-                            }
-                        }
-                        if (hit) {
-                            tank.setDurability(tank.getDurability() - 1);
-                            if (tank.getDurability() == 0) {
-                                x.setGold(x.getGold() + tank.getGold());
-                                tank.setGold(0);
-                            }
-                        }
-                    }
-                } else if (unit instanceof Wall wall) {
-                    wall.setDurability(wall.getDurability() - 1);
-                } else {
-                    throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
-                }
-            }
-        }));
-
-        System.out.println(possiblePlayerActions.getAllRulesForSubject(Tank.class));
-
+        // Test player rules
+        System.out.println(ruleset.getPlayerRules().getAllRulesForSubject(Tank.class));
         t.setGold(0);
-        List<IPlayerRule<Tank, Tank>> possibleActions = possiblePlayerActions.applicableSelfRules(Tank.class, s, t);
-        System.out.println("Applicable actions (should be 0): " + possibleActions.size());
+        List<IPlayerRule<Tank, Tank>> possibleActions = ruleset.getPlayerRules().applicableSelfRules(Tank.class, s, t);
+        System.out.println("Applicable self actions (should be 0): " + possibleActions.size());
         t.setGold(3);
-        possibleActions = possiblePlayerActions.applicableSelfRules(Tank.class, s, t);
-        System.out.println("Applicable actions (should be 1): " + possibleActions.size());
+        possibleActions = ruleset.getPlayerRules().applicableSelfRules(Tank.class, s, t);
+        System.out.println("Applicable self actions (should be 1): " + possibleActions.size());
         System.out.println(t.toInfoString());
         for (IPlayerRule<Tank, Tank> action  : possibleActions) {
             action.apply(s, t, t);
@@ -238,9 +92,5 @@ public class Main {
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
-
-        RulesetDescription ruleset = getRuleset(3).get();
-
-
     }
 }

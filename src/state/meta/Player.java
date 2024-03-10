@@ -1,18 +1,10 @@
 package state.meta;
 
+import rule.type.IMetaTickElement;
+
 import java.util.Objects;
 
-public class Player {
-
-    private final String name;
-
-    public Player(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
+public record Player(String name) implements IMetaTickElement {
 
     @Override
     public String toString() {
@@ -27,8 +19,4 @@ public class Player {
         return Objects.equals(name, player.name);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 }

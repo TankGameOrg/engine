@@ -87,7 +87,7 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
     }
 
     @Override
-    public Player getPlayer() {
-        return player;
+    public Player[] getPlayers() {
+        return new Player[]{player};
     }
 }

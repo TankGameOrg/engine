@@ -1,9 +1,13 @@
 package state.meta;
 
+import rule.type.IMetaTickElement;
+import rule.type.IPlayerElement;
+
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
-public class Council {
+public class Council implements IPlayerElement, IMetaTickElement {
 
     private int coffer;
     private final Set<Player> councillors;
@@ -33,5 +37,10 @@ public class Council {
 
     public Set<Player> getSenators() {
         return senators;
+    }
+
+    @Override
+    public Player[] getPlayers() {
+        return Stream.concat(councillors.stream(), senators.stream()).toList().toArray(new Player[0]);
     }
 }

@@ -1,5 +1,7 @@
 package state.board;
 
+import rule.type.IMetaTickElement;
+import rule.type.ITickElement;
 import state.board.floor.IFloor;
 import state.board.floor.StandardFloor;
 import state.board.unit.IUnit;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Board {
+public class Board implements IMetaTickElement {
 
     private final IUnit[][] unitBoard;
     private final IFloor[][] floorBoard;
