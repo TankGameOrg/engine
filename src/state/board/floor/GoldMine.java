@@ -8,7 +8,7 @@ public class GoldMine extends StandardFloor {
     }
 
     @Override
-    public String toString() {
-        return "G";
+    public char toBoardCharacter() {
+        return 'G';
     }
 }

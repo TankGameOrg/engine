@@ -1,7 +1,6 @@
 package state.board;
 
-import rule.type.IMetaTickElement;
-import rule.type.ITickElement;
+import rule.type.IMetaElement;
 import state.board.floor.IFloor;
 import state.board.floor.StandardFloor;
 import state.board.unit.IUnit;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Board implements IMetaTickElement {
+public class Board implements IMetaElement {
 
     private final IUnit[][] unitBoard;
     private final IFloor[][] floorBoard;
@@ -97,6 +96,34 @@ public class Board implements IMetaTickElement {
         return output;
     }
 
+    public List<?> gather(Class<?> t) {
+        // Handle the caller asking for a position
+        try {
+            t.cast(new Position(0, 0));
+            List<Position> positions = new ArrayList<>();
+            for (int i = 0; i < width; ++i) {
+                for (int j = 0; j < height; ++j) {
+                    positions.add(new Position(i, j));
+                }
+            }
+            return positions; // T extends Position iff t.cast(zero) succeeds
+        } catch (Exception ignored) {}
+
+        List output = new ArrayList<>();
+        for (int i = 0; i < width; ++i) {
+            for (int j = 0; j < height; ++j) {
+                Position p = new Position(i, j);
+                try {
+                    output.add(t.cast(getUnit(p).orElse(null)));
+                } catch (Exception ignored) {}
+                try {
+                    output.add(t.cast(getFloor(p).orElse(null)));
+                } catch (Exception ignored) {}
+            }
+        }
+        return output;
+    }
+
 
     private static <T extends IElement> String toGridString(T[][] board) {
 
@@ -120,7 +147,7 @@ public class Board implements IMetaTickElement {
             String paddedNumber = String.format(("%1$" + pad + "s"), (i + 1));
             sb.append(paddedNumber).append("| ");
             for (int j = 0; j < board[0].length; ++j) {
-                sb.append(board[i][j].toString()).append(' ');
+                sb.append(board[i][j].toBoardCharacter()).append(' ');
             }
             sb.append('\n');
         }

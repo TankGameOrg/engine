@@ -1,21 +1,84 @@
 import rule.definition.RulesetDescription;
 import rule.definition.player.IPlayerRule;
+import rule.definition.player.PlayerActionRule;
 import rule.impl.IRuleset;
-import rule.impl.Version3;
+import rule.impl.version3.Ruleset;
 import state.board.Position;
 import state.State;
 import state.board.floor.GoldMine;
 import state.board.unit.*;
+import util.DuoClass;
+import util.Pair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static util.LineOfSight.hasLineOfSight;
 
 public class Main {
 
+    private static void enforceInvariants(State state, RulesetDescription ruleset) {
+        for (Class<?> c : ruleset.getEnforcerRules().keySet()) {
+            state.getBoard().gather(c).forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
+        }
+        for (Class<?> c : ruleset.getMetaEnforcerRules().keySet()) {
+            state.getTickElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
+        }
+    }
+
+    private static void applyConditionals(State state, RulesetDescription ruleset) {
+        for (Class<?> c : ruleset.getConditionalRules().keySet()) {
+            state.getBoard().gather(c).forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
+        }
+        for (Class<?> c : ruleset.getMetaConditionalRules().keySet()) {
+            state.getTickElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
+        }
+    }
+
+    private static void handlePlayerRules(State state, RulesetDescription ruleset) {
+        List<PlayerActionRule<?, ?>> applicable = new ArrayList<>();
+        for (DuoClass<?, ?> c : ruleset.getPlayerRules().keySet()) {
+            List<IPlayerRule<?, ?>> rules = ruleset.getPlayerRules().get(c.getLeftClass(), c.getRightClass());
+            for (IPlayerRule<?, ?> rule : rules) {
+                IPlayerRule<Object, Object> aRule = (IPlayerRule<Object, Object>) rule; // Always works
+                List<Pair<?, ?>> pairs =  state.getBoard().gather(c.getLeftClass())
+                        .stream().flatMap( // For each LHS class, flatten the map of
+                        (x) -> state.getBoard().gather(c.getRightClass()) // objects obtained on board
+                                .stream().map((y) -> new Pair<>(x, y) ) // and map into pairs with all objects on board
+                                .filter((p) -> aRule.canApply(state, p.left(), p.right()))) // that can apply the rule
+                        .collect(Collectors.toList());
+                for (Pair<?, ?> pair : pairs) {
+                    System.out.printf("%s can %s to %s\n", pair.left(), rule.name(), pair.right());
+                }
+            }
+
+        }
+        for (DuoClass<?, ?> c : ruleset.getMetaPlayerRules().keySet()) {
+            state.getTickElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
+        }
+    }
+
+    private static void applyTick(State state, RulesetDescription ruleset) {
+        for (Class<?> c : ruleset.getTickRules().keySet()) {
+            state.getBoard().gather(c).forEach((x) -> ruleset.getTickRules().applyRules(state, x));
+        }
+        for (Class<?> c : ruleset.getMetaTickRules().keySet()) {
+            state.getTickElements().forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
+        }
+    }
+
+    private static void handleTick(State state, RulesetDescription ruleset) {
+        enforceInvariants(state, ruleset);
+        applyConditionals(state, ruleset);
+
+        handlePlayerRules(state, ruleset);
+
+        applyTick(state, ruleset);
+    }
+
     public static void main(String[] args) {
 
-        RulesetDescription ruleset = IRuleset.getRuleset(new Version3());
+        RulesetDescription ruleset = IRuleset.getRuleset(new Ruleset());
 
         State s = new State(11, 11, new HashSet<>());
         Tank t = new Tank(new Position(0, 0), 3, 0, 3, 2);
@@ -52,8 +115,8 @@ public class Main {
         }
 
         System.out.println(s.getCouncil().getCouncillors());
-        assert s.getCouncil().getCouncillors().contains(t.getPlayers());
-        assert !s.getCouncil().getSenators().contains(t.getPlayers());
+        assert s.getCouncil().getCouncillors().contains(t.getPlayers()[0]);
+        assert !s.getCouncil().getSenators().contains(t.getPlayers()[0]);
 
         System.out.println(t.toInfoString());
         t.setDead(false);
@@ -61,9 +124,9 @@ public class Main {
 
 
         // Test player rules
-        System.out.println(ruleset.getPlayerRules().getAllRulesForSubject(Tank.class));
+        System.out.println(ruleset.getPlayerRules().getExactRulesForSubject(Tank.class));
         t.setGold(0);
-        List<IPlayerRule<Tank, Tank>> possibleActions = ruleset.getPlayerRules().applicableSelfRules(Tank.class, s, t);
+        List<IPlayerRule<Tank, Tank>> possibleActions = ruleset.getPlayerRules().applicableRules(Tank.class, Tank.class, s, t, t);
         System.out.println("Applicable self actions (should be 0): " + possibleActions.size());
         t.setGold(3);
         possibleActions = ruleset.getPlayerRules().applicableSelfRules(Tank.class, s, t);
@@ -92,5 +155,7 @@ public class Main {
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
+
+        handleTick(s, ruleset);
     }
 }

@@ -1,19 +1,20 @@
 package state;
 
+import rule.type.IMetaElement;
 import state.board.Board;
 import state.meta.Council;
+import state.meta.None;
 import state.meta.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class State {
 
+    private final List<IMetaElement> metaTickElements;
     private final Board board;
-    private final Map<String, Player> players;
     private final Council council;
+    private final Map<String, Player> players;
+
     private int tick;
 
     public State(int boardWidth, int boardHeight, Set<String> players) {
@@ -24,6 +25,15 @@ public class State {
         }
         this.council = new Council();
         this.tick = 0;
+
+        this.metaTickElements = new ArrayList<>(3);
+        this.metaTickElements.add(board);
+        this.metaTickElements.add(council);
+        this.metaTickElements.add(new None());
+    }
+
+    public List<IMetaElement> getTickElements() {
+        return metaTickElements;
     }
 
     public Board getBoard() {

@@ -1,10 +1,10 @@
 package state.meta;
 
-import rule.type.IMetaTickElement;
+import rule.type.IMetaElement;
 
 import java.util.Objects;
 
-public record Player(String name) implements IMetaTickElement {
+public record Player(String name) implements IMetaElement {
 
     @Override
     public String toString() {

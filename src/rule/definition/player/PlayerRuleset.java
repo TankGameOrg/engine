@@ -4,10 +4,7 @@ import rule.type.IPlayerElement;
 import state.State;
 import util.DuoClass;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PlayerRuleset {
@@ -34,7 +31,7 @@ public class PlayerRuleset {
         put(t, t, rule);
     }
 
-    public <T extends IPlayerElement, U> List<IPlayerRule<T, U>> get(Class<T> t, Class<U> u) {
+    public <T extends IPlayerElement, U> List<IPlayerRule<T, U>> getExact(Class<T> t, Class<U> u) {
         DuoClass<T, U> c = new DuoClass<>(t, u);
         if (rules.containsKey(c)) {
             try {
@@ -45,18 +42,22 @@ public class PlayerRuleset {
         return new ArrayList<>(0);
     }
 
-    public <T extends IPlayerElement> List<IPlayerRule<T, T>> getSelfRules(Class<T> t) {
-        return get(t, t);
+    public List<IPlayerRule<?, ?>> get(Class<?> t, Class<?> u) {
+        DuoClass<?, ?> c = new DuoClass<>(t, u);
+        if (rules.containsKey(c)) {
+            return rules.get(c);
+        }
+        return new ArrayList<>(0);
     }
 
-    public <T extends IPlayerElement> List<IPlayerRule<T, ?>> getAllRulesForSubject(Class<T> t) {
+    public <T extends IPlayerElement> List<IPlayerRule<T, ?>> getExactRulesForSubject(Class<T> t) {
         return rules.keySet().stream().filter(k -> k.getLeftClass().equals(t))
                 .map(k -> (List<IPlayerRule<T, ?>>) ((Object)rules.get(k)))
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
 
-    public <T extends IPlayerElement> List<IPlayerRule<?, T>> getAllRulesForTarget(Class<T> t) {
+    public <T extends IPlayerElement> List<IPlayerRule<?, T>> getExactRulesForTarget(Class<T> t) {
         return rules.keySet().stream().filter(k -> k.getRightClass().equals(t))
                 .map(k -> (List<IPlayerRule<?, T>>) ((Object)rules.get(k)))
                 .flatMap(List::stream)
@@ -65,7 +66,7 @@ public class PlayerRuleset {
 
     public <T extends IPlayerElement, U> List<IPlayerRule<T, U>> applicableRules(Class<T> t, Class<U> u, State state, T subject, U target) {
         List<IPlayerRule<T, U>> output = new ArrayList<>();
-        for (IPlayerRule<T, U> rule : get(t, u)) {
+        for (IPlayerRule<T, U> rule : getExact(t, u)) {
             if (rule instanceof PlayerActionRule<T, U> conditional && conditional.canApply(state, subject, target)) {
                 output.add(conditional);
             }
@@ -77,4 +78,7 @@ public class PlayerRuleset {
         return applicableRules(t, t, state, target, target);
     }
 
+    public Set<DuoClass<?, ?>> keySet() {
+        return rules.keySet();
+    }
 }

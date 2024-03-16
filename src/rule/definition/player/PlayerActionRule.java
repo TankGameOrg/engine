@@ -7,11 +7,13 @@ import util.ITriPredicate;
 
 public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRule<T, U> {
 
+    private final String name;
     private final ITriPredicate<T, U, State> predicate;
     private final ITriConsumer<T, U, State> consumer;
 
 
-    public PlayerActionRule(ITriPredicate<T, U, State> predicate, ITriConsumer<T, U, State> consumer) {
+    public PlayerActionRule(String name, ITriPredicate<T, U, State> predicate, ITriConsumer<T, U, State> consumer) {
+        this.name = name;
         this.predicate = predicate;
         this.consumer = consumer;
     }
@@ -26,5 +28,10 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
     @Override
     public boolean canApply(State state, T subject, U target) {
         return predicate.test(subject, target, state);
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

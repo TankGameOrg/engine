@@ -1,4 +1,4 @@
-package rule.impl;
+package rule.impl.version3;
 
 import rule.definition.*;
 import rule.definition.enforcer.EnforcerRuleset;
@@ -7,6 +7,8 @@ import rule.definition.enforcer.MinimumEnforcer;
 import rule.definition.player.PlayerActionRule;
 import rule.definition.player.PlayerRuleset;
 import rule.definition.player.PlayerSelfActionRule;
+import rule.impl.BaseRuleset;
+import rule.impl.IRuleset;
 import state.board.Board;
 import state.board.Position;
 import state.board.Util;
@@ -17,13 +19,17 @@ import state.board.unit.IDurable;
 import state.board.unit.Tank;
 import state.board.unit.Wall;
 import state.meta.Council;
+import state.meta.Data;
+import state.meta.None;
 import state.meta.Player;
 
 import java.util.*;
 
 import static util.LineOfSight.hasLineOfSight;
 
-public class Version3 extends BaseRuleset implements IRuleset {
+public class Ruleset extends BaseRuleset implements IRuleset {
+
+    public static final Metadata metadata = new Metadata();
 
     @Override
     public void registerEnforcerRules(RulesetDescription ruleset) {
@@ -34,8 +40,8 @@ public class Version3 extends BaseRuleset implements IRuleset {
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getGold, Tank::setGold, 0));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
         invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
         invariants.put(Wall.class, new MinimumEnforcer<>(Wall::getDurability, Wall::setDurability, 0));
-
     }
 
     @Override
@@ -89,6 +95,11 @@ public class Version3 extends BaseRuleset implements IRuleset {
                 s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
             }
         }));
+
+        // Handle resetting the council's ability to apply a bounty
+        metaTickRules.put(None.class, new MetaTickActionRule<>((n, s) -> {
+            metadata.councilCanBounty = Data.Usable.AVAILABLE;
+        }));
     }
 
     @Override
@@ -124,29 +135,37 @@ public class Version3 extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        // Buy 1 action
         playerRules.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((t, s) -> !t.isDead() && t.getGold() >= 3, (t, s) -> {
+                new PlayerSelfActionRule<>("buy actions 1", (t, s) -> !t.isDead() && t.getGold() >= 3, (t, s) -> {
                     t.setActions(t.getActions() + 1);
                     t.setGold(t.getGold() - 3);
                 }));
 
-        // Buy 2 actions
         playerRules.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((t, s) -> !t.isDead() && t.getGold() >= 5, (t, s) -> {
+                new PlayerSelfActionRule<>("buy actions 2", (t, s) -> !t.isDead() && t.getGold() >= 5, (t, s) -> {
                     t.setActions(t.getActions() + 2);
                     t.setGold(t.getGold() - 5);
                 }));
 
-        // Upgrade range
         playerRules.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>((t, s) -> !t.isDead() && t.getGold() >= 8, (t, s) -> {
+                new PlayerSelfActionRule<>("buy actions 3", (t, s) -> !t.isDead() && t.getGold() >= 8, (t, s) -> {
+                    t.setActions(t.getActions() + 3);
+                    t.setGold(t.getGold() - 8);
+                }));
+
+        playerRules.putSelfRule(Tank.class,
+                new PlayerSelfActionRule<>("buy actions 4", (t, s) -> !t.isDead() && t.getGold() >= 10, (t, s) -> {
+                    t.setActions(t.getActions() + 4);
+                    t.setGold(t.getGold() - 10);
+                }));
+
+        playerRules.putSelfRule(Tank.class,
+                new PlayerSelfActionRule<>("upgrade range", (t, s) -> !t.isDead() && t.getGold() >= 8, (t, s) -> {
                     t.setRange(t.getRange() + 1);
                     t.setGold(t.getGold() - 8);
                 }));
 
-        // Shoot at a position
-        playerRules.put(Tank.class, Position.class, new PlayerActionRule<>((t, p, s) ->
+        playerRules.put(Tank.class, Position.class, new PlayerActionRule<>("shoot", (t, p, s) ->
                 !t.isDead() && t.getActions() >= 1 && t.getPosition().distanceFrom(p) <= t.getRange()
                         && s.getBoard().getUnit(p).orElse(null) instanceof IDurable
                         && hasLineOfSight(s, t.getPosition(), p),
@@ -157,18 +176,11 @@ public class Version3 extends BaseRuleset implements IRuleset {
                             if (tank.isDead()) {
                                 tank.setDurability(tank.getDurability() - 1);
                             } else {
-                                boolean hit = false;
-                                Random random = new Random(System.currentTimeMillis());
-                                for (int i = t.getPosition().distanceFrom(y); i <= t.getRange(); ++i) {
-                                    if (random.nextBoolean()) {
-                                        hit = true;
-                                        break;
-                                    }
-                                }
-                                if (hit) {
+                                if (metadata.shot == Data.Shoot.HIT) {
                                     tank.setDurability(tank.getDurability() - 1);
                                     if (tank.getDurability() == 0) {
-                                        t.setGold(t.getGold() + tank.getGold());
+                                        t.setGold(t.getGold() + tank.getGold() + tank.getBounty());
+                                        tank.setBounty(0);
                                         tank.setGold(0);
                                     }
                                 }
@@ -186,20 +198,29 @@ public class Version3 extends BaseRuleset implements IRuleset {
     public void registerMetaPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset metaPlayerRules = ruleset.getMetaPlayerRules();
 
-        // Action stimulus
-        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>((c, t, s) -> c.getCoffer() >= 3,
+        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>("stimulus",
+                (c, t, s) -> c.getCoffer() >= 3,
                 (c, t, s) -> {
                     t.setActions(t.getActions() + 1);
                     c.setCoffer(c.getCoffer() - 3);
         }));
 
-        // Grant life
-        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>((c, t, s) -> c.getCoffer() >= 15,
+        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>("grant life",
+                (c, t, s) -> c.getCoffer() >= 15,
                 (c, t, s) -> {
                     t.setDurability(t.getDurability() + 1);
                     c.setCoffer(c.getCoffer() - 15);
         }));
 
-        // TODO implement bounties
+        for (int i = 1; i <= 5; ++i) {
+            int tmp = i; // variable assignment in lambda must be effectively final
+            metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>(String.format("bounty %d", i),
+                    (c, t, s) -> metadata.councilCanBounty == Data.Usable.AVAILABLE &&  c.getCoffer() >= tmp,
+                    (c, t, s) -> {
+                        t.setBounty(t.getBounty() + tmp);
+                        c.setCoffer(c.getCoffer() - tmp);
+                        metadata.councilCanBounty = Data.Usable.USED;
+                    }));
+        }
     }
 }

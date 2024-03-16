@@ -10,7 +10,7 @@ public class StandardFloor extends ConditionallyWalkableFloor {
     }
 
     @Override
-    public String toString() {
-        return "_";
+    public char toBoardCharacter() {
+        return '_';
     }
 }

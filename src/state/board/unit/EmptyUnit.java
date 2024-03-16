@@ -17,6 +17,11 @@ public class EmptyUnit implements IWalkable {
 
     @Override
     public String toString() {
-        return "_";
+        return position.toString();
+    }
+
+    @Override
+    public char toBoardCharacter() {
+        return '_';
     }
 }

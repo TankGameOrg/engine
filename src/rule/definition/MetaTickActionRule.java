@@ -1,11 +1,11 @@
 package rule.definition;
 
-import rule.type.IMetaTickElement;
+import rule.type.IMetaElement;
 import state.State;
 
 import java.util.function.BiConsumer;
 
-public class MetaTickActionRule<T extends IMetaTickElement> implements IApplicableRule<T> {
+public class MetaTickActionRule<T extends IMetaElement> implements IApplicableRule<T> {
 
     private final BiConsumer<T, State> consumer;
 

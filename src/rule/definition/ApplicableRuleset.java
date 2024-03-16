@@ -2,10 +2,7 @@ package rule.definition;
 
 import state.State;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ApplicableRuleset {
 
@@ -51,5 +48,9 @@ public class ApplicableRuleset {
             }
         }
         return output;
+    }
+
+    public Set<Class<?>> keySet() {
+        return rules.keySet();
     }
 }

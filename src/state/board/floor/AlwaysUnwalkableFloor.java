@@ -14,8 +14,9 @@ public class AlwaysUnwalkableFloor extends AbstractPositionedFloor {
         return false;
     }
 
+
     @Override
-    public String toString() {
-        return "X";
+    public char toBoardCharacter() {
+        return 'X';
     }
 }

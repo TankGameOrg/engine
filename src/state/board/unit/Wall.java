@@ -14,6 +14,12 @@ public class Wall extends AbstractDurable {
 
     @Override
     public String toString() {
-        return "W";
+        return position.toString();
+    }
+
+
+    @Override
+    public char toBoardCharacter() {
+        return 'W';
     }
 }

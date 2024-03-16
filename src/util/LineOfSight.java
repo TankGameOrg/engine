@@ -12,10 +12,10 @@ public class LineOfSight {
     private static boolean pointsSeparated(int a, int b, int c, int x1, int y1, int x2, int y2) {
         int fx1 = a * x1 + b * y1 + c;
         int fx2 = a * x2 + b * y2 + c;
-        int corner = a * x1 + b * y2 + c;
-
+        int corner1 = a * x1 + b * y2 + c;
+        int corner2 = a * x2 + b * y1 + c;
         // points are separated by the line if the signs are opposite; detect if a corner is hit
-        return (fx1 * fx2) <= 0 || corner == 0;
+        return (fx1 * fx2) <= 0 || corner1 * corner2 == 0;
     }
 
     private static Set<Position> allPointsBetweenLineOfSight(Position p1, Position p2) {

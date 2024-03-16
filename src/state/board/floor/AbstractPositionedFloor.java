@@ -14,4 +14,9 @@ public abstract class AbstractPositionedFloor implements IFloor {
     public Position getPosition() {
         return position;
     }
+
+    @Override
+    public String toString() {
+        return position.toString();
+    }
 }

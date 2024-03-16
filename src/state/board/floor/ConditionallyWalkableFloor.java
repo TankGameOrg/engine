@@ -20,8 +20,9 @@ public class ConditionallyWalkableFloor extends AbstractPositionedFloor {
         return predicate.test(this, board);
     }
 
+
     @Override
-    public String toString() {
-        return "~";
+    public char toBoardCharacter() {
+        return '~';
     }
 }

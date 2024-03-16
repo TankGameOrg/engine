@@ -6,22 +6,23 @@ import state.board.Position;
 import state.board.IMovable;
 import state.meta.Player;
 
-public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable {
+public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable, IBounty {
 
     private final Player player;
     private int actions;
     private int gold;
     private int range;
-
+    private int bounty;
     private boolean dead;
 
-    public Tank(Player player, Position position, int actions, int gold, int durability, int range) {
+    public Tank(Player player, Position position, int actions, int gold, int durability, int range, int bounty, boolean dead) {
         super(position, durability);
         this.player = player;
         this.actions = actions;
         this.gold = gold;
         this.range = range;
-        this.dead = false;
+        this.bounty = bounty;
+        this.dead = dead;
     }
 
     public Tank(Position position, int actions, int gold, int durability, int range) {
@@ -30,6 +31,7 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
         this.actions = actions;
         this.gold = gold;
         this.range = range;
+        this.bounty = 0;
         this.dead = false;
     }
 
@@ -43,6 +45,11 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
 
     public int getRange() {
         return range;
+    }
+
+    @Override
+    public int getBounty() {
+        return bounty;
     }
 
     public boolean isDead() {
@@ -66,28 +73,31 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
         this.range = range;
     }
 
+    @Override
+    public void setBounty(int bounty) {
+        this.bounty = bounty;
+    }
+
     public void setDead(boolean dead) {
         this.dead = dead;
     }
 
-    @Override
-    public String toString() {
+    public String toInfoString() {
         return "T";
     }
 
-    public String toInfoString() {
-        return "Tank{" +
-                "actions=" + actions +
-                ", gold=" + gold +
-                ", range=" + range +
-                ", dead=" + dead +
-                ", position=" + position +
-                ", durability=" + durability +
-                '}';
+    @Override
+    public String toString() {
+        return "Tank" + position.toString();
     }
 
     @Override
     public Player[] getPlayers() {
         return new Player[]{player};
+    }
+
+    @Override
+    public char toBoardCharacter() {
+        return 'T';
     }
 }

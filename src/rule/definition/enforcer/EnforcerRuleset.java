@@ -2,10 +2,7 @@ package rule.definition.enforcer;
 
 import state.State;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EnforcerRuleset {
 
@@ -41,5 +38,9 @@ public class EnforcerRuleset {
         for (IEnforceable<T> rule : (List<IEnforceable<T>>) (Object) get(c)) {
             rule.enforce(state, subject);
         }
+    }
+
+    public Set<Class<?>> keySet() {
+        return rules.keySet();
     }
 }

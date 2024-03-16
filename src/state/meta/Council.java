@@ -1,13 +1,13 @@
 package state.meta;
 
-import rule.type.IMetaTickElement;
+import rule.type.IMetaElement;
 import rule.type.IPlayerElement;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class Council implements IPlayerElement, IMetaTickElement {
+public class Council implements IPlayerElement, IMetaElement {
 
     private int coffer;
     private final Set<Player> councillors;
