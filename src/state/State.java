@@ -7,10 +7,11 @@ import state.meta.None;
 import state.meta.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class State {
 
-    private final List<IMetaElement> metaTickElements;
+    private final List<IMetaElement> metaElements;
     private final Board board;
     private final Council council;
     private final Map<String, Player> players;
@@ -26,14 +27,18 @@ public class State {
         this.council = new Council();
         this.tick = 0;
 
-        this.metaTickElements = new ArrayList<>(3);
-        this.metaTickElements.add(board);
-        this.metaTickElements.add(council);
-        this.metaTickElements.add(new None());
+        this.metaElements = new ArrayList<>(3);
+        this.metaElements.add(board);
+        this.metaElements.add(council);
+        this.metaElements.add(new None());
     }
 
-    public List<IMetaElement> getTickElements() {
-        return metaTickElements;
+    public List<IMetaElement> getMetaElements() {
+        return metaElements;
+    }
+
+    public List<IMetaElement> getMetaElements(Class<?> c) {
+        return metaElements.stream().filter((e) -> e.getClass().equals(c)).collect(Collectors.toList());
     }
 
     public Board getBoard() {

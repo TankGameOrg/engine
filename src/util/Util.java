@@ -1,7 +1,10 @@
-package state.board;
+package util;
 
 import state.State;
+import state.board.Position;
+import state.board.floor.AlwaysUnwalkableFloor;
 import state.board.floor.GoldMine;
+import state.board.unit.IWalkable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -33,7 +36,7 @@ public class Util {
 
         Position[] output = new Position[orthAdj.length + diagAdj.length];
         System.arraycopy(orthAdj, 0, output, 0, orthAdj.length);
-        System.arraycopy(diagAdj, 0, output, orthAdj.length, orthAdj.length + diagAdj.length);
+        System.arraycopy(diagAdj, 0, output, orthAdj.length, diagAdj.length);
 
         return output;
     }
@@ -67,6 +70,26 @@ public class Util {
             }
         }
         return output;
+    }
+
+    public static boolean canMoveTo(State state, Position s, Position e) {
+        Position[] adjacent = allAdjacentPositions(s);
+        if (!Arrays.stream(adjacent).toList().contains(e)) {
+            return false;
+        } else if (!state.getBoard().isWalkable(e)) {
+            return false;
+        }
+
+        int dx = e.x() - s.x();
+        int dy = e.y() - s.y();
+
+        if (dx == 0 || dy == 0) {
+            return true;
+        } else {
+            Position adjY = new Position(s.x() + dx, s.y());
+            Position adjX = new Position(s.x(), s.y() + dy);
+            return state.getBoard().isWalkable(adjY) || state.getBoard().isWalkable(adjX);
+        }
     }
 
 }

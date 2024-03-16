@@ -43,4 +43,13 @@ public class Council implements IPlayerElement, IMetaElement {
     public Player[] getPlayers() {
         return Stream.concat(councillors.stream(), senators.stream()).toList().toArray(new Player[0]);
     }
+
+    @Override
+    public String toString() {
+        return "Council(" +
+                "coffer=" + coffer +
+                ", councillors=" + councillors +
+                ", senators=" + senators +
+                ')';
+    }
 }

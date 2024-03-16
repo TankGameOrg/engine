@@ -1,10 +1,12 @@
 package state.board;
 
 import rule.type.IMetaElement;
+import state.board.floor.AlwaysUnwalkableFloor;
 import state.board.floor.IFloor;
 import state.board.floor.StandardFloor;
 import state.board.unit.IUnit;
 import state.board.unit.EmptyUnit;
+import state.board.unit.IWalkable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +126,10 @@ public class Board implements IMetaElement {
         return output;
     }
 
+    public boolean isWalkable(Position p) {
+        return (getUnit(p).orElse(null) instanceof IWalkable) ||
+                (getFloor(p).orElse(new AlwaysUnwalkableFloor(p)).isWalkable(this));
+    }
 
     private static <T extends IElement> String toGridString(T[][] board) {
 

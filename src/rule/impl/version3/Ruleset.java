@@ -11,7 +11,7 @@ import rule.impl.BaseRuleset;
 import rule.impl.IRuleset;
 import state.board.Board;
 import state.board.Position;
-import state.board.Util;
+import util.Util;
 import state.board.floor.AbstractPositionedFloor;
 import state.board.floor.GoldMine;
 import state.board.unit.EmptyUnit;
@@ -163,6 +163,16 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 new PlayerSelfActionRule<>("upgrade range", (t, s) -> !t.isDead() && t.getGold() >= 8, (t, s) -> {
                     t.setRange(t.getRange() + 1);
                     t.setGold(t.getGold() - 8);
+                }));
+
+        playerRules.put(Tank.class, Position.class,
+                new PlayerActionRule<>("move", (t, p, s) ->
+                        !t.isDead() && t.getActions() >= 1 && Util.canMoveTo(s, t.getPosition(), p),
+                        (t, p, s) -> {
+                    t.setActions(t.getActions() - 1);
+                    s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
+                    t.setPosition(p);
+                    s.getBoard().putUnit(t);
                 }));
 
         playerRules.put(Tank.class, Position.class, new PlayerActionRule<>("shoot", (t, p, s) ->

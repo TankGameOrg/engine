@@ -1,6 +1,5 @@
 import rule.definition.RulesetDescription;
 import rule.definition.player.IPlayerRule;
-import rule.definition.player.PlayerActionRule;
 import rule.impl.IRuleset;
 import rule.impl.version3.Ruleset;
 import state.board.Position;
@@ -22,7 +21,7 @@ public class Main {
             state.getBoard().gather(c).forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
         }
         for (Class<?> c : ruleset.getMetaEnforcerRules().keySet()) {
-            state.getTickElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
+            state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
         }
     }
 
@@ -31,30 +30,57 @@ public class Main {
             state.getBoard().gather(c).forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
         }
         for (Class<?> c : ruleset.getMetaConditionalRules().keySet()) {
-            state.getTickElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
+            state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
         }
     }
 
     private static void handlePlayerRules(State state, RulesetDescription ruleset) {
-        List<PlayerActionRule<?, ?>> applicable = new ArrayList<>();
+        Map<Pair<?, ?>, List<IPlayerRule<?, ?>>> applicable = new HashMap<>();
+
         for (DuoClass<?, ?> c : ruleset.getPlayerRules().keySet()) {
             List<IPlayerRule<?, ?>> rules = ruleset.getPlayerRules().get(c.getLeftClass(), c.getRightClass());
             for (IPlayerRule<?, ?> rule : rules) {
                 IPlayerRule<Object, Object> aRule = (IPlayerRule<Object, Object>) rule; // Always works
-                List<Pair<?, ?>> pairs =  state.getBoard().gather(c.getLeftClass())
-                        .stream().flatMap( // For each LHS class, flatten the map of
-                        (x) -> state.getBoard().gather(c.getRightClass()) // objects obtained on board
-                                .stream().map((y) -> new Pair<>(x, y) ) // and map into pairs with all objects on board
+                List<Pair<?, ?>> pairs =  state.getBoard().gather(c.getLeftClass()).stream()
+                        .flatMap( // For each LHS class, flatten the map of
+                        (x) -> state.getBoard().gather(c.getRightClass()).stream() // objects obtained on board
+                                .map((y) -> new Pair<>(x, y) ) // and map into pairs with all objects on board
                                 .filter((p) -> aRule.canApply(state, p.left(), p.right()))) // that can apply the rule
                         .collect(Collectors.toList());
                 for (Pair<?, ?> pair : pairs) {
                     System.out.printf("%s can %s to %s\n", pair.left(), rule.name(), pair.right());
+                    if (applicable.containsKey(pair)) {
+                        applicable.get(pair).add(rule);
+                    } else {
+                        List<IPlayerRule<?, ?>> ruleList = new ArrayList<>();
+                        ruleList.add(rule);
+                        applicable.put(pair, ruleList);
+                    }
                 }
             }
 
         }
         for (DuoClass<?, ?> c : ruleset.getMetaPlayerRules().keySet()) {
-            state.getTickElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
+            List<IPlayerRule<?, ?>> rules = ruleset.getMetaPlayerRules().get(c.getLeftClass(), c.getRightClass());
+            for (IPlayerRule<?, ?> rule : rules) {
+                IPlayerRule<Object, Object> aRule = (IPlayerRule<Object, Object>) rule; // Always works
+                List<Pair<?, ?>> pairs =  state.getMetaElements(c.getLeftClass()).stream()
+                        .flatMap( // For each LHS class, flatten the map of
+                                (x) -> state.getBoard().gather(c.getRightClass()).stream() // objects obtained on board
+                                        .map((y) -> new Pair<>(x, y) ) // and map into pairs with all objects on board
+                                        .filter((p) -> aRule.canApply(state, p.left(), p.right()))) // that can apply the rule
+                        .collect(Collectors.toList());
+                for (Pair<?, ?> pair : pairs) {
+                    System.out.printf("%s can %s to %s\n", pair.left(), rule.name(), pair.right());
+                    if (applicable.containsKey(pair)) {
+                        applicable.get(pair).add(rule);
+                    } else {
+                        List<IPlayerRule<?, ?>> ruleList = new ArrayList<>();
+                        ruleList.add(rule);
+                        applicable.put(pair, ruleList);
+                    }
+                }
+            }
         }
     }
 
@@ -63,7 +89,7 @@ public class Main {
             state.getBoard().gather(c).forEach((x) -> ruleset.getTickRules().applyRules(state, x));
         }
         for (Class<?> c : ruleset.getMetaTickRules().keySet()) {
-            state.getTickElements().forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
+            state.getMetaElements(c).forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
         }
     }
 
@@ -155,6 +181,8 @@ public class Main {
 
         System.out.println(s.getBoard().toUnitString());
         System.out.println(s.getBoard().toFloorString());
+        s.getCouncil().setCoffer(20);
+        System.out.println(s.getCouncil());
 
         handleTick(s, ruleset);
     }
