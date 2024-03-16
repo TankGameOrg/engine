@@ -18,12 +18,9 @@ public class State {
 
     private int tick;
 
-    public State(int boardWidth, int boardHeight, Set<String> players) {
+    public State(int boardWidth, int boardHeight) {
         this.board = new Board(boardWidth, boardHeight);
         this.players = new HashMap<>();
-        for (String player : players) {
-            this.players.put(player, new Player(player));
-        }
         this.council = new Council();
         this.tick = 0;
 
@@ -43,6 +40,12 @@ public class State {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void putPlayer(String name) {
+        if (!players.containsKey(name)) {
+            players.put(name, new Player(name));
+        }
     }
 
     public Optional<Player> getPlayer(String name) {

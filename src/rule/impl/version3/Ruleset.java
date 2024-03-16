@@ -91,7 +91,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
             for (Set<Position> mine : allMines) {
                 int tanks = (int) mine.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank).count();
-                int goldToGain = mine.size() % tanks;
+                int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
                 s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
             }
         }));
