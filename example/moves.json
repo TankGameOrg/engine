@@ -1160,34 +1160,13 @@
     "action": "shoot"
   },
   {
-    "subject": "Joel",
-    "quantity": 3,
-    "action": "buy_action"
-  },
-  {
-    "subject": "Joel",
-    "location": "J8",
+    "subject": "Stomp",
+    "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
-    "subject": "Joel",
-    "location": "J8",
-    "hit": true,
-    "action": "shoot"
-  },
-  {
-    "subject": "Dan",
-    "location": "C5",
-    "action": "move"
-  },
-  {
-    "subject": "Bryan",
-    "location": "B5",
-    "action": "move"
-  },
-  {
-    "subject": "Dan",
+    "subject": "Stomp",
     "location": "G4",
     "hit": true,
     "action": "shoot"
