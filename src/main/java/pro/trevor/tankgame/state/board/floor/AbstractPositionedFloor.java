@@ -4,7 +4,7 @@ import pro.trevor.tankgame.state.board.Position;
 
 public abstract class AbstractPositionedFloor implements IFloor {
 
-    private final Position position;
+    protected final Position position;
 
     public AbstractPositionedFloor(Position position) {
         this.position = position;

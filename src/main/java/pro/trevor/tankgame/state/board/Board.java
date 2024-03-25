@@ -1,5 +1,7 @@
 package pro.trevor.tankgame.state.board;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.state.board.floor.AlwaysUnwalkableFloor;
 import pro.trevor.tankgame.state.board.floor.IFloor;
@@ -168,4 +170,23 @@ public class Board implements IMetaElement {
         return toGridString(floorBoard);
     }
 
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = new JSONObject();
+        JSONArray units = new JSONArray();
+        JSONArray floors = new JSONArray();
+        for (int i = 0; i < height; ++i) {
+            JSONArray unit = new JSONArray();
+            JSONArray floor = new JSONArray();
+            for (int j = 0; j < width; ++j) {
+                unit.put(unitBoard[i][j].toJsonObject());
+                floor.put(floorBoard[i][j].toJsonObject());
+            }
+            units.put(unit);
+            floors.put(floor);
+        }
+        output.put("unit_board", units);
+        output.put("floor_board", floors);
+        return output;
+    }
 }

@@ -5,7 +5,6 @@ import pro.trevor.tankgame.rule.impl.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.meta.Data;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.rule.definition.*;
@@ -27,7 +26,7 @@ import java.util.*;
 
 public class Ruleset extends BaseRuleset implements IRuleset {
 
-    public static final Metadata metadata = new Metadata();
+    public static boolean councilCanBounty = true;
 
     @Override
     public void registerEnforcerRules(RulesetDescription ruleset) {
@@ -96,7 +95,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
         // Handle resetting the council's ability to apply a bounty
         metaTickRules.put(None.class, new MetaTickActionRule<>((n, s) -> {
-            metadata.councilCanBounty = Data.Usable.AVAILABLE;
+            councilCanBounty = true;
         }));
     }
 
@@ -219,13 +218,13 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         }));
 
         metaPlayerRules.put(Council.class, Tank.class, Integer.class, new PlayerActionRule<>(Rules.BOUNTY,
-                (c, t, s) -> metadata.councilCanBounty == Data.Usable.AVAILABLE,
+                (c, t, s) -> councilCanBounty,
                 (c, t, n, s) -> {
                     int bounty = n.orElseThrow();
                     assert c.getCoffer() >= bounty;
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
-                    metadata.councilCanBounty = Data.Usable.USED;
+                    councilCanBounty = false;
                 }));
     }
 

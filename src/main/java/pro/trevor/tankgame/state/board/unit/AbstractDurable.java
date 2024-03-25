@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.state.board.unit;
 
+import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 
 public abstract class AbstractDurable implements IDurable {
@@ -24,5 +25,13 @@ public abstract class AbstractDurable implements IDurable {
     @Override
     public void setDurability(int durability) {
         this.durability = durability;
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = new JSONObject();
+        output.put("position", position.toJsonObject());
+        output.put("durability", durability);
+        return output;
     }
 }

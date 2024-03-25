@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.state.board.unit;
 
+import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 
 public class Wall extends AbstractDurable {
@@ -21,5 +22,12 @@ public class Wall extends AbstractDurable {
     @Override
     public char toBoardCharacter() {
         return (char) ('0' + getDurability());
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = super.toJsonObject();
+        output.put("type", "wall");
+        return output;
     }
 }

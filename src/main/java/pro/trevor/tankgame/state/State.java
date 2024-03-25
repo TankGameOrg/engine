@@ -1,14 +1,17 @@
 package pro.trevor.tankgame.state;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.IJsonObject;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class State {
+public class State implements IJsonObject {
 
     private final List<IMetaElement> metaElements;
     private final Board board;
@@ -59,5 +62,15 @@ public class State {
 
     public void setTick(int tick) {
         this.tick = tick;
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = new JSONObject();
+        output.put("board", board.toJsonObject());
+        output.put("council", council.toJsonObject());
+        output.put("players", new JSONArray(players));
+        output.put("tick", tick);
+        return output;
     }
 }

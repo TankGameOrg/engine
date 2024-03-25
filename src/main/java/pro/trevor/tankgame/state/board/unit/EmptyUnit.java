@@ -1,5 +1,7 @@
 package pro.trevor.tankgame.state.board.unit;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 
 public class EmptyUnit implements IWalkable {
@@ -23,5 +25,13 @@ public class EmptyUnit implements IWalkable {
     @Override
     public char toBoardCharacter() {
         return '_';
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = new JSONObject();
+        output.put("type", "empty");
+        output.put("position", position.toJsonObject());
+        return output;
     }
 }

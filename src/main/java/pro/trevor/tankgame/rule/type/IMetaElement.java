@@ -1,4 +1,6 @@
 package pro.trevor.tankgame.rule.type;
 
-public interface IMetaElement {
+import pro.trevor.tankgame.util.IJsonObject;
+
+public interface IMetaElement extends IJsonObject {
 }

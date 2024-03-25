@@ -1,5 +1,7 @@
 package pro.trevor.tankgame.state.board;
 
-public interface IElement {
+import pro.trevor.tankgame.util.IJsonObject;
+
+public interface IElement extends IJsonObject {
     char toBoardCharacter();
 }

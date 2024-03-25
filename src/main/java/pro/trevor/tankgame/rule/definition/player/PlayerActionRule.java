@@ -32,6 +32,7 @@ public class PlayerActionRule<T extends IPlayerElement, U, V> implements IPlayer
             for (Tank tank : state.getBoard().gatherUnits(Tank.class)) {
                 System.out.println(tank.toString());
             }
+            System.out.println(state.toJsonObject().toString(2));
             throw new Error(String.format("Failed to apply `%s` to `%s` and `%s`", name, subject, target));
         }
     }

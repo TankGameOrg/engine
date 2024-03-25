@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.state.board.unit;
 
+import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.rule.type.ITickElement;
@@ -88,7 +89,6 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
         } else {
             return String.format("[%s, %s, AP: %d HP: %d R: %d G: %d]", player, position.toString(), actions, durability, range, gold);
         }
-//        return player + position.toString();
     }
 
     @Override
@@ -99,5 +99,16 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
     @Override
     public char toBoardCharacter() {
         return 'T';
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = super.toJsonObject();
+        output.put("actions", actions);
+        output.put("gold", gold);
+        output.put("rang", range);
+        output.put("bounty", bounty);
+        output.put("dead", dead);
+        return output;
     }
 }

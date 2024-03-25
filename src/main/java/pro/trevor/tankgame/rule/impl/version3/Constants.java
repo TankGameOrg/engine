@@ -1,6 +1,6 @@
-package pro.trevor.tankgame.state;
+package pro.trevor.tankgame.rule.impl.version3;
 
-public class DefaultConstants {
+public class Constants {
 
     // Living tank
     public static final int DEFAULT_TANK_DURABILITY = 3;

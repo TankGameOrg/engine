@@ -1,5 +1,7 @@
 package pro.trevor.tankgame.state.meta;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 
@@ -50,5 +52,13 @@ public class Council implements IPlayerElement, IMetaElement {
                 ", councillors=" + councillors +
                 ", senators=" + senators +
                 ')';
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject output = new JSONObject();
+        output.put("council", new JSONArray(councillors));
+        output.put("senate", new JSONArray(senators));
+        return output;
     }
 }
