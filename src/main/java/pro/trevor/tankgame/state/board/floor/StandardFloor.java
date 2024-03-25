@@ -19,7 +19,6 @@ public class StandardFloor extends ConditionallyWalkableFloor {
     public JSONObject toJsonObject() {
         JSONObject output = new JSONObject();
         output.put("type", "empty");
-        output.put("position", position.toJsonObject());
         return output;
     }
 }

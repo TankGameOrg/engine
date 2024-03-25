@@ -1,8 +1,9 @@
 package pro.trevor.tankgame.rule.definition.player;
 
+import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.IQuadConsumer;
 import pro.trevor.tankgame.util.ITriPredicate;
 
@@ -26,12 +27,6 @@ public class PlayerActionRule<T extends IPlayerElement, U, V> implements IPlayer
         if (canApply(state, subject, target)) {
             consumer.accept(subject, target, meta, state);
         } else {
-            System.out.println("\nERROR STATE\n");
-            System.out.println(state.getBoard().toUnitString());
-            System.out.println(state.getBoard().toFloorString());
-            for (Tank tank : state.getBoard().gatherUnits(Tank.class)) {
-                System.out.println(tank.toString());
-            }
             System.out.println(state.toJsonObject().toString(2));
             throw new Error(String.format("Failed to apply `%s` to `%s` and `%s`", name, subject, target));
         }

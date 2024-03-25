@@ -1,0 +1,686 @@
+{
+  "council": {
+    "council": [],
+    "senate": []
+  },
+  "day": 0,
+  "board": {
+    "unit_board": [
+      [
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Schmude",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Dan",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Stomp",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Ty",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        }
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Bryan",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Trevor",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "David",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Lena",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        }
+      ],
+      [
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "health": 3,
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Beyer",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Steve",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Joel",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Xavion",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        }
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Ryan",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "John",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "health": 3,
+          "type": "wall"
+        },
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Isaac",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        },
+        {"type": "empty"},
+        {
+          "gold": 0,
+          "bounty": 0,
+          "name": "Corey",
+          "health": 3,
+          "range": 2,
+          "dead": false,
+          "type": "tank",
+          "actions": 0
+        }
+      ]
+    ],
+    "floor_board": [
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "gold_mine"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "gold_mine"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "gold_mine"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "gold_mine"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ]
+    ]
+  }
+}

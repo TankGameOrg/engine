@@ -96,6 +96,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         // Handle resetting the council's ability to apply a bounty
         metaTickRules.put(None.class, new MetaTickActionRule<>((n, s) -> {
             councilCanBounty = true;
+            s.setTick(s.getTick() + 1);
         }));
     }
 

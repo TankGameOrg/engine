@@ -25,16 +25,6 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
         this.dead = dead;
     }
 
-    public Tank(Position position, int actions, int gold, int durability, int range) {
-        super(position, durability);
-        this.player = "Test";
-        this.actions = actions;
-        this.gold = gold;
-        this.range = range;
-        this.bounty = 0;
-        this.dead = false;
-    }
-
     public int getActions() {
         return actions;
     }
@@ -104,9 +94,11 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
     @Override
     public JSONObject toJsonObject() {
         JSONObject output = super.toJsonObject();
+        output.put("type", "tank");
+        output.put("name", player);
         output.put("actions", actions);
         output.put("gold", gold);
-        output.put("rang", range);
+        output.put("range", range);
         output.put("bounty", bounty);
         output.put("dead", dead);
         return output;

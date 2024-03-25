@@ -69,8 +69,7 @@ public class State implements IJsonObject {
         JSONObject output = new JSONObject();
         output.put("board", board.toJsonObject());
         output.put("council", council.toJsonObject());
-        output.put("players", new JSONArray(players));
-        output.put("tick", tick);
+        output.put("day", tick);
         return output;
     }
 }

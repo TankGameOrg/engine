@@ -10,7 +10,10 @@ public class Wall extends AbstractDurable {
 
     public Wall(Position position) {
         super(position, INITIAL_HEALTH);
+    }
 
+    public Wall(Position position, int initialHealth) {
+        super(position, initialHealth);
     }
 
     @Override

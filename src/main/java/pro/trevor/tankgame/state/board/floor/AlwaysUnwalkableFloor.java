@@ -25,7 +25,6 @@ public class AlwaysUnwalkableFloor extends AbstractPositionedFloor {
     public JSONObject toJsonObject() {
         JSONObject output = new JSONObject();
         output.put("type", "unwalkable");
-        output.put("position", position.toJsonObject());
         return output;
     }
 }
