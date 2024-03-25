@@ -18,12 +18,8 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.DuoClass;
 import pro.trevor.tankgame.util.Pair;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.json.*;
 
@@ -189,49 +185,6 @@ public class Api implements IApi {
 
         }
         System.out.println(output.toString(humanReadable ? 2 : 0));
-    }
-
-    public void initialize(String initialState) {
-        Scanner scanner = new Scanner(initialState);
-        int width = scanner.nextInt();
-        int height = scanner.nextInt();
-        int playerCount = scanner.nextInt();
-        scanner.nextLine(); // seek to the next line
-
-        this.state = new State(width, height);
-
-        for (int y = 0; y < height; ++y) {
-            String line = scanner.nextLine();
-            for (int x = 0; x < width; ++x) {
-                char element = line.charAt(x * 2);
-                switch (element) {
-                    case 'W':
-                        state.getBoard().putUnit(new Wall(new Position(x, y)));
-                        break;
-                    case 'G':
-                        state.getBoard().putFloor(new GoldMine(new Position(x, y)));
-                        break;
-                    case 'T':
-                    case '_':
-                    default:
-                        break;
-                }
-            }
-        }
-
-        Map<String, Position> players = new HashMap<>();
-
-        for (int i = 0; i < playerCount; ++i) {
-            String name = scanner.next();
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-            state.putPlayer(name);
-            players.put(name, new Position(x, y));
-        }
-
-        for (String player : players.keySet()) {
-            state.getBoard().putUnit(new Tank(player, players.get(player), 0, 0, 3, 2, 0, false));
-        }
     }
 
 
