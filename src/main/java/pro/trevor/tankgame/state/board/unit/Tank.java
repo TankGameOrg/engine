@@ -92,8 +92,8 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
     }
 
     @Override
-    public JSONObject toJsonObject() {
-        JSONObject output = super.toJsonObject();
+    public JSONObject toJson() {
+        JSONObject output = super.toJson();
         output.put("type", "tank");
         output.put("name", player);
         output.put("actions", actions);
@@ -101,6 +101,14 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
         output.put("range", range);
         output.put("bounty", bounty);
         output.put("dead", dead);
+        return output;
+    }
+
+    @Override
+    public JSONObject toShortJson() {
+        JSONObject output = new JSONObject();
+        output.put("type", "tank");
+        output.put("name", player);
         return output;
     }
 }

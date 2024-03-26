@@ -1,6 +1,5 @@
 package pro.trevor.tankgame.state;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.state.meta.None;
@@ -65,10 +64,10 @@ public class State implements IJsonObject {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
-        output.put("board", board.toJsonObject());
-        output.put("council", council.toJsonObject());
+        output.put("board", board.toJson());
+        output.put("council", council.toJson());
         output.put("day", tick);
         return output;
     }

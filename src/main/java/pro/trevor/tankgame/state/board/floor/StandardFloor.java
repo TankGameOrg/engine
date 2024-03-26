@@ -16,7 +16,7 @@ public class StandardFloor extends ConditionallyWalkableFloor {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("type", "empty");
         return output;

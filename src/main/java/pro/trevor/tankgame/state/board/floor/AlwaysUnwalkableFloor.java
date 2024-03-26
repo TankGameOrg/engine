@@ -22,7 +22,7 @@ public class AlwaysUnwalkableFloor extends AbstractPositionedFloor {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("type", "unwalkable");
         return output;

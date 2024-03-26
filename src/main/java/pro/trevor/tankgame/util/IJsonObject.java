@@ -4,6 +4,10 @@ import org.json.JSONObject;
 
 public interface IJsonObject {
 
-    JSONObject toJsonObject();
+    JSONObject toJson();
+
+    default JSONObject toShortJson() {
+        return toJson();
+    }
 
 }

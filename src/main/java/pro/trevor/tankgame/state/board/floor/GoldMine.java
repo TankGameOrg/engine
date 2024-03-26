@@ -14,7 +14,7 @@ public class GoldMine extends StandardFloor {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("type", "gold_mine");
         return output;

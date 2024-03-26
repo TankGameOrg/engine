@@ -28,7 +28,7 @@ public class EmptyUnit implements IWalkable {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("type", "empty");
         return output;

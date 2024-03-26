@@ -175,7 +175,7 @@ public class Api implements IApi {
 
     @Override
     public void printStateJson(boolean humanReadable) {
-        System.out.println(state.toJsonObject().toString(humanReadable ? 2 : 0));
+        System.out.println(state.toJson().toString(humanReadable ? 2 : 0));
     }
 
     @Override
@@ -192,8 +192,8 @@ public class Api implements IApi {
                 JSONObject pairRulesJson = new JSONObject();
                 pairRulesJson.put("rules", rule.name());
                 if (key.left() instanceof IJsonObject left && key.right() instanceof IJsonObject right) {
-                    pairRulesJson.put("subject", left.toJsonObject());
-                    pairRulesJson.put("target", right.toJsonObject());
+                    pairRulesJson.put("subject", left.toShortJson());
+                    pairRulesJson.put("target", right.toShortJson());
                 }
                 output.put(pairRulesJson);
             }

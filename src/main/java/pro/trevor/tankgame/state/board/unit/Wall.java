@@ -28,8 +28,8 @@ public class Wall extends AbstractDurable {
     }
 
     @Override
-    public JSONObject toJsonObject() {
-        JSONObject output = super.toJsonObject();
+    public JSONObject toJson() {
+        JSONObject output = super.toJson();
         output.put("type", "wall");
         return output;
     }

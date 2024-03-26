@@ -10,7 +10,7 @@ import pro.trevor.tankgame.rule.type.ITickElement;
 public class None implements ITickElement, IMetaElement {
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         return new JSONObject();
     }
 }

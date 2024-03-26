@@ -28,7 +28,7 @@ public class ConditionallyWalkableFloor extends AbstractPositionedFloor {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("type", "conditional");
         return output;

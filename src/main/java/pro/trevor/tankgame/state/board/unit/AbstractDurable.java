@@ -28,7 +28,7 @@ public abstract class AbstractDurable implements IDurable {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("health", durability);
         return output;

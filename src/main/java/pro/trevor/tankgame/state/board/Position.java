@@ -30,14 +30,21 @@ public record Position (int x, int y) implements IJsonObject {
         return String.format("(%d, %d)", x, y);
     }
     public String toBoardString() {
-        return String.format("%c%d", ('A')+x, y);
+        return String.format("%c%d", x+('A'), y+1);
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("x", x);
         output.put("y", y);
+        return output;
+    }
+
+    @Override
+    public JSONObject toShortJson() {
+        JSONObject output = new JSONObject();
+        output.put("position", toBoardString());
         return output;
     }
 }

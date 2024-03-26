@@ -171,7 +171,7 @@ public class Board implements IMetaElement {
     }
 
     @Override
-    public JSONObject toJsonObject() {
+    public JSONObject toJson() {
         JSONObject output = new JSONObject();
         JSONArray units = new JSONArray();
         JSONArray floors = new JSONArray();
@@ -179,8 +179,8 @@ public class Board implements IMetaElement {
             JSONArray unit = new JSONArray();
             JSONArray floor = new JSONArray();
             for (int j = 0; j < width; ++j) {
-                unit.put(unitBoard[i][j].toJsonObject());
-                floor.put(floorBoard[i][j].toJsonObject());
+                unit.put(unitBoard[i][j].toJson());
+                floor.put(floorBoard[i][j].toJson());
             }
             units.put(unit);
             floors.put(floor);

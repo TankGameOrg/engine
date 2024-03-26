@@ -7,13 +7,10 @@ import pro.trevor.tankgame.rule.impl.version3.Api;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        System.out.println(Arrays.toString(args));
         if (args.length == 0) {
             // Only read from stdin (repl)
         } else if (args.length == 1) {
@@ -22,7 +19,7 @@ public class Main {
             System.err.println("Expected 0 or 1 arguments:\n    tankgame <path/to/initial.json>");
         }
 
-        // Demo version 3 rules with v3 logs
+        // Demo version 3 rules with game logs
         File initialFile = new File("example/initial.json");
         File movesFile = new File("example/moves.json");
         IApi api = new Api();
