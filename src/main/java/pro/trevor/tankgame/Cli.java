@@ -57,14 +57,17 @@ public class Cli {
         input.useDelimiter("");
         int count = 0;
         boolean seeking = true;
+        boolean inQuote = false;
         do {
             char current = input.next().charAt(0);
             sb.append(current);
-            if (current == '{') {
+            if (current == '{' && !inQuote) {
                 count = count + 1;
                 seeking = false;
-            } else if (current == '}') {
+            } else if (current == '}' && !inQuote) {
                 count = count - 1;
+            } else if (current == '\"')  {
+                inQuote = !inQuote;
             }
 
         } while (count > 0 || seeking);

@@ -7,7 +7,6 @@ import pro.trevor.tankgame.rule.impl.version3.Api;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.util.Scanner;
 
 public class Main {
 
