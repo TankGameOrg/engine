@@ -174,12 +174,14 @@ public class Api implements IApi {
     }
 
     @Override
-    public void printStateJson(boolean humanReadable) {
-        System.out.println(state.toJson().toString(humanReadable ? 2 : 0));
+    public JSONObject getStateJson() {
+        JSONObject output = state.toJson();
+        output.put("possible_actions", getPossibleActionsJson());
+        return output;
     }
 
     @Override
-    public void printPossibleMovesJson(boolean humanReadable) {
+    public JSONArray getPossibleActionsJson() {
         JSONArray output = new JSONArray();
         Map<Pair<?, ?>, List<IPlayerRule<?, ?, ?>>> applicable = applicablePlayerRules(state, ruleset);
         for (Pair<?, ?> key : applicable.keySet()) {
@@ -199,7 +201,7 @@ public class Api implements IApi {
             }
 
         }
-        System.out.println(output.toString(humanReadable ? 2 : 0));
+        return output;
     }
 
 

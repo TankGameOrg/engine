@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.rule.impl;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public interface IApi {
@@ -10,8 +11,8 @@ public interface IApi {
 
     void ingestAction(JSONObject json);
 
-    void printStateJson(boolean humanReadable);
+    JSONObject getStateJson();
 
-    void printPossibleMovesJson(boolean humanReadable);
+    JSONArray getPossibleActionsJson();
     
 }

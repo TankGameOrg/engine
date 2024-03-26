@@ -1,6 +1,5 @@
 package pro.trevor.tankgame.state.board;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
 
@@ -36,6 +35,7 @@ public record Position (int x, int y) implements IJsonObject {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
+        output.put("type", "position");
         output.put("x", x);
         output.put("y", y);
         return output;
