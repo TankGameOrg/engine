@@ -36,13 +36,9 @@ public class Main {
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
-//            Scanner s = new Scanner(System.in);
-//            System.out.println(Cli.getJsonObject(s).toString(2));
         } else if (args.length == 0) {
-            // Only read from stdin (repl)
             Cli.repl(new Api());
         } else if (args.length == 1) {
-            // read from specified file as initial state and then read from stdin
             IApi api = new Api();
             File initialFile = new File(args[0]);
             try {

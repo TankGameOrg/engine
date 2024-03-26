@@ -1,8 +1,10 @@
 {
   "council": {
     "council": [],
-    "senate": []
+    "senate": [],
+    "type": "council"
   },
+  "type": "state",
   "day": 0,
   "board": {
     "unit_board": [
@@ -681,6 +683,7 @@
         {"type": "empty"},
         {"type": "empty"}
       ]
-    ]
+    ],
+    "type": "board"
   }
 }

@@ -1,2005 +1,2369 @@
 [
   {
+    "type": "action",
     "day": 1
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "J10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "J11",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Schmude",
     "location": "A3",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "C10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "A10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "J9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "A3",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "A3",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 2
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "H10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "B2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "B8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 3
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "B4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "H10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D11",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D11",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D11",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 4
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "H10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "J2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "J4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "J4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "J4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "J4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "J5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "J5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "J5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "I10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "G10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "J9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "G10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "J10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B8",
     "action": "move"
   },
   {
+    "type": "action",
     "day": 5
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "J5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "J3",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "J2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "B4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "B3",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "B4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Schmude",
     "location": "A2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "H2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A2",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Schmude",
     "location": "A3",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Schmude",
     "location": "A3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Schmude",
     "location": "A3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 6
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "B4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "A2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "B2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "A2",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "A2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "A2",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 7
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B7",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 8
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "I4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "I4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "I4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "I2",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "B5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A3",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "B5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "A5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 9
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "C8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "C8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "C8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C3",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "I4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "A5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "H1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "H1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "H1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H3",
     "action": "move"
   },
   {
+    "type": "action",
     "day": 10
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C8",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "B4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "A4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "I9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "I8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "I8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "I8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "I8",
     "action": "move"
   },
   {
+    "type": "action",
     "day": 11
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 2,
     "target": "Joel",
     "action": "donate"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "J8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Joel",
     "location": "J8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Dan",
     "location": "C5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "B5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C7",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "A7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "A7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "A7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "J8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G11",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G11",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G11",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "F9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "E9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "F9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "F9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "H4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "H4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "H4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ty",
     "location": "H5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "H5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 12
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "K6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "G5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "G5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "location": "G5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F1",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Steve",
     "location": "D9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "John",
     "location": "D9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 13
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "D8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "D8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "D8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "day": 14
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "F3",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "action": "upgrade_range"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "quantity": 3,
     "target": "Dan",
     "action": "donate"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "C5",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "C5",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Bryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B5",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "action": "upgrade_range"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C6",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "quantity": 10,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "C5",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Council",
     "quantity": 5,
     "target": "Corey",
     "action": "bounty"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "H9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Ryan",
     "location": "B6",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "David",
     "action": "upgrade_range"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "J10",
     "action": "move"
   },
   {
+    "type": "action",
     "day": 15
   },
   {
+    "type": "action",
     "subject": "Lena",
     "action": "upgrade_range"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I6",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "action": "upgrade_range"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "target": "Isaac",
     "action": "donate"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "David",
     "quantity": 3,
     "target": "Lena",
     "action": "donate"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "target": "Isaac",
     "action": "donate"
   },
   {
+    "type": "action",
     "subject": "Isaac",
     "location": "I8",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I9",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "quantity": 3,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "I9",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C6",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "B6",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "B6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "B6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "B6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Trevor",
     "location": "C4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "B6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Council",
     "target": "Beyer",
     "action": "stimulus"
   },
   {
+    "type": "action",
     "subject": "Council",
     "target": "Beyer",
     "action": "stimulus"
   },
   {
+    "type": "action",
     "subject": "Council",
     "target": "Beyer",
     "action": "stimulus"
   },
   {
+    "type": "action",
     "subject": "Council",
     "target": "Beyer",
     "action": "stimulus"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C7",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C6",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C4",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Council",
     "target": "Beyer",
     "action": "stimulus"
   },
   {
+    "type": "action",
     "subject": "Council",
     "target": "Beyer",
     "action": "stimulus"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Beyer",
     "location": "C4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Lena",
     "location": "I7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Stomp",
     "location": "G4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "location": "G8",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "action": "upgrade_range"
   },
   {
+    "type": "action",
     "day": 16
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "F10",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "E10",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "E10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "E10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "E10",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 10,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G9",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H8",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H7",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 10,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H7",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H6",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H5",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I4",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Xavion",
     "quantity": 5,
     "target": "Corey",
     "action": "donate"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 10,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "G4",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 10,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "I6",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H4",
     "action": "move"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "quantity": 5,
     "action": "buy_action"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H3",
     "hit": true,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H3",
     "hit": false,
     "action": "shoot"
   },
   {
+    "type": "action",
     "subject": "Corey",
     "location": "H3",
     "hit": true,

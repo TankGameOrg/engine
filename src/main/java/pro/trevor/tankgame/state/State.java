@@ -66,6 +66,7 @@ public class State implements IJsonObject {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
+        output.put("type", "state");
         output.put("board", board.toJson());
         output.put("council", council.toJson());
         output.put("day", tick);

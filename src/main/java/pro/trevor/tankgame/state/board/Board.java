@@ -173,6 +173,7 @@ public class Board implements IMetaElement {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
+        output.put("type", "board");
         JSONArray units = new JSONArray();
         JSONArray floors = new JSONArray();
         for (int i = 0; i < height; ++i) {

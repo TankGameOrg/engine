@@ -57,6 +57,7 @@ public class Council implements IPlayerElement, IMetaElement {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
+        output.put("type", "council");
         output.put("council", new JSONArray(councillors));
         output.put("senate", new JSONArray(senators));
         return output;

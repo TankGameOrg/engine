@@ -248,18 +248,14 @@ public class Api implements IApi {
         for (Class<?> c : ruleset.getEnforcerRules().keySet()) {
             state.getBoard().gather(c).forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
         }
-        for (Class<?> c : ruleset.getMetaEnforcerRules().keySet()) {
-            state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
-        }
+        state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
     }
 
     private static void applyConditionals(State state, RulesetDescription ruleset) {
         for (Class<?> c : ruleset.getConditionalRules().keySet()) {
             state.getBoard().gather(c).forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
         }
-        for (Class<?> c : ruleset.getMetaConditionalRules().keySet()) {
-            state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
-        }
+        state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
     }
 
     private static Map<Pair<?, ?>, List<IPlayerRule<?, ?, ?>>> applicablePlayerRules(State state, RulesetDescription ruleset) {
