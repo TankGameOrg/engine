@@ -173,7 +173,6 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
         playerRules.put(Tank.class, Position.class, Boolean.class, new PlayerActionRule<>(Rules.SHOOT, (t, p, s) ->
                 !t.isDead() && t.getActions() >= 1 && t.getPosition().distanceFrom(p) <= t.getRange()
-                        && s.getBoard().getUnit(p).orElse(null) instanceof IDurable
                         && LineOfSight.hasLineOfSight(s, t.getPosition(), p),
                 (t, p, n, s) -> {
                     if (s.getBoard().getUnit(p).orElse(null) instanceof IDurable unit) {
@@ -193,6 +192,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                             }
                         } else if (unit instanceof Wall wall) {
                             wall.setDurability(wall.getDurability() - 1);
+                        } else if (unit instanceof EmptyUnit) {
+                            // MISS
                         } else {
                             throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
                         }

@@ -16,6 +16,7 @@ import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.Wall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.DuoClass;
+import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.Pair;
 
 import java.util.*;
@@ -181,7 +182,21 @@ public class Api implements IApi {
     public void printPossibleMovesJson(boolean humanReadable) {
         JSONArray output = new JSONArray();
         Map<Pair<?, ?>, List<IPlayerRule<?, ?, ?>>> applicable = applicablePlayerRules(state, ruleset);
-        for (Object key : applicable.keySet()) {
+        for (Pair<?, ?> key : applicable.keySet()) {
+
+            List<IPlayerRule<?, ?, ?>> rules = applicable.get(key);
+            if (rules.isEmpty()) {
+                continue;
+            }
+            for (IPlayerRule<?, ?, ?> rule : rules) {
+                JSONObject pairRulesJson = new JSONObject();
+                pairRulesJson.put("rules", rule.name());
+                if (key.left() instanceof IJsonObject left && key.right() instanceof IJsonObject right) {
+                    pairRulesJson.put("subject", left.toJsonObject());
+                    pairRulesJson.put("target", right.toJsonObject());
+                }
+                output.put(pairRulesJson);
+            }
 
         }
         System.out.println(output.toString(humanReadable ? 2 : 0));
