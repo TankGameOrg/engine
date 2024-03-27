@@ -33,13 +33,13 @@ public class PlayerActionRule<T extends IPlayerElement, U, V> implements IPlayer
             error.put("rule", name);
 
             if (subject instanceof IJsonObject subjectJson) {
-                error.put("subject", subjectJson);
+                error.put("subject", subjectJson.toJson());
             } else {
                 error.put("subject", subject.getPlayer());
             }
 
             if (target instanceof IJsonObject targetJson) {
-                error.put("target", targetJson);
+                error.put("target", targetJson.toJson());
             } else {
                 error.put("target", target.toString());
             }

@@ -1781,16 +1781,16 @@
   },
   {
     "type": "action",
+    "subject": "Isaac",
+    "location": "I9",
+    "action": "move"
+  },
+  {
+    "type": "action",
     "subject": "Lena",
     "quantity": 5,
     "target": "Isaac",
     "action": "donate"
-  },
-  {
-    "type": "action",
-    "subject": "Isaac",
-    "location": "I9",
-    "action": "move"
   },
   {
     "type": "action",
@@ -2167,6 +2167,12 @@
     "subject": "Corey",
     "location": "H8",
     "action": "move"
+  },
+  {
+    "type": "action",
+    "subject": "Corey",
+    "quantity": 5,
+    "action": "buy_action"
   },
   {
     "type": "action",
