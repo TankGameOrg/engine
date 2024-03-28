@@ -26,6 +26,10 @@ public record Position (int x, int y) implements IJsonObject {
 
     @Override
     public String toString() {
+        return toBoardString();
+    }
+
+    public String toLongString() {
         return String.format("(%d, %d)", x, y);
     }
     public String toBoardString() {

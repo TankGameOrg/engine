@@ -2243,6 +2243,12 @@
   {
     "type": "action",
     "subject": "Corey",
+    "quantity": 8,
+    "action": "buy_action"
+  },
+  {
+    "type": "action",
+    "subject": "Corey",
     "location": "I4",
     "hit": true,
     "action": "shoot"

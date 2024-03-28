@@ -59,7 +59,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
                     Set<Position> mines = new HashSet<>();
                     Util.findAllConnectedMines(mines, s, t.getPosition());
-                    int tanks = (int) mines.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank).count();
+                    int tanks = (int) mines.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank && !tank.isDead()).count();
                     int goldToGain = mines.size() / tanks;
                     t.setGold(t.getGold() + goldToGain);
                 }
@@ -87,7 +87,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             }
 
             for (Set<Position> mine : allMines) {
-                int tanks = (int) mine.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank).count();
+                int tanks = (int) mine.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank && !tank.isDead()).count();
                 int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
                 s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
             }

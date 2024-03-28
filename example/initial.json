@@ -439,7 +439,7 @@
         },
         {"type": "empty"},
         {
-          "gold": 1,
+          "gold": 0,
           "bounty": 0,
           "name": "Xavion",
           "health": 3,
@@ -476,7 +476,7 @@
       ],
       [
         {
-          "gold": 2,
+          "gold": 0,
           "bounty": 0,
           "name": "Ryan",
           "health": 3,
