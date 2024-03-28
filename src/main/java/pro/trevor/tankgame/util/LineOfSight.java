@@ -2,21 +2,11 @@ package pro.trevor.tankgame.util;
 
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.IWalkable;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class LineOfSight {
-
-    private static boolean pointsSeparated(int a, int b, int c, int x1, int y1, int x2, int y2) {
-        int fx1 = a * x1 + b * y1 + c;
-        int fx2 = a * x2 + b * y2 + c;
-        int corner1 = a * x1 + b * y2 + c;
-        int corner2 = a * x2 + b * y1 + c;
-        // points are separated by the line if the signs are opposite; detect if a corner is hit
-        return (fx1 * fx2) < 0 || corner1 * corner2 == 0;
-    }
 
     private static float ccw(PointF a, PointF b, PointF c) {
         return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x());
@@ -26,7 +16,7 @@ public class LineOfSight {
         return (ccw(a, b, c) * ccw(a, b, d) < 0 && ccw(c, d, a) * ccw(c, d, b) < 0);
     }
 
-    private static Set<Position> allPointsBetweenLineOfSight(Position p1, Position p2) {
+    private static Set<Position> allSquaresBetweenLineOfSight(Position p1, Position p2) {
         int minx = Math.min(p1.x(), p2.x());
         int maxx = Math.max(p1.x(), p2.x());
         int miny = Math.min(p1.y(), p2.y());
@@ -49,15 +39,6 @@ public class LineOfSight {
                 points.add(new Position(x, miny));
             }
         } else {
-            // y - p1.y() = slope * (x - p1.x())
-            // y - (dy/dx) * x - p1.y() + (dy/dx) * p1.x() = 0
-            // dx*y - dy*x - dx*p1.y() + dy*p1.x() = 0
-            // dy*x - dx*y + (dy*p1.x() - dx*p1.y()) = 0
-            // Ax + By + C = 0
-            int a = dy;
-            int b = -dx;
-            int c = dx * p1.y() - dy * p1.x();
-
             for (int x = minx; x <= maxx; ++x) {
                 for (int y = miny; y <= maxy; ++y) {
                     // X represents the given position of the square
@@ -107,12 +88,91 @@ public class LineOfSight {
         return points;
     }
 
-    public static boolean hasLineOfSight(State s, Position p1, Position p2) {
-        for (Position p : allPointsBetweenLineOfSight(p1, p2)) {
-            if (!s.getBoard().isWalkable(p)) {
+    private static Set<Position> allCartesianAlignedPointsBetween(Position p1, Position p2) {
+        // Double our resolution; line of sight is center to center
+        Position p1_ = new Position(p1.x() * 2 + 1, p1.y() * 2 + 1);
+        Position p2_ = new Position(p2.x() * 2 + 1, p2.y() * 2 + 1);
+
+        // The slope is the same despite our resolution
+        int dx = p2.x() - p1.x();
+        int dy = p2.y() - p1.y();
+
+        if (dx == 0 || dy == 0) {
+            return new HashSet<>(0);
+        }
+
+        int minx = Math.min(p1_.x(), p2_.x());
+        int maxx = Math.max(p1_.x(), p2_.x());
+
+        Set<Position> output = new HashSet<>((maxx - minx) / 2);
+
+        // y - p1.y() = (dy/dx) * (x - p1.x())
+        // y * dx = p1.y() * dx + dy * (x - p1.x())
+        // Use even-numbered X coordinates (corresponding to X/2 on the standard resolution board)
+        for (int i = minx + 1; i <= maxx; i += 2) {
+            // Calculate y * dx instead of needing to use a floating point number
+            int ydx = dx * p1_.y() + dy * (i - p1_.x());
+            int y = ydx / dx;
+            // Ensure the
+            if (y * dx == ydx && y % 2 == 0) {
+                // y is an integer, this point to the list; divide by two first to go back to standard resolution
+                output.add(new Position(i / 2, y / 2));
+            }
+        }
+        return output;
+    }
+
+    public static boolean hasLineOfSightV3(State s, Position p1, Position p2) {
+        for (Position p : allSquaresBetweenLineOfSight(p1, p2)) {
+            if (!s.getBoard().isAbleToShootThrough(p)) {
                 return false;
             }
         }
+        return true;
+    }
+
+    public static boolean hasLineOfSightV4(State s, Position p1, Position p2) {
+        for (Position p : allSquaresBetweenLineOfSight(p1, p2)) {
+            if (!s.getBoard().isAbleToShootThrough(p)) {
+                return false;
+            }
+        }
+
+        int dx = p2.x() - p1.x();
+        int dy = p2.y() - p1.y();
+
+        // an integer multiplied by the sign of the slope (can be zero)
+        int sign = dy * dx;
+
+        Set<Position> corners = allCartesianAlignedPointsBetween(p1, p2);
+
+        Position q1, q2;
+        boolean hitLeft = false;
+        boolean hitRight = false;
+        for (Position corner : corners) {
+            int x = corner.x();
+            int y = corner.y();
+            if (sign >= 0) {
+                q1 = new Position(x-1, y);
+                q2 = new Position(x, y-1);
+            } else {
+                q1 = new Position(x-1, y-1);
+                q2 = new Position(x, y);
+            }
+            if (!s.getBoard().isAbleToShootThrough(q1)) {
+                hitLeft = true;
+            }
+            if (!s.getBoard().isAbleToShootThrough(q2)) {
+                hitRight = true;
+            }
+
+            // does not have line of sight if passed through both a left corner and a right corner
+            if (hitLeft && hitRight) {
+                return false;
+            }
+        }
+
+        // has line of sight if was not blocked by corners or points
         return true;
     }
 

@@ -173,7 +173,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
         playerRules.put(Tank.class, Position.class, Boolean.class, new PlayerActionRule<>(Rules.SHOOT, (t, p, s) ->
                 !t.isDead() && t.getActions() >= 1 && t.getPosition().distanceFrom(p) <= t.getRange()
-                        && LineOfSight.hasLineOfSight(s, t.getPosition(), p),
+                        && LineOfSight.hasLineOfSightV3(s, t.getPosition(), p),
                 (t, p, n, s) -> {
                     if (s.getBoard().getUnit(p).orElse(null) instanceof IDurable unit) {
                         t.setActions(t.getActions() - 1);

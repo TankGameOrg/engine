@@ -133,6 +133,10 @@ public class Board implements IMetaElement {
                 (getFloor(p).orElse(new AlwaysUnwalkableFloor(p)).isWalkable(this));
     }
 
+    public boolean isAbleToShootThrough(Position p) {
+        return getUnit(p).orElse(null) instanceof IWalkable;
+    }
+
     private static <T extends IElement> String toGridString(T[][] board) {
 
         int pad = (int) Math.log10(board.length) + 1;

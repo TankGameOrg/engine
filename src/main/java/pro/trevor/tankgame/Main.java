@@ -4,13 +4,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.version3.Api;
+import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.unit.Wall;
+import pro.trevor.tankgame.util.LineOfSight;
 
 import java.io.File;
 import java.nio.file.Files;
 
 public class Main {
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     public static void main(String[] args) {
 
