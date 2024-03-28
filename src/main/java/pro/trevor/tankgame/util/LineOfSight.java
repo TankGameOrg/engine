@@ -128,6 +128,31 @@ public class LineOfSight {
                 return false;
             }
         }
+        int dx = p2.x() - p1.x();
+        int dy = p2.y() - p1.y();
+
+        // an integer multiplied by the sign of the slope (can be zero)
+        int sign = dy * dx;
+
+        Set<Position> corners = allCartesianAlignedPointsBetween(p1, p2);
+
+        Position q1, q2;
+        for (Position corner : corners) {
+            int x = corner.x();
+            int y = corner.y();
+            if (sign >= 0) {
+                q1 = new Position(x-1, y);
+                q2 = new Position(x, y-1);
+            } else {
+                q1 = new Position(x-1, y-1);
+                q2 = new Position(x, y);
+            }
+            if (!s.getBoard().isAbleToShootThrough(q1) || !s.getBoard().isAbleToShootThrough(q2)) {
+                return false;
+            }
+        }
+
+        // has line of sight if was not blocked by corners or points
         return true;
     }
 
