@@ -32,6 +32,7 @@ public class Main {
                     api.ingestAction(action);
 
                 }
+                System.out.println(api.getState().toString());
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }

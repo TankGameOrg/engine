@@ -5,6 +5,7 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -88,6 +89,16 @@ public class Util {
             Position adjX = new Position(s.x(), s.y() + dy);
             return state.getBoard().isWalkable(adjY) || state.getBoard().isWalkable(adjX);
         }
+    }
+
+    public static String toString(Collection<?> items) {
+        return toString(items, 2);
+    }
+
+    public static String toString(Collection<?> items, int indent) {
+        StringBuilder sb = new StringBuilder("[\n");
+        items.forEach((x) -> sb.repeat(' ', indent).append(x).append(",\n"));
+        return sb.append("]\n").toString();
     }
 
 }

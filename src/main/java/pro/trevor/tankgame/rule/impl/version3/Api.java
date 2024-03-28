@@ -39,6 +39,11 @@ public class Api implements IApi {
         return 3;
     }
 
+    @Override
+    public State getState() {
+        return state;
+    }
+
     private static IUnit unitFromJson(JSONObject json, Position position) {
         String type = json.getString("type");
         switch (type) {

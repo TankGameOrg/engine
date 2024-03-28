@@ -2,10 +2,12 @@ package pro.trevor.tankgame.state;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,5 +73,16 @@ public class State implements IJsonObject {
         output.put("council", council.toJson());
         output.put("day", tick);
         return output;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("tick: ").append(tick).append('\n');
+        sb.append(council.toString());
+        sb.append("tanks: ").append(Util.toString(board.gatherUnits(Tank.class), 2));
+        sb.append('\n').append(board.toUnitString());
+        sb.append('\n').append(board.toFloorString());
+        return sb.toString();
     }
 }
