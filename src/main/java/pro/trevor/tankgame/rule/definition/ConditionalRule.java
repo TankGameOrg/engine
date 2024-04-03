@@ -7,10 +7,10 @@ import java.util.function.BiPredicate;
 
 public class ConditionalRule<T> implements IConditionalRule<T> {
 
-    private final BiPredicate<T, State> predicate;
-    private final BiConsumer<T, State> consumer;
+    private final BiPredicate<State, T> predicate;
+    private final BiConsumer<State, T> consumer;
 
-    public ConditionalRule(BiPredicate<T, State> predicate, BiConsumer<T, State> consumer) {
+    public ConditionalRule(BiPredicate<State, T> predicate, BiConsumer<State, T> consumer) {
         this.predicate = predicate;
         this.consumer = consumer;
     }
@@ -18,12 +18,12 @@ public class ConditionalRule<T> implements IConditionalRule<T> {
     @Override
     public void apply(State state, T subject) {
         if (canApply(state, subject)) {
-            consumer.accept(subject, state);
+            consumer.accept(state, subject);
         }
     }
 
     @Override
     public boolean canApply(State state, T subject) {
-        return predicate.test(subject, state);
+        return predicate.test(state, subject);
     }
 }

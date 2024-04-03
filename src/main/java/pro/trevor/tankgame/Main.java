@@ -4,10 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.version3.Api;
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.Wall;
-import pro.trevor.tankgame.util.LineOfSight;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -26,6 +22,8 @@ public class Main {
             try {
                 String initialString = Files.readString(initialFile.toPath());
                 String movesString = Files.readString(movesFile.toPath());
+
+                System.out.println(api.getRules().toString(2));
 
                 JSONObject initial = new JSONObject(initialString);
                 JSONArray moves = new JSONArray(movesString);
@@ -57,7 +55,5 @@ public class Main {
         } else {
             System.err.println("Expected 0 or 1 arguments:\n    tankgame <path/to/initial.json>");
         }
-
-
     }
 }

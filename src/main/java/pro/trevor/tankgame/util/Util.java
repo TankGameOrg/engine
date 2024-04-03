@@ -101,4 +101,12 @@ public class Util {
         return sb.append("]\n").toString();
     }
 
+    public static <T> T toTypeOrError(Object o, Class<T> type) {
+        if (o.getClass().isAssignableFrom(type)) {
+            return type.cast(o);
+        } else {
+            throw new Error(String.format("Could not convert %s to %s", o.getClass().getSimpleName(), type.getSimpleName()));
+        }
+    }
+
 }

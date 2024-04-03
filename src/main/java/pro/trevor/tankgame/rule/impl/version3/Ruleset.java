@@ -53,7 +53,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
         // Handle gold mine distribution to tanks
-        tickRules.put(Tank.class, new TickActionRule<>((t, s) -> {
+        tickRules.put(Tank.class, new TickActionRule<>((s, t) -> {
             if (!t.isDead()) {
                 t.setActions(t.getActions() + 1);
                 if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
@@ -72,7 +72,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         // Handle gold mine distribution to coffer
-        metaTickRules.put(Board.class, new MetaTickActionRule<>((b, s) -> {
+        metaTickRules.put(Board.class, new MetaTickActionRule<>((s, b) -> {
             List<Position> mines = b.gatherFloors(GoldMine.class).stream()
                     .map(AbstractPositionedFloor::getPosition).toList();
             List<Set<Position>> allMines = new ArrayList<>();
@@ -94,7 +94,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         }));
 
         // Handle resetting the council's ability to apply a bounty
-        metaTickRules.put(None.class, new MetaTickActionRule<>((n, s) -> {
+        metaTickRules.put(None.class, new MetaTickActionRule<>((s, n) -> {
             councilCanBounty = true;
             s.setTick(s.getTick() + 1);
         }));
@@ -105,7 +105,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
 
         // Handle tank destruction
-        conditionalRules.put(Tank.class, new ConditionalRule<>((t, s) -> t.getDurability() == 0, (t, s) -> {
+        conditionalRules.put(Tank.class, new ConditionalRule<>((s, t) -> t.getDurability() == 0, (s, t) -> {
             if (t.isDead()) {
                 s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
                 String tankPlayer = t.getPlayer();
@@ -121,7 +121,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         }));
 
         // Handle wall destruction
-        conditionalRules.put(Wall.class, new ConditionalRule<>((t, s) -> t.getDurability() == 0, (t, s) -> {
+        conditionalRules.put(Wall.class, new ConditionalRule<>((s, t) -> t.getDurability() == 0, (s, t) -> {
             s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
             if (Util.isOrthAdjToMine(s, t.getPosition())) {
                 s.getBoard().putFloor(new GoldMine(t.getPosition()));
@@ -133,9 +133,9 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        playerRules.putSelfRule(Tank.class, Integer.class,
-                new PlayerSelfActionRule<>(Rules.BUY_ACTION, (t, s) -> !t.isDead() && t.getGold() >= 3, (t, n, s) -> {
-                    int gold = n.orElseThrow();
+        playerRules.putSelfRule(Tank.class,
+                new PlayerSelfActionRule<>(Rules.BUY_ACTION, (s, t, n) -> !t.isDead() && t.getGold() >= 3, (s, t, n) -> {
+                    int gold = Util.toTypeOrError(n[0], Integer.class);
                     int n5 =  gold / 5;
                     int rem = gold - n5 * 5;
                     int n3 = gold / 3;
@@ -143,91 +143,90 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
                     t.setActions(t.getActions() + n5 * 2 + n3);
                     t.setGold(t.getGold() - gold);
-                }));
+                }, Integer.class));
 
-        playerRules.putSelfRule(Tank.class, Void.class,
-                new PlayerSelfActionRule<>(Rules.UPGRADE_RANGE, (t, s) -> !t.isDead() && t.getGold() >= 8, (t, n, s) -> {
+        playerRules.putSelfRule(Tank.class,
+                new PlayerSelfActionRule<>(Rules.UPGRADE_RANGE, (s, t, n) -> !t.isDead() && t.getGold() >= 8, (s, t, n) -> {
                     t.setRange(t.getRange() + 1);
                     t.setGold(t.getGold() - 8);
                 }));
 
-        playerRules.put(Tank.class, Tank.class, Integer.class,
-                new PlayerActionRule<>(Rules.DONATE, (t, u, s) ->
+        playerRules.put(Tank.class, Tank.class,
+                new PlayerActionRule<>(Rules.DONATE, (s, t, u, n) ->
                         !t.isDead() && !u.isDead() && t.getGold() >= 2 && Util.getSpacesInRange(t.getPosition(), t.getRange()).contains(u.getPosition()),
-                        (t, u, n, s) -> {
-                            int donation = n.orElseThrow();
+                        (s, t, u, n) -> {
+                            int donation = Util.toTypeOrError(n[0], Integer.class);
                             assert t.getGold() >= donation + 1;
                             t.setGold(t.getGold() - donation - 1);
                             u.setGold(u.getGold() + donation);
-                        }));
+                        }, Integer.class));
 
-        playerRules.put(Tank.class, Position.class, Void.class,
-                new PlayerActionRule<>(Rules.MOVE, (t, p, s) ->
+        playerRules.put(Tank.class, Position.class,
+                new PlayerActionRule<>(Rules.MOVE, (s, t, p, n) ->
                         !t.isDead() && t.getActions() >= 1 && Util.canMoveTo(s, t.getPosition(), p),
-                        (t, p, n, s) -> {
+                        (s, t, p, n) -> {
                     t.setActions(t.getActions() - 1);
                     s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
                     t.setPosition(p);
                     s.getBoard().putUnit(t);
                 }));
 
-        playerRules.put(Tank.class, Position.class, Boolean.class, new PlayerActionRule<>(Rules.SHOOT, (t, p, s) ->
+        playerRules.put(Tank.class, Position.class, new PlayerActionRule<>(Rules.SHOOT, (s, t, p, n) ->
                 !t.isDead() && t.getActions() >= 1 && t.getPosition().distanceFrom(p) <= t.getRange()
                         && LineOfSight.hasLineOfSightV3(s, t.getPosition(), p),
-                (t, p, n, s) -> {
+                (s, t, p, n) -> {
                     if (s.getBoard().getUnit(p).orElse(null) instanceof IDurable unit) {
                         t.setActions(t.getActions() - 1);
-                        if (unit instanceof Tank tank) {
-                            if (tank.isDead()) {
-                                tank.setDurability(tank.getDurability() - 1);
-                            } else {
-                                if (n.orElseThrow()) {
+                        switch (unit) {
+                            case Tank tank -> {
+                                if (tank.isDead()) {
                                     tank.setDurability(tank.getDurability() - 1);
-                                    if (tank.getDurability() == 0) {
-                                        t.setGold(t.getGold() + tank.getGold() + tank.getBounty());
-                                        tank.setBounty(0);
-                                        tank.setGold(0);
+                                } else {
+                                    if (Util.toTypeOrError(n[0], Boolean.class)) {
+                                        tank.setDurability(tank.getDurability() - 1);
+                                        if (tank.getDurability() == 0) {
+                                            t.setGold(t.getGold() + tank.getGold() + tank.getBounty());
+                                            tank.setBounty(0);
+                                            tank.setGold(0);
+                                        }
                                     }
                                 }
                             }
-                        } else if (unit instanceof Wall wall) {
-                            wall.setDurability(wall.getDurability() - 1);
-                        } else if (unit instanceof EmptyUnit) {
-                            // MISS
-                        } else {
-                            throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
+                            case Wall wall -> wall.setDurability(wall.getDurability() - 1);
+                            case EmptyUnit emptyUnit -> { /* MISS */ }
+                            default -> throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
                         }
                     }
-        }));
+        }, Boolean.class));
     }
 
     @Override
     public void registerMetaPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset metaPlayerRules = ruleset.getMetaPlayerRules();
 
-        metaPlayerRules.put(Council.class, Tank.class, Void.class, new PlayerActionRule<>(Rules.STIMULUS,
-                (c, t, s) -> c.getCoffer() >= 3,
-                (c, t, n, s) -> {
+        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>(Rules.STIMULUS,
+                (s, c, t, n) -> c.getCoffer() >= 3,
+                (s, c, t, n) -> {
                     t.setActions(t.getActions() + 1);
                     c.setCoffer(c.getCoffer() - 3);
         }));
 
-        metaPlayerRules.put(Council.class, Tank.class, Void.class, new PlayerActionRule<>(Rules.GRANT_LIFE,
-                (c, t, s) -> c.getCoffer() >= 15,
-                (c, t, n, s) -> {
+        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>(Rules.GRANT_LIFE,
+                (s, c, t, n) -> c.getCoffer() >= 15,
+                (s, c, t, n) -> {
                     t.setDurability(t.getDurability() + 1);
                     c.setCoffer(c.getCoffer() - 15);
         }));
 
-        metaPlayerRules.put(Council.class, Tank.class, Integer.class, new PlayerActionRule<>(Rules.BOUNTY,
-                (c, t, s) -> councilCanBounty,
-                (c, t, n, s) -> {
-                    int bounty = n.orElseThrow();
+        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>(Rules.BOUNTY,
+                (s, c, t, n) -> councilCanBounty,
+                (s, c, t, n) -> {
+                    int bounty = Util.toTypeOrError(n[0], Integer.class);
                     assert c.getCoffer() >= bounty;
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
                     councilCanBounty = false;
-                }));
+                }, Integer.class));
     }
 
     public static class Rules {

@@ -10,6 +10,8 @@ public interface IApi {
 
     State getState();
 
+    JSONArray getRules();
+
     void ingestState(JSONObject json);
 
     void ingestAction(JSONObject json);

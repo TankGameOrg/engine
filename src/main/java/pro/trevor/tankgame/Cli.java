@@ -25,28 +25,32 @@ public class Cli {
 
             String type = json.getString("type");
 
-            if (type.equals("command")) {
-                String command = json.getString("command");
-                switch (command) {
-                    case "actions" -> output.println(api.getPossibleActionsJson().toString(2));
-                    case "display" -> output.println(api.getStateJson().toString(2));
-                    case "exit" -> exit = true;
-                    default -> System.err.printf("Unexpected command: `%s`\n", command);
+            switch (type) {
+                case "command" -> {
+                    String command = json.getString("command");
+                    switch (command) {
+                        case "rules" -> output.println(api.getRules().toString(2));
+                        case "actions" -> output.println(api.getPossibleActionsJson().toString(2));
+                        case "display" -> output.println(api.getStateJson().toString(2));
+                        case "exit" -> exit = true;
+                        default -> System.err.printf("Unexpected command: `%s`\n", command);
+                    }
                 }
-            } else if (type.equals("state")) {
-                try {
-                    api.ingestState(json);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                case "state" -> {
+                    try {
+                        api.ingestState(json);
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
                 }
-            } else if (type.equals("action")) {
-                try {
-                    api.ingestAction(json);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                case "action" -> {
+                    try {
+                        api.ingestAction(json);
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
                 }
-            } else {
-                System.err.printf("Unexpected type `%s`", type);
+                default -> System.err.printf("Unexpected type `%s`", type);
             }
         }
     }

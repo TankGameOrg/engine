@@ -2,14 +2,11 @@ package pro.trevor.tankgame.rule.definition.player;
 
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.util.ITriConsumer;
+import pro.trevor.tankgame.util.IVarTriConsumer;
+import pro.trevor.tankgame.util.IVarTriPredicate;
 
-import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
-
-public class PlayerSelfActionRule<T extends IPlayerElement, U> extends PlayerActionRule <T, T, U>{
-    public PlayerSelfActionRule(String name, BiPredicate<T, State> predicate, ITriConsumer<T, Optional<U>, State> consumer) {
-        super(name, (t, u, s) -> t == u && predicate.test(t, s), (t, u, v, s) -> consumer.accept(t, v, s));
+public class PlayerSelfActionRule<T extends IPlayerElement, U> extends PlayerActionRule <T, T>{
+    public PlayerSelfActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, Class<?>... optional) {
+        super(name, (s, t, u, v) -> t == u && predicate.test(s, t, v), (s, t, u, v) -> consumer.accept(s, t, v), optional);
     }
 }

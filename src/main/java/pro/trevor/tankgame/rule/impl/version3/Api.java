@@ -44,6 +44,14 @@ public class Api implements IApi {
         return state;
     }
 
+    @Override
+    public JSONArray getRules() {
+        JSONArray playerRules = ruleset.getPlayerRules().toJsonRequirements();
+        JSONArray metaRules = ruleset.getMetaPlayerRules().toJsonRequirements();
+        metaRules.forEach(playerRules::put);
+        return playerRules;
+    }
+
     private static IUnit unitFromJson(JSONObject json, Position position) {
         String type = json.getString("type");
         switch (type) {
@@ -119,16 +127,16 @@ public class Api implements IApi {
                     String location = json.getString(JsonKeys.LOCATION);
                     Position position = positionFromString(location);
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, Position.class, Void.class, Ruleset.Rules.MOVE)
-                            .apply(state, tank, position, Optional.empty());
+                    getRule(Tank.class, Position.class, Ruleset.Rules.MOVE)
+                            .apply(state, tank, position);
                 }
                 case Ruleset.Rules.SHOOT -> {
                     String location = json.getString(JsonKeys.LOCATION);
                     Position position = positionFromString(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, Position.class, Boolean.class, Ruleset.Rules.SHOOT)
-                            .apply(state, tank, position, Optional.of(hit));
+                    getRule(Tank.class, Position.class, Ruleset.Rules.SHOOT)
+                            .apply(state, tank, position, hit);
 
                 }
                 case Ruleset.Rules.DONATE -> {
@@ -136,39 +144,39 @@ public class Api implements IApi {
                     int quantity = json.getInt(JsonKeys.QUANTITY);
                     Tank subjectTank = getTank(subject);
                     Tank targetTank = getTank(target);
-                    getRule(Tank.class, Tank.class, Integer.class, Ruleset.Rules.DONATE)
-                            .apply(state, subjectTank, targetTank, Optional.of(quantity));
+                    getRule(Tank.class, Tank.class, Ruleset.Rules.DONATE)
+                            .apply(state, subjectTank, targetTank, quantity);
                 }
                 case Ruleset.Rules.BUY_ACTION -> {
                     int quantity = json.getInt(JsonKeys.QUANTITY);
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, Tank.class, Integer.class, Ruleset.Rules.BUY_ACTION)
-                            .apply(state, tank, tank, Optional.of(quantity));
+                    getRule(Tank.class, Tank.class, Ruleset.Rules.BUY_ACTION)
+                            .apply(state, tank, tank, quantity);
                 }
                 case Ruleset.Rules.UPGRADE_RANGE -> {
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, Tank.class, Void.class, Ruleset.Rules.UPGRADE_RANGE)
-                            .apply(state, tank, tank, Optional.empty());
+                    getRule(Tank.class, Tank.class, Ruleset.Rules.UPGRADE_RANGE)
+                            .apply(state, tank, tank);
                 }
 
                 case Ruleset.Rules.STIMULUS -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
-                    getMetaRule(Council.class, Tank.class, Void.class, Ruleset.Rules.STIMULUS)
-                            .apply(state, state.getCouncil(), getTank(target), Optional.empty());
+                    getMetaRule(Council.class, Tank.class, Ruleset.Rules.STIMULUS)
+                            .apply(state, state.getCouncil(), getTank(target));
                 }
                 case Ruleset.Rules.BOUNTY -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.QUANTITY);
-                    getMetaRule(Council.class, Tank.class, Integer.class, Ruleset.Rules.BOUNTY)
-                            .apply(state, state.getCouncil(), getTank(target), Optional.of(quantity));
+                    getMetaRule(Council.class, Tank.class, Ruleset.Rules.BOUNTY)
+                            .apply(state, state.getCouncil(), getTank(target), quantity);
                 }
                 case Ruleset.Rules.GRANT_LIFE -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
-                    getMetaRule(Council.class, Tank.class, Void.class, Ruleset.Rules.GRANT_LIFE)
-                            .apply(state, state.getCouncil(), getTank(target), Optional.empty());
+                    getMetaRule(Council.class, Tank.class, Ruleset.Rules.GRANT_LIFE)
+                            .apply(state, state.getCouncil(), getTank(target));
                 }
                 default -> throw new Error("Unexpected action: " + action);
             }
@@ -180,22 +188,20 @@ public class Api implements IApi {
 
     @Override
     public JSONObject getStateJson() {
-        JSONObject output = state.toJson();
-        output.put("possible_actions", getPossibleActionsJson());
-        return output;
+        return state.toJson();
     }
 
     @Override
     public JSONArray getPossibleActionsJson() {
         JSONArray output = new JSONArray();
-        Map<Pair<?, ?>, List<IPlayerRule<?, ?, ?>>> applicable = applicablePlayerRules(state, ruleset);
+        Map<Pair<?, ?>, List<IPlayerRule<?, ?>>> applicable = applicablePlayerRules(state, ruleset);
         for (Pair<?, ?> key : applicable.keySet()) {
 
-            List<IPlayerRule<?, ?, ?>> rules = applicable.get(key);
+            List<IPlayerRule<?, ?>> rules = applicable.get(key);
             if (rules.isEmpty()) {
                 continue;
             }
-            for (IPlayerRule<?, ?, ?> rule : rules) {
+            for (IPlayerRule<?, ?> rule : rules) {
                 JSONObject pairRulesJson = new JSONObject();
                 pairRulesJson.put("rules", rule.name());
                 if (key.left() instanceof IJsonObject left && key.right() instanceof IJsonObject right) {
@@ -210,32 +216,32 @@ public class Api implements IApi {
     }
 
 
-    private <T extends IPlayerElement, U, V> IPlayerRule<T, U, V> getRule(Class<T> t, Class<U> u, Class<V> v, String name) {
-        List<IPlayerRule<T, U, ?>> rules = ruleset.getPlayerRules().getExact(t, u);
+    private <T extends IPlayerElement, U> IPlayerRule<T, U> getRule(Class<T> t, Class<U> u, String name) {
+        List<IPlayerRule<T, U>> rules = ruleset.getPlayerRules().getExact(t, u);
         if (rules.isEmpty()) {
             throw new Error(String.format("No rule for `%s/%s`", t.getSimpleName(), u.getSimpleName()));
         }
 
-        List<IPlayerRule<T, U, ?>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
+        List<IPlayerRule<T, U>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
         if (namedRules.isEmpty()) {
             throw new Error(String.format("No rule named `%s`", name));
         }
 
-        return (IPlayerRule<T, U, V>) namedRules.getFirst();
+        return namedRules.getFirst();
     }
 
-    private <T extends IPlayerElement, U, V> IPlayerRule<T, U, V> getMetaRule(Class<T> t, Class<U> u, Class<V> v, String name) {
-        List<IPlayerRule<T, U, ?>> rules = ruleset.getMetaPlayerRules().getExact(t, u);
+    private <T extends IPlayerElement, U, V> IPlayerRule<T, U> getMetaRule(Class<T> t, Class<U> u, String name) {
+        List<IPlayerRule<T, U>> rules = ruleset.getMetaPlayerRules().getExact(t, u);
         if (rules.isEmpty()) {
             throw new Error(String.format("No rule for `%s/%s`", t.getSimpleName(), u.getSimpleName()));
         }
 
-        List<IPlayerRule<T, U, ?>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
+        List<IPlayerRule<T, U>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
         if (namedRules.isEmpty()) {
             throw new Error(String.format("No rule named `%s`", name));
         }
 
-        return (IPlayerRule<T, U, V>) namedRules.getFirst();
+        return namedRules.getFirst();
     }
 
     private Tank getTank(String player) {
@@ -263,13 +269,13 @@ public class Api implements IApi {
         state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
     }
 
-    private static Map<Pair<?, ?>, List<IPlayerRule<?, ?, ?>>> applicablePlayerRules(State state, RulesetDescription ruleset) {
-        Map<Pair<?, ?>, List<IPlayerRule<?, ?, ?>>> applicable = new HashMap<>();
+    private static Map<Pair<?, ?>, List<IPlayerRule<?, ?>>> applicablePlayerRules(State state, RulesetDescription ruleset) {
+        Map<Pair<?, ?>, List<IPlayerRule<?, ?>>> applicable = new HashMap<>();
 
         for (DuoClass<?, ?> c : ruleset.getPlayerRules().keySet()) {
-            List<IPlayerRule<?, ?, ?>> rules = ruleset.getPlayerRules().get(c.getLeftClass(), c.getRightClass());
-            for (IPlayerRule<?, ?, ?> rule : rules) {
-                IPlayerRule<Object, Object, Object> aRule = (IPlayerRule<Object, Object, Object>) rule; // Always works
+            List<IPlayerRule<?, ?>> rules = ruleset.getPlayerRules().get(c.getLeftClass(), c.getRightClass());
+            for (IPlayerRule<?, ?> rule : rules) {
+                IPlayerRule<Object, Object> aRule = (IPlayerRule<Object, Object>) rule; // Always works
                 List<Pair<?, ?>> pairs =  state.getBoard().gather(c.getLeftClass()).stream()
                         .flatMap( // For each LHS class, flatten the map of
                                 (x) -> state.getBoard().gather(c.getRightClass()).stream() // objects obtained on board
@@ -280,7 +286,7 @@ public class Api implements IApi {
                     if (applicable.containsKey(pair)) {
                         applicable.get(pair).add(rule);
                     } else {
-                        List<IPlayerRule<?, ?, ?>> ruleList = new ArrayList<>();
+                        List<IPlayerRule<?, ?>> ruleList = new ArrayList<>();
                         ruleList.add(rule);
                         applicable.put(pair, ruleList);
                     }
@@ -289,9 +295,9 @@ public class Api implements IApi {
 
         }
         for (DuoClass<?, ?> c : ruleset.getMetaPlayerRules().keySet()) {
-            List<IPlayerRule<?, ?, ?>> rules = ruleset.getMetaPlayerRules().get(c.getLeftClass(), c.getRightClass());
-            for (IPlayerRule<?, ?, ?> rule : rules) {
-                IPlayerRule<Object, Object, Object> aRule = (IPlayerRule<Object, Object, Object>) rule; // Always works
+            List<IPlayerRule<?, ?>> rules = ruleset.getMetaPlayerRules().get(c.getLeftClass(), c.getRightClass());
+            for (IPlayerRule<?, ?> rule : rules) {
+                IPlayerRule<Object, Object> aRule = (IPlayerRule<Object, Object>) rule; // Always works
                 List<Pair<?, ?>> pairs =  state.getMetaElements(c.getLeftClass()).stream()
                         .flatMap( // For each LHS class, flatten the map of
                                 (x) -> state.getBoard().gather(c.getRightClass()).stream() // objects obtained on board
@@ -302,7 +308,7 @@ public class Api implements IApi {
                     if (applicable.containsKey(pair)) {
                         applicable.get(pair).add(rule);
                     } else {
-                        List<IPlayerRule<?, ?, ?>> ruleList = new ArrayList<>();
+                        List<IPlayerRule<?, ?>> ruleList = new ArrayList<>();
                         ruleList.add(rule);
                         applicable.put(pair, ruleList);
                     }
