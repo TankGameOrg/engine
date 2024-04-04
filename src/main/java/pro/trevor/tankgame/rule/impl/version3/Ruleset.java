@@ -134,7 +134,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
         playerRules.putSelfRule(Tank.class,
-                new PlayerSelfActionRule<>(Rules.BUY_ACTION, (s, t, n) -> !t.isDead() && t.getGold() >= 3, (s, t, n) -> {
+                new PlayerSelfActionRule<Tank>(Rules.BUY_ACTION, (s, t, n) -> !t.isDead() && t.getGold() >= 3, (s, t, n) -> {
                     int gold = Util.toTypeOrError(n[0], Integer.class);
                     int n5 =  gold / 5;
                     int rem = gold - n5 * 5;
@@ -143,7 +143,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
                     t.setActions(t.getActions() + n5 * 2 + n3);
                     t.setGold(t.getGold() - gold);
-                }, Integer.class));
+                }).withParamTypes(Integer.class).withParamNames("gold"));
 
         playerRules.putSelfRule(Tank.class,
                 new PlayerSelfActionRule<>(Rules.UPGRADE_RANGE, (s, t, n) -> !t.isDead() && t.getGold() >= 8, (s, t, n) -> {
@@ -152,14 +152,14 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 }));
 
         playerRules.put(Tank.class, Tank.class,
-                new PlayerActionRule<>(Rules.DONATE, (s, t, u, n) ->
+                new PlayerActionRule<Tank, Tank>(Rules.DONATE, (s, t, u, n) ->
                         !t.isDead() && !u.isDead() && t.getGold() >= 2 && Util.getSpacesInRange(t.getPosition(), t.getRange()).contains(u.getPosition()),
                         (s, t, u, n) -> {
                             int donation = Util.toTypeOrError(n[0], Integer.class);
                             assert t.getGold() >= donation + 1;
                             t.setGold(t.getGold() - donation - 1);
                             u.setGold(u.getGold() + donation);
-                        }, Integer.class));
+                        }).withParamTypes(Integer.class).withParamNames("donation"));
 
         playerRules.put(Tank.class, Position.class,
                 new PlayerActionRule<>(Rules.MOVE, (s, t, p, n) ->
@@ -171,7 +171,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     s.getBoard().putUnit(t);
                 }));
 
-        playerRules.put(Tank.class, Position.class, new PlayerActionRule<>(Rules.SHOOT, (s, t, p, n) ->
+        playerRules.put(Tank.class, Position.class, new PlayerActionRule<Tank, Position>(Rules.SHOOT, (s, t, p, n) ->
                 !t.isDead() && t.getActions() >= 1 && t.getPosition().distanceFrom(p) <= t.getRange()
                         && LineOfSight.hasLineOfSightV3(s, t.getPosition(), p),
                 (s, t, p, n) -> {
@@ -197,7 +197,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                             default -> throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
                         }
                     }
-        }, Boolean.class));
+        }).withParamTypes(Boolean.class).withParamNames("hit"));
     }
 
     @Override
@@ -218,7 +218,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     c.setCoffer(c.getCoffer() - 15);
         }));
 
-        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<>(Rules.BOUNTY,
+        metaPlayerRules.put(Council.class, Tank.class, new PlayerActionRule<Council, Tank>(Rules.BOUNTY,
                 (s, c, t, n) -> councilCanBounty,
                 (s, c, t, n) -> {
                     int bounty = Util.toTypeOrError(n[0], Integer.class);
@@ -226,7 +226,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
                     councilCanBounty = false;
-                }, Integer.class));
+                }).withParamTypes(Integer.class).withParamNames("bounty"));
     }
 
     public static class Rules {

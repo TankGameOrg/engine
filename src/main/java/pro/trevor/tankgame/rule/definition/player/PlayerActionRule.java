@@ -12,13 +12,15 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
     private final String name;
     private final IVarQuadPredicate<State, T, U, Object> predicate;
     private final IVarQuadConsumer<State, T, U, Object> consumer;
-    private final Class<?>[] optional;
+    private Class<?>[] paramTypes;
+    private String[] paramNames;
 
-    public PlayerActionRule(String name, IVarQuadPredicate<State, T, U, Object> predicate, IVarQuadConsumer<State, T, U, Object> consumer, Class<?>... optional) {
+    public PlayerActionRule(String name, IVarQuadPredicate<State, T, U, Object> predicate, IVarQuadConsumer<State, T, U, Object> consumer) {
         this.name = name;
         this.predicate = predicate;
         this.consumer = consumer;
-        this.optional = optional;
+        this.paramTypes = new Class[0];
+        this.paramNames = new String[0];
     }
 
     @Override
@@ -58,19 +60,46 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
     }
 
     @Override
-    public Class<?>[] optional() {
-        return optional;
+    public Class<?>[] paramTypes() {
+        return paramTypes;
+    }
+
+    @Override
+    public String[] paramNames() {
+        return paramNames;
+    }
+
+    public PlayerActionRuleInternal<T, U> withParamTypes(Class<?>... paramTypes) {
+        this.paramTypes = paramTypes;
+        return new PlayerActionRuleInternal<T, U>(this);
     }
 
     private boolean validateOptionalTypes(Object[] meta) {
-        if (meta.length != optional.length) {
+        if (meta.length != paramTypes.length) {
             return false;
         }
-        for (int i = 0; i < optional.length; ++i) {
-            if (!meta[i].getClass().equals(optional[i])) {
+        for (int i = 0; i < paramTypes.length; ++i) {
+            if (!meta[i].getClass().equals(paramTypes[i])) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Internal class used to force the caller of withParamTypes(...) to also call withParamNames(...)
+     */
+    public static class PlayerActionRuleInternal<T extends IPlayerElement, U> {
+
+        private final PlayerActionRule<T, U> rule;
+        private PlayerActionRuleInternal(PlayerActionRule<T, U> rule) {
+            this.rule = rule;
+        }
+
+        public PlayerActionRule<T, U> withParamNames(String... paramNames) {
+            assert paramNames.length == rule.paramTypes.length;
+            rule.paramNames = paramNames;
+            return rule;
+        }
     }
 }
