@@ -44,7 +44,7 @@ public class Cli {
                         api.ingestState(json);
                         output.println(response("state successfully ingested", false));
                     } catch (Throwable throwable) {
-                        output.println(response("failed to ingest state", true));
+                        output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();
                     }
                 }
@@ -53,7 +53,7 @@ public class Cli {
                         api.ingestAction(json);
                         output.println(response("action successfully ingested", false));
                     } catch (Throwable throwable) {
-                        output.println(response("failed to ingest action", true));
+                        output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();
                     }
                 }
