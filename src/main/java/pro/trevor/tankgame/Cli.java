@@ -32,7 +32,10 @@ public class Cli {
                         case "rules" -> output.println(api.getRules().toString());
                         case "actions" -> output.println(api.getPossibleActionsJson().toString());
                         case "display" -> output.println(api.getStateJson().toString());
-                        case "exit" -> exit = true;
+                        case "exit" -> {
+                            output.println(response("exiting successfully", false));
+                            exit = true;
+                        }
                         default -> output.println(response("unexpected command: " + command, true));
                     }
                 }
