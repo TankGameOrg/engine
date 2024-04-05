@@ -3,19 +3,19 @@ package pro.trevor.tankgame.rule.definition.player;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.util.IJsonObject;
-import pro.trevor.tankgame.util.IVarQuadConsumer;
-import pro.trevor.tankgame.util.IVarQuadPredicate;
+import pro.trevor.tankgame.util.*;
 
-public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRule<T, U> {
+import java.util.Arrays;
+
+public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T> {
 
     private final String name;
-    private final IVarQuadPredicate<State, T, U, Object> predicate;
-    private final IVarQuadConsumer<State, T, U, Object> consumer;
+    private final IVarTriPredicate<State, T, Object> predicate;
+    private final IVarTriConsumer<State, T, Object> consumer;
     private Class<?>[] paramTypes;
     private String[] paramNames;
 
-    public PlayerActionRule(String name, IVarQuadPredicate<State, T, U, Object> predicate, IVarQuadConsumer<State, T, U, Object> consumer) {
+    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer) {
         this.name = name;
         this.predicate = predicate;
         this.consumer = consumer;
@@ -24,9 +24,9 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
     }
 
     @Override
-    public void apply(State state, T subject, U target, Object... meta) {
-        if (canApply(state, subject, target, meta)) {
-            consumer.accept(state, subject, target, meta);
+    public void apply(State state, T subject, Object... meta) {
+        if (canApply(state, subject, meta)) {
+            consumer.accept(state, subject, meta);
         } else {
             JSONObject error = new JSONObject();
             error.put("error", true);
@@ -38,20 +38,14 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
                 error.put("subject", subject.getPlayer());
             }
 
-            if (target instanceof IJsonObject targetJson) {
-                error.put("target", targetJson.toJson());
-            } else {
-                error.put("target", target.toString());
-            }
-
             System.out.println(error.toString(2));
-            throw new Error(String.format("Failed to apply `%s` to `%s` and `%s`", name, subject, target));
+            throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
         }
     }
 
     @Override
-    public boolean canApply(State state, T subject, U target, Object... meta) {
-        return validateOptionalTypes(meta) && predicate.test(state, subject, target, meta);
+    public boolean canApply(State state, T subject, Object... meta) {
+        return validateOptionalTypes(meta) && predicate.test(state, subject, meta);
     }
 
     @Override
@@ -69,9 +63,9 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
         return paramNames;
     }
 
-    public PlayerActionRuleInternal<T, U> withParamTypes(Class<?>... paramTypes) {
+    public PlayerActionRuleInternal<T> withParamTypes(Class<?>... paramTypes) {
         this.paramTypes = paramTypes;
-        return new PlayerActionRuleInternal<T, U>(this);
+        return new PlayerActionRuleInternal<>(this);
     }
 
     private boolean validateOptionalTypes(Object[] meta) {
@@ -89,14 +83,14 @@ public class PlayerActionRule<T extends IPlayerElement, U> implements IPlayerRul
     /**
      * Internal class used to force the caller of withParamTypes(...) to also call withParamNames(...)
      */
-    public static class PlayerActionRuleInternal<T extends IPlayerElement, U> {
+    public static class PlayerActionRuleInternal<T extends IPlayerElement> {
 
-        private final PlayerActionRule<T, U> rule;
-        private PlayerActionRuleInternal(PlayerActionRule<T, U> rule) {
+        private final PlayerActionRule<T> rule;
+        private PlayerActionRuleInternal(PlayerActionRule<T> rule) {
             this.rule = rule;
         }
 
-        public PlayerActionRule<T, U> withParamNames(String... paramNames) {
+        public PlayerActionRule<T> withParamNames(String... paramNames) {
             assert paramNames.length == rule.paramTypes.length;
             rule.paramNames = paramNames;
             return rule;

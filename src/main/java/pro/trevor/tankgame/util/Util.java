@@ -101,7 +101,7 @@ public class Util {
         return sb.append("]\n").toString();
     }
 
-    public static <T> T toTypeOrError(Object o, Class<T> type) {
+    public static <T> T toType(Object o, Class<T> type) {
         if (o.getClass().isAssignableFrom(type)) {
             return type.cast(o);
         } else {
