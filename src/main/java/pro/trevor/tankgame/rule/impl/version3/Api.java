@@ -124,14 +124,14 @@ public class Api implements IApi {
 
             switch (action) {
                 case Ruleset.Rules.MOVE -> {
-                    String location = json.getString(JsonKeys.LOCATION);
-                    Position position = positionFromString(location);
+                    String positionString = json.getString(JsonKeys.POSITION);
+                    Position position = positionFromString(positionString);
                     Tank tank = getTank(subject);
                     getRule(Tank.class, Position.class, Ruleset.Rules.MOVE)
                             .apply(state, tank, position);
                 }
                 case Ruleset.Rules.SHOOT -> {
-                    String location = json.getString(JsonKeys.LOCATION);
+                    String location = json.getString(JsonKeys.POSITION);
                     Position position = positionFromString(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
@@ -331,7 +331,7 @@ public class Api implements IApi {
         public static final String DAY = "day";
         public static final String SUBJECT = "subject";
         public static final String ACTION = "action";
-        public static final String LOCATION = "location";
+        public static final String POSITION = "position";
         public static final String TARGET = "target";
         public static final String QUANTITY = "quantity";
         public static final String HIT = "hit";

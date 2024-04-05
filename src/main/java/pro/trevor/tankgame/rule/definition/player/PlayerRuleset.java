@@ -87,10 +87,15 @@ public class PlayerRuleset {
                 JSONObject ruleJson = new JSONObject();
                 ruleJson.put("name", rule.name());
                 ruleJson.put("subject", key.getLeftClass().getSimpleName());
-                if (! (rule instanceof PlayerSelfActionRule<?>)) {
-                    ruleJson.put("target", key.getRightClass().getSimpleName());
-                }
+
                 JSONArray meta = new JSONArray();
+                if (! (rule instanceof PlayerSelfActionRule<?>)) {
+                    JSONObject target = new JSONObject();
+                    target.put("type", key.getRightClass().getSimpleName());
+                    target.put("name", "target");
+                    meta.put(target);
+                }
+
                 Class<?>[] ruleParamTypes = rule.paramTypes();
                 String[] ruleParamName = rule.paramNames();
                 for (int i = 0; i < ruleParamTypes.length; ++i) {
