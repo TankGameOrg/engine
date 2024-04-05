@@ -10,11 +10,9 @@ import java.nio.file.Files;
 
 public class Main {
 
-    public static final boolean DEBUG = false;
-
     public static void main(String[] args) {
 
-        if (DEBUG) {
+        if (args.length == 1 && args[0].equals("debug")) {
             // Demo version 3 rules with game logs
             File initialFile = new File("example/initial.json");
             File movesFile = new File("example/moves.json");
