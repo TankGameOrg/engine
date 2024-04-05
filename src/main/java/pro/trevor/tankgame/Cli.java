@@ -19,7 +19,7 @@ public class Cli {
         while (!exit) {
             json = getJsonObject(scanner);
             if (!json.has("type")) {
-                System.err.println("JSON input does not have a type, try again");
+                output.println(response("input does not have a type", true));
                 continue;
             }
 
@@ -29,28 +29,32 @@ public class Cli {
                 case "command" -> {
                     String command = json.getString("command");
                     switch (command) {
-                        case "rules" -> output.println(api.getRules().toString(2));
-                        case "actions" -> output.println(api.getPossibleActionsJson().toString(2));
-                        case "display" -> output.println(api.getStateJson().toString(2));
+                        case "rules" -> output.println(api.getRules().toString());
+                        case "actions" -> output.println(api.getPossibleActionsJson().toString());
+                        case "display" -> output.println(api.getStateJson().toString());
                         case "exit" -> exit = true;
-                        default -> System.err.printf("Unexpected command: `%s`\n", command);
+                        default -> output.println(response("unexpected command: " + command, true));
                     }
                 }
                 case "state" -> {
                     try {
                         api.ingestState(json);
+                        output.println(response("state successfully ingested", false));
                     } catch (Throwable throwable) {
+                        output.println(response("failed to ingest state", true));
                         throwable.printStackTrace();
                     }
                 }
                 case "action" -> {
                     try {
                         api.ingestAction(json);
+                        output.println(response("action successfully ingested", false));
                     } catch (Throwable throwable) {
+                        output.println(response("failed to ingest action", true));
                         throwable.printStackTrace();
                     }
                 }
-                default -> System.err.printf("Unexpected type `%s`", type);
+                default -> output.println(response("unexpected type: " + type, true));
             }
         }
     }
@@ -83,6 +87,14 @@ public class Cli {
         } catch (Exception e) {
             return new JSONObject();
         }
+    }
+
+    private static JSONObject response(String string, boolean error) {
+        JSONObject output = new JSONObject();
+        output.put("type", "response");
+        output.put("response", string);
+        output.put("error", error);
+        return output;
     }
 
 }

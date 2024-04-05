@@ -188,7 +188,7 @@ public class Api implements IApi {
 
     @Override
     public JSONObject getStateJson() {
-        return state.toJson();
+        return state.toJson().put("error", false);
     }
 
     @Override
