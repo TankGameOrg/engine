@@ -9,12 +9,9 @@ import java.io.File;
 import java.nio.file.Files;
 
 public class Main {
-
-    public static final boolean DEBUG = true;
-
     public static void main(String[] args) {
 
-        if (DEBUG) {
+        if (args.length == 1 && (args[0].equals("--debug") || args[0].equals("-d"))) {
             // Demo version 3 rules with game logs
             File initialFile = new File("example/initial.json");
             File movesFile = new File("example/moves.json");
@@ -40,20 +37,8 @@ public class Main {
             }
         } else if (args.length == 0) {
             Cli.repl(new Api());
-        } else if (args.length == 1) {
-            IApi api = new Api();
-            File initialFile = new File(args[0]);
-            try {
-                String initialString = Files.readString(initialFile.toPath());
-                JSONObject initialState = new JSONObject(initialString);
-                api.ingestState(initialState);
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-                System.exit(1);
-            }
-            Cli.repl(api);
         } else {
-            System.err.println("Expected 0 or 1 arguments:\n    tankgame <path/to/initial.json>");
+            System.err.println("Expected 0 or 1 arguments:\n    tankgame <-d|--debug>");
         }
     }
 }

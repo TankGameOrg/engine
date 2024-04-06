@@ -12,7 +12,6 @@ import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
 import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
-import pro.trevor.tankgame.util.Util;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;

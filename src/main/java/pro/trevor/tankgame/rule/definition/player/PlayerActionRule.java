@@ -38,7 +38,7 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
                 error.put("subject", subject.getPlayer());
             }
 
-            System.out.println(error.toString(2));
+            System.err.println(error.toString(2));
             throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
         }
     }
