@@ -59,6 +59,7 @@ public class Council implements IPlayerElement, IMetaElement {
         output.put("type", "council");
         output.put("council", new JSONArray(councillors));
         output.put("senate", new JSONArray(senators));
+        output.put("coffer", coffer);
         return output;
     }
 }
