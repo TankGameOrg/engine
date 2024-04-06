@@ -63,7 +63,7 @@ public class PlayerRuleset {
             for (IPlayerRule<?> rule : rules.get(key)) {
                 JSONObject ruleJson = new JSONObject();
                 ruleJson.put("name", rule.name());
-                ruleJson.put("subject", key.getSimpleName());
+                ruleJson.put("subject", key.getSimpleName().toLowerCase());
 
                 JSONArray meta = new JSONArray();
 
@@ -71,7 +71,7 @@ public class PlayerRuleset {
                 String[] ruleParamName = rule.paramNames();
                 for (int i = 0; i < ruleParamTypes.length; ++i) {
                     JSONObject parameter = new JSONObject();
-                    parameter.put("type", ruleParamTypes[i].getSimpleName());
+                    parameter.put("type", ruleParamTypes[i].getSimpleName().toLowerCase());
                     parameter.put("name", ruleParamName[i]);
                     meta.put(parameter);
                 }

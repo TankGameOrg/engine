@@ -1,10 +1,12 @@
 package pro.trevor.tankgame;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.rule.impl.ApiRegistry;
 import pro.trevor.tankgame.rule.impl.IApi;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -30,13 +32,22 @@ public class Cli {
                     String command = json.getString("command");
                     switch (command) {
                         case "rules" -> output.println(api.getRules().toString());
-                        case "actions" -> output.println(api.getPossibleActionsJson().toString());
                         case "display" -> output.println(api.getStateJson().toString());
                         case "exit" -> {
-                            output.println(response("exiting successfully", false));
+                            output.println(response("exiting", false));
                             exit = true;
                         }
                         default -> output.println(response("unexpected command: " + command, true));
+                    }
+                }
+                case "version" -> {
+                    String version = json.getString("version");
+                    Optional<IApi> newApi = ApiRegistry.getApi(version);
+                    if (newApi.isEmpty()) {
+                        output.println(response("no such version: " + version, true));
+                    } else {
+                        api = newApi.get();
+                        output.println(response("switched to version: " + version, false));
                     }
                 }
                 case "state" -> {
@@ -44,7 +55,7 @@ public class Cli {
                         api.ingestState(json);
                         output.println(response("state successfully ingested", false));
                     } catch (Throwable throwable) {
-                        output.println(response("failed to ingest state", true));
+                        output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();
                     }
                 }
@@ -53,7 +64,7 @@ public class Cli {
                         api.ingestAction(json);
                         output.println(response("action successfully ingested", false));
                     } catch (Throwable throwable) {
-                        output.println(response("failed to ingest action", true));
+                        output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();
                     }
                 }
