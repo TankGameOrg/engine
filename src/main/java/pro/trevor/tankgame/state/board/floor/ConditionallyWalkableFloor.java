@@ -8,7 +8,7 @@ import java.util.function.BiPredicate;
 
 public class ConditionallyWalkableFloor extends AbstractPositionedFloor {
 
-    private final BiPredicate<AbstractPositionedFloor, Board> predicate;
+    protected final BiPredicate<AbstractPositionedFloor, Board> predicate;
 
     public ConditionallyWalkableFloor(Position position, BiPredicate<AbstractPositionedFloor, Board> predicate) {
         super(position);

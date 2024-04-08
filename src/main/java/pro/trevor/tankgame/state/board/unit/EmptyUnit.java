@@ -6,7 +6,7 @@ import pro.trevor.tankgame.state.board.Position;
 
 public class EmptyUnit implements IWalkable {
 
-    private Position position;
+    protected Position position;
 
     public EmptyUnit(Position position) {
         this.position = position;

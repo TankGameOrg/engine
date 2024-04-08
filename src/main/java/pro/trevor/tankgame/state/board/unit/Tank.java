@@ -8,12 +8,12 @@ import pro.trevor.tankgame.state.board.IMovable;
 
 public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable, IBounty {
 
-    private final String player;
-    private int actions;
-    private int gold;
-    private int range;
-    private int bounty;
-    private boolean dead;
+    protected final String player;
+    protected int actions;
+    protected int gold;
+    protected int range;
+    protected int bounty;
+    protected boolean dead;
 
     public Tank(String player, Position position, int actions, int gold, int durability, int range, int bounty, boolean dead) {
         super(position, durability);
