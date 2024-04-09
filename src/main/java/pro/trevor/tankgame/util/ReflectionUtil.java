@@ -1,6 +1,8 @@
 package pro.trevor.tankgame.util;
 
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.util.function.ITriConsumer;
+import pro.trevor.tankgame.util.function.ITriPredicate;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

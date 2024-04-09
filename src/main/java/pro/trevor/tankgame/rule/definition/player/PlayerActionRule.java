@@ -4,6 +4,8 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.*;
+import pro.trevor.tankgame.util.function.IVarTriConsumer;
+import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 import java.util.Arrays;
 
