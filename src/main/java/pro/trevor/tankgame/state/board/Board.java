@@ -74,58 +74,50 @@ public class Board implements IMetaElement {
     }
 
 
-    public <T extends IUnit> List<T> gatherUnits(Class<T> t) {
+    public <T> List<T> gatherUnits(Class<T> t) {
         List<T> output = new ArrayList<>();
         for (int i = 0; i < unitBoard.length; ++i) {
             for (int j = 0; j < unitBoard[0].length; ++j) {
                 IUnit unit = unitBoard[i][j];
-                try {
+                if (t.isInstance(unit)) {
                     output.add(t.cast(unit));
-                } catch (Exception ignored) {}
+                }
             }
         }
         return output;
     }
 
-    public <T extends IFloor> List<T> gatherFloors(Class<T> t) {
+    public <T> List<T> gatherFloors(Class<T> t) {
         List<T> output = new ArrayList<>();
         for (int i = 0; i < floorBoard.length; ++i) {
             for (int j = 0; j < floorBoard[0].length; ++j) {
                 IFloor floor = floorBoard[i][j];
-                try {
+                if (t.isInstance(floor)) {
                     output.add(t.cast(floor));
-                } catch (Exception ignored) {}
+                }
             }
         }
         return output;
     }
 
-    public List<?> gather(Class<?> t) {
-        // Handle the caller asking for a position
-        try {
-            t.cast(new Position(0, 0));
-            List<Position> positions = new ArrayList<>();
+    public <T> List<T> gather(Class<T> t) {
+        if (Position.class.isAssignableFrom(t)) {
+            List<T> positions = new ArrayList<>();
             for (int i = 0; i < width; ++i) {
                 for (int j = 0; j < height; ++j) {
-                    positions.add(new Position(i, j));
+                    positions.add((T) new Position(i, j));
                 }
             }
-            return positions; // T extends Position iff t.cast(zero) succeeds
-        } catch (Exception ignored) {}
-
-        List output = new ArrayList<>();
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                Position p = new Position(i, j);
-                try {
-                    output.add(t.cast(getUnit(p).orElse(null)));
-                } catch (Exception ignored) {}
-                try {
-                    output.add(t.cast(getFloor(p).orElse(null)));
-                } catch (Exception ignored) {}
-            }
+            return positions;
         }
-        return output;
+
+        if (IUnit.class.isAssignableFrom(t)) {
+            return gatherUnits(t);
+        } else if (IFloor.class.isAssignableFrom(t)) {
+            return gatherFloors(t);
+        } else {
+            throw new Error("Unexpected class: " + t.getSimpleName());
+        }
     }
 
     public boolean isWalkable(Position p) {
