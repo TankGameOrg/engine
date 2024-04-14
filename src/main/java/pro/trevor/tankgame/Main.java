@@ -28,13 +28,14 @@ public class Main {
                 JSONArray moves = new JSONArray(movesString);
 
                 api.ingestState(initial);
+
                 for (int i = 0; i < moves.length(); ++i) {
                     JSONObject action = moves.getJSONObject(i);
                     api.ingestAction(action);
-
                 }
                 System.out.println(api.getState().toString());
             } catch (Throwable throwable) {
+                System.out.println(api.getPossibleActions("Stomp").toString(2));
                 throwable.printStackTrace();
             }
         } else if (args.length == 0) {

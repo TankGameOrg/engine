@@ -123,6 +123,9 @@ public class LineOfSight {
     }
 
     public static boolean hasLineOfSightV3(State s, Position p1, Position p2) {
+        if (!s.getBoard().isValidPosition(p1) || !s.getBoard().isValidPosition(p2)) {
+            return false;
+        }
         for (Position p : allSquaresBetweenLineOfSight(p1, p2)) {
             if (!s.getBoard().isAbleToShootThrough(p)) {
                 return false;

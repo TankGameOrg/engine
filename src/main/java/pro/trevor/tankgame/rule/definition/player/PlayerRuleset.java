@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
+import pro.trevor.tankgame.util.range.TypeRange;
 
 import java.util.*;
 
@@ -66,16 +67,12 @@ public class PlayerRuleset {
                 ruleJson.put("subject", key.getSimpleName().toLowerCase());
 
                 JSONArray meta = new JSONArray();
-
-                Class<?>[] ruleParamTypes = rule.paramTypes();
-                String[] ruleParamName = rule.paramNames();
-                for (int i = 0; i < ruleParamTypes.length; ++i) {
-                    JSONObject parameter = new JSONObject();
-                    parameter.put("type", ruleParamTypes[i].getSimpleName().toLowerCase());
-                    parameter.put("name", ruleParamName[i]);
-                    meta.put(parameter);
+                TypeRange<?>[] ruleParameters = rule.parameters();
+                for (TypeRange<?> ruleParameter : ruleParameters) {
+                    meta.put(ruleParameter.toJson());
                 }
                 ruleJson.put("fields", meta);
+
                 rulesJson.put(ruleJson);
             }
         }

@@ -6,6 +6,7 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.*;
 import pro.trevor.tankgame.util.function.IVarTriConsumer;
 import pro.trevor.tankgame.util.function.IVarTriPredicate;
+import pro.trevor.tankgame.util.range.TypeRange;
 
 import java.util.Arrays;
 
@@ -14,15 +15,13 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
     private final String name;
     private final IVarTriPredicate<State, T, Object> predicate;
     private final IVarTriConsumer<State, T, Object> consumer;
-    private Class<?>[] paramTypes;
-    private String[] paramNames;
+    private final TypeRange<?>[] parameters;
 
-    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer) {
+    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
         this.name = name;
         this.predicate = predicate;
         this.consumer = consumer;
-        this.paramTypes = new Class[0];
-        this.paramNames = new String[0];
+        this.parameters = parameters;
     }
 
     @Override
@@ -56,46 +55,19 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
     }
 
     @Override
-    public Class<?>[] paramTypes() {
-        return paramTypes;
-    }
-
-    @Override
-    public String[] paramNames() {
-        return paramNames;
-    }
-
-    public PlayerActionRuleInternal<T> withParamTypes(Class<?>... paramTypes) {
-        this.paramTypes = paramTypes;
-        return new PlayerActionRuleInternal<>(this);
+    public TypeRange<?>[] parameters() {
+        return parameters;
     }
 
     private boolean validateOptionalTypes(Object[] meta) {
-        if (meta.length != paramTypes.length) {
+        if (meta.length != parameters.length) {
             return false;
         }
-        for (int i = 0; i < paramTypes.length; ++i) {
-            if (!meta[i].getClass().equals(paramTypes[i])) {
+        for (int i = 0; i < parameters.length; ++i) {
+            if (!meta[i].getClass().equals(parameters[i].getBoundClass())) {
                 return false;
             }
         }
         return true;
-    }
-
-    /**
-     * Internal class used to force the caller of withParamTypes(...) to also call withParamNames(...)
-     */
-    public static class PlayerActionRuleInternal<T extends IPlayerElement> {
-
-        private final PlayerActionRule<T> rule;
-        private PlayerActionRuleInternal(PlayerActionRule<T> rule) {
-            this.rule = rule;
-        }
-
-        public PlayerActionRule<T> withParamNames(String... paramNames) {
-            assert paramNames.length == rule.paramTypes.length;
-            rule.paramNames = paramNames;
-            return rule;
-        }
     }
 }

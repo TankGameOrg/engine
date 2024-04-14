@@ -15,6 +15,7 @@ import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.Wall;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.state.range.VariableTypeRange;
 import pro.trevor.tankgame.util.DuoClass;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.Pair;
@@ -23,6 +24,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.json.*;
+import pro.trevor.tankgame.util.range.DiscreteTypeRange;
+import pro.trevor.tankgame.util.range.TypeRange;
 
 public class Api implements IApi {
     private final RulesetDescription ruleset;
@@ -184,6 +187,98 @@ public class Api implements IApi {
         return state.toJson().put("error", false);
     }
 
+    @Override
+    public JSONObject getPossibleActions(String player) {
+        JSONObject actions = new JSONObject();
+        actions.put("error", false);
+        actions.put("type", "possible_actions");
+        actions.put("player", player);
+
+        JSONArray actionsArray = new JSONArray();
+        List<IPlayerRule<?>> rules;
+        Class<?> type;
+        Object subject;
+
+        if (player.equals(COUNCIL)) {
+            type = Council.class;
+            rules = ruleset.getMetaPlayerRules().get(type);
+            subject = state.getCouncil();
+        } else if (state.getPlayers().contains(player)) {
+            type = Tank.class;
+            rules = ruleset.getPlayerRules().get(type);
+            Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()
+                    .filter((t) -> t.getPlayer().equals(player))
+                    .findFirst();
+            if (tank.isPresent()) {
+                subject = tank.get();
+            } else {
+                actions.put("actions", actionsArray);
+                return actions;
+            }
+        } else {
+            throw new Error("Unknown player: " + player);
+        }
+
+        assert type.isInstance(subject);
+
+        for (IPlayerRule<?> rule : rules) {
+            JSONObject actionJson = new JSONObject();
+            actionJson.put("rule", rule.name());
+            actionJson.put("subject", type.getSimpleName().toLowerCase());
+
+            // find all states of each parameter
+            JSONArray fields = new JSONArray();
+            for (TypeRange<?> field : rule.parameters()) {
+                if (field instanceof VariableTypeRange<?,?> variableField) {
+                    VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
+                    genericField.generate(state, subject);
+                }
+                fields.put(field.toJson());
+            }
+            actionJson.put("fields", fields);
+            actionsArray.put(actionJson);
+        }
+
+        actions.put("actions", actionsArray);
+        return actions;
+    }
+
+    private Set<List<Object>> allPermutations(IPlayerRule<?> rule, State state, Object subject) {
+        IPlayerRule<Object> genericRule = (IPlayerRule<Object>) rule;
+        DiscreteTypeRange<?>[] parameters = new DiscreteTypeRange<?>[rule.parameters().length];
+        for (int i = 0; i < rule.parameters().length; ++i) {
+            TypeRange<?> parameter = rule.parameters()[i];
+            if (parameter instanceof DiscreteTypeRange<?> discreteParameter) {
+                parameters[i] = discreteParameter;
+            } else {
+                throw new Error(String.format("Given parameter `%s` is not discrete", parameter.getName()));
+            }
+        }
+        return allPermutations(genericRule, parameters, state, subject);
+    }
+
+    private Set<List<Object>> allPermutations(IPlayerRule<Object> rule, DiscreteTypeRange<?>[] discreteParameters, State state, Object subject, Object... permutation) {
+        if (permutation.length == discreteParameters.length) {
+            if (rule.canApply(state, subject, permutation)) {
+                return new HashSet<>(List.of(List.of(permutation)));
+            }
+        } else {
+            DiscreteTypeRange<?> currentParameter = discreteParameters[permutation.length];
+            if (currentParameter instanceof VariableTypeRange<?,?> variableRange) {
+                VariableTypeRange<Object, ?> genericRange = (VariableTypeRange<Object, ?>) variableRange;
+                genericRange.generate(state, subject);
+            }
+            Set<List<Object>> output = new HashSet<>();
+            for (Object possibleValue : currentParameter.getElements()) {
+                Object[] newPermutation = new Object[permutation.length + 1];
+                System.arraycopy(permutation, 0, newPermutation, 0, permutation.length);
+                newPermutation[permutation.length] = possibleValue;
+                output.addAll(allPermutations(rule, discreteParameters, state, subject, newPermutation));
+            }
+            return output;
+        }
+        return new HashSet<>(0);
+    }
 
     private <T extends IPlayerElement> IPlayerRule<T> getRule(Class<T> t, String name) {
         List<IPlayerRule<T>> rules = ruleset.getPlayerRules().getExact(t);

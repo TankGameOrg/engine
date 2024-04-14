@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.rule.definition.player;
 
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.util.range.TypeRange;
 
 public interface IPlayerRule<T> {
 
@@ -8,7 +9,6 @@ public interface IPlayerRule<T> {
     boolean canApply(State state, T subject, Object... meta);
 
     String name();
-    Class<?>[] paramTypes();
-    String[] paramNames();
+    TypeRange<?>[] parameters();
 
 }

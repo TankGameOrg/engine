@@ -68,6 +68,15 @@ public class Cli {
                         throwable.printStackTrace();
                     }
                 }
+                case "possible_actions" -> {
+                    try {
+                        output.println(api.getPossibleActions(json.getString("player")));
+                    } catch (Throwable throwable) {
+                        output.println(response(throwable.getMessage(), true));
+                        throwable.printStackTrace();
+                    }
+                }
+
                 default -> output.println(response("unexpected type: " + type, true));
             }
         }

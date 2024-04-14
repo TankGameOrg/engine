@@ -15,5 +15,7 @@ public interface IApi {
     void ingestAction(JSONObject json);
 
     JSONObject getStateJson();
+
+    JSONObject getPossibleActions(String player);
     
 }

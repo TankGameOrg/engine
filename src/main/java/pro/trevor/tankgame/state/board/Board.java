@@ -37,13 +37,13 @@ public class Board implements IMetaElement {
         }
     }
 
-    private boolean validPosition(Position p) {
+    public boolean isValidPosition(Position p) {
         return (p.x() >= 0 && p.y() >= 0 && p.x() < width && p.y() < height);
     }
 
 
     private <T extends IPositioned> boolean putElementOnBoard(T[][] board, T element) {
-        if (validPosition(element.getPosition())) {
+        if (isValidPosition(element.getPosition())) {
             board[element.getPosition().y()][element.getPosition().x()] = element;
             return true;
         }
@@ -51,7 +51,7 @@ public class Board implements IMetaElement {
     }
 
     private <T extends IPositioned> Optional<T> getElementOnBoard(T[][] board, Position p) {
-        if (validPosition(p)) {
+        if (isValidPosition(p)) {
             return Optional.of(board[p.y()][p.x()]);
         }
         return Optional.empty();
