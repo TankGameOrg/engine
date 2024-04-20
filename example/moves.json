@@ -6,59 +6,59 @@
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "J10",
-    "action": "move"
+    "action": "move",
+    "target": "J10"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "J11",
-    "action": "move"
+    "action": "move",
+    "target": "J11"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B10",
-    "action": "move"
+    "action": "move",
+    "target": "B10"
   },
   {
     "type": "action",
     "subject": "Schmude",
-    "position": "A3",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A3"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "C10",
-    "action": "move"
+    "action": "move",
+    "target": "C10"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "A10",
-    "action": "move"
+    "action": "move",
+    "target": "A10"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "J9",
-    "action": "move"
+    "action": "move",
+    "target": "J9"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "A3",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A3"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "A3",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A3"
   },
   {
     "type": "action",
@@ -67,36 +67,36 @@
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A4"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A4"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "H10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H10"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "B2",
-    "action": "move"
+    "action": "move",
+    "target": "B2"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "B8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B8"
   },
   {
     "type": "action",
@@ -105,71 +105,71 @@
   {
     "type": "action",
     "subject": "Dan",
-    "position": "B4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B4"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "H10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H10"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A4"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D11",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D11"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D11",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D11"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D11",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D11"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B8"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B8"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B9",
-    "action": "move"
+    "action": "move",
+    "target": "B9"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B7"
   },
   {
     "type": "action",
@@ -178,132 +178,132 @@
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "H10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H10"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "J2",
-    "action": "move"
+    "action": "move",
+    "target": "J2"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "J4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "J4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "J4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J4"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "J4",
-    "action": "move"
+    "action": "move",
+    "target": "J4"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "J5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J5"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "J5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J5"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "J5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J5"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "I10",
-    "action": "move"
+    "action": "move",
+    "target": "I10"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "G10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G10"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "J9",
-    "action": "move"
+    "action": "move",
+    "target": "J9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I10",
-    "action": "move"
+    "action": "move",
+    "target": "I10"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "G10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G10"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I9",
-    "action": "move"
+    "action": "move",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "J10",
-    "action": "move"
+    "action": "move",
+    "target": "J10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I10",
-    "action": "move"
+    "action": "move",
+    "target": "I10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H10",
-    "action": "move"
+    "action": "move",
+    "target": "H10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G10"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B8",
-    "action": "move"
+    "action": "move",
+    "target": "B8"
   },
   {
     "type": "action",
@@ -312,134 +312,134 @@
   {
     "type": "action",
     "subject": "Lena",
-    "position": "J5",
-    "action": "move"
+    "action": "move",
+    "target": "J5"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G10",
-    "action": "move"
+    "action": "move",
+    "target": "G10"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "J3",
-    "action": "move"
+    "action": "move",
+    "target": "J3"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "J2",
-    "action": "move"
+    "action": "move",
+    "target": "J2"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H2"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H2"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H2"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "B4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B4"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "B3",
-    "action": "move"
+    "action": "move",
+    "target": "B3"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "B4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B4"
   },
   {
     "type": "action",
     "subject": "Schmude",
-    "position": "A2",
-    "action": "move"
+    "action": "move",
+    "target": "A2"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "H2",
-    "action": "move"
+    "action": "move",
+    "target": "H2"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G2"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G2"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G2"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G2",
-    "action": "move"
+    "action": "move",
+    "target": "G2"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A2",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A2"
   },
   {
     "type": "action",
     "subject": "Schmude",
-    "position": "A3",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A3"
   },
   {
     "type": "action",
     "subject": "Schmude",
-    "position": "A3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A3"
   },
   {
     "type": "action",
     "subject": "Schmude",
-    "position": "A3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A3"
   },
   {
     "type": "action",
@@ -448,42 +448,42 @@
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "B4",
-    "action": "move"
+    "action": "move",
+    "target": "B4"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "A2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A2"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "B2",
-    "action": "move"
+    "action": "move",
+    "target": "B2"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "A2",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A2"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "A2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A2"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "A2",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A2"
   },
   {
     "type": "action",
@@ -492,151 +492,151 @@
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B7"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B7"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B7",
-    "action": "move"
+    "action": "move",
+    "target": "B7"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D10"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D10"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D10"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D10",
-    "action": "move"
+    "action": "move",
+    "target": "D10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G9"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G9"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G9"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K5"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K5"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K5"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G1"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G1"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G1"
   },
   {
     "type": "action",
@@ -645,198 +645,198 @@
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I5"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I5"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I5"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G3"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G3"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G3"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "I4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "I4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "I4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "I2",
-    "action": "move"
+    "action": "move",
+    "target": "I2"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "B5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B5"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A3",
-    "action": "move"
+    "action": "move",
+    "target": "A3"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "B5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B5"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "A5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A5"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E10",
-    "action": "move"
+    "action": "move",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H9",
-    "action": "move"
+    "action": "move",
+    "target": "H9"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G8"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G8"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G8"
   },
   {
     "type": "action",
@@ -845,150 +845,150 @@
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C7"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C7"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C7"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "C8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C8"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "C8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C8"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "C8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C8"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K4"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K4"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K4"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C3",
-    "action": "move"
+    "action": "move",
+    "target": "C3"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "I4",
-    "action": "move"
+    "action": "move",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "A5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A5"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "H1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H1"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "H1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H1"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "H1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H1"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H3",
-    "action": "move"
+    "action": "move",
+    "target": "H3"
   },
   {
     "type": "action",
@@ -997,147 +997,147 @@
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B9",
-    "action": "move"
+    "action": "move",
+    "target": "B9"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C8",
-    "action": "move"
+    "action": "move",
+    "target": "C8"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C6"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C6"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C6"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "B4",
-    "action": "move"
+    "action": "move",
+    "target": "B4"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "A4",
-    "action": "move"
+    "action": "move",
+    "target": "A4"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C4",
-    "action": "move"
+    "action": "move",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H8"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H8"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H8"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "I9",
-    "action": "move"
+    "action": "move",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "I8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "I8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "I8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "I8",
-    "action": "move"
+    "action": "move",
+    "target": "I8"
   },
   {
     "type": "action",
@@ -1146,276 +1146,276 @@
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 2,
     "target": "Joel",
-    "action": "donate"
+    "action": "donate",
+    "donation": 2
   },
   {
     "type": "action",
     "subject": "Joel",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "J8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J8"
   },
   {
     "type": "action",
     "subject": "Joel",
-    "position": "J8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J8"
   },
   {
     "type": "action",
     "subject": "Dan",
-    "position": "C5",
-    "action": "move"
+    "action": "move",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "B5",
-    "action": "move"
+    "action": "move",
+    "target": "B5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C7",
-    "action": "move"
+    "action": "move",
+    "target": "C7"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "A7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A7"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "A7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A7"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "A7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "A7"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I10",
-    "action": "move"
+    "action": "move",
+    "target": "I10"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "J8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "J8"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G11",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G11"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G11",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G11"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G11",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G11"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "F9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F9"
   },
   {
     "type": "action",
     "subject": "John",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E9"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E9"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "E9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E9"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "F9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F9"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "F9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F9"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "H4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "H4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "H4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H4"
   },
   {
     "type": "action",
     "subject": "Ty",
-    "position": "H5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H5"
   },
   {
     "type": "action",
     "subject": "David",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H5"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "H5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H5"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F3"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F3"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F3"
   },
   {
     "type": "action",
@@ -1424,164 +1424,164 @@
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K6"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K6"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "K6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "K6"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
     "subject": "David",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "G5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G5"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "G5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G5"
   },
   {
     "type": "action",
     "subject": "David",
-    "position": "G5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G5"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F1"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F1"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F1",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "F1"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D9"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D9"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D9"
   },
   {
     "type": "action",
     "subject": "Steve",
-    "position": "D9",
-    "action": "move"
+    "action": "move",
+    "target": "D9"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D9"
   },
   {
     "type": "action",
     "subject": "John",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D9"
   },
   {
     "type": "action",
     "subject": "John",
-    "position": "D9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D9"
   },
   {
     "type": "action",
@@ -1590,29 +1590,29 @@
   {
     "type": "action",
     "subject": "Beyer",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "D8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D8"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "D8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D8"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "D8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "D8"
   },
   {
     "type": "action",
@@ -1621,8 +1621,8 @@
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "F3",
-    "action": "move"
+    "action": "move",
+    "target": "F3"
   },
   {
     "type": "action",
@@ -1632,57 +1632,57 @@
   {
     "type": "action",
     "subject": "Stomp",
-    "quantity": 3,
     "target": "Dan",
-    "action": "donate"
+    "action": "donate",
+    "donation": 3
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "C5",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "C5",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Bryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B5",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B5"
   },
   {
     "type": "action",
@@ -1692,61 +1692,61 @@
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C6",
-    "action": "move"
+    "action": "move",
+    "target": "C6"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "quantity": 10,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 10
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "C5",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Council",
-    "quantity": 5,
     "target": "Corey",
-    "action": "bounty"
+    "action": "bounty",
+    "bounty": 5
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "H9",
-    "action": "move"
+    "action": "move",
+    "target": "H9"
   },
   {
     "type": "action",
     "subject": "Ryan",
-    "position": "B6",
-    "action": "move"
+    "action": "move",
+    "target": "B6"
   },
   {
     "type": "action",
@@ -1756,8 +1756,8 @@
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "J10",
-    "action": "move"
+    "action": "move",
+    "target": "J10"
   },
   {
     "type": "action",
@@ -1771,8 +1771,8 @@
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I6",
-    "action": "move"
+    "action": "move",
+    "target": "I6"
   },
   {
     "type": "action",
@@ -1782,209 +1782,209 @@
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I9",
-    "action": "move"
+    "action": "move",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 5,
     "target": "Isaac",
-    "action": "donate"
+    "action": "donate",
+    "donation": 5
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "David",
-    "quantity": 3,
     "target": "Lena",
-    "action": "donate"
+    "action": "donate",
+    "donation": 3
   },
   {
     "type": "action",
     "subject": "Lena",
-    "quantity": 5,
     "target": "Isaac",
-    "action": "donate"
+    "action": "donate",
+    "donation": 5
   },
   {
     "type": "action",
     "subject": "Isaac",
-    "position": "I8",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I8"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I9",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "quantity": 3,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 3
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "I9",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I9"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C5",
-    "action": "move"
+    "action": "move",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C6",
-    "action": "move"
+    "action": "move",
+    "target": "C6"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "B6",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "B6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "B6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "B6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C5",
-    "action": "move"
+    "action": "move",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Trevor",
-    "position": "C4",
-    "action": "move"
+    "action": "move",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "B6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "B6"
   },
   {
     "type": "action",
@@ -2013,34 +2013,34 @@
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C7",
-    "action": "move"
+    "action": "move",
+    "target": "C7"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C6",
-    "action": "move"
+    "action": "move",
+    "target": "C6"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C5",
-    "action": "move"
+    "action": "move",
+    "target": "C5"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C4",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
@@ -2057,55 +2057,55 @@
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Beyer",
-    "position": "C4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "C4"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I7"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I7"
   },
   {
     "type": "action",
     "subject": "Lena",
-    "position": "I7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I7"
   },
   {
     "type": "action",
     "subject": "Stomp",
-    "position": "G4",
-    "action": "move"
+    "action": "move",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "position": "G8",
-    "action": "move"
+    "action": "move",
+    "target": "G8"
   },
   {
     "type": "action",
@@ -2119,266 +2119,266 @@
   {
     "type": "action",
     "subject": "Corey",
-    "position": "F10",
-    "action": "move"
+    "action": "move",
+    "target": "F10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "E10",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "E10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "E10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "E10",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "E10"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 10,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 10
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G9",
-    "action": "move"
+    "action": "move",
+    "target": "G9"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H8",
-    "action": "move"
+    "action": "move",
+    "target": "H8"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H7"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H7"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H7",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H7"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 10,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 10
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H7",
-    "action": "move"
+    "action": "move",
+    "target": "H7"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H6",
-    "action": "move"
+    "action": "move",
+    "target": "H6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H5",
-    "action": "move"
+    "action": "move",
+    "target": "H5"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 8,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 8
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I4",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Xavion",
-    "quantity": 5,
     "target": "Corey",
-    "action": "donate"
+    "action": "donate",
+    "donation": 5
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 10,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 10
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "G4",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "G4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 10,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 10
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "I6",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H4",
-    "action": "move"
+    "action": "move",
+    "target": "H4"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "quantity": 5,
-    "action": "buy_action"
+    "action": "buy_action",
+    "gold": 5
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H3",
     "hit": false,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   },
   {
     "type": "action",
     "subject": "Corey",
-    "position": "H3",
     "hit": true,
-    "action": "shoot"
+    "action": "shoot",
+    "target": "H3"
   }
 ]
