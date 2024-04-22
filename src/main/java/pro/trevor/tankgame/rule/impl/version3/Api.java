@@ -125,13 +125,13 @@ public class Api implements IApi {
 
             switch (action) {
                 case Ruleset.Rules.MOVE -> {
-                    String positionString = json.getString(JsonKeys.POSITION);
+                    String positionString = json.getString(JsonKeys.TARGET);
                     Position position = positionFromString(positionString);
                     Tank tank = getTank(subject);
                     getRule(Tank.class, Ruleset.Rules.MOVE).apply(state, tank, position);
                 }
                 case Ruleset.Rules.SHOOT -> {
-                    String location = json.getString(JsonKeys.POSITION);
+                    String location = json.getString(JsonKeys.TARGET);
                     Position position = positionFromString(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
@@ -140,13 +140,13 @@ public class Api implements IApi {
                 }
                 case Ruleset.Rules.DONATE -> {
                     String target = json.getString(JsonKeys.TARGET);
-                    int quantity = json.getInt(JsonKeys.QUANTITY);
+                    int quantity = json.getInt(JsonKeys.DONATION);
                     Tank subjectTank = getTank(subject);
                     Tank targetTank = getTank(target);
                     getRule(Tank.class, Ruleset.Rules.DONATE).apply(state, subjectTank, targetTank, quantity);
                 }
                 case Ruleset.Rules.BUY_ACTION -> {
-                    int quantity = json.getInt(JsonKeys.QUANTITY);
+                    int quantity = json.getInt(JsonKeys.GOLD);
                     Tank subjectTank = getTank(subject);
                     getRule(Tank.class, Ruleset.Rules.BUY_ACTION).apply(state, subjectTank, quantity);
                 }
@@ -164,7 +164,7 @@ public class Api implements IApi {
                 case Ruleset.Rules.BOUNTY -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
-                    int quantity = json.getInt(JsonKeys.QUANTITY);
+                    int quantity = json.getInt(JsonKeys.BOUNTY);
                     Tank targetTank = getTank(target);
                     getMetaRule(Council.class, Ruleset.Rules.BOUNTY).apply(state, state.getCouncil(), targetTank, quantity);
                 }
@@ -350,6 +350,9 @@ public class Api implements IApi {
         public static final String TARGET = "target";
         public static final String QUANTITY = "quantity";
         public static final String HIT = "hit";
+        public static final String GOLD = "gold";
+        public static final String DONATION = "donation";
+        public static final String BOUNTY = "bounty";
 
     }
 }

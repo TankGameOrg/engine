@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+if [ "$1" == "help" ]; then
+    echo "Usage: $0 [tag]"
+    echo "       $0 no-pull [tag]"
+    echo
+    echo "TIP: If you want to use the latest development version of tank game ui, check it out run ./scripts/build and then run ./run-web-ui no-pull development"
+    exit 1
+fi
+
+# Cd to repo root
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+# TANK_GAME_WEB_IMAGE="ghcr.io/ryan3r/tank_game_ui"
+TANK_GAME_WEB_IMAGE="ghcr.io/ryan3r/tank_game_ui"
+
+if [ "$1" == "no-pull" ]; then
+    shift  # Take the no-pull argument off the stack
+else
+    docker pull "$TANK_GAME_WEB_IMAGE"
+fi
+
+tag="${1:-latest}"
+
+docker run --rm -it \
+    -p 3333:3333 \
+    --init \
+    -v $(pwd)/target:/app/engine \
+    "${TANK_GAME_WEB_IMAGE}:${tag}"
