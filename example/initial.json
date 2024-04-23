@@ -2,7 +2,8 @@
   "council": {
     "council": [],
     "senate": [],
-    "type": "council"
+    "type": "council",
+    "coffer": 0
   },
   "type": "state",
   "day": 0,

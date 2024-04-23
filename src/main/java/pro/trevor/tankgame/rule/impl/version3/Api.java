@@ -99,6 +99,7 @@ public class Api implements IApi {
         state.setTick(tick);
         state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
         state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
+        state.getCouncil().setCoffer(council.getInt("coffer"));
         for (int i = 0; i < unitBoard.length(); ++i) {
             JSONArray unitBoardRow = unitBoard.getJSONArray(i);
             JSONArray floorBoardRow = floorBoard.getJSONArray(i);
