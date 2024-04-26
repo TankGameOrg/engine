@@ -1,6 +1,6 @@
 package pro.trevor.tankgame.state.range;
 
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.state.board.unit.tank.Tank;
 
 import java.util.HashSet;
 

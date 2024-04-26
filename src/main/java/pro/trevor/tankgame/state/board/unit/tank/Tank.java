@@ -1,10 +1,12 @@
-package pro.trevor.tankgame.state.board.unit;
+package pro.trevor.tankgame.state.board.unit.tank;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.board.IMovable;
+import pro.trevor.tankgame.state.board.unit.AbstractDurable;
+import pro.trevor.tankgame.state.board.unit.IDurable;
 
 public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged, ITickElement, IPlayerElement, IDurable, IBounty {
 
@@ -96,6 +98,7 @@ public class Tank extends AbstractDurable implements IMovable, IWallet, IRanged,
         JSONObject output = super.toJson();
         output.put("type", "tank");
         output.put("name", player);
+        output.put("position", position.toJson());
         output.put("actions", actions);
         output.put("gold", gold);
         output.put("range", range);

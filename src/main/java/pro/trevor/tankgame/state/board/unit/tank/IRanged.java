@@ -1,4 +1,6 @@
-package pro.trevor.tankgame.state.board.unit;
+package pro.trevor.tankgame.state.board.unit.tank;
+
+import pro.trevor.tankgame.state.board.unit.IUnit;
 
 public interface IRanged extends IUnit {
 

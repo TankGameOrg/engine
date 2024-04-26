@@ -1,9 +1,6 @@
-package pro.trevor.tankgame.state.board.unit;
+package pro.trevor.tankgame.state.board.unit.tank;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.rule.type.ITickElement;
-import pro.trevor.tankgame.state.board.IMovable;
 import pro.trevor.tankgame.state.board.Position;
 
 import java.util.HashSet;
@@ -11,8 +8,8 @@ import java.util.Set;
 
 public class TeamTank extends Tank implements ITeamed {
 
-    private String team;
-    private final Set<String> previousTeams;
+    protected String team;
+    protected final Set<String> previousTeams;
 
     public TeamTank(String player, String team, Position position, int actions, int gold, int durability, int range, int bounty, boolean dead) {
         super(player, position, actions, gold, durability, range, bounty, dead);

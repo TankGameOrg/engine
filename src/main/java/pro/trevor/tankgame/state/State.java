@@ -3,7 +3,7 @@ package pro.trevor.tankgame.state;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.state.board.unit.tank.Tank;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;

@@ -20,7 +20,7 @@ import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IDurable;
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.state.board.unit.tank.Tank;
 import pro.trevor.tankgame.state.board.unit.Wall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.range.BooleanRange;

@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.state.board.unit;
+package pro.trevor.tankgame.state.board.unit.tank;
 
 public interface ITeamed {
 

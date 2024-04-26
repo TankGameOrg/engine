@@ -3,7 +3,7 @@ package pro.trevor.tankgame.state.range;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.IUnit;
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.state.board.unit.tank.Tank;
 import pro.trevor.tankgame.util.Util;
 
 import java.util.HashSet;
