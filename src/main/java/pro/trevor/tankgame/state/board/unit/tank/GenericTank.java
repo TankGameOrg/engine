@@ -7,6 +7,7 @@ import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.board.IMovable;
 import pro.trevor.tankgame.state.board.IPositioned;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.unit.tank.status.IAttributeStatus;
 import pro.trevor.tankgame.state.board.unit.tank.status.IStatus;
 
 import java.util.*;
@@ -28,7 +29,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         }
     }
 
-    <T> T get(E attribute, Class<T> type) {
+    protected <T> T get(E attribute, Class<T> type) {
         if (attribute.getType().isAssignableFrom(type)) {
             try {
                 return type.cast(attributes.get(attribute));
@@ -49,11 +50,27 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
     }
 
     int getInteger(E attribute) {
-        return get(attribute, Integer.class);
+        int value = get(attribute, Integer.class);
+        int modification = 0;
+        for (IStatus status : statuses) {
+            if (status instanceof IAttributeStatus<?, ?> s && s.attributeEffected().equals(attribute)) {
+                IAttributeStatus<E, Integer> castStatus = (IAttributeStatus<E, Integer>) s;
+                modification += castStatus.modify(value);
+            }
+        }
+        return value + modification;
     }
 
     double getDouble(E attribute) {
-        return get(attribute, Double.class);
+        double value = get(attribute, Double.class);
+        double modification = 0;
+        for (IStatus status : statuses) {
+            if (status instanceof IAttributeStatus<?, ?> s && s.attributeEffected().equals(attribute)) {
+                IAttributeStatus<E, Double> castStatus = (IAttributeStatus<E, Double>) s;
+                modification += castStatus.modify(value);
+            }
+        }
+        return value + modification;
     }
 
     boolean getBoolean(E attribute) {
