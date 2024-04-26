@@ -9,59 +9,27 @@ import pro.trevor.tankgame.state.board.IPositioned;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.tank.status.IStatus;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class OpenTank implements IMovable, IPositioned, ITickElement, IPlayerElement {
-
-    public enum Attribute {
-        DEAD(Boolean.class),
-        DURABILITY(Integer.class),
-        MAX_DURABILITY(Integer.class),
-        ACTIONS(Integer.class),
-        ACTIONS_PER_DAY(Integer.class),
-        MAX_ACTIONS(Integer.class),
-        RANGE(Integer.class),
-        GOLD(Integer.class),
-        MAX_GOLD(Integer.class),
-        MOVE_SPEED(Integer.class),
-        HIT_CHANCE(Double.class),
-        ATTACK_DAMAGE(Integer.class);
-
-        private final Class<?> type;
-
-        Attribute(Class<?> type) {
-            this.type = type;
-        }
-
-        public Class<?> getType() {
-            return type;
-        }
-
-        public boolean isType(Class<?> type) {
-            return this.type.isAssignableFrom(type);
-        }
-    }
+public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IPositioned, ITickElement, IPlayerElement {
 
     protected final String player;
     protected Position position;
-    protected final Map<Attribute, Object> attributes;
+    protected final Map<E, Object> attributes;
     protected final Set<IStatus> statuses;
 
-    public OpenTank(String player, Position position, Map<Attribute, Object> defaults) {
+    public GenericTank(String player, Position position, Map<E, Object> defaults) {
         this.player = player;
         this.position = position;
         this.attributes = new HashMap<>();
         this.statuses = new HashSet<>();
-        for (Attribute attribute : defaults.keySet()) {
+        for (E attribute : defaults.keySet()) {
             attributes.put(attribute, defaults.get(attribute));
         }
     }
 
-    <T> T get(Attribute attribute, Class<T> type) {
-        if (attribute.isType(type)) {
+    <T> T get(E attribute, Class<T> type) {
+        if (attribute.getType().isAssignableFrom(type)) {
             try {
                 return type.cast(attributes.get(attribute));
             } catch (ClassCastException ignored) {
@@ -72,23 +40,23 @@ public class OpenTank implements IMovable, IPositioned, ITickElement, IPlayerEle
         }
     }
 
-    void set(Attribute attribute, Object object) {
-        if (attribute.isType(object.getClass())) {
+    void set(E attribute, Object object) {
+        if (attribute.getType().isAssignableFrom(object.getClass())) {
             attributes.put(attribute, object);
         } else {
             throw new Error(String.format("Attribute %s cannot store a(n) %s", attribute.name(), object.getClass().getSimpleName()));
         }
     }
 
-    int getInteger(Attribute attribute) {
+    int getInteger(E attribute) {
         return get(attribute, Integer.class);
     }
 
-    double getDouble(Attribute attribute) {
+    double getDouble(E attribute) {
         return get(attribute, Double.class);
     }
 
-    boolean getBoolean(Attribute attribute) {
+    boolean getBoolean(E attribute) {
         return get(attribute, Boolean.class);
     }
 
@@ -122,7 +90,7 @@ public class OpenTank implements IMovable, IPositioned, ITickElement, IPlayerEle
 
         JSONObject attributesJson = new JSONObject();
 
-        for (Attribute attribute : attributes.keySet()) {
+        for (E attribute : attributes.keySet()) {
             String attributeName = attribute.name();
             Object value = attributes.get(attribute);
             switch (value) {
