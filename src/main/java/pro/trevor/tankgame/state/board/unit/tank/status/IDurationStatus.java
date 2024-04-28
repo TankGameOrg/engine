@@ -1,8 +1,8 @@
 package pro.trevor.tankgame.state.board.unit.tank.status;
 
-public interface IDurationStatus {
+public interface IDurationStatus extends IStatus {
 
     int getDuration();
-    void decrementDuration();
+    void setDuration(int duration);
 
 }

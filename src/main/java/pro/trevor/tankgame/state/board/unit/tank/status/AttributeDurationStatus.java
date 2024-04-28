@@ -1,15 +1,21 @@
 package pro.trevor.tankgame.state.board.unit.tank.status;
 
+import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.unit.tank.IAttribute;
+import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
 
-public abstract class AttributeDurationStatus<E extends Enum<E> & IAttribute, T> implements IAttributeStatus<E, T>, IDurationStatus {
+public abstract class AttributeDurationStatus<E extends Enum<E> & IAttribute, T> extends DurationStatus implements IAttributeStatus<E, T> {
 
     protected E attribute;
-    protected int duration;
 
-    public AttributeDurationStatus(E attribute, int duration) {
+    public AttributeDurationStatus(String name, int duration, E attribute) {
+        super(name, duration);
         this.attribute = attribute;
-        this.duration = duration;
+    }
+
+    public AttributeDurationStatus(JSONObject json, IAttributeDecoder<E> decoder) {
+        super(json);
+        attribute = decoder.fromString(json.getString("attribute"));
     }
 
     @Override
@@ -18,12 +24,9 @@ public abstract class AttributeDurationStatus<E extends Enum<E> & IAttribute, T>
     }
 
     @Override
-    public int getDuration() {
-        return duration;
-    }
-
-    @Override
-    public void decrementDuration() {
-        duration = duration - 1;
+    public JSONObject toJson() {
+        JSONObject output = new JSONObject();
+        output.put("attribute", attribute.name());
+        return output;
     }
 }

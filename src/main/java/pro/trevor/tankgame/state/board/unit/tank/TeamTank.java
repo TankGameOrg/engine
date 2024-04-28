@@ -4,15 +4,16 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-public class TeamTank extends Tank implements ITeamed {
+public class TeamTank<E extends Enum<E> & IAttribute> extends GenericTank<E> implements ITeamed {
 
     protected String team;
     protected final Set<String> previousTeams;
 
-    public TeamTank(String player, String team, Position position, int actions, int gold, int durability, int range, int bounty, boolean dead) {
-        super(player, position, actions, gold, durability, range, bounty, dead);
+    public TeamTank(String player, Position position, Map<E, Object> defaults, String team) {
+        super(player, position, defaults);
         this.team = team;
         this.previousTeams = new HashSet<>();
     }
@@ -30,15 +31,6 @@ public class TeamTank extends Tank implements ITeamed {
 
     public Set<String> getPreviousTeams() {
         return previousTeams;
-    }
-
-    @Override
-    public String toString() {
-        if (dead) {
-            return String.format("[%s, %s, %s, HP: %d]", player, team, position.toString(), durability);
-        } else {
-            return String.format("[%s, %s, %s, AP: %d HP: %d R: %d G: %d]", player, team, position.toString(), actions, durability, range, gold);
-        }
     }
 
     @Override

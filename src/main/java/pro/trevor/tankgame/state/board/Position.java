@@ -51,4 +51,9 @@ public record Position (int x, int y) implements IJsonObject {
         output.put("position", toBoardString());
         return output;
     }
+
+    public static Position fromJson(JSONObject json) {
+        assert json.get("type").equals("position");
+        return new Position(json.getInt("x"), json.getInt("y"));
+    }
 }

@@ -97,6 +97,10 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         return 'T';
     }
 
+    public Set<IStatus> getStatuses() {
+        return statuses;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
@@ -121,12 +125,31 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         output.put("attributes", attributes);
 
         JSONArray statusesJson = new JSONArray();
-
         for (IStatus status : statuses) {
             statusesJson.put(status.toJson());
         }
 
+        output.put("statuses", statusesJson);
+
         return output;
+    }
+
+    public static <E extends Enum<E> & IAttribute> GenericTank<E> fromJson(JSONObject json, IAttributeDecoder<E> decoder) {
+        assert json.get("type").equals("tank");
+        String name = json.getString("name");
+        Position position = Position.fromJson(json.getJSONObject("position"));
+        Map<E, Object> attributes = decoder.fromJson(json.getJSONObject("attributes"));
+
+        GenericTank<E> tank = new GenericTank<>(name, position, attributes);
+        JSONArray statuses = json.getJSONArray("statuses");
+        for (int i = 0; i < statuses.length(); ++i) {
+            JSONObject statusJson = statuses.getJSONObject(i);
+            // TODO find a way to create the corresponding IStatus from JSON
+            // tank.statuses.add(...);
+            assert false;
+        }
+
+        return tank;
     }
 
 }

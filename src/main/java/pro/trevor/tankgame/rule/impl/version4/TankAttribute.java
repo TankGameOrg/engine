@@ -25,4 +25,24 @@ public enum TankAttribute implements IAttribute {
     public Class<?> getType() {
         return type;
     }
+
+    /**
+     * Static comptime references to the names of each enumeration.
+     * These must match EXACTLY with the output of enumeration::name.
+     */
+    public static final class Name {
+        public static final String DEAD = "DEAD";
+        public static final String DURABILITY = "DURABILITY";
+        public static final String MAX_DURABILITY = "MAX_DURABILITY";
+        public static final String ACTIONS = "ACTIONS";
+        public static final String ACTIONS_PER_DAY = "ACTIONS_PER_DAY";
+        public static final String MAX_ACTIONS = "MAX_ACTIONS";
+        public static final String RANGE = "RANGE";
+        public static final String GOLD = "GOLD";
+        public static final String MAX_GOLD = "MAX_GOLD";
+        public static final String MOVE_SPEED = "MOVE_SPEED";
+        public static final String HIT_CHANCE = "HIT_CHANCE";
+        public static final String ATTACK_DAMAGE = "ATTACK_DAMAGE";
+    }
+
 }
