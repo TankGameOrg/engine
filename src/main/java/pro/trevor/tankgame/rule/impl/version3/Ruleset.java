@@ -187,7 +187,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             }, new MovePositionRange("target"))
         );
 
-        playerRules.put(Tank.class, new PlayerActionRule<Tank>(Rules.SHOOT,
+        playerRules.put(Tank.class, new PlayerActionRule<>(Rules.SHOOT,
             (s, t, n) -> !t.isDead() && t.getActions() >= 1 &&
                 t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange() &&
                 LineOfSight.hasLineOfSightV3(s, t.getPosition(), toType(n[0], Position.class)),

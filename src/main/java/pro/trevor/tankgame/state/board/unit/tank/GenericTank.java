@@ -122,7 +122,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
             }
         }
 
-        output.put("attributes", attributes);
+        output.put("attributes", attributesJson);
 
         JSONArray statusesJson = new JSONArray();
         for (IStatus status : statuses) {
