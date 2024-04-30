@@ -69,26 +69,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         // Handle gold mine distribution to coffer
-        metaTickRules.put(Board.class, new MetaTickActionRule<>((s, b) -> {
-            List<Position> mines = b.gatherFloors(GoldMine.class).stream()
-                    .map(AbstractPositionedFloor::getPosition).toList();
-            List<Set<Position>> allMines = new ArrayList<>();
-
-            for (Position p : mines) {
-                if (allMines.stream().flatMap(Collection::stream).anyMatch(p::equals)) {
-                    continue;
-                }
-                Set<Position> thisMine = new HashSet<>();
-                findAllConnectedMines(thisMine, s, p);
-                allMines.add(thisMine);
-            }
-
-            for (Set<Position> mine : allMines) {
-                int tanks = (int) mine.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank && !tank.isDead()).count();
-                int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
-                s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
-            }
-        }));
+        metaTickRules.put(Board.class, Rules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
 
         // Handle resetting the council's ability to apply a bounty
         metaTickRules.put(None.class, new MetaTickActionRule<>((s, n) -> {
@@ -117,13 +98,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             }
         }));
 
-        // Handle wall destruction
-        conditionalRules.put(Wall.class, new ConditionalRule<>((s, t) -> t.getDurability() == 0, (s, t) -> {
-            s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
-            if (isOrthAdjToMine(s, t.getPosition())) {
-                s.getBoard().putFloor(new GoldMine(t.getPosition()));
-            }
-        }));
+        conditionalRules.put(Wall.class, Rules.DESTROY_WALL_ON_ZERO_DURABILITY);
     }
 
     @Override
@@ -212,26 +187,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerMetaPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset metaPlayerRules = ruleset.getMetaPlayerRules();
 
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerAction.STIMULUS,
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && c.getCoffer() >= 3;
-                },
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    t.setActions(t.getActions() + 1);
-                    c.setCoffer(c.getCoffer() - 3);
-                }, new TankRange<Council>("target"))
-        );
-
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerAction.GRANT_LIFE,
-                (s, c, n) -> c.getCoffer() >= 15,
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    t.setDurability(t.getDurability() + 1);
-                    c.setCoffer(c.getCoffer() - 15);
-                }, new TankRange<Council>("target"))
-        );
+        metaPlayerRules.put(Council.class, Rules.GetCofferCostStimulusRule(3));
+        metaPlayerRules.put(Council.class, Rules.GetRule_CofferCost_GrantLife(15));
 
         metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerAction.BOUNTY,
                 (s, c, n) -> {
