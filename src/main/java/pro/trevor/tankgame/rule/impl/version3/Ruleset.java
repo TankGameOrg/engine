@@ -3,6 +3,7 @@ package pro.trevor.tankgame.rule.impl.version3;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.IRuleset;
+import pro.trevor.tankgame.rule.impl.Rules;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.None;
@@ -60,18 +61,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
         // Handle gold mine distribution to tanks
-        tickRules.put(Tank.class, new TickActionRule<>((s, t) -> {
-            if (!t.isDead()) {
-                t.setActions(t.getActions() + 1);
-                if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
-                    Set<Position> mines = new HashSet<>();
-                    findAllConnectedMines(mines, s, t.getPosition());
-                    int tanks = (int) mines.stream().filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank && !tank.isDead()).count();
-                    int goldToGain = mines.size() / tanks;
-                    t.setGold(t.getGold() + goldToGain);
-                }
-            }
-        }));
+        tickRules.put(Tank.class, Rules.DISTRIBUTE_GOLD_TO_TANKS_RULE);
     }
 
     @Override
@@ -140,7 +130,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        playerRules.put(Tank.class, new PlayerActionRule<>(Rules.BUY_ACTION,
+        playerRules.put(Tank.class, new PlayerActionRule<>(PlayerAction.BUY_ACTION,
             (s, t, n) -> !t.isDead() && t.getGold() >= 3,
             (s, t, n) -> {
                 int gold = toType(n[0], Integer.class);
@@ -154,7 +144,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             }, new DiscreteIntegerRange("gold",new HashSet<>(List.of(3, 5, 8, 10))))
         );
 
-        playerRules.put(Tank.class, new PlayerActionRule<>(Rules.UPGRADE_RANGE,
+        playerRules.put(Tank.class, new PlayerActionRule<>(PlayerAction.UPGRADE_RANGE,
             (s, t, n) -> !t.isDead() && t.getGold() >= 8,
             (s, t, n) -> {
                 t.setRange(t.getRange() + 1);
@@ -162,7 +152,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             })
         );
 
-        playerRules.put(Tank.class, new PlayerActionRule<>(Rules.DONATE,
+        playerRules.put(Tank.class, new PlayerActionRule<>(PlayerAction.DONATE,
             (s, t, n) -> {
                 Tank other = toType(n[0], Tank.class);
                 int donation = toType(n[1], Integer.class);
@@ -177,7 +167,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             }, new DonateTankRange("target"), new IntegerRange("donation"))
         );
 
-        playerRules.put(Tank.class, new PlayerActionRule<>(Rules.MOVE,
+        playerRules.put(Tank.class, new PlayerActionRule<>(PlayerAction.MOVE,
             (s, t, n) -> !t.isDead() && t.getActions() >= 1 && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
             (s, t, n) -> {
                 t.setActions(t.getActions() - 1);
@@ -187,7 +177,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
             }, new MovePositionRange("target"))
         );
 
-        playerRules.put(Tank.class, new PlayerActionRule<Tank>(Rules.SHOOT,
+        playerRules.put(Tank.class, new PlayerActionRule<Tank>(PlayerAction.SHOOT,
             (s, t, n) -> !t.isDead() && t.getActions() >= 1 &&
                 t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange() &&
                 LineOfSight.hasLineOfSightV3(s, t.getPosition(), toType(n[0], Position.class)),
@@ -222,7 +212,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerMetaPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset metaPlayerRules = ruleset.getMetaPlayerRules();
 
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(Rules.STIMULUS,
+        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerAction.STIMULUS,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
                     return !t.isDead() && c.getCoffer() >= 3;
@@ -234,7 +224,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 }, new TankRange<Council>("target"))
         );
 
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(Rules.GRANT_LIFE,
+        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerAction.GRANT_LIFE,
                 (s, c, n) -> c.getCoffer() >= 15,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
@@ -243,7 +233,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 }, new TankRange<Council>("target"))
         );
 
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(Rules.BOUNTY,
+        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerAction.BOUNTY,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
                     return !t.isDead() && councilCanBounty;
@@ -259,7 +249,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         );
     }
 
-    public static class Rules {
+    public static class PlayerAction {
 
         public static final String SHOOT = "shoot";
         public static final String MOVE = "move";
