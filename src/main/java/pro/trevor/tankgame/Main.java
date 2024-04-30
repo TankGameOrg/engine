@@ -11,7 +11,7 @@ import java.nio.file.Files;
 
 public class Main {
     public static void main(String[] args) {
-        ApiRegistry.putApi("version3", Api.class);
+        ApiRegistry.putApi("wd-3", Api.class);
 
         if (args.length == 1 && (args[0].equals("--debug") || args[0].equals("-d"))) {
             // Demo version 3 rules with game logs
