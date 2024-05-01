@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule.impl.version3;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.impl.BaseRuleset;
+import pro.trevor.tankgame.rule.impl.util.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;

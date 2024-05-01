@@ -4,6 +4,7 @@ import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
+import pro.trevor.tankgame.rule.impl.util.NullStatusDecoder;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
@@ -13,6 +14,8 @@ import pro.trevor.tankgame.state.board.floor.StandardFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.Wall;
+import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
+import pro.trevor.tankgame.state.board.unit.tank.status.IStatusDecoder;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
 
@@ -25,6 +28,8 @@ import pro.trevor.tankgame.util.range.TypeRange;
 public class Api implements IApi {
     private final RulesetDescription ruleset;
     private State state;
+    private static final IAttributeDecoder<TankAttribute> attributeDecoder = new AttributeDecoder();
+    private static final IStatusDecoder statusDecoder = new NullStatusDecoder();
 
     private static final String COUNCIL = "Council";
 
@@ -52,7 +57,7 @@ public class Api implements IApi {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
-                return new Tank3(json.getString("name"), position, new AttributeDecoder().fromJson(json));
+                return new Tank3(json, position, attributeDecoder, statusDecoder);
             }
             case "wall" -> {
                 return new Wall(position, json.getInt("durability"));

@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-public interface IAttributeDecoder<E extends Enum<E> & IAttribute> {
-    Map<E, Object> fromJson(JSONObject json);
-    E fromString(String attribute);
+public interface IAttributeDecoder<E extends Enum<E> & IAttribute> extends IDecoder<E, String> {
+    Map<E, Object> fromJsonAttributes(JSONObject json);
+    E fromSource(String attribute);
 }

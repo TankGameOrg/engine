@@ -2,7 +2,7 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.ApiRegistry;
+import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.version3.Api;
 

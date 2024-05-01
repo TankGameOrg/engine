@@ -15,7 +15,7 @@ public abstract class AttributeDurationStatus<E extends Enum<E> & IAttribute, T>
 
     public AttributeDurationStatus(JSONObject json, IAttributeDecoder<E> decoder) {
         super(json);
-        attribute = decoder.fromString(json.getString("attribute"));
+        attribute = decoder.fromSource(json.getString("attribute"));
     }
 
     @Override
@@ -25,7 +25,7 @@ public abstract class AttributeDurationStatus<E extends Enum<E> & IAttribute, T>
 
     @Override
     public JSONObject toJson() {
-        JSONObject output = new JSONObject();
+        JSONObject output = super.toJson();
         output.put("attribute", attribute.name());
         return output;
     }

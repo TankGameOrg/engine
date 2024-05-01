@@ -8,19 +8,19 @@ import java.util.Map;
 
 public class AttributeDecoder implements IAttributeDecoder<TankAttribute> {
     @Override
-    public Map<TankAttribute, Object> fromJson(JSONObject json) {
+    public Map<TankAttribute, Object> fromJsonAttributes(JSONObject json) {
         Map<TankAttribute, Object> output = new HashMap<>();
         for (String key : json.keySet()) {
-            TankAttribute attribute = fromString(key);
+            TankAttribute attribute = fromSource(key);
             if (attribute != null) {
-                output.put(fromString(key), json.get(key));
+                output.put(fromSource(key), json.get(key));
             }
         }
         return output;
     }
 
     @Override
-    public TankAttribute fromString(String attribute) {
+    public TankAttribute fromSource(String attribute) {
         switch (attribute.toUpperCase()) {
             case TankAttribute.Name.ACTIONS -> {
                 return TankAttribute.ACTIONS;
