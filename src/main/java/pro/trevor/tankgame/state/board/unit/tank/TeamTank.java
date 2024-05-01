@@ -20,8 +20,8 @@ public class TeamTank<E extends Enum<E> & IAttribute> extends GenericTank<E> imp
         this.previousTeams = new HashSet<>();
     }
 
-    public TeamTank(JSONObject json, Position position, IAttributeDecoder<E> attributeDecoder, IStatusDecoder statusDecoder) {
-        super(json, position, attributeDecoder, statusDecoder);
+    public TeamTank(JSONObject json, IAttributeDecoder<E> attributeDecoder, IStatusDecoder statusDecoder) {
+        super(json, attributeDecoder, statusDecoder);
         this.team = json.getString("team");
         this.previousTeams = new HashSet<>();
         JSONArray previousTeamsJson = json.getJSONArray("previous_teams");

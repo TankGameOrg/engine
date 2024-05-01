@@ -31,18 +31,17 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMova
         }
     }
 
-    public GenericTank(JSONObject json, Position position, IAttributeDecoder<E> attributeDecoder, IStatusDecoder statusDecoder) {
+    public GenericTank(JSONObject json, IAttributeDecoder<E> attributeDecoder, IStatusDecoder statusDecoder) {
         assert !json.get("type").equals("tank");
 
         this.player = json.getString("name");
-        this.position = position;
-//         this.position = Position.fromJson(json.getJSONObject("position"));
+        this.position = Position.fromJson(json.getJSONObject("position"));
         this.attributes = attributeDecoder.fromJsonAttributes(json.getJSONObject("attributes"));
         this.statuses = new HashSet<>();
 
-        JSONArray statuses = json.getJSONArray("statuses");
-        for (int i = 0; i < statuses.length(); ++i) {
-            JSONObject statusJson = statuses.getJSONObject(i);
+        JSONArray statusesJson = json.getJSONArray("statuses");
+        for (int i = 0; i < statusesJson.length(); ++i) {
+            JSONObject statusJson = statusesJson.getJSONObject(i);
             this.statuses.add(statusDecoder.fromSource(statusJson));
         }
     }

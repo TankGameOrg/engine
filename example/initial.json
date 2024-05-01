@@ -1,9 +1,9 @@
 {
   "council": {
+    "coffer": 0,
     "council": [],
     "senate": [],
-    "type": "council",
-    "coffer": 0
+    "type": "council"
   },
   "type": "state",
   "day": 0,
@@ -11,25 +11,41 @@
     "unit_board": [
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Schmude",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Dan",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {
           "durability": 3,
@@ -52,25 +68,41 @@
           "type": "wall"
         },
         {
-          "gold": 5,
-          "bounty": 0,
           "name": "Stomp",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 5,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 8,
+            "y": 0,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Ty",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 10,
+            "y": 0,
+            "type": "position"
+          },
+          "type": "tank"
         }
       ],
       [
@@ -100,25 +132,41 @@
       ],
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Bryan",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Trevor",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 2,
+            "y": 2,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {
           "durability": 3,
@@ -141,25 +189,41 @@
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "David",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 5,
-          "bounty": 0,
           "name": "Lena",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 5,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 10,
+            "y": 2,
+            "type": "position"
+          },
+          "type": "tank"
         }
       ],
       [
@@ -388,25 +452,41 @@
       ],
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Beyer",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Steve",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 2,
+            "y": 8,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {
           "durability": 3,
@@ -429,25 +509,41 @@
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Joel",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 8,
+            "y": 8,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Xavion",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 10,
+            "y": 8,
+            "type": "position"
+          },
+          "type": "tank"
         }
       ],
       [
@@ -477,25 +573,41 @@
       ],
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Ryan",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "John",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 2,
+            "y": 10,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {
           "durability": 3,
@@ -518,25 +630,41 @@
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Isaac",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 8,
+            "y": 10,
+            "type": "position"
+          },
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Corey",
-          "durability": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "statuses": [],
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "BOUNTY": 0,
+            "DEAD": false,
+            "RANGE": 2
+          },
+          "position": {
+            "x": 10,
+            "y": 10,
+            "type": "position"
+          },
+          "type": "tank"
         }
       ]
     ],

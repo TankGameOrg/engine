@@ -57,7 +57,7 @@ public class Api implements IApi {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
-                return new Tank3(json, position, attributeDecoder, statusDecoder);
+                return new Tank3(json, attributeDecoder, statusDecoder);
             }
             case "wall" -> {
                 return new Wall(position, json.getInt("durability"));
