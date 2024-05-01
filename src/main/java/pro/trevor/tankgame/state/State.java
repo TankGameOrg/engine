@@ -3,7 +3,7 @@ package pro.trevor.tankgame.state;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.unit.tank.Tank;
+import pro.trevor.tankgame.state.board.unit.tank.GenericTank;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
@@ -83,7 +83,7 @@ public class State implements IJsonObject {
         StringBuilder sb = new StringBuilder();
         sb.append("tick: ").append(tick).append('\n');
         sb.append(council.toString());
-        sb.append("tanks: ").append(Util.toString(board.gatherUnits(Tank.class), 2));
+        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
         sb.append('\n').append(board.toUnitString());
         sb.append('\n').append(board.toFloorString());
         return sb.toString();

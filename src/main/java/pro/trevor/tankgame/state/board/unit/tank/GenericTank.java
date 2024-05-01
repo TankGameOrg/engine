@@ -7,12 +7,13 @@ import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.board.IMovable;
 import pro.trevor.tankgame.state.board.IPositioned;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.tank.status.IAttributeStatus;
 import pro.trevor.tankgame.state.board.unit.tank.status.IStatus;
 
 import java.util.*;
 
-public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IPositioned, ITickElement, IPlayerElement {
+public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMovable, IPositioned, ITickElement, IPlayerElement {
 
     protected final String player;
     protected Position position;
@@ -41,7 +42,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         }
     }
 
-    void set(E attribute, Object object) {
+    protected void set(E attribute, Object object) {
         if (attribute.getType().isAssignableFrom(object.getClass())) {
             attributes.put(attribute, object);
         } else {
@@ -49,7 +50,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         }
     }
 
-    int getInteger(E attribute) {
+    public int getInteger(E attribute) {
         int value = get(attribute, Integer.class);
         int modification = 0;
         for (IStatus status : statuses) {
@@ -61,7 +62,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         return value + modification;
     }
 
-    double getDouble(E attribute) {
+    public double getDouble(E attribute) {
         double value = get(attribute, Double.class);
         double modification = 0;
         for (IStatus status : statuses) {
@@ -73,7 +74,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         return value + modification;
     }
 
-    boolean getBoolean(E attribute) {
+    public boolean getBoolean(E attribute) {
         return get(attribute, Boolean.class);
     }
 
@@ -152,4 +153,8 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IMovable, IP
         return tank;
     }
 
+    @Override
+    public String toString() {
+        return getPlayer();
+    }
 }

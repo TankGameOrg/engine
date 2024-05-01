@@ -19,6 +19,9 @@ public class AttributeDecoder implements IAttributeDecoder<TankAttribute> {
     @Override
     public TankAttribute fromString(String attribute) {
         switch (attribute) {
+            case TankAttribute.Name.BOUNTY -> {
+                return TankAttribute.BOUNTY;
+            }
             case TankAttribute.Name.ACTIONS -> {
                 return TankAttribute.ACTIONS;
             }
