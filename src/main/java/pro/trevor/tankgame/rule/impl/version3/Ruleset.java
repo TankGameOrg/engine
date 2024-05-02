@@ -168,7 +168,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 return !t.isDead() && !other.isDead() && t.getGold() >= donation + 1 &&
                         getSpacesInRange(t.getPosition(), t.getRange()).contains(other.getPosition());
             }, (s, t, n) -> {
-            Tank other = toType(n[0], Tank.class);
+                Tank other = toType(n[0], Tank.class);
                 int donation = toType(n[1], Integer.class);
                 assert t.getGold() >= donation + 1;
                 t.setGold(t.getGold() - donation - 1);
