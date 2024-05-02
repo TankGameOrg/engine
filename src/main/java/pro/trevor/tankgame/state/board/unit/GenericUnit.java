@@ -4,8 +4,6 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.tank.IAttribute;
 import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
-import pro.trevor.tankgame.state.board.unit.tank.status.IAttributeStatus;
-import pro.trevor.tankgame.state.board.unit.tank.status.IStatus;
 
 import java.util.*;
 

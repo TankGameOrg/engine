@@ -3,7 +3,6 @@ package pro.trevor.tankgame.state.board.unit.tank;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.tank.status.IStatusDecoder;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -20,8 +19,8 @@ public class TeamTank<E extends Enum<E> & IAttribute> extends GenericTank<E> imp
         this.previousTeams = new HashSet<>();
     }
 
-    public TeamTank(JSONObject json, IAttributeDecoder<E> attributeDecoder, IStatusDecoder statusDecoder) {
-        super(json, attributeDecoder, statusDecoder);
+    public TeamTank(JSONObject json, IAttributeDecoder<E> attributeDecoder) {
+        super(json, attributeDecoder);
         this.team = json.getString("team");
         this.previousTeams = new HashSet<>();
         JSONArray previousTeamsJson = json.getJSONArray("previous_teams");
