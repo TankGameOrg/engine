@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.version4;
+package pro.trevor.tankgame.rule.impl.version5;
 
 import pro.trevor.tankgame.rule.impl.util.AbstractAttributeDecoder;
 
