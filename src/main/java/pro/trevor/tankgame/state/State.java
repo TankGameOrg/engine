@@ -73,8 +73,6 @@ public class State implements IJsonObject {
         output.put("board", board.toJson());
         output.put("council", council.toJson());
         output.put("day", tick);
-        JSONArray playersJson = new JSONArray();
-        players.forEach(playersJson::put);
         return output;
     }
 
