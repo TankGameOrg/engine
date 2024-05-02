@@ -28,6 +28,7 @@ public class Main {
                 JSONArray moves = new JSONArray(movesString);
 
                 api.ingestState(initial);
+                System.out.println(api.getState().toJson().toString(2));
 
                 for (int i = 0; i < moves.length(); ++i) {
                     JSONObject action = moves.getJSONObject(i);

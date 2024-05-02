@@ -12,13 +12,12 @@
       [
         {
           "name": "Schmude",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -31,13 +30,12 @@
         {"type": "empty"},
         {
           "name": "Dan",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -69,13 +67,12 @@
         },
         {
           "name": "Stomp",
-          "statuses": [],
           "attributes": {
             "GOLD": 5,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -88,13 +85,12 @@
         {"type": "empty"},
         {
           "name": "Ty",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -133,13 +129,12 @@
       [
         {
           "name": "Bryan",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -152,13 +147,12 @@
         {"type": "empty"},
         {
           "name": "Trevor",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -190,13 +184,12 @@
         },
         {
           "name": "David",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -209,13 +202,12 @@
         {"type": "empty"},
         {
           "name": "Lena",
-          "statuses": [],
           "attributes": {
             "GOLD": 5,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -453,13 +445,12 @@
       [
         {
           "name": "Beyer",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -472,13 +463,12 @@
         {"type": "empty"},
         {
           "name": "Steve",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -510,13 +500,12 @@
         },
         {
           "name": "Joel",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -529,13 +518,12 @@
         {"type": "empty"},
         {
           "name": "Xavion",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -574,13 +562,12 @@
       [
         {
           "name": "Ryan",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -593,13 +580,12 @@
         {"type": "empty"},
         {
           "name": "John",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -631,13 +617,12 @@
         },
         {
           "name": "Isaac",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
@@ -650,13 +635,12 @@
         {"type": "empty"},
         {
           "name": "Corey",
-          "statuses": [],
           "attributes": {
             "GOLD": 0,
             "DURABILITY": 3,
             "ACTIONS": 0,
-            "BOUNTY": 0,
             "DEAD": false,
+            "BOUNTY": 0,
             "RANGE": 2
           },
           "position": {
