@@ -5,40 +5,29 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.board.IMovable;
-import pro.trevor.tankgame.state.board.IPositioned;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.IUnit;
+import pro.trevor.tankgame.state.board.unit.GenericUnit;
 import pro.trevor.tankgame.state.board.unit.tank.status.IAttributeStatus;
 import pro.trevor.tankgame.state.board.unit.tank.status.IStatus;
 import pro.trevor.tankgame.state.board.unit.tank.status.IStatusDecoder;
 
 import java.util.*;
 
-public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMovable, IPositioned, ITickElement, IPlayerElement {
+public class GenericTank<E extends Enum<E> & IAttribute> extends GenericUnit<E> implements IMovable, ITickElement, IPlayerElement {
 
     protected final String player;
-    protected Position position;
-    protected final Map<E, Object> attributes;
     protected final Set<IStatus> statuses;
 
     public GenericTank(String player, Position position, Map<E, Object> defaults) {
+        super(position, defaults);
         this.player = player;
-        this.position = position;
-        this.attributes = new HashMap<>();
         this.statuses = new HashSet<>();
-        for (E attribute : defaults.keySet()) {
-            attributes.put(attribute, defaults.get(attribute));
-        }
     }
 
     public GenericTank(JSONObject json, IAttributeDecoder<E> attributeDecoder, IStatusDecoder statusDecoder) {
-        assert !json.get("type").equals("tank");
-
+        super(json, attributeDecoder);
         this.player = json.getString("name");
-        this.position = Position.fromJson(json.getJSONObject("position"));
-        this.attributes = attributeDecoder.fromJsonAttributes(json.getJSONObject("attributes"));
         this.statuses = new HashSet<>();
-
         JSONArray statusesJson = json.getJSONArray("statuses");
         for (int i = 0; i < statusesJson.length(); ++i) {
             JSONObject statusJson = statusesJson.getJSONObject(i);
@@ -66,7 +55,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMova
         }
     }
 
-    public int getInteger(E attribute) {
+    public int getIntegerWithModifiers(E attribute) {
         int value = get(attribute, Integer.class);
         int modification = 0;
         for (IStatus status : statuses) {
@@ -78,7 +67,7 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMova
         return value + modification;
     }
 
-    public double getDouble(E attribute) {
+    public double getDoubleWithModifiers(E attribute) {
         double value = get(attribute, Double.class);
         double modification = 0;
         for (IStatus status : statuses) {
@@ -90,18 +79,9 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMova
         return value + modification;
     }
 
-    public boolean getBoolean(E attribute) {
-        return get(attribute, Boolean.class);
-    }
-
     @Override
     public String getPlayer() {
         return player;
-    }
-
-    @Override
-    public Position getPosition() {
-        return position;
     }
 
     @Override
@@ -120,26 +100,10 @@ public class GenericTank<E extends Enum<E> & IAttribute> implements IUnit, IMova
 
     @Override
     public JSONObject toJson() {
-        JSONObject output = new JSONObject();
+        JSONObject output = super.toJson();
 
         output.put("type", "tank");
         output.put("name", player);
-        output.put("position", position.toJson());
-
-        JSONObject attributesJson = new JSONObject();
-
-        for (E attribute : attributes.keySet()) {
-            String attributeName = attribute.name();
-            Object value = attributes.get(attribute);
-            switch (value) {
-                case Boolean v -> attributesJson.put(attributeName, v);
-                case Integer v -> attributesJson.put(attributeName, v);
-                case Double v -> attributesJson.put(attributeName, v);
-                default -> throw new Error(String.format("Unhandled type %s for attribute %s", attribute.getType().getSimpleName(), attributeName));
-            }
-        }
-
-        output.put("attributes", attributesJson);
 
         JSONArray statusesJson = new JSONArray();
         for (IStatus status : statuses) {

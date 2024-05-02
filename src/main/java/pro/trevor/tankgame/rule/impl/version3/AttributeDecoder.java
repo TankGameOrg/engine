@@ -1,24 +1,8 @@
 package pro.trevor.tankgame.rule.impl.version3;
 
-import org.json.JSONObject;
-import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
+import pro.trevor.tankgame.rule.impl.util.AbstractAttributeDecoder;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class AttributeDecoder implements IAttributeDecoder<TankAttribute> {
-    @Override
-    public Map<TankAttribute, Object> fromJsonAttributes(JSONObject json) {
-        Map<TankAttribute, Object> output = new HashMap<>();
-        for (String key : json.keySet()) {
-            TankAttribute attribute = fromSource(key);
-            if (attribute != null) {
-                output.put(fromSource(key), json.get(key));
-            }
-        }
-        return output;
-    }
-
+public class AttributeDecoder extends AbstractAttributeDecoder<TankAttribute> {
     @Override
     public TankAttribute fromSource(String attribute) {
         switch (attribute.toUpperCase()) {

@@ -57,7 +57,7 @@ public class Api implements IApi {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
-                return new Tank3(json, attributeDecoder, statusDecoder);
+                return new Tank(json, attributeDecoder, statusDecoder);
             }
             case "wall" -> {
                 return new Wall(position, json.getInt("durability"));
@@ -126,51 +126,51 @@ public class Api implements IApi {
                 case Ruleset.Rules.MOVE -> {
                     String positionString = json.getString(JsonKeys.TARGET);
                     Position position = positionFromString(positionString);
-                    Tank3 tank = getTank(subject);
-                    getRule(Tank3.class, Ruleset.Rules.MOVE).apply(state, tank, position);
+                    Tank tank = getTank(subject);
+                    getRule(Tank.class, Ruleset.Rules.MOVE).apply(state, tank, position);
                 }
                 case Ruleset.Rules.SHOOT -> {
                     String location = json.getString(JsonKeys.TARGET);
                     Position position = positionFromString(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
-                    Tank3 tank = getTank(subject);
-                    getRule(Tank3.class, Ruleset.Rules.SHOOT).apply(state, tank, position, hit);
+                    Tank tank = getTank(subject);
+                    getRule(Tank.class, Ruleset.Rules.SHOOT).apply(state, tank, position, hit);
 
                 }
                 case Ruleset.Rules.DONATE -> {
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.DONATION);
-                    Tank3 subjectTank = getTank(subject);
-                    Tank3 targetTank = getTank(target);
-                    getRule(Tank3.class, Ruleset.Rules.DONATE).apply(state, subjectTank, targetTank, quantity);
+                    Tank subjectTank = getTank(subject);
+                    Tank targetTank = getTank(target);
+                    getRule(Tank.class, Ruleset.Rules.DONATE).apply(state, subjectTank, targetTank, quantity);
                 }
                 case Ruleset.Rules.BUY_ACTION -> {
                     int quantity = json.getInt(JsonKeys.GOLD);
-                    Tank3 subjectTank = getTank(subject);
-                    getRule(Tank3.class, Ruleset.Rules.BUY_ACTION).apply(state, subjectTank, quantity);
+                    Tank subjectTank = getTank(subject);
+                    getRule(Tank.class, Ruleset.Rules.BUY_ACTION).apply(state, subjectTank, quantity);
                 }
                 case Ruleset.Rules.UPGRADE_RANGE -> {
-                    Tank3 subjectTank = getTank(subject);
-                    getRule(Tank3.class, Ruleset.Rules.UPGRADE_RANGE).apply(state, subjectTank);
+                    Tank subjectTank = getTank(subject);
+                    getRule(Tank.class, Ruleset.Rules.UPGRADE_RANGE).apply(state, subjectTank);
                 }
 
                 case Ruleset.Rules.STIMULUS -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
-                    Tank3 targetTank = getTank(target);
+                    Tank targetTank = getTank(target);
                     getMetaRule(Council.class, Ruleset.Rules.STIMULUS).apply(state, state.getCouncil(), targetTank);
                 }
                 case Ruleset.Rules.BOUNTY -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.BOUNTY);
-                    Tank3 targetTank = getTank(target);
+                    Tank targetTank = getTank(target);
                     getMetaRule(Council.class, Ruleset.Rules.BOUNTY).apply(state, state.getCouncil(), targetTank, quantity);
                 }
                 case Ruleset.Rules.GRANT_LIFE -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
-                    Tank3 targetTank = getTank(target);
+                    Tank targetTank = getTank(target);
                     getMetaRule(Council.class, Ruleset.Rules.GRANT_LIFE).apply(state, state.getCouncil(), targetTank);
                 }
                 default -> throw new Error("Unexpected action: " + action);
@@ -203,9 +203,9 @@ public class Api implements IApi {
             rules = ruleset.getMetaPlayerRules().get(type);
             subject = state.getCouncil();
         } else if (state.getPlayers().contains(player)) {
-            type = Tank3.class;
+            type = Tank.class;
             rules = ruleset.getPlayerRules().get(type);
-            Optional<Tank3> tank = state.getBoard().gather(Tank3.class).stream()
+            Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()
                     .filter((t) -> t.getPlayer().equals(player))
                     .findFirst();
             if (tank.isPresent()) {
@@ -307,8 +307,8 @@ public class Api implements IApi {
         return namedRules.getFirst();
     }
 
-    private Tank3 getTank(String player) {
-        return state.getBoard().gatherUnits(Tank3.class).stream()
+    private Tank getTank(String player) {
+        return state.getBoard().gatherUnits(Tank.class).stream()
                 .filter(t -> t.getPlayer().equals(player)).toList().getFirst();
     }
 

@@ -5,8 +5,8 @@ import pro.trevor.tankgame.state.board.unit.tank.GenericTank;
 import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
 import pro.trevor.tankgame.state.board.unit.tank.status.IStatusDecoder;
 
-public class Tank3 extends GenericTank<TankAttribute> {
-    public Tank3(JSONObject json, IAttributeDecoder<TankAttribute> attributeDecoder, IStatusDecoder statusDecoder) {
+public class Tank extends GenericTank<TankAttribute> {
+    public Tank(JSONObject json, IAttributeDecoder<TankAttribute> attributeDecoder, IStatusDecoder statusDecoder) {
         super(json, attributeDecoder, statusDecoder);
     }
 
