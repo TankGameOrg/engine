@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.board.attribute.IAttribute;
-import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 import pro.trevor.tankgame.state.board.IMovable;
 import pro.trevor.tankgame.state.board.Position;
 
@@ -19,8 +18,8 @@ public class GenericTank<E extends Enum<E> & IAttribute> extends pro.trevor.tank
         this.player = player;
     }
 
-    public GenericTank(JSONObject json, IAttributeDecoder<E> attributeDecoder) {
-        super(json, attributeDecoder);
+    public GenericTank(JSONObject json, Class<E> type) {
+        super(json, type);
         this.player = json.getString("name");
     }
 

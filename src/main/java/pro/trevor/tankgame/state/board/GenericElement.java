@@ -2,7 +2,6 @@ package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.attribute.IAttribute;
-import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +19,9 @@ public class GenericElement<E extends Enum<E> & IAttribute> implements IElement,
         }
     }
 
-    public GenericElement(JSONObject json, IAttributeDecoder<E> attributeDecoder) {
+    public GenericElement(JSONObject json, Class<E> type) {
         this.position = new Position(json.optString("position"));
-        this.attributes = attributeDecoder.fromJsonAttributes(json.optJSONObject("attributes", new JSONObject()));
+        this.attributes = IAttribute.fromJson(type, json.getJSONObject("attributes"));
     }
 
     protected <T> T get(E attribute, Class<T> type) {

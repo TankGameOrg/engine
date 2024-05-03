@@ -14,7 +14,6 @@ import pro.trevor.tankgame.state.board.floor.StandardFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
 

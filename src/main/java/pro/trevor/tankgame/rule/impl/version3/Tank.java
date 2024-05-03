@@ -2,11 +2,10 @@ package pro.trevor.tankgame.rule.impl.version3;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 
 public class Tank extends GenericTank<TankAttribute> {
     public Tank(JSONObject json) {
-        super(json, TankAttribute.DECODER);
+        super(json, TankAttribute.class);
     }
 
     public int getDurability() {
@@ -32,7 +31,6 @@ public class Tank extends GenericTank<TankAttribute> {
     public boolean isDead() {
         return getBoolean(TankAttribute.DEAD);
     }
-
 
 
     public void setDurability(int durability) {

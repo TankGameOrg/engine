@@ -14,7 +14,7 @@ public class BasicWall extends GenericElement<DurableAttribute> implements IUnit
     }
 
     public BasicWall(JSONObject json) {
-        super(json, DurableAttribute.DECODER);
+        super(json, DurableAttribute.class);
     }
 
     @Override
