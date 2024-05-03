@@ -111,6 +111,26 @@ public class BuyActionWithGoldTest
 
     @ParameterizedTest()
 	@CsvSource({
+           "6,  1,  6,  3,  0",
+           "16,  2,  9,  5,  7",
+	})
+    public void BuyActionsGainActions(int starting_gold, int starting_actions, int spent_gold, int expected_actions, int expected_gold)
+    {
+        Tank tank = new Tank("test", new Position(0, 0), starting_actions, starting_gold, 3, 2, 0, false);
+
+        // Get 3 gold-cost rule
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+
+        // apply rule
+        Integer[] meta = {spent_gold};
+        rule.apply(new State(1, 1), tank, meta);
+
+        assertEquals(expected_gold, tank.getGold());
+        assertEquals(expected_actions, tank.getActions());
+    }
+
+    @ParameterizedTest()
+	@CsvSource({
 			"3,   3,  1",
 			"3,   6,  2",
 			"3,   9,  3",
