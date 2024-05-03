@@ -37,11 +37,31 @@
           "position": "C1",
           "type": "tank"
         },
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "D1",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "E1",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "F1",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "G1",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "H1",
+          "type": "wall"
+        },
         {
           "name": "Stomp",
           "attributes": {
@@ -137,7 +157,11 @@
           "position": "E3",
           "type": "wall"
         },
-        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "F3",
+          "type": "wall"
+        },
         {
           "attributes": {"DURABILITY": 3},
           "position": "G3",
@@ -177,9 +201,21 @@
         }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "A4",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "B4",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "C4",
+          "type": "wall"
+        },
         {
           "attributes": {"DURABILITY": 3},
           "position": "D4",
@@ -205,9 +241,21 @@
           "position": "H4",
           "type": "wall"
         },
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "I4",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "J4",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "K4",
+          "type": "wall"
+        }
       ],
       [
         {
@@ -321,7 +369,11 @@
           "position": "A7",
           "type": "wall"
         },
-        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "B7",
+          "type": "wall"
+        },
         {
           "attributes": {"DURABILITY": 3},
           "position": "C7",
@@ -357,7 +409,11 @@
           "position": "I7",
           "type": "wall"
         },
-        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "J7",
+          "type": "wall"
+        },
         {
           "attributes": {"DURABILITY": 3},
           "position": "K7",
