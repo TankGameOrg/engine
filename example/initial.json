@@ -20,11 +20,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 0,
-            "y": 0,
-            "type": "position"
-          },
+          "position": "A1",
           "type": "tank"
         },
         {"type": "empty"},
@@ -38,33 +34,14 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 2,
-            "y": 0,
-            "type": "position"
-          },
+          "position": "C1",
           "type": "tank"
         },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
         {
           "name": "Stomp",
           "attributes": {
@@ -75,11 +52,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 8,
-            "y": 0,
-            "type": "position"
-          },
+          "position": "I1",
           "type": "tank"
         },
         {"type": "empty"},
@@ -93,11 +66,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 10,
-            "y": 0,
-            "type": "position"
-          },
+          "position": "K1",
           "type": "tank"
         }
       ],
@@ -106,20 +75,24 @@
         {"type": "empty"},
         {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D2",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E2",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G2",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H2",
           "type": "wall"
         },
         {"type": "empty"},
@@ -137,11 +110,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 0,
-            "y": 2,
-            "type": "position"
-          },
+          "position": "A3",
           "type": "tank"
         },
         {"type": "empty"},
@@ -155,31 +124,28 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 2,
-            "y": 2,
-            "type": "position"
-          },
+          "position": "C3",
           "type": "tank"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D3",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E3",
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "G3",
           "type": "wall"
         },
         {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H3",
           "type": "wall"
         },
         {
@@ -192,11 +158,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 8,
-            "y": 2,
-            "type": "position"
-          },
+          "position": "I3",
           "type": "tank"
         },
         {"type": "empty"},
@@ -210,235 +172,252 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 10,
-            "y": 2,
-            "type": "position"
-          },
+          "position": "K3",
           "type": "tank"
         }
       ],
       [
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D4",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E4",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F4",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G4",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H4",
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {"type": "empty"},
+        {"type": "empty"}
+      ],
+      [
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "A5",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "B5",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C5",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D5",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E5",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F5",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "H5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "I5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "J5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "K5",
           "type": "wall"
         }
       ],
       [
         {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A6",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C6",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D6",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E6",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F6",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G6",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H6",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I6",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K6",
           "type": "wall"
         }
       ],
       [
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A7",
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "C7",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D7",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E7",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F7",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G7",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H7",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I7",
           "type": "wall"
         },
+        {"type": "empty"},
         {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K7",
           "type": "wall"
         }
       ],
       [
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "B8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "J8",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K8",
           "type": "wall"
         }
       ],
@@ -453,11 +432,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 0,
-            "y": 8,
-            "type": "position"
-          },
+          "position": "A9",
           "type": "tank"
         },
         {"type": "empty"},
@@ -471,31 +446,32 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 2,
-            "y": 8,
-            "type": "position"
-          },
+          "position": "C9",
           "type": "tank"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D9",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E9",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F9",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G9",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H9",
           "type": "wall"
         },
         {
@@ -508,11 +484,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 8,
-            "y": 8,
-            "type": "position"
-          },
+          "position": "I9",
           "type": "tank"
         },
         {"type": "empty"},
@@ -526,11 +498,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 10,
-            "y": 8,
-            "type": "position"
-          },
+          "position": "K9",
           "type": "tank"
         }
       ],
@@ -539,20 +507,24 @@
         {"type": "empty"},
         {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D10",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E10",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G10",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H10",
           "type": "wall"
         },
         {"type": "empty"},
@@ -570,11 +542,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 0,
-            "y": 10,
-            "type": "position"
-          },
+          "position": "A11",
           "type": "tank"
         },
         {"type": "empty"},
@@ -588,31 +556,28 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 2,
-            "y": 10,
-            "type": "position"
-          },
+          "position": "C11",
           "type": "tank"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D11",
           "type": "wall"
         },
         {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E11",
+          "type": "wall"
+        },
+        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "G11",
           "type": "wall"
         },
         {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
-          "type": "wall"
-        },
-        {
-          "durability": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H11",
           "type": "wall"
         },
         {
@@ -625,11 +590,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 8,
-            "y": 10,
-            "type": "position"
-          },
+          "position": "I11",
           "type": "tank"
         },
         {"type": "empty"},
@@ -643,11 +604,7 @@
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": {
-            "x": 10,
-            "y": 10,
-            "type": "position"
-          },
+          "position": "K11",
           "type": "tank"
         }
       ]

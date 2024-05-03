@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.state.board.unit.tank;
+package pro.trevor.tankgame.state.board.attribute;
 
 import org.json.JSONObject;
 

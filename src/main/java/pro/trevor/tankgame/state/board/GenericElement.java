@@ -1,18 +1,18 @@
-package pro.trevor.tankgame.state.board.unit;
+package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.tank.IAttribute;
-import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
+import pro.trevor.tankgame.state.board.attribute.IAttribute;
+import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class GenericUnit<E extends Enum<E> & IAttribute> implements IUnit {
+public class GenericElement<E extends Enum<E> & IAttribute> implements IElement, IPositioned {
 
     protected Position position;
     protected final Map<E, Object> attributes;
 
-    public GenericUnit(Position position, Map<E, Object> defaults) {
+    public GenericElement(Position position, Map<E, Object> defaults) {
         this.position = position;
         this.attributes = new HashMap<>();
         for (E attribute : defaults.keySet()) {
@@ -20,9 +20,9 @@ public class GenericUnit<E extends Enum<E> & IAttribute> implements IUnit {
         }
     }
 
-    public GenericUnit(JSONObject json, IAttributeDecoder<E> attributeDecoder) {
-        this.position = Position.fromJson(json.getJSONObject("position"));
-        this.attributes = attributeDecoder.fromJsonAttributes(json.getJSONObject("attributes"));
+    public GenericElement(JSONObject json, IAttributeDecoder<E> attributeDecoder) {
+        this.position = new Position(json.optString("position"));
+        this.attributes = attributeDecoder.fromJsonAttributes(json.optJSONObject("attributes", new JSONObject()));
     }
 
     protected <T> T get(E attribute, Class<T> type) {
@@ -72,7 +72,7 @@ public class GenericUnit<E extends Enum<E> & IAttribute> implements IUnit {
         JSONObject output = new JSONObject();
 
         output.put("type", "unit");
-        output.put("position", position.toJson());
+        output.put("position", position.toBoardString());
 
         JSONObject attributesJson = new JSONObject();
 
@@ -93,6 +93,14 @@ public class GenericUnit<E extends Enum<E> & IAttribute> implements IUnit {
 
     @Override
     public String toString() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        sb.append(position.toString());
+        for (E key : attributes.keySet()) {
+            sb.append(", ");
+            sb.append(attributes.get(key).toString());
+        }
+        sb.append(']');
+        return sb.toString();
     }
 }

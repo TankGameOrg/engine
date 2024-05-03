@@ -1,25 +1,18 @@
 package pro.trevor.tankgame.state.board.unit;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+import pro.trevor.tankgame.state.board.GenericElement;
+import pro.trevor.tankgame.state.board.attribute.EmptyAttribute;
 import pro.trevor.tankgame.state.board.Position;
 
-public class EmptyUnit implements IWalkable {
+import java.util.HashMap;
 
-    protected Position position;
+public class EmptyUnit extends GenericElement<EmptyAttribute> implements IWalkable {
+
+    private static final HashMap<EmptyAttribute, Object> EMPTY_MAP = new HashMap<>();
 
     public EmptyUnit(Position position) {
-        this.position = position;
-    }
-
-    @Override
-    public Position getPosition() {
-        return position;
-    }
-
-    @Override
-    public String toString() {
-        return position.toString();
+        super(position, EMPTY_MAP);
     }
 
     @Override

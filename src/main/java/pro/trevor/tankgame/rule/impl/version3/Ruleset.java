@@ -20,7 +20,7 @@ import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.Wall;
+import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.range.BooleanRange;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
@@ -44,7 +44,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
         invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
-        invariants.put(Wall.class, new MinimumEnforcer<>(Wall::getDurability, Wall::setDurability, 0));
+        invariants.put(BasicWall.class, new MinimumEnforcer<>(BasicWall::getDurability, BasicWall::setDurability, 0));
     }
 
     @Override
@@ -127,7 +127,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         }));
 
         // Handle wall destruction
-        conditionalRules.put(Wall.class, new ConditionalRule<>((s, t) -> t.getDurability() == 0, (s, t) -> {
+        conditionalRules.put(BasicWall.class, new ConditionalRule<>((s, t) -> t.getDurability() == 0, (s, t) -> {
             s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
             if (isOrthAdjToMine(s, t.getPosition())) {
                 s.getBoard().putFloor(new GoldMine(t.getPosition()));
@@ -145,7 +145,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                 int gold = toType(n[0], Integer.class);
                 int n5 = gold / 5;
                 int rem = gold - n5 * 5;
-                int n3 = gold / 3;
+                int n3 = rem / 3;
                 assert rem == n3 * 3;
 
                 t.setActions(t.getActions() + n5 * 2 + n3);
@@ -213,7 +213,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                             }
                         }
                     }
-                    case Wall wall -> wall.setDurability(wall.getDurability() - 1);
+                    case BasicWall wall -> wall.setDurability(wall.getDurability() - 1);
                     case EmptyUnit emptyUnit -> { /* MISS */ }
                     default -> throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
                 }

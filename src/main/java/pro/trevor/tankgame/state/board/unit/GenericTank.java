@@ -1,17 +1,18 @@
-package pro.trevor.tankgame.state.board.unit.tank;
+package pro.trevor.tankgame.state.board.unit;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.rule.type.ITickElement;
+import pro.trevor.tankgame.state.board.attribute.IAttribute;
+import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 import pro.trevor.tankgame.state.board.IMovable;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericUnit;
 
 import java.util.*;
 
-public class GenericTank<E extends Enum<E> & IAttribute> extends GenericUnit<E> implements IMovable, ITickElement, IPlayerElement {
+public class GenericTank<E extends Enum<E> & IAttribute> extends pro.trevor.tankgame.state.board.GenericElement<E> implements IMovable, ITickElement, IPlayerElement, IUnit {
 
-    protected final String player;
+    private final String player;
 
     public GenericTank(String player, Position position, Map<E, Object> defaults) {
         super(position, defaults);
@@ -41,7 +42,6 @@ public class GenericTank<E extends Enum<E> & IAttribute> extends GenericUnit<E> 
     @Override
     public JSONObject toJson() {
         JSONObject output = super.toJson();
-
         output.put("type", "tank");
         output.put("name", player);
         return output;
@@ -49,6 +49,6 @@ public class GenericTank<E extends Enum<E> & IAttribute> extends GenericUnit<E> 
 
     @Override
     public String toString() {
-        return getPlayer();
+        return String.format("%s: %s", player, super.toString());
     }
 }

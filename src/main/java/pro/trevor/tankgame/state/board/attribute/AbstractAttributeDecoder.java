@@ -1,9 +1,6 @@
-package pro.trevor.tankgame.rule.impl.util;
+package pro.trevor.tankgame.state.board.attribute;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
-import pro.trevor.tankgame.state.board.unit.tank.IAttribute;
-import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
 
 import java.util.HashMap;
 import java.util.Map;

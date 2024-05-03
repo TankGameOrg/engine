@@ -12,8 +12,8 @@ import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.StandardFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
-import pro.trevor.tankgame.state.board.unit.Wall;
-import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
+import pro.trevor.tankgame.state.board.unit.BasicWall;
+import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
 
@@ -26,7 +26,6 @@ import pro.trevor.tankgame.util.range.TypeRange;
 public class Api implements IApi {
     private final RulesetDescription ruleset;
     private State state;
-    private static final IAttributeDecoder<TankAttribute> attributeDecoder = new AttributeDecoder();
 
     private static final String COUNCIL = "Council";
 
@@ -54,10 +53,10 @@ public class Api implements IApi {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
-                return new Tank(json, attributeDecoder);
+                return new Tank(json);
             }
             case "wall" -> {
-                return new Wall(position, json.getInt("durability"));
+                return new BasicWall(json);
             }
             case "empty" -> {
                 return new EmptyUnit(position);
@@ -131,6 +130,9 @@ public class Api implements IApi {
                     Position position = positionFromString(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
+                    if (tank.getPlayer().equals("Ryan")) {
+                        System.out.println(position.toBoardString());
+                    }
                     getRule(Tank.class, Ruleset.Rules.SHOOT).apply(state, tank, position, hit);
 
                 }

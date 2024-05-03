@@ -1,12 +1,12 @@
 package pro.trevor.tankgame.rule.impl.version3;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.state.board.unit.tank.GenericTank;
-import pro.trevor.tankgame.state.board.unit.tank.IAttributeDecoder;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.attribute.IAttributeDecoder;
 
 public class Tank extends GenericTank<TankAttribute> {
-    public Tank(JSONObject json, IAttributeDecoder<TankAttribute> attributeDecoder) {
-        super(json, attributeDecoder);
+    public Tank(JSONObject json) {
+        super(json, TankAttribute.DECODER);
     }
 
     public int getDurability() {
