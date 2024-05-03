@@ -40,6 +40,18 @@ public class PlayerRules
         new DiscreteIntegerRange("gold",new HashSet<>(List.of(3, 5, 8, 10)))
     );
 
+    public static final PlayerActionRule<Tank> BuyActionWithGold(int action_cost)
+    {
+        return new PlayerActionRule<Tank>(
+            ActionKeys.BUY_ACTION,
+            (s, t, n) -> true, 
+            (s, t, n) -> {
+                int i = 0;
+            }, 
+            new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 6, 9, 12, 15)))
+        );
+    }
+
     public static final PlayerActionRule<Tank> SPEND_ACTION_TO_MOVE = new PlayerActionRule<>(
         PlayerRules.ActionKeys.MOVE,
         (s, t, n) -> !t.isDead() && t.getActions() >= 1 && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
