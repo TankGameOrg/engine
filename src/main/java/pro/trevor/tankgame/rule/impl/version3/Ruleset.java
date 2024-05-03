@@ -3,7 +3,7 @@ package pro.trevor.tankgame.rule.impl.version3;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.Rules;
+import pro.trevor.tankgame.rule.impl.shared.Rules;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.range.TankRange;
