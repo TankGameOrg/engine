@@ -121,18 +121,15 @@ public class Api implements IApi {
             switch (action) {
                 case Ruleset.Rules.MOVE -> {
                     String positionString = json.getString(JsonKeys.TARGET);
-                    Position position = positionFromString(positionString);
+                    Position position = new Position(positionString);
                     Tank tank = getTank(subject);
                     getRule(Tank.class, Ruleset.Rules.MOVE).apply(state, tank, position);
                 }
                 case Ruleset.Rules.SHOOT -> {
                     String location = json.getString(JsonKeys.TARGET);
-                    Position position = positionFromString(location);
+                    Position position = new Position(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
-                    if (tank.getPlayer().equals("Ryan")) {
-                        System.out.println(position.toBoardString());
-                    }
                     getRule(Tank.class, Ruleset.Rules.SHOOT).apply(state, tank, position, hit);
 
                 }
@@ -309,12 +306,6 @@ public class Api implements IApi {
     private Tank getTank(String player) {
         return state.getBoard().gatherUnits(Tank.class).stream()
                 .filter(t -> t.getPlayer().equals(player)).toList().getFirst();
-    }
-
-    private static Position positionFromString(String string) {
-        int x = string.substring(0, 1).charAt(0) - 'A';
-        int y = Integer.parseInt(string.substring(1)) - 1;
-        return new Position(x, y);
     }
 
     private static void enforceInvariants(State state, RulesetDescription ruleset) {
