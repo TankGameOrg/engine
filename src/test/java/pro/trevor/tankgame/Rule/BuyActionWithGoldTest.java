@@ -54,7 +54,13 @@ public class BuyActionWithGoldTest
     @Test
     public void ZeroGoldCostRuleIllegal()
     {
-        assertThrows(Exception.class, () -> PlayerRules.BuyActionWithGold(0));
+        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(0));
+    }
+
+    @Test
+    public void NegativeCostRuleIllegal()
+    {
+        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(-5));
     }
 
     @Test
