@@ -1,19 +1,10 @@
 package pro.trevor.tankgame.rule.impl.shared;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import pro.trevor.tankgame.rule.definition.ConditionalRule;
-import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
-import pro.trevor.tankgame.rule.definition.TickActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
-import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IDurable;
 import pro.trevor.tankgame.state.board.unit.Tank;

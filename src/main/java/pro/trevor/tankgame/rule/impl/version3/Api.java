@@ -17,12 +17,8 @@ import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.Wall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
-import pro.trevor.tankgame.util.DuoClass;
-import pro.trevor.tankgame.util.IJsonObject;
-import pro.trevor.tankgame.util.Pair;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.json.*;
 import pro.trevor.tankgame.util.range.DiscreteTypeRange;
