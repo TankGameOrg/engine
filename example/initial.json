@@ -65,7 +65,7 @@
         {
           "name": "Stomp",
           "attributes": {
-            "GOLD": 5,
+            "GOLD": 8,
             "DURABILITY": 3,
             "ACTIONS": 0,
             "DEAD": false,
@@ -625,7 +625,11 @@
           "position": "E11",
           "type": "wall"
         },
-        {"type": "empty"},
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "F11",
+          "type": "wall"
+        },
         {
           "attributes": {"DURABILITY": 3},
           "position": "G11",
