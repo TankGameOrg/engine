@@ -15,12 +15,16 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
+import pro.trevor.tankgame.state.board.unit.IDurable;
 import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.Wall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.DonateTankRange;
 import pro.trevor.tankgame.state.range.MovePositionRange;
+import pro.trevor.tankgame.state.range.ShootPositionRange;
 import pro.trevor.tankgame.state.range.TankRange;
+import pro.trevor.tankgame.util.LineOfSight;
+import pro.trevor.tankgame.util.range.BooleanRange;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.util.range.IntegerRange;
 
