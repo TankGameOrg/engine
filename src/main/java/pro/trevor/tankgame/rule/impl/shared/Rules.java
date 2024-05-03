@@ -182,7 +182,7 @@ public class Rules
             );
         }
 
-        public static final PlayerActionRule<Council> GetRule_CofferCost_GrantLife(int cost)
+        public static final PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost)
         {
             return new PlayerActionRule<Council>(
                 Keys.GRANT_LIFE,
@@ -209,7 +209,7 @@ public class Rules
             public static final String BOUNTY = "bounty";
         }
 
-        public static final PlayerActionRule<Tank> SPEND_ACTION_TO_SHOOT_LOSv3 = new PlayerActionRule<Tank>(
+        public static final PlayerActionRule<Tank> SPEND_ACTION_TO_SHOOT_LOSV3 = new PlayerActionRule<Tank>(
             Rules.PlayerAction.Keys.SHOOT,
             (s, t, n) -> (!t.isDead() && t.getActions() >= 1) && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange()) && (LineOfSight.hasLineOfSightV3(s, t.getPosition(), toType(n[0], Position.class))),
             (s, t, n) -> {
