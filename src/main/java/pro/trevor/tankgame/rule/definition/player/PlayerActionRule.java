@@ -12,10 +12,10 @@ import java.util.Arrays;
 
 public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T> {
 
-    private final String name;
-    private final IVarTriPredicate<State, T, Object> predicate;
-    private final IVarTriConsumer<State, T, Object> consumer;
-    private final TypeRange<?>[] parameters;
+    protected final String name;
+    protected final IVarTriPredicate<State, T, Object> predicate;
+    protected final IVarTriConsumer<State, T, Object> consumer;
+    protected final TypeRange<?>[] parameters;
 
     public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
         this.name = name;
@@ -60,7 +60,7 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
         return parameters;
     }
 
-    private boolean validateOptionalTypes(Object[] meta) {
+    protected boolean validateOptionalTypes(Object[] meta) {
         if (meta.length != parameters.length) {
             return false;
         }
