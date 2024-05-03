@@ -79,6 +79,7 @@ public class PlayerRules
                 assert t.getGold() >= donation + taxAmount;
                 t.setGold(t.getGold() - donation - taxAmount);
                 other.setGold(other.getGold() + donation);
+                s.getCouncil().setCoffer(s.getCouncil().getCoffer() + 1);
             }, 
             new DonateTankRange("target"),
             new IntegerRange("donation")
