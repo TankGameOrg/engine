@@ -4,15 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import pro.trevor.tankgame.TestUtil.TestUtilities;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
 import pro.trevor.tankgame.state.State;
 
 public class BuyActionWithGoldTest 
@@ -24,24 +23,10 @@ public class BuyActionWithGoldTest
         assertEquals(PlayerRules.ActionKeys.BUY_ACTION, rule.name(), "Asserts that the buy action with gold rule is the right type");
     }
 
-    private Tank BuildTestTank(int actions, int gold, boolean dead)
-    {
-        JSONObject json = new JSONObject();
-        JSONObject attributes = new JSONObject();
-        attributes.put(TankAttribute.ACTIONS.name(), actions);
-        attributes.put(TankAttribute.GOLD.name(), gold);
-        attributes.put(TankAttribute.DEAD.name(), dead);
-        json.put("name", "test");
-        json.put("attributes", attributes);
-        json.put("type", "tank");
-        json.put("position", "A1");
-        return new Tank(json);
-    }
-
     @Test
     public void DeadTankCannotBuyAction()
     {
-        Tank tank = BuildTestTank(0, 3, true);
+        Tank tank = TestUtilities.BuildTestTank(0, 3, true);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
@@ -54,7 +39,7 @@ public class BuyActionWithGoldTest
     @Test
     public void NoGoldCannotBuyAction()
     {
-        Tank tank = BuildTestTank(0, 0, false);
+        Tank tank = TestUtilities.BuildTestTank(0, 0, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
@@ -79,7 +64,7 @@ public class BuyActionWithGoldTest
     @Test
     public void TooFewGoldCannotBuyAction()
     {
-        Tank tank = BuildTestTank(0, 5, false);
+        Tank tank = TestUtilities.BuildTestTank(0, 5, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
@@ -92,7 +77,7 @@ public class BuyActionWithGoldTest
     @Test
     public void NonCostMultipleFails()
     {
-        Tank tank = BuildTestTank(0, 5, false);
+        Tank tank = TestUtilities.BuildTestTank(0, 5, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
@@ -105,7 +90,7 @@ public class BuyActionWithGoldTest
     @Test
     public void BuyActionGainAction()
     {
-        Tank tank = BuildTestTank(0, 3, false);
+        Tank tank = TestUtilities.BuildTestTank(0, 3, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
@@ -126,7 +111,7 @@ public class BuyActionWithGoldTest
     })
     public void BuyActionsGainActions(int starting_gold, int starting_actions, int spent_gold, int expected_actions, int expected_gold)
     {
-        Tank tank = BuildTestTank(starting_actions, starting_gold, false);
+        Tank tank = TestUtilities.BuildTestTank(starting_actions, starting_gold, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
@@ -150,7 +135,7 @@ public class BuyActionWithGoldTest
     })
     public void CostMultiplesWork(int action_cost, int gold_spent, int expected_actions)
     {
-        Tank tank = BuildTestTank(0, gold_spent, false);
+        Tank tank = TestUtilities.BuildTestTank(0, gold_spent, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(action_cost);
