@@ -3,6 +3,8 @@ package pro.trevor.tankgame.rule.impl.shared;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
@@ -64,11 +66,7 @@ public class PlayerRules
                 t.setActions(t.getActions() + bought_actions);
                 t.setGold(t.getGold() - actual_gold_spent);
             }, 
-            new DiscreteIntegerRange("gold", new HashSet<>(List.of(1 * actionCost,
-                                                                   2 * actionCost,
-                                                                   3 * actionCost,
-                                                                   4 * actionCost,
-                                                                   5 * actionCost)))
+            new DiscreteIntegerRange("gold", new HashSet<>(IntStream.rangeClosed(1, 5).map(n -> n * actionCost).boxed().collect(Collectors.toSet())))
         );
     }
 
