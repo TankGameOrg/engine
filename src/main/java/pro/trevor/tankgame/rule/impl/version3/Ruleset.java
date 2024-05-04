@@ -42,7 +42,6 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerMetaEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getMetaEnforcerRules();
-
         invariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
     }
 
