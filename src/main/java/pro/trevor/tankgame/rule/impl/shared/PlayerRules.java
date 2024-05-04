@@ -40,6 +40,34 @@ public class PlayerRules
         new DiscreteIntegerRange("gold",new HashSet<>(List.of(3, 5, 8, 10)))
     );
 
+    public static final PlayerActionRule<Tank> BuyActionWithGold(int action_cost)
+    {
+        if (action_cost <= 0)
+            throw new Error("Illegal Action Cost of " + action_cost + " gold. Must be positive and non-zero.");
+
+        return new PlayerActionRule<Tank>(
+            ActionKeys.BUY_ACTION,
+            (s, t, n) -> {
+                int gold_spent = toType(n[0], Integer.class);
+                return !t.isDead() && (t.getGold() >= gold_spent) && (gold_spent >= action_cost) && (gold_spent % action_cost == 0);
+            }, 
+            (s, t, n) -> {
+                int attempted_gold_spent = toType(n[0], Integer.class);
+                int bought_actions = attempted_gold_spent / action_cost;
+                int actual_gold_spent = bought_actions * action_cost;
+                assert attempted_gold_spent == actual_gold_spent;
+                
+                t.setActions(t.getActions() + bought_actions);
+                t.setGold(t.getGold() - actual_gold_spent);
+            }, 
+            new DiscreteIntegerRange("gold", new HashSet<>(List.of(1 * action_cost,
+                                                                        2 * action_cost,
+                                                                        3 * action_cost,
+                                                                        4 * action_cost,
+                                                                        5 * action_cost)))
+        );
+    }
+
     public static final PlayerActionRule<Tank> SPEND_ACTION_TO_MOVE = new PlayerActionRule<>(
         PlayerRules.ActionKeys.MOVE,
         (s, t, n) -> !t.isDead() && t.getActions() >= 1 && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
