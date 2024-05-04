@@ -69,7 +69,7 @@ public class BuyActionWithGoldTest
     }
 
     @Test
-    public void NonCostMultipleFails()
+    public void EnsureGoldSpentDivisibleByCost()
     {
         Tank tank = TestUtilities.BuildTestTank(0, 5, false);
 
