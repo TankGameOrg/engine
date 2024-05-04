@@ -81,6 +81,8 @@ public class Api implements IApi {
     @Override
     public void ingestState(JSONObject json) {
         int tick = json.getInt("day");
+        boolean running = json.getBoolean("running");
+        String winner = json.getString("winner");
         JSONObject council = json.getJSONObject("council");
         JSONArray councillors = council.getJSONArray("council");
         JSONArray senators = council.getJSONArray("senate");
@@ -91,6 +93,8 @@ public class Api implements IApi {
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
         state = new State(unitBoard.length(), unitBoard.getJSONArray(0).length());
         state.setTick(tick);
+        state.setRunning(running);
+        state.setWinner(winner);
         state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
         state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
         state.getCouncil().setCoffer(council.getInt("coffer"));
@@ -112,6 +116,10 @@ public class Api implements IApi {
 
     @Override
     public void ingestAction(JSONObject json) {
+        if (!state.isRunning()) {
+            throw new Error("The game is over; no actions can be submitted");
+        }
+
         if (json.keySet().contains(JsonKeys.DAY)) {
             applyTick(state, ruleset);
         } else {
