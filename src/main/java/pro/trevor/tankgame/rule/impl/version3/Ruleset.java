@@ -14,7 +14,6 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
@@ -44,7 +43,6 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerMetaEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getMetaEnforcerRules();
-
         invariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
     }
 
@@ -60,7 +58,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
-        metaTickRules.put(None.class, new MetaTickActionRule<>((s, n) -> {
+        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, n) -> {
             councilCanBounty = true;
             s.setTick(s.getTick() + 1);
         }));
@@ -71,6 +69,12 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
         conditionalRules.put(Tank.class, ConditionalRules.KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY);
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
+    }
+
+    @Override
+    public void registerMetaConditionalRules(RulesetDescription ruleset) {
+        ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
+        metaConditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
 
     @Override

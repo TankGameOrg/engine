@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
@@ -15,6 +17,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
+import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 
 public class TickRules 
 {
@@ -52,6 +55,13 @@ public class TickRules
                 int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
                 s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
             }
+        }
+    );
+
+    public static final MetaTickActionRule<ArmisticeCouncil> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
+        (s, c) -> {
+            int totalCouncillors = c.getCouncillors().size() + c.getSenators().size();
+            c.setArmisticeVoteCount(c.getArmisticeVoteCap() - totalCouncillors);
         }
     );
 }

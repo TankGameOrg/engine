@@ -107,15 +107,20 @@ public class PlayerRules
         );
     }
 
-    public static final PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost)
+    public static PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost)
     {
-        return new PlayerActionRule<Council>(
+        return new PlayerActionRule<>(
             PlayerRules.ActionKeys.GRANT_LIFE,
             (s, c, n) -> c.getCoffer() >= cost,
             (s, c, n) -> {
-                Tank t = toType(n[0], Tank.class);
-                t.setDurability(t.getDurability() + 1);
                 c.setCoffer(c.getCoffer() - cost);
+                Tank t = toType(n[0], Tank.class);
+                if (t.isDead()) {
+                    t.setDead(false);
+                    t.setDurability(1);
+                } else {
+                    t.setDurability(t.getDurability() + 1);
+                }
             },
             new TankRange<Council>("target")
         );
@@ -139,7 +144,7 @@ public class PlayerRules
                     handleHit.accept(s, t, unit);
                 }
             },
-            new ShootPositionRange("target"),
+            new ShootPositionRange("target", lineOfSight),
             new BooleanRange("hit")
         );
     }
