@@ -102,6 +102,9 @@ public class State implements IJsonObject {
         StringBuilder sb = new StringBuilder();
         sb.append("tick: ").append(tick).append('\n');
         sb.append("running: ").append(running).append('\n');
+        if (!winner.isEmpty()) {
+            sb.append("winner: ").append(winner).append('\n');
+        }
         sb.append(council.toString());
         sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
         sb.append('\n').append(board.toUnitString());
