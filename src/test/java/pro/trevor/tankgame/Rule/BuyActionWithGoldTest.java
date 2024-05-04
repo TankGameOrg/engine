@@ -109,19 +109,19 @@ public class BuyActionWithGoldTest
         "6,  1,  6,  3,  0",
         "16,  2,  9,  5,  7",
     })
-    public void BuyActionsGainActions(int starting_gold, int starting_actions, int spent_gold, int expected_actions, int expected_gold)
+    public void BuyActionsGainActions(int startingGold, int startingActions, int spentGold, int expectedActions, int expectedGold)
     {
-        Tank tank = TestUtilities.BuildTestTank(starting_actions, starting_gold, false);
+        Tank tank = TestUtilities.BuildTestTank(startingActions, startingGold, false);
 
         // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         // apply rule
-        Integer[] meta = {spent_gold};
+        Integer[] meta = {spentGold};
         rule.apply(new State(1, 1), tank, meta);
 
-        assertEquals(expected_gold, tank.getGold());
-        assertEquals(expected_actions, tank.getActions());
+        assertEquals(expectedGold, tank.getGold());
+        assertEquals(expectedActions, tank.getActions());
     }
 
     @ParameterizedTest()
@@ -133,19 +133,19 @@ public class BuyActionWithGoldTest
         "5,  10,  2",
         "5,  25,  5"
     })
-    public void CostMultiplesWork(int action_cost, int gold_spent, int expected_actions)
+    public void CostMultiplesWork(int actionCost, int goldSpent, int expectedActions)
     {
-        Tank tank = TestUtilities.BuildTestTank(0, gold_spent, false);
+        Tank tank = TestUtilities.BuildTestTank(0, goldSpent, false);
 
         // Get 3 gold-cost rule
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(action_cost);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost);
 
         // apply rule
-        Integer[] meta = {gold_spent};
+        Integer[] meta = {goldSpent};
         rule.apply(new State(1, 1), tank, meta);
 
         // have 0 gold and expected actions
         assertEquals(0, tank.getGold());
-        assertEquals(expected_actions, tank.getActions());
+        assertEquals(expectedActions, tank.getActions());
     }
 }
