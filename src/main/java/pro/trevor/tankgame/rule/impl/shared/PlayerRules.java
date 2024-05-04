@@ -103,21 +103,26 @@ public class PlayerRules
         );
     }
 
-    public static final PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost)
+    public static PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost)
     {
-        return new PlayerActionRule<Council>(
+        return new PlayerActionRule<>(
             PlayerRules.ActionKeys.GRANT_LIFE,
             (s, c, n) -> c.getCoffer() >= cost,
             (s, c, n) -> {
-                Tank t = toType(n[0], Tank.class);
-                t.setDurability(t.getDurability() + 1);
                 c.setCoffer(c.getCoffer() - cost);
+                Tank t = toType(n[0], Tank.class);
+                if (t.isDead()) {
+                    t.setDead(false);
+                    t.setDurability(1);
+                } else {
+                    t.setDurability(t.getDurability() + 1);
+                }
             },
             new TankRange<Council>("target")
         );
     }
 
-    public static final PlayerActionRule<Tank> SPEND_ACTION_TO_SHOOT_LOSV3 = new PlayerActionRule<Tank>(
+    public static final PlayerActionRule<Tank> SPEND_ACTION_TO_SHOOT_LOSV3 = new PlayerActionRule<>(
         PlayerRules.ActionKeys.SHOOT,
         (s, t, n) -> (!t.isDead() && t.getActions() >= 1) && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange()) && (LineOfSight.hasLineOfSightV3(s, t.getPosition(), toType(n[0], Position.class))),
         (s, t, n) -> {
@@ -135,7 +140,7 @@ public class PlayerRules
                     if (tank.isDead()) {
                         tank.setDurability(tank.getDurability() - 1);
                     } else {
-                        if (toType(n[1], Boolean.class)) {
+                        if (hit) {
                             tank.setDurability(tank.getDurability() - 1);
                             if (tank.getDurability() == 0) {
                                 t.setGold(t.getGold() + tank.getGold() + tank.getBounty());
