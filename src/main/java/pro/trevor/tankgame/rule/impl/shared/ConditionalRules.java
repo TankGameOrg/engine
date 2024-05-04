@@ -32,6 +32,7 @@ public class ConditionalRules
                 t.setDead(true);
                 t.setActions(0);
                 t.setGold(0);
+                t.setBounty(0);
                 t.setDurability(3);
                 s.getCouncil().getCouncillors().add(t.getPlayer());
             }

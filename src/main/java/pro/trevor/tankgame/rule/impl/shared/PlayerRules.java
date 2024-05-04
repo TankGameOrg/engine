@@ -10,12 +10,16 @@ import pro.trevor.tankgame.rule.impl.version3.range.DonateTankRange;
 import pro.trevor.tankgame.rule.impl.version3.range.MovePositionRange;
 import pro.trevor.tankgame.rule.impl.version3.range.ShootPositionRange;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.LineOfSight;
+import pro.trevor.tankgame.util.function.IQuadConsumer;
+import pro.trevor.tankgame.util.function.ITriConsumer;
+import pro.trevor.tankgame.util.function.ITriPredicate;
 import pro.trevor.tankgame.util.range.BooleanRange;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.util.range.IntegerRange;
@@ -117,42 +121,44 @@ public class PlayerRules
         );
     }
 
-    public static final PlayerActionRule<Tank> SPEND_ACTION_TO_SHOOT_LOSV3 = new PlayerActionRule<Tank>(
-        PlayerRules.ActionKeys.SHOOT,
-        (s, t, n) -> (!t.isDead() && t.getActions() >= 1) && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange()) && (LineOfSight.hasLineOfSightV3(s, t.getPosition(), toType(n[0], Position.class))),
-        (s, t, n) -> {
-            Position target = toType(n[0], Position.class);
-            boolean hit = toType(n[1], Boolean.class);
-            t.setActions(t.getActions() - 1);
+    public static PlayerActionRule<Tank> SpendActionToShootGeneric(ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<State, Tank, IUnit> handleHit) {
+        return new PlayerActionRule<>(PlayerRules.ActionKeys.SHOOT,
+            (s, t, n) -> !t.isDead() && (t.getActions() >= 1) && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange()) && lineOfSight.test(s, t.getPosition(), toType(n[0], Position.class)),
+            (s, t, n) -> {
+                Position target = toType(n[0], Position.class);
+                boolean hit = toType(n[1], Boolean.class);
+                t.setActions(t.getActions() - 1);
 
-            Optional<IUnit> optionalUnit = s.getBoard().getUnit(target);
-            if (optionalUnit.isEmpty()) {
-                throw new Error(String.format("Target position %s is not on the game board", target.toString()));
-            }
-            IUnit unit = optionalUnit.get();
-            switch (unit) {
+                Optional<IUnit> optionalUnit = s.getBoard().getUnit(target);
+                if (optionalUnit.isEmpty()) {
+                    throw new Error(String.format("Target position %s is not on the game board", target.toString()));
+                }
+                IUnit unit = optionalUnit.get();
+
+                if (hit) {
+                    handleHit.accept(s, t, unit);
+                }
+            },
+            new ShootPositionRange("target"),
+            new BooleanRange("hit")
+        );
+    }
+
+    public static PlayerActionRule<Tank> SpendActionToShootWithDeathHandle(ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<State, Tank, Tank> handleDeath) {
+        return SpendActionToShootGeneric(lineOfSight, (s, t, u) -> {
+            switch (u) {
                 case Tank tank -> {
-                    if (tank.isDead()) {
-                        tank.setDurability(tank.getDurability() - 1);
-                    } else {
-                        if (toType(n[1], Boolean.class)) {
-                            tank.setDurability(tank.getDurability() - 1);
-                            if (tank.getDurability() == 0) {
-                                t.setGold(t.getGold() + tank.getGold() + tank.getBounty());
-                                tank.setBounty(0);
-                                tank.setGold(0);
-                            }
-                        }
+                    tank.setDurability(tank.getDurability() - 1);
+                    if (!tank.isDead() && tank.getDurability() == 0) {
+                        handleDeath.accept(s, t, tank);
                     }
                 }
                 case BasicWall wall -> wall.setDurability(wall.getDurability() - 1);
                 case EmptyUnit emptyUnit -> { /* MISS */ }
-                default -> throw new Error("Unhandled tank shot onto " + unit.getClass().getName());
+                default -> throw new Error("Unhandled tank shot onto " + u.getClass().getName());
             }
-        }, 
-        new ShootPositionRange("target"),
-        new BooleanRange("hit")
-    );
+        });
+    }
 
     public static class ActionKeys {
     
