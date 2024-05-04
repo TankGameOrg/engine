@@ -28,10 +28,8 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(0, 3, true);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
-        // apply rule
         Integer[] meta = {3};
         assertFalse(rule.canApply(new State(1, 1), tank, meta));
     }
@@ -41,10 +39,8 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(0, 0, false);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
-        // apply rule
         Integer[] meta = {3};
         assertFalse(rule.canApply(new State(1, 1), tank, meta));
     }
@@ -66,10 +62,8 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(0, 5, false);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
-        // apply rule
         Integer[] meta = {6};
         assertFalse(rule.canApply(new State(1, 1), tank, meta));
     }
@@ -79,10 +73,8 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(0, 5, false);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
-        // apply rule, but tries to spend 4, a non-multiple of the cost
         Integer[] meta = {4};
         assertFalse(rule.canApply(new State(1, 1), tank, meta));
     }
@@ -92,14 +84,11 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(0, 3, false);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
-        // apply rule
         Integer[] meta = {3};
         rule.apply(new State(1, 1), tank, meta);
 
-        // have 0 gold and 1 action
         assertEquals(0, tank.getGold());
         assertEquals(1, tank.getActions());
     }
@@ -113,10 +102,8 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(startingActions, startingGold, false);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
-        // apply rule
         Integer[] meta = {spentGold};
         rule.apply(new State(1, 1), tank, meta);
 
@@ -137,14 +124,11 @@ public class BuyActionWithGoldTest
     {
         Tank tank = TestUtilities.BuildTestTank(0, goldSpent, false);
 
-        // Get 3 gold-cost rule
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost);
 
-        // apply rule
         Integer[] meta = {goldSpent};
         rule.apply(new State(1, 1), tank, meta);
 
-        // have 0 gold and expected actions
         assertEquals(0, tank.getGold());
         assertEquals(expectedActions, tank.getActions());
     }
