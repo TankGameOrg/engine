@@ -59,7 +59,7 @@ public class TickRules
     public static final MetaTickActionRule<ArmisticeCouncil> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
         (s, c) -> {
             int totalCouncillors = c.getCouncillors().size() + c.getSenators().size();
-            c.setArmisticeVoteCap(c.getArmisticeVoteCap() - totalCouncillors);
+            c.setArmisticeVoteCount(c.getArmisticeVoteCap() - totalCouncillors);
         }
     );
 }
