@@ -9,6 +9,9 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
+import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
+
+import java.util.stream.Collectors;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,6 +51,14 @@ public class ConditionalRules
         (s, b) -> {
             s.setRunning(false);
             s.setWinner(b.gatherUnits(Tank.class).stream().filter((t) -> !t.isDead()).findFirst().get().getPlayer());
+        }
+    );
+
+    public static final ConditionalRule<ArmisticeCouncil> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
+        (s, c) -> c.getArmisticeVoteCount() >= c.getArmisticeVoteCap(),
+        (s, c) -> {
+            s.setRunning(false);
+            s.setWinner("Council");
         }
     );
 }

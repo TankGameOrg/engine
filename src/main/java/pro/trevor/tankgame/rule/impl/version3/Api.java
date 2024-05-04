@@ -7,6 +7,7 @@ import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.IFloor;
@@ -91,7 +92,9 @@ public class Api implements IApi {
         JSONArray floorBoard = board.getJSONArray("floor_board");
         assert unitBoard.length() == floorBoard.length();
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
-        state = new State(unitBoard.length(), unitBoard.getJSONArray(0).length());
+        int boardWidth = unitBoard.length();
+        int boardHeight = unitBoard.getJSONArray(0).length();
+        state = new State(new Board(boardWidth, boardHeight), new Council());
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
