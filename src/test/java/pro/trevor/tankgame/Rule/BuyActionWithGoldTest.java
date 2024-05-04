@@ -31,7 +31,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         Integer[] meta = {3};
-        assertFalse(rule.canApply(new State(1, 1), tank, meta));
+        assertFalse(rule.canApply(TestUtilities.DUMMY_STATE, tank, meta));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         Integer[] meta = {3};
-        assertFalse(rule.canApply(new State(1, 1), tank, meta));
+        assertFalse(rule.canApply(TestUtilities.DUMMY_STATE, tank, meta));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         Integer[] meta = {6};
-        assertFalse(rule.canApply(new State(1, 1), tank, meta));
+        assertFalse(rule.canApply(TestUtilities.DUMMY_STATE, tank, meta));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         Integer[] meta = {4};
-        assertFalse(rule.canApply(new State(1, 1), tank, meta));
+        assertFalse(rule.canApply(TestUtilities.DUMMY_STATE, tank, meta));
     }
 
     @Test
@@ -87,7 +87,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         Integer[] meta = {3};
-        rule.apply(new State(1, 1), tank, meta);
+        rule.apply(TestUtilities.DUMMY_STATE, tank, meta);
 
         assertEquals(0, tank.getGold());
         assertEquals(1, tank.getActions());
@@ -105,7 +105,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
 
         Integer[] meta = {spentGold};
-        rule.apply(new State(1, 1), tank, meta);
+        rule.apply(TestUtilities.DUMMY_STATE, tank, meta);
 
         assertEquals(expectedGold, tank.getGold());
         assertEquals(expectedActions, tank.getActions());
@@ -127,7 +127,7 @@ public class BuyActionWithGoldTest
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost);
 
         Integer[] meta = {goldSpent};
-        rule.apply(new State(1, 1), tank, meta);
+        rule.apply(TestUtilities.DUMMY_STATE, tank, meta);
 
         assertEquals(0, tank.getGold());
         assertEquals(expectedActions, tank.getActions());

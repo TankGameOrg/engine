@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
+import pro.trevor.tankgame.state.State;
 
 public class TestUtilities 
 {
@@ -20,4 +21,6 @@ public class TestUtilities
         json.put("position", "A1");
         return new Tank(json);
     }
+
+    public static final State DUMMY_STATE = new State(1, 1);
 }
