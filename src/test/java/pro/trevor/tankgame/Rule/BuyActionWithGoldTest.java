@@ -110,10 +110,10 @@ public class BuyActionWithGoldTest
     }
 
     @ParameterizedTest()
-	@CsvSource({
-           "6,  1,  6,  3,  0",
-           "16,  2,  9,  5,  7",
-	})
+    @CsvSource({
+        "6,  1,  6,  3,  0",
+        "16,  2,  9,  5,  7",
+    })
     public void BuyActionsGainActions(int starting_gold, int starting_actions, int spent_gold, int expected_actions, int expected_gold)
     {
         Tank tank = new Tank("test", new Position(0, 0), starting_actions, starting_gold, 3, 2, 0, false);
@@ -130,14 +130,14 @@ public class BuyActionWithGoldTest
     }
 
     @ParameterizedTest()
-	@CsvSource({
-			"3,   3,  1",
-			"3,   6,  2",
-			"3,   9,  3",
-            "5,   5,  1",
-            "5,  10,  2",
-			"5,  25,  5"
-	})
+    @CsvSource({
+        "3,   3,  1",
+        "3,   6,  2",
+        "3,   9,  3",
+        "5,   5,  1",
+        "5,  10,  2",
+        "5,  25,  5"
+    })
     public void CostMultiplesWork(int action_cost, int gold_spent, int expected_actions)
     {
         // Tank with 0 actions and 3 gold
