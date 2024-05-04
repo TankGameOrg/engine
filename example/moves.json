@@ -403,6 +403,12 @@
   {
     "type": "action",
     "subject": "Stomp",
+    "action": "buy_action",
+    "gold": 5
+  },
+  {
+    "type": "action",
+    "subject": "Stomp",
     "hit": true,
     "action": "shoot",
     "target": "G2"
@@ -1857,6 +1863,12 @@
   {
     "type": "action",
     "subject": "Isaac",
+    "action": "buy_action",
+    "gold": 5
+  },
+  {
+    "type": "action",
+    "subject": "Isaac",
     "hit": true,
     "action": "shoot",
     "target": "I8"
@@ -2237,21 +2249,14 @@
   {
     "type": "action",
     "subject": "Corey",
-    "action": "move",
-    "target": "H5"
-  },
-  {
-    "type": "action",
-    "subject": "Corey",
     "action": "buy_action",
     "gold": 8
   },
   {
     "type": "action",
     "subject": "Corey",
-    "hit": true,
-    "action": "shoot",
-    "target": "I4"
+    "action": "move",
+    "target": "H5"
   },
   {
     "type": "action",
@@ -2263,7 +2268,7 @@
   {
     "type": "action",
     "subject": "Corey",
-    "hit": false,
+    "hit": true,
     "action": "shoot",
     "target": "I4"
   },
@@ -2283,6 +2288,13 @@
   {
     "type": "action",
     "subject": "Corey",
+    "hit": false,
+    "action": "shoot",
+    "target": "I4"
+  },
+  {
+    "type": "action",
+    "subject": "Corey",
     "hit": true,
     "action": "shoot",
     "target": "I4"
@@ -2324,15 +2336,15 @@
   {
     "type": "action",
     "subject": "Corey",
-    "hit": true,
-    "action": "shoot",
-    "target": "I6"
+    "action": "buy_action",
+    "gold": 10
   },
   {
     "type": "action",
     "subject": "Corey",
-    "action": "buy_action",
-    "gold": 10
+    "hit": true,
+    "action": "shoot",
+    "target": "I6"
   },
   {
     "type": "action",
@@ -2351,7 +2363,7 @@
     "type": "action",
     "subject": "Corey",
     "action": "buy_action",
-    "gold": 5
+    "gold": 10
   },
   {
     "type": "action",

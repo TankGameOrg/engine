@@ -1,6 +1,7 @@
-package pro.trevor.tankgame.rule.impl;
+package pro.trevor.tankgame.rule.impl.util;
 
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
+import pro.trevor.tankgame.rule.impl.IRuleset;
 
 /**
  * This is a basic empty ruleset so that versions need not implement functions that will be empty.

@@ -2,7 +2,7 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.ApiRegistry;
+import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.version3.Api;
 
@@ -10,6 +10,7 @@ import java.io.File;
 import java.nio.file.Files;
 
 public class Main {
+
     public static void main(String[] args) {
         ApiRegistry.putApi("3", Api.class);
 
@@ -28,6 +29,7 @@ public class Main {
                 JSONArray moves = new JSONArray(movesString);
 
                 api.ingestState(initial);
+                System.out.println(api.getState().toJson().toString(2));
 
                 for (int i = 0; i < moves.length(); ++i) {
                     JSONObject action = moves.getJSONObject(i);
@@ -35,7 +37,6 @@ public class Main {
                 }
                 System.out.println(api.getState().toString());
             } catch (Throwable throwable) {
-                System.out.println(api.getPossibleActions("Stomp").toString(2));
                 throwable.printStackTrace();
             }
         } else if (args.length == 0) {

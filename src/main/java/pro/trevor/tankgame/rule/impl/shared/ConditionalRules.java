@@ -3,14 +3,14 @@ package pro.trevor.tankgame.rule.impl.shared;
 import static pro.trevor.tankgame.util.Util.isOrthAdjToMine;
 
 import pro.trevor.tankgame.rule.definition.ConditionalRule;
+import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
+import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.Tank;
-import pro.trevor.tankgame.state.board.unit.Wall;
 
 public class ConditionalRules 
 {
-    public static final ConditionalRule<Wall> DESTROY_WALL_ON_ZERO_DURABILITY = new ConditionalRule<Wall>(
+    public static final ConditionalRule<BasicWall> DESTROY_WALL_ON_ZERO_DURABILITY = new ConditionalRule<>(
         (s, w) -> w.getDurability() == 0, 
         (s, w) -> {
             s.getBoard().putUnit(new EmptyUnit(w.getPosition()));
@@ -20,7 +20,7 @@ public class ConditionalRules
         }
     );
 
-    public static final ConditionalRule<Tank> KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY = new ConditionalRule<Tank>(
+    public static final ConditionalRule<Tank> KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY = new ConditionalRule<>(
         (s, t) -> t.getDurability() == 0, 
         (s, t) -> {
             if (t.isDead()) {

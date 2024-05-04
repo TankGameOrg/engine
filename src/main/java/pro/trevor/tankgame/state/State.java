@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.state;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
@@ -73,8 +72,6 @@ public class State implements IJsonObject {
         output.put("board", board.toJson());
         output.put("council", council.toJson());
         output.put("day", tick);
-        JSONArray playersJson = new JSONArray();
-        players.forEach(playersJson::put);
         return output;
     }
 
@@ -83,7 +80,7 @@ public class State implements IJsonObject {
         StringBuilder sb = new StringBuilder();
         sb.append("tick: ").append(tick).append('\n');
         sb.append(council.toString());
-        sb.append("tanks: ").append(Util.toString(board.gatherUnits(Tank.class), 2));
+        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
         sb.append('\n').append(board.toUnitString());
         sb.append('\n').append(board.toFloorString());
         return sb.toString();

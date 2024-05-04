@@ -13,8 +13,7 @@ import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.StandardFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
-import pro.trevor.tankgame.state.board.unit.Tank;
-import pro.trevor.tankgame.state.board.unit.Wall;
+import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
 
@@ -54,12 +53,10 @@ public class Api implements IApi {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
-                return new Tank(json.getString("name"), position, json.getInt("actions"),
-                        json.getInt("gold"), json.getInt("health"), json.getInt("range"),
-                        json.getInt("bounty"), json.getBoolean("dead"));
+                return new Tank(json);
             }
             case "wall" -> {
-                return new Wall(position, json.getInt("health"));
+                return new BasicWall(json);
             }
             case "empty" -> {
                 return new EmptyUnit(position);
@@ -124,13 +121,13 @@ public class Api implements IApi {
             switch (action) {
                 case PlayerRules.ActionKeys.MOVE -> {
                     String positionString = json.getString(JsonKeys.TARGET);
-                    Position position = positionFromString(positionString);
+                    Position position = new Position(positionString);
                     Tank tank = getTank(subject);
                     getRule(Tank.class, PlayerRules.ActionKeys.MOVE).apply(state, tank, position);
                 }
                 case PlayerRules.ActionKeys.SHOOT -> {
                     String location = json.getString(JsonKeys.TARGET);
-                    Position position = positionFromString(location);
+                    Position position = new Position(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
                     getRule(Tank.class, PlayerRules.ActionKeys.SHOOT).apply(state, tank, position, hit);
@@ -309,12 +306,6 @@ public class Api implements IApi {
     private Tank getTank(String player) {
         return state.getBoard().gatherUnits(Tank.class).stream()
                 .filter(t -> t.getPlayer().equals(player)).toList().getFirst();
-    }
-
-    private static Position positionFromString(String string) {
-        int x = string.substring(0, 1).charAt(0) - 'A';
-        int y = Integer.parseInt(string.substring(1)) - 1;
-        return new Position(x, y);
     }
 
     private static void enforceInvariants(State state, RulesetDescription ruleset) {

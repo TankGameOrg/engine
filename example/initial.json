@@ -1,9 +1,9 @@
 {
   "council": {
+    "coffer": 0,
     "council": [],
     "senate": [],
-    "type": "council",
-    "coffer": 0
+    "type": "council"
   },
   "type": "state",
   "day": 0,
@@ -11,66 +11,83 @@
     "unit_board": [
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Schmude",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "A1",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Dan",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "C1",
+          "type": "tank"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D1",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E1",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F1",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G1",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H1",
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Stomp",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 8,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "I1",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Ty",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "K1",
+          "type": "tank"
         }
       ],
       [
@@ -78,20 +95,24 @@
         {"type": "empty"},
         {"type": "empty"},
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D2",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E2",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G2",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H2",
           "type": "wall"
         },
         {"type": "empty"},
@@ -100,354 +121,441 @@
       ],
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Bryan",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "A3",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Trevor",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "C3",
+          "type": "tank"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D3",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E3",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F3",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G3",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H3",
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "David",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "I3",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Lena",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 5,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "K3",
+          "type": "tank"
         }
       ],
       [
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "B4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I4",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "J4",
           "type": "wall"
         },
         {
-          "health": 3,
-          "type": "wall"
-        }
-      ],
-      [
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
-          "type": "wall"
-        },
-        {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K4",
           "type": "wall"
         }
       ],
       [
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "B5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "C5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "D5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "E5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "F5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "G5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "H5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "I5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "J5",
+          "type": "wall"
+        },
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "K5",
+          "type": "wall"
+        }
+      ],
+      [
+        {
+          "attributes": {"DURABILITY": 3},
+          "position": "A6",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C6",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D6",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E6",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F6",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G6",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H6",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I6",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K6",
           "type": "wall"
         }
       ],
       [
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "B7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "J7",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K7",
           "type": "wall"
         }
       ],
       [
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "A8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "B8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "C8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "I8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "J8",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "K8",
           "type": "wall"
         }
       ],
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Beyer",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "A9",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Steve",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "C9",
+          "type": "tank"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D9",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E9",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F9",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G9",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H9",
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Joel",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "I9",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Xavion",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "K9",
+          "type": "tank"
         }
       ],
       [
@@ -455,20 +563,24 @@
         {"type": "empty"},
         {"type": "empty"},
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D10",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E10",
           "type": "wall"
         },
         {"type": "empty"},
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G10",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H10",
           "type": "wall"
         },
         {"type": "empty"},
@@ -477,66 +589,83 @@
       ],
       [
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Ryan",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "A11",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "John",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "C11",
+          "type": "tank"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "D11",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "E11",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "F11",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "G11",
           "type": "wall"
         },
         {
-          "health": 3,
+          "attributes": {"DURABILITY": 3},
+          "position": "H11",
           "type": "wall"
         },
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Isaac",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "I11",
+          "type": "tank"
         },
         {"type": "empty"},
         {
-          "gold": 0,
-          "bounty": 0,
           "name": "Corey",
-          "health": 3,
-          "range": 2,
-          "dead": false,
-          "type": "tank",
-          "actions": 0
+          "attributes": {
+            "GOLD": 0,
+            "DURABILITY": 3,
+            "ACTIONS": 0,
+            "DEAD": false,
+            "BOUNTY": 0,
+            "RANGE": 2
+          },
+          "position": "K11",
+          "type": "tank"
         }
       ]
     ],

@@ -1,8 +1,9 @@
-package pro.trevor.tankgame.state.range;
+package pro.trevor.tankgame.rule.impl.version3.range;
 
+import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.Tank;
+import pro.trevor.tankgame.state.range.FunctionVariableRange;
 import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.Util;
 

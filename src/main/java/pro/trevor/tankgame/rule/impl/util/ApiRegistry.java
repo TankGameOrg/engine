@@ -1,4 +1,6 @@
-package pro.trevor.tankgame.rule.impl;
+package pro.trevor.tankgame.rule.impl.util;
+
+import pro.trevor.tankgame.rule.impl.IApi;
 
 import java.util.HashMap;
 import java.util.Optional;

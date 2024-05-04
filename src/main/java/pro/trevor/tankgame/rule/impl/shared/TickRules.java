@@ -10,15 +10,15 @@ import java.util.Set;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
+import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
-import pro.trevor.tankgame.state.board.unit.Tank;
 
 public class TickRules 
 {
-    public static final TickActionRule<Tank> DISTRIBUTE_GOLD_TO_TANKS_RULE = new TickActionRule<Tank>(
+    public static final TickActionRule<Tank> DISTRIBUTE_GOLD_TO_TANKS_RULE = new TickActionRule<>(
         (s, t) -> {
             if (!t.isDead()) {
                 t.setActions(t.getActions() + 1);
@@ -33,7 +33,7 @@ public class TickRules
         }
     );
 
-    public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<Board>(
+    public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<>(
         (s, b) -> {
             List<Position> mines = b.gatherFloors(GoldMine.class).stream().map(AbstractPositionedFloor::getPosition).toList();
             List<Set<Position>> allMines = new ArrayList<>();
