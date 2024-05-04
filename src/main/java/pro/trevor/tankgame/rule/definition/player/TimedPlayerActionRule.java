@@ -20,6 +20,11 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
         this.cooldownFunction = cooldownFunction;
     }
 
+    public TimedPlayerActionRule(PlayerActionRule<T> rule, Function<State, Long> cooldownFunction) {
+        super(rule.name, rule.predicate, rule.consumer, rule.parameters);
+        this.cooldownFunction = cooldownFunction;
+    }
+
     @Override
     public void apply(State state, T subject, Object... meta) {
         long cooldown = cooldownFunction.apply(state);
