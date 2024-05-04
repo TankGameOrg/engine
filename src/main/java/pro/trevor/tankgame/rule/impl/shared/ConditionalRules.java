@@ -3,7 +3,6 @@ package pro.trevor.tankgame.rule.impl.shared;
 import static pro.trevor.tankgame.util.Util.isOrthAdjToMine;
 
 import pro.trevor.tankgame.rule.definition.ConditionalRule;
-import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
@@ -11,7 +10,6 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ConditionalRules 
@@ -53,7 +51,7 @@ public class ConditionalRules
     );
 
     public static final ConditionalRule<ArmisticeCouncil> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
-        (s, c) -> c.getArmisticeVotesRemaining() == 0,
+        (s, c) -> c.getArmisticeVoteCount() >= c.getArmisticeVoteCap(),
         (s, c) -> {
             s.setRunning(false);
             s.setWinner("Council");

@@ -4,25 +4,32 @@ import org.json.JSONObject;
 
 public class ArmisticeCouncil extends Council {
 
-    private int armisticeVotesRemaining;
+    private final int armisticeVoteCap;
+    private int armisticeVoteCount;
 
-    public ArmisticeCouncil(int armisticeVotesRemaining) {
+    public ArmisticeCouncil(int armisticeVoteCap, int armisticeVoteCount) {
         super();
-        this.armisticeVotesRemaining = armisticeVotesRemaining;
+        this.armisticeVoteCap = armisticeVoteCap;
+        this.armisticeVoteCount = armisticeVoteCount;
     }
 
-    public int getArmisticeVotesRemaining() {
-        return armisticeVotesRemaining;
+    public int getArmisticeVoteCap() {
+        return armisticeVoteCap;
     }
 
-    public void setArmisticeVotesRemaining(int armisticeVotesRemaining) {
-        this.armisticeVotesRemaining = Math.max(0, armisticeVotesRemaining);
+    public int getArmisticeVoteCount() {
+        return armisticeVoteCount;
+    }
+
+    public void setArmisticeVoteCount(int armisticeVoteCount) {
+        this.armisticeVoteCount = armisticeVoteCount;
     }
 
     @Override
     public JSONObject toJson() {
         JSONObject output = super.toJson();
-        output.put("armistice_votes_remaining", armisticeVotesRemaining);
+        output.put("armistice_vote_cap", armisticeVoteCap);
+        output.put("armistice_vote_count", armisticeVoteCount);
         return output;
     }
 }
