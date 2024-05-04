@@ -73,6 +73,12 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     }
 
     @Override
+    public void registerMetaConditionalRules(RulesetDescription ruleset) {
+        ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
+        metaConditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
+    }
+
+    @Override
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.put(Tank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);

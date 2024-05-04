@@ -19,13 +19,17 @@ public class State implements IJsonObject {
     private final Council council;
     private final Set<String> players;
 
+    private boolean running;
     private int tick;
+    private String winner;
 
     public State(int boardWidth, int boardHeight) {
         this.board = new Board(boardWidth, boardHeight);
         this.players = new HashSet<>();
         this.council = new Council();
         this.tick = 0;
+        this.running = true;
+        this.winner = "";
 
         this.metaElements = new ArrayList<>(3);
         this.metaElements.add(board);
@@ -65,6 +69,22 @@ public class State implements IJsonObject {
         this.tick = tick;
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
@@ -72,6 +92,8 @@ public class State implements IJsonObject {
         output.put("board", board.toJson());
         output.put("council", council.toJson());
         output.put("day", tick);
+        output.put("running", running);
+        output.put("winner", winner);
         return output;
     }
 
@@ -79,6 +101,10 @@ public class State implements IJsonObject {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("tick: ").append(tick).append('\n');
+        sb.append("running: ").append(running).append('\n');
+        if (!winner.isEmpty()) {
+            sb.append("winner: ").append(winner).append('\n');
+        }
         sb.append(council.toString());
         sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
         sb.append('\n').append(board.toUnitString());

@@ -2392,5 +2392,180 @@
     "hit": true,
     "action": "shoot",
     "target": "H3"
+  },
+  {
+    "type": "action",
+    "day": 17
+  },
+  {
+    "type": "action",
+    "day": 18
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "H5"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "H6"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "H7"
+  },
+  {
+    "type": "action",
+    "action": "buy_action",
+    "subject": "Corey",
+    "gold": "10"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "H8"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "G8",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "G8",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "buy_action",
+    "subject": "Corey",
+    "gold": "10"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "G8",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "G9"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "F9"
+  },
+  {
+    "type": "action",
+    "action": "buy_action",
+    "subject": "Corey",
+    "gold": "10"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "D9",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "D9",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "D9",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "E9"
+  },
+  {
+    "type": "action",
+    "action": "buy_action",
+    "subject": "Corey",
+    "gold": "10"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "D8"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "C7"
+  },
+  {
+    "type": "action",
+    "action": "move",
+    "subject": "Corey",
+    "target": "C6"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "C5",
+    "hit": "false"
+  },
+  {
+    "type": "action",
+    "action": "buy_action",
+    "subject": "Corey",
+    "gold": "10"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "C5",
+    "hit": "false"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "C5",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "C5",
+    "hit": "true"
+  },
+  {
+    "type": "action",
+    "action": "shoot",
+    "subject": "Corey",
+    "target": "C5",
+    "hit": "true"
   }
 ]
