@@ -14,7 +14,6 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
@@ -59,7 +58,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
-        metaTickRules.put(None.class, new MetaTickActionRule<>((s, n) -> {
+        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, n) -> {
             councilCanBounty = true;
             s.setTick(s.getTick() + 1);
         }));

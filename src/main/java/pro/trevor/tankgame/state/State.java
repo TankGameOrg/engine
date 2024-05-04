@@ -3,7 +3,6 @@ package pro.trevor.tankgame.state;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.IJsonObject;
@@ -23,26 +22,31 @@ public class State implements IJsonObject {
     private int tick;
     private String winner;
 
-    public State(int boardWidth, int boardHeight) {
-        this.board = new Board(boardWidth, boardHeight);
+    public State(Board board, Council council) {
+        this.board = board;
         this.players = new HashSet<>();
-        this.council = new Council();
+        this.council = council;
         this.tick = 0;
         this.running = true;
         this.winner = "";
 
-        this.metaElements = new ArrayList<>(3);
+        this.metaElements = new ArrayList<>(2);
         this.metaElements.add(board);
         this.metaElements.add(council);
-        this.metaElements.add(new None());
     }
+
+    public State(int boardWidth, int boardHeight) {
+        this(new Board(boardWidth, boardHeight), new Council());
+    }
+
+
 
     public List<IMetaElement> getMetaElements() {
         return metaElements;
     }
 
     public List<IMetaElement> getMetaElements(Class<?> c) {
-        return metaElements.stream().filter((e) -> e.getClass().equals(c)).collect(Collectors.toList());
+        return metaElements.stream().filter((e) -> e.getClass().isAssignableFrom(c)).collect(Collectors.toList());
     }
 
     public Board getBoard() {
