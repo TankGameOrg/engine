@@ -15,7 +15,7 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
     // Returns the cooldown in milliseconds for the function based on the state
     private final Function<State, Long> cooldownFunction;
 
-    public TimedPlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, Function<State, Long> cooldownFunction, TypeRange<?>... parameters) {
+    public TimedPlayerActionRule(String name, Function<State, Long> cooldownFunction, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
         super(name, predicate, consumer, parameters);
         this.cooldownFunction = cooldownFunction;
     }
