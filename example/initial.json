@@ -1,4 +1,6 @@
 {
+  "running": true,
+  "winner": "",
   "council": {
     "coffer": 0,
     "council": [],

@@ -14,10 +14,10 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.meta.None;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 
 import static pro.trevor.tankgame.util.Util.*;
@@ -31,6 +31,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
 
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getDurability, Tank::setDurability, 0));
+        invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getDurability, Tank::setDurability, 3));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getRange, Tank::setRange, 0));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getGold, Tank::setGold, 0));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
@@ -42,7 +43,6 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerMetaEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getMetaEnforcerRules();
-
         invariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
     }
 
@@ -58,7 +58,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
-        metaTickRules.put(None.class, new MetaTickActionRule<>((s, n) -> {
+        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, n) -> {
             councilCanBounty = true;
             s.setTick(s.getTick() + 1);
         }));
@@ -72,13 +72,21 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     }
 
     @Override
+    public void registerMetaConditionalRules(RulesetDescription ruleset) {
+        ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
+        metaConditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
+    }
+
+    @Override
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.put(Tank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
         playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeWithGoldRule(8));
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
         playerRules.put(Tank.class, PlayerRules.SPEND_ACTION_TO_MOVE);
-        playerRules.put(Tank.class, PlayerRules.SPEND_ACTION_TO_SHOOT_LOSV3);
+        playerRules.put(Tank.class, PlayerRules.SpendActionToShootWithDeathHandle(LineOfSight::hasLineOfSightV3,
+            (s, t, d) -> t.setGold(t.getGold() + d.getGold() + d.getBounty())
+        ));
     }
 
     @Override
