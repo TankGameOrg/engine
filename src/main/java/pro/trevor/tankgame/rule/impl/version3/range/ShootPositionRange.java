@@ -20,7 +20,7 @@ public class ShootPositionRange extends FunctionVariableRange<Tank, Position> {
     private static Set<Position> getShootable(ITriPredicate<State, Position, Position> lineOfSight, State state, Position center, int range) {
         Set<Position> output = new HashSet<>();
         for (Position pos : Util.getSpacesInRange(center, range)) {
-            if (LineOfSight.hasLineOfSightV3(state, center, pos)) {
+            if (lineOfSight.test(state, center, pos)) {
                 output.add(pos);
             }
         }
