@@ -53,10 +53,10 @@ public class ConditionalRules
     );
 
     public static final ConditionalRule<ArmisticeCouncil> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
-            (s, c) -> c.getArmisticeVotesRemaining() == 0,
-            (s, c) -> {
-                s.setRunning(false);
-                s.setWinner("Council");
-            }
+        (s, c) -> c.getArmisticeVotesRemaining() == 0,
+        (s, c) -> {
+            s.setRunning(false);
+            s.setWinner("Council");
+        }
     );
 }
