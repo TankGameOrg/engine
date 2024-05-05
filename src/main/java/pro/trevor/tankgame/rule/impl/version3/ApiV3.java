@@ -58,9 +58,11 @@ public class ApiV3 implements IApi {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
+                assert json.getString("position").equals(position.toString());
                 return new Tank(json);
             }
             case "wall" -> {
+                assert json.getString("position").equals(position.toString());
                 return new BasicWall(json);
             }
             case "empty" -> {
