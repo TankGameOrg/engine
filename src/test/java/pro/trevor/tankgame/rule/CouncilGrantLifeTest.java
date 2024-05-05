@@ -1,6 +1,8 @@
 package pro.trevor.tankgame.rule;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.DummyState;
 import pro.trevor.tankgame.util.TestUtilities;
@@ -24,9 +26,12 @@ public class CouncilGrantLifeTest {
         assertEquals(2, tank.getDurability());
     }
 
-    @Test
-    public void testGrantLifeToDeadTank() {
-        Tank tank = TestUtilities.buildDurableTestTank(0, 0, 3, true);
+    @ParameterizedTest
+    @CsvSource({
+        "1", "2", "3"
+    })
+    public void testGrantLifeToDeadTank(int durability) {
+        Tank tank = TestUtilities.buildDurableTestTank(0, 0, durability, true);
         State state = new DummyState();
         state.getCouncil().getCouncillors().add(tank.getPlayer());
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
@@ -42,6 +47,13 @@ public class CouncilGrantLifeTest {
         state.getCouncil().setCoffer(1);
         ONE_COST_RULE.apply(state, state.getCouncil(), tank);
         assertEquals(0, state.getCouncil().getCoffer());
+    }
+
+    @Test
+    public void testErrorOnInsufficientGoldInCoffer() {
+        Tank tank = TestUtilities.buildDurableTestTank(0, 0, 1, false);
+        State state = new DummyState();
+        assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, state.getCouncil(), tank));
     }
 
 }

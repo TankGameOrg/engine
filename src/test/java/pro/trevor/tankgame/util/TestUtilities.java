@@ -7,6 +7,7 @@ import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
 import pro.trevor.tankgame.state.meta.Council;
 
 public class TestUtilities {
+
     public static Tank buildTestTank(int actions, int gold, boolean dead) {
         JSONObject json = new JSONObject();
         JSONObject attributes = new JSONObject();
