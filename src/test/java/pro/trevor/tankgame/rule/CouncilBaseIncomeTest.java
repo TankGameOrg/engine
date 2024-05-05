@@ -2,15 +2,16 @@ package pro.trevor.tankgame.Rule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static pro.trevor.tankgame.util.DummyState.DUMMY_STATE;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import pro.trevor.tankgame.TestUtil.TestUtilities;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.TestUtilities;
 
 public class CouncilBaseIncomeTest 
 {
@@ -35,7 +36,7 @@ public class CouncilBaseIncomeTest
         Council c = TestUtilities.BuildTestCouncil(startingCoffer, numCouncilors, numSenators);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(1, 3);
 
-        rule.apply(TestUtilities.DUMMY_STATE, c);
+        rule.apply(DUMMY_STATE, c);
 
         assertEquals(expectedCoffer, c.getCoffer());
     }
@@ -72,7 +73,7 @@ public class CouncilBaseIncomeTest
         Council c = TestUtilities.BuildTestCouncil(0, numCouncilors, numSenators);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(coucilorIncome, senatorIncome);
 
-        rule.apply(TestUtilities.DUMMY_STATE, c);
+        rule.apply(DUMMY_STATE, c);
 
         assertEquals(expectedCoffer, c.getCoffer());
     }
@@ -83,13 +84,13 @@ public class CouncilBaseIncomeTest
         Council c = TestUtilities.BuildTestCouncil(5, 12, 3);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(1, 3);
 
-        rule.apply(TestUtilities.DUMMY_STATE, c);
+        rule.apply(DUMMY_STATE, c);
         assertEquals(26, c.getCoffer());
 
-        rule.apply(TestUtilities.DUMMY_STATE, c);
+        rule.apply(DUMMY_STATE, c);
         assertEquals(47, c.getCoffer());
 
-        rule.apply(TestUtilities.DUMMY_STATE, c);
+        rule.apply(DUMMY_STATE, c);
         assertEquals(68, c.getCoffer());
     }
 }
