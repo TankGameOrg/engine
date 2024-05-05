@@ -54,17 +54,17 @@ public class PlayerRules
         return new PlayerActionRule<Tank>(
             ActionKeys.BUY_ACTION,
             (s, t, n) -> {
-                int gold_spent = toType(n[0], Integer.class);
-                return !t.isDead() && (t.getGold() >= gold_spent) && (gold_spent >= actionCost) && (gold_spent % actionCost == 0);
+                int goldSpent = toType(n[0], Integer.class);
+                return !t.isDead() && (t.getGold() >= goldSpent) && (goldSpent >= actionCost) && (goldSpent % actionCost == 0);
             }, 
             (s, t, n) -> {
-                int attempted_gold_spent = toType(n[0], Integer.class);
-                int bought_actions = attempted_gold_spent / actionCost;
-                int actual_gold_spent = bought_actions * actionCost;
-                assert attempted_gold_spent == actual_gold_spent;
+                int attemptedGoldSpent = toType(n[0], Integer.class);
+                int boughtActions = attemptedGoldSpent / actionCost;
+                int actualGoldSpent = boughtActions * actionCost;
+                assert attemptedGoldSpent == actualGoldSpent;
                 
-                t.setActions(t.getActions() + bought_actions);
-                t.setGold(t.getGold() - actual_gold_spent);
+                t.setActions(t.getActions() + boughtActions);
+                t.setGold(t.getGold() - actualGoldSpent);
             }, 
             new DiscreteIntegerRange("gold", new HashSet<>(IntStream.rangeClosed(1, 5).map(n -> n * actionCost).boxed().collect(Collectors.toSet())))
         );
