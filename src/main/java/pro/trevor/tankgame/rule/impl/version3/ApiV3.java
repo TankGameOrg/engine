@@ -24,14 +24,18 @@ import org.json.*;
 import pro.trevor.tankgame.util.range.DiscreteTypeRange;
 import pro.trevor.tankgame.util.range.TypeRange;
 
-public class Api implements IApi {
-    private final RulesetDescription ruleset;
-    private State state;
+public class ApiV3 implements IApi {
+    protected final RulesetDescription ruleset;
+    protected State state;
 
-    private static final String COUNCIL = "Council";
+    protected static final String COUNCIL = "Council";
 
-    public Api() {
+    public ApiV3() {
         this.ruleset = IRuleset.getRuleset(new Ruleset());
+    }
+
+    protected ApiV3(IRuleset ruleset) {
+        this.ruleset = IRuleset.getRuleset(ruleset);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class Api implements IApi {
         return rules;
     }
 
-    private static IUnit unitFromJson(JSONObject json, Position position) {
+    protected static IUnit unitFromJson(JSONObject json, Position position) {
         String type = json.getString("type");
         switch (type) {
             case "tank" -> {
@@ -66,7 +70,7 @@ public class Api implements IApi {
         }
     }
 
-    private static IFloor floorFromJson(JSONObject json, Position position) {
+    protected static IFloor floorFromJson(JSONObject json, Position position) {
         String type = json.getString("type");
         switch (type) {
             case "gold_mine" -> {
