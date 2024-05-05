@@ -10,7 +10,6 @@ import pro.trevor.tankgame.state.meta.Council;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.GetRuleCofferCostGrantLife;
-import static pro.trevor.tankgame.util.DummyState.DUMMY_STATE;
 
 public class CouncilGrantLifeTest {
 
@@ -20,7 +19,8 @@ public class CouncilGrantLifeTest {
     @Test
     public void testGrantLifeToLivingTank() {
         Tank tank = TestUtilities.buildDurableTestTank(0, 0, 1, false);
-        ZERO_COST_RULE.apply(DUMMY_STATE, DUMMY_STATE.getCouncil(), tank);
+        State state = new DummyState();
+        ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
         assertEquals(2, tank.getDurability());
     }
 

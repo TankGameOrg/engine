@@ -6,10 +6,8 @@ import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
 import pro.trevor.tankgame.state.meta.Council;
 
-public class TestUtilities 
-{
-    public static Tank buildTestTank(int actions, int gold, boolean dead)
-    {
+public class TestUtilities {
+    public static Tank buildTestTank(int actions, int gold, boolean dead) {
         JSONObject json = new JSONObject();
         JSONObject attributes = new JSONObject();
         attributes.put(TankAttribute.ACTIONS.name(), actions);
@@ -22,8 +20,7 @@ public class TestUtilities
         return new Tank(json);
     }
 
-    public static Tank buildDurableTestTank(int actions, int gold, int durability, boolean dead)
-    {
+    public static Tank buildDurableTestTank(int actions, int gold, int durability, boolean dead) {
         JSONObject json = new JSONObject();
         JSONObject attributes = new JSONObject();
         attributes.put(TankAttribute.ACTIONS.name(), actions);
@@ -37,8 +34,7 @@ public class TestUtilities
         return new Tank(json);
     }
 
-    public static Council BuildTestCouncil(int coffer, int councilors, int senators)
-    {
+    public static Council BuildTestCouncil(int coffer, int councilors, int senators) {
         Council c = new Council(coffer);
 
         for (int i = 0; i < councilors; i++)
