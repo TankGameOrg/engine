@@ -18,8 +18,6 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.LineOfSight;
-import pro.trevor.tankgame.util.function.IQuadConsumer;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriPredicate;
 import pro.trevor.tankgame.util.range.BooleanRange;

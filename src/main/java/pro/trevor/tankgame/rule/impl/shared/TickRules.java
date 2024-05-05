@@ -7,8 +7,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
@@ -18,6 +16,7 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
+import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules 
 {
@@ -64,4 +63,23 @@ public class TickRules
             c.setArmisticeVoteCount(c.getArmisticeVoteCap() - totalCouncillors);
         }
     );
+
+    public static MetaTickActionRule<Council> GetCouncilBaseIncomeRule(int goldPerCouncilor, int goldPerSenator)
+    {
+        if (goldPerCouncilor < 0)
+            throw new Error("Illegal goldPerCouncilor value: " + goldPerCouncilor);
+        if (goldPerSenator < 0)
+            throw new Error("Illegal goldPerSenator value: " + goldPerSenator);
+            
+        return new MetaTickActionRule<>(
+            (s, c) -> {
+                int councilorCount = c.getCouncillors().size();
+                int senatorCount = c.getSenators().size();
+
+                int income = (goldPerCouncilor * councilorCount) + (goldPerSenator * senatorCount);
+
+                c.setCoffer(c.getCoffer() + income);
+            }
+        );
+    }
 }
