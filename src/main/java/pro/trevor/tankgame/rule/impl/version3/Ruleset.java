@@ -85,7 +85,10 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
         playerRules.put(Tank.class, PlayerRules.SPEND_ACTION_TO_MOVE);
         playerRules.put(Tank.class, PlayerRules.SpendActionToShootWithDeathHandle(LineOfSight::hasLineOfSightV3,
-            (s, t, d) -> t.setGold(t.getGold() + d.getGold() + d.getBounty())
+            (s, t, d) -> {
+                t.setGold(t.getGold() + d.getGold() + d.getBounty());
+                s.getCouncil().setCoffer(s.getCouncil().getCoffer() + 1);
+            }
         ));
     }
 

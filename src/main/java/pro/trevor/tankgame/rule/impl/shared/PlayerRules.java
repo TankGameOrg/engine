@@ -18,6 +18,7 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriPredicate;
 import pro.trevor.tankgame.util.range.BooleanRange;
@@ -188,6 +189,21 @@ public class PlayerRules
             }
         });
     }
+
+    public static final PlayerActionRule<Tank> SHOOT_V4 = SpendActionToShootWithDeathHandle(LineOfSight::hasLineOfSightV4,
+        (s, t, d) -> {
+            t.setGold(t.getGold() + d.getBounty());
+            switch (d.getGold()) {
+                case 0 -> {}
+                case 1 -> t.setGold(t.getGold() + 1);
+                default -> {
+                    // Tax is target tank gold * 0.25 rounded up
+                    int tax = (d.getGold() + 3) / 4;
+                    t.setGold(t.getGold() + d.getGold() - tax);
+                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + tax);
+                }
+            }
+        });
 
     public static class ActionKeys {
     
