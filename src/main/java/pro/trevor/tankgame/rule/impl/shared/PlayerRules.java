@@ -142,6 +142,7 @@ public class PlayerRules
                 if (t.isDead()) {
                     t.setDead(false);
                     t.setDurability(1);
+                    s.getCouncil().getCouncillors().remove(t.getPlayer());
                 } else {
                     t.setDurability(t.getDurability() + 1);
                 }
