@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
+import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
 
 public class TestUtilities {
@@ -32,6 +33,22 @@ public class TestUtilities {
         json.put("attributes", attributes);
         json.put("type", "tank");
         json.put("position", "A1");
+        return new Tank(json);
+    }
+
+    public static Tank buildPositionedTank(String position, int actions, int gold, int durability, boolean dead) {
+        JSONObject json = new JSONObject();
+        JSONObject attributes = new JSONObject();
+        attributes.put(TankAttribute.ACTIONS.name(), actions);
+        attributes.put(TankAttribute.BOUNTY.name(), 0);
+        attributes.put(TankAttribute.GOLD.name(), gold);
+        attributes.put(TankAttribute.DEAD.name(), dead);
+        attributes.put(TankAttribute.DURABILITY.name(), durability);
+        attributes.put(TankAttribute.RANGE.name(), 2);
+        json.put("name", "test");
+        json.put("attributes", attributes);
+        json.put("type", "tank");
+        json.put("position", position);
         return new Tank(json);
     }
 

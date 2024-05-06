@@ -14,19 +14,6 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        playerRules.put(Tank.class, PlayerRules.SpendActionToShootWithDeathHandle(LineOfSight::hasLineOfSightV4,
-            (s, t, d) -> {
-                t.setGold(t.getGold() + d.getBounty());
-                switch (d.getGold()) {
-                    case 0 -> {}
-                    case 1 -> t.setGold(t.getGold() + 1);
-                    default -> {
-                        // Tax is target tank gold * 0.25 rounded up
-                        int tax = (d.getGold() + 3) / 4;
-                        t.setGold(t.getGold() + d.getGold() - tax);
-                        s.getCouncil().setCoffer(s.getCouncil().getCoffer() + tax);
-                    }
-                }
-        }));
+        playerRules.put(Tank.class, PlayerRules.SHOOT_V4);
     }
 }
