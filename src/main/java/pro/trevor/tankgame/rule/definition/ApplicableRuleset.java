@@ -35,9 +35,12 @@ public class ApplicableRuleset {
 
     public <T> void applyRules(State state, T subject){
         Class<?> c = subject.getClass();
-        for (IApplicableRule<T> rule : (List<IApplicableRule<T>>) (Object) get(c)) {
-            rule.apply(state, subject);
+        for (Class<?> type = c; type != null; type = type.getSuperclass()) {
+            for (IApplicableRule<T> rule : (List<IApplicableRule<T>>) (Object) get(type)) {
+                rule.apply(state, subject);
+            }
         }
+
     }
 
     public <T> List<IConditionalRule<T>> applicableConditionalRules(Class<T> c, State state, T subject) {
