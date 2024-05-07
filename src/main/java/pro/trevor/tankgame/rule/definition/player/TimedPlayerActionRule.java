@@ -33,7 +33,7 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
         long cooldown = cooldownFunction.apply(state);
         long elapsed = timeOfAction - subject.getLastUsage(name);
         if (elapsed >= cooldown) {
-            Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length - 1);
+            Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length);
             if (super.canApply(state, subject, appliedMeta)) {
                 consumer.accept(state, subject, appliedMeta);
             } else {
@@ -78,7 +78,7 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
     public boolean canApply(State state, T subject, Object... meta) {
         long cooldown = cooldownFunction.apply(state);
         long elapsed = (long) meta[0] - subject.getLastUsage(name);
-        return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length - 1));
+        return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
     }
 
 }
