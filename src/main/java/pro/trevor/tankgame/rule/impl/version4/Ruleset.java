@@ -106,6 +106,13 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     }
 
     @Override
+    public void registerConditionalRules(RulesetDescription ruleset) {
+        ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
+        conditionalRules.put(Tank.class, ConditionalRules.KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY);
+        conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
+    }
+
+    @Override
     public void registerMetaConditionalRules(RulesetDescription ruleset) {
         ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
         metaConditionalRules.put(ArmisticeCouncil.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
