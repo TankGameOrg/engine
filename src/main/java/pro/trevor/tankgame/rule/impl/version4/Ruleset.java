@@ -31,7 +31,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
     private static boolean councilCanBounty = true;
 
-    private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60 * 1000);
+    private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60);
 
     @Override
     public void registerEnforcerRules(RulesetDescription ruleset) {
@@ -103,6 +103,13 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     councilCanBounty = false;
                 }, new TankRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5))
         );
+    }
+
+    @Override
+    public void registerConditionalRules(RulesetDescription ruleset) {
+        ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
+        conditionalRules.put(Tank.class, ConditionalRules.KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY);
+        conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
     }
 
     @Override
