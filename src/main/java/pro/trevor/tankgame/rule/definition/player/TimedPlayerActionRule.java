@@ -33,7 +33,26 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
         long cooldown = cooldownFunction.apply(state);
         long elapsed = timeOfAction - subject.getLastUsage(name);
         if (elapsed >= cooldown) {
-            super.apply(state, subject, Arrays.copyOfRange(meta, 1, meta.length - 1));
+            Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length - 1);
+            if (super.canApply(state, subject, appliedMeta)) {
+                consumer.accept(state, subject, appliedMeta);
+            } else {
+                JSONObject error = new JSONObject();
+                error.put("error", true);
+                error.put("rule", name);
+
+                if (subject instanceof IJsonObject subjectJson) {
+                    error.put("subject", subjectJson.toJson());
+                } else {
+                    error.put("subject", subject.getPlayer());
+                }
+
+                if (Main.DEBUG) {
+                    System.err.println(error.toString(2));
+                    System.err.println(state.toString());
+                }
+                throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
+            }
             subject.setLastUsage(name, timeOfAction);
         } else {
             JSONObject error = new JSONObject();
