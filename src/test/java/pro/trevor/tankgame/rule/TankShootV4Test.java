@@ -93,7 +93,7 @@ public class TankShootV4Test {
     void testShootOutOfBoundsThrows() {
         Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
         State state = generateBoard(1, 1, tank);
-        assertThrows(Error.class, () -> SHOOT_V4.apply(state, tank, new Position("A2"), true));
+        assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2"), true));
     }
 
     @ParameterizedTest
@@ -103,11 +103,11 @@ public class TankShootV4Test {
         "2, 1, 1",
         "3, 2, 1",
         "4, 3, 1",
-        "5, 3, 2",
+        "5, 4, 1",
         "6, 4, 2",
         "7, 5, 2",
         "8, 6, 2",
-        "9, 6, 3",
+        "9, 7, 2",
     })
     void testShootKillingLivingTankDistributesGold(int gold, int expectedNewGold, int expectedNewCoffer) {
         Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
