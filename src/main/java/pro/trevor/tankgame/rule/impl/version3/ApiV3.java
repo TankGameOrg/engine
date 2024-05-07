@@ -359,6 +359,6 @@ public class ApiV3 implements IApi {
         public static final String GOLD = "gold";
         public static final String DONATION = "donation";
         public static final String BOUNTY = "bounty";
-        public static final String TIME = "time";
+        public static final String TIME = "timestamp";
     }
 }
