@@ -33,8 +33,8 @@ public class ApiV4 extends ApiV3 implements IApi {
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
         int boardWidth = unitBoard.length();
         int boardHeight = unitBoard.getJSONArray(0).length();
-        int armisticeCap = json.getInt("armistice_vote_cap");
-        int armisticeCount = json.getInt("armistice_vote_count");
+        int armisticeCap = council.getInt("armistice_vote_cap");
+        int armisticeCount = council.getInt("armistice_vote_count");
         state = new State(new Board(boardWidth, boardHeight), new ArmisticeCouncil(armisticeCap, armisticeCount));
         state.setTick(tick);
         state.setRunning(running);
