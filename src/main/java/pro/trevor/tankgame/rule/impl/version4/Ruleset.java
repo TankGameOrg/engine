@@ -6,7 +6,6 @@ import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.util.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.util.LineOfSight;
 
 public class Ruleset extends BaseRuleset implements IRuleset {
 

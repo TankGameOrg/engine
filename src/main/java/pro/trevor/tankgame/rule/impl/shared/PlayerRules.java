@@ -45,27 +45,29 @@ public class PlayerRules
         new DiscreteIntegerRange("gold",new HashSet<>(List.of(3, 5, 8, 10)))
     );
 
-    public static final PlayerActionRule<Tank> BuyActionWithGold(int actionCost)
+    public static final PlayerActionRule<Tank> BuyActionWithGold(int actionCost, int maxBuys)
     {
         if (actionCost <= 0)
             throw new Error("Illegal Action Cost of " + actionCost + " gold. Must be positive and non-zero.");
+        if (maxBuys <= 0)
+            throw new Error("illegal max buys of " + maxBuys + ". Must be positive and non-zero.");
 
         return new PlayerActionRule<Tank>(
             ActionKeys.BUY_ACTION,
             (s, t, n) -> {
-                int goldSpent = toType(n[0], Integer.class);
-                return !t.isDead() && (t.getGold() >= goldSpent) && (goldSpent >= actionCost) && (goldSpent % actionCost == 0);
+                int attemptedGoldSpent = toType(n[0], Integer.class);
+                int attemptedBuys = attemptedGoldSpent / actionCost;
+
+                return !t.isDead() && (t.getGold() >= attemptedGoldSpent) && (attemptedBuys <= maxBuys) && (attemptedBuys * actionCost == attemptedGoldSpent);
             }, 
             (s, t, n) -> {
-                int attemptedGoldSpent = toType(n[0], Integer.class);
-                int boughtActions = attemptedGoldSpent / actionCost;
-                int actualGoldSpent = boughtActions * actionCost;
-                assert attemptedGoldSpent == actualGoldSpent;
+                int goldSpent = toType(n[0], Integer.class);
+                int boughtActions = goldSpent / actionCost;
                 
                 t.setActions(t.getActions() + boughtActions);
-                t.setGold(t.getGold() - actualGoldSpent);
+                t.setGold(t.getGold() - goldSpent);
             }, 
-            new DiscreteIntegerRange("gold", new HashSet<>(IntStream.rangeClosed(1, 5).map(n -> n * actionCost).boxed().collect(Collectors.toSet())))
+            new DiscreteIntegerRange("gold", new HashSet<>(IntStream.rangeClosed(1, maxBuys).map(n -> n * actionCost).boxed().collect(Collectors.toSet())))
         );
     }
 
