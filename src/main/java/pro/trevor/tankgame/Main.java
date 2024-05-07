@@ -12,11 +12,14 @@ import java.nio.file.Files;
 
 public class Main {
 
+    public static boolean DEBUG = false;
+
     public static void main(String[] args) {
         ApiRegistry.putApi("3", ApiV3.class);
         ApiRegistry.putApi("4", ApiV4.class);
 
         if (args.length == 1 && (args[0].equals("--debug") || args[0].equals("-d"))) {
+            DEBUG = true;
             // Demo version 3 rules with game logs
             File initialFile = new File("example/initial.json");
             File movesFile = new File("example/moves.json");

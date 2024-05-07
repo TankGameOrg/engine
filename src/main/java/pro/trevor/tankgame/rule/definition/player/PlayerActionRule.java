@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.rule.definition.player;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.Main;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.*;
@@ -39,8 +40,10 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
                 error.put("subject", subject.getPlayer());
             }
 
-            System.err.println(error.toString(2));
-            System.err.println(state.toString());
+            if (Main.DEBUG) {
+                System.err.println(error.toString(2));
+                System.err.println(state.toString());
+            }
             throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
         }
     }

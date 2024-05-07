@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.rule.definition.player;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.Main;
 import pro.trevor.tankgame.rule.type.ICooldownPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.IJsonObject;
@@ -45,7 +46,9 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
                 error.put("subject", subject.getPlayer());
             }
 
-            System.err.println(error.toString(2));
+            if (Main.DEBUG) {
+                System.err.println(error.toString(2));
+            }
             throw new Error(String.format("Rule %s has cooldown of %dms but only waited %dms", name, cooldown, elapsed));
         }
     }

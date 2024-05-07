@@ -10,6 +10,7 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.DummyState;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -38,6 +39,21 @@ public class TankShootTest {
         Tank tank = buildPositionedTank("A1", 0, 0, 3, true);
         State state = generateBoard(2, 2, tank);
         assertThrows(Error.class, () -> SHOOT_V4.apply(state, tank, new Position("A2")));
+    }
+
+    @Test
+    void testShootDecrementsActions() {
+        Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
+        SHOOT_V4.apply(new DummyState(), tank, new Position("A1"), false);
+        assertEquals(0, tank.getActions());
+    }
+
+    @Test
+    void testShootEmpty() {
+        Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
+        State state = generateBoard(2, 2, tank);
+        // Has no side effects, this test only ensures that it does not error
+        SHOOT_V4.apply(state, tank, new Position("A2"), true);
     }
 
     @Test
@@ -76,6 +92,21 @@ public class TankShootTest {
         assertEquals(2, otherTank.getDurability());
     }
 
+    @Test
+    void testShootDamageSelf() {
+        Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
+        State state = generateBoard(1, 1, tank);
+        SHOOT_V4.apply(state, tank, new Position("A1"), true);
+        assertEquals(2, tank.getDurability());
+    }
+
+    @Test
+    void testShootOutOfBoundsThrows() {
+        Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
+        State state = generateBoard(1, 1, tank);
+        assertThrows(Error.class, () -> SHOOT_V4.apply(state, tank, new Position("A2"), true));
+    }
+
     @ParameterizedTest
     @CsvSource({
         "0, 0, 0",
@@ -96,6 +127,28 @@ public class TankShootTest {
         SHOOT_V4.apply(state, tank, new Position("A2"), true);
         assertEquals(expectedNewGold, tank.getGold());
         assertEquals(expectedNewCoffer, state.getCouncil().getCoffer());
+    }
+
+    @Test
+    void testShootKillingLivingTeamDistributesBounty() {
+        Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
+        Tank otherTank = buildPositionedTank("A2", 0, 0, 1, false);
+        otherTank.setBounty(5);
+        State state = generateBoard(2, 2, tank, otherTank);
+        SHOOT_V4.apply(state, tank, new Position("A2"), true);
+        assertEquals(5, tank.getGold());
+        assertEquals(0, state.getCouncil().getCoffer());
+    }
+
+    @Test
+    void testShootKillingLivingTeamDistributesBountyAndGold() {
+        Tank tank = buildPositionedTank("A1", 1, 1, 3, false);
+        Tank otherTank = buildPositionedTank("A2", 0, 0, 1, false);
+        otherTank.setBounty(5);
+        State state = generateBoard(2, 2, tank, otherTank);
+        SHOOT_V4.apply(state, tank, new Position("A2"), true);
+        assertEquals(6, tank.getGold());
+        assertEquals(0, state.getCouncil().getCoffer());
     }
 
 }
