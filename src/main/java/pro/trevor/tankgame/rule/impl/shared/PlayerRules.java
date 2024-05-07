@@ -8,10 +8,7 @@ import java.util.stream.IntStream;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.rule.impl.version3.range.DonateTankRange;
-import pro.trevor.tankgame.rule.impl.version3.range.MovePositionRange;
-import pro.trevor.tankgame.rule.impl.version3.range.ShootPositionRange;
-import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
+import pro.trevor.tankgame.rule.impl.version3.range.*;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
@@ -44,12 +41,12 @@ public class PlayerRules
         new DiscreteIntegerRange("gold",new HashSet<>(List.of(3, 5, 8, 10)))
     );
 
-    public static final PlayerActionRule<Tank> BuyActionWithGold(int actionCost)
+    public static PlayerActionRule<Tank> BuyActionWithGold(int actionCost)
     {
         if (actionCost <= 0)
             throw new Error("Illegal Action Cost of " + actionCost + " gold. Must be positive and non-zero.");
 
-        return new PlayerActionRule<Tank>(
+        return new PlayerActionRule<>(
             ActionKeys.BUY_ACTION,
             (s, t, n) -> {
                 int goldSpent = toType(n[0], Integer.class);
@@ -64,7 +61,7 @@ public class PlayerRules
                 t.setActions(t.getActions() + boughtActions);
                 t.setGold(t.getGold() - actualGoldSpent);
             }, 
-            new DiscreteIntegerRange("gold", new HashSet<>(IntStream.rangeClosed(1, 5).map(n -> n * actionCost).boxed().collect(Collectors.toSet())))
+            new DiscreteIntegerRange("gold", IntStream.rangeClosed(1, 5).map(n -> n * actionCost).boxed().collect(Collectors.toSet()))
         );
     }
 
@@ -127,7 +124,7 @@ public class PlayerRules
                 t.setActions(t.getActions() + 1);
                 c.setCoffer(c.getCoffer() - cost);
             }, 
-            new TankRange<Council>("target")
+            new LivingTankRange<Council>("target")
         );
     }
 
