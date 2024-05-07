@@ -9,6 +9,7 @@ import pro.trevor.tankgame.util.function.IVarTriConsumer;
 import pro.trevor.tankgame.util.function.IVarTriPredicate;
 import pro.trevor.tankgame.util.range.TypeRange;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends PlayerActionRule<T> {
@@ -28,11 +29,12 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
 
     @Override
     public void apply(State state, T subject, Object... meta) {
+        long timeOfAction = (long) meta[0];
         long cooldown = cooldownFunction.apply(state);
-        long elapsed = System.currentTimeMillis() - subject.getLastUsage(name);
+        long elapsed = timeOfAction - subject.getLastUsage(name);
         if (elapsed >= cooldown) {
-            super.apply(state, subject, meta);
-            subject.setLastUsage(name, System.currentTimeMillis());
+            super.apply(state, subject, Arrays.copyOfRange(meta, 1, meta.length - 1));
+            subject.setLastUsage(name, timeOfAction);
         } else {
             JSONObject error = new JSONObject();
             error.put("error", true);
@@ -56,8 +58,8 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
     @Override
     public boolean canApply(State state, T subject, Object... meta) {
         long cooldown = cooldownFunction.apply(state);
-        long elapsed = System.currentTimeMillis() - subject.getLastUsage(name);
-        return elapsed >= cooldown && super.canApply(state, subject, meta);
+        long elapsed = (long) meta[0] - subject.getLastUsage(name);
+        return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length - 1));
     }
 
 }

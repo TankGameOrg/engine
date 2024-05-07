@@ -292,7 +292,7 @@ public class ApiV3 implements IApi {
         return new HashSet<>(0);
     }
 
-    private <T extends IPlayerElement> IPlayerRule<T> getRule(Class<T> t, String name) {
+    protected <T extends IPlayerElement> IPlayerRule<T> getRule(Class<T> t, String name) {
         List<IPlayerRule<T>> rules = ruleset.getPlayerRules().getExact(t);
         if (rules.isEmpty()) {
             throw new Error(String.format("No rule for `%s`", t.getSimpleName()));
@@ -306,7 +306,7 @@ public class ApiV3 implements IApi {
         return namedRules.getFirst();
     }
 
-    private <T extends IPlayerElement> IPlayerRule<T> getMetaRule(Class<T> t, String name) {
+    protected <T extends IPlayerElement> IPlayerRule<T> getMetaRule(Class<T> t, String name) {
         List<IPlayerRule<T>> rules = ruleset.getMetaPlayerRules().getExact(t);
         if (rules.isEmpty()) {
             throw new Error(String.format("No rule for `%s`", t.getSimpleName()));
@@ -320,26 +320,26 @@ public class ApiV3 implements IApi {
         return namedRules.getFirst();
     }
 
-    private Tank getTank(String player) {
+    protected Tank getTank(String player) {
         return state.getBoard().gatherUnits(Tank.class).stream()
                 .filter(t -> t.getPlayer().equals(player)).toList().getFirst();
     }
 
-    private static void enforceInvariants(State state, RulesetDescription ruleset) {
+    protected static void enforceInvariants(State state, RulesetDescription ruleset) {
         for (Class<?> c : ruleset.getEnforcerRules().keySet()) {
             state.getBoard().gather(c).forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
         }
         state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
     }
 
-    private static void applyConditionals(State state, RulesetDescription ruleset) {
+    protected static void applyConditionals(State state, RulesetDescription ruleset) {
         for (Class<?> c : ruleset.getConditionalRules().keySet()) {
             state.getBoard().gather(c).forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
         }
         state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
     }
 
-    private static void applyTick(State state, RulesetDescription ruleset) {
+    protected static void applyTick(State state, RulesetDescription ruleset) {
         for (Class<?> c : ruleset.getTickRules().keySet()) {
             state.getBoard().gather(c).forEach((x) -> ruleset.getTickRules().applyRules(state, x));
         }
@@ -348,7 +348,7 @@ public class ApiV3 implements IApi {
         }
     }
 
-    private static class JsonKeys {
+    protected static class JsonKeys {
         public static final String DAY = "day";
         public static final String SUBJECT = "subject";
         public static final String ACTION = "action";
@@ -359,6 +359,6 @@ public class ApiV3 implements IApi {
         public static final String GOLD = "gold";
         public static final String DONATION = "donation";
         public static final String BOUNTY = "bounty";
-
+        public static final String TIME = "time";
     }
 }
