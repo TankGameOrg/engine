@@ -17,7 +17,6 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 
 import static pro.trevor.tankgame.util.Util.*;
@@ -84,9 +83,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeWithGoldRule(8));
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
         playerRules.put(Tank.class, PlayerRules.SPEND_ACTION_TO_MOVE);
-        playerRules.put(Tank.class, PlayerRules.SpendActionToShootWithDeathHandle(LineOfSight::hasLineOfSightV3,
-            (s, t, d) -> t.setGold(t.getGold() + d.getGold() + d.getBounty())
-        ));
+        playerRules.put(Tank.class, PlayerRules.SHOOT_V3);
     }
 
     @Override
