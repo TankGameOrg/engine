@@ -62,7 +62,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
     @Override
     public void registerMetaTickRules(RulesetDescription ruleset) {
-        ApplicableRuleset metaTickRules = ruleset.getTickRules();
+        ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         metaTickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
