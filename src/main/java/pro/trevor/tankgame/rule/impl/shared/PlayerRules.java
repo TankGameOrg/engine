@@ -154,7 +154,7 @@ public class PlayerRules
 
     public static PlayerActionRule<Tank> SpendActionToShootGeneric(ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<State, Tank, IUnit> handleHit) {
         return new PlayerActionRule<>(PlayerRules.ActionKeys.SHOOT,
-            (s, t, n) -> !t.isDead() && (t.getActions() >= 1) && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange()) && lineOfSight.test(s, t.getPosition(), toType(n[0], Position.class)),
+            (s, t, n) -> s.getBoard().isValidPosition(toType(n[0], Position.class)) && !t.isDead() && (t.getActions() >= 1) && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= t.getRange()) && lineOfSight.test(s, t.getPosition(), toType(n[0], Position.class)),
             (s, t, n) -> {
                 Position target = toType(n[0], Position.class);
                 boolean hit = toType(n[1], Boolean.class);
@@ -206,7 +206,7 @@ public class PlayerRules
                 case 1 -> t.setGold(t.getGold() + 1);
                 default -> {
                     // Tax is target tank gold * 0.25 rounded up
-                    int tax = (d.getGold() + 3) / 4;
+                    int tax = (d.getGold() + 2) / 4;
                     t.setGold(t.getGold() + d.getGold() - tax);
                     s.getCouncil().setCoffer(s.getCouncil().getCoffer() + tax);
                 }

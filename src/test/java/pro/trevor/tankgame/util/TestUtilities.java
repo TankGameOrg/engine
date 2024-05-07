@@ -4,7 +4,10 @@ import org.json.JSONObject;
 
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
+import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 
 public class TestUtilities {
@@ -50,6 +53,14 @@ public class TestUtilities {
         json.put("type", "tank");
         json.put("position", position);
         return new Tank(json);
+    }
+
+    public static State generateBoard(int width, int height, IUnit... units) {
+        Board board = new Board(width, height);
+        for (IUnit unit : units) {
+            board.putUnit(unit);
+        }
+        return new State(board, new Council());
     }
 
     public static Council BuildTestCouncil(int coffer, int councilors, int senators) {

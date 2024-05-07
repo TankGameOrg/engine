@@ -5,40 +5,29 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.board.unit.IUnit;
-import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.DummyState;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.SHOOT_V4;
 import static pro.trevor.tankgame.util.TestUtilities.buildPositionedTank;
+import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
 
-public class TankShootTest {
-
-    private static State generateBoard(int width, int height, IUnit... units) {
-        Board board = new Board(width, height);
-        for (IUnit unit : units) {
-            board.putUnit(unit);
-        }
-        return new State(board, new Council());
-    }
+public class TankShootV4Test {
 
     @Test
     void testDeadTankCannotShoot() {
         Tank tank = buildPositionedTank("A1", 1, 0, 3, true);
         State state = generateBoard(2, 2, tank);
-        assertThrows(Error.class, () -> SHOOT_V4.apply(state, tank, new Position("A2")));
+        assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2")));
     }
 
     @Test
     void testTankCannotShootWithoutActions() {
         Tank tank = buildPositionedTank("A1", 0, 0, 3, true);
         State state = generateBoard(2, 2, tank);
-        assertThrows(Error.class, () -> SHOOT_V4.apply(state, tank, new Position("A2")));
+        assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2")));
     }
 
     @Test
@@ -130,7 +119,7 @@ public class TankShootTest {
     }
 
     @Test
-    void testShootKillingLivingTeamDistributesBounty() {
+    void testShootKillingLivingTankDistributesBounty() {
         Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
         Tank otherTank = buildPositionedTank("A2", 0, 0, 1, false);
         otherTank.setBounty(5);
@@ -141,7 +130,7 @@ public class TankShootTest {
     }
 
     @Test
-    void testShootKillingLivingTeamDistributesBountyAndGold() {
+    void testShootKillingLivingTankDistributesBountyAndGold() {
         Tank tank = buildPositionedTank("A1", 1, 1, 3, false);
         Tank otherTank = buildPositionedTank("A2", 0, 0, 1, false);
         otherTank.setBounty(5);
