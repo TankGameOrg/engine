@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends PlayerActionRule<T> {
 
-    // Returns the cooldown in milliseconds for the function based on the state
+    // Returns the cooldown for the function based on the state
     private final Function<State, Long> cooldownFunction;
 
     public TimedPlayerActionRule(String name, Function<State, Long> cooldownFunction, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
@@ -70,7 +70,7 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
             if (Main.DEBUG) {
                 System.err.println(error.toString(2));
             }
-            throw new Error(String.format("Rule %s has cooldown of %dms but only waited %dms", name, cooldown, elapsed));
+            throw new Error(String.format("Rule %s has cooldown of %d seconds but only waited %d seconds", name, cooldown, elapsed));
         }
     }
 

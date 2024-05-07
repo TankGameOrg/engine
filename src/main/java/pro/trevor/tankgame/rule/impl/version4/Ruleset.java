@@ -31,7 +31,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
     private static boolean councilCanBounty = true;
 
-    private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60 * 1000);
+    private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60);
 
     @Override
     public void registerEnforcerRules(RulesetDescription ruleset) {
