@@ -11,6 +11,7 @@ import java.util.Set;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
@@ -20,6 +21,10 @@ import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules 
 {
+    public static final MetaTickActionRule<Board> INCREMENT_DAY_ON_TICK = new MetaTickActionRule<>(
+            (s, n) -> { s.setTick(s.getTick() + 1); }
+    );
+
     public static final TickActionRule<Tank> DISTRIBUTE_GOLD_TO_TANKS_RULE = new TickActionRule<>(
         (s, t) -> {
             if (!t.isDead()) {
@@ -59,8 +64,8 @@ public class TickRules
 
     public static final MetaTickActionRule<ArmisticeCouncil> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
         (s, c) -> {
-            int totalCouncillors = c.getCouncillors().size() + c.getSenators().size();
-            c.setArmisticeVoteCount(c.getArmisticeVoteCap() - totalCouncillors);
+            int totalCouncilMembers = c.getCouncillors().size() + c.getSenators().size();
+            c.setArmisticeVoteCount(c.getArmisticeVoteCount() + totalCouncilMembers);
         }
     );
 

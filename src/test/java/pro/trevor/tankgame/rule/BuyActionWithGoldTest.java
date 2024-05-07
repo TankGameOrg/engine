@@ -15,9 +15,10 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 
 public class BuyActionWithGoldTest {
+
     @Test
     public void TypeCheckTest() {
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3); // action_cost is a don't care
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1); // action_cost is a don't care
         assertEquals(PlayerRules.ActionKeys.BUY_ACTION, rule.name(), "Asserts that the buy action with gold rule is the right type");
     }
 
@@ -25,7 +26,7 @@ public class BuyActionWithGoldTest {
     public void DeadTankCannotBuyAction() {
         Tank tank = TestUtilities.buildTestTank(0, 3, true);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
 
         Integer[] meta = {3};
         assertFalse(rule.canApply(new DummyState(), tank, meta));
@@ -35,27 +36,47 @@ public class BuyActionWithGoldTest {
     public void NoGoldCannotBuyAction() {
         Tank tank = TestUtilities.buildTestTank(0, 0, false);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
 
         Integer[] meta = {3};
         assertFalse(rule.canApply(new DummyState(), tank, meta));
     }
 
     @Test
+    public void OneMaxBuyAttemptBuyTwo() {
+        Tank tank = TestUtilities.buildTestTank(0, 6, false);
+
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
+
+        Integer[] meta = {6};
+        assertFalse(rule.canApply(new DummyState(), tank, meta));
+    }
+
+    @Test
     public void ZeroGoldCostRuleIllegal() {
-        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(0));
+        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(0, 1));
     }
 
     @Test
     public void NegativeCostRuleIllegal() {
-        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(-5));
+        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(-5, 1));
+    }
+
+    @Test
+    public void ZeroMaxBuysRuleIllegal() {
+        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(3, 0));
+    }
+
+    @Test
+    public void NegativeMaxBuysRuleIllegal() {
+        assertThrows(Error.class, () -> PlayerRules.BuyActionWithGold(3, -4));
     }
 
     @Test
     public void TooFewGoldCannotBuyAction() {
         Tank tank = TestUtilities.buildTestTank(0, 5, false);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
 
         Integer[] meta = {6};
         assertFalse(rule.canApply(new DummyState(), tank, meta));
@@ -65,7 +86,7 @@ public class BuyActionWithGoldTest {
     public void EnsureGoldSpentDivisibleByCost() {
         Tank tank = TestUtilities.buildTestTank(0, 5, false);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
 
         Integer[] meta = {4};
         assertFalse(rule.canApply(new DummyState(), tank, meta));
@@ -75,7 +96,7 @@ public class BuyActionWithGoldTest {
     public void BuyActionGainAction() {
         Tank tank = TestUtilities.buildTestTank(0, 3, false);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
 
         Integer[] meta = {3};
         rule.apply(new DummyState(), tank, meta);
@@ -92,7 +113,7 @@ public class BuyActionWithGoldTest {
     public void BuyActionsGainActions(int startingGold, int startingActions, int spentGold, int expectedActions, int expectedGold) {
         Tank tank = TestUtilities.buildTestTank(startingActions, startingGold, false);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
 
         Integer[] meta = {spentGold};
         rule.apply(new DummyState(), tank, meta);
@@ -114,7 +135,7 @@ public class BuyActionWithGoldTest {
     {
         Tank tank = TestUtilities.buildTestTank(0, goldSpent, false);
 
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost);
+        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost, 5);
 
         Integer[] meta = {goldSpent};
         rule.apply(new DummyState(), tank, meta);
