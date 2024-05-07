@@ -195,7 +195,6 @@ public class PlayerRules
     public static final PlayerActionRule<Tank> SHOOT_V3 = SpendActionToShootWithDeathHandle(LineOfSight::hasLineOfSightV3,
         (s, t, d) -> {
             t.setGold(t.getGold() + d.getGold() + d.getBounty());
-            s.getCouncil().setCoffer(s.getCouncil().getCoffer() + 1);
         }
     );
 

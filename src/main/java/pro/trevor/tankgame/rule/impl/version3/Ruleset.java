@@ -17,7 +17,6 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 
 import static pro.trevor.tankgame.util.Util.*;
