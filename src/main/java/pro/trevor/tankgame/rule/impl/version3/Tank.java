@@ -10,7 +10,7 @@ public class Tank extends GenericTank<TankAttribute> implements ICooldownPlayerE
 
     public Tank(JSONObject json) {
         super(json, TankAttribute.class);
-        lastUseMs = 0;
+        lastUseMs = json.optLong("last_action_time", 0);
     }
 
     public int getDurability() {
@@ -70,5 +70,10 @@ public class Tank extends GenericTank<TankAttribute> implements ICooldownPlayerE
     @Override
     public void setLastUsage(String rule, long time) {
         lastUseMs = time;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return super.toJson().put("last_action_time", lastUseMs);
     }
 }
