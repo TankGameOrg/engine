@@ -107,20 +107,20 @@ public class ApiV4 extends ApiV3 implements IApi {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS).apply(state, state.getCouncil(), time, targetTank);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS).apply(state, state.getCouncil(), targetTank);
                 }
                 case PlayerRules.ActionKeys.BOUNTY -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.BOUNTY);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY).apply(state, state.getCouncil(), time, targetTank, quantity);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY).apply(state, state.getCouncil(), targetTank, quantity);
                 }
                 case PlayerRules.ActionKeys.GRANT_LIFE -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE).apply(state, state.getCouncil(), time, targetTank);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE).apply(state, state.getCouncil(), targetTank);
                 }
                 default -> throw new Error("Unexpected action: " + action);
             }
