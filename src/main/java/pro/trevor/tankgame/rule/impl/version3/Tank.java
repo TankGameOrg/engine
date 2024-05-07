@@ -1,11 +1,16 @@
 package pro.trevor.tankgame.rule.impl.version3;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.rule.type.ICooldownPlayerElement;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
-public class Tank extends GenericTank<TankAttribute> {
+public class Tank extends GenericTank<TankAttribute> implements ICooldownPlayerElement {
+
+    private long lastUseMs;
+
     public Tank(JSONObject json) {
         super(json, TankAttribute.class);
+        lastUseMs = 0;
     }
 
     public int getDurability() {
@@ -55,5 +60,15 @@ public class Tank extends GenericTank<TankAttribute> {
 
     public void setDead(boolean dead) {
         set(TankAttribute.DEAD, dead);
+    }
+
+    @Override
+    public long getLastUsage(String rule) {
+        return lastUseMs;
+    }
+
+    @Override
+    public void setLastUsage(String rule, long time) {
+        lastUseMs = time;
     }
 }

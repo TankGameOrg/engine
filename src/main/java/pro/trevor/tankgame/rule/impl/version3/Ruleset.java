@@ -73,6 +73,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerMetaConditionalRules(RulesetDescription ruleset) {
         ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
+
         metaConditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
 
