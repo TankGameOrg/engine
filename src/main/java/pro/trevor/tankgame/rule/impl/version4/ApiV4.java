@@ -35,7 +35,10 @@ public class ApiV4 extends ApiV3 implements IApi {
         int boardHeight = unitBoard.getJSONArray(0).length();
         int armisticeCap = council.getInt("armistice_vote_cap");
         int armisticeCount = council.getInt("armistice_vote_count");
-        state = new State(new Board(boardWidth, boardHeight), new ArmisticeCouncil(armisticeCap, armisticeCount));
+        boolean councilCanBounty = council.getBoolean("can_bounty");
+        Council councilObject = new ArmisticeCouncil(armisticeCap, armisticeCount);
+        councilObject.setCanBounty(councilCanBounty);
+        state = new State(new Board(boardWidth, boardHeight), councilObject);
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);

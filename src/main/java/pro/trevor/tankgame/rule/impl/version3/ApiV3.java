@@ -100,7 +100,10 @@ public class ApiV3 implements IApi {
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
         int boardWidth = unitBoard.length();
         int boardHeight = unitBoard.getJSONArray(0).length();
-        state = new State(new Board(boardWidth, boardHeight), new Council());
+        boolean councilCanBounty = council.getBoolean("can_bounty");
+        Council councilObject = new Council();
+        councilObject.setCanBounty(councilCanBounty);
+        state = new State(new Board(boardWidth, boardHeight), councilObject);
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
