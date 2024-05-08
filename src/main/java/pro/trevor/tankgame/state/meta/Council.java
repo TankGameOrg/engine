@@ -14,6 +14,7 @@ public class Council implements IPlayerElement, IMetaElement {
     private int coffer;
     private final Set<String> councillors;
     private final Set<String> senators;
+    private boolean canBounty;
 
     public Council(int coffer) {
         this.coffer = coffer;
@@ -41,6 +42,14 @@ public class Council implements IPlayerElement, IMetaElement {
         return senators;
     }
 
+    public boolean canBounty() {
+        return canBounty;
+    }
+
+    public void setCanBounty(boolean canBounty) {
+        this.canBounty = canBounty;
+    }
+
     @Override
     public String getPlayer() {
         return "Council";
@@ -60,6 +69,7 @@ public class Council implements IPlayerElement, IMetaElement {
         output.put("council", new JSONArray(councillors));
         output.put("senate", new JSONArray(senators));
         output.put("coffer", coffer);
+        output.put("can_bounty", canBounty);
         return output;
     }
 }

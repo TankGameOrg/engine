@@ -23,8 +23,6 @@ import static pro.trevor.tankgame.util.Util.*;
 
 public class Ruleset extends BaseRuleset implements IRuleset {
 
-    public static boolean councilCanBounty = true;
-
     @Override
     public void registerEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
@@ -57,8 +55,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
-        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, n) -> {
-            councilCanBounty = true;
+        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> {
+            c.setCanBounty(true);
             s.setTick(s.getTick() + 1);
         }));
     }
@@ -96,7 +94,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && councilCanBounty;
+                    return !t.isDead() && c.canBounty();
                 },
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
@@ -104,7 +102,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     assert c.getCoffer() >= bounty;
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
-                    councilCanBounty = false;
+                    c.setCanBounty(false);
                 }, new TankRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5))
         );
     }

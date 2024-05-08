@@ -1414,6 +1414,7 @@
             "coffer": 0,
             "council": [],
             "senate": [],
+            "can_bounty": true,
             "armistice_vote_cap": 35,
             "armistice_vote_count": 0
         }

@@ -5,6 +5,7 @@ import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
@@ -19,6 +20,7 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.json.*;
 import pro.trevor.tankgame.util.range.DiscreteTypeRange;
@@ -100,7 +102,10 @@ public class ApiV3 implements IApi {
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
         int boardWidth = unitBoard.length();
         int boardHeight = unitBoard.getJSONArray(0).length();
-        state = new State(new Board(boardWidth, boardHeight), new Council());
+        boolean councilCanBounty = council.optBoolean("can_bounty", true);
+        Council councilObject = new Council();
+        councilObject.setCanBounty(councilCanBounty);
+        state = new State(new Board(boardWidth, boardHeight), councilObject);
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
@@ -326,26 +331,18 @@ public class ApiV3 implements IApi {
     }
 
     protected static void enforceInvariants(State state, RulesetDescription ruleset) {
-        for (Class<?> c : ruleset.getEnforcerRules().keySet()) {
-            state.getBoard().gather(c).forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
-        }
+        state.getBoard().gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
         state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
     }
 
     protected static void applyConditionals(State state, RulesetDescription ruleset) {
-        for (Class<?> c : ruleset.getConditionalRules().keySet()) {
-            state.getBoard().gather(c).forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
-        }
+        state.getBoard().gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
         state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
     }
 
     protected static void applyTick(State state, RulesetDescription ruleset) {
-        for (Class<?> c : ruleset.getTickRules().keySet()) {
-            state.getBoard().gather(c).forEach((x) -> ruleset.getTickRules().applyRules(state, x));
-        }
-        for (Class<?> c : ruleset.getMetaTickRules().keySet()) {
-            state.getMetaElements(c).forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
-        }
+        state.getBoard().gatherAll().forEach((x) -> ruleset.getTickRules().applyRules(state, x));
+        state.getMetaElements().forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
     }
 
     protected static class JsonKeys {

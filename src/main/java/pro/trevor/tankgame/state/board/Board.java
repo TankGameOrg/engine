@@ -13,6 +13,8 @@ import pro.trevor.tankgame.state.board.unit.IWalkable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Board implements IMetaElement {
 
@@ -118,6 +120,10 @@ public class Board implements IMetaElement {
         } else {
             throw new Error("Unexpected class: " + t.getSimpleName());
         }
+    }
+
+    public List<IElement> gatherAll() {
+        return Stream.concat(gather(IUnit.class).stream(), gather(IFloor.class).stream()).collect(Collectors.toList());
     }
 
     public boolean isWalkable(Position p) {
