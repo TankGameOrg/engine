@@ -102,7 +102,7 @@ public class ApiV3 implements IApi {
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
         int boardWidth = unitBoard.length();
         int boardHeight = unitBoard.getJSONArray(0).length();
-        boolean councilCanBounty = council.getBoolean("can_bounty");
+        boolean councilCanBounty = council.optBoolean("can_bounty", true);
         Council councilObject = new Council();
         councilObject.setCanBounty(councilCanBounty);
         state = new State(new Board(boardWidth, boardHeight), councilObject);
@@ -331,9 +331,6 @@ public class ApiV3 implements IApi {
     }
 
     protected static void enforceInvariants(State state, RulesetDescription ruleset) {
-        for (Class<?> c : ruleset.getEnforcerRules().keySet()) {
-            state.getBoard().gather(c).forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
-        }
         state.getBoard().gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
         state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
     }
