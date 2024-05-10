@@ -11,7 +11,6 @@ import java.util.Set;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;

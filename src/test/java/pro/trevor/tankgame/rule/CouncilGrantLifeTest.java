@@ -5,9 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.DummyState;
-import pro.trevor.tankgame.util.TestUtilities;
+import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
 import pro.trevor.tankgame.state.meta.Council;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +21,10 @@ public class CouncilGrantLifeTest {
 
     @Test
     public void testGrantLifeToLivingTank() {
-        Tank tank = TestUtilities.buildDurableTestTank(0, 0, 1, false);
+        Tank tank = TankBuilder.buildV3Tank()
+                        .withAttribute(TankAttribute.DURABILITY, 1)
+                        .withAttribute(TankAttribute.DEAD, false)
+                        .finish();
         State state = new DummyState();
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
         assertEquals(2, tank.getDurability());
@@ -31,7 +35,10 @@ public class CouncilGrantLifeTest {
         "1", "2", "3"
     })
     public void testGrantLifeToDeadTank(int durability) {
-        Tank tank = TestUtilities.buildDurableTestTank(0, 0, durability, true);
+        Tank tank = TankBuilder.buildV3Tank()
+                        .withAttribute(TankAttribute.DURABILITY, durability)
+                        .withAttribute(TankAttribute.DEAD, true)
+                        .finish();
         State state = new DummyState();
         state.getCouncil().getCouncillors().add(tank.getPlayer());
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
@@ -42,7 +49,10 @@ public class CouncilGrantLifeTest {
 
     @Test
     public void testSubtractGoldFromCoffer() {
-        Tank tank = TestUtilities.buildDurableTestTank(0, 0, 1, false);
+        Tank tank = TankBuilder.buildV3Tank()
+                        .withAttribute(TankAttribute.DURABILITY, 1)
+                        .withAttribute(TankAttribute.DEAD, false)
+                        .finish();
         State state = new DummyState();
         state.getCouncil().setCoffer(1);
         ONE_COST_RULE.apply(state, state.getCouncil(), tank);
@@ -51,7 +61,10 @@ public class CouncilGrantLifeTest {
 
     @Test
     public void testErrorOnInsufficientGoldInCoffer() {
-        Tank tank = TestUtilities.buildDurableTestTank(0, 0, 1, false);
+        Tank tank = TankBuilder.buildV3Tank()
+                        .withAttribute(TankAttribute.DURABILITY, 1)
+                        .withAttribute(TankAttribute.DEAD, false)
+                        .finish();
         State state = new DummyState();
         assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, state.getCouncil(), tank));
     }
