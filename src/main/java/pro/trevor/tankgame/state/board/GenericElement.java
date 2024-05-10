@@ -56,6 +56,21 @@ public class GenericElement<E extends Enum<E> & IAttribute> implements IElement,
         return get(attribute, Boolean.class);
     }
 
+    public void setInteger(E attribute, int value)
+    {
+        set(attribute, value);
+    }
+
+    public void setDouble(E attribute, double value)
+    {
+        set(attribute, value);
+    }
+
+    public void setBoolean(E attribute, boolean value)
+    {
+        set(attribute, value);
+    }
+
     @Override
     public Position getPosition() {
         return position;

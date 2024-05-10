@@ -11,11 +11,14 @@ import java.util.Set;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.attribute.IAttribute;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
+import pro.trevor.tankgame.state.board.floor.HealthPool;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
 
@@ -39,6 +42,19 @@ public class TickRules
             }
         }
     );
+
+    public static <E extends Enum<E> & IAttribute> TickActionRule<GenericTank<E>> GetHealTanksInHealthPoolRule()
+    {
+        return new TickActionRule<>(
+            (s, t) -> {
+                if (t.getBoolean((E) TankAttribute.DEAD)) return;
+                if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool)
+                {
+                    t.setInteger((E) TankAttribute.DURABILITY, t.getInteger((E) TankAttribute.DURABILITY) + healthPool.getRegenAmount());
+                }
+            }
+        );
+    } 
 
     public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<>(
         (s, b) -> {
