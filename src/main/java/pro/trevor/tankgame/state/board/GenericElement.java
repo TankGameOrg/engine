@@ -36,7 +36,7 @@ public class GenericElement<E extends Enum<E> & IAttribute> implements IElement,
         }
     }
 
-    protected void set(E attribute, Object object) {
+    public void set(E attribute, Object object) {
         if (attribute.getType().isAssignableFrom(object.getClass())) {
             attributes.put(attribute, object);
         } else {
