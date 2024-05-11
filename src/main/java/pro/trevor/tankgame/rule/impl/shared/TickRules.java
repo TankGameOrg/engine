@@ -44,18 +44,16 @@ public class TickRules {
                 }
             });
 
-    public static <E extends Enum<E> & IAttribute> TickActionRule<GenericTank<E>> GetHealTanksInHealthPoolRule()
-    {
+    public static <E extends Enum<E> & IAttribute> TickActionRule<GenericTank<E>> GetHealTanksInHealthPoolRule() {
         return new TickActionRule<>(
-            (s, t) -> {
-                if (t.getBoolean((E) TankAttribute.DEAD)) return;
-                if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool)
-                {
-                    t.setInteger((E) TankAttribute.DURABILITY, t.getInteger((E) TankAttribute.DURABILITY) + healthPool.getRegenAmount());
-                }
-            }
-        );
-    } 
+                (s, t) -> {
+                    if (t.getBoolean((E) TankAttribute.DEAD))
+                        return;
+                    if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool) {
+                        t.set((E) TankAttribute.DURABILITY, t.getInteger((E) TankAttribute.DURABILITY) + healthPool.getRegenAmount());
+                    }
+                });
+    }
 
     public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<>(
             (s, b) -> {
