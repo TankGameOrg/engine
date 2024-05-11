@@ -1,14 +1,13 @@
 package pro.trevor.tankgame;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
-import pro.trevor.tankgame.rule.impl.IApi;
-import pro.trevor.tankgame.rule.impl.version3.ApiV3;
-import pro.trevor.tankgame.rule.impl.version4.ApiV4;
-
 import java.io.File;
 import java.nio.file.Files;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import pro.trevor.tankgame.rule.impl.IApi;
+import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
+import pro.trevor.tankgame.rule.impl.version3.ApiV3;
+import pro.trevor.tankgame.rule.impl.version4.ApiV4;
 
 public class Main {
 

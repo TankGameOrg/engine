@@ -9,5 +9,4 @@ public interface IJsonObject {
     default JSONObject toShortJson() {
         return toJson();
     }
-
 }

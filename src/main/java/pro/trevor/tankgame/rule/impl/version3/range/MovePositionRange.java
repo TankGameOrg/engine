@@ -1,13 +1,12 @@
 package pro.trevor.tankgame.rule.impl.version3.range;
 
+import java.util.HashSet;
+import java.util.Set;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.range.FunctionVariableRange;
 import pro.trevor.tankgame.util.Util;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MovePositionRange extends FunctionVariableRange<Tank, Position> {
 

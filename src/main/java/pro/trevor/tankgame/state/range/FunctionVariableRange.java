@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.state.range;
 
-import pro.trevor.tankgame.state.State;
-
 import java.util.Set;
 import java.util.function.BiFunction;
+import pro.trevor.tankgame.state.State;
 
 public class FunctionVariableRange<S, T> extends BaseVariableRange<S, T> {
 

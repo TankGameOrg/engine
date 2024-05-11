@@ -17,5 +17,4 @@ public interface IApi {
     JSONObject getStateJson();
 
     JSONObject getPossibleActions(String player);
-    
 }

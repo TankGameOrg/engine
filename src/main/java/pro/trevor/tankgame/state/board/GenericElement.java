@@ -1,10 +1,9 @@
 package pro.trevor.tankgame.state.board;
 
-import org.json.JSONObject;
-import pro.trevor.tankgame.state.board.attribute.IAttribute;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.json.JSONObject;
+import pro.trevor.tankgame.state.board.attribute.IAttribute;
 
 public class GenericElement<E extends Enum<E> & IAttribute> implements IElement, IPositioned {
 
@@ -29,10 +28,16 @@ public class GenericElement<E extends Enum<E> & IAttribute> implements IElement,
             try {
                 return type.cast(attributes.get(attribute));
             } catch (ClassCastException ignored) {
-                throw new Error(String.format("Attribute %s was not stored as a(n) %s", attribute.name(), type.getSimpleName()));
+                throw new Error(
+                        String.format(
+                                "Attribute %s was not stored as a(n) %s",
+                                attribute.name(), type.getSimpleName()));
             }
         } else {
-            throw new Error(String.format("Unable to read attribute %s as a(n) %s", attribute.name(), type.getSimpleName()));
+            throw new Error(
+                    String.format(
+                            "Unable to read attribute %s as a(n) %s",
+                            attribute.name(), type.getSimpleName()));
         }
     }
 
@@ -40,7 +45,10 @@ public class GenericElement<E extends Enum<E> & IAttribute> implements IElement,
         if (attribute.getType().isAssignableFrom(object.getClass())) {
             attributes.put(attribute, object);
         } else {
-            throw new Error(String.format("Attribute %s cannot store a(n) %s", attribute.name(), object.getClass().getSimpleName()));
+            throw new Error(
+                    String.format(
+                            "Attribute %s cannot store a(n) %s",
+                            attribute.name(), object.getClass().getSimpleName()));
         }
     }
 
@@ -82,7 +90,11 @@ public class GenericElement<E extends Enum<E> & IAttribute> implements IElement,
                 case Boolean v -> attributesJson.put(attributeName, v);
                 case Integer v -> attributesJson.put(attributeName, v);
                 case Double v -> attributesJson.put(attributeName, v);
-                default -> throw new Error(String.format("Unhandled type %s for attribute %s", attribute.getType().getSimpleName(), attributeName));
+                default ->
+                        throw new Error(
+                                String.format(
+                                        "Unhandled type %s for attribute %s",
+                                        attribute.getType().getSimpleName(), attributeName));
             }
         }
 

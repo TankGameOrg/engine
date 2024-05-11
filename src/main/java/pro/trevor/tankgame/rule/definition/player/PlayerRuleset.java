@@ -1,12 +1,11 @@
 package pro.trevor.tankgame.rule.definition.player;
 
+import java.util.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.range.TypeRange;
-
-import java.util.*;
 
 public class PlayerRuleset {
 
@@ -44,10 +43,12 @@ public class PlayerRuleset {
         return new ArrayList<>(0);
     }
 
-    public <T extends IPlayerElement> List<IPlayerRule<T>> applicableRules(Class<T> t, State state, T subject) {
+    public <T extends IPlayerElement> List<IPlayerRule<T>> applicableRules(
+            Class<T> t, State state, T subject) {
         List<IPlayerRule<T>> output = new ArrayList<>();
         for (IPlayerRule<T> rule : getExact(t)) {
-            if (rule instanceof PlayerActionRule<T> conditional && conditional.canApply(state, subject)) {
+            if (rule instanceof PlayerActionRule<T> conditional
+                    && conditional.canApply(state, subject)) {
                 output.add(conditional);
             }
         }

@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.rule.definition;
 
-import pro.trevor.tankgame.state.State;
-
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
+import pro.trevor.tankgame.state.State;
 
 public class ConditionalRule<T> implements IConditionalRule<T> {
 

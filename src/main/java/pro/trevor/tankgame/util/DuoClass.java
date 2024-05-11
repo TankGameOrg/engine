@@ -25,7 +25,8 @@ public class DuoClass<T, U> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DuoClass<?, ?> duoClass = (DuoClass<?, ?>) o;
-        return Objects.equals(leftClass, duoClass.leftClass) && Objects.equals(rightClass, duoClass.rightClass);
+        return Objects.equals(leftClass, duoClass.leftClass)
+                && Objects.equals(rightClass, duoClass.rightClass);
     }
 
     @Override

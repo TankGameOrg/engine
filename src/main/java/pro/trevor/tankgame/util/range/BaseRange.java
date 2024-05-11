@@ -1,8 +1,7 @@
 package pro.trevor.tankgame.util.range;
 
-import org.json.JSONObject;
-
 import java.lang.reflect.ParameterizedType;
+import org.json.JSONObject;
 
 public abstract class BaseRange<T> implements TypeRange<T> {
 

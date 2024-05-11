@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.rule.definition.enforcer;
 
-import pro.trevor.tankgame.state.State;
-
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
+import pro.trevor.tankgame.state.State;
 
 public class PredicateEnforcer<T, U extends Comparable<U>> implements IEnforceable<T> {
 
@@ -24,4 +23,3 @@ public class PredicateEnforcer<T, U extends Comparable<U>> implements IEnforceab
         }
     }
 }
-

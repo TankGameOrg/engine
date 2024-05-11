@@ -1,8 +1,7 @@
 package pro.trevor.tankgame.rule.definition.enforcer;
 
-import pro.trevor.tankgame.state.State;
-
 import java.util.*;
+import pro.trevor.tankgame.state.State;
 
 public class EnforcerRuleset {
 
@@ -33,7 +32,7 @@ public class EnforcerRuleset {
         return new ArrayList<>(0);
     }
 
-    public <T> void enforceRules(State state, T subject){
+    public <T> void enforceRules(State state, T subject) {
         Class<?> c = subject.getClass();
         for (IEnforceable<T> rule : (List<IEnforceable<T>>) (Object) get(c)) {
             rule.enforce(state, subject);

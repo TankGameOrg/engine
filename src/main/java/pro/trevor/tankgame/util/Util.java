@@ -1,13 +1,12 @@
 package pro.trevor.tankgame.util;
 
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.GoldMine;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.floor.GoldMine;
 
 public class Util {
 
@@ -58,7 +57,7 @@ public class Util {
         }
     }
 
-    public static Set<Position> getSpacesInRange(Position p, int range){
+    public static Set<Position> getSpacesInRange(Position p, int range) {
         Set<Position> output = new HashSet<>();
         for (int i = 0; i <= range; ++i) {
             for (int j = 0; j <= range; ++j) {
@@ -105,8 +104,10 @@ public class Util {
         if (o.getClass().isAssignableFrom(type)) {
             return type.cast(o);
         } else {
-            throw new Error(String.format("Could not convert %s to %s", o.getClass().getSimpleName(), type.getSimpleName()));
+            throw new Error(
+                    String.format(
+                            "Could not convert %s to %s",
+                            o.getClass().getSimpleName(), type.getSimpleName()));
         }
     }
-
 }

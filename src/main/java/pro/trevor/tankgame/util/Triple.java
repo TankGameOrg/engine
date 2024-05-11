@@ -13,7 +13,9 @@ public record Triple<T, U, V>(T left, U center, V right) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Triple<?, ?, ?> triple = (Triple<?, ?, ?>) o;
-        return Objects.equals(left, triple.left) && Objects.equals(center, triple.center) && Objects.equals(right, triple.right);
+        return Objects.equals(left, triple.left)
+                && Objects.equals(center, triple.center)
+                && Objects.equals(right, triple.right);
     }
 
     @Override

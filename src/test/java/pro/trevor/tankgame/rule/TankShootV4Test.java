@@ -1,5 +1,10 @@
 package pro.trevor.tankgame.rule;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.SHOOT_V4;
+import static pro.trevor.tankgame.util.TestUtilities.buildPositionedTank;
+import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,11 +13,6 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.util.DummyState;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.SHOOT_V4;
-import static pro.trevor.tankgame.util.TestUtilities.buildPositionedTank;
-import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
 
 public class TankShootV4Test {
 
@@ -98,18 +98,11 @@ public class TankShootV4Test {
 
     @ParameterizedTest
     @CsvSource({
-        "0, 0, 0",
-        "1, 1, 0",
-        "2, 1, 1",
-        "3, 2, 1",
-        "4, 3, 1",
-        "5, 4, 1",
-        "6, 4, 2",
-        "7, 5, 2",
-        "8, 6, 2",
-        "9, 7, 2",
+        "0, 0, 0", "1, 1, 0", "2, 1, 1", "3, 2, 1", "4, 3, 1", "5, 4, 1", "6, 4, 2", "7, 5, 2",
+        "8, 6, 2", "9, 7, 2",
     })
-    void testShootKillingLivingTankDistributesGold(int gold, int expectedNewGold, int expectedNewCoffer) {
+    void testShootKillingLivingTankDistributesGold(
+            int gold, int expectedNewGold, int expectedNewCoffer) {
         Tank tank = buildPositionedTank("A1", 1, 0, 3, false);
         Tank otherTank = buildPositionedTank("A2", 0, gold, 1, false);
         State state = generateBoard(2, 2, tank, otherTank);
@@ -139,5 +132,4 @@ public class TankShootV4Test {
         assertEquals(6, tank.getGold());
         assertEquals(0, state.getCouncil().getCoffer());
     }
-
 }

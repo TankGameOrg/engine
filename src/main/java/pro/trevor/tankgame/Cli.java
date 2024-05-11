@@ -1,14 +1,13 @@
 package pro.trevor.tankgame;
 
-import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
-import pro.trevor.tankgame.rule.impl.IApi;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import org.json.JSONObject;
+import pro.trevor.tankgame.rule.impl.IApi;
+import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
 
 public class Cli {
 
@@ -97,7 +96,7 @@ public class Cli {
                 seeking = false;
             } else if (current == '}' && !inQuote) {
                 count = count - 1;
-            } else if (current == '\"')  {
+            } else if (current == '\"') {
                 inQuote = !inQuote;
             }
 
@@ -119,5 +118,4 @@ public class Cli {
         output.put("error", error);
         return output;
     }
-
 }
