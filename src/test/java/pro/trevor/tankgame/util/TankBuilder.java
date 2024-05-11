@@ -16,13 +16,13 @@ public class TankBuilder<T extends GenericTank<E>, E extends Enum<E> & IAttribut
         this.tank = tank;
     }
 
-    public TankBuilder<T, E> withAttribute(E attribute, Object value)
+    public TankBuilder<T, E> with(E attribute, Object value)
     {
         tank.set(attribute, value);
         return this;
     }
 
-    public TankBuilder<T, E> atPosition(Position p)
+    public TankBuilder<T, E> at(Position p)
     {
         tank.setPosition(p);
         return this;

@@ -22,8 +22,8 @@ public class CouncilGrantLifeTest {
     @Test
     public void testGrantLifeToLivingTank() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .withAttribute(TankAttribute.DURABILITY, 1)
-                        .withAttribute(TankAttribute.DEAD, false)
+                        .with(TankAttribute.DURABILITY, 1)
+                        .with(TankAttribute.DEAD, false)
                         .finish();
         State state = new DummyState();
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
@@ -36,8 +36,8 @@ public class CouncilGrantLifeTest {
     })
     public void testGrantLifeToDeadTank(int durability) {
         Tank tank = TankBuilder.buildV3Tank()
-                        .withAttribute(TankAttribute.DURABILITY, durability)
-                        .withAttribute(TankAttribute.DEAD, true)
+                        .with(TankAttribute.DURABILITY, durability)
+                        .with(TankAttribute.DEAD, true)
                         .finish();
         State state = new DummyState();
         state.getCouncil().getCouncillors().add(tank.getPlayer());
@@ -50,8 +50,8 @@ public class CouncilGrantLifeTest {
     @Test
     public void testSubtractGoldFromCoffer() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .withAttribute(TankAttribute.DURABILITY, 1)
-                        .withAttribute(TankAttribute.DEAD, false)
+                        .with(TankAttribute.DURABILITY, 1)
+                        .with(TankAttribute.DEAD, false)
                         .finish();
         State state = new DummyState();
         state.getCouncil().setCoffer(1);
@@ -62,8 +62,8 @@ public class CouncilGrantLifeTest {
     @Test
     public void testErrorOnInsufficientGoldInCoffer() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .withAttribute(TankAttribute.DURABILITY, 1)
-                        .withAttribute(TankAttribute.DEAD, false)
+                        .with(TankAttribute.DURABILITY, 1)
+                        .with(TankAttribute.DEAD, false)
                         .finish();
         State state = new DummyState();
         assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, state.getCouncil(), tank));
