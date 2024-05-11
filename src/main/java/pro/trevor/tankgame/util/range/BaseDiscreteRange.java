@@ -1,10 +1,9 @@
 package pro.trevor.tankgame.util.range;
 
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
-
-import java.util.Set;
 
 public abstract class BaseDiscreteRange<T> extends BaseRange<T> implements DiscreteTypeRange<T> {
 

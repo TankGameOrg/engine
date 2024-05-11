@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.rule.definition;
 
+import java.util.function.BiConsumer;
 import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.State;
-
-import java.util.function.BiConsumer;
 
 public class TickActionRule<T extends ITickElement> implements IApplicableRule<T> {
 

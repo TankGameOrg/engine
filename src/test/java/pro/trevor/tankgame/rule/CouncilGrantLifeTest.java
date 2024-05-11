@@ -1,17 +1,17 @@
 package pro.trevor.tankgame.rule;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.GetRuleCofferCostGrantLife;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.util.DummyState;
-import pro.trevor.tankgame.util.TestUtilities;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.Council;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.GetRuleCofferCostGrantLife;
+import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestUtilities;
 
 public class CouncilGrantLifeTest {
 
@@ -27,9 +27,7 @@ public class CouncilGrantLifeTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-        "1", "2", "3"
-    })
+    @CsvSource({"1", "2", "3"})
     public void testGrantLifeToDeadTank(int durability) {
         Tank tank = TestUtilities.buildDurableTestTank(0, 0, durability, true);
         State state = new DummyState();
@@ -55,5 +53,4 @@ public class CouncilGrantLifeTest {
         State state = new DummyState();
         assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, state.getCouncil(), tank));
     }
-
 }

@@ -1,13 +1,12 @@
 package pro.trevor.tankgame.state.meta;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.util.Util;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class Council implements IPlayerElement, IMetaElement {
 
@@ -57,9 +56,12 @@ public class Council implements IPlayerElement, IMetaElement {
 
     @Override
     public String toString() {
-        return "council: [\n  coffer: " + coffer +
-                "\n  councillors: " + Util.toString(councillors, 4) +
-                "  senators: " + Util.toString(senators, 4);
+        return "council: [\n  coffer: "
+                + coffer
+                + "\n  councillors: "
+                + Util.toString(councillors, 4)
+                + "  senators: "
+                + Util.toString(senators, 4);
     }
 
     @Override

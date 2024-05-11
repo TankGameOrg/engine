@@ -1,4 +1,3 @@
 package pro.trevor.tankgame.rule.type;
 
-public interface ITickElement {
-}
+public interface ITickElement {}

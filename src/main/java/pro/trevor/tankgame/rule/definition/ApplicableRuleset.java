@@ -1,8 +1,7 @@
 package pro.trevor.tankgame.rule.definition;
 
-import pro.trevor.tankgame.state.State;
-
 import java.util.*;
+import pro.trevor.tankgame.state.State;
 
 public class ApplicableRuleset {
 
@@ -33,20 +32,21 @@ public class ApplicableRuleset {
         return new ArrayList<>(0);
     }
 
-    public <T> void applyRules(State state, T subject){
+    public <T> void applyRules(State state, T subject) {
         Class<?> c = subject.getClass();
         for (Class<?> type = c; type != null; type = type.getSuperclass()) {
             for (IApplicableRule<T> rule : (List<IApplicableRule<T>>) (Object) get(type)) {
                 rule.apply(state, subject);
             }
         }
-
     }
 
-    public <T> List<IConditionalRule<T>> applicableConditionalRules(Class<T> c, State state, T subject) {
+    public <T> List<IConditionalRule<T>> applicableConditionalRules(
+            Class<T> c, State state, T subject) {
         List<IConditionalRule<T>> output = new ArrayList<>();
         for (IApplicableRule<T> rule : get(c)) {
-            if (rule instanceof IConditionalRule<T> conditional && conditional.canApply(state, subject)) {
+            if (rule instanceof IConditionalRule<T> conditional
+                    && conditional.canApply(state, subject)) {
                 output.add(conditional);
             }
         }

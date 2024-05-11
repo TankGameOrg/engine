@@ -1,11 +1,12 @@
 package pro.trevor.tankgame.rule.impl.version3;
 
+import java.util.*;
+import org.json.*;
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
-import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
@@ -13,16 +14,11 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.StandardFloor;
+import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
-import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.range.VariableTypeRange;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import org.json.*;
 import pro.trevor.tankgame.util.range.DiscreteTypeRange;
 import pro.trevor.tankgame.util.range.TypeRange;
 
@@ -109,8 +105,12 @@ public class ApiV3 implements IApi {
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
-        state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
-        state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
+        state.getCouncil()
+                .getCouncillors()
+                .addAll(councillors.toList().stream().map(Object::toString).toList());
+        state.getCouncil()
+                .getSenators()
+                .addAll(senators.toList().stream().map(Object::toString).toList());
         state.getCouncil().setCoffer(council.getInt("coffer"));
         for (int i = 0; i < unitBoard.length(); ++i) {
             JSONArray unitBoardRow = unitBoard.getJSONArray(i);
@@ -152,44 +152,50 @@ public class ApiV3 implements IApi {
                     Position position = new Position(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.SHOOT).apply(state, tank, position, hit);
-
+                    getRule(Tank.class, PlayerRules.ActionKeys.SHOOT)
+                            .apply(state, tank, position, hit);
                 }
                 case PlayerRules.ActionKeys.DONATE -> {
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.DONATION);
                     Tank subjectTank = getTank(subject);
                     Tank targetTank = getTank(target);
-                    getRule(Tank.class, PlayerRules.ActionKeys.DONATE).apply(state, subjectTank, targetTank, quantity);
+                    getRule(Tank.class, PlayerRules.ActionKeys.DONATE)
+                            .apply(state, subjectTank, targetTank, quantity);
                 }
                 case PlayerRules.ActionKeys.BUY_ACTION -> {
                     int quantity = json.getInt(JsonKeys.GOLD);
                     Tank subjectTank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.BUY_ACTION).apply(state, subjectTank, quantity);
+                    getRule(Tank.class, PlayerRules.ActionKeys.BUY_ACTION)
+                            .apply(state, subjectTank, quantity);
                 }
                 case PlayerRules.ActionKeys.UPGRADE_RANGE -> {
                     Tank subjectTank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.UPGRADE_RANGE).apply(state, subjectTank);
+                    getRule(Tank.class, PlayerRules.ActionKeys.UPGRADE_RANGE)
+                            .apply(state, subjectTank);
                 }
 
                 case PlayerRules.ActionKeys.STIMULUS -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS).apply(state, state.getCouncil(), targetTank);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS)
+                            .apply(state, state.getCouncil(), targetTank);
                 }
                 case PlayerRules.ActionKeys.BOUNTY -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.BOUNTY);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY).apply(state, state.getCouncil(), targetTank, quantity);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY)
+                            .apply(state, state.getCouncil(), targetTank, quantity);
                 }
                 case PlayerRules.ActionKeys.GRANT_LIFE -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE).apply(state, state.getCouncil(), targetTank);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE)
+                            .apply(state, state.getCouncil(), targetTank);
                 }
                 default -> throw new Error("Unexpected action: " + action);
             }
@@ -223,9 +229,10 @@ public class ApiV3 implements IApi {
         } else if (state.getPlayers().contains(player)) {
             type = Tank.class;
             rules = ruleset.getPlayerRules().get(type);
-            Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()
-                    .filter((t) -> t.getPlayer().equals(player))
-                    .findFirst();
+            Optional<Tank> tank =
+                    state.getBoard().gather(Tank.class).stream()
+                            .filter((t) -> t.getPlayer().equals(player))
+                            .findFirst();
             if (tank.isPresent()) {
                 subject = tank.get();
             } else {
@@ -246,8 +253,9 @@ public class ApiV3 implements IApi {
             // find all states of each parameter
             JSONArray fields = new JSONArray();
             for (TypeRange<?> field : rule.parameters()) {
-                if (field instanceof VariableTypeRange<?,?> variableField) {
-                    VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
+                if (field instanceof VariableTypeRange<?, ?> variableField) {
+                    VariableTypeRange<Object, ?> genericField =
+                            (VariableTypeRange<Object, ?>) variableField;
                     genericField.generate(state, subject);
                 }
                 fields.put(field.toJson());
@@ -268,21 +276,28 @@ public class ApiV3 implements IApi {
             if (parameter instanceof DiscreteTypeRange<?> discreteParameter) {
                 parameters[i] = discreteParameter;
             } else {
-                throw new Error(String.format("Given parameter `%s` is not discrete", parameter.getName()));
+                throw new Error(
+                        String.format("Given parameter `%s` is not discrete", parameter.getName()));
             }
         }
         return allPermutations(genericRule, parameters, state, subject);
     }
 
-    private Set<List<Object>> allPermutations(IPlayerRule<Object> rule, DiscreteTypeRange<?>[] discreteParameters, State state, Object subject, Object... permutation) {
+    private Set<List<Object>> allPermutations(
+            IPlayerRule<Object> rule,
+            DiscreteTypeRange<?>[] discreteParameters,
+            State state,
+            Object subject,
+            Object... permutation) {
         if (permutation.length == discreteParameters.length) {
             if (rule.canApply(state, subject, permutation)) {
                 return new HashSet<>(List.of(List.of(permutation)));
             }
         } else {
             DiscreteTypeRange<?> currentParameter = discreteParameters[permutation.length];
-            if (currentParameter instanceof VariableTypeRange<?,?> variableRange) {
-                VariableTypeRange<Object, ?> genericRange = (VariableTypeRange<Object, ?>) variableRange;
+            if (currentParameter instanceof VariableTypeRange<?, ?> variableRange) {
+                VariableTypeRange<Object, ?> genericRange =
+                        (VariableTypeRange<Object, ?>) variableRange;
                 genericRange.generate(state, subject);
             }
             Set<List<Object>> output = new HashSet<>();
@@ -290,7 +305,8 @@ public class ApiV3 implements IApi {
                 Object[] newPermutation = new Object[permutation.length + 1];
                 System.arraycopy(permutation, 0, newPermutation, 0, permutation.length);
                 newPermutation[permutation.length] = possibleValue;
-                output.addAll(allPermutations(rule, discreteParameters, state, subject, newPermutation));
+                output.addAll(
+                        allPermutations(rule, discreteParameters, state, subject, newPermutation));
             }
             return output;
         }
@@ -303,7 +319,8 @@ public class ApiV3 implements IApi {
             throw new Error(String.format("No rule for `%s`", t.getSimpleName()));
         }
 
-        List<IPlayerRule<T>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
+        List<IPlayerRule<T>> namedRules =
+                rules.stream().filter(r -> r.name().equals(name)).toList();
         if (namedRules.isEmpty()) {
             throw new Error(String.format("No rule named `%s`", name));
         }
@@ -317,7 +334,8 @@ public class ApiV3 implements IApi {
             throw new Error(String.format("No rule for `%s`", t.getSimpleName()));
         }
 
-        List<IPlayerRule<T>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
+        List<IPlayerRule<T>> namedRules =
+                rules.stream().filter(r -> r.name().equals(name)).toList();
         if (namedRules.isEmpty()) {
             throw new Error(String.format("No rule named `%s`", name));
         }
@@ -327,17 +345,25 @@ public class ApiV3 implements IApi {
 
     protected Tank getTank(String player) {
         return state.getBoard().gatherUnits(Tank.class).stream()
-                .filter(t -> t.getPlayer().equals(player)).toList().getFirst();
+                .filter(t -> t.getPlayer().equals(player))
+                .toList()
+                .getFirst();
     }
 
     protected static void enforceInvariants(State state, RulesetDescription ruleset) {
-        state.getBoard().gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
-        state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
+        state.getBoard()
+                .gatherAll()
+                .forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
+        state.getMetaElements()
+                .forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
     }
 
     protected static void applyConditionals(State state, RulesetDescription ruleset) {
-        state.getBoard().gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
-        state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
+        state.getBoard()
+                .gatherAll()
+                .forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
+        state.getMetaElements()
+                .forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
     }
 
     protected static void applyTick(State state, RulesetDescription ruleset) {

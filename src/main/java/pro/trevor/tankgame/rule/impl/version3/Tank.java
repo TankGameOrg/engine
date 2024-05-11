@@ -37,7 +37,6 @@ public class Tank extends GenericTank<TankAttribute> implements ICooldownPlayerE
         return getBoolean(TankAttribute.DEAD);
     }
 
-
     public void setDurability(int durability) {
         set(TankAttribute.DURABILITY, durability);
     }

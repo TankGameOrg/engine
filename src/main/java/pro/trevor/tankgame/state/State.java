@@ -1,15 +1,14 @@
 package pro.trevor.tankgame.state;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.Util;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 public class State implements IJsonObject {
 
@@ -44,7 +43,9 @@ public class State implements IJsonObject {
     }
 
     public List<IMetaElement> getMetaElements(Class<?> c) {
-        return metaElements.stream().filter((e) -> c.isAssignableFrom(e.getClass())).collect(Collectors.toList());
+        return metaElements.stream()
+                .filter((e) -> c.isAssignableFrom(e.getClass()))
+                .collect(Collectors.toList());
     }
 
     public Board getBoard() {

@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.rule.impl.version3.range;
 
+import java.util.HashSet;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.range.FunctionVariableRange;
-
-import java.util.HashSet;
 
 public class TankRange<S> extends FunctionVariableRange<S, Tank> {
     public TankRange(String name) {

@@ -7,5 +7,4 @@ public interface TypeRange<T> extends IJsonObject {
     Class<T> getBoundClass();
 
     String getName();
-
 }

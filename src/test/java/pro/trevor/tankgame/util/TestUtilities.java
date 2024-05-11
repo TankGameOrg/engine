@@ -1,12 +1,10 @@
 package pro.trevor.tankgame.util;
 
 import org.json.JSONObject;
-
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.rule.impl.version3.TankAttribute;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 
@@ -39,7 +37,8 @@ public class TestUtilities {
         return new Tank(json);
     }
 
-    public static Tank buildPositionedTank(String position, int actions, int gold, int durability, boolean dead) {
+    public static Tank buildPositionedTank(
+            String position, int actions, int gold, int durability, boolean dead) {
         JSONObject json = new JSONObject();
         JSONObject attributes = new JSONObject();
         attributes.put(TankAttribute.ACTIONS.name(), actions);
@@ -66,13 +65,11 @@ public class TestUtilities {
     public static Council BuildTestCouncil(int coffer, int councilors, int senators) {
         Council c = new Council(coffer);
 
-        for (int i = 0; i < councilors; i++)
-        {
+        for (int i = 0; i < councilors; i++) {
             c.getCouncillors().add("Councilor " + i);
         }
 
-        for (int i = 0; i < senators; i++)
-        {
+        for (int i = 0; i < senators; i++) {
             c.getSenators().add("Senators " + i);
         }
 

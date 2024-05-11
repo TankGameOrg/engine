@@ -42,8 +42,12 @@ public class ApiV4 extends ApiV3 implements IApi {
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
-        state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
-        state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
+        state.getCouncil()
+                .getCouncillors()
+                .addAll(councillors.toList().stream().map(Object::toString).toList());
+        state.getCouncil()
+                .getSenators()
+                .addAll(senators.toList().stream().map(Object::toString).toList());
         state.getCouncil().setCoffer(council.getInt("coffer"));
         for (int i = 0; i < unitBoard.length(); ++i) {
             JSONArray unitBoardRow = unitBoard.getJSONArray(i);
@@ -79,51 +83,58 @@ public class ApiV4 extends ApiV3 implements IApi {
                     String positionString = json.getString(JsonKeys.TARGET);
                     Position position = new Position(positionString);
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.MOVE).apply(state, tank, time, position);
+                    getRule(Tank.class, PlayerRules.ActionKeys.MOVE)
+                            .apply(state, tank, time, position);
                 }
                 case PlayerRules.ActionKeys.SHOOT -> {
                     String location = json.getString(JsonKeys.TARGET);
                     Position position = new Position(location);
                     boolean hit = json.getBoolean(JsonKeys.HIT);
                     Tank tank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.SHOOT).apply(state, tank, time, position, hit);
-
+                    getRule(Tank.class, PlayerRules.ActionKeys.SHOOT)
+                            .apply(state, tank, time, position, hit);
                 }
                 case PlayerRules.ActionKeys.DONATE -> {
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.DONATION);
                     Tank subjectTank = getTank(subject);
                     Tank targetTank = getTank(target);
-                    getRule(Tank.class, PlayerRules.ActionKeys.DONATE).apply(state, subjectTank, time, targetTank, quantity);
+                    getRule(Tank.class, PlayerRules.ActionKeys.DONATE)
+                            .apply(state, subjectTank, time, targetTank, quantity);
                 }
                 case PlayerRules.ActionKeys.BUY_ACTION -> {
                     int quantity = json.getInt(JsonKeys.GOLD);
                     Tank subjectTank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.BUY_ACTION).apply(state, subjectTank, time, quantity);
+                    getRule(Tank.class, PlayerRules.ActionKeys.BUY_ACTION)
+                            .apply(state, subjectTank, time, quantity);
                 }
                 case PlayerRules.ActionKeys.UPGRADE_RANGE -> {
                     Tank subjectTank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.UPGRADE_RANGE).apply(state, subjectTank, time);
+                    getRule(Tank.class, PlayerRules.ActionKeys.UPGRADE_RANGE)
+                            .apply(state, subjectTank, time);
                 }
 
                 case PlayerRules.ActionKeys.STIMULUS -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS).apply(state, state.getCouncil(), targetTank);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS)
+                            .apply(state, state.getCouncil(), targetTank);
                 }
                 case PlayerRules.ActionKeys.BOUNTY -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     int quantity = json.getInt(JsonKeys.BOUNTY);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY).apply(state, state.getCouncil(), targetTank, quantity);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY)
+                            .apply(state, state.getCouncil(), targetTank, quantity);
                 }
                 case PlayerRules.ActionKeys.GRANT_LIFE -> {
                     assert subject.equals(COUNCIL);
                     String target = json.getString(JsonKeys.TARGET);
                     Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE).apply(state, state.getCouncil(), targetTank);
+                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE)
+                            .apply(state, state.getCouncil(), targetTank);
                 }
                 default -> throw new Error("Unexpected action: " + action);
             }

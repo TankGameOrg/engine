@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.rule.impl.util;
 
-import pro.trevor.tankgame.rule.impl.IApi;
-
 import java.util.HashMap;
 import java.util.Optional;
+import pro.trevor.tankgame.rule.impl.IApi;
 
 public class ApiRegistry {
 
@@ -24,5 +23,4 @@ public class ApiRegistry {
     public static void putApi(String name, Class<? extends IApi> api) {
         registry.put(name, api);
     }
-
 }

@@ -1,13 +1,13 @@
 package pro.trevor.tankgame.state.range;
 
-import org.json.JSONObject;
-import pro.trevor.tankgame.util.range.BaseDiscreteRange;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.HashSet;
 import java.util.Set;
+import org.json.JSONObject;
+import pro.trevor.tankgame.util.range.BaseDiscreteRange;
 
-public abstract class BaseVariableRange<S, T> extends BaseDiscreteRange<T> implements VariableTypeRange<S, T> {
+public abstract class BaseVariableRange<S, T> extends BaseDiscreteRange<T>
+        implements VariableTypeRange<S, T> {
 
     protected Set<T> elements;
 

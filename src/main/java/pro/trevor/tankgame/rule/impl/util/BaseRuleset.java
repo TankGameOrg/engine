@@ -8,42 +8,26 @@ import pro.trevor.tankgame.rule.impl.IRuleset;
  */
 public abstract class BaseRuleset implements IRuleset {
     @Override
-    public void registerEnforcerRules(RulesetDescription ruleset) {
-
-    }
+    public void registerEnforcerRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerMetaEnforcerRules(RulesetDescription ruleset) {
-
-    }
+    public void registerMetaEnforcerRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerTickRules(RulesetDescription ruleset) {
-
-    }
+    public void registerTickRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerMetaTickRules(RulesetDescription ruleset) {
-
-    }
+    public void registerMetaTickRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerConditionalRules(RulesetDescription ruleset) {
-
-    }
+    public void registerConditionalRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerMetaConditionalRules(RulesetDescription ruleset) {
-
-    }
+    public void registerMetaConditionalRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerPlayerRules(RulesetDescription ruleset) {
-
-    }
+    public void registerPlayerRules(RulesetDescription ruleset) {}
 
     @Override
-    public void registerMetaPlayerRules(RulesetDescription ruleset) {
-
-    }
+    public void registerMetaPlayerRules(RulesetDescription ruleset) {}
 }

@@ -1,11 +1,10 @@
 package pro.trevor.tankgame.state.board.unit;
 
+import java.util.Collections;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.attribute.DurableAttribute;
-
-import java.util.Collections;
 
 public class BasicWall extends GenericElement<DurableAttribute> implements IUnit {
 

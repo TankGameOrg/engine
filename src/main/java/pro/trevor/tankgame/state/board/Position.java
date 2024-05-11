@@ -2,7 +2,7 @@ package pro.trevor.tankgame.state.board;
 
 import java.util.Objects;
 
-public record Position (int x, int y) {
+public record Position(int x, int y) {
 
     public Position(String boardString) {
         this(boardString.charAt(0) - 'A', Integer.parseInt(boardString.substring(1)) - 1);
@@ -33,5 +33,4 @@ public record Position (int x, int y) {
     public String toBoardString() {
         return String.format("%c%d", x + ('A'), y + 1);
     }
-
 }

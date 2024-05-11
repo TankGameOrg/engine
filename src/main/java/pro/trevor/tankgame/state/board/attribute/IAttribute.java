@@ -1,9 +1,8 @@
 package pro.trevor.tankgame.state.board.attribute;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.json.JSONObject;
 
 public interface IAttribute {
     Class<?> getType();
@@ -16,7 +15,8 @@ public interface IAttribute {
         return null;
     }
 
-    static <E extends Enum<E> & IAttribute> Map<E, Object> fromJson(Class<E> type, JSONObject json) {
+    static <E extends Enum<E> & IAttribute> Map<E, Object> fromJson(
+            Class<E> type, JSONObject json) {
         Map<E, Object> output = new HashMap<>();
         for (String key : json.keySet()) {
             E attribute = IAttribute.fromString(type, key);

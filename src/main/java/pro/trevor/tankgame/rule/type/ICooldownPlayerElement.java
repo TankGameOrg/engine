@@ -7,5 +7,4 @@ public interface ICooldownPlayerElement extends IPlayerElement {
 
     // Sets the time last used of the specified rule to the given time
     void setLastUsage(String rule, long time);
-
 }

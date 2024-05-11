@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.State;
@@ -31,7 +30,8 @@ public class CouncilBaseIncomeTest {
         "15, 3,  1,  21",
         "9,  0,  0,  9",
     })
-    public void TestCouncilBaseIncome(int startingCoffer, int numCouncilors, int numSenators, int expectedCoffer) {
+    public void TestCouncilBaseIncome(
+            int startingCoffer, int numCouncilors, int numSenators, int expectedCoffer) {
         Council c = TestUtilities.BuildTestCouncil(startingCoffer, numCouncilors, numSenators);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(1, 3);
 
@@ -65,9 +65,15 @@ public class CouncilBaseIncomeTest {
         "0,  1,  0,  1,  1",
         "0,  1,  1,  1,  1",
     })
-    public void CouncilsWithZeroBaseIncome(int councilorIncome, int senatorIncome, int numCouncilors, int numSenators, int expectedCoffer) {
+    public void CouncilsWithZeroBaseIncome(
+            int councilorIncome,
+            int senatorIncome,
+            int numCouncilors,
+            int numSenators,
+            int expectedCoffer) {
         Council c = TestUtilities.BuildTestCouncil(0, numCouncilors, numSenators);
-        MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(councilorIncome, senatorIncome);
+        MetaTickActionRule<Council> rule =
+                TickRules.GetCouncilBaseIncomeRule(councilorIncome, senatorIncome);
 
         rule.apply(new DummyState(), c);
 

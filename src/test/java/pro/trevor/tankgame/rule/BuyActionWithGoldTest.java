@@ -7,19 +7,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import pro.trevor.tankgame.util.DummyState;
-import pro.trevor.tankgame.util.TestUtilities;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestUtilities;
 
 public class BuyActionWithGoldTest {
 
     @Test
     public void TypeCheckTest() {
-        PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1); // action_cost is a don't care
-        assertEquals(PlayerRules.ActionKeys.BUY_ACTION, rule.name(), "Asserts that the buy action with gold rule is the right type");
+        PlayerActionRule<Tank> rule =
+                PlayerRules.BuyActionWithGold(3, 1); // action_cost is a don't care
+        assertEquals(
+                PlayerRules.ActionKeys.BUY_ACTION,
+                rule.name(),
+                "Asserts that the buy action with gold rule is the right type");
     }
 
     @Test
@@ -110,7 +113,12 @@ public class BuyActionWithGoldTest {
         "6,  1,  6,  3,  0",
         "16,  2,  9,  5,  7",
     })
-    public void BuyActionsGainActions(int startingGold, int startingActions, int spentGold, int expectedActions, int expectedGold) {
+    public void BuyActionsGainActions(
+            int startingGold,
+            int startingActions,
+            int spentGold,
+            int expectedActions,
+            int expectedGold) {
         Tank tank = TestUtilities.buildTestTank(startingActions, startingGold, false);
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
@@ -123,16 +131,8 @@ public class BuyActionWithGoldTest {
     }
 
     @ParameterizedTest()
-    @CsvSource({
-        "3,   3,  1",
-        "3,   6,  2",
-        "3,   9,  3",
-        "5,   5,  1",
-        "5,  10,  2",
-        "5,  25,  5"
-    })
-    public void CostMultiplesWork(int actionCost, int goldSpent, int expectedActions)
-    {
+    @CsvSource({"3,   3,  1", "3,   6,  2", "3,   9,  3", "5,   5,  1", "5,  10,  2", "5,  25,  5"})
+    public void CostMultiplesWork(int actionCost, int goldSpent, int expectedActions) {
         Tank tank = TestUtilities.buildTestTank(0, goldSpent, false);
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost, 5);
