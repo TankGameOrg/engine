@@ -2,6 +2,11 @@
 import argparse
 import json
 import random
+import sys
+
+import PySimpleGUI as sg
+
+application_name = 'Tank Game Map Maker'
 
 GENERIC_ENTITY = True
 
@@ -68,91 +73,167 @@ def tank(name=None, dur=DEFAULT_DURABILITY, **others):
     tank_counter += 1
     return raw
 
-
 def gold_mine():
     return {
         "type": "gold_mine",
     }
 
-
-def fill_empty(board):
-    for i, row in enumerate(board):
-        board[i] = [({ "type": "empty" } if cell is None else cell) for cell in row]
+def empty():
+    return {"type": "empty",}
 
 def set_positions(board):
     y = 1
     for row in board:
         x = 0
         for cell in row:
-            if cell is not None:
+            if cell is not None and cell["type"] != "empty":
                 letter = chr(ord('A')+x)
                 position = f'{letter}{y}'
                 cell["position"] = position
             x += 1
         y += 1
 
+def save_board(filepath, state):
+    with open(filepath, "w") as f:
+        f.seek(0)
+        json.dump({
+            "fileFormatVersion": 5,
+            "logBook": {
+                "gameVersion": "4"
+            },
+            "initialGameState": state,
+        }, f, indent=4)
 
+def load_state(filepath):
+    with open(filepath, "r") as f:
+        return json.load(f)['initialGameState']
 
-board = [
-    [ wall(dur=6), wall(dur=6), wall(dur=6), wall(dur=6), tank(),      None,        None,        tank(),      wall(dur=6), wall(dur=6), wall(dur=6), wall(dur=6) ],
-    [ wall(dur=6), wall(dur=4), wall(dur=4), wall(dur=4), None,        None,        None,        None,        wall(dur=4), wall(dur=4), wall(dur=4), wall(dur=6) ],
-    [ wall(dur=6), wall(dur=4), None,        wall(dur=2), None,        None,        None,        None,        wall(dur=2), None,        wall(dur=4), wall(dur=6) ],
-    [ wall(dur=6), wall(dur=4), wall(dur=2), wall(dur=1), tank(),      None,        None,        tank(),      wall(dur=1), wall(dur=2), wall(dur=4), wall(dur=6) ],
-    [ tank(),      None,        None,        tank(),      wall(dur=6), wall(dur=2), wall(dur=2), wall(dur=6), tank(),      None,        None,        tank(),     ],
-    [ None,        None,        None,        None,        wall(dur=2), wall(dur=2), wall(dur=2), wall(dur=2), None,        None,        None,        None,       ],
-    [ None,        None,        None,        None,        wall(dur=2), wall(dur=2), wall(dur=2), wall(dur=2), None,        None,        None,        None,       ],
-    [ tank(),      None,        None,        tank(),      wall(dur=6), wall(dur=2), wall(dur=2), wall(dur=6), tank(),      None,        None,        tank(),     ],
-    [ wall(dur=6), wall(dur=4), wall(dur=2), wall(dur=1), tank(),      None,        None,        tank(),      wall(dur=1), wall(dur=2), wall(dur=4), wall(dur=6) ],
-    [ wall(dur=6), wall(dur=4), None,        wall(dur=2), None,        None,        None,        None,        wall(dur=2), None,        wall(dur=4), wall(dur=6) ],
-    [ wall(dur=6), wall(dur=4), wall(dur=4), wall(dur=4), None,        None,        None,        None,        wall(dur=4), wall(dur=4), wall(dur=4), wall(dur=6) ],
-    [ wall(dur=6), wall(dur=6), wall(dur=6), wall(dur=6), tank(),      None,        None,        tank(),      wall(dur=6), wall(dur=6), wall(dur=6), wall(dur=6) ]
-]
+def grid_config_window(row, col, unit_board):
+    radio_options = ["wall", "tank", "empty"]
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring board space {(col, row)}.')],
+                     [sg.Text(f'What is going to be here?')],
+                     [[sg.Radio(opt, 1, key=opt) for opt in radio_options]],
+                     [sg.Submit(), sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
+    
+    option = [key for key in radio_options if values[key]][0]
+    if option == "wall":
+        wall_config_window(row, col, unit_board)
+    elif option == "tank":
+        tank_config_window(row, col, unit_board)
+    elif option == "empty":
+        empty_config_window(row, col, unit_board)
+    else:
+        print(f'Error: bad grid space selection: {option}')
+        sys.exit()
+    return option
 
-floor = [
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, gold_mine(), None, None, None, None, None, None, gold_mine(), None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, gold_mine(), None, None, None, None, None, None, gold_mine(), None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ],
-    [ None, None, None,        None, None, None, None, None, None, None,        None, None ]
-]
+def empty_config_window(row, col, unit_board):
+    unit_board[col][row] = empty()
 
-set_positions(board)
-fill_empty(board)
-fill_empty(floor)
+def wall_config_window(row, col, unit_board):
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring board space {(col, row)}.')],
+                     [sg.Text(f'It will be a wall.')],
+                     [sg.Text(f'What is its durability?')],
+                     [sg.Input(key="durability")],
+                     [sg.Submit()]]).read(close=True)
+    
+    durability = int(values["durability"])
+    unit_board[col][row] = wall(durability)
 
-state = {
-    "running": True,
-    "winner": "",
-    "type": "state",
-    "day": 0,
-    "board": {
-        "type": "board",
-        "unit_board": board,
-        "floor_board": floor,
-    },
-    "council": {
-        "type": "council",
-        "coffer": 0,
-        "council": [],
-        "senate": [],
-        "armistice_vote_cap": 35,
-        "armistice_vote_count": 0,
-        "can_bounty": False
-    },
-}
+def tank_config_window(row, col, unit_board):
+    unit_board[col][row] = tank()
 
-with open("example/v4_map.json", "w") as f:
-    json.dump({
-        "fileFormatVersion": 5,
-        "logBook": {
-            "gameVersion": "4"
+def new_map_window():
+    event, values = sg.Window(application_name,
+                    [[sg.Text('Map Name:')],
+                     [sg.Input(key='name')],
+                     [sg.Text('Board Width:')],      
+                     [sg.Input(key='width')],
+                     [sg.Text('Board Height')],
+                     [sg.Input(key='height')],
+                     [sg.Submit(), sg.Cancel()]]).read(close=True)
+
+    name = values['name']
+    width = int(values["width"])
+    height = int(values["height"])
+    unit_board = [[empty() for x in range(height)] for y in range(width)]
+    floor_board = [[empty() for x in range(height)] for y in range(width)]
+    state = {
+        "running": True,
+        "winner": "",
+        "type": "state",
+        "day": 0,
+        "board": {
+            "type": "board",
+            "unit_board": unit_board,
+            "floor_board": floor_board,
         },
-        "initialGameState": state,
-    }, f, indent=4)
+        "council": {
+            "type": "council",
+            "coffer": 0,
+            "council": [],
+            "senate": [],
+            "armistice_vote_cap": 35,
+            "armistice_vote_count": 0,
+            "can_bounty": False
+        },
+    }
+    return name, state
+
+def load_map_window():
+    layout = [[sg.Text('Load an existing map.')],
+              [sg.Text('File', size=(8, 1)), sg.Input(), sg.FileBrowse()],
+              [sg.Submit(), sg.Cancel()]]
+    event, values = sg.Window(application_name, layout).read(close=True)
+    return values[0], load_state(values[0])
+
+def main():
+    sg.theme('DarkAmber')
+    event, values = sg.Window(application_name,
+                              [[sg.Button("New Map")],
+                               [sg.Button("Load Map")]]).read(close=True)
+    name = None
+    state = None
+    if event == "New Map":
+        name, state = new_map_window()
+    elif event == "Load Map":
+        name, state = load_map_window()
+
+    type_to_icon_map = {
+        "tank": "T",
+        "wall": "W",
+        "empty": "_"
+    }
+
+    unit_board = state['board']['unit_board'] 
+    width = len(unit_board)
+    height = len(unit_board[0])
+
+    layout =  [[sg.Button(type_to_icon_map[unit_board[i][j]['type']], size=(4, 2), key=(i,j), pad=(0,0)) for i in range(width)] for j in range(height)]
+    window = sg.Window(application_name, layout)
+
+    while True:
+        event, values = window.read()
+        if event in (sg.WIN_CLOSED, 'Exit'):
+            break
+
+        col = event[0]
+        row = event[1]
+        type = grid_config_window(row, col, unit_board)
+
+        if type is not None: window[(col, row)].update(type_to_icon_map[type])
+        # For this example, change the text of the button to the board's value and turn color black
+        #window[event].update(board[event[0]][event[1]], button_color=('white','black'))
+    window.close()
+
+    # Construct and save state
+    set_positions(unit_board)
+    state['board']['unit_board'] = unit_board
+    save_board(name, state)
+
+if __name__ == "__main__":
+    main()
