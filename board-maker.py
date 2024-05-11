@@ -131,7 +131,7 @@ def grid_config_window(row, col, unit_board):
     return option
 
 def empty_config_window(row, col, unit_board):
-    unit_board[col][row] = empty()
+    unit_board[row][col] = empty()
 
 def wall_config_window(row, col, unit_board):
     event, values = sg.Window('Tank Game Board Maker',
@@ -142,10 +142,10 @@ def wall_config_window(row, col, unit_board):
                      [sg.Submit()]]).read(close=True)
     
     durability = int(values["durability"])
-    unit_board[col][row] = wall(durability)
+    unit_board[row][col] = wall(durability)
 
 def tank_config_window(row, col, unit_board):
-    unit_board[col][row] = tank()
+    unit_board[row][col] = tank()
 
 def new_map_window():
     event, values = sg.Window(application_name,
@@ -160,8 +160,8 @@ def new_map_window():
     name = values['name']
     width = int(values["width"])
     height = int(values["height"])
-    unit_board = [[empty() for x in range(height)] for y in range(width)]
-    floor_board = [[empty() for x in range(height)] for y in range(width)]
+    unit_board = [[empty() for x in range(width)] for y in range(height)]
+    floor_board = [[empty() for x in range(width)] for y in range(height)]
     state = {
         "running": True,
         "winner": "",
@@ -206,34 +206,40 @@ def main():
     type_to_icon_map = {
         "tank": "T",
         "wall": "W",
-        "empty": "_"
+        "empty": " "
+    }
+    type_to_color_map = {
+        "gold_mine": "gold",
+        "empty": "white",
+        "health_pool": "pale violet red"
     }
 
-    unit_board = state['board']['unit_board'] 
-    width = len(unit_board)
-    height = len(unit_board[0])
+    unit_board = state['board']['unit_board']
+    floor_board = state['board']['floor_board']
+    height = len(unit_board)
+    width = len(unit_board[0])
 
-    layout =  [[sg.Button(type_to_icon_map[unit_board[i][j]['type']], size=(4, 2), key=(i,j), pad=(0,0)) for i in range(width)] for j in range(height)]
+    layout = [[[sg.Button(type_to_icon_map[unit_board[j][i]['type']], size=(4, 2), key=(j,i), pad=(0,0), button_color=type_to_color_map[floor_board[j][i]['type']]) for i in range(width)] for j in range(height)],
+              [[sg.Button("Save")], [sg.Button("Exit")]]]
     window = sg.Window(application_name, layout)
 
     while True:
         event, values = window.read()
         if event in (sg.WIN_CLOSED, 'Exit'):
             break
-
-        col = event[0]
-        row = event[1]
-        type = grid_config_window(row, col, unit_board)
-
-        if type is not None: window[(col, row)].update(type_to_icon_map[type])
-        # For this example, change the text of the button to the board's value and turn color black
-        #window[event].update(board[event[0]][event[1]], button_color=('white','black'))
+        elif event == "Save":
+            # Construct and save state
+            set_positions(unit_board)
+            set_positions(floor_board)
+            state['board']['unit_board'] = unit_board
+            save_board(name, state)
+        else:
+            row = event[0]
+            col = event[1]
+            type = grid_config_window(row, col, unit_board)
+            if type is not None: window[(row, col)].update(type_to_icon_map[type])
+    
     window.close()
-
-    # Construct and save state
-    set_positions(unit_board)
-    state['board']['unit_board'] = unit_board
-    save_board(name, state)
 
 if __name__ == "__main__":
     main()

@@ -29,12 +29,12 @@ public class Board implements IMetaElement {
         assert height > 0;
         this.width = width;
         this.height = height;
-        this.unitBoard = new IUnit[width][height];
-        this.floorBoard = new IFloor[width][height];
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                unitBoard[i][j] = new EmptyUnit(new Position(i, j));
-                floorBoard[i][j] = new StandardFloor(new Position(i, j));
+        this.unitBoard = new IUnit[height][width];
+        this.floorBoard = new IFloor[height][width];
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                unitBoard[y][x] = new EmptyUnit(new Position(x, y));
+                floorBoard[y][x] = new StandardFloor(new Position(x, y));
             }
         }
     }
@@ -78,9 +78,9 @@ public class Board implements IMetaElement {
 
     public <T> List<T> gatherUnits(Class<T> t) {
         List<T> output = new ArrayList<>();
-        for (int i = 0; i < unitBoard.length; ++i) {
-            for (int j = 0; j < unitBoard[0].length; ++j) {
-                IUnit unit = unitBoard[i][j];
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                IUnit unit = unitBoard[y][x];
                 if (t.isInstance(unit)) {
                     output.add(t.cast(unit));
                 }
@@ -91,9 +91,9 @@ public class Board implements IMetaElement {
 
     public <T> List<T> gatherFloors(Class<T> t) {
         List<T> output = new ArrayList<>();
-        for (int i = 0; i < floorBoard.length; ++i) {
-            for (int j = 0; j < floorBoard[0].length; ++j) {
-                IFloor floor = floorBoard[i][j];
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                IFloor floor = floorBoard[y][x];
                 if (t.isInstance(floor)) {
                     output.add(t.cast(floor));
                 }
@@ -105,9 +105,9 @@ public class Board implements IMetaElement {
     public <T> List<T> gather(Class<T> t) {
         if (Position.class.isAssignableFrom(t)) {
             List<T> positions = new ArrayList<>();
-            for (int i = 0; i < width; ++i) {
-                for (int j = 0; j < height; ++j) {
-                    positions.add((T) new Position(i, j));
+            for (int y = 0; y < height; ++y) {
+                for (int x = 0; x < width; ++x) {
+                    positions.add((T) new Position(x, y));
                 }
             }
             return positions;
@@ -178,12 +178,12 @@ public class Board implements IMetaElement {
         output.put("type", "board");
         JSONArray units = new JSONArray();
         JSONArray floors = new JSONArray();
-        for (int i = 0; i < height; ++i) {
+        for (int y = 0; y < height; ++y) {
             JSONArray unit = new JSONArray();
             JSONArray floor = new JSONArray();
-            for (int j = 0; j < width; ++j) {
-                unit.put(unitBoard[i][j].toJson());
-                floor.put(floorBoard[i][j].toJson());
+            for (int x = 0; x < width; ++x) {
+                unit.put(unitBoard[y][x].toJson());
+                floor.put(floorBoard[y][x].toJson());
             }
             units.put(unit);
             floors.put(floor);

@@ -100,8 +100,8 @@ public class ApiV3 implements IApi {
         JSONArray floorBoard = board.getJSONArray("floor_board");
         assert unitBoard.length() == floorBoard.length();
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
-        int boardWidth = unitBoard.length();
-        int boardHeight = unitBoard.getJSONArray(0).length();
+        int boardHeight = unitBoard.length();
+        int boardWidth = unitBoard.getJSONArray(0).length();
         boolean councilCanBounty = council.optBoolean("can_bounty", true);
         Council councilObject = new Council();
         councilObject.setCanBounty(councilCanBounty);
@@ -112,13 +112,13 @@ public class ApiV3 implements IApi {
         state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
         state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
         state.getCouncil().setCoffer(council.getInt("coffer"));
-        for (int i = 0; i < unitBoard.length(); ++i) {
-            JSONArray unitBoardRow = unitBoard.getJSONArray(i);
-            JSONArray floorBoardRow = floorBoard.getJSONArray(i);
-            for (int j = 0; j < unitBoardRow.length(); ++j) {
-                Position position = new Position(j, i);
-                JSONObject unitJson = unitBoardRow.getJSONObject(j);
-                JSONObject floorJson = floorBoardRow.getJSONObject(j);
+        for (int y = 0; y < boardHeight; ++y) {
+            JSONArray unitBoardRow = unitBoard.getJSONArray(y);
+            JSONArray floorBoardRow = floorBoard.getJSONArray(y);
+            for (int x = 0; x < boardWidth; ++x) {
+                Position position = new Position(x, y);
+                JSONObject unitJson = unitBoardRow.getJSONObject(x);
+                JSONObject floorJson = floorBoardRow.getJSONObject(x);
                 state.getBoard().putUnit(unitFromJson(unitJson, position));
                 state.getBoard().putFloor(floorFromJson(floorJson, position));
                 if (unitJson.getString("type").equals("tank")) {
