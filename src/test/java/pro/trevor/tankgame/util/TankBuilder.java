@@ -8,33 +8,28 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.attribute.IAttribute;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
-public class TankBuilder<T extends GenericTank<E>, E extends Enum<E> & IAttribute> 
-{
+public class TankBuilder<T extends GenericTank<E>, E extends Enum<E> & IAttribute> {
     private final T tank;
-    public TankBuilder(T tank) 
-    {
+
+    public TankBuilder(T tank) {
         this.tank = tank;
     }
 
-    public TankBuilder<T, E> with(E attribute, Object value)
-    {
+    public TankBuilder<T, E> with(E attribute, Object value) {
         tank.set(attribute, value);
         return this;
     }
 
-    public TankBuilder<T, E> at(Position p)
-    {
+    public TankBuilder<T, E> at(Position p) {
         tank.setPosition(p);
         return this;
     }
 
-    public T finish()
-    {
+    public T finish() {
         return tank;
     }
 
-    public static TankBuilder<Tank, TankAttribute> buildV3Tank() 
-    {
+    public static TankBuilder<Tank, TankAttribute> buildV3Tank() {
         JSONObject json = new JSONObject();
         JSONObject attributes = new JSONObject();
         json.put("name", "test");

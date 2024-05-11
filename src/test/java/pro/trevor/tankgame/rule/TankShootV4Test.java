@@ -20,12 +20,12 @@ public class TankShootV4Test {
     @Test
     void testDeadTankCannotShoot() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, true)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, true)
+                .finish();
         State state = generateBoard(2, 2, tank);
 
         assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2")));
@@ -34,12 +34,12 @@ public class TankShootV4Test {
     @Test
     void testTankCannotShootWithoutActions() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 0)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 0)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank);
 
         assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2")));
@@ -48,12 +48,12 @@ public class TankShootV4Test {
     @Test
     void testShootDecrementsActions() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
 
         SHOOT_V4.apply(new DummyState(), tank, new Position("A1"), false);
 
@@ -63,12 +63,12 @@ public class TankShootV4Test {
     @Test
     void testShootEmpty() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank);
 
         // Has no side effects, this test only ensures that it does not error
@@ -78,12 +78,12 @@ public class TankShootV4Test {
     @Test
     void testShootDamageWalls() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         BasicWall wall = new BasicWall(new Position("A2"), 3);
         State state = generateBoard(2, 2, tank, wall);
 
@@ -95,17 +95,17 @@ public class TankShootV4Test {
     @Test
     void testShootDamageTanks() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         Tank otherTank = TankBuilder.buildV3Tank()
-                            .at(new Position("A2"))
-                            .with(TankAttribute.DURABILITY, 3)
-                            .with(TankAttribute.DEAD, false)
-                            .finish();
+                .at(new Position("A2"))
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank, otherTank);
 
         SHOOT_V4.apply(state, tank, new Position("A2"), true);
@@ -116,17 +116,17 @@ public class TankShootV4Test {
     @Test
     void testShootMissDoesNotDamageTanks() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         Tank otherTank = TankBuilder.buildV3Tank()
-                            .at(new Position("A2"))
-                            .with(TankAttribute.DURABILITY, 3)
-                            .with(TankAttribute.DEAD, false)
-                            .finish();
+                .at(new Position("A2"))
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank, otherTank);
 
         SHOOT_V4.apply(state, tank, new Position("A2"), false);
@@ -137,17 +137,17 @@ public class TankShootV4Test {
     @Test
     void testShootDamageDeadTank() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         Tank otherTank = TankBuilder.buildV3Tank()
-                            .at(new Position("A2"))
-                            .with(TankAttribute.DURABILITY, 3)
-                            .with(TankAttribute.DEAD, true)
-                            .finish();
+                .at(new Position("A2"))
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.DEAD, true)
+                .finish();
         State state = generateBoard(2, 2, tank, otherTank);
 
         SHOOT_V4.apply(state, tank, new Position("A2"), true);
@@ -158,12 +158,12 @@ public class TankShootV4Test {
     @Test
     void testShootDamageSelf() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(1, 1, tank);
 
         SHOOT_V4.apply(state, tank, new Position("A1"), true);
@@ -174,12 +174,12 @@ public class TankShootV4Test {
     @Test
     void testShootOutOfBoundsThrows() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(1, 1, tank);
 
         assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2"), true));
@@ -187,33 +187,33 @@ public class TankShootV4Test {
 
     @ParameterizedTest
     @CsvSource({
-        "0, 0, 0",
-        "1, 1, 0",
-        "2, 1, 1",
-        "3, 2, 1",
-        "4, 3, 1",
-        "5, 4, 1",
-        "6, 4, 2",
-        "7, 5, 2",
-        "8, 6, 2",
-        "9, 7, 2",
+            "0, 0, 0",
+            "1, 1, 0",
+            "2, 1, 1",
+            "3, 2, 1",
+            "4, 3, 1",
+            "5, 4, 1",
+            "6, 4, 2",
+            "7, 5, 2",
+            "8, 6, 2",
+            "9, 7, 2",
     })
     void testShootKillingLivingTankDistributesGold(int gold, int expectedNewGold, int expectedNewCoffer) {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.GOLD, 0)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.GOLD, 0)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         Tank otherTank = TankBuilder.buildV3Tank()
-                            .at(new Position("A2"))
-                            .with(TankAttribute.DURABILITY, 1)
-                            .with(TankAttribute.GOLD, gold)
-                            .with(TankAttribute.BOUNTY, 0)
-                            .with(TankAttribute.DEAD, false)
-                            .finish();
+                .at(new Position("A2"))
+                .with(TankAttribute.DURABILITY, 1)
+                .with(TankAttribute.GOLD, gold)
+                .with(TankAttribute.BOUNTY, 0)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank, otherTank);
 
         SHOOT_V4.apply(state, tank, new Position("A2"), true);
@@ -225,20 +225,20 @@ public class TankShootV4Test {
     @Test
     void testShootKillingLivingTankDistributesBounty() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.GOLD, 0)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.GOLD, 0)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         Tank otherTank = TankBuilder.buildV3Tank()
-                            .at(new Position("A2"))
-                            .with(TankAttribute.DURABILITY, 1)
-                            .with(TankAttribute.GOLD, 0)
-                            .with(TankAttribute.BOUNTY, 5)
-                            .with(TankAttribute.DEAD, false)
-                            .finish();
+                .at(new Position("A2"))
+                .with(TankAttribute.DURABILITY, 1)
+                .with(TankAttribute.GOLD, 0)
+                .with(TankAttribute.BOUNTY, 5)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank, otherTank);
 
         SHOOT_V4.apply(state, tank, new Position("A2"), true);
@@ -250,20 +250,20 @@ public class TankShootV4Test {
     @Test
     void testShootKillingLivingTankDistributesBountyAndGold() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .at(new Position("A1"))
-                        .with(TankAttribute.ACTIONS, 1)
-                        .with(TankAttribute.DURABILITY, 3)
-                        .with(TankAttribute.RANGE, 2)
-                        .with(TankAttribute.GOLD, 0)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .at(new Position("A1"))
+                .with(TankAttribute.ACTIONS, 1)
+                .with(TankAttribute.DURABILITY, 3)
+                .with(TankAttribute.RANGE, 2)
+                .with(TankAttribute.GOLD, 0)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         Tank otherTank = TankBuilder.buildV3Tank()
-                            .at(new Position("A2"))
-                            .with(TankAttribute.DURABILITY, 1)
-                            .with(TankAttribute.GOLD, 1)
-                            .with(TankAttribute.BOUNTY, 5)
-                            .with(TankAttribute.DEAD, false)
-                            .finish();
+                .at(new Position("A2"))
+                .with(TankAttribute.DURABILITY, 1)
+                .with(TankAttribute.GOLD, 1)
+                .with(TankAttribute.BOUNTY, 5)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = generateBoard(2, 2, tank, otherTank);
         SHOOT_V4.apply(state, tank, new Position("A2"), true);
         assertEquals(6, tank.getGold());

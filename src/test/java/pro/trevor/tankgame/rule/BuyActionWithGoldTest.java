@@ -20,12 +20,14 @@ public class BuyActionWithGoldTest {
     @Test
     public void TypeCheckTest() {
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1); // action_cost is a don't care
-        assertEquals(PlayerRules.ActionKeys.BUY_ACTION, rule.name(), "Asserts that the buy action with gold rule is the right type");
+        assertEquals(PlayerRules.ActionKeys.BUY_ACTION, rule.name(),
+                "Asserts that the buy action with gold rule is the right type");
     }
 
     @Test
     public void DeadTankCannotBuyAction() {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 3).with(TankAttribute.DEAD, true).finish();
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 3)
+                .with(TankAttribute.DEAD, true).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
         assertFalse(rule.canApply(new DummyState(), tank, 3)); // goldSpent = 3
@@ -33,7 +35,8 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void NoGoldCannotBuyAction() {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 0).with(TankAttribute.DEAD, false).finish();
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 0)
+                .with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
         assertFalse(rule.canApply(new DummyState(), tank, 3)); // goldSpent = 3
@@ -41,7 +44,8 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void OneMaxBuyAttemptBuyTwo() {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 6).with(TankAttribute.DEAD, false).finish();
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 6)
+                .with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
         assertFalse(rule.canApply(new DummyState(), tank, 6)); // goldSpent = 6
@@ -69,7 +73,8 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void TooFewGoldCannotBuyAction() {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 5).with(TankAttribute.DEAD, false).finish();
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 5)
+                .with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
         assertFalse(rule.canApply(new DummyState(), tank, 6)); // goldSpent = 6
@@ -77,7 +82,8 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void EnsureGoldSpentDivisibleByCost() {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 5).with(TankAttribute.DEAD, false).finish();
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 5)
+                .with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
         assertFalse(rule.canApply(new DummyState(), tank, 4)); // goldSpent = 4
@@ -85,7 +91,8 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void BuyActionGainAction() {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 3).with(TankAttribute.DEAD, false).finish();
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, 3)
+                .with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
         rule.apply(new DummyState(), tank, 3); // goldSpent = 3
@@ -96,11 +103,13 @@ public class BuyActionWithGoldTest {
 
     @ParameterizedTest()
     @CsvSource({
-        "6,  1,  6,  3,  0",
-        "16,  2,  9,  5,  7",
+            "6,  1,  6,  3,  0",
+            "16,  2,  9,  5,  7",
     })
-    public void BuyActionsGainActions(int startingGold, int startingActions, int spentGold, int expectedActions, int expectedGold) {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, startingActions).with(TankAttribute.GOLD, startingGold).with(TankAttribute.DEAD, false).finish();
+    public void BuyActionsGainActions(int startingGold, int startingActions, int spentGold, int expectedActions,
+            int expectedGold) {
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, startingActions)
+                .with(TankAttribute.GOLD, startingGold).with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
         rule.apply(new DummyState(), tank, spentGold);
@@ -111,16 +120,16 @@ public class BuyActionWithGoldTest {
 
     @ParameterizedTest()
     @CsvSource({
-        "3,   3,  1",
-        "3,   6,  2",
-        "3,   9,  3",
-        "5,   5,  1",
-        "5,  10,  2",
-        "5,  25,  5"
+            "3,   3,  1",
+            "3,   6,  2",
+            "3,   9,  3",
+            "5,   5,  1",
+            "5,  10,  2",
+            "5,  25,  5"
     })
-    public void CostMultiplesWork(int actionCost, int goldSpent, int expectedActions)
-    {
-        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, goldSpent).with(TankAttribute.DEAD, false).finish();
+    public void CostMultiplesWork(int actionCost, int goldSpent, int expectedActions) {
+        Tank tank = TankBuilder.buildV3Tank().with(TankAttribute.ACTIONS, 0).with(TankAttribute.GOLD, goldSpent)
+                .with(TankAttribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost, 5);
         rule.apply(new DummyState(), tank, goldSpent);

@@ -22,9 +22,9 @@ public class CouncilGrantLifeTest {
     @Test
     public void testGrantLifeToLivingTank() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .with(TankAttribute.DURABILITY, 1)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .with(TankAttribute.DURABILITY, 1)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = new DummyState();
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
         assertEquals(2, tank.getDurability());
@@ -32,13 +32,13 @@ public class CouncilGrantLifeTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1", "2", "3"
+            "1", "2", "3"
     })
     public void testGrantLifeToDeadTank(int durability) {
         Tank tank = TankBuilder.buildV3Tank()
-                        .with(TankAttribute.DURABILITY, durability)
-                        .with(TankAttribute.DEAD, true)
-                        .finish();
+                .with(TankAttribute.DURABILITY, durability)
+                .with(TankAttribute.DEAD, true)
+                .finish();
         State state = new DummyState();
         state.getCouncil().getCouncillors().add(tank.getPlayer());
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
@@ -50,9 +50,9 @@ public class CouncilGrantLifeTest {
     @Test
     public void testSubtractGoldFromCoffer() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .with(TankAttribute.DURABILITY, 1)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .with(TankAttribute.DURABILITY, 1)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = new DummyState();
         state.getCouncil().setCoffer(1);
         ONE_COST_RULE.apply(state, state.getCouncil(), tank);
@@ -62,9 +62,9 @@ public class CouncilGrantLifeTest {
     @Test
     public void testErrorOnInsufficientGoldInCoffer() {
         Tank tank = TankBuilder.buildV3Tank()
-                        .with(TankAttribute.DURABILITY, 1)
-                        .with(TankAttribute.DEAD, false)
-                        .finish();
+                .with(TankAttribute.DURABILITY, 1)
+                .with(TankAttribute.DEAD, false)
+                .finish();
         State state = new DummyState();
         assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, state.getCouncil(), tank));
     }
