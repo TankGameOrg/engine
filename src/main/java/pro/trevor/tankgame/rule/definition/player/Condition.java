@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Condition<T extends IPlayerElement> {
 
-    protected final Predicate<T>[] predicates;
+    private final Predicate<T>[] predicates;
 
     public Condition(Predicate<T>... predicates) {
         this.predicates = predicates;
@@ -31,5 +31,4 @@ public class Condition<T extends IPlayerElement> {
             return Result.error(errors);
         }
     }
-
 }

@@ -6,7 +6,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import pro.trevor.tankgame.rule.definition.player.Condition;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
+import pro.trevor.tankgame.rule.definition.player.Predicate;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.rule.impl.version3.range.DonateTankRange;
 import pro.trevor.tankgame.rule.impl.version3.range.MovePositionRange;
@@ -95,15 +98,15 @@ public class PlayerRules
         );
     }
 
-    public static PlayerActionRule<Tank> GetShareGoldWithTaxRule(int taxAmount)
+    public static PlayerConditionRule<Tank> GetShareGoldWithTaxRule(int taxAmount)
     {
-        return new PlayerActionRule<>(
+        return new PlayerConditionRule<>(
             PlayerRules.ActionKeys.DONATE,
-            (s, t, n) -> {
-                Tank other = toType(n[0], Tank.class);
-                int donation = toType(n[1], Integer.class);
-                return !t.isDead() && !other.isDead() && (t.getGold() >= donation + taxAmount) && getSpacesInRange(t.getPosition(), t.getRange()).contains(other.getPosition());
-            }, 
+            new Condition<>(
+                    new Predicate<>((s, t, n) -> !t.isDead(), "Subject tank cannot be dead"),
+                    new Predicate<>((s, t, n) -> t.getGold() >= toType(n[1], Integer.class) + taxAmount, "Subject tank does not have sufficient gold"),
+                    new Predicate<>((s, t, n) -> getSpacesInRange(t.getPosition(), t.getRange()).contains(toType(n[0], Tank.class).getPosition()), "Subject tank is not in range of the target")
+            ),
             (s, t, n) -> {
                 Tank other = toType(n[0], Tank.class);
                 int donation = toType(n[1], Integer.class);
