@@ -1669,6 +1669,28 @@
             "floor_board": [
                 [
                     {
+                        "type": "health_pool",
+                        "regen_amount": 2
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
                         "type": "empty"
                     },
                     {
@@ -1679,6 +1701,213 @@
                     },
                     {
                         "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
                     },
                     {
                         "type": "empty"
@@ -1853,7 +2082,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "gold_mine"
                     },
                     {
                         "type": "empty"
@@ -1907,647 +2136,6 @@
                     },
                     {
                         "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "gold_mine",
-                        "position": "O6"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "gold_mine",
-                        "position": "I13"
                     },
                     {
                         "type": "empty"
@@ -2945,6 +2533,448 @@
                     },
                     {
                         "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "gold_mine"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 1
+                    },
+                    {
+                        "type": "health_pool",
+                        "regen_amount": 2
                     }
                 ]
             ]

@@ -78,6 +78,12 @@ def gold_mine():
         "type": "gold_mine",
     }
 
+def health_pool(regen):
+    return {
+        "type": "health_pool",
+        "regen_amount": regen,
+    }
+
 def empty():
     return {"type": "empty",}
 
@@ -108,10 +114,46 @@ def load_state(filepath):
     with open(filepath, "r") as f:
         return json.load(f)['initialGameState']
 
-def grid_config_window(row, col, unit_board):
+def grid_config_window(row, col, unit_board, floor_board):
     radio_options = ["wall", "tank", "empty"]
     event, values = sg.Window('Tank Game Board Maker',
                     [[sg.Text(f'You are configuring board space {(col, row)}.')],
+                     [sg.Text(f'Which board do you want to configure?')],
+                     [sg.Button("Unit Board"), sg.Button("Floor Board")],
+                     [sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None, None
+    elif event == "Unit Board":
+        return "unit", unit_config_window(row, col, unit_board)
+    elif event == "Floor Board":
+        return "floor", floor_config_window(row, col, floor_board)
+
+def empty_config_window(row, col, board):
+    board[row][col] = empty()
+    return "empty"
+
+def wall_config_window(row, col, unit_board):
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring unit board space {(col, row)}.')],
+                     [sg.Text(f'It will be a wall.')],
+                     [sg.Text(f'What is its durability?')],
+                     [sg.Input(key="durability")],
+                     [sg.Submit(), sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
+    
+    durability = int(values["durability"])
+    unit_board[row][col] = wall(durability)
+    return "wall"
+
+def tank_config_window(row, col, unit_board):
+    unit_board[row][col] = tank()
+    return "tank"
+
+def unit_config_window(row, col, unit_board):
+    radio_options = ["wall", "tank", "empty"]
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring unit board space {(col, row)}.')],
                      [sg.Text(f'What is going to be here?')],
                      [[sg.Radio(opt, 1, key=opt) for opt in radio_options]],
                      [sg.Submit(), sg.Cancel()]]).read(close=True)
@@ -120,32 +162,55 @@ def grid_config_window(row, col, unit_board):
     
     option = [key for key in radio_options if values[key]][0]
     if option == "wall":
-        wall_config_window(row, col, unit_board)
+        option = wall_config_window(row, col, unit_board)
     elif option == "tank":
-        tank_config_window(row, col, unit_board)
+        option = tank_config_window(row, col, unit_board)
     elif option == "empty":
-        empty_config_window(row, col, unit_board)
+        option = empty_config_window(row, col, unit_board)
     else:
         print(f'Error: bad grid space selection: {option}')
         sys.exit()
     return option
 
-def empty_config_window(row, col, unit_board):
-    unit_board[row][col] = empty()
-
-def wall_config_window(row, col, unit_board):
+def floor_config_window(row, col, floor_board):
+    radio_options = ["empty", "gold_mine", "health_pool"]
     event, values = sg.Window('Tank Game Board Maker',
-                    [[sg.Text(f'You are configuring board space {(col, row)}.')],
-                     [sg.Text(f'It will be a wall.')],
-                     [sg.Text(f'What is its durability?')],
-                     [sg.Input(key="durability")],
-                     [sg.Submit()]]).read(close=True)
+                    [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
+                     [sg.Text(f'What is going to be here?')],
+                     [[sg.Radio(opt, 1, key=opt) for opt in radio_options]],
+                     [sg.Submit(), sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
     
-    durability = int(values["durability"])
-    unit_board[row][col] = wall(durability)
+    option = [key for key in radio_options if values[key]][0]
+    if option == "empty":
+        option = empty_config_window(row, col, floor_board)
+    elif option == "gold_mine":
+        option = gold_mine_config_window(row, col, floor_board)
+    elif option == "health_pool":
+        option = health_pool_config_window(row, col, floor_board)
+    else:
+        print(f'Error: bad grid space selection: {option}')
+        sys.exit()
+    return option
 
-def tank_config_window(row, col, unit_board):
-    unit_board[row][col] = tank()
+def gold_mine_config_window(row, col, floor_board):
+    floor_board[row][col] = gold_mine()
+    return "gold_mine"
+
+def health_pool_config_window(row, col, floor_board):
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
+                     [sg.Text(f'It will be a health pool.')],
+                     [sg.Text(f'What is its Regeneration Amount?')],
+                     [sg.Input(key="regen_amount")],
+                     [sg.Submit(), sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
+    
+    regen = int(values["regen_amount"])
+    floor_board[row][col] = health_pool(regen)
+    return "health_pool"
 
 def new_map_window():
     event, values = sg.Window(application_name,
@@ -230,14 +295,17 @@ def main():
         elif event == "Save":
             # Construct and save state
             set_positions(unit_board)
-            set_positions(floor_board)
             state['board']['unit_board'] = unit_board
             save_board(name, state)
         else:
             row = event[0]
             col = event[1]
-            type = grid_config_window(row, col, unit_board)
-            if type is not None: window[(row, col)].update(type_to_icon_map[type])
+            type, value = grid_config_window(row, col, unit_board, floor_board)
+            if value is not None:
+                if type == "unit":
+                    window[(row, col)].update(type_to_icon_map[value])
+                elif type == "floor":
+                    window[(row, col)].update(button_color=type_to_color_map[value])
     
     window.close()
 
