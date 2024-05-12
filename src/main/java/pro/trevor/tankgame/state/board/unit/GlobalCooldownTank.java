@@ -2,8 +2,8 @@ package pro.trevor.tankgame.state.board.unit;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.ICooldownPlayerElement;
+import pro.trevor.tankgame.state.attribute.IAttribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.attribute.IAttribute;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  * individually.
  * @param <E> The attribute enum to be used for storing attributes about the tank.
  */
-public class GlobalCooldownTank<E extends Enum<E> & IAttribute> extends GenericTank<E> implements ICooldownPlayerElement {
+public class GlobalCooldownTank extends GenericTank implements ICooldownPlayerElement {
 
     protected long lastActionTime;
 
