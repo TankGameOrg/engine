@@ -2,64 +2,64 @@ package pro.trevor.tankgame.rule.impl.version3;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.ICooldownPlayerElement;
+import pro.trevor.tankgame.state.attribute.Attributes;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
-public class Tank extends GenericTank<TankAttribute> implements ICooldownPlayerElement {
+public class Tank extends GenericTank implements ICooldownPlayerElement {
 
     private long lastUseMs;
 
     public Tank(JSONObject json) {
-        super(json, TankAttribute.class);
+        super(json);
         lastUseMs = json.optLong("last_action_time", 0);
     }
 
     public int getDurability() {
-        return getInteger(TankAttribute.DURABILITY);
+        return Attributes.DURABILITY.unsafeFrom(this);
     }
 
     public int getRange() {
-        return getInteger(TankAttribute.RANGE);
+        return Attributes.RANGE.unsafeFrom(this);
     }
 
     public int getGold() {
-        return getInteger(TankAttribute.GOLD);
+        return Attributes.GOLD.unsafeFrom(this);
     }
 
     public int getActions() {
-        return getInteger(TankAttribute.ACTIONS);
+        return Attributes.ACTION_POINTS.unsafeFrom(this);
     }
 
     public int getBounty() {
-        return getInteger(TankAttribute.BOUNTY);
+        return Attributes.BOUNTY.unsafeFrom(this);
     }
 
     public boolean isDead() {
-        return getBoolean(TankAttribute.DEAD);
+        return Attributes.DEAD.unsafeFrom(this);
     }
 
-
     public void setDurability(int durability) {
-        set(TankAttribute.DURABILITY, durability);
+        Attributes.DURABILITY.to(this, durability);
     }
 
     public void setRange(int range) {
-        set(TankAttribute.RANGE, range);
+        Attributes.RANGE.to(this, range);
     }
 
     public void setGold(int gold) {
-        set(TankAttribute.GOLD, gold);
+        Attributes.GOLD.to(this, gold);
     }
 
     public void setActions(int actions) {
-        set(TankAttribute.ACTIONS, actions);
+        Attributes.ACTION_POINTS.to(this, actions);
     }
 
     public void setBounty(int bounty) {
-        set(TankAttribute.BOUNTY, bounty);
+        Attributes.BOUNTY.to(this, bounty);
     }
 
     public void setDead(boolean dead) {
-        set(TankAttribute.DEAD, dead);
+        Attributes.DEAD.to(this, dead);
     }
 
     @Override

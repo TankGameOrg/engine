@@ -1,8 +1,8 @@
 package pro.trevor.tankgame.state.attribute;
 
-public class GoldAttribute extends BaseAttribute<Integer> {
+public class DeadAttribute extends BaseAttribute<Boolean> {
 
-    public static String NAME = "GOLD";
+    public static String NAME = "DEAD";
 
     @Override
     protected String getName() {
@@ -11,7 +11,7 @@ public class GoldAttribute extends BaseAttribute<Integer> {
 
     @Override
     protected String getType() {
-        return Integer.class.getName();
+        return Boolean.class.getName();
     }
 
 }

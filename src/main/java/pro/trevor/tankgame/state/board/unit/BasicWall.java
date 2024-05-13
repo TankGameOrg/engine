@@ -1,20 +1,22 @@
 package pro.trevor.tankgame.state.board.unit;
 
 import org.json.JSONObject;
+
+import pro.trevor.tankgame.state.attribute.Attributes;
+import pro.trevor.tankgame.state.attribute.DurabilityAttribute;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.attribute.DurableAttribute;
 
 import java.util.Collections;
 
-public class BasicWall extends GenericElement<DurableAttribute> implements IUnit {
+public class BasicWall extends GenericElement implements IUnit {
 
     public BasicWall(Position position, int initialHealth) {
-        super(position, Collections.singletonMap(DurableAttribute.DURABILITY, initialHealth));
+        super(position, Collections.singletonMap(DurabilityAttribute.NAME, initialHealth));
     }
 
     public BasicWall(JSONObject json) {
-        super(json, DurableAttribute.class);
+        super(json);
     }
 
     @Override
@@ -23,11 +25,11 @@ public class BasicWall extends GenericElement<DurableAttribute> implements IUnit
     }
 
     public int getDurability() {
-        return getInteger(DurableAttribute.DURABILITY);
+        return Attributes.DURABILITY.from(this).orElse(0);
     }
 
     public void setDurability(int durability) {
-        set(DurableAttribute.DURABILITY, durability);
+        Attributes.DURABILITY.to(this, durability);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package pro.trevor.tankgame.state.attribute;
 
-public class GoldAttribute extends BaseAttribute<Integer> {
+public class DurabilityAttribute extends BaseAttribute<Integer> {
 
-    public static String NAME = "GOLD";
+    public static String NAME = "DURABILITY";
 
     @Override
     protected String getName() {

@@ -19,9 +19,13 @@ public class GenericElement implements IPositioned {
     }
 
     public GenericElement(JSONObject json) {
-        this.position = new Position(json.optString("position"));
-        this.attributes = new HashMap<>();
+        throw new UnsupportedOperationException();
+        //this.position = new Position(json.optString("position"));
         // this.attributes = IAttribute.fromJson(json.getJSONObject("attributes"));
+    }
+
+    public boolean has(String attribute) {
+        return this.attributes.containsKey(attribute);
     }
 
     public Object get(String attribute) {
@@ -57,7 +61,8 @@ public class GenericElement implements IPositioned {
                 case Boolean v -> attributesJson.put(attribute, v);
                 case Integer v -> attributesJson.put(attribute, v);
                 case Double v -> attributesJson.put(attribute, v);
-                default -> throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
+                default ->
+                    throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
             }
         }
 
