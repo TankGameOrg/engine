@@ -4,7 +4,7 @@ import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;

@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.shared;
+package pro.trevor.tankgame.rule.impl.shared.range;
 
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.range.FunctionVariableRange;

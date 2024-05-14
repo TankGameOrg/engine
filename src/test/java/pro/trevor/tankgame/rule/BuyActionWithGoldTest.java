@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pro.trevor.tankgame.util.DummyState;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.attribute.Attributes;
 

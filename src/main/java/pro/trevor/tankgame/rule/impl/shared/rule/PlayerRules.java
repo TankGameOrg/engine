@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.shared;
+package pro.trevor.tankgame.rule.impl.shared.rule;
 
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
+import pro.trevor.tankgame.rule.impl.shared.range.DonateTankRange;
+import pro.trevor.tankgame.rule.impl.shared.range.MovePositionRange;
+import pro.trevor.tankgame.rule.impl.shared.range.ShootPositionRange;
+import pro.trevor.tankgame.rule.impl.shared.range.TankRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attributes;

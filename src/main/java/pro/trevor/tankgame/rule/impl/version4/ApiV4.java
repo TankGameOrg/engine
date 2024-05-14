@@ -3,7 +3,7 @@ package pro.trevor.tankgame.rule.impl.version4;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.IApi;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.ApiV3;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;

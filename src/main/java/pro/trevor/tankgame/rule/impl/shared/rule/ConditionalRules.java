@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.shared;
+package pro.trevor.tankgame.rule.impl.shared.rule;
 
 import static pro.trevor.tankgame.util.Util.isOrthAdjToMine;
 
