@@ -3,6 +3,7 @@ package pro.trevor.tankgame.rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attributes;
 import pro.trevor.tankgame.util.DummyState;
@@ -41,7 +42,11 @@ public class CouncilGrantLifeTest {
                 .finish();
         State state = new DummyState();
         state.getCouncil().getCouncillors().add(tank.getPlayer());
+
+        System.out.println(Attributes.DEAD.in(tank));
+        System.out.println(Attributes.DURABILITY.in(tank));
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
+
         assertEquals(1, tank.getDurability());
         assertFalse(tank.isDead());
         assertFalse(state.getCouncil().getCouncillors().contains(tank.getPlayer()));

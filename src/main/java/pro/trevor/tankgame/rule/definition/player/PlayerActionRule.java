@@ -68,7 +68,7 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
             return false;
         }
         for (int i = 0; i < parameters.length; ++i) {
-            if (!meta[i].getClass().equals(parameters[i].getBoundClass())) {
+            if (!(parameters[i].getBoundClass().isAssignableFrom(meta[i].getClass()))) {
                 return false;
             }
         }
