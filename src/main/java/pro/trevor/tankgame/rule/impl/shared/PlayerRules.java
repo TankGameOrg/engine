@@ -14,6 +14,7 @@ import pro.trevor.tankgame.rule.impl.version3.range.ShootPositionRange;
 import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attributes;
+import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
@@ -83,7 +84,7 @@ public class PlayerRules {
             },
             new MovePositionRange("target"));
 
-    public static PlayerActionRule<GenericTank> GetUpgradeRangeWithGoldRule(int cost) {
+    public static <T extends GenericTank> PlayerActionRule<T> GetUpgradeRangeWithGoldRule(int cost) {
         return new PlayerActionRule<>(
                 PlayerRules.ActionKeys.UPGRADE_RANGE,
                 (s, tank, n) -> {

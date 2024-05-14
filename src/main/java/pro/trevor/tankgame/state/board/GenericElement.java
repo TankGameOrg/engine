@@ -19,9 +19,12 @@ public class GenericElement implements IPositioned {
     }
 
     public GenericElement(JSONObject json) {
-        throw new UnsupportedOperationException();
-        //this.position = new Position(json.optString("position"));
-        // this.attributes = IAttribute.fromJson(json.getJSONObject("attributes"));
+        this.position = new Position(json.optString("position"));
+        this.attributes = new HashMap<>();
+        JSONObject attributesJsonObject = json.getJSONObject("attributes");
+        for (String key : attributesJsonObject.keySet()) {
+            this.attributes.put(key, attributesJsonObject.get(key));
+        }
     }
 
     public boolean has(String attribute) {

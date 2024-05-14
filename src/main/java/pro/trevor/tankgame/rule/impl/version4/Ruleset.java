@@ -20,6 +20,7 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.GlobalCooldownTank;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
@@ -79,7 +80,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.SHOOT_V4, TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));
-        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeWithGoldRule(5), TIMEOUT));
+        playerRules.put(GlobalCooldownTank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeWithGoldRule(5), TIMEOUT));
     }
 
     @Override
