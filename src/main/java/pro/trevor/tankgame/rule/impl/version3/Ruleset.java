@@ -83,7 +83,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Tank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
         playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeRule(Attributes.GOLD, 8));
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
-        playerRules.put(Tank.class, PlayerRules.SPEND_ACTION_TO_MOVE);
+        playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attributes.ACTION_POINTS, 1));
         playerRules.put(Tank.class, PlayerRules.SHOOT_V3);
     }
 

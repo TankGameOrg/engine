@@ -76,7 +76,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
         // Player Actions
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.SPEND_ACTION_TO_MOVE, TIMEOUT));
+        playerRules.put(Tank.class,
+                new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attributes.ACTION_POINTS, 1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.SHOOT_V4, TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));

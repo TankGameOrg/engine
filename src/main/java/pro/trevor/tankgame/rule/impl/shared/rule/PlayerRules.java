@@ -74,17 +74,20 @@ public class PlayerRules {
                         .map(n -> n * actionCost).boxed().collect(Collectors.toSet()))));
     }
 
-    public static final PlayerActionRule<Tank> SPEND_ACTION_TO_MOVE = new PlayerActionRule<>(
-            PlayerRules.ActionKeys.MOVE,
-            (s, t, n) -> !t.isDead() && t.getActions() >= 1
-                    && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
-            (s, t, n) -> {
-                t.setActions(t.getActions() - 1);
-                s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
-                t.setPosition(toType(n[0], Position.class));
-                s.getBoard().putUnit(t);
-            },
-            new MovePositionRange("target"));
+    public static <T extends GenericTank> PlayerActionRule<T> GetMoveRule(BaseAttribute<Integer> attribute,
+            Integer cost) {
+        return new PlayerActionRule<T>(
+                PlayerRules.ActionKeys.MOVE,
+                (s, t, n) -> !Attributes.DEAD.from(t).orElse(false) && attribute.from(t).orElse(0) >= cost
+                        && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
+                (s, t, n) -> {
+                    attribute.to(t, attribute.unsafeFrom(t) - cost);
+                    s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
+                    t.setPosition(toType(n[0], Position.class));
+                    s.getBoard().putUnit(t);
+                },
+                new MovePositionRange("target"));
+    }
 
     public static <T extends GenericTank> PlayerActionRule<T> GetUpgradeRangeRule(BaseAttribute<Integer> attribute,
             Integer cost) {
@@ -221,16 +224,16 @@ public class PlayerRules {
 
     public static final PlayerActionRule<Tank> SHOOT_V4 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV4,
-            (s, t, d) -> {
-                t.setGold(t.getGold() + Attributes.BOUNTY.unsafeFrom(d));
-                switch (Attributes.GOLD.unsafeFrom(d)) {
+            (s, tank, dead) -> {
+                tank.setGold(tank.getGold() + Attributes.BOUNTY.unsafeFrom(dead));
+                switch (Attributes.GOLD.unsafeFrom(dead)) {
                     case 0 -> {
                     }
-                    case 1 -> t.setGold(t.getGold() + 1);
+                    case 1 -> tank.setGold(tank.getGold() + 1);
                     default -> {
                         // Tax is target tank gold * 0.25 rounded up
-                        int tax = (Attributes.GOLD.unsafeFrom(d) + 2) / 4;
-                        t.setGold(t.getGold() + Attributes.GOLD.unsafeFrom(d) - tax);
+                        int tax = (Attributes.GOLD.unsafeFrom(dead) + 2) / 4;
+                        tank.setGold(tank.getGold() + Attributes.GOLD.unsafeFrom(dead) - tax);
                         s.getCouncil().setCoffer(s.getCouncil().getCoffer() + tax);
                     }
                 }
