@@ -71,7 +71,7 @@ public class TickRules {
                 }
 
                 for (Set<Position> mine : allMines) {
-                    int tanks = (int) mines.stream().filter(
+                    int tanks = (int) mine.stream().filter(
                             (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
                                     && !Attributes.DEAD.from(tank).orElse(false))
                             .count();
