@@ -8,10 +8,6 @@ import java.util.stream.IntStream;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.rule.impl.version3.range.DonateTankRange;
-import pro.trevor.tankgame.rule.impl.version3.range.MovePositionRange;
-import pro.trevor.tankgame.rule.impl.version3.range.ShootPositionRange;
-import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attributes;
 import pro.trevor.tankgame.state.attribute.BaseAttribute;
