@@ -5,8 +5,13 @@ import pro.trevor.tankgame.state.range.FunctionVariableRange;
 
 import java.util.HashSet;
 
-public class TankRange<S> extends FunctionVariableRange<S, GenericTank> {
-    public TankRange(String name) {
+public class AllTanksRange<S> extends FunctionVariableRange<S, GenericTank> {
+    public AllTanksRange(String name) {
         super(name, (state, subject) -> new HashSet<>(state.getBoard().gatherUnits(GenericTank.class)));
+    }
+
+    @Override
+    public String getDataType() {
+        return "tank";
     }
 }

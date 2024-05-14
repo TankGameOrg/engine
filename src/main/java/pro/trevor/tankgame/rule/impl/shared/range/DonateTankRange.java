@@ -27,4 +27,9 @@ public class DonateTankRange extends FunctionVariableRange<GenericTank, GenericT
         }
         return output;
     }
+
+    @Override
+    public String getDataType() {
+        return "tank";
+    }
 }

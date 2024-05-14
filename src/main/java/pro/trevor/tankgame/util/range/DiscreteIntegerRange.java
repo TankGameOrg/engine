@@ -15,4 +15,9 @@ public class DiscreteIntegerRange extends BaseDiscreteRange<Integer> {
         super(name, new HashSet<>(IntStream.rangeClosed(lower, upper).boxed().toList()));
         assert lower <= upper;
     }
+
+    @Override
+    public String getDataType() {
+        return "integer";
+    }
 }

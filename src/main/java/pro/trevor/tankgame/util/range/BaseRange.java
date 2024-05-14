@@ -30,7 +30,7 @@ public abstract class BaseRange<T> implements TypeRange<T> {
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("type", "range");
-        output.put("data_type", getBoundClass().getSimpleName().toLowerCase());
+        output.put("data_type", getDataType());
         output.put("name", getName());
         output.put("range_type", "unbounded");
         return output;
