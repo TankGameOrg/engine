@@ -10,7 +10,7 @@ import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.range.TankRange;
+import pro.trevor.tankgame.rule.impl.shared.range.AllTanksRange;
 import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
@@ -103,7 +103,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
                     c.setCanBounty(false);
-                }, new TankRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5)));
+                }, new AllTanksRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5)));
     }
 
     @Override

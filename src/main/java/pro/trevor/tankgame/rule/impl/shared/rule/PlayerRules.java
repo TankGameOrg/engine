@@ -10,7 +10,7 @@ import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.range.DonateTankRange;
 import pro.trevor.tankgame.rule.impl.shared.range.MovePositionRange;
 import pro.trevor.tankgame.rule.impl.shared.range.ShootPositionRange;
-import pro.trevor.tankgame.rule.impl.shared.range.TankRange;
+import pro.trevor.tankgame.rule.impl.shared.range.AllTanksRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attributes;
@@ -141,7 +141,7 @@ public class PlayerRules {
                     Attributes.ACTION_POINTS.to(t, Attributes.ACTION_POINTS.unsafeFrom(t) + 1);
                     c.setCoffer(c.getCoffer() - cost);
                 },
-                new TankRange<Council>("target"));
+                new AllTanksRange<Council>("target"));
     }
 
     public static PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost) {
@@ -162,7 +162,7 @@ public class PlayerRules {
                         Attributes.DURABILITY.to(t, Attributes.DURABILITY.unsafeFrom(t) + 1);
                     }
                 },
-                new TankRange<Council>("target"));
+                new AllTanksRange<Council>("target"));
     }
 
     public static <T extends GenericTank> PlayerActionRule<T> SpendActionToShootGeneric(

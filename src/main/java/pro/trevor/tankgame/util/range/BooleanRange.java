@@ -11,4 +11,9 @@ public class BooleanRange extends BaseDiscreteRange<Boolean> {
     public BooleanRange(String name) {
         super(name, booleans);
     }
+
+    @Override
+    public String getDataType() {
+        return "boolean";
+    }
 }

@@ -5,7 +5,7 @@ import pro.trevor.tankgame.state.State;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-public class FunctionVariableRange<S, T> extends BaseVariableRange<S, T> {
+public abstract class FunctionVariableRange<S, T> extends BaseVariableRange<S, T> {
 
     protected final BiFunction<State, S, Set<T>> generator;
 

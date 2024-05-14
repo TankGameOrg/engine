@@ -24,4 +24,9 @@ public class MovePositionRange extends FunctionVariableRange<GenericTank, Positi
         }
         return output;
     }
+
+    @Override
+    public String getDataType() {
+        return "position";
+    }
 }
