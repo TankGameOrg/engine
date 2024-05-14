@@ -9,7 +9,7 @@ import pro.trevor.tankgame.state.board.Position;
 
 import java.util.*;
 
-public class GenericTank extends GenericElement implements IMovable, ITickElement, IPlayerElement, IUnit {
+public abstract class GenericTank extends GenericElement implements IMovable, ITickElement, IPlayerElement, IUnit {
 
     private final String player;
 
