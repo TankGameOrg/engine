@@ -48,7 +48,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerTickRules(RulesetDescription ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(Tank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS_RULE);
+        tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
+        tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
     }
 
     @Override

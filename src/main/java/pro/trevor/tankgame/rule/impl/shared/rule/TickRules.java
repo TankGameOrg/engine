@@ -10,11 +10,14 @@ import java.util.Set;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.rule.type.ITickElement;
+import pro.trevor.tankgame.state.attribute.Attributes;
 import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
 
@@ -24,21 +27,33 @@ public class TickRules {
                 s.setTick(s.getTick() + 1);
             });
 
-    public static final TickActionRule<Tank> DISTRIBUTE_GOLD_TO_TANKS_RULE = new TickActionRule<>(
-            (s, t) -> {
-                if (!t.isDead()) {
-                    t.setActions(t.getActions() + 1);
-                    if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
-                        Set<Position> mines = new HashSet<>();
-                        findAllConnectedMines(mines, s, t.getPosition());
-                        int tanks = (int) mines.stream().filter(
-                                (p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank && !tank.isDead())
-                                .count();
-                        int goldToGain = mines.size() / tanks;
-                        t.setGold(t.getGold() + goldToGain);
+    public static <T extends GenericTank> TickActionRule<T> GetDistributeGoldToTanksRule() {
+        return new TickActionRule<T>(
+                (s, t) -> {
+                    if (!Attributes.DEAD.from(t).orElse(false) && Attributes.GOLD.in(t)) {
+                        if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
+                            Set<Position> mines = new HashSet<>();
+                            findAllConnectedMines(mines, s, t.getPosition());
+                            int tanks = (int) mines.stream().filter(
+                                    (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
+                                            && !Attributes.DEAD.from(tank).orElse(false))
+                                    .count();
+                            int goldToGain = mines.size() / tanks;
+                            Attributes.GOLD.to(t, Attributes.GOLD.unsafeFrom(t) + goldToGain);
+                        }
                     }
-                }
-            });
+                });
+    }
+
+    public static <T extends GenericElement & ITickElement> TickActionRule<T> GetGrantActionPointsOnTickRule(
+            int amount) {
+        return new TickActionRule<T>(
+                (s, t) -> {
+                    if (!Attributes.DEAD.from(t).orElse(false) && Attributes.ACTION_POINTS.in(t)) {
+                        Attributes.ACTION_POINTS.to(t, Attributes.ACTION_POINTS.unsafeFrom(t) + amount);
+                    }
+                });
+    }
 
     public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<>(
             (s, b) -> {
@@ -56,8 +71,9 @@ public class TickRules {
                 }
 
                 for (Set<Position> mine : allMines) {
-                    int tanks = (int) mine.stream()
-                            .filter((p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank && !tank.isDead())
+                    int tanks = (int) mines.stream().filter(
+                            (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
+                                    && !Attributes.DEAD.from(tank).orElse(false))
                             .count();
                     int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
                     s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
