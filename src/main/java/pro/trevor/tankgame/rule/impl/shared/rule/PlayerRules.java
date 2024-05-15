@@ -7,12 +7,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.definition.range.AllTanksRange;
+import pro.trevor.tankgame.rule.definition.range.UnitRange;
 import pro.trevor.tankgame.rule.definition.range.BooleanRange;
 import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
-import pro.trevor.tankgame.rule.definition.range.LivingTankRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
@@ -141,7 +140,7 @@ public class PlayerRules {
                     Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + 1);
                     c.setCoffer(c.getCoffer() - cost);
                 },
-                new LivingTankRange<Council>("target"));
+                UnitRange.ALL_LIVING_TANKS);
     }
 
     public static PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost) {
@@ -162,7 +161,7 @@ public class PlayerRules {
                         Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + 1);
                     }
                 },
-                new AllTanksRange<Council>("target"));
+                UnitRange.ALL_TANKS);
     }
 
     public static <T extends GenericTank> PlayerActionRule<T> SpendActionToShootGeneric(
