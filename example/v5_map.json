@@ -674,7 +674,17 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "tank",
+                        "name": "Beyer",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "M8"
                     },
                     {
                         "type": "empty"
@@ -712,17 +722,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "tank",
-                        "name": "David",
-                        "attributes": {
-                            "DURABILITY": 3,
-                            "GOLD": 0,
-                            "ACTIONS": 0,
-                            "DEAD": false,
-                            "RANGE": 2,
-                            "BOUNTY": 0
-                        },
-                        "position": "S8"
+                        "type": "empty"
                     },
                     {
                         "type": "empty"
@@ -751,17 +751,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "tank",
-                        "name": "Mike",
-                        "attributes": {
-                            "DURABILITY": 3,
-                            "GOLD": 0,
-                            "ACTIONS": 0,
-                            "DEAD": false,
-                            "RANGE": 2,
-                            "BOUNTY": 0
-                        },
-                        "position": "E9"
+                        "type": "empty"
                     },
                     {
                         "type": "empty"
@@ -799,7 +789,17 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "tank",
+                        "name": "Schmude",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "K9"
                     },
                     {
                         "type": "empty"
@@ -876,7 +876,17 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "tank",
+                        "name": "John",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "M10"
                     },
                     {
                         "type": "empty"
@@ -914,17 +924,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "tank",
-                        "name": "Corey",
-                        "attributes": {
-                            "DURABILITY": 3,
-                            "GOLD": 0,
-                            "ACTIONS": 0,
-                            "DEAD": false,
-                            "RANGE": 2,
-                            "BOUNTY": 5
-                        },
-                        "position": "S10"
+                        "type": "empty"
                     },
                     {
                         "type": "empty"
@@ -953,17 +953,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "tank",
-                        "name": "Isaac",
-                        "attributes": {
-                            "DURABILITY": 3,
-                            "GOLD": 0,
-                            "ACTIONS": 0,
-                            "DEAD": false,
-                            "RANGE": 2,
-                            "BOUNTY": 0
-                        },
-                        "position": "E11"
+                        "type": "empty"
                     },
                     {
                         "type": "empty"
@@ -1001,7 +991,17 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "tank",
+                        "name": "Ryan",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "K11"
                     },
                     {
                         "type": "empty"

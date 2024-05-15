@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.util.range;
+package pro.trevor.tankgame.rule.definition.range;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,5 +10,10 @@ public class BooleanRange extends BaseDiscreteRange<Boolean> {
 
     public BooleanRange(String name) {
         super(name, booleans);
+    }
+
+    @Override
+    public String getDataType() {
+        return "boolean";
     }
 }
