@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.util.range;
+package pro.trevor.tankgame.rule.definition.range;
 
 import pro.trevor.tankgame.util.IJsonObject;
 

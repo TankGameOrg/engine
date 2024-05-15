@@ -2,6 +2,9 @@ package pro.trevor.tankgame.rule.impl.version3;
 
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.range.DiscreteTypeRange;
+import pro.trevor.tankgame.rule.definition.range.TypeRange;
+import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
@@ -17,14 +20,11 @@ import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.state.range.VariableTypeRange;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import org.json.*;
-import pro.trevor.tankgame.util.range.DiscreteTypeRange;
-import pro.trevor.tankgame.util.range.TypeRange;
 
 public class ApiV3 implements IApi {
     protected final RulesetDescription ruleset;

@@ -1,7 +1,6 @@
-package pro.trevor.tankgame.rule.impl.shared.range;
+package pro.trevor.tankgame.rule.definition.range;
 
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.range.FunctionVariableRange;
 
 import java.util.HashSet;
 

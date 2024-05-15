@@ -9,8 +9,9 @@ import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
+import pro.trevor.tankgame.rule.definition.range.AllTanksRange;
+import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.range.AllTanksRange;
 import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
@@ -22,7 +23,6 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 
 import java.util.function.Function;
 

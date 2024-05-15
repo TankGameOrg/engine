@@ -7,13 +7,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.impl.shared.range.DonateTankRange;
-import pro.trevor.tankgame.rule.impl.shared.range.MovePositionRange;
-import pro.trevor.tankgame.rule.impl.shared.range.ShootPositionRange;
-import pro.trevor.tankgame.rule.impl.shared.range.AllTanksRange;
+import pro.trevor.tankgame.rule.definition.range.AllTanksRange;
+import pro.trevor.tankgame.rule.definition.range.BooleanRange;
+import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
+import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
+import pro.trevor.tankgame.rule.definition.range.IntegerRange;
+import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
+import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
@@ -24,9 +26,6 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriPredicate;
-import pro.trevor.tankgame.util.range.BooleanRange;
-import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
-import pro.trevor.tankgame.util.range.IntegerRange;
 
 import static pro.trevor.tankgame.util.Util.*;
 

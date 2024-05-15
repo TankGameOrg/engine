@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.state.range;
+package pro.trevor.tankgame.rule.definition.range;
 
 import pro.trevor.tankgame.state.State;
 

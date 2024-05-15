@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.util.range;
+package pro.trevor.tankgame.rule.definition.range;
 
 import java.util.Set;
 import java.util.stream.Collectors;
