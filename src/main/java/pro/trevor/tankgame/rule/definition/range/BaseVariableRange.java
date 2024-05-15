@@ -1,7 +1,6 @@
-package pro.trevor.tankgame.state.range;
+package pro.trevor.tankgame.rule.definition.range;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.util.range.BaseDiscreteRange;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.HashSet;

@@ -5,7 +5,8 @@
     "coffer": 0,
     "council": [],
     "senate": [],
-    "type": "council"
+    "type": "council",
+    "can_bounty": true
   },
   "type": "state",
   "day": 0,

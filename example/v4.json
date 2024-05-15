@@ -1,0 +1,1422 @@
+{
+    "fileFormatVersion": 5,
+    "openHours": [],
+    "logBook": {
+        "gameVersion": "4",
+        "rawEntries": [
+            {
+                "type": "action",
+                "day": 1,
+                "timestamp": 1200
+            },
+            {
+                "type": "action",
+                "day": 2,
+                "timestamp": 1715056245
+            },
+            {
+                "type": "action",
+                "day": 3,
+                "timestamp": 1715056249
+            }
+        ]
+    },
+    "initialGameState": {
+        "running": true,
+        "winner": "",
+        "type": "state",
+        "day": 0,
+        "board": {
+            "type": "board",
+            "unit_board": [
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "B1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "C1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "D1"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Ryan",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "E1"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Schmude",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "H1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "I1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "J1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "K1"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L1"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A2"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "B2"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "C2"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "D2"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "I2"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "J2"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "K2"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L2"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A3"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "B3"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "D3"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "I3"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "K3"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L3"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "B4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "C4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 1
+                        },
+                        "position": "D4"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "John",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "E4"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Isaac",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "H4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 1
+                        },
+                        "position": "I4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "J4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "K4"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L4"
+                    }
+                ],
+                [
+                    {
+                        "type": "tank",
+                        "name": "Beyer",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "A5"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Mike",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "D5"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "E5"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "F5"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "G5"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "H5"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Xavion",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "I5"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Stomp",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "L5"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "E6"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "F6"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "G6"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "H6"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "E7"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "F7"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "G7"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "H7"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "tank",
+                        "name": "Ty",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "A8"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Dan",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "D8"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "E8"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "F8"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "G8"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "H8"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Bryan",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "I8"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Corey",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "L8"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "B9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "C9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 1
+                        },
+                        "position": "D9"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Lena",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "E9"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Charlie",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "H9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 1
+                        },
+                        "position": "I9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "J9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "K9"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L9"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A10"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "B10"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "D10"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 2
+                        },
+                        "position": "I10"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "K10"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L10"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A11"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "B11"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "C11"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "D11"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "I11"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "J11"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 4
+                        },
+                        "position": "K11"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L11"
+                    }
+                ],
+                [
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "A12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "B12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "C12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "D12"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "David",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "E12"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "tank",
+                        "name": "Trevor",
+                        "attributes": {
+                            "DURABILITY": 3,
+                            "GOLD": 0,
+                            "ACTIONS": 0,
+                            "DEAD": false,
+                            "RANGE": 2,
+                            "BOUNTY": 0
+                        },
+                        "position": "H12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "I12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "J12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "K12"
+                    },
+                    {
+                        "type": "wall",
+                        "attributes": {
+                            "DURABILITY": 6
+                        },
+                        "position": "L12"
+                    }
+                ]
+            ],
+            "floor_board": [
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "gold_mine"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "gold_mine"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "gold_mine"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "gold_mine"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ]
+            ]
+        },
+        "council": {
+            "type": "council",
+            "coffer": 0,
+            "council": [],
+            "senate": [],
+            "can_bounty": true,
+            "armistice_vote_cap": 35,
+            "armistice_vote_count": 0
+        }
+    }
+}

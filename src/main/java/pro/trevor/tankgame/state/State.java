@@ -39,14 +39,12 @@ public class State implements IJsonObject {
         this(new Board(boardWidth, boardHeight), new Council());
     }
 
-
-
     public List<IMetaElement> getMetaElements() {
         return metaElements;
     }
 
     public List<IMetaElement> getMetaElements(Class<?> c) {
-        return metaElements.stream().filter((e) -> e.getClass().isAssignableFrom(c)).collect(Collectors.toList());
+        return metaElements.stream().filter((e) -> c.isAssignableFrom(e.getClass())).collect(Collectors.toList());
     }
 
     public Board getBoard() {

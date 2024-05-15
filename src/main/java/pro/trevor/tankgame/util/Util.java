@@ -102,7 +102,7 @@ public class Util {
     }
 
     public static <T> T toType(Object o, Class<T> type) {
-        if (o.getClass().isAssignableFrom(type)) {
+        if (type.isAssignableFrom(o.getClass())) {
             return type.cast(o);
         } else {
             throw new Error(String.format("Could not convert %s to %s", o.getClass().getSimpleName(), type.getSimpleName()));
