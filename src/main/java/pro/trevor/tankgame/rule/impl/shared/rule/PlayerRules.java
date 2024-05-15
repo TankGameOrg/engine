@@ -13,8 +13,8 @@ import pro.trevor.tankgame.rule.impl.shared.range.ShootPositionRange;
 import pro.trevor.tankgame.rule.impl.shared.range.AllTanksRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attributes;
-import pro.trevor.tankgame.state.attribute.BaseAttribute;
+import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
@@ -58,27 +58,27 @@ public class PlayerRules {
                     int attemptedGoldSpent = toType(n[0], Integer.class);
                     int attemptedBuys = attemptedGoldSpent / actionCost;
 
-                    return !Attributes.DEAD.from(tank).orElse(false)
-                            && (Attributes.GOLD.from(tank).orElse(0) >= attemptedGoldSpent)
-                            && Attributes.ACTION_POINTS.in(tank) && (attemptedBuys <= maxBuys)
+                    return !Attribute.DEAD.from(tank).orElse(false)
+                            && (Attribute.GOLD.from(tank).orElse(0) >= attemptedGoldSpent)
+                            && Attribute.ACTION_POINTS.in(tank) && (attemptedBuys <= maxBuys)
                             && (attemptedBuys * actionCost == attemptedGoldSpent);
                 },
                 (s, tank, n) -> {
                     int goldSpent = toType(n[0], Integer.class);
                     int boughtActions = goldSpent / actionCost;
 
-                    Attributes.ACTION_POINTS.to(tank, Attributes.ACTION_POINTS.unsafeFrom(tank) + boughtActions);
-                    Attributes.GOLD.to(tank, Attributes.GOLD.unsafeFrom(tank) - goldSpent);
+                    Attribute.ACTION_POINTS.to(tank, Attribute.ACTION_POINTS.unsafeFrom(tank) + boughtActions);
+                    Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - goldSpent);
                 },
                 new DiscreteIntegerRange("gold", new HashSet<>(IntStream.rangeClosed(1, maxBuys)
                         .map(n -> n * actionCost).boxed().collect(Collectors.toSet()))));
     }
 
-    public static <T extends GenericTank> PlayerActionRule<T> GetMoveRule(BaseAttribute<Integer> attribute,
+    public static <T extends GenericTank> PlayerActionRule<T> GetMoveRule(Attribute<Integer> attribute,
             Integer cost) {
         return new PlayerActionRule<T>(
                 PlayerRules.ActionKeys.MOVE,
-                (s, t, n) -> !Attributes.DEAD.from(t).orElse(false) && attribute.from(t).orElse(0) >= cost
+                (s, t, n) -> !Attribute.DEAD.from(t).orElse(false) && attribute.from(t).orElse(0) >= cost
                         && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
                 (s, t, n) -> {
                     attribute.to(t, attribute.unsafeFrom(t) - cost);
@@ -89,16 +89,16 @@ public class PlayerRules {
                 new MovePositionRange("target"));
     }
 
-    public static <T extends GenericTank> PlayerActionRule<T> GetUpgradeRangeRule(BaseAttribute<Integer> attribute,
+    public static <T extends GenericTank> PlayerActionRule<T> GetUpgradeRangeRule(Attribute<Integer> attribute,
             Integer cost) {
         return new PlayerActionRule<T>(
                 PlayerRules.ActionKeys.UPGRADE_RANGE,
                 (s, tank, n) -> {
-                    return !Attributes.DEAD.from(tank).orElse(false) && (attribute.from(tank).orElse(0) >= cost)
-                            && (Attributes.RANGE.in(tank));
+                    return !Attribute.DEAD.from(tank).orElse(false) && (attribute.from(tank).orElse(0) >= cost)
+                            && (Attribute.RANGE.in(tank));
                 },
                 (s, tank, n) -> {
-                    Attributes.RANGE.to(tank, Attributes.RANGE.unsafeFrom(tank) + 1);
+                    Attribute.RANGE.to(tank, Attribute.RANGE.unsafeFrom(tank) + 1);
                     attribute.to(tank, attribute.unsafeFrom(tank) - cost);
                 });
     }
@@ -110,18 +110,18 @@ public class PlayerRules {
                     GenericTank other = toType(n[0], GenericTank.class);
                     int donation = toType(n[1], Integer.class);
 
-                    return !Attributes.DEAD.from(tank).orElse(false)
-                            && (Attributes.GOLD.from(tank).orElse(0) >= donation + taxAmount)
-                            && Attributes.GOLD.in(other)
-                            && getSpacesInRange(tank.getPosition(), Attributes.RANGE.from(tank).orElse(0))
+                    return !Attribute.DEAD.from(tank).orElse(false)
+                            && (Attribute.GOLD.from(tank).orElse(0) >= donation + taxAmount)
+                            && Attribute.GOLD.in(other)
+                            && getSpacesInRange(tank.getPosition(), Attribute.RANGE.from(tank).orElse(0))
                                     .contains(other.getPosition());
                 },
                 (s, tank, n) -> {
                     GenericTank other = toType(n[0], GenericTank.class);
                     int donation = toType(n[1], Integer.class);
 
-                    Attributes.GOLD.to(tank, Attributes.GOLD.unsafeFrom(tank) - (donation + taxAmount));
-                    Attributes.GOLD.to(other, Attributes.GOLD.unsafeFrom(other) + donation);
+                    Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - (donation + taxAmount));
+                    Attribute.GOLD.to(other, Attribute.GOLD.unsafeFrom(other) + donation);
                     s.getCouncil().setCoffer(s.getCouncil().getCoffer() + 1);
                 },
                 new DonateTankRange("target"),
@@ -133,12 +133,12 @@ public class PlayerRules {
                 PlayerRules.ActionKeys.STIMULUS,
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
-                    return !Attributes.DEAD.from(t).orElse(false) && Attributes.ACTION_POINTS.in(t)
+                    return !Attribute.DEAD.from(t).orElse(false) && Attribute.ACTION_POINTS.in(t)
                             && c.getCoffer() >= cost;
                 },
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
-                    Attributes.ACTION_POINTS.to(t, Attributes.ACTION_POINTS.unsafeFrom(t) + 1);
+                    Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + 1);
                     c.setCoffer(c.getCoffer() - cost);
                 },
                 new AllTanksRange<Council>("target"));
@@ -149,17 +149,17 @@ public class PlayerRules {
                 PlayerRules.ActionKeys.GRANT_LIFE,
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
-                    return Attributes.DEAD.in(t) && Attributes.DURABILITY.in(t) && c.getCoffer() >= cost;
+                    return Attribute.DEAD.in(t) && Attribute.DURABILITY.in(t) && c.getCoffer() >= cost;
                 },
                 (s, c, n) -> {
                     c.setCoffer(c.getCoffer() - cost);
                     GenericTank t = toType(n[0], GenericTank.class);
-                    if (Attributes.DEAD.unsafeFrom(t)) {
-                        Attributes.DEAD.to(t, false);
-                        Attributes.DURABILITY.to(t, 1);
+                    if (Attribute.DEAD.unsafeFrom(t)) {
+                        Attribute.DEAD.to(t, false);
+                        Attribute.DURABILITY.to(t, 1);
                         s.getCouncil().getCouncillors().remove(t.getPlayer());
                     } else {
-                        Attributes.DURABILITY.to(t, Attributes.DURABILITY.unsafeFrom(t) + 1);
+                        Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + 1);
                     }
                 },
                 new AllTanksRange<Council>("target"));
@@ -172,16 +172,16 @@ public class PlayerRules {
                 PlayerRules.ActionKeys.SHOOT,
                 (s, t, n) -> {
                     return s.getBoard().isValidPosition(toType(n[0], Position.class))
-                            && !Attributes.DEAD.from(t).orElse(false)
-                            && (Attributes.ACTION_POINTS.from(t).orElse(0) >= 1)
-                            && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= Attributes.RANGE.from(t)
+                            && !Attribute.DEAD.from(t).orElse(false)
+                            && (Attribute.ACTION_POINTS.from(t).orElse(0) >= 1)
+                            && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= Attribute.RANGE.from(t)
                                     .orElse(0))
                             && lineOfSight.test(s, t.getPosition(), toType(n[0], Position.class));
                 },
                 (s, t, n) -> {
                     Position target = toType(n[0], Position.class);
                     boolean hit = toType(n[1], Boolean.class);
-                    Attributes.ACTION_POINTS.to(t, Attributes.ACTION_POINTS.unsafeFrom(t) - 1);
+                    Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) - 1);
 
                     Optional<IUnit> optionalUnit = s.getBoard().getUnit(target);
                     if (optionalUnit.isEmpty()) {
@@ -203,8 +203,8 @@ public class PlayerRules {
         return SpendActionToShootGeneric(lineOfSight, (s, t, u) -> {
             switch (u) {
                 case GenericTank tank -> {
-                    Attributes.DURABILITY.to(tank, Attributes.DURABILITY.unsafeFrom(tank) - 1);
-                    if (!Attributes.DEAD.unsafeFrom(tank) && Attributes.DURABILITY.unsafeFrom(tank) == 0) {
+                    Attribute.DURABILITY.to(tank, Attribute.DURABILITY.unsafeFrom(tank) - 1);
+                    if (!Attribute.DEAD.unsafeFrom(tank) && Attribute.DURABILITY.unsafeFrom(tank) == 0) {
                         handleDeath.accept(s, t, tank);
                     }
                 }
@@ -219,21 +219,21 @@ public class PlayerRules {
     public static final PlayerActionRule<Tank> SHOOT_V3 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV3,
             (s, t, d) -> {
-                t.setGold(t.getGold() + Attributes.GOLD.unsafeFrom(d) + Attributes.BOUNTY.unsafeFrom(d));
+                t.setGold(t.getGold() + Attribute.GOLD.unsafeFrom(d) + Attribute.BOUNTY.unsafeFrom(d));
             });
 
     public static final PlayerActionRule<Tank> SHOOT_V4 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV4,
             (s, tank, dead) -> {
-                tank.setGold(tank.getGold() + Attributes.BOUNTY.unsafeFrom(dead));
-                switch (Attributes.GOLD.unsafeFrom(dead)) {
+                tank.setGold(tank.getGold() + Attribute.BOUNTY.unsafeFrom(dead));
+                switch (Attribute.GOLD.unsafeFrom(dead)) {
                     case 0 -> {
                     }
                     case 1 -> tank.setGold(tank.getGold() + 1);
                     default -> {
                         // Tax is target tank gold * 0.25 rounded up
-                        int tax = (Attributes.GOLD.unsafeFrom(dead) + 2) / 4;
-                        tank.setGold(tank.getGold() + Attributes.GOLD.unsafeFrom(dead) - tax);
+                        int tax = (Attribute.GOLD.unsafeFrom(dead) + 2) / 4;
+                        tank.setGold(tank.getGold() + Attribute.GOLD.unsafeFrom(dead) - tax);
                         s.getCouncil().setCoffer(s.getCouncil().getCoffer() + tax);
                     }
                 }

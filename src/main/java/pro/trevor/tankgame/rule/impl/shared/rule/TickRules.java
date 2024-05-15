@@ -11,7 +11,7 @@ import java.util.Set;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
 import pro.trevor.tankgame.rule.type.ITickElement;
-import pro.trevor.tankgame.state.attribute.Attributes;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
@@ -30,16 +30,16 @@ public class TickRules {
     public static <T extends GenericTank> TickActionRule<T> GetDistributeGoldToTanksRule() {
         return new TickActionRule<T>(
                 (s, t) -> {
-                    if (!Attributes.DEAD.from(t).orElse(false) && Attributes.GOLD.in(t)) {
+                    if (!Attribute.DEAD.from(t).orElse(false) && Attribute.GOLD.in(t)) {
                         if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
                             Set<Position> mines = new HashSet<>();
                             findAllConnectedMines(mines, s, t.getPosition());
                             int tanks = (int) mines.stream().filter(
                                     (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
-                                            && !Attributes.DEAD.from(tank).orElse(false))
+                                            && !Attribute.DEAD.from(tank).orElse(false))
                                     .count();
                             int goldToGain = mines.size() / tanks;
-                            Attributes.GOLD.to(t, Attributes.GOLD.unsafeFrom(t) + goldToGain);
+                            Attribute.GOLD.to(t, Attribute.GOLD.unsafeFrom(t) + goldToGain);
                         }
                     }
                 });
@@ -49,8 +49,8 @@ public class TickRules {
             int amount) {
         return new TickActionRule<T>(
                 (s, t) -> {
-                    if (!Attributes.DEAD.from(t).orElse(false) && Attributes.ACTION_POINTS.in(t)) {
-                        Attributes.ACTION_POINTS.to(t, Attributes.ACTION_POINTS.unsafeFrom(t) + amount);
+                    if (!Attribute.DEAD.from(t).orElse(false) && Attribute.ACTION_POINTS.in(t)) {
+                        Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + amount);
                     }
                 });
     }
@@ -73,7 +73,7 @@ public class TickRules {
                 for (Set<Position> mine : allMines) {
                     int tanks = (int) mine.stream().filter(
                             (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
-                                    && !Attributes.DEAD.from(tank).orElse(false))
+                                    && !Attribute.DEAD.from(tank).orElse(false))
                             .count();
                     int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
                     s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);

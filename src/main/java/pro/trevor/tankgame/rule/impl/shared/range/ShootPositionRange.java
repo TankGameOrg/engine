@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule.impl.shared.range;
 
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attributes;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.range.FunctionVariableRange;
@@ -17,7 +17,7 @@ public class ShootPositionRange extends FunctionVariableRange<GenericTank, Posit
 
     public ShootPositionRange(String name, ITriPredicate<State, Position, Position> lineOfSight) {
         super(name, (state, tank) -> getShootable(lineOfSight, state, tank.getPosition(),
-                Attributes.RANGE.from(tank).orElse(0)));
+                Attribute.RANGE.from(tank).orElse(0)));
     }
 
     private static Set<Position> getShootable(ITriPredicate<State, Position, Position> lineOfSight, State state,

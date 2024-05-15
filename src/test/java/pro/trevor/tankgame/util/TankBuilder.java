@@ -3,7 +3,7 @@ package pro.trevor.tankgame.util;
 import org.json.JSONObject;
 
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.state.attribute.BaseAttribute;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
@@ -14,7 +14,7 @@ public class TankBuilder<T extends GenericTank> {
         this.tank = tank;
     }
 
-    public <E> TankBuilder<T> with(BaseAttribute<E> attribute, E value) {
+    public <E> TankBuilder<T> with(Attribute<E> attribute, E value) {
         attribute.to(tank, value);
         return this;
     }

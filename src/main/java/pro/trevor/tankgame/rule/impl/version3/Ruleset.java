@@ -14,7 +14,7 @@ import pro.trevor.tankgame.rule.impl.shared.range.AllTanksRange;
 import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
-import pro.trevor.tankgame.state.attribute.Attributes;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
@@ -81,9 +81,9 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.put(Tank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
-        playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeRule(Attributes.GOLD, 8));
+        playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 8));
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
-        playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attributes.ACTION_POINTS, 1));
+        playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
         playerRules.put(Tank.class, PlayerRules.SHOOT_V3);
     }
 

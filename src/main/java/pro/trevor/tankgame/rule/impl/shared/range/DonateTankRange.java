@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule.impl.shared.range;
 
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attributes;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.board.unit.IUnit;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class DonateTankRange extends FunctionVariableRange<GenericTank, GenericTank> {
     public DonateTankRange(String name) {
-        super(name, (state, tank) -> getTanksInRange(state, tank.getPosition(), Attributes.RANGE.from(tank).orElse(0)));
+        super(name, (state, tank) -> getTanksInRange(state, tank.getPosition(), Attribute.RANGE.from(tank).orElse(0)));
     }
 
     private static Set<GenericTank> getTanksInRange(State state, Position center, int range) {
