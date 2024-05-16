@@ -6,10 +6,18 @@ import pro.trevor.tankgame.state.board.Position;
 
 public class HealthPool extends StandardFloor {
     private int regenAmount;
+    private static final String typeValue = "health_pool";
+    private static final String regenAmountKey = "regen_amount";
 
     public HealthPool(Position position, int regenAmount) {
         super(position);
         this.regenAmount = regenAmount;
+    }
+
+    public HealthPool(Position position, JSONObject json)
+    {
+        super(position);
+        this.regenAmount = json.getInt(regenAmountKey);
     }
 
     public int getRegenAmount() {
@@ -24,8 +32,8 @@ public class HealthPool extends StandardFloor {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-        output.put("type", "health_pool");
-        output.put("regen_amount", regenAmount);
+        output.put("type", typeValue);
+        output.put(regenAmountKey, regenAmount);
         return output;
     }
 
