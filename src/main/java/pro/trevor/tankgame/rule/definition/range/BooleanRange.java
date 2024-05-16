@@ -13,7 +13,12 @@ public class BooleanRange extends BaseDiscreteRange<Boolean> {
     }
 
     @Override
-    public String getDataType() {
+    public String getJsonDataType() {
         return "boolean";
+    }
+
+    @Override
+    public Class<Boolean> getBoundClass() {
+        return Boolean.class;
     }
 }

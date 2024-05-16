@@ -28,7 +28,12 @@ public class DonateTankRange extends FunctionVariableRange<GenericTank, GenericT
     }
 
     @Override
-    public String getDataType() {
+    public String getJsonDataType() {
         return "tank";
+    }
+
+    @Override
+    public Class<GenericTank> getBoundClass() {
+        return GenericTank.class;
     }
 }

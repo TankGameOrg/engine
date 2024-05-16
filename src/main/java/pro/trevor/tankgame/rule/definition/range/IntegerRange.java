@@ -7,7 +7,12 @@ public class IntegerRange extends BaseRange<Integer> {
     }
 
     @Override
-    public String getDataType() {
+    public String getJsonDataType() {
         return "integer";
+    }
+
+    @Override
+    public Class<Integer> getBoundClass() {
+        return Integer.class;
     }
 }
