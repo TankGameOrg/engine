@@ -9,19 +9,20 @@ import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
+import pro.trevor.tankgame.rule.definition.range.AllTanksRange;
+import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
-import pro.trevor.tankgame.rule.impl.shared.TickRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.rule.impl.util.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 
 import java.util.function.Function;
 
@@ -55,7 +56,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerTickRules(RulesetDescription ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(Tank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS_RULE);
+        tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
+        tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
     }
 
     @Override
@@ -74,11 +76,13 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
         // Player Actions
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.SPEND_ACTION_TO_MOVE, TIMEOUT));
+        playerRules.put(Tank.class,
+                new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.SHOOT_V4, TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeWithGoldRule(5), TIMEOUT));
+        playerRules.put(Tank.class,
+                new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
     }
 
     @Override
@@ -99,14 +103,13 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
                     c.setCanBounty(false);
-                }, new TankRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5))
-        );
+                }, new AllTanksRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5)));
     }
 
     @Override
     public void registerConditionalRules(RulesetDescription ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(Tank.class, ConditionalRules.KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY);
+        conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
     }
 

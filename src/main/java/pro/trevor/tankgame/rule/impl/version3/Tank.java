@@ -1,79 +1,60 @@
 package pro.trevor.tankgame.rule.impl.version3;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.type.ICooldownPlayerElement;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.board.unit.GlobalCooldownTank;
 
-public class Tank extends GenericTank<TankAttribute> implements ICooldownPlayerElement {
-
-    private long lastUseMs;
+public class Tank extends GlobalCooldownTank {
 
     public Tank(JSONObject json) {
-        super(json, TankAttribute.class);
-        lastUseMs = json.optLong("last_action_time", 0);
+        super(json);
     }
 
     public int getDurability() {
-        return getInteger(TankAttribute.DURABILITY);
+        return Attribute.DURABILITY.unsafeFrom(this);
     }
 
     public int getRange() {
-        return getInteger(TankAttribute.RANGE);
+        return Attribute.RANGE.unsafeFrom(this);
     }
 
     public int getGold() {
-        return getInteger(TankAttribute.GOLD);
+        return Attribute.GOLD.unsafeFrom(this);
     }
 
     public int getActions() {
-        return getInteger(TankAttribute.ACTIONS);
+        return Attribute.ACTION_POINTS.unsafeFrom(this);
     }
 
     public int getBounty() {
-        return getInteger(TankAttribute.BOUNTY);
+        return Attribute.BOUNTY.unsafeFrom(this);
     }
 
     public boolean isDead() {
-        return getBoolean(TankAttribute.DEAD);
+        return Attribute.DEAD.unsafeFrom(this);
     }
 
-
     public void setDurability(int durability) {
-        set(TankAttribute.DURABILITY, durability);
+        Attribute.DURABILITY.to(this, durability);
     }
 
     public void setRange(int range) {
-        set(TankAttribute.RANGE, range);
+        Attribute.RANGE.to(this, range);
     }
 
     public void setGold(int gold) {
-        set(TankAttribute.GOLD, gold);
+        Attribute.GOLD.to(this, gold);
     }
 
     public void setActions(int actions) {
-        set(TankAttribute.ACTIONS, actions);
+        Attribute.ACTION_POINTS.to(this, actions);
     }
 
     public void setBounty(int bounty) {
-        set(TankAttribute.BOUNTY, bounty);
+        Attribute.BOUNTY.to(this, bounty);
     }
 
     public void setDead(boolean dead) {
-        set(TankAttribute.DEAD, dead);
-    }
-
-    @Override
-    public long getLastUsage(String rule) {
-        return lastUseMs;
-    }
-
-    @Override
-    public void setLastUsage(String rule, long time) {
-        lastUseMs = time;
-    }
-
-    @Override
-    public JSONObject toJson() {
-        return super.toJson().put("last_action_time", lastUseMs);
+        Attribute.DEAD.to(this, dead);
     }
 }

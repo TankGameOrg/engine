@@ -3,8 +3,8 @@ package pro.trevor.tankgame.rule.definition.player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.util.range.TypeRange;
 
 import java.util.*;
 

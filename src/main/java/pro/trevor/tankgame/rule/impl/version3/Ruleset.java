@@ -8,16 +8,17 @@ import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
+import pro.trevor.tankgame.rule.definition.range.AllTanksRange;
+import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.impl.util.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
-import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
-import pro.trevor.tankgame.rule.impl.shared.TickRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.rule.impl.version3.range.TankRange;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.range.DiscreteIntegerRange;
 
 import static pro.trevor.tankgame.util.Util.*;
 
@@ -47,7 +48,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerTickRules(RulesetDescription ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(Tank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS_RULE);
+        tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
+        tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
     }
 
     @Override
@@ -64,7 +66,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerConditionalRules(RulesetDescription ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(Tank.class, ConditionalRules.KILL_OR_DESTROY_TANK_ON_ZERO_DURABILITY);
+        conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
     }
 
@@ -79,9 +81,9 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.put(Tank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
-        playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeWithGoldRule(8));
+        playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 8));
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
-        playerRules.put(Tank.class, PlayerRules.SPEND_ACTION_TO_MOVE);
+        playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
         playerRules.put(Tank.class, PlayerRules.SHOOT_V3);
     }
 
@@ -103,7 +105,6 @@ public class Ruleset extends BaseRuleset implements IRuleset {
                     t.setBounty(t.getBounty() + bounty);
                     c.setCoffer(c.getCoffer() - bounty);
                     c.setCanBounty(false);
-                }, new TankRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5))
-        );
+                }, new AllTanksRange<Council>("target"), new DiscreteIntegerRange("bounty", 1, 5)));
     }
 }
