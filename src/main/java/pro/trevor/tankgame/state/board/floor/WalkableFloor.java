@@ -5,9 +5,9 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 
-public class StandardFloor extends AbstractPositionedFloor {
+public class WalkableFloor extends AbstractPositionedFloor {
 
-    public StandardFloor(Position position) {
+    public WalkableFloor(Position position) {
         super(position);
     }
 
