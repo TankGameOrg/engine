@@ -18,7 +18,8 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
     protected final IVarTriConsumer<State, T, Object> consumer;
     protected final TypeRange<?>[] parameters;
 
-    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
+    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate,
+            IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
         this.name = name;
         this.predicate = predicate;
         this.consumer = consumer;
@@ -44,7 +45,8 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
                 System.err.println(error.toString(2));
                 System.err.println(state.toString());
             }
-            throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
+            throw new Error(
+                    String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
         }
     }
 
@@ -68,7 +70,7 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
             return false;
         }
         for (int i = 0; i < parameters.length; ++i) {
-            if (!(parameters[i].getBoundClass().isAssignableFrom(meta[i].getClass()))) {
+            if (!parameters[i].getBoundClass().isAssignableFrom(meta[i].getClass())) {
                 return false;
             }
         }

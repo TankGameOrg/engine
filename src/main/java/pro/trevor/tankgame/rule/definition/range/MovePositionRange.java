@@ -25,7 +25,12 @@ public class MovePositionRange extends FunctionVariableRange<GenericTank, Positi
     }
 
     @Override
-    public String getDataType() {
+    public String getJsonDataType() {
         return "position";
+    }
+
+    @Override
+    public Class<Position> getBoundClass() {
+        return Position.class;
     }
 }

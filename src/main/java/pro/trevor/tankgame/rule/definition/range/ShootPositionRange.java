@@ -10,8 +10,6 @@ import pro.trevor.tankgame.util.function.ITriPredicate;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.json.JSONObject;
-
 public class ShootPositionRange extends FunctionVariableRange<GenericTank, Position> {
 
     public ShootPositionRange(String name, ITriPredicate<State, Position, Position> lineOfSight) {
@@ -31,7 +29,12 @@ public class ShootPositionRange extends FunctionVariableRange<GenericTank, Posit
     }
 
     @Override
-    public String getDataType() {
+    public String getJsonDataType() {
         return "position";
+    }
+
+    @Override
+    public Class<Position> getBoundClass() {
+        return Position.class;
     }
 }
