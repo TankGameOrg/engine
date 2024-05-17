@@ -87,6 +87,12 @@ def health_pool(regen):
 def empty():
     return {"type": "empty",}
 
+def unwalkable(icon_name):
+    return {
+        "type": "unwalkable",
+        "icon": icon_name,
+    }
+
 def set_positions(board):
     y = 1
     for row in board:
@@ -173,7 +179,7 @@ def unit_config_window(row, col, unit_board):
     return option
 
 def floor_config_window(row, col, floor_board):
-    radio_options = ["empty", "gold_mine", "health_pool"]
+    radio_options = ["empty", "gold_mine", "health_pool", "unwalkable"]
     event, values = sg.Window('Tank Game Board Maker',
                     [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
                      [sg.Text(f'What is going to be here?')],
@@ -189,10 +195,26 @@ def floor_config_window(row, col, floor_board):
         option = gold_mine_config_window(row, col, floor_board)
     elif option == "health_pool":
         option = health_pool_config_window(row, col, floor_board)
+    elif option == "unwalkable":
+        option = unwalkable_config_window(row, col, floor_board)
     else:
         print(f'Error: bad grid space selection: {option}')
         sys.exit()
     return option
+
+def unwalkable_config_window(row, col, floor_board):
+    buttonNames = ["river", "chasm", "rubble"]
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
+                     [sg.Text(f'It will be unwalkable.')],
+                     [sg.Text(f'What icon do you want to use?')],
+                     [[sg.Button(buttonNames[x]) for x in range(len(buttonNames))]],
+                     [sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
+    
+    floor_board[row][col] = unwalkable(event)
+    return f'unwalkable'
 
 def gold_mine_config_window(row, col, floor_board):
     floor_board[row][col] = gold_mine()
@@ -276,7 +298,8 @@ def main():
     type_to_color_map = {
         "gold_mine": "gold",
         "empty": "white",
-        "health_pool": "pale violet red"
+        "health_pool": "pale violet red",
+        "unwalkable": "pale turquoise",
     }
 
     unit_board = state['board']['unit_board']

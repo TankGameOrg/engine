@@ -7,7 +7,7 @@ import pro.trevor.tankgame.state.board.GenericElement;
 public class Attribute<E> {
 
     public static Attribute<Integer> GOLD = new Attribute<Integer>("GOLD");
-    public static Attribute<Integer> ACTION_POINTS = new Attribute<Integer>("ACTION_POINTS");
+    public static Attribute<Integer> ACTION_POINTS = new Attribute<Integer>("ACTIONS");
     public static Attribute<Integer> DURABILITY = new Attribute<Integer>("DURABILITY");
     public static Attribute<Integer> RANGE = new Attribute<Integer>("RANGE");
     public static Attribute<Integer> BOUNTY = new Attribute<Integer>("BOUNTY");

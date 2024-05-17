@@ -6,7 +6,7 @@ import pro.trevor.tankgame.state.board.Position;
 
 import java.util.HashMap;
 
-public class EmptyUnit extends GenericElement implements IWalkable {
+public class EmptyUnit extends GenericElement implements IUnit {
 
     private static final HashMap<String, Object> EMPTY_MAP = new HashMap<>();
 

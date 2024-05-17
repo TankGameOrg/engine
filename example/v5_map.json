@@ -1856,7 +1856,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -1931,7 +1932,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2002,7 +2004,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2073,7 +2076,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2144,7 +2148,80 @@
                         "type": "empty"
                     },
                     {
+                        "type": "unwalkable",
+                        "icon": "river"
+                    },
+                    {
                         "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2357,7 +2434,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2428,78 +2506,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2570,7 +2578,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2641,7 +2650,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2712,7 +2722,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
@@ -2787,7 +2798,8 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable",
+                        "icon": "river"
                     },
                     {
                         "type": "empty"
