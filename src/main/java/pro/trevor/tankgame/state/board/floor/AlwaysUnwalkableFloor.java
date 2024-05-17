@@ -15,7 +15,6 @@ public class AlwaysUnwalkableFloor extends AbstractPositionedFloor {
         return false;
     }
 
-
     @Override
     public char toBoardCharacter() {
         return 'X';
