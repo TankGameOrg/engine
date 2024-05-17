@@ -1856,7 +1856,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -1931,7 +1931,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2002,7 +2002,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2073,7 +2073,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2144,7 +2144,78 @@
                         "type": "empty"
                     },
                     {
+                        "type": "unwalkable"
+                    },
+                    {
                         "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    }
+                ],
+                [
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "empty"
+                    },
+                    {
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2357,7 +2428,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2428,78 +2499,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    }
-                ],
-                [
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
-                    },
-                    {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2570,7 +2570,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2641,7 +2641,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2712,7 +2712,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
@@ -2787,7 +2787,7 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "unwalkable"
                     },
                     {
                         "type": "empty"
