@@ -11,16 +11,20 @@ import java.util.*;
 
 public class GenericTank extends GenericElement implements IMovable, ITickElement, IPlayerElement, IUnit {
 
+    private static final String typeValue = "tank";
     private final String player;
+    private Position position;
 
     public GenericTank(String player, Position position, Map<String, Object> defaults) {
-        super(position, defaults);
+        super(defaults);
         this.player = player;
+        this.position = position;
     }
 
     public GenericTank(JSONObject json) {
         super(json);
         this.player = json.getString("name");
+        this.position = new Position(json.getString("position"));
     }
 
     @Override
@@ -41,7 +45,8 @@ public class GenericTank extends GenericElement implements IMovable, ITickElemen
     @Override
     public JSONObject toJson() {
         JSONObject output = super.toJson();
-        output.put("type", "tank");
+        output.put("type", typeValue);
+        output.put("position", position.toBoardString());
         output.put("name", player);
         return output;
     }
@@ -49,5 +54,10 @@ public class GenericTank extends GenericElement implements IMovable, ITickElemen
     @Override
     public String toString() {
         return String.format("%s: %s", player, super.toString());
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 }

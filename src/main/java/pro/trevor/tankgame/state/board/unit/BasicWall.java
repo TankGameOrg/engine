@@ -10,12 +10,17 @@ import java.util.Collections;
 
 public class BasicWall extends GenericElement implements IUnit {
 
+    private static final String typeValue = "wall";
+    private final Position position;
+
     public BasicWall(Position position, int initialHealth) {
-        super(position, Collections.singletonMap(Attribute.DURABILITY.getName(), initialHealth));
+        super(Collections.singletonMap(Attribute.DURABILITY.getName(), initialHealth));
+        this.position = position;
     }
 
     public BasicWall(JSONObject json) {
         super(json);
+        this.position = new Position(json.getString("position"));
     }
 
     @Override
@@ -39,7 +44,13 @@ public class BasicWall extends GenericElement implements IUnit {
     @Override
     public JSONObject toJson() {
         JSONObject output = super.toJson();
-        output.put("type", "wall");
+        output.put("type", typeValue);
+        output.put("position", position.toBoardString());
         return output;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 }

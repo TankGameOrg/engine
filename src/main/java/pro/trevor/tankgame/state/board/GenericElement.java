@@ -5,13 +5,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GenericElement implements IPositioned {
+public abstract class GenericElement implements IElement {
 
-    protected Position position;
     protected final Map<String, Object> attributes;
 
-    public GenericElement(Position position, Map<String, Object> defaults) {
-        this.position = position;
+    public GenericElement(Map<String, Object> defaults) {
         this.attributes = new HashMap<>();
         for (String attribute : defaults.keySet()) {
             attributes.put(attribute, defaults.get(attribute));
@@ -19,7 +17,6 @@ public class GenericElement implements IPositioned {
     }
 
     public GenericElement(JSONObject json) {
-        this.position = new Position(json.optString("position"));
         this.attributes = new HashMap<>();
         JSONObject attributesJsonObject = json.getJSONObject("attributes");
         for (String key : attributesJsonObject.keySet()) {
@@ -40,21 +37,8 @@ public class GenericElement implements IPositioned {
     }
 
     @Override
-    public Position getPosition() {
-        return position;
-    }
-
-    @Override
-    public char toBoardCharacter() {
-        return 'U';
-    }
-
-    @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-
-        output.put("type", "unit");
-        output.put("position", position.toBoardString());
 
         JSONObject attributesJson = new JSONObject();
 
@@ -71,18 +55,5 @@ public class GenericElement implements IPositioned {
 
         output.put("attributes", attributesJson);
         return output;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        sb.append(position.toString());
-        for (String key : attributes.keySet()) {
-            sb.append(", ");
-            sb.append(attributes.get(key).toString());
-        }
-        sb.append(']');
-        return sb.toString();
     }
 }
