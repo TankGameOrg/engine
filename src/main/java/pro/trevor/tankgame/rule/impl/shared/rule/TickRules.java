@@ -17,6 +17,7 @@ import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
+import pro.trevor.tankgame.state.board.floor.HealthPool;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
@@ -51,6 +52,17 @@ public class TickRules {
                 (s, t) -> {
                     if (!Attribute.DEAD.from(t).orElse(false) && Attribute.ACTION_POINTS.in(t)) {
                         Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + amount);
+                    }
+                });
+    }
+
+    public static TickActionRule<GenericTank> GetHealTanksInHealthPoolRule() {
+        return new TickActionRule<>(
+                (s, t) -> {
+                    if (Attribute.DEAD.from(t).orElse(false) || !Attribute.DURABILITY.in(t))
+                        return;
+                    if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool) {
+                        Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + healthPool.getRegenAmount());
                     }
                 });
     }
