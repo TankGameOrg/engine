@@ -8,7 +8,6 @@ import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.StandardFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.IWalkable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,6 @@ public class Board implements IMetaElement {
         return (p.x() >= 0 && p.y() >= 0 && p.x() < width && p.y() < height);
     }
 
-
     private <T extends IPositioned> boolean putElementOnBoard(T[][] board, T element) {
         if (isValidPosition(element.getPosition())) {
             board[element.getPosition().y()][element.getPosition().x()] = element;
@@ -74,7 +72,6 @@ public class Board implements IMetaElement {
     public Optional<IFloor> getFloor(Position p) {
         return getElementOnBoard(floorBoard, p);
     }
-
 
     public <T> List<T> gatherUnits(Class<T> t) {
         List<T> output = new ArrayList<>();
@@ -127,12 +124,12 @@ public class Board implements IMetaElement {
     }
 
     public boolean isWalkable(Position p) {
-        return (getUnit(p).orElse(null) instanceof IWalkable) ||
-                (getFloor(p).orElse(new AlwaysUnwalkableFloor(p)).isWalkable(this));
+        return (getUnit(p).orElse(null) instanceof EmptyUnit)
+                && (getFloor(p).orElse(new AlwaysUnwalkableFloor(p)).isWalkable(this));
     }
 
     public boolean isAbleToShootThrough(Position p) {
-        return getUnit(p).orElse(null) instanceof IWalkable;
+        return getUnit(p).orElse(null) instanceof EmptyUnit;
     }
 
     private static <T extends IElement> String toGridString(T[][] board) {
@@ -141,10 +138,10 @@ public class Board implements IMetaElement {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.repeat(' ', 2*pad);
+        sb.repeat(' ', 2 * pad);
 
         for (int i = 0; i < board.length; ++i) {
-            sb.append((char)('A' + i)).append(' ');
+            sb.append((char) ('A' + i)).append(' ');
         }
 
         sb.append("\n").repeat(' ', pad).append("+-");
