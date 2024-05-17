@@ -87,9 +87,10 @@ def health_pool(regen):
 def empty():
     return {"type": "empty",}
 
-def unwalkable():
+def unwalkable(icon_name):
     return {
         "type": "unwalkable",
+        "icon": icon_name,
     }
 
 def set_positions(board):
@@ -202,8 +203,18 @@ def floor_config_window(row, col, floor_board):
     return option
 
 def unwalkable_config_window(row, col, floor_board):
-    floor_board[row][col] = unwalkable()
-    return "unwalkable"
+    buttonNames = ["river", "chasm", "rubble"]
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
+                     [sg.Text(f'It will be unwalkable.')],
+                     [sg.Text(f'What icon do you want to use?')],
+                     [[sg.Button(buttonNames[x]) for x in range(len(buttonNames))]],
+                     [sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
+    
+    floor_board[row][col] = unwalkable(event)
+    return f'unwalkable'
 
 def gold_mine_config_window(row, col, floor_board):
     floor_board[row][col] = gold_mine()
@@ -288,7 +299,7 @@ def main():
         "gold_mine": "gold",
         "empty": "white",
         "health_pool": "pale violet red",
-        "unwalkable": "pale turquoise"
+        "unwalkable": "pale turquoise",
     }
 
     unit_board = state['board']['unit_board']
