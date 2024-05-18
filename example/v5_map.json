@@ -2292,7 +2292,13 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "destructible_wall",
+                        "icon": "bridge",
+                        "attributes": {
+                            "DURABILITY": "5",
+                            "MAX_DURABILITY": "5",
+                            "DESTROYED": false
+                        }
                     },
                     {
                         "type": "empty"
@@ -2363,7 +2369,13 @@
                         "type": "empty"
                     },
                     {
-                        "type": "empty"
+                        "type": "destructible_wall",
+                        "icon": "bridge",
+                        "attributes": {
+                            "DURABILITY": "5",
+                            "MAX_DURABILITY": "5",
+                            "DESTROYED": false
+                        }
                     },
                     {
                         "type": "empty"
