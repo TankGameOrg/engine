@@ -73,6 +73,16 @@ public class Board implements IMetaElement {
         return getElementOnBoard(floorBoard, p);
     }
 
+    // Returns the unit at the position if there is one.
+    // If there is no unit at the position, then the floor is returned.
+    public Optional<IElement> getTopElement(Position p) {
+        IElement unit = getUnit(p).orElse(null);
+        if (!(unit instanceof EmptyUnit))
+            return Optional.of(unit);
+        IElement floor = getFloor(p).orElse(null);
+        return Optional.ofNullable(floor);
+    }
+
     public <T> List<T> gatherUnits(Class<T> t) {
         List<T> output = new ArrayList<>();
         for (int y = 0; y < height; ++y) {

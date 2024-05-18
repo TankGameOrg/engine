@@ -9,9 +9,11 @@ public class Attribute<E> {
     public static Attribute<Integer> GOLD = new Attribute<Integer>("GOLD");
     public static Attribute<Integer> ACTION_POINTS = new Attribute<Integer>("ACTIONS");
     public static Attribute<Integer> DURABILITY = new Attribute<Integer>("DURABILITY");
+    public static Attribute<Integer> MAX_DURABILITY = new Attribute<Integer>("MAX_DURABILITY");
     public static Attribute<Integer> RANGE = new Attribute<Integer>("RANGE");
     public static Attribute<Integer> BOUNTY = new Attribute<Integer>("BOUNTY");
     public static Attribute<Boolean> DEAD = new Attribute<Boolean>("DEAD");
+    public static Attribute<Boolean> DESTROYED = new Attribute<Boolean>("DESTROYED");
 
     private String attributeName;
 
@@ -34,6 +36,14 @@ public class Attribute<E> {
 
         return getObject(e);
     }
+        
+    public void to(GenericElement e, E o) {
+        e.set(attributeName, o);
+    }
+
+    public String getName() {
+        return attributeName;
+    }
 
     @SuppressWarnings("unchecked")
     private E getObject(GenericElement e) {
@@ -46,13 +56,5 @@ public class Attribute<E> {
                             + " cannot be casted to it's type.",
                     exception);
         }
-    }
-
-    public void to(GenericElement e, E o) {
-        e.set(attributeName, o);
-    }
-
-    public String getName() {
-        return attributeName;
     }
 }
