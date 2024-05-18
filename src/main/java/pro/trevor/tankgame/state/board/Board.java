@@ -75,7 +75,7 @@ public class Board implements IMetaElement {
 
     // Returns the unit at the position if there is one.
     // If there is no unit at the position, then the floor is returned.
-    public Optional<IElement> getTopElement(Position p) {
+    public Optional<IElement> getUnitOrFloor(Position p) {
         IElement unit = getUnit(p).orElse(null);
         if (!(unit instanceof EmptyUnit))
             return Optional.of(unit);

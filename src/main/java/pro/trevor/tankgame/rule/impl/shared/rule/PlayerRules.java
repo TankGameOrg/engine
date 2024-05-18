@@ -183,7 +183,7 @@ public class PlayerRules {
                     boolean hit = toType(n[1], Boolean.class);
                     Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) - 1);
 
-                    Optional<IElement> optionalElement = s.getBoard().getTopElement(target);
+                    Optional<IElement> optionalElement = s.getBoard().getUnitOrFloor(target);
                     if (optionalElement.isEmpty()) {
                         throw new Error(
                                 String.format("Target position %s is not on the game board", target.toString()));
