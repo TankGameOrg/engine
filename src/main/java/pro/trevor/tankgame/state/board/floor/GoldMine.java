@@ -3,7 +3,7 @@ package pro.trevor.tankgame.state.board.floor;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
 
-public class GoldMine extends StandardFloor {
+public class GoldMine extends WalkableFloor {
     public GoldMine(Position position) {
         super(position);
     }

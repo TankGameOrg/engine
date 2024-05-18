@@ -15,7 +15,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.floor.StandardFloor;
+import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
@@ -81,7 +81,7 @@ public class ApiV3 implements IApi {
                 return new GoldMine(position);
             }
             case "empty" -> {
-                return new StandardFloor(position);
+                return new WalkableFloor(position);
             }
             default -> throw new Error("Unhandled floor type " + type);
         }

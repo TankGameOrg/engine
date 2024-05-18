@@ -9,9 +9,13 @@ import java.util.HashMap;
 public class EmptyUnit extends GenericElement implements IUnit {
 
     private static final HashMap<String, Object> EMPTY_MAP = new HashMap<>();
+    private static final String typeValue = "empty";
+
+    private final Position position;
 
     public EmptyUnit(Position position) {
-        super(position, EMPTY_MAP);
+        super(EMPTY_MAP);
+        this.position = position;
     }
 
     @Override
@@ -22,7 +26,13 @@ public class EmptyUnit extends GenericElement implements IUnit {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-        output.put("type", "empty");
+        output.put("type", typeValue);
+        output.put("position", position.toBoardString());
         return output;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 }

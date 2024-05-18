@@ -93,6 +93,18 @@ def unwalkable(icon_name):
         "icon": icon_name,
     }
 
+def destructibleFloor(dur, max_dur, icon_name):
+    destroyed = (dur == 0)
+    return {
+        "type": "destructible_wall",
+        "icon": icon_name,
+        "attributes": {
+            "DURABILITY": dur,
+            "MAX_DURABILITY": max_dur,
+            "DESTROYED": destroyed
+        },
+    }
+
 def set_positions(board):
     y = 1
     for row in board:
@@ -179,7 +191,7 @@ def unit_config_window(row, col, unit_board):
     return option
 
 def floor_config_window(row, col, floor_board):
-    radio_options = ["empty", "gold_mine", "health_pool", "unwalkable"]
+    radio_options = ["empty", "gold_mine", "health_pool", "unwalkable", "destructible_floor"]
     event, values = sg.Window('Tank Game Board Maker',
                     [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
                      [sg.Text(f'What is going to be here?')],
@@ -197,10 +209,28 @@ def floor_config_window(row, col, floor_board):
         option = health_pool_config_window(row, col, floor_board)
     elif option == "unwalkable":
         option = unwalkable_config_window(row, col, floor_board)
+    elif option == "destructible_floor":
+        option = destructible_floor_config_window(row, col, floor_board)
     else:
         print(f'Error: bad grid space selection: {option}')
         sys.exit()
     return option
+
+def destructible_floor_config_window(row, col, floor_board):
+    icons = ["rails", "bridge"]
+    event, values = sg.Window('Tank Game Board Maker',
+                    [[sg.Text(f'You are configuring floor board space {(col, row)}.')],
+                     [sg.Text(f'It will be a destructible floor.')],
+                     [sg.Text(f'What is the floors\'s Max Durability?')],
+                     [sg.Input(key="max_dur")],
+                     [sg.Text(f'What is the floors\'s current Durability?')],
+                     [sg.Input(key="dur")],
+                     [sg.Submit(), sg.Cancel()]]).read(close=True)
+    if event == 'Cancel':
+        return None
+    
+    floor_board[row][col] = destructibleFloor(values["dur"], values["max_dur"], "bridge")
+    return "destructible_floor"
 
 def unwalkable_config_window(row, col, floor_board):
     buttonNames = ["river", "chasm", "rubble"]
@@ -300,6 +330,7 @@ def main():
         "empty": "white",
         "health_pool": "pale violet red",
         "unwalkable": "pale turquoise",
+        "destructible_floor": "brown",
     }
 
     unit_board = state['board']['unit_board']

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
 import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.floor.StandardFloor;
+import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 
@@ -33,7 +33,7 @@ public class Board implements IMetaElement {
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
                 unitBoard[y][x] = new EmptyUnit(new Position(x, y));
-                floorBoard[y][x] = new StandardFloor(new Position(x, y));
+                floorBoard[y][x] = new WalkableFloor(new Position(x, y));
             }
         }
     }
@@ -71,6 +71,16 @@ public class Board implements IMetaElement {
 
     public Optional<IFloor> getFloor(Position p) {
         return getElementOnBoard(floorBoard, p);
+    }
+
+    // Returns the unit at the position if there is one.
+    // If there is no unit at the position, then the floor is returned.
+    public Optional<IElement> getUnitOrFloor(Position p) {
+        IElement unit = getUnit(p).orElse(null);
+        if (!(unit instanceof EmptyUnit))
+            return Optional.of(unit);
+        IElement floor = getFloor(p).orElse(null);
+        return Optional.ofNullable(floor);
     }
 
     public <T> List<T> gatherUnits(Class<T> t) {
