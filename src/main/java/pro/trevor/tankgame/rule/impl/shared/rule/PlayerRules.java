@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.rule.impl.shared.rule;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -248,6 +249,43 @@ public class PlayerRules {
                     }
                 }
             });
+
+    public static List<PlayerActionRule<GenericTank>> GenerateTeamPlayerActions(List<String> teamNames) {
+        String unaffiliatedTeam = "unaffiliated";
+        List<PlayerActionRule<GenericTank>> rules = new ArrayList<PlayerActionRule<GenericTank>>();
+        for (String team : teamNames) {
+            rules.add(GetJoinTeamRule(team, unaffiliatedTeam));
+            rules.add(GetBetrayTeamRule(team, unaffiliatedTeam));
+        }
+        return rules;
+    }
+
+    private static PlayerActionRule<GenericTank> GetJoinTeamRule(String teamName, String unaffiliatedTeam) {
+        return new PlayerActionRule<GenericTank>(
+            "join_" + teamName, 
+            (state, tank, other) -> {
+                return Attribute.TEAM.from(tank).orElse(unaffiliatedTeam) == unaffiliatedTeam &&
+                !Attribute.BETRAYED_TEAMS.from(tank).orElse(new ArrayList<String>()).contains(teamName);
+            }, 
+            (state, tank, other) -> {
+                Attribute.TEAM.to(tank, teamName);
+            });
+    }
+
+    private static PlayerActionRule<GenericTank> GetBetrayTeamRule(String teamName, String unaffiliatedTeam) {
+        return new PlayerActionRule<GenericTank>(
+            "betray_" + teamName,
+            (state, tank, other) -> {
+                return Attribute.TEAM.from(tank).orElse(unaffiliatedTeam) == teamName;
+            }, 
+            (state, tank, other) -> {
+                List<String> betrayedTeams = new ArrayList<>();
+                betrayedTeams.addAll(Attribute.BETRAYED_TEAMS.from(tank).orElse(new ArrayList<String>()));
+                betrayedTeams.add(teamName);
+                Attribute.BETRAYED_TEAMS.to(tank, betrayedTeams);
+                Attribute.TEAM.to(tank, unaffiliatedTeam);
+            });
+    }
 
     public static class ActionKeys {
 
