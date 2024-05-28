@@ -96,7 +96,7 @@ def unwalkable(icon_name):
 def destructibleFloor(dur, max_dur, icon_name):
     destroyed = (dur == 0)
     return {
-        "type": "destructible_wall",
+        "type": "destructible_floor",
         "icon": icon_name,
         "attributes": {
             "DURABILITY": dur,
