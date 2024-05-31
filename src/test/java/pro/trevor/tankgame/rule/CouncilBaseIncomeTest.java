@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
-import pro.trevor.tankgame.rule.impl.shared.TickRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.DummyState;

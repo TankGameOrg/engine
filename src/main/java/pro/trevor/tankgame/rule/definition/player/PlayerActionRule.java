@@ -2,12 +2,12 @@ package pro.trevor.tankgame.rule.definition.player;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.Main;
+import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.util.*;
 import pro.trevor.tankgame.util.function.IVarTriConsumer;
 import pro.trevor.tankgame.util.function.IVarTriPredicate;
-import pro.trevor.tankgame.util.range.TypeRange;
 
 import java.util.Arrays;
 
@@ -18,7 +18,8 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
     protected final IVarTriConsumer<State, T, Object> consumer;
     protected final TypeRange<?>[] parameters;
 
-    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
+    public PlayerActionRule(String name, IVarTriPredicate<State, T, Object> predicate,
+            IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
         this.name = name;
         this.predicate = predicate;
         this.consumer = consumer;
@@ -44,7 +45,8 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
                 System.err.println(error.toString(2));
                 System.err.println(state.toString());
             }
-            throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
+            throw new Error(
+                    String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
         }
     }
 
@@ -68,7 +70,7 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
             return false;
         }
         for (int i = 0; i < parameters.length; ++i) {
-            if (!meta[i].getClass().equals(parameters[i].getBoundClass())) {
+            if (!parameters[i].getBoundClass().isAssignableFrom(meta[i].getClass())) {
                 return false;
             }
         }

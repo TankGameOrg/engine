@@ -2,9 +2,12 @@ package pro.trevor.tankgame.rule.impl.version3;
 
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.range.DiscreteTypeRange;
+import pro.trevor.tankgame.rule.definition.range.TypeRange;
+import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
@@ -12,19 +15,16 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.floor.StandardFloor;
+import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.state.range.VariableTypeRange;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import org.json.*;
-import pro.trevor.tankgame.util.range.DiscreteTypeRange;
-import pro.trevor.tankgame.util.range.TypeRange;
 
 public class ApiV3 implements IApi {
     protected final RulesetDescription ruleset;
@@ -81,7 +81,7 @@ public class ApiV3 implements IApi {
                 return new GoldMine(position);
             }
             case "empty" -> {
-                return new StandardFloor(position);
+                return new WalkableFloor(position);
             }
             default -> throw new Error("Unhandled floor type " + type);
         }
@@ -100,8 +100,8 @@ public class ApiV3 implements IApi {
         JSONArray floorBoard = board.getJSONArray("floor_board");
         assert unitBoard.length() == floorBoard.length();
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
-        int boardWidth = unitBoard.length();
-        int boardHeight = unitBoard.getJSONArray(0).length();
+        int boardHeight = unitBoard.length();
+        int boardWidth = unitBoard.getJSONArray(0).length();
         boolean councilCanBounty = council.optBoolean("can_bounty", true);
         Council councilObject = new Council();
         councilObject.setCanBounty(councilCanBounty);
@@ -112,13 +112,13 @@ public class ApiV3 implements IApi {
         state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
         state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
         state.getCouncil().setCoffer(council.getInt("coffer"));
-        for (int i = 0; i < unitBoard.length(); ++i) {
-            JSONArray unitBoardRow = unitBoard.getJSONArray(i);
-            JSONArray floorBoardRow = floorBoard.getJSONArray(i);
-            for (int j = 0; j < unitBoardRow.length(); ++j) {
-                Position position = new Position(j, i);
-                JSONObject unitJson = unitBoardRow.getJSONObject(j);
-                JSONObject floorJson = floorBoardRow.getJSONObject(j);
+        for (int y = 0; y < boardHeight; ++y) {
+            JSONArray unitBoardRow = unitBoard.getJSONArray(y);
+            JSONArray floorBoardRow = floorBoard.getJSONArray(y);
+            for (int x = 0; x < boardWidth; ++x) {
+                Position position = new Position(x, y);
+                JSONObject unitJson = unitBoardRow.getJSONObject(x);
+                JSONObject floorJson = floorBoardRow.getJSONObject(x);
                 state.getBoard().putUnit(unitFromJson(unitJson, position));
                 state.getBoard().putFloor(floorFromJson(floorJson, position));
                 if (unitJson.getString("type").equals("tank")) {

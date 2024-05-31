@@ -3,12 +3,11 @@ package pro.trevor.tankgame.state.board;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.floor.AlwaysUnwalkableFloor;
+import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
 import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.floor.StandardFloor;
+import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.IWalkable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +28,12 @@ public class Board implements IMetaElement {
         assert height > 0;
         this.width = width;
         this.height = height;
-        this.unitBoard = new IUnit[width][height];
-        this.floorBoard = new IFloor[width][height];
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                unitBoard[i][j] = new EmptyUnit(new Position(i, j));
-                floorBoard[i][j] = new StandardFloor(new Position(i, j));
+        this.unitBoard = new IUnit[height][width];
+        this.floorBoard = new IFloor[height][width];
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                unitBoard[y][x] = new EmptyUnit(new Position(x, y));
+                floorBoard[y][x] = new WalkableFloor(new Position(x, y));
             }
         }
     }
@@ -42,7 +41,6 @@ public class Board implements IMetaElement {
     public boolean isValidPosition(Position p) {
         return (p.x() >= 0 && p.y() >= 0 && p.x() < width && p.y() < height);
     }
-
 
     private <T extends IPositioned> boolean putElementOnBoard(T[][] board, T element) {
         if (isValidPosition(element.getPosition())) {
@@ -75,12 +73,21 @@ public class Board implements IMetaElement {
         return getElementOnBoard(floorBoard, p);
     }
 
+    // Returns the unit at the position if there is one.
+    // If there is no unit at the position, then the floor is returned.
+    public Optional<IElement> getUnitOrFloor(Position p) {
+        IElement unit = getUnit(p).orElse(null);
+        if (!(unit instanceof EmptyUnit))
+            return Optional.of(unit);
+        IElement floor = getFloor(p).orElse(null);
+        return Optional.ofNullable(floor);
+    }
 
     public <T> List<T> gatherUnits(Class<T> t) {
         List<T> output = new ArrayList<>();
-        for (int i = 0; i < unitBoard.length; ++i) {
-            for (int j = 0; j < unitBoard[0].length; ++j) {
-                IUnit unit = unitBoard[i][j];
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                IUnit unit = unitBoard[y][x];
                 if (t.isInstance(unit)) {
                     output.add(t.cast(unit));
                 }
@@ -91,9 +98,9 @@ public class Board implements IMetaElement {
 
     public <T> List<T> gatherFloors(Class<T> t) {
         List<T> output = new ArrayList<>();
-        for (int i = 0; i < floorBoard.length; ++i) {
-            for (int j = 0; j < floorBoard[0].length; ++j) {
-                IFloor floor = floorBoard[i][j];
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                IFloor floor = floorBoard[y][x];
                 if (t.isInstance(floor)) {
                     output.add(t.cast(floor));
                 }
@@ -105,9 +112,9 @@ public class Board implements IMetaElement {
     public <T> List<T> gather(Class<T> t) {
         if (Position.class.isAssignableFrom(t)) {
             List<T> positions = new ArrayList<>();
-            for (int i = 0; i < width; ++i) {
-                for (int j = 0; j < height; ++j) {
-                    positions.add((T) new Position(i, j));
+            for (int y = 0; y < height; ++y) {
+                for (int x = 0; x < width; ++x) {
+                    positions.add((T) new Position(x, y));
                 }
             }
             return positions;
@@ -127,12 +134,12 @@ public class Board implements IMetaElement {
     }
 
     public boolean isWalkable(Position p) {
-        return (getUnit(p).orElse(null) instanceof IWalkable) ||
-                (getFloor(p).orElse(new AlwaysUnwalkableFloor(p)).isWalkable(this));
+        return (getUnit(p).orElse(null) instanceof EmptyUnit)
+                && (getFloor(p).orElse(new UnwalkableFloor(p)).isWalkable(this));
     }
 
     public boolean isAbleToShootThrough(Position p) {
-        return getUnit(p).orElse(null) instanceof IWalkable;
+        return getUnit(p).orElse(null) instanceof EmptyUnit;
     }
 
     private static <T extends IElement> String toGridString(T[][] board) {
@@ -141,10 +148,10 @@ public class Board implements IMetaElement {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.repeat(' ', 2*pad);
+        sb.repeat(' ', 2 * pad);
 
         for (int i = 0; i < board.length; ++i) {
-            sb.append((char)('A' + i)).append(' ');
+            sb.append((char) ('A' + i)).append(' ');
         }
 
         sb.append("\n").repeat(' ', pad).append("+-");
@@ -178,12 +185,12 @@ public class Board implements IMetaElement {
         output.put("type", "board");
         JSONArray units = new JSONArray();
         JSONArray floors = new JSONArray();
-        for (int i = 0; i < height; ++i) {
+        for (int y = 0; y < height; ++y) {
             JSONArray unit = new JSONArray();
             JSONArray floor = new JSONArray();
-            for (int j = 0; j < width; ++j) {
-                unit.put(unitBoard[i][j].toJson());
-                floor.put(floorBoard[i][j].toJson());
+            for (int x = 0; x < width; ++x) {
+                unit.put(unitBoard[y][x].toJson());
+                floor.put(floorBoard[y][x].toJson());
             }
             units.put(unit);
             floors.put(floor);

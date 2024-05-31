@@ -1,20 +1,26 @@
 package pro.trevor.tankgame.state.board.unit;
 
 import org.json.JSONObject;
+
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.attribute.DurableAttribute;
 
 import java.util.Collections;
 
-public class BasicWall extends GenericElement<DurableAttribute> implements IUnit {
+public class BasicWall extends GenericElement implements IUnit {
+
+    private static final String typeValue = "wall";
+    private final Position position;
 
     public BasicWall(Position position, int initialHealth) {
-        super(position, Collections.singletonMap(DurableAttribute.DURABILITY, initialHealth));
+        super(Collections.singletonMap(Attribute.DURABILITY.getName(), initialHealth));
+        this.position = position;
     }
 
     public BasicWall(JSONObject json) {
-        super(json, DurableAttribute.class);
+        super(json);
+        this.position = new Position(json.getString("position"));
     }
 
     @Override
@@ -23,11 +29,11 @@ public class BasicWall extends GenericElement<DurableAttribute> implements IUnit
     }
 
     public int getDurability() {
-        return getInteger(DurableAttribute.DURABILITY);
+        return Attribute.DURABILITY.from(this).orElse(0);
     }
 
     public void setDurability(int durability) {
-        set(DurableAttribute.DURABILITY, durability);
+        Attribute.DURABILITY.to(this, durability);
     }
 
     @Override
@@ -38,7 +44,13 @@ public class BasicWall extends GenericElement<DurableAttribute> implements IUnit
     @Override
     public JSONObject toJson() {
         JSONObject output = super.toJson();
-        output.put("type", "wall");
+        output.put("type", typeValue);
+        output.put("position", position.toBoardString());
         return output;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 }
