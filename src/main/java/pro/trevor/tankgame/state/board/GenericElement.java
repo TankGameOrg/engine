@@ -2,7 +2,6 @@ package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +48,6 @@ public abstract class GenericElement implements IElement {
                 case Boolean v -> attributesJson.put(attribute, v);
                 case Integer v -> attributesJson.put(attribute, v);
                 case Double v -> attributesJson.put(attribute, v);
-                case Collection v -> attributesJson.put(attribute, v);
                 default ->
                     throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
             }
