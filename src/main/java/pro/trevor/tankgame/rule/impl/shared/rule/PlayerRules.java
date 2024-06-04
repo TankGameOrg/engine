@@ -15,7 +15,7 @@ import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
-import pro.trevor.tankgame.rule.definition.range.TeamRange;
+import pro.trevor.tankgame.rule.definition.range.StringRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -268,7 +268,7 @@ public class PlayerRules {
                 Attribute.TEAM.to(tank, newTeam);
                 Attribute.BETRAYER.to(tank, true);
             },
-            new TeamRange(teamNames));
+            StringRange.GetOtherTeamsRange(teamNames));
     }
 
     public static class ActionKeys {
