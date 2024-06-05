@@ -251,7 +251,10 @@ public class PlayerRules {
                 }
             });
 
-    private static PlayerActionRule<GenericTank> GetChangeTeamRule(List<String> teamNames) {
+    public static PlayerActionRule<GenericTank> GetChangeTeamRule(List<String> teamNames) {
+        if (teamNames.stream().distinct().count() != teamNames.size())
+            throw new Error("Repeated elements in team name list.");
+
         return new PlayerActionRule<GenericTank>(
             PlayerRules.ActionKeys.CHANGE_TEAM, 
             (state, tank, other) -> {

@@ -24,5 +24,11 @@ public class TeamWinConditionTest {
     // 0 living tanks
     // Cannot apply
     // EXAMPLE WHERE TWO TANKS, ON OPPOSING TEAMS, WITH 1 LIFE EACH GET HIT BY A DAMAGING TICK ACTION
-    // DON'T KNOW HOW GAME ENDS    
+    // DON'T KNOW HOW GAME ENDS
+
+    // 5
+    // Team A: 1 living tank + 1 council
+    // Team B: 3 council
+    // Can apply
+    // winner is team A
 }
