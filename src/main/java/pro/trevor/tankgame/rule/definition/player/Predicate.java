@@ -8,25 +8,18 @@ import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 public class Predicate<T extends IPlayerElement> {
 
-    protected final IVarTriPredicate<State, T, Object> predicate;
-    protected final IVarTriFunction<State, T, Object, String> errorFunction;
+    protected final IVarTriFunction<State, T, Object, Result<String>> predicate;
 
-    public Predicate(IVarTriPredicate<State , T, Object> predicate, String errorMessage) {
+    public Predicate(IVarTriFunction<State, T, Object, Result<String>> predicate) {
         this.predicate = predicate;
-        this.errorFunction = (s, t, n) -> errorMessage;
-    }
-
-    public Predicate(IVarTriPredicate<State , T, Object> predicate, IVarTriFunction<State, T, Object, String>  errorFunction) {
-        this.predicate = predicate;
-        this.errorFunction = errorFunction;
     }
 
     public Result<String> test(State state, T t, Object... meta) {
-        if (predicate.test(state, t, meta)) {
-            return Result.ok();
-        } else {
-            return Result.error(errorFunction.accept(state, t, meta));
-        }
+        return predicate.accept(state, t, meta);
+    }
+
+    public Condition<T> toCondition() {
+        return new Condition<>(this);
     }
 
 }

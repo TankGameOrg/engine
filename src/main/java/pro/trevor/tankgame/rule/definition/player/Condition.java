@@ -11,6 +11,7 @@ public class Condition<T extends IPlayerElement> {
 
     private final Predicate<T>[] predicates;
 
+    @SafeVarargs
     public Condition(Predicate<T>... predicates) {
         this.predicates = predicates;
     }
