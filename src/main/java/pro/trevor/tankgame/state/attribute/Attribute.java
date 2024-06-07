@@ -6,14 +6,14 @@ import pro.trevor.tankgame.state.board.GenericElement;
 
 public class Attribute<E> {
 
-    public static Attribute<Integer> GOLD = new Attribute<Integer>("GOLD");
-    public static Attribute<Integer> ACTION_POINTS = new Attribute<Integer>("ACTIONS");
-    public static Attribute<Integer> DURABILITY = new Attribute<Integer>("DURABILITY");
-    public static Attribute<Integer> MAX_DURABILITY = new Attribute<Integer>("MAX_DURABILITY");
-    public static Attribute<Integer> RANGE = new Attribute<Integer>("RANGE");
-    public static Attribute<Integer> BOUNTY = new Attribute<Integer>("BOUNTY");
-    public static Attribute<Boolean> DEAD = new Attribute<Boolean>("DEAD");
-    public static Attribute<Boolean> DESTROYED = new Attribute<Boolean>("DESTROYED");
+    public static Attribute<Integer> GOLD = new Attribute<>("GOLD");
+    public static Attribute<Integer> ACTION_POINTS = new Attribute<>("ACTIONS");
+    public static Attribute<Integer> DURABILITY = new Attribute<>("DURABILITY");
+    public static Attribute<Integer> MAX_DURABILITY = new Attribute<>("MAX_DURABILITY");
+    public static Attribute<Integer> RANGE = new Attribute<>("RANGE");
+    public static Attribute<Integer> BOUNTY = new Attribute<>("BOUNTY");
+    public static Attribute<Boolean> DEAD = new Attribute<>("DEAD");
+    public static Attribute<Boolean> DESTROYED = new Attribute<>("DESTROYED");
 
     private String attributeName;
 

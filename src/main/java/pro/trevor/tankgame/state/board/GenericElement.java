@@ -1,7 +1,9 @@
 package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.util.IJsonObject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +22,21 @@ public abstract class GenericElement implements IElement {
         this.attributes = new HashMap<>();
         JSONObject attributesJsonObject = json.getJSONObject("attributes");
         for (String key : attributesJsonObject.keySet()) {
-            this.attributes.put(key, attributesJsonObject.get(key));
+            Object attribute = attributesJsonObject.get(key);
+            if (attribute instanceof JSONObject jsonAttribute) {
+                String qualifiedClass = jsonAttribute.getString("class");
+                try {
+                    Class<?> attributeClass = Class.forName(qualifiedClass);
+                    attributeClass.getConstructor(JSONObject.class).newInstance(jsonAttribute);
+                } catch (ClassNotFoundException e) {
+                    throw new Error("Error reading attribute " + key + ": unknown class " + qualifiedClass, e);
+                } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                         InvocationTargetException e) {
+                    throw new Error("No matching constructor found for class " + qualifiedClass, e);
+                }
+            } else {
+                this.attributes.put(key, attributesJsonObject.get(key));
+            }
         }
     }
 
@@ -48,6 +64,7 @@ public abstract class GenericElement implements IElement {
                 case Boolean v -> attributesJson.put(attribute, v);
                 case Integer v -> attributesJson.put(attribute, v);
                 case Double v -> attributesJson.put(attribute, v);
+                case IJsonObject json -> attributesJson.put(attribute, json.toJson());
                 default ->
                     throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
             }
