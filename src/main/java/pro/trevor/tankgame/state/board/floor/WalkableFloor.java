@@ -5,22 +5,19 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 
-public class WalkableFloor extends AbstractPositionedFloor {
+public class WalkableFloor extends AbstractFloor {
 
     public WalkableFloor(Position position) {
         super(position);
     }
 
-    @Override
-    public char toBoardCharacter() {
-        return '_';
+    public WalkableFloor(JSONObject json) {
+        super(json);
     }
 
     @Override
-    public JSONObject toJson() {
-        JSONObject output = new JSONObject();
-        output.put("type", "empty");
-        return output;
+    public char toBoardCharacter() {
+        return '_';
     }
 
     @Override

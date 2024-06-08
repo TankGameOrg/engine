@@ -4,41 +4,28 @@ import org.json.JSONObject;
 
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
 
-public class DestructibleFloor extends GenericElement implements IFloor {
+public class DestructibleFloor extends AbstractFloor {
 
-    private static final String typeValue = "destructible_floor";
+    public DestructibleFloor(Position position, int durability, int maxDurability) {
+        super(position);
+        Attribute.DURABILITY.to(this, durability);
+        Attribute.MAX_DURABILITY.to(this, maxDurability);
+    }
 
-    private final Position position;
-
-    public DestructibleFloor(Position p, JSONObject json) {
+    public DestructibleFloor(JSONObject json) {
         super(json);
-        assert json.getString("type") == typeValue;
         assert Attribute.DURABILITY.in(this);
         assert Attribute.MAX_DURABILITY.in(this);
         assert Attribute.DURABILITY.unsafeFrom(this) <= Attribute.MAX_DURABILITY.unsafeFrom(this);
         assert Attribute.DURABILITY.unsafeFrom(this) >= 0;
-        if (Attribute.DURABILITY.unsafeFrom(this) == 0) assert Attribute.DESTROYED.in(this);
-        position = p;
-    }
-
-    @Override
-    public Position getPosition() {
-        return position;
+        assert Attribute.DURABILITY.unsafeFrom(this) != 0 || Attribute.DESTROYED.in(this);
     }
 
     @Override
     public char toBoardCharacter() {
         return '~';
-    }
-
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = super.toJson();
-        json.put("type", typeValue);
-        return json;
     }
 
     @Override

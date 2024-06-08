@@ -2,6 +2,7 @@ package pro.trevor.tankgame.rule.impl.version3;
 
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.range.DiscreteTypeRange;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
@@ -11,6 +12,8 @@ import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
@@ -22,9 +25,13 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.*;
+import java.util.concurrent.CancellationException;
 import java.util.stream.Collectors;
 
 import org.json.*;
+import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.util.Pair;
 
 public class ApiV3 implements IApi {
     protected final RulesetDescription ruleset;
@@ -56,34 +63,21 @@ public class ApiV3 implements IApi {
         return rules;
     }
 
-    protected static IUnit unitFromJson(JSONObject json, Position position) {
-        String type = json.getString("type");
-        switch (type) {
-            case "tank" -> {
-                assert json.getString("position").equals(position.toString());
-                return new Tank(json);
-            }
-            case "wall" -> {
-                assert json.getString("position").equals(position.toString());
-                return new BasicWall(json);
-            }
-            case "empty" -> {
-                return new EmptyUnit(position);
-            }
-            default -> throw new Error("Unhandled unit type " + type);
+    protected static IUnit unitFromJson(JSONObject json) {
+        Object output = AttributeObject.fromJson(json);
+        if (output instanceof IUnit unit) {
+            return unit;
+        } else {
+            throw new Error("JSON contains a class that is not IUnit: " + output.getClass().getName());
         }
     }
 
-    protected static IFloor floorFromJson(JSONObject json, Position position) {
-        String type = json.getString("type");
-        switch (type) {
-            case "gold_mine" -> {
-                return new GoldMine(position);
-            }
-            case "empty" -> {
-                return new WalkableFloor(position);
-            }
-            default -> throw new Error("Unhandled floor type " + type);
+    protected static IFloor floorFromJson(JSONObject json) {
+        Object output = AttributeObject.fromJson(json);
+        if (output instanceof IFloor floor) {
+            return floor;
+        } else {
+            throw new Error("JSON contains a class that is not IFloor: " + output.getClass().getName());
         }
     }
 
@@ -116,13 +110,13 @@ public class ApiV3 implements IApi {
             JSONArray unitBoardRow = unitBoard.getJSONArray(y);
             JSONArray floorBoardRow = floorBoard.getJSONArray(y);
             for (int x = 0; x < boardWidth; ++x) {
-                Position position = new Position(x, y);
                 JSONObject unitJson = unitBoardRow.getJSONObject(x);
                 JSONObject floorJson = floorBoardRow.getJSONObject(x);
-                state.getBoard().putUnit(unitFromJson(unitJson, position));
-                state.getBoard().putFloor(floorFromJson(floorJson, position));
-                if (unitJson.getString("type").equals("tank")) {
-                    state.putPlayer(unitJson.getString("name"));
+                AttributeObject unit = (AttributeObject) unitFromJson(unitJson);
+                state.getBoard().putUnit(unitFromJson(unitJson));
+                state.getBoard().putFloor(floorFromJson(floorJson));
+                if (Attribute.PLAYER.in(unit)) {
+                    state.putPlayer(Attribute.PLAYER.unsafeFrom(unit).getName());
                 }
             }
         }
@@ -137,66 +131,47 @@ public class ApiV3 implements IApi {
         if (json.keySet().contains(JsonKeys.DAY)) {
             applyTick(state, ruleset);
         } else {
-            String subject = json.getString(JsonKeys.SUBJECT);
             String action = json.getString(JsonKeys.ACTION);
+            Object subject = json.get(JsonKeys.SUBJECT);
 
-            switch (action) {
-                case PlayerRules.ActionKeys.MOVE -> {
-                    String positionString = json.getString(JsonKeys.TARGET);
-                    Position position = new Position(positionString);
-                    Tank tank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.MOVE).apply(state, tank, position);
-                }
-                case PlayerRules.ActionKeys.SHOOT -> {
-                    String location = json.getString(JsonKeys.TARGET);
-                    Position position = new Position(location);
-                    boolean hit = json.getBoolean(JsonKeys.HIT);
-                    Tank tank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.SHOOT).apply(state, tank, position, hit);
+            Optional<Pair<Class<?>, IPlayerRule<?>>> optionalRule = getRuleByName(action);
+            if (optionalRule.isEmpty()) {
+                throw new Error("Unexpected action: " + action);
+            }
 
-                }
-                case PlayerRules.ActionKeys.DONATE -> {
-                    String target = json.getString(JsonKeys.TARGET);
-                    int quantity = json.getInt(JsonKeys.DONATION);
-                    Tank subjectTank = getTank(subject);
-                    Tank targetTank = getTank(target);
-                    getRule(Tank.class, PlayerRules.ActionKeys.DONATE).apply(state, subjectTank, targetTank, quantity);
-                }
-                case PlayerRules.ActionKeys.BUY_ACTION -> {
-                    int quantity = json.getInt(JsonKeys.GOLD);
-                    Tank subjectTank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.BUY_ACTION).apply(state, subjectTank, quantity);
-                }
-                case PlayerRules.ActionKeys.UPGRADE_RANGE -> {
-                    Tank subjectTank = getTank(subject);
-                    getRule(Tank.class, PlayerRules.ActionKeys.UPGRADE_RANGE).apply(state, subjectTank);
-                }
+            Pair<Class<?>, IPlayerRule<?>> rulePair = optionalRule.get();
+            Class<?> ruleClass = rulePair.left();
+            IPlayerRule<Object> rule = (IPlayerRule<Object>) rulePair.right();
 
-                case PlayerRules.ActionKeys.STIMULUS -> {
-                    assert subject.equals(COUNCIL);
-                    String target = json.getString(JsonKeys.TARGET);
-                    Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.STIMULUS).apply(state, state.getCouncil(), targetTank);
-                }
-                case PlayerRules.ActionKeys.BOUNTY -> {
-                    assert subject.equals(COUNCIL);
-                    String target = json.getString(JsonKeys.TARGET);
-                    int quantity = json.getInt(JsonKeys.BOUNTY);
-                    Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.BOUNTY).apply(state, state.getCouncil(), targetTank, quantity);
-                }
-                case PlayerRules.ActionKeys.GRANT_LIFE -> {
-                    assert subject.equals(COUNCIL);
-                    String target = json.getString(JsonKeys.TARGET);
-                    Tank targetTank = getTank(target);
-                    getMetaRule(Council.class, PlayerRules.ActionKeys.GRANT_LIFE).apply(state, state.getCouncil(), targetTank);
-                }
-                default -> throw new Error("Unexpected action: " + action);
+            // If the subject given was JSON, try to construct it into an Object of its given class;
+            // otherwise, send the Object through to attempt to be case to the rule subject type.
+            if (subject instanceof JSONObject subjectJson) {
+                subject = AttributeObject.fromJson(subjectJson);
+            }
+
+            try {
+                rule.apply(state, ruleClass.cast(subject), getArguments(rule, json));
+            } catch (ClassCastException e) {
+                throw new Error("Unable to cast given subject to class " + ruleClass.getSimpleName(), e);
             }
         }
 
         enforceInvariants(state, ruleset);
         applyConditionals(state, ruleset);
+    }
+
+    private static Object[] getArguments(IPlayerRule<?> rule, JSONObject json) {
+        Object[] arguments = new Object[rule.parameters().length];
+        for (int i = 0; i < arguments.length; ++i) {
+            Object input = json.get(rule.parameters()[i].getName());
+            if (input instanceof JSONObject inputJson) {
+                arguments[i] = AttributeObject.fromJson(inputJson);
+            } else {
+                // Try to assume that, if it is not JSON, it is a primitive
+                arguments[i] = input;
+            }
+        }
+        return arguments;
     }
 
     @Override
@@ -224,7 +199,7 @@ public class ApiV3 implements IApi {
             type = Tank.class;
             rules = ruleset.getPlayerRules().get(type);
             Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()
-                    .filter((t) -> t.getPlayer().equals(player))
+                    .filter((t) -> t.getPlayer().getName().equals(player))
                     .findFirst();
             if (tank.isPresent()) {
                 subject = tank.get();
@@ -297,6 +272,16 @@ public class ApiV3 implements IApi {
         return new HashSet<>(0);
     }
 
+    protected Optional<Pair<Class<?>, IPlayerRule<?>>>  getRuleByName(String name) {
+        Optional<Pair<Class<?>, IPlayerRule<?>>> rule = ruleset.getPlayerRules().getByName(name);
+        if (rule.isPresent()) {
+            return rule;
+        }
+
+        return ruleset.getMetaPlayerRules().getByName(name);
+
+    }
+
     protected <T extends IPlayerElement> IPlayerRule<T> getRule(Class<T> t, String name) {
         List<IPlayerRule<T>> rules = ruleset.getPlayerRules().getExact(t);
         if (rules.isEmpty()) {
@@ -327,7 +312,7 @@ public class ApiV3 implements IApi {
 
     protected Tank getTank(String player) {
         return state.getBoard().gatherUnits(Tank.class).stream()
-                .filter(t -> t.getPlayer().equals(player)).toList().getFirst();
+                .filter(t -> t.getPlayer().getName().equals(player)).toList().getFirst();
     }
 
     protected static void enforceInvariants(State state, RulesetDescription ruleset) {

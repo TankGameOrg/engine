@@ -51,8 +51,8 @@ public class Council implements IPlayerElement, IMetaElement {
     }
 
     @Override
-    public String getPlayer() {
-        return "Council";
+    public Player getPlayer() {
+        return new Player("Council");
     }
 
     @Override

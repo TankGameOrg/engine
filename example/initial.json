@@ -14,807 +14,2436 @@
     "unit_board": [
       [
         {
-          "name": "Schmude",
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Schmude"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "A1",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Dan",
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Dan"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "C1",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D1",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "E1",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "F1",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "G1",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "H1",
-          "type": "wall"
-        },
-        {
-          "name": "Stomp",
           "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Stomp"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 8,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "I1",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Ty",
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Ty"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 0,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "K1",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D2",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E2",
-          "type": "wall"
-        },
-        {"type": "empty"},
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "G2",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H2",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 1,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 1,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 1,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 1,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        }
       ],
       [
         {
-          "name": "Bryan",
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Bryan"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "A3",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Trevor",
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Trevor"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "C3",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D3",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "E3",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "F3",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "G3",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "H3",
-          "type": "wall"
-        },
-        {
-          "name": "David",
           "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "David"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "I3",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Lena",
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Lena"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 5,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 2,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "K3",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         }
       ],
       [
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "A4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "B4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 1,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "C4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "F4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "G4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "I4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "J4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 9,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "K4",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 3,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         }
       ],
       [
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "A5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "B5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 1,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "C5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "F5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "G5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "I5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "J5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 9,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "K5",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 4,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         }
       ],
       [
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "A6",
-          "type": "wall"
-        },
-        {"type": "empty"},
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "C6",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "D6",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E6",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "F6",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "G6",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H6",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "I6",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
-        {"type": "empty"},
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "K6",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 5,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         }
       ],
       [
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "A7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "B7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 1,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "C7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "F7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "G7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "I7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "J7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 9,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "K7",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 6,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         }
       ],
       [
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "A8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "B8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 1,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "C8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "F8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "G8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "I8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "J8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 9,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "K8",
-          "type": "wall"
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 7,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
         }
       ],
       [
         {
-          "name": "Beyer",
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Beyer"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "A9",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Steve",
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Steve"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "C9",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D9",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "E9",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "F9",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "G9",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "H9",
-          "type": "wall"
-        },
-        {
-          "name": "Joel",
           "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Joel"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "I9",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Xavion",
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Xavion"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 8,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "K9",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D10",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "E10",
-          "type": "wall"
-        },
-        {"type": "empty"},
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "G10",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "H10",
-          "type": "wall"
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
         },
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 9,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 9,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 9,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 9,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        }
       ],
       [
         {
-          "name": "Ryan",
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Ryan"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 0,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "A11",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "John",
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "John"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 2,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "C11",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
         {
-          "attributes": {"DURABILITY": 3},
-          "position": "D11",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "E11",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "F11",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "G11",
-          "type": "wall"
-        },
-        {
-          "attributes": {"DURABILITY": 3},
-          "position": "H11",
-          "type": "wall"
-        },
-        {
-          "name": "Isaac",
           "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 3,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 4,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 5,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 6,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "DURABILITY": 3,
+            "POSITION": {
+              "x": 7,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            }
+          },
+          "class": "pro.trevor.tankgame.state.board.unit.BasicWall"
+        },
+        {
+          "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Isaac"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 8,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "I11",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         },
-        {"type": "empty"},
         {
-          "name": "Corey",
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.unit.EmptyUnit"
+        },
+        {
           "attributes": {
+            "PLAYER": {
+              "attributes": {"NAME": "Corey"},
+              "class": "pro.trevor.tankgame.state.meta.Player"
+            },
             "GOLD": 0,
             "DURABILITY": 3,
+            "POSITION": {
+              "x": 10,
+              "y": 10,
+              "class": "pro.trevor.tankgame.state.board.Position"
+            },
+            "TIME_SINCE_LAST_ACTION": 0,
             "ACTIONS": 0,
             "DEAD": false,
             "BOUNTY": 0,
             "RANGE": 2
           },
-          "position": "K11",
-          "type": "tank"
+          "class": "pro.trevor.tankgame.rule.impl.version3.Tank"
         }
       ]
     ],
     "floor_board": [
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 0,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "gold_mine"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.GoldMine"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 1,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 2,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 3,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 4,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "gold_mine"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "gold_mine"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.GoldMine"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.GoldMine"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 5,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 6,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 7,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 8,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "gold_mine"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.GoldMine"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 9,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ],
       [
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"},
-        {"type": "empty"}
+        {
+          "attributes": {"POSITION": {
+            "x": 0,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 1,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 2,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 3,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 4,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 5,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 6,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 7,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 8,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 9,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        },
+        {
+          "attributes": {"POSITION": {
+            "x": 10,
+            "y": 10,
+            "class": "pro.trevor.tankgame.state.board.Position"
+          }},
+          "class": "pro.trevor.tankgame.state.board.floor.WalkableFloor"
+        }
       ]
     ],
     "type": "board"
