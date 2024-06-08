@@ -15,22 +15,22 @@ public class GlobalCooldownTank extends GenericTank implements ICooldownPlayerEl
 
     public GlobalCooldownTank(String player, Position position, Map<String, Object> defaults) {
         super(player, position, defaults);
-        Attribute.TIME_SINCE_LAST_ACTION.toIfNotPresent(this, 0L);
+        Attribute.TIME_OF_LAST_ACTION.toIfNotPresent(this, 0L);
     }
 
     public GlobalCooldownTank(JSONObject json) {
         super(json);
-        Attribute.TIME_SINCE_LAST_ACTION.toIfNotPresent(this, 0L);
+        Attribute.TIME_OF_LAST_ACTION.toIfNotPresent(this, 0L);
     }
 
     @Override
     public long getLastUsage(String rule) {
-        return Attribute.TIME_SINCE_LAST_ACTION.unsafeFrom(this);
+        return Attribute.TIME_OF_LAST_ACTION.unsafeFrom(this);
     }
 
     @Override
     public void setLastUsage(String rule, long time) {
-        Attribute.TIME_SINCE_LAST_ACTION.to(this, time);
+        Attribute.TIME_OF_LAST_ACTION.to(this, time);
     }
 
 }

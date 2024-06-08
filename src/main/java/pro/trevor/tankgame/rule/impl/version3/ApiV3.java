@@ -144,9 +144,15 @@ public class ApiV3 implements IApi {
             IPlayerRule<Object> rule = (IPlayerRule<Object>) rulePair.right();
 
             // If the subject given was JSON, try to construct it into an Object of its given class;
-            // otherwise, send the Object through to attempt to be case to the rule subject type.
+            // otherwise, send the Object through to attempt to be cast to the rule subject type.
             if (subject instanceof JSONObject subjectJson) {
                 subject = AttributeObject.fromJson(subjectJson);
+            }
+
+            // Also, if the subject Object is a String, try to decode it as a Tank (via name) or position;
+            // This could result in issues if a tank/player has the same name as a grid space (e.g., B3).
+            if (subject instanceof String subjectString) {
+                subject = fromString(subjectString);
             }
 
             try {
@@ -160,14 +166,41 @@ public class ApiV3 implements IApi {
         applyConditionals(state, ruleset);
     }
 
-    private static Object[] getArguments(IPlayerRule<?> rule, JSONObject json) {
+    private boolean isPosition(String string) {
+        char c = string.charAt(0);
+        boolean canParseRemaining = false;
+        try {
+            Integer.parseInt(string.substring(1));
+            canParseRemaining = true;
+        } catch (Exception ignored) {}
+        return canParseRemaining && (c >= 'A' && c <= 'z');
+    }
+
+    private Object fromString(String string) {
+        if (string.equals(COUNCIL)) {
+            return state.getCouncil();
+        }
+        Optional<Tank> optionalTank = state.getBoard().gatherUnits(Tank.class).stream()
+                .filter(t -> t.getPlayer().getName().equals(string)).findFirst();
+        if (optionalTank.isPresent()) {
+            return optionalTank.get();
+        } else if (isPosition(string)) {
+            return new Position(string);
+        } else {
+            throw new Error("Subject string could is not a living tank's player nor position: " + string);
+        }
+    }
+
+    private Object[] getArguments(IPlayerRule<?> rule, JSONObject json) {
         Object[] arguments = new Object[rule.parameters().length];
         for (int i = 0; i < arguments.length; ++i) {
             Object input = json.get(rule.parameters()[i].getName());
             if (input instanceof JSONObject inputJson) {
                 arguments[i] = AttributeObject.fromJson(inputJson);
+            } else if (input instanceof String inputString) {
+                arguments[i] = fromString(inputString);
             } else {
-                // Try to assume that, if it is not JSON, it is a primitive
+                // Try to assume that, if it is not JSON or position/tank string, it is a primitive
                 arguments[i] = input;
             }
         }

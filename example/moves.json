@@ -2423,7 +2423,7 @@
     "type": "action",
     "action": "buy_action",
     "subject": "Corey",
-    "gold": "10"
+    "gold": 10
   },
   {
     "type": "action",
@@ -2436,27 +2436,27 @@
     "action": "shoot",
     "subject": "Corey",
     "target": "G8",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "G8",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
     "action": "buy_action",
     "subject": "Corey",
-    "gold": "10"
+    "gold": 10
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "G8",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
@@ -2474,28 +2474,28 @@
     "type": "action",
     "action": "buy_action",
     "subject": "Corey",
-    "gold": "10"
+    "gold": 10
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "D9",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "D9",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "D9",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
@@ -2507,7 +2507,7 @@
     "type": "action",
     "action": "buy_action",
     "subject": "Corey",
-    "gold": "10"
+    "gold": 10
   },
   {
     "type": "action",
@@ -2532,40 +2532,40 @@
     "action": "shoot",
     "subject": "Corey",
     "target": "C5",
-    "hit": "false"
+    "hit": false
   },
   {
     "type": "action",
     "action": "buy_action",
     "subject": "Corey",
-    "gold": "10"
+    "gold": 10
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "C5",
-    "hit": "false"
+    "hit": false
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "C5",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "C5",
-    "hit": "true"
+    "hit": true
   },
   {
     "type": "action",
     "action": "shoot",
     "subject": "Corey",
     "target": "C5",
-    "hit": "true"
+    "hit": true
   }
 ]

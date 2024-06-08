@@ -20,7 +20,7 @@ public class Attribute<E> {
     public static final Attribute<Integer> BOUNTY = new Attribute<>("BOUNTY");
     public static final Attribute<Boolean> DEAD = new Attribute<>("DEAD");
     public static final Attribute<Player> PLAYER = new Attribute<>("PLAYER");
-    public static final Attribute<Long> TIME_SINCE_LAST_ACTION = new Attribute<>("TIME_SINCE_LAST_ACTION");
+    public static final Attribute<Long> TIME_OF_LAST_ACTION = new Attribute<>("TIME_OF_LAST_ACTION");
 
     // Durability attributes
     public static final Attribute<Integer> DURABILITY = new Attribute<>("DURABILITY");

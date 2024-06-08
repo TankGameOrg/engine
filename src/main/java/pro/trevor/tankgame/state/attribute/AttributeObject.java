@@ -85,4 +85,13 @@ public abstract class AttributeObject {
         output.put("class", this.getClass().getName());
         return output;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (String attributeKey : attributes.keySet()) {
+            output.append(attributeKey).append(": ").append(attributes.get(attributeKey)).append(System.lineSeparator());
+        }
+        return output.toString();
+    }
 }
