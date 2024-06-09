@@ -14,5 +14,8 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
           distribution: 'temurin'
+      - run: mvn package
       - name: Build and run unit tests
         run: mvn verify
+      - name: Run debug mode
+        run: java -jar target/TankGame-*.jar --debug
