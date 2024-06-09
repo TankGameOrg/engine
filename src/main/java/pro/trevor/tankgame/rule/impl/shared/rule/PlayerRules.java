@@ -110,7 +110,8 @@ public class PlayerRules {
                     GenericTank other = toType(n[0], GenericTank.class);
                     int donation = toType(n[1], Integer.class);
 
-                    return !Attribute.DEAD.from(tank).orElse(false)
+                    return donation > 0
+                            && !Attribute.DEAD.from(tank).orElse(false)
                             && (Attribute.GOLD.from(tank).orElse(0) >= donation + taxAmount)
                             && Attribute.GOLD.in(other)
                             && getSpacesInRange(tank.getPosition(), Attribute.RANGE.from(tank).orElse(0))
