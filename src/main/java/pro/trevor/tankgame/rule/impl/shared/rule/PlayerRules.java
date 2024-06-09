@@ -114,7 +114,7 @@ public class PlayerRules {
                             && !Attribute.DEAD.from(tank).orElse(false)
                             && (Attribute.GOLD.from(tank).orElse(0) >= donation + taxAmount)
                             && Attribute.GOLD.in(other)
-                            && getSpacesInRange(tank.getPosition(), Attribute.RANGE.from(tank).orElse(0))
+                            && getSpacesInRange(s.getBoard(), tank.getPosition(), Attribute.RANGE.from(tank).orElse(0))
                                     .contains(other.getPosition());
                 },
                 (s, tank, n) -> {
@@ -221,7 +221,7 @@ public class PlayerRules {
                     }
                 }
                 default -> {
-                    
+
                 }
             }
         });

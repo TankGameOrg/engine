@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.util;
 
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 
@@ -58,14 +59,18 @@ public class Util {
         }
     }
 
-    public static Set<Position> getSpacesInRange(Position p, int range){
+    public static Set<Position> getSpacesInRange(Board board, Position p, int range){
         Set<Position> output = new HashSet<>();
         for (int i = 0; i <= range; ++i) {
             for (int j = 0; j <= range; ++j) {
-                output.add(new Position(p.x() + i, p.y() + j));
-                output.add(new Position(p.x() - i, p.y() - j));
-                output.add(new Position(p.x() - i, p.y() + j));
-                output.add(new Position(p.x() + i, p.y() - j));
+                Position p1 = new Position(p.x() + i, p.y() + j);
+                if(board.isValidPosition(p1)) output.add(p1);
+                Position p2 = new Position(p.x() - i, p.y() - j);
+                if(board.isValidPosition(p2)) output.add(p2);
+                Position p3 = new Position(p.x() - i, p.y() + j);
+                if(board.isValidPosition(p3)) output.add(p3);
+                Position p4 = new Position(p.x() + i, p.y() - j);
+                if(board.isValidPosition(p4)) output.add(p4);
             }
         }
         return output;
