@@ -123,7 +123,7 @@ public class PlayerRules {
 
                     Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - (donation + taxAmount));
                     Attribute.GOLD.to(other, Attribute.GOLD.unsafeFrom(other) + donation);
-                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + 1);
+                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + taxAmount);
                 },
                 new DonateTankRange("target"),
                 new IntegerRange("donation"));
