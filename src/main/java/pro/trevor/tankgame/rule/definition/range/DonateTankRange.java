@@ -18,7 +18,7 @@ public class DonateTankRange extends FunctionVariableRange<GenericTank, GenericT
 
     private static Set<GenericTank> getTanksInRange(State state, Position center, int range) {
         Set<GenericTank> output = new HashSet<>();
-        for (Position pos : Util.getSpacesInRange(center, range)) {
+        for (Position pos : Util.getSpacesInRange(state.getBoard(), center, range)) {
             Optional<IUnit> unit = state.getBoard().getUnit(pos);
             if (unit.isPresent() && unit.get() instanceof GenericTank tank) {
                 output.add(tank);

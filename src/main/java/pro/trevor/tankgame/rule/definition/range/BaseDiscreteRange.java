@@ -29,7 +29,7 @@ public abstract class BaseDiscreteRange<T> extends BaseRange<T> implements Discr
             if (element instanceof IJsonObject jsonElement) {
                 range.put(jsonElement.toJson());
             } else {
-                range.put(element.toString());
+                range.put(element);
             }
         }
         output.put("range", range);

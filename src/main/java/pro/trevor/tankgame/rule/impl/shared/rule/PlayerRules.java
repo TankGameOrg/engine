@@ -110,10 +110,11 @@ public class PlayerRules {
                     GenericTank other = toType(n[0], GenericTank.class);
                     int donation = toType(n[1], Integer.class);
 
-                    return !Attribute.DEAD.from(tank).orElse(false)
+                    return donation > 0
+                            && !Attribute.DEAD.from(tank).orElse(false)
                             && (Attribute.GOLD.from(tank).orElse(0) >= donation + taxAmount)
                             && Attribute.GOLD.in(other)
-                            && getSpacesInRange(tank.getPosition(), Attribute.RANGE.from(tank).orElse(0))
+                            && getSpacesInRange(s.getBoard(), tank.getPosition(), Attribute.RANGE.from(tank).orElse(0))
                                     .contains(other.getPosition());
                 },
                 (s, tank, n) -> {
@@ -122,7 +123,7 @@ public class PlayerRules {
 
                     Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - (donation + taxAmount));
                     Attribute.GOLD.to(other, Attribute.GOLD.unsafeFrom(other) + donation);
-                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + 1);
+                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + taxAmount);
                 },
                 new DonateTankRange("target"),
                 new IntegerRange("donation"));
@@ -220,7 +221,7 @@ public class PlayerRules {
                     }
                 }
                 default -> {
-                    
+
                 }
             }
         });
