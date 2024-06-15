@@ -40,10 +40,6 @@ public class ApiV3 implements IApi {
         this.ruleset = IRuleset.getRuleset(ruleset);
     }
 
-    public int getProtocolVersion() {
-        return 1;
-    }
-
     @Override
     public State getState() {
         return state;
