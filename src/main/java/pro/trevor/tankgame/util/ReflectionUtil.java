@@ -62,7 +62,7 @@ public class ReflectionUtil {
         return classes;
     }
 
-    public static List<Class<?>> allClassesInFile(File directory, String packageName) {
+    private static List<Class<?>> allClassesInFile(File directory, String packageName) {
         List<Class<?>> classes = new ArrayList<>();
         if (!directory.exists()) {
             return classes;
@@ -85,7 +85,7 @@ public class ReflectionUtil {
         return classes;
     }
 
-    public static List<Class<?>> allClassesInJar(JarURLConnection connection, String packageName) throws IOException {
+    private static List<Class<?>> allClassesInJar(JarURLConnection connection, String packageName) throws IOException {
         List<Class<?>> classes = new ArrayList<>();
 
         JarFile jar = connection.getJarFile();
