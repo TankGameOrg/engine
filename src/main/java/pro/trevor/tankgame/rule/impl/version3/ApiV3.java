@@ -2,35 +2,24 @@ package pro.trevor.tankgame.rule.impl.version3;
 
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.range.DiscreteTypeRange;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
-import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.floor.WalkableFloor;
-import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.IUnit;
-import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.stream.Collectors;
 
 import org.json.*;
-import pro.trevor.tankgame.state.meta.Player;
-import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.Pair;
 
 public class ApiV3 implements IApi {
