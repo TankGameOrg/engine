@@ -88,9 +88,19 @@ public abstract class AttributeObject {
 
     @Override
     public String toString() {
+        return toString(2);
+    }
+
+    public String toString(int indent) {
         StringBuilder output = new StringBuilder();
         for (String attributeKey : attributes.keySet()) {
-            output.append(attributeKey).append(": ").append(attributes.get(attributeKey)).append(System.lineSeparator());
+            Object value = attributes.get(attributeKey);
+            output.repeat(" ", indent).append(attributeKey).append(":");
+            if (value instanceof AttributeObject attributeValue) {
+                output.append(System.lineSeparator()).append(attributeValue.toString(indent + 2));
+            } else {
+                output.append(' ').append(attributes.get(attributeKey)).append(System.lineSeparator());
+            }
         }
         return output.toString();
     }

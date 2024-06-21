@@ -103,7 +103,7 @@ public class State implements IJsonObject {
             sb.append("winner: ").append(winner).append('\n');
         }
         sb.append(council.toString());
-        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
+        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), (t) -> t.toString(2)));
         sb.append('\n').append(board.toUnitString());
         sb.append('\n').append(board.toFloorString());
         return sb.toString();

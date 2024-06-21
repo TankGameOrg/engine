@@ -14,7 +14,11 @@ public class Codec {
 
     static {
         for (Class<?> c : ReflectionUtil.allClassesAnnotatedWith(JsonType.class, "pro.trevor.tankgame")) {
-            System.out.println(typeFromClass(c));
+            try {
+                c.getConstructor(JSONObject.class);
+            } catch (NoSuchMethodException ignored) {
+                System.err.printf("No constructor found for %s(JSONObject)\n", c.getSimpleName());
+            }
             typeToClass.put(typeFromClass(c), c);
         }
     }
