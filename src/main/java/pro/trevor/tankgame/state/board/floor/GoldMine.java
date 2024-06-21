@@ -2,7 +2,9 @@ package pro.trevor.tankgame.state.board.floor;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.util.JsonType;
 
+@JsonType(name = "GoldMine")
 public class GoldMine extends WalkableFloor {
 
     public GoldMine(Position position) {

@@ -11,6 +11,7 @@ import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.IFloor;
@@ -53,7 +54,7 @@ public class ApiV3 implements IApi {
     }
 
     protected static IUnit unitFromJson(JSONObject json) {
-        Object output = AttributeObject.fromJson(json);
+        Object output = Codec.decodeJson(json);
         if (output instanceof IUnit unit) {
             return unit;
         } else {
@@ -62,7 +63,7 @@ public class ApiV3 implements IApi {
     }
 
     protected static IFloor floorFromJson(JSONObject json) {
-        Object output = AttributeObject.fromJson(json);
+        Object output = Codec.decodeJson(json);
         if (output instanceof IFloor floor) {
             return floor;
         } else {
@@ -135,7 +136,7 @@ public class ApiV3 implements IApi {
             // If the subject given was JSON, try to construct it into an Object of its given class;
             // otherwise, send the Object through to attempt to be cast to the rule subject type.
             if (subject instanceof JSONObject subjectJson) {
-                subject = AttributeObject.fromJson(subjectJson);
+                subject = Codec.decodeJson(subjectJson);
             }
 
             // Also, if the subject Object is a String, try to decode it as a Tank (via name) or position;
@@ -185,7 +186,7 @@ public class ApiV3 implements IApi {
         for (int i = 0; i < arguments.length; ++i) {
             Object input = json.get(rule.parameters()[i].getName());
             if (input instanceof JSONObject inputJson) {
-                arguments[i] = AttributeObject.fromJson(inputJson);
+                arguments[i] = Codec.decodeJson(inputJson);
             } else if (input instanceof String inputString) {
                 arguments[i] = fromString(inputString);
             } else {
@@ -294,7 +295,7 @@ public class ApiV3 implements IApi {
         return new HashSet<>(0);
     }
 
-    protected Optional<Pair<Class<?>, IPlayerRule<?>>>  getRuleByName(String name) {
+    protected Optional<Pair<Class<?>, IPlayerRule<?>>> getRuleByName(String name) {
         Optional<Pair<Class<?>, IPlayerRule<?>>> rule = ruleset.getPlayerRules().getByName(name);
         if (rule.isPresent()) {
             return rule;

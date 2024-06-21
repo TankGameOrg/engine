@@ -2,9 +2,11 @@ package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.util.JsonType;
 
 import java.util.Objects;
 
+@JsonType(name = "Position")
 public record Position (int x, int y) implements IJsonObject {
 
     public Position(String boardString) {

@@ -42,7 +42,7 @@ public abstract class AttributeObject {
         for (String key : attributesJsonObject.keySet()) {
             Object attribute = attributesJsonObject.get(key);
             if (attribute instanceof JSONObject jsonAttribute) {
-                this.attributes.put(key, fromJson(jsonAttribute));
+                this.attributes.put(key, Codec.decodeJson(jsonAttribute));
             } else {
                 this.attributes.put(key, attributesJsonObject.get(key));
             }
@@ -75,14 +75,14 @@ public abstract class AttributeObject {
                 case Float v -> attributesJson.put(attribute, v);
                 case Double v -> attributesJson.put(attribute, v);
                 case String v -> attributesJson.put(attribute, v);
-                case IJsonObject json -> attributesJson.put(attribute, json.toJson());
+                case IJsonObject jsonObject -> attributesJson.put(attribute, Codec.encodeJson(jsonObject));
                 default ->
                         throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
             }
         }
 
         output.put("attributes", attributesJson);
-        output.put("class", this.getClass().getName());
+        output.put("class", Codec.typeFromClass(this.getClass()));
         return output;
     }
 

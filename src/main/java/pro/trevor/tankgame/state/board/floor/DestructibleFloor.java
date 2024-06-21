@@ -5,7 +5,9 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.util.JsonType;
 
+@JsonType(name = "DestructibleFloor")
 public class DestructibleFloor extends AbstractFloor {
 
     public DestructibleFloor(Position position, int durability, int maxDurability) {

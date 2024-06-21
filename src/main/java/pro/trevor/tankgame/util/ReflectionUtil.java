@@ -1,101 +1,113 @@
 package pro.trevor.tankgame.util;
 
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.util.function.ITriConsumer;
-import pro.trevor.tankgame.util.function.ITriPredicate;
+import java.io.File;
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.net.JarURLConnection;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
-
-/**
- * Provides conversion functions to wrap Method objects as functional interfaces (e.g., BiConsumer).
- * These functions expect return and parameter types with the functional interface specified.
- * These functions will explicitly error and stop the program if there is an issue with the conversion.
- */
 public class ReflectionUtil {
 
-    private static void expectParameters(Method method, int argc) {
-        assert argc > 0;
-        Parameter[] parameters = method.getParameters();
-        if (parameters.length != argc) {
-            System.err.printf("Method `%s` does not have exactly %d fields\n", method.getName(), argc);
-            System.exit(1);
-        } else if (!parameters[argc-1].getType().equals(State.class)) {
-            System.err.printf("Method `%s` does does not consume a State as its last parameter\n", method.getName());
-            System.exit(1);
+    public static List<Class<?>> allClassesAnnotatedWith(Class<? extends Annotation> annotation, String packageName) {
+        List<Class<?>> classes = allClassesInPackage(packageName);
+        List<Class<?>> output = new ArrayList<>();
+
+        for (Class<?> c : classes) {
+            if (c.isAnnotationPresent(annotation)) {
+                output.add(c);
+            }
         }
+
+        return output;
     }
 
-    private static <T> void expectReturnType(Method method, Class<T> clazz) {
-        if (!method.getReturnType().equals(clazz)) {
-            System.err.printf("Method `%s` does does not return type `%s` as expected\n",
-                    method.getName(), clazz.getName());
-            System.exit(1);
+    public static List<Class<?>> allClassesInPackage(String packageName) {
+        List<Class<?>> classes = new ArrayList<>();
+
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        String pathToPackage = packageName.replace('.', '/');
+        Enumeration<URL> urls = Collections.enumeration(new ArrayList<>());
+
+        try {
+            urls = classLoader.getResources(pathToPackage);
+        } catch (IOException e) {
+            System.err.println("Invalid path to package: " + pathToPackage);
         }
+
+        while (urls.hasMoreElements()) {
+            URL url = urls.nextElement();
+            try {
+                URLConnection connection = url.openConnection();
+                if (connection instanceof JarURLConnection jarConnection) {
+
+                    classes.addAll(allClassesInJar(jarConnection, packageName));
+                } else {
+                    // Assume we are looking at a file
+                    try {
+                        classes.addAll(allClassesInFile(new File(url.toURI()), packageName));
+                    } catch (URISyntaxException e) {
+                        System.err.println("Invalid URL: " + url);
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Failed to open URL: " + url);
+            }
+        }
+
+        return classes;
     }
 
-    public static <T> BiConsumer<T, State> toBiConsumer(Method method) {
-        expectParameters(method, 2);
-        expectReturnType(method, void.class);
-        return (t, u) -> {
-            try {
-                method.invoke(null, t, u);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s` and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
+    public static List<Class<?>> allClassesInFile(File directory, String packageName) {
+        List<Class<?>> classes = new ArrayList<>();
+        if (!directory.exists()) {
+            return classes;
+        }
+
+        File[] files = directory.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                assert !file.getName().contains(".");
+                classes.addAll(allClassesInFile(file, packageName + '.' + file.getName()));
+            } else if (file.getName().endsWith(".class")) {
+                String className = packageName + '.' + file.getName().substring(0, file.getName().length() - ".class".length());
+                try {
+                    classes.add(Class.forName(className));
+                } catch (ClassNotFoundException e) {
+                    System.err.println("Could not load class " + className);
+                }
             }
-        };
+        }
+        return classes;
     }
 
-    public static <T, U> ITriConsumer<T, U, State> toTriConsumer(Method method) {
-        expectParameters(method, 3);
-        expectReturnType(method, void.class);
-        return (t, u, v) -> {
-            try {
-                method.invoke(null, t, u, v);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s`, `%s`, and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName(), v.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
-            }
-        };
-    }
+    public static List<Class<?>> allClassesInJar(JarURLConnection connection, String packageName) throws IOException {
+        List<Class<?>> classes = new ArrayList<>();
 
-    public static <T> BiPredicate<T, State> toBiPredicate(Method method) {
-        expectParameters(method, 2);
-        expectReturnType(method, boolean.class);
-        return (t, u) -> {
-            try {
-                return (boolean) method.invoke(null, t, u);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s` and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
-            }
-            return false;
-        };
-    }
+        JarFile jar = connection.getJarFile();
+        Enumeration<JarEntry> entries = jar.entries();
 
-    public static <T, U, V> ITriPredicate<T, U, V> toTriPredicate(Method method) {
-        expectParameters(method, 3);
-        expectReturnType(method, boolean.class);
-        return (t, u, v) -> {
-            try {
-                return (boolean) method.invoke(null, t, u);
-            } catch (Exception e) {
-                System.err.printf("Failed to invoke `%s` with argument types `%s`, `%s`, and `%s`\n",
-                        method.getName(), t.getClass().getName(), u.getClass().getName(), v.getClass().getName());
-                e.printStackTrace();
-                System.exit(1);
+        while (entries.hasMoreElements()) {
+            JarEntry entry = entries.nextElement();
+            String name = entry.getName();
+
+            if (name.endsWith(".class")) {
+                String className = name.substring(0, name.length() - ".class".length()).replace('/', '.');
+                if (className.contains(packageName)) {
+                    try {
+                        classes.add(Class.forName(className));
+                    } catch (ClassNotFoundException e) {
+                        System.err.println("Could not load class " + className);
+                    }
+                }
             }
-            return false;
-        };
+        }
+
+        return classes;
     }
 
 }
