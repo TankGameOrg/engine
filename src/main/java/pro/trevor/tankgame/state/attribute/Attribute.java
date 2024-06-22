@@ -29,6 +29,14 @@ public class Attribute<E> {
         return Optional.ofNullable(getObject(e));
     }
 
+    public E fromOrElse(GenericElement e, E defaultValue) {
+        if (this.in(e)) {
+            return getObject(e);
+        } else {
+            return defaultValue;
+        }
+    }
+
     public E unsafeFrom(GenericElement e) {
         if (!this.in(e))
             throw new Error("Attempting to get attribute '" + attributeName + "' from generic element " + e
