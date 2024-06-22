@@ -22,20 +22,6 @@ public abstract class AttributeObject {
         }
     }
 
-    public static Object fromJson(JSONObject json) {
-        String qualifiedClass = json.getString("class");
-        try {
-            Class<?> attributeClass = Class.forName(qualifiedClass);
-            return attributeClass.getConstructor(JSONObject.class).newInstance(json);
-        } catch (ClassNotFoundException e) {
-            throw new Error("Error constructing from JSON: unknown class " + qualifiedClass, e);
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException e) {
-            throw new Error("Error constructing from JSON: no matching constructor found for class " +
-                    qualifiedClass, e);
-        }
-    }
-
     public AttributeObject(JSONObject json) {
         this.attributes = new HashMap<>();
         JSONObject attributesJsonObject = json.optJSONObject("attributes", new JSONObject());
