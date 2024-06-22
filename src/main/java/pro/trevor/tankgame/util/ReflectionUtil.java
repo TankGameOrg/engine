@@ -44,7 +44,6 @@ public class ReflectionUtil {
             try {
                 URLConnection connection = url.openConnection();
                 if (connection instanceof JarURLConnection jarConnection) {
-
                     classes.addAll(allClassesInJar(jarConnection, packageName));
                 } else {
                     // Assume we are looking at a file
