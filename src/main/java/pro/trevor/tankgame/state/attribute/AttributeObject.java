@@ -61,6 +61,10 @@ public abstract class AttributeObject {
         this.attributes.put(attribute, object);
     }
 
+    public Object remove(String attribute) {
+        return this.attributes.remove(attribute);
+    }
+
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
 

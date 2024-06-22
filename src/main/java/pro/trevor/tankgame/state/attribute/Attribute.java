@@ -84,6 +84,10 @@ public class Attribute<E> {
         }
     }
 
+    public E remove(AttributeObject e) {
+        return (E) e.remove(attributeName);
+    }
+
     public String getName() {
         return attributeName;
     }
