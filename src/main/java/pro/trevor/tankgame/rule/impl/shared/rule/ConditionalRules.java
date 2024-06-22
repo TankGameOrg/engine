@@ -26,7 +26,7 @@ public class ConditionalRules {
     public static <T extends GenericTank> ConditionalRule<T> GetKillOrDestroyTankOnZeroDurabilityRule() {
         return new ConditionalRule<>(
                 (s, t) -> Attribute.DURABILITY.from(t).orElse(-1) == 0, // -1, so that if a tank doesn't have
-                                                                         // durability, this rule won't apply
+                                                                        // durability, this rule won't apply
                 (s, t) -> {
                     if (Attribute.DEAD.from(t).orElse(false)) {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
@@ -52,6 +52,16 @@ public class ConditionalRules {
                 s.setWinner(
                         b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
                                 .findFirst().get().getPlayer());
+            });
+
+    public static final ConditionalRule<Board> TEAM_WIN_CONDITION = new ConditionalRule<>(
+            (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
+                    .map((t) -> Attribute.TEAM.from(t).orElse("")).distinct().count() == 1,
+            (s, b) -> {
+                s.setRunning(false);
+                s.setWinner(
+                        b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
+                                .map((t) -> Attribute.TEAM.from(t).orElse("")).findFirst().get());
             });
 
     public static final ConditionalRule<ArmisticeCouncil> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(

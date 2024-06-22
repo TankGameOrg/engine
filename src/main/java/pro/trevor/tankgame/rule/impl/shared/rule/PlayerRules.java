@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.rule.impl.shared.rule;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
+import pro.trevor.tankgame.rule.definition.range.StringRange;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -250,6 +252,29 @@ public class PlayerRules {
                 }
             });
 
+    public static PlayerActionRule<GenericTank> GetChangeTeamRule(List<String> teamNames) {
+        if (teamNames.stream().distinct().count() != teamNames.size())
+            throw new Error("Repeated elements in team name list.");
+
+        return new PlayerActionRule<GenericTank>(
+            PlayerRules.ActionKeys.CHANGE_TEAM, 
+            (state, tank, other) -> {
+                String newTeam = toType(other[0], String.class);
+
+                if (!teamNames.contains(newTeam)) return false;
+                if (Attribute.BETRAYER.from(tank).orElse(false)) return false;
+                if (Attribute.TEAM.from(tank).orElse("").equals(newTeam)) return false;
+                
+                return true;
+            }, 
+            (state, tank, other) -> {
+                String newTeam = toType(other[0], String.class);
+                Attribute.TEAM.to(tank, newTeam);
+                Attribute.BETRAYER.to(tank, true);
+            },
+            StringRange.GetOtherTeamsRange(teamNames));
+    }
+
     public static class ActionKeys {
 
         public static final String SHOOT = "shoot";
@@ -261,5 +286,7 @@ public class PlayerRules {
         public static final String STIMULUS = "stimulus";
         public static final String GRANT_LIFE = "grant_life";
         public static final String BOUNTY = "bounty";
+
+        public static final String CHANGE_TEAM = "change_team";
     }
 }

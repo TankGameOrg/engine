@@ -14,6 +14,8 @@ public class Attribute<E> {
     public static Attribute<Integer> BOUNTY = new Attribute<Integer>("BOUNTY");
     public static Attribute<Boolean> DEAD = new Attribute<Boolean>("DEAD");
     public static Attribute<Boolean> DESTROYED = new Attribute<Boolean>("DESTROYED");
+    public static Attribute<String> TEAM = new Attribute<String>("TEAM");
+    public static Attribute<Boolean> BETRAYER = new Attribute<>("BETRAYER");
 
     private String attributeName;
 
