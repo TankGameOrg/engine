@@ -6,6 +6,7 @@ import pro.trevor.tankgame.util.IJsonObject;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class AttributeObject {
 
@@ -93,5 +94,20 @@ public abstract class AttributeObject {
             }
         }
         return output.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(attributes.keySet(), attributes.values());
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof AttributeObject other)) return false;
+        for (String key : attributes.keySet()) {
+            if (attributes.get(key) != other.attributes.get(key)) return false;
+        }
+        return true;
     }
 }

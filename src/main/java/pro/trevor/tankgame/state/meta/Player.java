@@ -23,4 +23,16 @@ public class Player extends AttributeObject implements IJsonObject {
     public String getName() {
         return Attribute.NAME.unsafeFrom(this);
     }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Player other)) return false;
+        return getName().equals(other.getName());
+    }
 }
