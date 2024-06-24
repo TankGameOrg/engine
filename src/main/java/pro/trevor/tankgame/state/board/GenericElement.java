@@ -8,7 +8,7 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.Map;
 
 @JsonType(name = "GenericElement")
-public abstract class GenericElement extends AttributeObject implements IElement {
+public class GenericElement extends AttributeObject implements IElement {
 
     public GenericElement() {
         super();
@@ -28,5 +28,10 @@ public abstract class GenericElement extends AttributeObject implements IElement
 
     public void setPosition(Position position) {
         Attribute.POSITION.to(this, position);
+    }
+
+    @Override
+    public char toBoardCharacter() {
+        return '?';
     }
 }

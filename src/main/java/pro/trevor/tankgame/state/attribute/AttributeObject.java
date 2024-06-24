@@ -2,13 +2,15 @@ package pro.trevor.tankgame.state.attribute;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.util.JsonType;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public abstract class AttributeObject {
+@JsonType(name = "AttributeObject")
+public class AttributeObject {
 
     protected final Map<String, Object> attributes;
 
@@ -73,7 +75,7 @@ public abstract class AttributeObject {
         }
 
         output.put("attributes", attributesJson);
-        output.put("class", Codec.typeFromClass(this.getClass()));
+        output.put("class", Codec.typeFromClass(getClass()));
         return output;
     }
 
@@ -106,7 +108,7 @@ public abstract class AttributeObject {
         if (this == object) return true;
         if (!(object instanceof AttributeObject other)) return false;
         for (String key : attributes.keySet()) {
-            if (attributes.get(key) != other.attributes.get(key)) return false;
+            if (!attributes.get(key).equals(other.attributes.get(key))) return false;
         }
         return true;
     }
