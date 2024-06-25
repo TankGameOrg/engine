@@ -1,11 +1,20 @@
 package pro.trevor.tankgame.state.board;
 
+import org.json.JSONObject;
+import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.util.JsonType;
+
 import java.util.Objects;
 
-public record Position (int x, int y) {
+@JsonType(name = "Position")
+public record Position (int x, int y) implements IJsonObject {
 
     public Position(String boardString) {
         this(boardString.charAt(0) - 'A', Integer.parseInt(boardString.substring(1)) - 1);
+    }
+
+    public Position(JSONObject json) {
+        this(json.getInt("x"), json.getInt("y"));
     }
 
     public int distanceFrom(Position p) {
@@ -34,4 +43,12 @@ public record Position (int x, int y) {
         return String.format("%c%d", x + ('A'), y + 1);
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("class", this.getClass().getName());
+        json.put("x", x);
+        json.put("y", y);
+        return json;
+    }
 }

@@ -49,11 +49,10 @@ public class ApiV4 extends ApiV3 implements IApi {
             JSONArray unitBoardRow = unitBoard.getJSONArray(y);
             JSONArray floorBoardRow = floorBoard.getJSONArray(y);
             for (int x = 0; x < unitBoardRow.length(); ++x) {
-                Position position = new Position(x, y);
                 JSONObject unitJson = unitBoardRow.getJSONObject(x);
                 JSONObject floorJson = floorBoardRow.getJSONObject(x);
-                state.getBoard().putUnit(unitFromJson(unitJson, position));
-                state.getBoard().putFloor(floorFromJson(floorJson, position));
+                state.getBoard().putUnit(unitFromJson(unitJson));
+                state.getBoard().putFloor(floorFromJson(floorJson));
                 if (unitJson.getString("type").equals("tank")) {
                     state.putPlayer(unitJson.getString("name"));
                 }

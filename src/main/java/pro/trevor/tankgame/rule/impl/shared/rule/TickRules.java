@@ -15,7 +15,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
+import pro.trevor.tankgame.state.board.floor.AbstractFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
@@ -69,7 +69,7 @@ public class TickRules {
 
     public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<>(
             (s, b) -> {
-                List<Position> mines = b.gatherFloors(GoldMine.class).stream().map(AbstractPositionedFloor::getPosition)
+                List<Position> mines = b.gatherFloors(GoldMine.class).stream().map(AbstractFloor::getPosition)
                         .toList();
                 List<Set<Position>> allMines = new ArrayList<>();
 

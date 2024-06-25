@@ -9,7 +9,6 @@ import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.Util;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class State implements IJsonObject {
 
@@ -41,10 +40,6 @@ public class State implements IJsonObject {
 
     public List<IMetaElement> getMetaElements() {
         return metaElements;
-    }
-
-    public List<IMetaElement> getMetaElements(Class<?> c) {
-        return metaElements.stream().filter((e) -> c.isAssignableFrom(e.getClass())).collect(Collectors.toList());
     }
 
     public Board getBoard() {
@@ -108,7 +103,7 @@ public class State implements IJsonObject {
             sb.append("winner: ").append(winner).append('\n');
         }
         sb.append(council.toString());
-        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
+        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), (t) -> t.toString(2)));
         sb.append('\n').append(board.toUnitString());
         sb.append('\n').append(board.toFloorString());
         return sb.toString();

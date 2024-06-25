@@ -26,15 +26,15 @@ public class DestructibleFloorTest {
     {
         assert durability >= 0;
         JSONObject json = new JSONObject();
-        json.put("type", "destructible_floor");
 
         JSONObject attributes = new JSONObject();
         attributes.put(Attribute.DURABILITY.getName(), durability);
         attributes.put(Attribute.MAX_DURABILITY.getName(), maxDurability);
+        attributes.put(Attribute.POSITION.getName(), p.toJson());
         if (durability == 0) attributes.put(Attribute.DESTROYED.getName(), true);
         json.put("attributes", attributes);
 
-        return new DestructibleFloor(p, json);
+        return new DestructibleFloor(json);
     }
 
     @Test
@@ -60,9 +60,8 @@ public class DestructibleFloorTest {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 1, 3);
 
         JSONObject json = floor.toJson();
-        DestructibleFloor newFloor = new DestructibleFloor(new Position("A1"), json);
+        DestructibleFloor newFloor = new DestructibleFloor(json);
 
-        assertEquals("destructible_floor", json.getString("type"));
         assertEquals(floor.getPosition(), newFloor.getPosition());
         assertEquals(Attribute.DURABILITY.unsafeFrom(floor), Attribute.DURABILITY.unsafeFrom(newFloor));
         assertEquals(Attribute.MAX_DURABILITY.unsafeFrom(floor), Attribute.MAX_DURABILITY.unsafeFrom(newFloor));
@@ -73,9 +72,8 @@ public class DestructibleFloorTest {
         DestructibleFloor brokenFloor = GetTestFloor(new Position("A1"), 0, 3);
 
         JSONObject json = brokenFloor.toJson();
-        DestructibleFloor newFloor = new DestructibleFloor(new Position("A1"), json);
+        DestructibleFloor newFloor = new DestructibleFloor(json);
 
-        assertEquals("destructible_floor", json.getString("type"));
         assertEquals(brokenFloor.getPosition(), newFloor.getPosition());
         assertEquals(Attribute.DURABILITY.unsafeFrom(brokenFloor), Attribute.DURABILITY.unsafeFrom(newFloor));
         assertEquals(Attribute.MAX_DURABILITY.unsafeFrom(brokenFloor), Attribute.MAX_DURABILITY.unsafeFrom(newFloor));

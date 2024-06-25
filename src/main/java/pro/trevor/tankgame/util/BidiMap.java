@@ -21,18 +21,18 @@ public class BidiMap<K, V> {
         }
     }
 
-    void put(K key, V value) {
+    public void put(K key, V value) {
         assert !keyToValue.containsKey(key);
         assert !valueToKey.containsKey(value);
         keyToValue.put(key, value);
         valueToKey.put(value, key);
     }
 
-    V getValue(K key) {
+    public V getValue(K key) {
         return keyToValue.get(key);
     }
 
-    K getKey(V value) {
+    public K getKey(V value) {
         return valueToKey.get(value);
     }
 }

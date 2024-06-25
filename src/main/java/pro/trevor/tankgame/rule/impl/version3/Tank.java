@@ -3,7 +3,9 @@ package pro.trevor.tankgame.rule.impl.version3;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.unit.GlobalCooldownTank;
+import pro.trevor.tankgame.util.JsonType;
 
+@JsonType(name = "TankV3")
 public class Tank extends GlobalCooldownTank {
 
     public Tank(JSONObject json) {

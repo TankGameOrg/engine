@@ -30,7 +30,7 @@ public class ConditionalRules {
                 (s, t) -> {
                     if (Attribute.DEAD.from(t).orElse(false)) {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
-                        String tankPlayer = t.getPlayer();
+                        String tankPlayer = t.getPlayer().getName();
                         s.getCouncil().getCouncillors().remove(tankPlayer);
                         s.getCouncil().getSenators().add(tankPlayer);
                     } else {
@@ -39,7 +39,7 @@ public class ConditionalRules {
                         Attribute.GOLD.to(t, 0);
                         Attribute.BOUNTY.to(t, 0);
                         Attribute.DURABILITY.to(t, 3);
-                        s.getCouncil().getCouncillors().add(t.getPlayer());
+                        s.getCouncil().getCouncillors().add(t.getPlayer().getName());
                     }
                 });
     }
@@ -51,7 +51,7 @@ public class ConditionalRules {
                 s.setRunning(false);
                 s.setWinner(
                         b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
-                                .findFirst().get().getPlayer());
+                                .findFirst().get().getPlayer().getName());
             });
 
     public static final ConditionalRule<ArmisticeCouncil> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
