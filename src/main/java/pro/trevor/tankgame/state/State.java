@@ -2,8 +2,8 @@ package pro.trevor.tankgame.state;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.Util;

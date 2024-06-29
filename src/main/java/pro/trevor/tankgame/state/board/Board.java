@@ -3,11 +3,13 @@ package pro.trevor.tankgame.state.board;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
+import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
 import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
+import pro.trevor.tankgame.util.JsonType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@JsonType(name = "Board")
 public class Board implements IMetaElement {
 
     private final IUnit[][] unitBoard;
@@ -34,6 +37,44 @@ public class Board implements IMetaElement {
             for (int x = 0; x < width; ++x) {
                 unitBoard[y][x] = new EmptyUnit(new Position(x, y));
                 floorBoard[y][x] = new WalkableFloor(new Position(x, y));
+            }
+        }
+    }
+
+    public Board(JSONObject json) {
+        JSONArray unitBoard = json.getJSONArray("unit_board");
+        JSONArray floorBoard = json.getJSONArray("floor_board");
+
+        assert unitBoard.length() == floorBoard.length();
+        assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
+
+        this.height = unitBoard.length();
+        this.width = unitBoard.getJSONArray(0).length();
+
+        this.unitBoard = new IUnit[height][width];
+        this.floorBoard = new IFloor[height][width];
+
+        for (int y = 0; y < height; ++y) {
+            JSONArray unitBoardRow = unitBoard.getJSONArray(y);
+            JSONArray floorBoardRow = floorBoard.getJSONArray(y);
+            for (int x = 0; x < width; ++x) {
+                JSONObject unitJson = unitBoardRow.getJSONObject(x);
+                JSONObject floorJson = floorBoardRow.getJSONObject(x);
+
+                Object decodedUnit = Codec.decodeJson(unitJson);
+                Object decodedFloor = Codec.decodeJson(floorJson);
+
+                if (decodedUnit instanceof IUnit unit) {
+                    putUnit(unit);
+                } else {
+                    throw new Error("JSON contains a class that is not IUnit: " + decodedUnit.getClass().getName());
+                }
+
+                if (decodedFloor instanceof IFloor floor) {
+                    putFloor(floor);
+                } else {
+                    throw new Error("JSON contains a class that is not IFloor: " + decodedFloor.getClass().getName());
+                }
             }
         }
     }
@@ -182,7 +223,6 @@ public class Board implements IMetaElement {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-        output.put("type", "board");
         JSONArray units = new JSONArray();
         JSONArray floors = new JSONArray();
         for (int y = 0; y < height; ++y) {

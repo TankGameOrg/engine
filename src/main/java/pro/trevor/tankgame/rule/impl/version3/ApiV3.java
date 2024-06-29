@@ -21,7 +21,6 @@ import pro.trevor.tankgame.state.meta.Council;
 import java.util.*;
 
 import org.json.*;
-import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.util.Pair;
 
 public class ApiV3 implements IApi {
@@ -77,32 +76,12 @@ public class ApiV3 implements IApi {
         int tick = json.getInt("day");
         boolean running = json.getBoolean("running");
         String winner = json.getString("winner");
-        JSONObject board = json.getJSONObject("board");
-        JSONArray unitBoard = board.getJSONArray("unit_board");
-        JSONArray floorBoard = board.getJSONArray("floor_board");
-        assert unitBoard.length() == floorBoard.length();
-        assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
-        int boardHeight = unitBoard.length();
-        int boardWidth = unitBoard.getJSONArray(0).length();
+        Board board = new Board(json.getJSONObject("board"));
         Council councilObject = new Council(json.getJSONObject("council"));
-        state = new State(new Board(boardWidth, boardHeight), councilObject);
+        state = new State(board, councilObject);
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
-        for (int y = 0; y < boardHeight; ++y) {
-            JSONArray unitBoardRow = unitBoard.getJSONArray(y);
-            JSONArray floorBoardRow = floorBoard.getJSONArray(y);
-            for (int x = 0; x < boardWidth; ++x) {
-                JSONObject unitJson = unitBoardRow.getJSONObject(x);
-                JSONObject floorJson = floorBoardRow.getJSONObject(x);
-                AttributeObject unit = (AttributeObject) unitFromJson(unitJson);
-                state.getBoard().putUnit(unitFromJson(unitJson));
-                state.getBoard().putFloor(floorFromJson(floorJson));
-                if (Attribute.PLAYER.in(unit)) {
-                    state.putPlayer(Attribute.PLAYER.unsafeFrom(unit).getName());
-                }
-            }
-        }
     }
 
     @Override

@@ -22,31 +22,12 @@ public class ApiV4 extends ApiV3 implements IApi {
         int tick = json.getInt("day");
         boolean running = json.getBoolean("running");
         String winner = json.getString("winner");
-        JSONObject board = json.getJSONObject("board");
-        JSONArray unitBoard = board.getJSONArray("unit_board");
-        JSONArray floorBoard = board.getJSONArray("floor_board");
-        assert unitBoard.length() == floorBoard.length();
-        assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
-        int boardHeight = unitBoard.length();
-        int boardWidth = unitBoard.getJSONArray(0).length();
-        Council councilObject = new Council(json.getJSONObject("council"));
-        state = new State(new Board(boardWidth, boardHeight), councilObject);
+        Board board = new Board(json.getJSONObject("board"));
+        Council council = new Council(json.getJSONObject("council"));
+        state = new State(board, council);
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
-        for (int y = 0; y < unitBoard.length(); ++y) {
-            JSONArray unitBoardRow = unitBoard.getJSONArray(y);
-            JSONArray floorBoardRow = floorBoard.getJSONArray(y);
-            for (int x = 0; x < unitBoardRow.length(); ++x) {
-                JSONObject unitJson = unitBoardRow.getJSONObject(x);
-                JSONObject floorJson = floorBoardRow.getJSONObject(x);
-                state.getBoard().putUnit(unitFromJson(unitJson));
-                state.getBoard().putFloor(floorFromJson(floorJson));
-                if (unitJson.getString("type").equals("tank")) {
-                    state.putPlayer(unitJson.getString("name"));
-                }
-            }
-        }
     }
 
     @Override
