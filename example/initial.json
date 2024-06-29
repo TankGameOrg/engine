@@ -2,11 +2,19 @@
   "running": true,
   "winner": "",
   "council": {
-    "coffer": 0,
-    "council": [],
-    "senate": [],
-    "type": "council",
-    "can_bounty": true
+    "attributes": {
+      "SENATORS": {
+        "elements": [],
+        "class": "AttributeList"
+      },
+      "COFFER": 0,
+      "COUNCILLORS": {
+        "elements": [],
+        "class": "AttributeList"
+      },
+      "CAN_BOUNTY": true
+    },
+    "class": "Council"
   },
   "type": "state",
   "day": 0,

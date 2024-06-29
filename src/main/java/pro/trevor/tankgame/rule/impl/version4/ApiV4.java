@@ -9,9 +9,7 @@ import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.state.meta.Player;
 
 public class ApiV4 extends ApiV3 implements IApi {
 
@@ -24,9 +22,6 @@ public class ApiV4 extends ApiV3 implements IApi {
         int tick = json.getInt("day");
         boolean running = json.getBoolean("running");
         String winner = json.getString("winner");
-        JSONObject council = json.getJSONObject("council");
-        JSONArray councillors = council.getJSONArray("council");
-        JSONArray senators = council.getJSONArray("senate");
         JSONObject board = json.getJSONObject("board");
         JSONArray unitBoard = board.getJSONArray("unit_board");
         JSONArray floorBoard = board.getJSONArray("floor_board");
@@ -34,18 +29,11 @@ public class ApiV4 extends ApiV3 implements IApi {
         assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
         int boardHeight = unitBoard.length();
         int boardWidth = unitBoard.getJSONArray(0).length();
-        int armisticeCap = council.getInt("armistice_vote_cap");
-        int armisticeCount = council.getInt("armistice_vote_count");
-        boolean councilCanBounty = council.optBoolean("can_bounty", true);
-        Council councilObject = new ArmisticeCouncil(armisticeCap, armisticeCount);
-        councilObject.setCanBounty(councilCanBounty);
+        Council councilObject = new Council(json.getJSONObject("council"));
         state = new State(new Board(boardWidth, boardHeight), councilObject);
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
-        state.getCouncil().setCoffer(council.getInt("coffer"));
-        councillors.toList().forEach((o) -> state.getCouncil().getCouncillors().add(new Player(o.toString())));
-        senators.toList().forEach((o) -> state.getCouncil().getSenators().add(new Player(o.toString())));
         for (int y = 0; y < unitBoard.length(); ++y) {
             JSONArray unitBoardRow = unitBoard.getJSONArray(y);
             JSONArray floorBoardRow = floorBoard.getJSONArray(y);
