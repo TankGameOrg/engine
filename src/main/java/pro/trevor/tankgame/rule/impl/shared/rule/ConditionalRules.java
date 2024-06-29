@@ -31,16 +31,15 @@ public class ConditionalRules {
                 (s, t) -> {
                     if (Attribute.DEAD.from(t).orElse(false)) {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
-                        String tankPlayer = t.getPlayer().getName();
-                        s.getCouncil().getCouncillors().remove(tankPlayer);
-                        s.getCouncil().getSenators().add(new Player(tankPlayer));
+                        s.getCouncil().getCouncillors().remove(t.getPlayer());
+                        s.getCouncil().getSenators().add(t.getPlayer());
                     } else {
                         Attribute.DEAD.to(t, true);
                         Attribute.ACTION_POINTS.to(t, 0);
                         Attribute.GOLD.to(t, 0);
                         Attribute.BOUNTY.to(t, 0);
                         Attribute.DURABILITY.to(t, 3);
-                        s.getCouncil().getCouncillors().add(new Player(t.getPlayer().getName()));
+                        s.getCouncil().getCouncillors().add(t.getPlayer());
                     }
                 });
     }

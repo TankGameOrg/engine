@@ -38,6 +38,10 @@ public class AttributeList<T extends IJsonObject> implements IJsonObject {
         return elements.isEmpty();
     }
 
+    public int indexOf(T element) {
+        return elements.indexOf(element);
+    }
+
     public boolean contains(T element) {
         return elements.contains(element);
     }
@@ -58,7 +62,7 @@ public class AttributeList<T extends IJsonObject> implements IJsonObject {
         return elements.remove(index);
     }
 
-    public boolean remove(Object element) {
+    public boolean remove(T element) {
         return elements.remove(element);
     }
 

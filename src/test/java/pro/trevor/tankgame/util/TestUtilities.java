@@ -4,6 +4,7 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.state.meta.Player;
 
 public class TestUtilities {
     public static State generateBoard(int width, int height, IUnit... units) {
@@ -18,11 +19,11 @@ public class TestUtilities {
         Council c = new Council(coffer);
 
         for (int i = 0; i < councilors; i++) {
-            c.getCouncillors().add("Councilor " + i);
+            c.getCouncillors().add(new Player("Councilor " + i));
         }
 
         for (int i = 0; i < senators; i++) {
-            c.getSenators().add("Senators " + i);
+            c.getSenators().add(new Player("Senators " + i));
         }
 
         return c;

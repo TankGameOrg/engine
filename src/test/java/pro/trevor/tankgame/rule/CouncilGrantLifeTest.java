@@ -41,13 +41,13 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DEAD, true)
                 .finish();
         State state = new DummyState();
-        state.getCouncil().getCouncillors().add(tank.getPlayer().getName());
+        state.getCouncil().getCouncillors().add(tank.getPlayer());
         
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
 
         assertEquals(1, tank.getDurability());
         assertFalse(tank.isDead());
-        assertFalse(state.getCouncil().getCouncillors().contains(tank.getPlayer().getName()));
+        assertFalse(state.getCouncil().getCouncillors().contains(tank.getPlayer()));
     }
 
     @Test
