@@ -10,6 +10,7 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
+import pro.trevor.tankgame.state.meta.Player;
 
 import java.util.stream.Collectors;
 
@@ -32,14 +33,14 @@ public class ConditionalRules {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
                         String tankPlayer = t.getPlayer().getName();
                         s.getCouncil().getCouncillors().remove(tankPlayer);
-                        s.getCouncil().getSenators().add(tankPlayer);
+                        s.getCouncil().getSenators().add(new Player(tankPlayer));
                     } else {
                         Attribute.DEAD.to(t, true);
                         Attribute.ACTION_POINTS.to(t, 0);
                         Attribute.GOLD.to(t, 0);
                         Attribute.BOUNTY.to(t, 0);
                         Attribute.DURABILITY.to(t, 3);
-                        s.getCouncil().getCouncillors().add(t.getPlayer().getName());
+                        s.getCouncil().getCouncillors().add(new Player(t.getPlayer().getName()));
                     }
                 });
     }

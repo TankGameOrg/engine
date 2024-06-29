@@ -1,6 +1,6 @@
 package pro.trevor.tankgame.state.attribute;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import pro.trevor.tankgame.state.board.Board;
@@ -38,6 +38,10 @@ public class Attribute<E> {
     public static final Attribute<Board> BOARD = new Attribute<>("BOARD");
 
     // Council attributes
+    public static final Attribute<AttributeList<Player>> COUNCILLORS = new Attribute<>("COUNCILLORS");
+    public static final Attribute<AttributeList<Player>> SENATORS = new Attribute<>("SENATORS");
+    public static final Attribute<Integer> COFFER = new Attribute<>("COFFER");
+    public static final Attribute<Boolean> CAN_BOUNTY = new Attribute<>("CAN_BOUNTY");
     public static final Attribute<Integer> ARMISTICE_COUNT = new Attribute<>("ARMISTICE_COUNT");
     public static final Attribute<Integer> ARMISTICE_MAX = new Attribute<>("ARMISTICE_MAX");
 

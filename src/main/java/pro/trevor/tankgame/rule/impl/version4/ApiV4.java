@@ -11,6 +11,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.state.meta.Player;
 
 public class ApiV4 extends ApiV3 implements IApi {
 
@@ -42,9 +43,9 @@ public class ApiV4 extends ApiV3 implements IApi {
         state.setTick(tick);
         state.setRunning(running);
         state.setWinner(winner);
-        state.getCouncil().getCouncillors().addAll(councillors.toList().stream().map(Object::toString).toList());
-        state.getCouncil().getSenators().addAll(senators.toList().stream().map(Object::toString).toList());
         state.getCouncil().setCoffer(council.getInt("coffer"));
+        councillors.toList().forEach((o) -> state.getCouncil().getCouncillors().add(new Player(o.toString())));
+        senators.toList().forEach((o) -> state.getCouncil().getSenators().add(new Player(o.toString())));
         for (int y = 0; y < unitBoard.length(); ++y) {
             JSONArray unitBoardRow = unitBoard.getJSONArray(y);
             JSONArray floorBoardRow = floorBoard.getJSONArray(y);

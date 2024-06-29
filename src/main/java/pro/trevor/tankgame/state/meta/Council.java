@@ -4,72 +4,61 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
+import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.attribute.AttributeList;
+import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.util.JsonType;
 import pro.trevor.tankgame.util.Util;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Council implements IPlayerElement, IMetaElement {
-
-    private int coffer;
-    private final Set<String> councillors;
-    private final Set<String> senators;
-    private boolean canBounty;
+@JsonType(name = "Council")
+public class Council extends AttributeObject implements IPlayerElement, IMetaElement, IJsonObject {
 
     public Council(int coffer) {
-        this.coffer = coffer;
-        this.councillors = new HashSet<>();
-        this.senators = new HashSet<>();
+        super();
+        Attribute.COFFER.to(this, coffer);
+        Attribute.COUNCILLORS.to(this, new AttributeList<>());
+        Attribute.SENATORS.to(this, new AttributeList<>());
+        Attribute.CAN_BOUNTY.to(this, true);
     }
 
     public Council() {
         this(0);
     }
 
+    public Council(JSONObject json) {
+        super(json);
+    }
+
     public int getCoffer() {
-        return coffer;
+        return Attribute.COFFER.unsafeFrom(this);
     }
 
     public void setCoffer(int coffer) {
-        this.coffer = coffer;
+        Attribute.COFFER.to(this, coffer);
     }
 
-    public Set<String> getCouncillors() {
-        return councillors;
+    public AttributeList<Player> getCouncillors() {
+        return Attribute.COUNCILLORS.unsafeFrom(this);
     }
 
-    public Set<String> getSenators() {
-        return senators;
+    public AttributeList<Player> getSenators() {
+        return Attribute.SENATORS.unsafeFrom(this);
     }
 
     public boolean canBounty() {
-        return canBounty;
+        return Attribute.CAN_BOUNTY.unsafeFrom(this);
     }
 
     public void setCanBounty(boolean canBounty) {
-        this.canBounty = canBounty;
+        Attribute.CAN_BOUNTY.to(this, canBounty);
     }
 
     @Override
     public Player getPlayer() {
         return new Player("Council");
-    }
-
-    @Override
-    public String toString() {
-        return "council: [\n  coffer: " + coffer +
-                "\n  councillors: " + Util.toString(councillors, 4) +
-                "  senators: " + Util.toString(senators, 4);
-    }
-
-    @Override
-    public JSONObject toJson() {
-        JSONObject output = new JSONObject();
-        output.put("type", "council");
-        output.put("council", new JSONArray(councillors));
-        output.put("senate", new JSONArray(senators));
-        output.put("coffer", coffer);
-        output.put("can_bounty", canBounty);
-        return output;
     }
 }
