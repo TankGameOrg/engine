@@ -57,9 +57,9 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = new TestState();
-        state.getCouncil().setCoffer(1);
+        Attribute.COFFER.to(state.getCouncil(), 1);
         ONE_COST_RULE.apply(state, state.getCouncil(), tank);
-        assertEquals(0, state.getCouncil().getCoffer());
+        assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
     }
 
     @Test

@@ -96,11 +96,11 @@ public class ShareGoldWithTaxRuleTest {
         int endingCoffer = startingCoffer + tax;
 
         State state = new TestState();
-        state.getCouncil().setCoffer(startingCoffer);
+        Attribute.COFFER.to(state.getCouncil(), startingCoffer);
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
         rule.apply(state, sender, reciever, donation);
         assertEquals(senderEndingGold, Attribute.GOLD.unsafeFrom(sender));
         assertEquals(recieverEndingGold, Attribute.GOLD.unsafeFrom(reciever));
-        assertEquals(endingCoffer, state.getCouncil().getCoffer());
+        assertEquals(endingCoffer, Attribute.COFFER.unsafeFrom(state.getCouncil()));
     }
 }

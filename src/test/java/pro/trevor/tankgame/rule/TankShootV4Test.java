@@ -219,7 +219,7 @@ public class TankShootV4Test {
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
 
                 assertEquals(expectedNewGold, tank.getGold());
-                assertEquals(expectedNewCoffer, state.getCouncil().getCoffer());
+                assertEquals(expectedNewCoffer, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
 
         @Test
@@ -244,7 +244,7 @@ public class TankShootV4Test {
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
 
                 assertEquals(5, tank.getGold());
-                assertEquals(0, state.getCouncil().getCoffer());
+                assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
 
         @Test
@@ -267,7 +267,7 @@ public class TankShootV4Test {
                 State state = generateBoard(2, 2, tank, otherTank);
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
                 assertEquals(6, tank.getGold());
-                assertEquals(0, state.getCouncil().getCoffer());
+                assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
 
 }

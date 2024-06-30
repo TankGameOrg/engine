@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TestUtilities;
@@ -37,7 +38,7 @@ public class CouncilBaseIncomeTest {
 
         rule.apply(new TestState(), c);
 
-        assertEquals(expectedCoffer, c.getCoffer());
+        assertEquals(expectedCoffer, Attribute.COFFER.unsafeFrom(c));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class CouncilBaseIncomeTest {
 
         rule.apply(new TestState(), c);
 
-        assertEquals(expectedCoffer, c.getCoffer());
+        assertEquals(expectedCoffer, Attribute.COFFER.unsafeFrom(c));
     }
 
     @Test
@@ -83,12 +84,12 @@ public class CouncilBaseIncomeTest {
         State state = new TestState();
 
         rule.apply(state, c);
-        assertEquals(26, c.getCoffer());
+        assertEquals(26, Attribute.COFFER.unsafeFrom(c));
 
         rule.apply(state, c);
-        assertEquals(47, c.getCoffer());
+        assertEquals(47, Attribute.COFFER.unsafeFrom(c));
 
         rule.apply(state, c);
-        assertEquals(68, c.getCoffer());
+        assertEquals(68, Attribute.COFFER.unsafeFrom(c));
     }
 }

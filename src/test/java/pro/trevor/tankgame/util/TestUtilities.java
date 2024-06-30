@@ -13,7 +13,7 @@ public class TestUtilities {
         for (IUnit unit : units) {
             board.putUnit(unit);
         }
-        return new State(board, new Council());
+        return new State(board, BuildTestCouncil(0, 0, 0));
     }
 
     public static Council BuildTestCouncil(int coffer, int councilors, int senators) {
