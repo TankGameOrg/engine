@@ -19,7 +19,6 @@ import pro.trevor.tankgame.state.board.floor.AbstractFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules {
@@ -90,10 +89,10 @@ public class TickRules {
                 }
             });
 
-    public static final MetaTickActionRule<ArmisticeCouncil> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
+    public static final MetaTickActionRule<Council> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
             (s, c) -> {
                 int totalCouncilMembers = c.getCouncillors().size() + c.getSenators().size();
-                c.setArmisticeVoteCount(c.getArmisticeVoteCount() + totalCouncilMembers);
+                Attribute.ARMISTICE_COUNT.to(c, Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) + totalCouncilMembers);
             });
 
     public static MetaTickActionRule<Council> GetCouncilBaseIncomeRule(int goldPerCouncilor, int goldPerSenator) {

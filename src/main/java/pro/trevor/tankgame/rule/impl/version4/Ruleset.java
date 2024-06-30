@@ -21,7 +21,6 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
@@ -60,7 +59,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
         tickRules.put(Council.class, TickRules.GetCouncilBaseIncomeRule(1, 3));
-        tickRules.put(ArmisticeCouncil.class, TickRules.ARMISTICE_VIA_COUNCIL);
+        tickRules.put(Council.class, TickRules.ARMISTICE_VIA_COUNCIL);
         tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> c.setCanBounty(true)));
     }
 
@@ -99,7 +98,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
 
-        conditionalRules.put(ArmisticeCouncil.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
+        conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
         conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
 }
