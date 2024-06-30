@@ -54,7 +54,7 @@ public class ConditionalRules {
             });
 
     public static final ConditionalRule<Council> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
-            (s, c) -> Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) >= Attribute.ARMISTICE_MAX.fromOrElse(c, 1),
+            (s, c) -> Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) >= Attribute.ARMISTICE_MAX.unsafeFrom(c),
             (s, c) -> {
                 Attribute.RUNNING.to(s, false);
                 Attribute.WINNER.to(s, "Council");
