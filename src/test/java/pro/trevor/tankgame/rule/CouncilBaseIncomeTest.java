@@ -10,8 +10,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TestUtilities;
 
 public class CouncilBaseIncomeTest {
@@ -35,9 +36,9 @@ public class CouncilBaseIncomeTest {
         Council c = TestUtilities.BuildTestCouncil(startingCoffer, numCouncilors, numSenators);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(1, 3);
 
-        rule.apply(new DummyState(), c);
+        rule.apply(new TestState(), c);
 
-        assertEquals(expectedCoffer, c.getCoffer());
+        assertEquals(expectedCoffer, Attribute.COFFER.unsafeFrom(c));
     }
 
     @Test
@@ -70,9 +71,9 @@ public class CouncilBaseIncomeTest {
         Council c = TestUtilities.BuildTestCouncil(0, numCouncilors, numSenators);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(councilorIncome, senatorIncome);
 
-        rule.apply(new DummyState(), c);
+        rule.apply(new TestState(), c);
 
-        assertEquals(expectedCoffer, c.getCoffer());
+        assertEquals(expectedCoffer, Attribute.COFFER.unsafeFrom(c));
     }
 
     @Test
@@ -80,15 +81,15 @@ public class CouncilBaseIncomeTest {
         Council c = TestUtilities.BuildTestCouncil(5, 12, 3);
         MetaTickActionRule<Council> rule = TickRules.GetCouncilBaseIncomeRule(1, 3);
 
-        State state = new DummyState();
+        State state = new TestState();
 
         rule.apply(state, c);
-        assertEquals(26, c.getCoffer());
+        assertEquals(26, Attribute.COFFER.unsafeFrom(c));
 
         rule.apply(state, c);
-        assertEquals(47, c.getCoffer());
+        assertEquals(47, Attribute.COFFER.unsafeFrom(c));
 
         rule.apply(state, c);
-        assertEquals(68, c.getCoffer());
+        assertEquals(68, Attribute.COFFER.unsafeFrom(c));
     }
 }

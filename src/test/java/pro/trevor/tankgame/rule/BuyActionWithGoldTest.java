@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
@@ -30,7 +30,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, true).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
-        assertFalse(rule.canApply(new DummyState(), tank, 3)); // goldSpent = 3
+        assertFalse(rule.canApply(new TestState(), tank, 3)); // goldSpent = 3
     }
 
     @Test
@@ -39,7 +39,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
-        assertFalse(rule.canApply(new DummyState(), tank, 3)); // goldSpent = 3
+        assertFalse(rule.canApply(new TestState(), tank, 3)); // goldSpent = 3
     }
 
     @Test
@@ -48,7 +48,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
-        assertFalse(rule.canApply(new DummyState(), tank, 6)); // goldSpent = 6
+        assertFalse(rule.canApply(new TestState(), tank, 6)); // goldSpent = 6
     }
 
     @Test
@@ -77,7 +77,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
-        assertFalse(rule.canApply(new DummyState(), tank, 6)); // goldSpent = 6
+        assertFalse(rule.canApply(new TestState(), tank, 6)); // goldSpent = 6
     }
 
     @Test
@@ -86,7 +86,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
-        assertFalse(rule.canApply(new DummyState(), tank, 4)); // goldSpent = 4
+        assertFalse(rule.canApply(new TestState(), tank, 4)); // goldSpent = 4
     }
 
     @Test
@@ -95,7 +95,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 1);
-        rule.apply(new DummyState(), tank, 3); // goldSpent = 3
+        rule.apply(new TestState(), tank, 3); // goldSpent = 3
 
         assertEquals(0, tank.getGold());
         assertEquals(1, tank.getActions());
@@ -112,7 +112,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.GOLD, startingGold).with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(3, 5);
-        rule.apply(new DummyState(), tank, spentGold);
+        rule.apply(new TestState(), tank, spentGold);
 
         assertEquals(expectedGold, tank.getGold());
         assertEquals(expectedActions, tank.getActions());
@@ -132,7 +132,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.BuyActionWithGold(actionCost, 5);
-        rule.apply(new DummyState(), tank, goldSpent);
+        rule.apply(new TestState(), tank, goldSpent);
 
         assertEquals(0, tank.getGold());
         assertEquals(expectedActions, tank.getActions());
