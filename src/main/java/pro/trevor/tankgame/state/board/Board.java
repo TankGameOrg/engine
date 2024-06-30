@@ -221,6 +221,11 @@ public class Board implements IMetaElement {
     }
 
     @Override
+    public String toString() {
+        return '\n' + toUnitString() + '\n' + toFloorString();
+    }
+
+    @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
         JSONArray units = new JSONArray();

@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
+import pro.trevor.tankgame.util.Util;
 
 import java.util.*;
 
@@ -110,6 +111,11 @@ public class AttributeList<T> implements Collection<T>, IJsonObject {
     @Override
     public <U> U[] toArray(U[] a) {
         return elements.toArray(a);
+    }
+
+    @Override
+    public String toString() {
+        return Util.toString(elements);
     }
 
     @Override
