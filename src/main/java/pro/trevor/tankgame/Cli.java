@@ -27,10 +27,10 @@ public class Cli {
             try {
                 RULESETS.put(rulesetType.name(), rulesetClass.getConstructor().newInstance());
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                throw new Error("Error constructing from JSON: no matching constructor found for class " +
+                throw new Error("Error constructing IRuleset: no matching constructor found for class " +
                         rulesetClass, e);
             } catch (InstantiationException e) {
-                throw new Error("Error constructing from JSON: failed to instantiate class " + rulesetClass, e);
+                throw new Error("Error constructing IRuleset: failed to instantiate class " + rulesetClass, e);
             }
         }
     }
