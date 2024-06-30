@@ -1,0 +1,11 @@
+name: Compatibility Tests
+
+on:
+  pull_request:
+    branches:
+      - stable
+
+jobs:
+  compatibility:
+    name: Compatibility Tests
+    uses: TankGameOrg/ui/.github/workflows/testing.yml@main
