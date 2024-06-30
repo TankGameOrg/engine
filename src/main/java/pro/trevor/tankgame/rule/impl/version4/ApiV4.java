@@ -5,7 +5,6 @@ import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.ApiV3;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
-import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
@@ -14,11 +13,6 @@ public class ApiV4 extends ApiV3 implements IApi {
 
     public ApiV4() {
         super(new Ruleset());
-    }
-
-    @Override
-    public void ingestState(JSONObject json) {
-        state = new State(json);
     }
 
     @Override

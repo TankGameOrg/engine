@@ -3,6 +3,7 @@ package pro.trevor.tankgame;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
 import pro.trevor.tankgame.rule.impl.IApi;
+import pro.trevor.tankgame.state.State;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -32,7 +33,7 @@ public class Cli {
                     String command = json.getString("command");
                     switch (command) {
                         case "rules" -> output.println(api.getRules().toString());
-                        case "display" -> output.println(api.getStateJson().toString());
+                        case "display" -> output.println(api.getState().toJson().toString());
                         case "exit" -> {
                             output.println(response("exiting", false));
                             exit = true;
@@ -52,7 +53,7 @@ public class Cli {
                 }
                 case "state" -> {
                     try {
-                        api.ingestState(json);
+                        api.setState(new State(json));
                         output.println(response("state successfully ingested", false));
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));

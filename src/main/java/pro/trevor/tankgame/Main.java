@@ -6,6 +6,7 @@ import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.version3.ApiV3;
 import pro.trevor.tankgame.rule.impl.version4.ApiV4;
+import pro.trevor.tankgame.state.State;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -33,7 +34,7 @@ public class Main {
                 JSONObject initial = new JSONObject(initialString);
                 JSONArray moves = new JSONArray(movesString);
 
-                api.ingestState(initial);
+                api.setState(new State(initial));
                 System.out.println(api.getState().toJson().toString(2));
 
                 for (int i = 0; i < moves.length(); ++i) {

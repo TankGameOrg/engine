@@ -12,8 +12,6 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.*;
@@ -41,6 +39,11 @@ public class ApiV3 implements IApi {
     }
 
     @Override
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    @Override
     public JSONObject getRules() {
         JSONObject rules = new JSONObject();
         rules.put("type", "rules");
@@ -49,29 +52,6 @@ public class ApiV3 implements IApi {
         metaRules.forEach(playerRules::put);
         rules.put("rules", playerRules);
         return rules;
-    }
-
-    protected static IUnit unitFromJson(JSONObject json) {
-        Object output = Codec.decodeJson(json);
-        if (output instanceof IUnit unit) {
-            return unit;
-        } else {
-            throw new Error("JSON contains a class that is not IUnit: " + output.getClass().getName());
-        }
-    }
-
-    protected static IFloor floorFromJson(JSONObject json) {
-        Object output = Codec.decodeJson(json);
-        if (output instanceof IFloor floor) {
-            return floor;
-        } else {
-            throw new Error("JSON contains a class that is not IFloor: " + output.getClass().getName());
-        }
-    }
-
-    @Override
-    public void ingestState(JSONObject json) {
-        state = new State(json);
     }
 
     @Override
@@ -157,11 +137,6 @@ public class ApiV3 implements IApi {
             }
         }
         return arguments;
-    }
-
-    @Override
-    public JSONObject getStateJson() {
-        return state.toJson().put("error", false);
     }
 
     @Override
@@ -321,7 +296,6 @@ public class ApiV3 implements IApi {
         public static final String ACTION = "action";
         public static final String POSITION = "position";
         public static final String TARGET = "target";
-        public static final String QUANTITY = "quantity";
         public static final String HIT = "hit";
         public static final String GOLD = "gold";
         public static final String DONATION = "donation";

@@ -8,13 +8,11 @@ public interface IApi {
 
     State getState();
 
+    void setState(State state);
+
     JSONObject getRules();
 
-    void ingestState(JSONObject json);
-
     void ingestAction(JSONObject json);
-
-    JSONObject getStateJson();
 
     JSONObject getPossibleActions(String player);
     
