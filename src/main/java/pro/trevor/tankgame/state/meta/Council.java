@@ -1,6 +1,5 @@
 package pro.trevor.tankgame.state.meta;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
@@ -9,10 +8,6 @@ import pro.trevor.tankgame.state.attribute.AttributeList;
 import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
-import pro.trevor.tankgame.util.Util;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @JsonType(name = "Council")
 public class Council extends AttributeObject implements IPlayerElement, IMetaElement, IJsonObject {

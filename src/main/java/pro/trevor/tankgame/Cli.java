@@ -106,7 +106,7 @@ public class Cli {
         }
     }
 
-    public static JSONObject getJsonObject(Scanner input) {
+    private static JSONObject getJsonObject(Scanner input) {
         Pattern oldPattern = input.delimiter();
         StringBuilder sb = new StringBuilder();
         input.useDelimiter("");

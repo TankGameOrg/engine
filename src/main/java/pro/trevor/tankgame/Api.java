@@ -40,10 +40,7 @@ public class Api {
     public JSONObject getRules() {
         JSONObject rules = new JSONObject();
         rules.put("type", "rules");
-        JSONArray playerRules = ruleset.getPlayerRules().toJsonRequirements();
-        JSONArray metaRules = ruleset.getMetaPlayerRules().toJsonRequirements();
-        metaRules.forEach(playerRules::put);
-        rules.put("rules", playerRules);
+        rules.put("rules", ruleset.getPlayerRules().toJsonRequirements());
         return rules;
     }
 
@@ -58,7 +55,7 @@ public class Api {
             String action = json.getString(JsonKeys.ACTION);
             long time = json.optLong(JsonKeys.TIME, 0);
 
-            Optional<Pair<Class<?>, IPlayerRule<?>>> optionalRule = getRuleByName(action);
+            Optional<Pair<Class<?>, IPlayerRule<?>>> optionalRule = ruleset.getPlayerRules().getByName(action);
             if (optionalRule.isEmpty()) {
                 throw new Error("Unexpected action: " + action);
             }
@@ -158,7 +155,7 @@ public class Api {
 
         if (player.equals(COUNCIL)) {
             type = Council.class;
-            rules = ruleset.getMetaPlayerRules().get(type);
+            rules = ruleset.getPlayerRules().get(type);
             subject = state.getCouncil();
         } else if (state.getPlayer(player).isPresent()) {
             type = Tank.class;
@@ -238,28 +235,20 @@ public class Api {
     }
 
     private Optional<Pair<Class<?>, IPlayerRule<?>>> getRuleByName(String name) {
-        Optional<Pair<Class<?>, IPlayerRule<?>>> rule = ruleset.getPlayerRules().getByName(name);
-        if (rule.isPresent()) {
-            return rule;
-        }
-
-        return ruleset.getMetaPlayerRules().getByName(name);
+        return ruleset.getPlayerRules().getByName(name);
 
     }
 
     private static void enforceInvariants(State state, RulesetDescription ruleset) {
-        state.getBoard().gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
-        state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
+        state.gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
     }
 
     private static void applyConditionals(State state, RulesetDescription ruleset) {
-        state.getBoard().gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
-        state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
+        state.gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
     }
 
     private static void applyTick(State state, RulesetDescription ruleset) {
-        state.getBoard().gatherAll().forEach((x) -> ruleset.getTickRules().applyRules(state, x));
-        state.getMetaElements().forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
+        state.gatherAll().forEach((x) -> ruleset.getTickRules().applyRules(state, x));
     }
 
     private static class JsonKeys {

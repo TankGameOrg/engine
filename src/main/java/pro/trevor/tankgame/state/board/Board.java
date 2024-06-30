@@ -9,6 +9,7 @@ import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
+import pro.trevor.tankgame.util.IGatherable;
 import pro.trevor.tankgame.util.JsonType;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @JsonType(name = "Board")
-public class Board implements IMetaElement {
+public class Board implements IMetaElement, IGatherable {
 
     private final IUnit[][] unitBoard;
     private final IFloor[][] floorBoard;
@@ -150,6 +151,7 @@ public class Board implements IMetaElement {
         return output;
     }
 
+    @Override
     public <T> List<T> gather(Class<T> t) {
         if (Position.class.isAssignableFrom(t)) {
             List<T> positions = new ArrayList<>();
@@ -170,7 +172,12 @@ public class Board implements IMetaElement {
         }
     }
 
-    public List<IElement> gatherAll() {
+    @Override
+    public List<Object> gatherAll() {
+        return Stream.concat(gatherAllElements().stream(), gather(Position.class).stream()).collect(Collectors.toList());
+    }
+
+    public List<IElement> gatherAllElements() {
         return Stream.concat(gather(IUnit.class).stream(), gather(IFloor.class).stream()).collect(Collectors.toList());
     }
 

@@ -2,6 +2,7 @@ package pro.trevor.tankgame.state.attribute;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pro.trevor.tankgame.util.IGatherable;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 import pro.trevor.tankgame.util.Util;
@@ -9,7 +10,7 @@ import pro.trevor.tankgame.util.Util;
 import java.util.*;
 
 @JsonType(name = "AttributeList")
-public class AttributeList<T> implements Collection<T>, IJsonObject {
+public class AttributeList<T> implements Collection<T>, IJsonObject, IGatherable {
 
     private final List<T> elements;
 
@@ -131,5 +132,31 @@ public class AttributeList<T> implements Collection<T>, IJsonObject {
         });
         json.put("elements", array);
         return json;
+    }
+
+    @Override
+    public <U> List<U> gather(Class<U> type) {
+        List<U> result = new ArrayList<>();
+        for (Object value : elements) {
+            if (value instanceof IGatherable gatherable) {
+                result.addAll(gatherable.gather(type));
+            }
+            if (type.isAssignableFrom(value.getClass())) {
+                result.add((U) value);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<Object> gatherAll() {
+        List<Object> result = new ArrayList<>();
+        for (Object value : elements) {
+            result.add(value);
+            if (value instanceof IGatherable gatherable) {
+                result.addAll(gatherable.gatherAll());
+            }
+        }
+        return result;
     }
 }
