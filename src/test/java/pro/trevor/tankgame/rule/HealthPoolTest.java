@@ -12,7 +12,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 
 public class HealthPoolTest {
@@ -20,7 +20,7 @@ public class HealthPoolTest {
     public void GainHealthInHealthPool() {
         Tank tank = TankBuilder.buildV3Tank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
                 .with(Attribute.DEAD, false).finish();
-        DummyState state = new DummyState();
+        TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
@@ -34,7 +34,7 @@ public class HealthPoolTest {
     public void DeadTankInHealthPool() {
         Tank tank = TankBuilder.buildV3Tank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
                 .with(Attribute.DEAD, true).finish();
-        DummyState state = new DummyState();
+        TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
@@ -62,7 +62,7 @@ public class HealthPoolTest {
     public void HealthPoolTwoRegen() {
         Tank tank = TankBuilder.buildV3Tank().at(new Position("A1")).with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false).finish();
-        DummyState state = new DummyState();
+        TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 2);
         state.getBoard().putFloor(hp);
 
@@ -76,7 +76,7 @@ public class HealthPoolTest {
     public void HealthPoolMultipleApplications() {
         Tank tank = TankBuilder.buildV3Tank().at(new Position("A1")).with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false).finish();
-        DummyState state = new DummyState();
+        TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 

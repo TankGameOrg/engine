@@ -13,7 +13,7 @@ import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 
 public class ShareGoldWithTaxRuleTest {
@@ -25,7 +25,7 @@ public class ShareGoldWithTaxRuleTest {
         Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
-        assertFalse(rule.canApply(new DummyState(), sender, reciever, 3 /* donationAmount */));
+        assertFalse(rule.canApply(new TestState(), sender, reciever, 3 /* donationAmount */));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ShareGoldWithTaxRuleTest {
         Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
-        assertFalse(rule.canApply(new DummyState(), sender, reciever, 3 /* donationAmount */));
+        assertFalse(rule.canApply(new TestState(), sender, reciever, 3 /* donationAmount */));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ShareGoldWithTaxRuleTest {
         Tank reciever = TankBuilder.buildV3Tank().finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
-        assertFalse(rule.canApply(new DummyState(), sender, reciever, 3 /* donationAmount */));
+        assertFalse(rule.canApply(new TestState(), sender, reciever, 3 /* donationAmount */));
     }
 
     @ParameterizedTest()
@@ -57,7 +57,7 @@ public class ShareGoldWithTaxRuleTest {
         Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
-        assertFalse(rule.canApply(new DummyState(), sender, reciever, donation));
+        assertFalse(rule.canApply(new TestState(), sender, reciever, donation));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ShareGoldWithTaxRuleTest {
         Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
-        assertFalse(rule.canApply(new DummyState(), sender, reciever, -3 /* donationAmount */));
+        assertFalse(rule.canApply(new TestState(), sender, reciever, -3 /* donationAmount */));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ShareGoldWithTaxRuleTest {
             .at(new Position("A3")).with(Attribute.GOLD, 0).finish();
 
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
-        assertFalse(rule.canApply(new DummyState(), sender, reciever, 1 /* donationAmount */));
+        assertFalse(rule.canApply(new TestState(), sender, reciever, 1 /* donationAmount */));
     }
 
     @ParameterizedTest()
@@ -95,7 +95,7 @@ public class ShareGoldWithTaxRuleTest {
         int recieverEndingGold = recieverStartingGold + donation;
         int endingCoffer = startingCoffer + tax;
 
-        State state = new DummyState();
+        State state = new TestState();
         state.getCouncil().setCoffer(startingCoffer);
         PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
         rule.apply(state, sender, reciever, donation);

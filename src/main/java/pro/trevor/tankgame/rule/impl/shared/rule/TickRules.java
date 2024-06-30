@@ -85,7 +85,8 @@ public class TickRules {
                                     && !Attribute.DEAD.from(tank).orElse(false))
                             .count();
                     int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
-                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
+
+                    Attribute.COFFER.to(s.getCouncil(), Attribute.COFFER.fromOrElse(s.getCouncil(), 0) + goldToGain);
                 }
             });
 
@@ -108,7 +109,7 @@ public class TickRules {
 
                     int income = (goldPerCouncilor * councilorCount) + (goldPerSenator * senatorCount);
 
-                    c.setCoffer(c.getCoffer() + income);
+                    Attribute.COFFER.to(c, Attribute.COFFER.fromOrElse(c, 0) + income);
                 });
     }
 }

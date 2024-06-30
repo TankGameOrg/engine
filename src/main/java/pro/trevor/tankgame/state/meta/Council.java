@@ -12,28 +12,14 @@ import pro.trevor.tankgame.util.JsonType;
 @JsonType(name = "Council")
 public class Council extends AttributeObject implements IPlayerElement, IMetaElement, IJsonObject {
 
-    public Council(int coffer) {
+    public Council() {
         super();
-        Attribute.COFFER.to(this, coffer);
         Attribute.COUNCILLORS.to(this, new AttributeList<>());
         Attribute.SENATORS.to(this, new AttributeList<>());
-        Attribute.CAN_BOUNTY.to(this, true);
-    }
-
-    public Council() {
-        this(0);
     }
 
     public Council(JSONObject json) {
         super(json);
-    }
-
-    public int getCoffer() {
-        return Attribute.COFFER.unsafeFrom(this);
-    }
-
-    public void setCoffer(int coffer) {
-        Attribute.COFFER.to(this, coffer);
     }
 
     public AttributeList<Player> getCouncillors() {
@@ -42,14 +28,6 @@ public class Council extends AttributeObject implements IPlayerElement, IMetaEle
 
     public AttributeList<Player> getSenators() {
         return Attribute.SENATORS.unsafeFrom(this);
-    }
-
-    public boolean canBounty() {
-        return Attribute.CAN_BOUNTY.unsafeFrom(this);
-    }
-
-    public void setCanBounty(boolean canBounty) {
-        Attribute.CAN_BOUNTY.to(this, canBounty);
     }
 
     @Override

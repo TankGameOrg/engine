@@ -46,7 +46,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
         invariants.put(BasicWall.class, new MinimumEnforcer<>(BasicWall::getDurability, BasicWall::setDurability, 0));
 
-        invariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
+        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER::unsafeFrom, Attribute.COFFER::to, 0));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
         tickRules.put(Council.class, TickRules.GetCouncilBaseIncomeRule(1, 3));
         tickRules.put(Council.class, TickRules.ARMISTICE_VIA_COUNCIL);
-        tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> c.setCanBounty(true)));
+        tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> Attribute.CAN_BOUNTY.to(c, true)));
     }
 
     @Override
@@ -78,15 +78,15 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && c.canBounty();
+                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true);
                 },
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
                     int bounty = toType(n[1], Integer.class);
-                    assert c.getCoffer() >= bounty;
+                    assert Attribute.COFFER.unsafeFrom(c) >= bounty;
                     t.setBounty(t.getBounty() + bounty);
-                    c.setCoffer(c.getCoffer() - bounty);
-                    c.setCanBounty(false);
+                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
+                    Attribute.CAN_BOUNTY.to(c, false);
                 },
                 UnitRange.ALL_LIVING_TANKS,
                 new DiscreteIntegerRange("bounty", 1, 5)));

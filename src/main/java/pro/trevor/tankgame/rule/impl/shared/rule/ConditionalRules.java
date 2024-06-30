@@ -25,8 +25,7 @@ public class ConditionalRules {
 
     public static <T extends GenericTank> ConditionalRule<T> GetKillOrDestroyTankOnZeroDurabilityRule() {
         return new ConditionalRule<>(
-                (s, t) -> Attribute.DURABILITY.from(t).orElse(-1) == 0, // -1, so that if a tank doesn't have
-                                                                         // durability, this rule won't apply
+                (s, t) -> Attribute.DURABILITY.from(t).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
                 (s, t) -> {
                     if (Attribute.DEAD.from(t).orElse(false)) {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
