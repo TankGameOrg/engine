@@ -10,9 +10,7 @@ import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.state.attribute.Codec;
-import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
@@ -73,20 +71,12 @@ public class ApiV3 implements IApi {
 
     @Override
     public void ingestState(JSONObject json) {
-        int tick = json.getInt("day");
-        boolean running = json.getBoolean("running");
-        String winner = json.getString("winner");
-        Board board = new Board(json.getJSONObject("board"));
-        Council councilObject = new Council(json.getJSONObject("council"));
-        state = new State(board, councilObject);
-        state.setTick(tick);
-        state.setRunning(running);
-        state.setWinner(winner);
+        state = new State(json);
     }
 
     @Override
     public void ingestAction(JSONObject json) {
-        if (!state.isRunning()) {
+        if (!Attribute.RUNNING.fromOrElse(state, true)) {
             throw new Error("The game is over; no actions can be submitted");
         }
 
@@ -190,7 +180,7 @@ public class ApiV3 implements IApi {
             type = Council.class;
             rules = ruleset.getMetaPlayerRules().get(type);
             subject = state.getCouncil();
-        } else if (state.getPlayers().contains(player)) {
+        } else if (state.getPlayer(player).isPresent()) {
             type = Tank.class;
             rules = ruleset.getPlayerRules().get(type);
             Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()

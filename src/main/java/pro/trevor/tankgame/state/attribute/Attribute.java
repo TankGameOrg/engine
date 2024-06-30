@@ -1,6 +1,5 @@
 package pro.trevor.tankgame.state.attribute;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import pro.trevor.tankgame.state.board.Board;
@@ -31,9 +30,10 @@ public class Attribute<E> {
     public static final Attribute<Integer> REGENERATION = new Attribute<>("REGENERATION");
 
     // State attributes
-    public static final Attribute<Boolean> TICK = new Attribute<>("TICK");
+    public static final Attribute<Integer> TICK = new Attribute<>("TICK");
     public static final Attribute<Boolean> RUNNING = new Attribute<>("RUNNING");
     public static final Attribute<String> WINNER = new Attribute<>("WINNER");
+    public static final Attribute<AttributeList<Player>> PLAYERS = new Attribute<>("PLAYERS");
     public static final Attribute<Council> COUNCIL = new Attribute<>("COUNCIL");
     public static final Attribute<Board> BOARD = new Attribute<>("BOARD");
 
@@ -74,7 +74,6 @@ public class Attribute<E> {
         if (!this.in(e))
             throw new Error("Attempting to get attribute '" + attributeName + "' from generic element " + e
                     + ". This generic element has no such attribute");
-
         return getObject(e);
     }
         

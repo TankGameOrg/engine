@@ -1,13 +1,12 @@
 package pro.trevor.tankgame.rule.impl.version4;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.version3.ApiV3;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
 
@@ -19,20 +18,12 @@ public class ApiV4 extends ApiV3 implements IApi {
 
     @Override
     public void ingestState(JSONObject json) {
-        int tick = json.getInt("day");
-        boolean running = json.getBoolean("running");
-        String winner = json.getString("winner");
-        Board board = new Board(json.getJSONObject("board"));
-        Council council = new Council(json.getJSONObject("council"));
-        state = new State(board, council);
-        state.setTick(tick);
-        state.setRunning(running);
-        state.setWinner(winner);
+        state = new State(json);
     }
 
     @Override
     public void ingestAction(JSONObject json) {
-        if (!state.isRunning()) {
+        if (!Attribute.RUNNING.fromOrElse(state, true)) {
             throw new Error("The game is over; no actions can be submitted");
         }
 

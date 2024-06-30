@@ -1,2459 +1,2530 @@
 {
-  "running": true,
-  "winner": "",
-  "council": {
-    "attributes": {
-      "SENATORS": {
-        "elements": [],
-        "class": "AttributeList"
-      },
-      "COFFER": 0,
-      "COUNCILLORS": {
-        "elements": [],
-        "class": "AttributeList"
-      },
-      "CAN_BOUNTY": true
+  "attributes": {
+    "BOARD": {
+      "unit_board": [
+        [
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Schmude"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 0,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Dan"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 0,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 0,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 0,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 0,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 0,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 0,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Stomp"},
+                "class": "Player"
+              },
+              "GOLD": 8,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 0,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Ty"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 0,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 1,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 1,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 1,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 1,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Bryan"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 2,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Trevor"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 2,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 2,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 2,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 2,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 2,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 2,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "David"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 2,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Lena"},
+                "class": "Player"
+              },
+              "GOLD": 5,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 2,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 1,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 9,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 3,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 1,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 9,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 4,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 5,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 1,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 9,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 6,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 1,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 9,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 7,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Beyer"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 8,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Steve"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 8,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 8,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 8,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 8,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 8,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 8,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Joel"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 8,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Xavion"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 8,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 9,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 9,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 9,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 9,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          }
+        ],
+        [
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Ryan"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 0,
+                "y": 10,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "John"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 2,
+                "y": 10,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 3,
+                "y": 10,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 4,
+                "y": 10,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 5,
+                "y": 10,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 6,
+                "y": 10,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 7,
+                "y": 10,
+                "class": "Position"
+              }
+            },
+            "class": "Wall"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Isaac"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 8,
+                "y": 10,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "EmptyUnit"
+          },
+          {
+            "attributes": {
+              "PLAYER": {
+                "attributes": {"NAME": "Corey"},
+                "class": "Player"
+              },
+              "GOLD": 0,
+              "DURABILITY": 3,
+              "POSITION": {
+                "x": 10,
+                "y": 10,
+                "class": "Position"
+              },
+              "ACTIONS": 0,
+              "DEAD": false,
+              "BOUNTY": 0,
+              "TIME_OF_LAST_ACTION": 0,
+              "RANGE": 2
+            },
+            "class": "TankV3"
+          }
+        ]
+      ],
+      "floor_board": [
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 0,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "GoldMine"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 1,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 2,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 3,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 4,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "GoldMine"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "GoldMine"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 5,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 6,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 7,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 8,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "GoldMine"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 9,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ],
+        [
+          {
+            "attributes": {"POSITION": {
+              "x": 0,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 1,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 2,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 3,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 4,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 5,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 6,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 7,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 8,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 9,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          },
+          {
+            "attributes": {"POSITION": {
+              "x": 10,
+              "y": 10,
+              "class": "Position"
+            }},
+            "class": "WalkableFloor"
+          }
+        ]
+      ],
+      "class": "Board"
     },
-    "class": "Council"
+    "WINNER": "",
+    "PLAYERS": {
+      "elements": [
+        {
+          "attributes": {"NAME": "Schmude"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Dan"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Stomp"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Ty"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Bryan"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Trevor"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "David"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Lena"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Beyer"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Steve"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Joel"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Xavion"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Ryan"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "John"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Isaac"},
+          "class": "Player"
+        },
+        {
+          "attributes": {"NAME": "Corey"},
+          "class": "Player"
+        }
+      ],
+      "class": "AttributeList"
+    },
+    "COUNCIL": {
+      "attributes": {
+        "SENATORS": {
+          "elements": [],
+          "class": "AttributeList"
+        },
+        "COFFER": 0,
+        "COUNCILLORS": {
+          "elements": [],
+          "class": "AttributeList"
+        },
+        "CAN_BOUNTY": true
+      },
+      "class": "Council"
+    },
+    "RUNNING": true,
+    "TICK": 0
   },
-  "type": "state",
-  "day": 0,
-  "board": {
-    "unit_board": [
-      [
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Schmude"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 0,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Dan"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 0,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 0,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 0,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 0,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 0,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 0,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Stomp"},
-              "class": "Player"
-            },
-            "GOLD": 8,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 0,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Ty"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 0,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 1,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 1,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 1,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 1,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Bryan"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 2,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Trevor"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 2,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 2,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 2,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 2,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 2,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 2,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "David"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 2,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Lena"},
-              "class": "Player"
-            },
-            "GOLD": 5,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 2,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 1,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 9,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 3,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 1,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 9,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 4,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 5,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 1,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 9,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 6,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 1,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 9,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 7,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Beyer"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 8,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Steve"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 8,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 8,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 8,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 8,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 8,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 8,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Joel"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 8,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Xavion"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 8,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 9,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 9,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 9,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 9,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        }
-      ],
-      [
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Ryan"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 0,
-              "y": 10,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "John"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 2,
-              "y": 10,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 3,
-              "y": 10,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 4,
-              "y": 10,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 5,
-              "y": 10,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 6,
-              "y": 10,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 7,
-              "y": 10,
-              "class": "Position"
-            }
-          },
-          "class": "Wall"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Isaac"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 8,
-              "y": 10,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "EmptyUnit"
-        },
-        {
-          "attributes": {
-            "PLAYER": {
-              "attributes": {"NAME": "Corey"},
-              "class": "Player"
-            },
-            "GOLD": 0,
-            "DURABILITY": 3,
-            "POSITION": {
-              "x": 10,
-              "y": 10,
-              "class": "Position"
-            },
-            "ACTIONS": 0,
-            "DEAD": false,
-            "BOUNTY": 0,
-            "TIME_OF_LAST_ACTION": 0,
-            "RANGE": 2
-          },
-          "class": "TankV3"
-        }
-      ]
-    ],
-    "floor_board": [
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 0,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "GoldMine"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 1,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 2,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 3,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 4,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "GoldMine"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "GoldMine"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 5,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 6,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 7,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 8,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "GoldMine"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 9,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ],
-      [
-        {
-          "attributes": {"POSITION": {
-            "x": 0,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 1,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 2,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 3,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 4,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 5,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 6,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 7,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 8,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 9,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        },
-        {
-          "attributes": {"POSITION": {
-            "x": 10,
-            "y": 10,
-            "class": "Position"
-          }},
-          "class": "WalkableFloor"
-        }
-      ]
-    ],
-    "type": "board"
-  }
+  "class": "State"
 }

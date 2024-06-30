@@ -20,6 +20,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
 
+import static pro.trevor.tankgame.rule.impl.shared.rule.TickRules.INCREMENT_DAY_ON_TICK;
 import static pro.trevor.tankgame.util.Util.*;
 
 public class Ruleset extends BaseRuleset implements IRuleset {
@@ -57,9 +58,9 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
 
         metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
+        metaTickRules.put(Board.class, INCREMENT_DAY_ON_TICK);
         metaTickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> {
             c.setCanBounty(true);
-            s.setTick(s.getTick() + 1);
         }));
     }
 

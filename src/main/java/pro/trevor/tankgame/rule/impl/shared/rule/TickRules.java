@@ -24,9 +24,7 @@ import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules {
     public static final MetaTickActionRule<Board> INCREMENT_DAY_ON_TICK = new MetaTickActionRule<>(
-            (s, n) -> {
-                s.setTick(s.getTick() + 1);
-            });
+            (s, n) -> Attribute.TICK.to(s, Attribute.TICK.fromOrElse(s, 0) + 1));
 
     public static <T extends GenericTank> TickActionRule<T> GetDistributeGoldToTanksRule() {
         return new TickActionRule<T>(
