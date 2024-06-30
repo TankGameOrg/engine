@@ -197,48 +197,6 @@ public class Api {
         return actions;
     }
 
-    private Set<List<Object>> allPermutations(IPlayerRule<?> rule, State state, Object subject) {
-        IPlayerRule<Object> genericRule = (IPlayerRule<Object>) rule;
-        DiscreteTypeRange<?>[] parameters = new DiscreteTypeRange<?>[rule.parameters().length];
-        for (int i = 0; i < rule.parameters().length; ++i) {
-            TypeRange<?> parameter = rule.parameters()[i];
-            if (parameter instanceof DiscreteTypeRange<?> discreteParameter) {
-                parameters[i] = discreteParameter;
-            } else {
-                throw new Error(String.format("Given parameter `%s` is not discrete", parameter.getName()));
-            }
-        }
-        return allPermutations(genericRule, parameters, state, subject);
-    }
-
-    private Set<List<Object>> allPermutations(IPlayerRule<Object> rule, DiscreteTypeRange<?>[] discreteParameters, State state, Object subject, Object... permutation) {
-        if (permutation.length == discreteParameters.length) {
-            if (rule.canApply(state, subject, permutation)) {
-                return new HashSet<>(List.of(List.of(permutation)));
-            }
-        } else {
-            DiscreteTypeRange<?> currentParameter = discreteParameters[permutation.length];
-            if (currentParameter instanceof VariableTypeRange<?,?> variableRange) {
-                VariableTypeRange<Object, ?> genericRange = (VariableTypeRange<Object, ?>) variableRange;
-                genericRange.generate(state, subject);
-            }
-            Set<List<Object>> output = new HashSet<>();
-            for (Object possibleValue : currentParameter.getElements()) {
-                Object[] newPermutation = new Object[permutation.length + 1];
-                System.arraycopy(permutation, 0, newPermutation, 0, permutation.length);
-                newPermutation[permutation.length] = possibleValue;
-                output.addAll(allPermutations(rule, discreteParameters, state, subject, newPermutation));
-            }
-            return output;
-        }
-        return new HashSet<>(0);
-    }
-
-    private Optional<Pair<Class<?>, IPlayerRule<?>>> getRuleByName(String name) {
-        return ruleset.getPlayerRules().getByName(name);
-
-    }
-
     private static void enforceInvariants(State state, RulesetDescription ruleset) {
         state.gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
     }
