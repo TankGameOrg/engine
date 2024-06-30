@@ -1,19 +1,42 @@
 package pro.trevor.tankgame;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
-import pro.trevor.tankgame.rule.impl.IApi;
+import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.util.ReflectionUtil;
+import pro.trevor.tankgame.util.RulesetType;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Optional;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Cli {
 
-    public static void repl(IApi api) {
+    private static final Map<String, IRuleset> RULESETS = new HashMap<>();
+
+    static {
+        List<Class<?>> rulesets = ReflectionUtil.allClassesAnnotatedWith(RulesetType.class, "pro.trevor.tankgame");
+        for (Class<?> ruleset : rulesets) {
+            Class<? extends IRuleset> rulesetClass = (Class<? extends IRuleset>) ruleset;
+            RulesetType rulesetType = ruleset.getAnnotation(RulesetType.class);
+            try {
+                RULESETS.put(rulesetType.name(), rulesetClass.getConstructor().newInstance());
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                throw new Error("Error constructing from JSON: no matching constructor found for class " +
+                        rulesetClass, e);
+            } catch (InstantiationException e) {
+                throw new Error("Error constructing from JSON: failed to instantiate class " + rulesetClass, e);
+            }
+        }
+    }
+
+    public static void repl(IRuleset ruleset) {
+        Api api = new Api(ruleset);
         PrintStream output = System.out;
         InputStream input = System.in;
         Scanner scanner = new Scanner(input);
@@ -41,13 +64,13 @@ public class Cli {
                         default -> output.println(response("unexpected command: " + command, true));
                     }
                 }
-                case "version" -> {
-                    String version = json.getString("version");
-                    Optional<IApi> newApi = ApiRegistry.getApi(version);
-                    if (newApi.isEmpty()) {
+                case "ruleset" -> {
+                    String version = json.getString("ruleset");
+                    IRuleset newRuleset = RULESETS.get(version);
+                    if (newRuleset == null) {
                         output.println(response("no such version: " + version, true));
                     } else {
-                        api = newApi.get();
+                        api = new Api(newRuleset);
                         output.println(response("switched to version: " + version, false));
                     }
                 }

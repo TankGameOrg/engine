@@ -1,13 +1,13 @@
-package pro.trevor.tankgame.rule.impl.version3;
+package pro.trevor.tankgame;
 
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
 import pro.trevor.tankgame.rule.definition.range.DiscreteTypeRange;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
-import pro.trevor.tankgame.rule.impl.IApi;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.type.IPlayerElement;
+import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Codec;
@@ -19,31 +19,24 @@ import java.util.*;
 import org.json.*;
 import pro.trevor.tankgame.util.Pair;
 
-public class ApiV3 implements IApi {
-    protected final RulesetDescription ruleset;
-    protected State state;
+public class Api {
+    private final RulesetDescription ruleset;
+    private State state;
 
-    protected static final String COUNCIL = "Council";
+    private static final String COUNCIL = "Council";
 
-    public ApiV3() {
-        this.ruleset = IRuleset.getRuleset(new Ruleset());
-    }
-
-    protected ApiV3(IRuleset ruleset) {
+    public Api(IRuleset ruleset) {
         this.ruleset = IRuleset.getRuleset(ruleset);
     }
 
-    @Override
     public State getState() {
         return state;
     }
 
-    @Override
     public void setState(State state) {
         this.state = state;
     }
 
-    @Override
     public JSONObject getRules() {
         JSONObject rules = new JSONObject();
         rules.put("type", "rules");
@@ -54,17 +47,16 @@ public class ApiV3 implements IApi {
         return rules;
     }
 
-    @Override
     public void ingestAction(JSONObject json) {
         if (!Attribute.RUNNING.fromOrElse(state, true)) {
             throw new Error("The game is over; no actions can be submitted");
         }
-
-        if (json.keySet().contains(JsonKeys.DAY)) {
+        else if (json.keySet().contains(JsonKeys.DAY)) {
             applyTick(state, ruleset);
         } else {
-            String action = json.getString(JsonKeys.ACTION);
             Object subject = json.get(JsonKeys.SUBJECT);
+            String action = json.getString(JsonKeys.ACTION);
+            long time = json.optLong(JsonKeys.TIME, 0);
 
             Optional<Pair<Class<?>, IPlayerRule<?>>> optionalRule = getRuleByName(action);
             if (optionalRule.isEmpty()) {
@@ -88,7 +80,11 @@ public class ApiV3 implements IApi {
             }
 
             try {
-                rule.apply(state, ruleClass.cast(subject), getArguments(rule, json));
+                if (rule instanceof TimedPlayerActionRule) {
+                    rule.apply(state, ruleClass.cast(subject), getArgumentsTimed(rule, json, time));
+                } else {
+                    rule.apply(state, ruleClass.cast(subject), getArguments(rule, json));
+                }
             } catch (ClassCastException e) {
                 throw new Error("Unable to cast given subject to class " + ruleClass.getSimpleName(), e);
             }
@@ -119,7 +115,7 @@ public class ApiV3 implements IApi {
         } else if (isPosition(string)) {
             return new Position(string);
         } else {
-            throw new Error("Subject string could is not a living tank's player nor position: " + string);
+            throw new Error("Subject string is not a living tank's player nor position: " + string);
         }
     }
 
@@ -139,7 +135,16 @@ public class ApiV3 implements IApi {
         return arguments;
     }
 
-    @Override
+    private Object[] getArgumentsTimed(IPlayerRule<?> rule, JSONObject json, long time) {
+        Object[] args = getArguments(rule, json);
+        Object[] out = new Object[args.length + 1];
+
+        System.arraycopy(args, 0, out, 0, args.length);
+        out[args.length - 1] = time;
+
+        return out;
+    }
+
     public JSONObject getPossibleActions(String player) {
         JSONObject actions = new JSONObject();
         actions.put("error", false);
@@ -232,7 +237,7 @@ public class ApiV3 implements IApi {
         return new HashSet<>(0);
     }
 
-    protected Optional<Pair<Class<?>, IPlayerRule<?>>> getRuleByName(String name) {
+    private Optional<Pair<Class<?>, IPlayerRule<?>>> getRuleByName(String name) {
         Optional<Pair<Class<?>, IPlayerRule<?>>> rule = ruleset.getPlayerRules().getByName(name);
         if (rule.isPresent()) {
             return rule;
@@ -242,64 +247,25 @@ public class ApiV3 implements IApi {
 
     }
 
-    protected <T extends IPlayerElement> IPlayerRule<T> getRule(Class<T> t, String name) {
-        List<IPlayerRule<T>> rules = ruleset.getPlayerRules().getExact(t);
-        if (rules.isEmpty()) {
-            throw new Error(String.format("No rule for `%s`", t.getSimpleName()));
-        }
-
-        List<IPlayerRule<T>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
-        if (namedRules.isEmpty()) {
-            throw new Error(String.format("No rule named `%s`", name));
-        }
-
-        return namedRules.getFirst();
-    }
-
-    protected <T extends IPlayerElement> IPlayerRule<T> getMetaRule(Class<T> t, String name) {
-        List<IPlayerRule<T>> rules = ruleset.getMetaPlayerRules().getExact(t);
-        if (rules.isEmpty()) {
-            throw new Error(String.format("No rule for `%s`", t.getSimpleName()));
-        }
-
-        List<IPlayerRule<T>> namedRules = rules.stream().filter(r -> r.name().equals(name)).toList();
-        if (namedRules.isEmpty()) {
-            throw new Error(String.format("No rule named `%s`", name));
-        }
-
-        return namedRules.getFirst();
-    }
-
-    protected Tank getTank(String player) {
-        return state.getBoard().gatherUnits(Tank.class).stream()
-                .filter(t -> t.getPlayer().getName().equals(player)).toList().getFirst();
-    }
-
-    protected static void enforceInvariants(State state, RulesetDescription ruleset) {
+    private static void enforceInvariants(State state, RulesetDescription ruleset) {
         state.getBoard().gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
         state.getMetaElements().forEach((x) -> ruleset.getMetaEnforcerRules().enforceRules(state, x));
     }
 
-    protected static void applyConditionals(State state, RulesetDescription ruleset) {
+    private static void applyConditionals(State state, RulesetDescription ruleset) {
         state.getBoard().gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
         state.getMetaElements().forEach((x) -> ruleset.getMetaConditionalRules().applyRules(state, x));
     }
 
-    protected static void applyTick(State state, RulesetDescription ruleset) {
+    private static void applyTick(State state, RulesetDescription ruleset) {
         state.getBoard().gatherAll().forEach((x) -> ruleset.getTickRules().applyRules(state, x));
         state.getMetaElements().forEach((x) -> ruleset.getMetaTickRules().applyRules(state, x));
     }
 
-    protected static class JsonKeys {
+    private static class JsonKeys {
         public static final String DAY = "day";
         public static final String SUBJECT = "subject";
         public static final String ACTION = "action";
-        public static final String POSITION = "position";
-        public static final String TARGET = "target";
-        public static final String HIT = "hit";
-        public static final String GOLD = "gold";
-        public static final String DONATION = "donation";
-        public static final String BOUNTY = "bounty";
         public static final String TIME = "timestamp";
     }
 }

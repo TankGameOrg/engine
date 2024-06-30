@@ -23,11 +23,13 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
 
 import static pro.trevor.tankgame.util.Util.toType;
 
+@RulesetType(name = "version4")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
     private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60);

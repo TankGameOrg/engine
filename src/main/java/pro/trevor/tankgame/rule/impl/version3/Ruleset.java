@@ -19,10 +19,12 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.RulesetType;
 
 import static pro.trevor.tankgame.rule.impl.shared.rule.TickRules.INCREMENT_DAY_ON_TICK;
 import static pro.trevor.tankgame.util.Util.*;
 
+@RulesetType(name = "version3")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
     @Override
