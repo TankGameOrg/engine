@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule.type;
 
-import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public interface IPlayerElement {
-    Player getPlayer();
+    PlayerRef getPlayerRef();
 }

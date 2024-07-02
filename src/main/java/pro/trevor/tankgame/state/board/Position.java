@@ -51,4 +51,14 @@ public record Position (int x, int y) implements IJsonObject {
         json.put("y", y);
         return json;
     }
+
+    public static boolean isPosition(String string) {
+        char c = string.charAt(0);
+        boolean canParseRemaining = false;
+        try {
+            Integer.parseInt(string.substring(1));
+            canParseRemaining = true;
+        } catch (Exception ignored) {}
+        return canParseRemaining && (c >= 'A' && c <= 'z');
+    }
 }

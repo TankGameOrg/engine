@@ -6,6 +6,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public class Attribute<E> {
 
@@ -18,8 +19,7 @@ public class Attribute<E> {
     public static final Attribute<Integer> RANGE = new Attribute<>("RANGE", Integer.class);
     public static final Attribute<Integer> BOUNTY = new Attribute<>("BOUNTY", Integer.class);
     public static final Attribute<Boolean> DEAD = new Attribute<>("DEAD", Boolean.class);
-    public static final Attribute<Player> PLAYER = new Attribute<>("PLAYER", Player.class);
-    public static final Attribute<Long> TIME_OF_LAST_ACTION = new Attribute<>("TIME_OF_LAST_ACTION", Long.class);
+    public static final Attribute<PlayerRef> PLAYER_REF = new Attribute<>("PLAYER_REF", PlayerRef.class);
 
     // Durability attributes
     public static final Attribute<Integer> DURABILITY = new Attribute<>("DURABILITY", Integer.class);
@@ -33,6 +33,7 @@ public class Attribute<E> {
     public static final Attribute<Integer> TICK = new Attribute<>("TICK", Integer.class);
     public static final Attribute<Boolean> RUNNING = new Attribute<>("RUNNING", Boolean.class);
     public static final Attribute<String> WINNER = new Attribute<>("WINNER", String.class);
+    public static final Attribute<Player> PLAYER = new Attribute<>("PLAYER", Player.class);
     public static final Attribute<AttributeList> PLAYERS = new Attribute<>("PLAYERS", AttributeList.class); // AttributeList<Player>
     public static final Attribute<Council> COUNCIL = new Attribute<>("COUNCIL", Council.class);
     public static final Attribute<Board> BOARD = new Attribute<>("BOARD", Board.class);
@@ -47,6 +48,7 @@ public class Attribute<E> {
 
     // Player attributes
     public static final Attribute<String> NAME = new Attribute<>("NAME", String.class);
+    public static final Attribute<Long> TIME_OF_LAST_ACTION = new Attribute<>("TIME_OF_LAST_ACTION", Long.class);
 
     private final String attributeName;
     private final Class<E> attributeClass;

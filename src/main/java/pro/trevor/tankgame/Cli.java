@@ -3,6 +3,7 @@ package pro.trevor.tankgame;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ReflectionUtil;
 import pro.trevor.tankgame.util.RulesetType;
 
@@ -64,8 +65,8 @@ public class Cli {
                         default -> output.println(response("unexpected command: " + command, true));
                     }
                 }
-                case "ruleset" -> {
-                    String version = json.getString("ruleset");
+                case "version" -> {
+                    String version = json.getString("version");
                     IRuleset newRuleset = RULESETS.get(version);
                     if (newRuleset == null) {
                         output.println(response("no such version: " + version, true));
@@ -94,7 +95,7 @@ public class Cli {
                 }
                 case "possible_actions" -> {
                     try {
-                        output.println(api.getPossibleActions(json.getString("player")));
+                        output.println(api.getPossibleActions(new PlayerRef(json.getString("player"))));
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();

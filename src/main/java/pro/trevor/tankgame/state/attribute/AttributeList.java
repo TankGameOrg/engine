@@ -33,7 +33,6 @@ public class AttributeList<T> implements Collection<T>, IJsonObject, IGatherable
                 // Assume we are working with a primitive or String
                 elements.add((T) fromJson);
             }
-
         }
     }
 

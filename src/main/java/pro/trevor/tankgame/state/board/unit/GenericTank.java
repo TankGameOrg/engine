@@ -8,6 +8,7 @@ import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.IElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.JsonType;
 
 import java.util.*;
@@ -26,8 +27,8 @@ public class GenericTank extends GenericElement implements ITickElement, IPlayer
     }
 
     @Override
-    public Player getPlayer() {
-        return Attribute.PLAYER.unsafeFrom(this);
+    public PlayerRef getPlayerRef() {
+        return Attribute.PLAYER_REF.unsafeFrom(this);
     }
 
     @Override

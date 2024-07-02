@@ -24,7 +24,7 @@ import pro.trevor.tankgame.util.RulesetType;
 import static pro.trevor.tankgame.rule.impl.shared.rule.TickRules.INCREMENT_DAY_ON_TICK;
 import static pro.trevor.tankgame.util.Util.*;
 
-@RulesetType(name = "version3")
+@RulesetType(name = "default-v3")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
     @Override

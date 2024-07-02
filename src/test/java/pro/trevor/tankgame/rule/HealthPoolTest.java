@@ -9,6 +9,7 @@ import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.attribute.AttributeList;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
@@ -50,7 +51,7 @@ public class HealthPoolTest {
     public void TankNotInHealthPool() {
         Tank tank = TankBuilder.buildV3Tank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
                 .with(Attribute.DEAD, false).finish();
-        State state = new State(new Board(2, 2), new Council());
+        State state = new State(new Board(2, 2), new Council(), new AttributeList<>());
         HealthPool hp = new HealthPool(new Position("B2"), 1);
         state.getBoard().putFloor(hp);
 

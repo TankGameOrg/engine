@@ -2,7 +2,7 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.version3.Ruleset;
+import pro.trevor.tankgame.rule.impl.version4.Ruleset;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
@@ -15,9 +15,9 @@ public class Main {
     public static void main(String[] args) {
         if (args.length == 1 && (args[0].equals("--debug") || args[0].equals("-d"))) {
             DEBUG = true;
-            // Demo version 3 rules with game logs
-            File initialFile = new File("example/initial.json");
-            File movesFile = new File("example/moves.json");
+            // Demo version 4 rules with game logs
+            File initialFile = new File("example/initial-v4.json");
+            File movesFile = new File("example/moves-v4.json");
             Api api = new Api(new Ruleset());
             try {
                 String initialString = Files.readString(initialFile.toPath());

@@ -24,6 +24,10 @@ public class Player extends AttributeObject implements IJsonObject {
         return Attribute.NAME.unsafeFrom(this);
     }
 
+    public PlayerRef toRef() {
+        return new PlayerRef(getName());
+    }
+
     @Override
     public int hashCode() {
         return getName().hashCode();

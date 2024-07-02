@@ -3,7 +3,6 @@ package pro.trevor.tankgame;
 import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
-import pro.trevor.tankgame.rule.definition.range.DiscreteTypeRange;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.IRuleset;
@@ -17,6 +16,7 @@ import pro.trevor.tankgame.state.meta.Council;
 import java.util.*;
 
 import org.json.*;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Pair;
 
 public class Api {
@@ -91,25 +91,15 @@ public class Api {
         applyConditionals(state, ruleset);
     }
 
-    private boolean isPosition(String string) {
-        char c = string.charAt(0);
-        boolean canParseRemaining = false;
-        try {
-            Integer.parseInt(string.substring(1));
-            canParseRemaining = true;
-        } catch (Exception ignored) {}
-        return canParseRemaining && (c >= 'A' && c <= 'z');
-    }
-
     private Object fromString(String string) {
         if (string.equals(COUNCIL)) {
             return state.getCouncil();
         }
         Optional<Tank> optionalTank = state.getBoard().gatherUnits(Tank.class).stream()
-                .filter(t -> t.getPlayer().getName().equals(string)).findFirst();
+                .filter(t -> t.getPlayerRef().getName().equals(string)).findFirst();
         if (optionalTank.isPresent()) {
             return optionalTank.get();
-        } else if (isPosition(string)) {
+        } else if (Position.isPosition(string)) {
             return new Position(string);
         } else {
             throw new Error("Subject string is not a living tank's player nor position: " + string);
@@ -136,13 +126,12 @@ public class Api {
         Object[] args = getArguments(rule, json);
         Object[] out = new Object[args.length + 1];
 
-        System.arraycopy(args, 0, out, 0, args.length);
-        out[args.length - 1] = time;
-
+        System.arraycopy(args, 0, out, 1, args.length);
+        out[0] = time;
         return out;
     }
 
-    public JSONObject getPossibleActions(String player) {
+    public JSONObject getPossibleActions(PlayerRef player) {
         JSONObject actions = new JSONObject();
         actions.put("error", false);
         actions.put("type", "possible_actions");
@@ -153,7 +142,7 @@ public class Api {
         Class<?> type;
         Object subject;
 
-        if (player.equals(COUNCIL)) {
+        if (player.getName().equals(COUNCIL) || state.getCouncil().isPlayerOnCouncil(player)) {
             type = Council.class;
             rules = ruleset.getPlayerRules().get(type);
             subject = state.getCouncil();
@@ -161,7 +150,7 @@ public class Api {
             type = Tank.class;
             rules = ruleset.getPlayerRules().get(type);
             Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()
-                    .filter((t) -> t.getPlayer().getName().equals(player))
+                    .filter((t) -> t.getPlayerRef().equals(player))
                     .findFirst();
             if (tank.isPresent()) {
                 subject = tank.get();

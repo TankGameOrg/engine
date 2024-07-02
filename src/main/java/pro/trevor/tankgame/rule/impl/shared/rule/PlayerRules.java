@@ -158,7 +158,7 @@ public class PlayerRules {
                     if (Attribute.DEAD.unsafeFrom(t)) {
                         Attribute.DEAD.to(t, false);
                         Attribute.DURABILITY.to(t, 1);
-                        s.getCouncil().getCouncillors().remove(t.getPlayer());
+                        s.getCouncil().getCouncillors().remove(t.getPlayerRef());
                     } else {
                         Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + 1);
                     }

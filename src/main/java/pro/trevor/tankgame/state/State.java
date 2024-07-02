@@ -8,6 +8,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.IGatherable;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
@@ -17,17 +18,12 @@ import java.util.*;
 @JsonType(name = "State")
 public class State extends AttributeObject implements IJsonObject, IGatherable {
 
-    public State(Board board, Council council) {
+    public State(Board board, Council council, AttributeList<Player> players) {
         Attribute.BOARD.to(this, board);
         Attribute.COUNCIL.to(this, council);
         Attribute.TICK.to(this, 0);
         Attribute.RUNNING.to(this, true);
         Attribute.WINNER.to(this, "");
-
-        AttributeList<Player> players = new AttributeList<>();
-        players.addAll(board.gatherUnits(GenericTank.class).stream().map(GenericTank::getPlayer).toList());
-        players.addAll(council.getCouncillors());
-        players.addAll(council.getSenators());
 
         Attribute.PLAYERS.to(this, players);
     }
@@ -48,13 +44,8 @@ public class State extends AttributeObject implements IJsonObject, IGatherable {
         return Attribute.PLAYERS.unsafeFrom(this);
     }
 
-    public Optional<Player> getPlayer(String name) {
-        for (Player player : getPlayers()) {
-            if (player.getName().equals(name)) {
-                return Optional.of(player);
-            }
-        }
-        return Optional.empty();
+    public Optional<Player> getPlayer(PlayerRef playerRef) {
+        return playerRef.toPlayer(this);
     }
 
     @Override

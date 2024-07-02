@@ -28,7 +28,7 @@ import java.util.function.Function;
 
 import static pro.trevor.tankgame.util.Util.toType;
 
-@RulesetType(name = "version4")
+@RulesetType(name = "default-v4")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
     private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60);

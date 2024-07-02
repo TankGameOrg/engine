@@ -38,7 +38,7 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
             if (subject instanceof IJsonObject subjectJson) {
                 error.put("subject", subjectJson.toJson());
             } else {
-                error.put("subject", subject.getPlayer());
+                error.put("subject", subject.getPlayerRef());
             }
 
             if (Main.DEBUG) {
