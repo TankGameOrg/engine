@@ -33,7 +33,6 @@ public class Attribute<E> {
     public static final Attribute<Integer> TICK = new Attribute<>("TICK", Integer.class);
     public static final Attribute<Boolean> RUNNING = new Attribute<>("RUNNING", Boolean.class);
     public static final Attribute<String> WINNER = new Attribute<>("WINNER", String.class);
-    public static final Attribute<Player> PLAYER = new Attribute<>("PLAYER", Player.class);
     public static final Attribute<AttributeList> PLAYERS = new Attribute<>("PLAYERS", AttributeList.class); // AttributeList<Player>
     public static final Attribute<Council> COUNCIL = new Attribute<>("COUNCIL", Council.class);
     public static final Attribute<Board> BOARD = new Attribute<>("BOARD", Board.class);
@@ -97,6 +96,10 @@ public class Attribute<E> {
 
     public String getName() {
         return attributeName;
+    }
+
+    public String getJsonName() {
+        return AttributeObject.toAttributeJsonKeyString(attributeName);
     }
 
     private enum WrapperClass {

@@ -2,6 +2,7 @@ package pro.trevor.tankgame.state.meta;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
@@ -37,7 +38,7 @@ public class PlayerRef implements IJsonObject {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("class", this.getClass().getName());
+        json.put("class", Codec.typeFromClass(getClass()));
         json.put("name", name);
         return json;
     }

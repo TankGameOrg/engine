@@ -12,6 +12,7 @@ import pro.trevor.tankgame.util.function.IVarTriConsumer;
 import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActionRule<T> {
@@ -35,7 +36,7 @@ public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActio
         long cooldown = cooldownFunction.apply(state);
         Player player = subject.getPlayerRef().toPlayer(state).get();
 
-        long elapsed = timeOfAction - Attribute.TIME_OF_LAST_ACTION.unsafeFrom(player);
+        long elapsed = timeOfAction - Attribute.TIME_OF_LAST_ACTION.fromOrElse(player, 0L);
         if (elapsed >= cooldown) {
             Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length);
             if (super.canApply(state, subject, appliedMeta)) {
@@ -80,8 +81,12 @@ public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActio
 
     @Override
     public boolean canApply(State state, T subject, Object... meta) {
+        Optional<Player> player = subject.getPlayerRef().toPlayer(state);
+        if (player.isEmpty()) {
+            throw new Error("No player found with name `" + subject.getPlayerRef().getName() + "`");
+        }
         long cooldown = cooldownFunction.apply(state);
-        long elapsed = (long) meta[0] - Attribute.TIME_OF_LAST_ACTION.unsafeFrom(subject.getPlayerRef().toPlayer(state).get());
+        long elapsed = (long) meta[0] - Attribute.TIME_OF_LAST_ACTION.fromOrElse(player.get(),0L);
         return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
     }
 

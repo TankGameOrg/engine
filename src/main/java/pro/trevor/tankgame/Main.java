@@ -2,7 +2,6 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.version4.Ruleset;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
@@ -13,12 +12,22 @@ public class Main {
     public static boolean DEBUG = false;
 
     public static void main(String[] args) {
-        if (args.length == 1 && (args[0].equals("--debug") || args[0].equals("-d"))) {
+        if (args.length == 2 && (args[0].equals("--debug") || args[0].equals("-d"))) {
+            File initialFile;
+            File movesFile;
+            Api api;
+            if (args[1].equals("default-v3")) {
+                // Debug the default-v3 ruleset
+                initialFile = new File("example/initial.json");
+                movesFile = new File("example/moves.json");
+                api = new Api(new pro.trevor.tankgame.rule.impl.version3.Ruleset());
+            } else {
+                // Default to debugging default-v4 ruleset
+                initialFile = new File("example/initial-v4.json");
+                movesFile = new File("example/moves-v4.json");
+                api = new Api(new pro.trevor.tankgame.rule.impl.version4.Ruleset());
+            }
             DEBUG = true;
-            // Demo version 4 rules with game logs
-            File initialFile = new File("example/initial-v4.json");
-            File movesFile = new File("example/moves-v4.json");
-            Api api = new Api(new Ruleset());
             try {
                 String initialString = Files.readString(initialFile.toPath());
                 String movesString = Files.readString(movesFile.toPath());
@@ -40,9 +49,10 @@ public class Main {
                 throwable.printStackTrace();
             }
         } else if (args.length == 0) {
-            Cli.repl(new Ruleset());
+            // REPL with the newest default ruleset
+            Cli.repl(new pro.trevor.tankgame.rule.impl.version4.Ruleset());
         } else {
-            System.err.println("Expected 0 or 1 arguments:\n    tankgame <-d|--debug>");
+            System.err.println("Expected 0 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4>");
         }
     }
 }

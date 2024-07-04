@@ -33,10 +33,8 @@ public class TankBuilder<T extends GenericTank> {
     public static TankBuilder<Tank> buildV3Tank() {
         JSONObject json = new JSONObject();
         json.put("class", "TankV3");
-        JSONObject attributes = new JSONObject();
-        attributes.put(Attribute.PLAYER_REF.getName(), new PlayerRef("test").toJson());
-        attributes.put(Attribute.POSITION.getName(), new Position("A1").toJson());
-        json.put("attributes", attributes);
+        json.put(Attribute.PLAYER_REF.getJsonName(), new PlayerRef("test").toJson());
+        json.put(Attribute.POSITION.getJsonName(), new Position("A1").toJson());
         return new TankBuilder<>(new Tank(json));
     }
 }
