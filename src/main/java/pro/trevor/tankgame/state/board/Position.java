@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
@@ -46,9 +47,19 @@ public record Position (int x, int y) implements IJsonObject {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("class", this.getClass().getName());
+        json.put("class", Codec.typeFromClass(getClass()));
         json.put("x", x);
         json.put("y", y);
         return json;
+    }
+
+    public static boolean isPosition(String string) {
+        char c = string.charAt(0);
+        boolean canParseRemaining = false;
+        try {
+            Integer.parseInt(string.substring(1));
+            canParseRemaining = true;
+        } catch (Exception ignored) {}
+        return canParseRemaining && (c >= 'A' && c <= 'z');
     }
 }

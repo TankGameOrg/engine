@@ -32,10 +32,11 @@ public class Codec {
         Class<?> objectClass = classFromType(className);
         try {
             return objectClass.getConstructor(JSONObject.class).newInstance(json);
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new Error("Error constructing from JSON: no matching constructor found for class " +
                     className, e);
+        } catch (InstantiationException e) {
+            throw new Error("Error constructing from JSON: failed to instantiate class " + className, e);
         }
     }
 

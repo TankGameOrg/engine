@@ -4,11 +4,16 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * A type that stores its attributes in a map. These attributes are accessible through Attribute objects.
+ * All subclasses of AttributeObject must implement a constructor <code>Subclass(JSONObject)</code>.
+ * The character `$` is used to prefix each attribute key in JSON. When extending this class, refrain from adding JSON
+ * keys that begin with a `$`.
+ */
 @JsonType(name = "AttributeObject")
 public class AttributeObject {
 
@@ -27,15 +32,27 @@ public class AttributeObject {
 
     public AttributeObject(JSONObject json) {
         this.attributes = new HashMap<>();
-        JSONObject attributesJsonObject = json.optJSONObject("attributes", new JSONObject());
-        for (String key : attributesJsonObject.keySet()) {
-            Object attribute = attributesJsonObject.get(key);
+        for (String jsonKey : json.keySet().stream().filter(AttributeObject::isAttributeJsonKey).toList()) {
+            Object attribute = json.get(jsonKey);
+            String key = toAttributeString(jsonKey);
             if (attribute instanceof JSONObject jsonAttribute) {
                 this.attributes.put(key, Codec.decodeJson(jsonAttribute));
             } else {
-                this.attributes.put(key, attributesJsonObject.get(key));
+                this.attributes.put(key, attribute);
             }
         }
+    }
+
+    static String toAttributeJsonKeyString(String attribute) {
+        return "$" + attribute;
+    }
+
+    static String toAttributeString(String attributeKey) {
+        return attributeKey.substring(1);
+    }
+
+    static boolean isAttributeJsonKey(String attribute) {
+        return attribute.startsWith("$");
     }
 
     public boolean has(String attribute) {
@@ -56,25 +73,22 @@ public class AttributeObject {
 
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-
-        JSONObject attributesJson = new JSONObject();
-
         for (String attribute : attributes.keySet()) {
             Object value = attributes.get(attribute);
+            String attributeKey = toAttributeJsonKeyString(attribute);
             switch (value) {
-                case Boolean v -> attributesJson.put(attribute, v);
-                case Integer v -> attributesJson.put(attribute, v);
-                case Long v -> attributesJson.put(attribute, v);
-                case Float v -> attributesJson.put(attribute, v);
-                case Double v -> attributesJson.put(attribute, v);
-                case String v -> attributesJson.put(attribute, v);
-                case IJsonObject jsonObject -> attributesJson.put(attribute, Codec.encodeJson(jsonObject));
+                case Boolean v -> output.put(attributeKey, v);
+                case Integer v -> output.put(attributeKey, v);
+                case Long v -> output.put(attributeKey, v);
+                case Float v -> output.put(attributeKey, v);
+                case Double v -> output.put(attributeKey, v);
+                case String v -> output.put(attributeKey, v);
+                case IJsonObject jsonObject -> output.put(attributeKey, Codec.encodeJson(jsonObject));
                 default ->
                         throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
             }
         }
 
-        output.put("attributes", attributesJson);
         output.put("class", Codec.typeFromClass(getClass()));
         return output;
     }

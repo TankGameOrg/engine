@@ -27,12 +27,10 @@ public class DestructibleFloorTest {
         assert durability >= 0;
         JSONObject json = new JSONObject();
 
-        JSONObject attributes = new JSONObject();
-        attributes.put(Attribute.DURABILITY.getName(), durability);
-        attributes.put(Attribute.MAX_DURABILITY.getName(), maxDurability);
-        attributes.put(Attribute.POSITION.getName(), p.toJson());
-        if (durability == 0) attributes.put(Attribute.DESTROYED.getName(), true);
-        json.put("attributes", attributes);
+        json.put(Attribute.DURABILITY.getJsonName(), durability);
+        json.put(Attribute.MAX_DURABILITY.getJsonName(), maxDurability);
+        json.put(Attribute.POSITION.getJsonName(), p.toJson());
+        if (durability == 0) json.put(Attribute.DESTROYED.getJsonName(), true);
 
         return new DestructibleFloor(json);
     }

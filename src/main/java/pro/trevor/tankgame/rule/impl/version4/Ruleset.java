@@ -21,13 +21,14 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
 
 import static pro.trevor.tankgame.util.Util.toType;
 
+@RulesetType(name = "default-v4")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
     private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60);
@@ -44,12 +45,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
         invariants.put(BasicWall.class, new MinimumEnforcer<>(BasicWall::getDurability, BasicWall::setDurability, 0));
-    }
 
-    @Override
-    public void registerMetaEnforcerRules(RulesetDescription ruleset) {
-        EnforcerRuleset invariants = ruleset.getMetaEnforcerRules();
-        invariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
+        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER::unsafeFrom, Attribute.COFFER::to, 0));
     }
 
     @Override
@@ -58,51 +55,38 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
         tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
-    }
 
-    @Override
-    public void registerMetaTickRules(RulesetDescription ruleset) {
-        ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
-
-        metaTickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
-        metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
-        metaTickRules.put(Council.class, TickRules.GetCouncilBaseIncomeRule(1, 3));
-        metaTickRules.put(ArmisticeCouncil.class, TickRules.ARMISTICE_VIA_COUNCIL);
-        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> c.setCanBounty(true)));
+        tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
+        tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
+        tickRules.put(Council.class, TickRules.GetCouncilBaseIncomeRule(1, 3));
+        tickRules.put(Council.class, TickRules.ARMISTICE_VIA_COUNCIL);
+        tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> Attribute.CAN_BOUNTY.to(c, true)));
     }
 
     @Override
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        // Player Actions
-        playerRules.put(Tank.class,
-                new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
+        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.SHOOT_V4, TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));
-        playerRules.put(Tank.class,
-                new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
-    }
+        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
 
-    @Override
-    public void registerMetaPlayerRules(RulesetDescription ruleset) {
-        PlayerRuleset metaPlayerRules = ruleset.getMetaPlayerRules();
-
-        metaPlayerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
-        metaPlayerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15));
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
+        playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
+        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15));
+        playerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && c.canBounty();
+                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true);
                 },
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
                     int bounty = toType(n[1], Integer.class);
-                    assert c.getCoffer() >= bounty;
+                    assert Attribute.COFFER.unsafeFrom(c) >= bounty;
                     t.setBounty(t.getBounty() + bounty);
-                    c.setCoffer(c.getCoffer() - bounty);
-                    c.setCanBounty(false);
+                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
+                    Attribute.CAN_BOUNTY.to(c, false);
                 },
                 UnitRange.ALL_LIVING_TANKS,
                 new DiscreteIntegerRange("bounty", 1, 5)));
@@ -113,12 +97,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
         conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
-    }
 
-    @Override
-    public void registerMetaConditionalRules(RulesetDescription ruleset) {
-        ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
-        metaConditionalRules.put(ArmisticeCouncil.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
-        metaConditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
+        conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
+        conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
 }

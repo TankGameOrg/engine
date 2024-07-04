@@ -123,7 +123,7 @@ public class PlayerRules {
 
                     Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - (donation + taxAmount));
                     Attribute.GOLD.to(other, Attribute.GOLD.unsafeFrom(other) + donation);
-                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + taxAmount);
+                    Attribute.COFFER.to(s.getCouncil(), Attribute.COFFER.unsafeFrom(s.getCouncil()) + taxAmount);
                 },
                 new DonateTankRange("target"),
                 new IntegerRange("donation"));
@@ -135,12 +135,12 @@ public class PlayerRules {
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
                     return !Attribute.DEAD.from(t).orElse(false) && Attribute.ACTION_POINTS.in(t)
-                            && c.getCoffer() >= cost;
+                            && Attribute.COFFER.unsafeFrom(s.getCouncil()) >= cost;
                 },
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
                     Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + 1);
-                    c.setCoffer(c.getCoffer() - cost);
+                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - cost);
                 },
                 UnitRange.ALL_LIVING_TANKS);
     }
@@ -150,15 +150,15 @@ public class PlayerRules {
                 PlayerRules.ActionKeys.GRANT_LIFE,
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
-                    return Attribute.DEAD.in(t) && Attribute.DURABILITY.in(t) && c.getCoffer() >= cost;
+                    return Attribute.DEAD.in(t) && Attribute.DURABILITY.in(t) && Attribute.COFFER.unsafeFrom(c) >= cost;
                 },
                 (s, c, n) -> {
-                    c.setCoffer(c.getCoffer() - cost);
+                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - cost);
                     GenericTank t = toType(n[0], GenericTank.class);
                     if (Attribute.DEAD.unsafeFrom(t)) {
                         Attribute.DEAD.to(t, false);
                         Attribute.DURABILITY.to(t, 1);
-                        s.getCouncil().getCouncillors().remove(t.getPlayer().getName());
+                        s.getCouncil().getCouncillors().remove(t.getPlayerRef());
                     } else {
                         Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + 1);
                     }
@@ -171,14 +171,12 @@ public class PlayerRules {
             ITriConsumer<State, T, IElement> handleHit) {
         return new PlayerActionRule<>(
                 PlayerRules.ActionKeys.SHOOT,
-                (s, t, n) -> {
-                    return s.getBoard().isValidPosition(toType(n[0], Position.class))
+                (s, t, n) -> s.getBoard().isValidPosition(toType(n[0], Position.class))
                             && !Attribute.DEAD.from(t).orElse(false)
                             && (Attribute.ACTION_POINTS.from(t).orElse(0) >= 1)
                             && (t.getPosition().distanceFrom(toType(n[0], Position.class)) <= Attribute.RANGE.from(t)
                                     .orElse(0))
-                            && lineOfSight.test(s, t.getPosition(), toType(n[0], Position.class));
-                },
+                            && lineOfSight.test(s, t.getPosition(), toType(n[0], Position.class)),
                 (s, t, n) -> {
                     Position target = toType(n[0], Position.class);
                     boolean hit = toType(n[1], Boolean.class);
@@ -245,7 +243,7 @@ public class PlayerRules {
                         // Tax is target tank gold * 0.25 rounded up
                         int tax = (Attribute.GOLD.unsafeFrom(dead) + 2) / 4;
                         tank.setGold(tank.getGold() + Attribute.GOLD.unsafeFrom(dead) - tax);
-                        s.getCouncil().setCoffer(s.getCouncil().getCoffer() + tax);
+                        Attribute.COFFER.to(s.getCouncil(), Attribute.COFFER.unsafeFrom(s.getCouncil()) + tax);
                     }
                 }
             });

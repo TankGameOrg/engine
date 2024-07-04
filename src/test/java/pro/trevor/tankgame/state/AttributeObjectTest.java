@@ -13,16 +13,14 @@ public class AttributeObjectTest {
         JSONObject json = new JSONObject(
 """
 {
-  "attributes": {
-    "NAME": "Test",
-    "POSITION": {
-      "x": 2,
-      "y": 2,
-      "class": "Position"
-    },
-    "ACTIONS": 0,
-    "DEAD": false,
+  "$NAME": "Test",
+  "$POSITION": {
+    "x": 2,
+    "y": 2,
+    "class": "Position"
   },
+  "$ACTIONS": 0,
+  "$DEAD": false,
   "class": "AttributeObject"
 }
 """);
