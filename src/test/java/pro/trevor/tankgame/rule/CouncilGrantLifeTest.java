@@ -17,8 +17,8 @@ import static pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules.GetRuleCoffe
 
 public class CouncilGrantLifeTest {
 
-    private static final PlayerActionRule<Council> ZERO_COST_RULE = GetRuleCofferCostGrantLife(0);
-    private static final PlayerActionRule<Council> ONE_COST_RULE = GetRuleCofferCostGrantLife(1);
+    private static final PlayerActionRule<Council> ZERO_COST_RULE = GetRuleCofferCostGrantLife(0, 0);
+    private static final PlayerActionRule<Council> ONE_COST_RULE = GetRuleCofferCostGrantLife(1, 0);
 
     @Test
     public void testGrantLifeToLivingTank() {

@@ -145,12 +145,13 @@ public class PlayerRules {
                 UnitRange.ALL_LIVING_TANKS);
     }
 
-    public static PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost) {
+    public static PlayerActionRule<Council> GetRuleCofferCostGrantLife(int cost, int minimumCouncillors) {
         return new PlayerActionRule<>(
                 PlayerRules.ActionKeys.GRANT_LIFE,
                 (s, c, n) -> {
                     GenericTank t = toType(n[0], GenericTank.class);
-                    return Attribute.DEAD.in(t) && Attribute.DURABILITY.in(t) && Attribute.COFFER.unsafeFrom(c) >= cost;
+                    return Attribute.DEAD.in(t) && Attribute.DURABILITY.in(t) && Attribute.COFFER.unsafeFrom(c) >= cost
+                            && c.allPlayersOnCouncil().size() >= minimumCouncillors;
                 },
                 (s, c, n) -> {
                     Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - cost);
@@ -164,6 +165,27 @@ public class PlayerRules {
                     }
                 },
                 UnitRange.ALL_TANKS);
+    }
+
+    public static PlayerActionRule<Council> GetRuleCofferCostBounty(int lowerBound, int upperBound) {
+        assert lowerBound >= 0 && upperBound >= lowerBound;
+        return new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
+                (s, c, n) -> {
+                    Tank t = toType(n[0], Tank.class);
+                    int bounty = toType(n[1], Integer.class);
+                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true) &&
+                            Attribute.COFFER.unsafeFrom(c) >= bounty;
+                },
+                (s, c, n) -> {
+                    Tank t = toType(n[0], Tank.class);
+                    int bounty = toType(n[1], Integer.class);
+                    assert Attribute.COFFER.unsafeFrom(c) >= bounty;
+                    t.setBounty(t.getBounty() + bounty);
+                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
+                    Attribute.CAN_BOUNTY.to(c, false);
+                },
+                UnitRange.ALL_LIVING_TANKS,
+                new DiscreteIntegerRange("bounty", lowerBound, upperBound));
     }
 
     public static <T extends GenericTank> PlayerActionRule<T> SpendActionToShootGeneric(
@@ -207,9 +229,6 @@ public class PlayerRules {
                     }
                 }
                 case BasicWall wall -> wall.setDurability(wall.getDurability() - 1);
-                case EmptyUnit emptyUnit -> {
-
-                }
                 case DestructibleFloor floor -> {
                     if (Attribute.DESTROYED.from(floor).orElse(false))
                         return;

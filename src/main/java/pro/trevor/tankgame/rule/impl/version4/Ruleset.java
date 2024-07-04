@@ -74,22 +74,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
 
         playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
-        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15));
-        playerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true);
-                },
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    int bounty = toType(n[1], Integer.class);
-                    assert Attribute.COFFER.unsafeFrom(c) >= bounty;
-                    t.setBounty(t.getBounty() + bounty);
-                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
-                    Attribute.CAN_BOUNTY.to(c, false);
-                },
-                UnitRange.ALL_LIVING_TANKS,
-                new DiscreteIntegerRange("bounty", 1, 5)));
+        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15, 3));
+        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostBounty(1, 5));
     }
 
     @Override
