@@ -52,7 +52,7 @@ public class PlayerRules {
         if (maxBuys <= 0)
             throw new Error("illegal max buys of " + maxBuys + ". Must be positive and non-zero.");
 
-        return new PlayerActionRule<T>(
+        return new PlayerActionRule<>(
                 ActionKeys.BUY_ACTION,
                 (s, tank, n) -> {
                     int attemptedGoldSpent = toType(n[0], Integer.class);
@@ -76,7 +76,7 @@ public class PlayerRules {
 
     public static <T extends GenericTank> PlayerActionRule<T> GetMoveRule(Attribute<Integer> attribute,
             Integer cost) {
-        return new PlayerActionRule<T>(
+        return new PlayerActionRule<>(
                 PlayerRules.ActionKeys.MOVE,
                 (s, t, n) -> !Attribute.DEAD.from(t).orElse(false) && attribute.from(t).orElse(0) >= cost
                         && canMoveTo(s, t.getPosition(), toType(n[0], Position.class)),
@@ -91,12 +91,10 @@ public class PlayerRules {
 
     public static <T extends GenericTank> PlayerActionRule<T> GetUpgradeRangeRule(Attribute<Integer> attribute,
             Integer cost) {
-        return new PlayerActionRule<T>(
+        return new PlayerActionRule<>(
                 PlayerRules.ActionKeys.UPGRADE_RANGE,
-                (s, tank, n) -> {
-                    return !Attribute.DEAD.from(tank).orElse(false) && (attribute.from(tank).orElse(0) >= cost)
-                            && (Attribute.RANGE.in(tank));
-                },
+                (s, tank, n) -> !Attribute.DEAD.from(tank).orElse(false) &&
+                        (attribute.from(tank).orElse(0) >= cost) && (Attribute.RANGE.in(tank)),
                 (s, tank, n) -> {
                     Attribute.RANGE.to(tank, Attribute.RANGE.unsafeFrom(tank) + 1);
                     attribute.to(tank, attribute.unsafeFrom(tank) - cost);
@@ -246,9 +244,7 @@ public class PlayerRules {
 
     public static final PlayerActionRule<Tank> SHOOT_V3 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV3,
-            (s, t, d) -> {
-                t.setGold(t.getGold() + Attribute.GOLD.unsafeFrom(d) + Attribute.BOUNTY.unsafeFrom(d));
-            });
+            (s, t, d) -> t.setGold(t.getGold() + Attribute.GOLD.unsafeFrom(d) + Attribute.BOUNTY.unsafeFrom(d)));
 
     public static final PlayerActionRule<Tank> SHOOT_V4 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV4,
