@@ -18,8 +18,8 @@ public class Main {
             Api api;
             if (args[1].equals("default-v3")) {
                 // Debug the default-v3 ruleset
-                initialFile = new File("example/initial.json");
-                movesFile = new File("example/moves.json");
+                initialFile = new File("example/initial-v3.json");
+                movesFile = new File("example/moves-v3.json");
                 api = new Api(new pro.trevor.tankgame.rule.impl.version3.Ruleset());
             } else {
                 // Default to debugging default-v4 ruleset

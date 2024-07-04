@@ -18,83 +18,67 @@
     "elements": [
       {
         "$NAME": "Corey",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Dan",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "David",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Stomp",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Trevor",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Xavion",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Charlie",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Beyer",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Ty",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Isaac",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Ryan",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Bryan",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Schmude",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "John",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Lena",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       },
       {
         "$NAME": "Mike",
-        "class": "Player",
-        "$TIME_OF_LAST_ACTION": 0
+        "class": "Player"
       }
     ],
     "class": "AttributeList"
