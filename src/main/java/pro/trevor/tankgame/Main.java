@@ -47,6 +47,7 @@ public class Main {
                 System.out.println(api.getState().toString());
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
+                System.exit(1);
             }
         } else if (args.length == 0) {
             // REPL with the newest default ruleset
