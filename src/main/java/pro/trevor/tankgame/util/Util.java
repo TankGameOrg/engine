@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.util;
 
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 public class Util {
 
@@ -58,14 +60,18 @@ public class Util {
         }
     }
 
-    public static Set<Position> getSpacesInRange(Position p, int range){
+    public static Set<Position> getSpacesInRange(Board board, Position p, int range){
         Set<Position> output = new HashSet<>();
         for (int i = 0; i <= range; ++i) {
             for (int j = 0; j <= range; ++j) {
-                output.add(new Position(p.x() + i, p.y() + j));
-                output.add(new Position(p.x() - i, p.y() - j));
-                output.add(new Position(p.x() - i, p.y() + j));
-                output.add(new Position(p.x() + i, p.y() - j));
+                Position p1 = new Position(p.x() + i, p.y() + j);
+                if(board.isValidPosition(p1)) output.add(p1);
+                Position p2 = new Position(p.x() - i, p.y() - j);
+                if(board.isValidPosition(p2)) output.add(p2);
+                Position p3 = new Position(p.x() - i, p.y() + j);
+                if(board.isValidPosition(p3)) output.add(p3);
+                Position p4 = new Position(p.x() + i, p.y() - j);
+                if(board.isValidPosition(p4)) output.add(p4);
             }
         }
         return output;
@@ -92,12 +98,23 @@ public class Util {
     }
 
     public static String toString(Collection<?> items) {
-        return toString(items, 2);
+        return toString(items, 0, Object::toString);
+    }
+
+    public static <T> String toString(Collection<T> items, Function<T, String> toStringFunction) {
+        return toString(items, 0, toStringFunction);
     }
 
     public static String toString(Collection<?> items, int indent) {
+        return toString(items, indent, Object::toString);
+    }
+
+    public static <T> String toString(Collection<T> items, int indent, Function<T, String> toStringFunction) {
         StringBuilder sb = new StringBuilder("[\n");
-        items.forEach((x) -> sb.repeat(' ', indent).append(x).append(",\n"));
+        items.forEach((x) -> sb.repeat(' ', indent).append(toStringFunction.apply(x)).append(",\n"));
+        if (!items.isEmpty()) {
+            sb.delete(sb.length() - 2, sb.length());
+        }
         return sb.append("]\n").toString();
     }
 

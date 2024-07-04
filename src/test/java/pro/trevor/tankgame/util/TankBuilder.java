@@ -6,6 +6,8 @@ import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public class TankBuilder<T extends GenericTank> {
     private final T tank;
@@ -30,11 +32,9 @@ public class TankBuilder<T extends GenericTank> {
 
     public static TankBuilder<Tank> buildV3Tank() {
         JSONObject json = new JSONObject();
-        JSONObject attributes = new JSONObject();
-        json.put("name", "test");
-        json.put("position", "A1");
-        json.put("type", "tank");
-        json.put("attributes", attributes);
+        json.put("class", "TankV3");
+        json.put(Attribute.PLAYER_REF.getJsonName(), new PlayerRef("test").toJson());
+        json.put(Attribute.POSITION.getJsonName(), new Position("A1").toJson());
         return new TankBuilder<>(new Tank(json));
     }
 }

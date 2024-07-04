@@ -1,0 +1,2683 @@
+{
+  "$COUNCIL": {
+    "$SENATORS": {
+      "elements": [],
+      "class": "AttributeList"
+    },
+    "$COFFER": 0,
+    "$ARMISTICE_MAX": 35,
+    "$COUNCILLORS": {
+      "elements": [],
+      "class": "AttributeList"
+    },
+    "class": "Council",
+    "$ARMISTICE_COUNT": 0
+  },
+  "$TICK": 0,
+  "$PLAYERS": {
+    "elements": [
+      {
+        "$NAME": "Corey",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Dan",
+        "class": "Player"
+      },
+      {
+        "$NAME": "David",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Stomp",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Trevor",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Xavion",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Charlie",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Beyer",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Ty",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Isaac",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Ryan",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Bryan",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Schmude",
+        "class": "Player"
+      },
+      {
+        "$NAME": "John",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Lena",
+        "class": "Player"
+      },
+      {
+        "$NAME": "Mike",
+        "class": "Player"
+      }
+    ],
+    "class": "AttributeList"
+  },
+  "$BOARD": {
+    "unit_board": [
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 4,
+            "y": 0,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Corey",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 5,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 7,
+            "y": 0,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Dan",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 0,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 1,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 2,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 2,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 2,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 2,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 2,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 1,
+          "class": "Wall"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 4,
+            "y": 3,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "David",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 7,
+            "y": 3,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 1,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 3,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 0,
+            "y": 4,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 3,
+            "y": 4,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 4,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 4,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 4,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 8,
+            "y": 4,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Charlie",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 11,
+            "y": 4,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 5,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 5,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 5,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 6,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 6,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 6,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        }
+      ],
+      [
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 0,
+            "y": 7,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Ty",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 3,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 3,
+            "y": 7,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 7,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 7,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 11,
+            "y": 7,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 1,
+          "class": "Wall"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 4,
+            "y": 8,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "John",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 1,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 8,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 9,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 9,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 9,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 9,
+            "class": "Position"
+          },
+          "$DURABILITY": 2,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 9,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 9,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 4,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 10,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 4,
+            "y": 11,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Lena",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "EmptyUnit"
+        },
+        {
+          "$DEAD": false,
+          "$POSITION": {
+            "x": 7,
+            "y": 11,
+            "class": "Position"
+          },
+          "$GOLD": 0,
+          "$RANGE": 2,
+          "$PLAYER_REF": {
+            "name": "Mike",
+            "class": "PlayerRef"
+          },
+          "$DURABILITY": 3,
+          "class": "TankV3",
+          "$BOUNTY": 0,
+          "$ACTIONS": 0
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 11,
+            "class": "Position"
+          },
+          "$DURABILITY": 6,
+          "class": "Wall"
+        }
+      ]
+    ],
+    "floor_board": [
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 0,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 1,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "GoldMine"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "GoldMine"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 2,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 3,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 4,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 5,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 6,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 7,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 8,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "GoldMine"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "GoldMine"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 9,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 10,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ],
+      [
+        {
+          "$POSITION": {
+            "x": 0,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 1,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 2,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 3,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 4,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 5,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 6,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 7,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 8,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 9,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 10,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        },
+        {
+          "$POSITION": {
+            "x": 11,
+            "y": 11,
+            "class": "Position"
+          },
+          "class": "WalkableFloor"
+        }
+      ]
+    ],
+    "class": "Board"
+  },
+  "class": "State",
+  "$RUNNING": true
+}

@@ -2,7 +2,6 @@ name: Unit tests
 
 on:
   pull_request:
-    types: [opened, reopened]
 
 jobs:
   build:
@@ -15,5 +14,10 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
           distribution: 'temurin'
+      - run: mvn package
       - name: Build and run unit tests
         run: mvn verify
+      - name: Run debug mode for default-v3
+        run: java -jar target/TankGame-*.jar --debug default-v3
+      - name: Run debug mode for default-v4
+        run: java -jar target/TankGame-*.jar --debug default-v4

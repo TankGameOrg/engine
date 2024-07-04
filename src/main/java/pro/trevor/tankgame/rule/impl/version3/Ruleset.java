@@ -19,9 +19,12 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.RulesetType;
 
+import static pro.trevor.tankgame.rule.impl.shared.rule.TickRules.INCREMENT_DAY_ON_TICK;
 import static pro.trevor.tankgame.util.Util.*;
 
+@RulesetType(name = "default-v3")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
     @Override
@@ -36,12 +39,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
         invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
         invariants.put(BasicWall.class, new MinimumEnforcer<>(BasicWall::getDurability, BasicWall::setDurability, 0));
-    }
 
-    @Override
-    public void registerMetaEnforcerRules(RulesetDescription ruleset) {
-        EnforcerRuleset invariants = ruleset.getMetaEnforcerRules();
-        invariants.put(Council.class, new MinimumEnforcer<>(Council::getCoffer, Council::setCoffer, 0));
+        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER::unsafeFrom, Attribute.COFFER::to, 0));
     }
 
     @Override
@@ -50,17 +49,9 @@ public class Ruleset extends BaseRuleset implements IRuleset {
 
         tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
-    }
-
-    @Override
-    public void registerMetaTickRules(RulesetDescription ruleset) {
-        ApplicableRuleset metaTickRules = ruleset.getMetaTickRules();
-
-        metaTickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
-        metaTickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> {
-            c.setCanBounty(true);
-            s.setTick(s.getTick() + 1);
-        }));
+        tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
+        tickRules.put(Board.class, INCREMENT_DAY_ON_TICK);
+        tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> Attribute.CAN_BOUNTY.to(c, true)));
     }
 
     @Override
@@ -68,13 +59,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
         conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
-    }
-
-    @Override
-    public void registerMetaConditionalRules(RulesetDescription ruleset) {
-        ApplicableRuleset metaConditionalRules = ruleset.getMetaConditionalRules();
-
-        metaConditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
+        conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
 
     @Override
@@ -85,26 +70,21 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
         playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
         playerRules.put(Tank.class, PlayerRules.SHOOT_V3);
-    }
 
-    @Override
-    public void registerMetaPlayerRules(RulesetDescription ruleset) {
-        PlayerRuleset metaPlayerRules = ruleset.getMetaPlayerRules();
-
-        metaPlayerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
-        metaPlayerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15));
-        metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
+        playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
+        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15));
+        playerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && c.canBounty();
+                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true);
                 },
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
                     int bounty = toType(n[1], Integer.class);
-                    assert c.getCoffer() >= bounty;
+                    assert Attribute.COFFER.unsafeFrom(c) >= bounty;
                     t.setBounty(t.getBounty() + bounty);
-                    c.setCoffer(c.getCoffer() - bounty);
-                    c.setCanBounty(false);
+                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
+                    Attribute.CAN_BOUNTY.to(c, false);
                 },
                 UnitRange.ALL_LIVING_TANKS,
                 new DiscreteIntegerRange("bounty", 1, 5)));

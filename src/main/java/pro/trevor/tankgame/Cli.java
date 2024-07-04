@@ -1,18 +1,43 @@
 package pro.trevor.tankgame;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.util.ApiRegistry;
-import pro.trevor.tankgame.rule.impl.IApi;
+import pro.trevor.tankgame.rule.impl.IRuleset;
+import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.ReflectionUtil;
+import pro.trevor.tankgame.util.RulesetType;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Optional;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Cli {
 
-    public static void repl(IApi api) {
+    private static final Map<String, IRuleset> RULESETS = new HashMap<>();
+
+    static {
+        List<Class<?>> rulesets = ReflectionUtil.allClassesAnnotatedWith(RulesetType.class, "pro.trevor.tankgame");
+        for (Class<?> ruleset : rulesets) {
+            Class<? extends IRuleset> rulesetClass = (Class<? extends IRuleset>) ruleset;
+            RulesetType rulesetType = ruleset.getAnnotation(RulesetType.class);
+            try {
+                RULESETS.put(rulesetType.name(), rulesetClass.getConstructor().newInstance());
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                throw new Error("Error constructing IRuleset: no matching constructor found for class " +
+                        rulesetClass, e);
+            } catch (InstantiationException e) {
+                throw new Error("Error constructing IRuleset: failed to instantiate class " + rulesetClass, e);
+            }
+        }
+    }
+
+    public static void repl(IRuleset ruleset) {
+        Api api = new Api(ruleset);
         PrintStream output = System.out;
         InputStream input = System.in;
         Scanner scanner = new Scanner(input);
@@ -32,7 +57,7 @@ public class Cli {
                     String command = json.getString("command");
                     switch (command) {
                         case "rules" -> output.println(api.getRules().toString());
-                        case "display" -> output.println(api.getStateJson().toString());
+                        case "display" -> output.println(api.getState().toJson().toString());
                         case "exit" -> {
                             output.println(response("exiting", false));
                             exit = true;
@@ -42,17 +67,17 @@ public class Cli {
                 }
                 case "version" -> {
                     String version = json.getString("version");
-                    Optional<IApi> newApi = ApiRegistry.getApi(version);
-                    if (newApi.isEmpty()) {
+                    IRuleset newRuleset = RULESETS.get(version);
+                    if (newRuleset == null) {
                         output.println(response("no such version: " + version, true));
                     } else {
-                        api = newApi.get();
+                        api = new Api(newRuleset);
                         output.println(response("switched to version: " + version, false));
                     }
                 }
                 case "state" -> {
                     try {
-                        api.ingestState(json);
+                        api.setState(new State(json));
                         output.println(response("state successfully ingested", false));
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
@@ -70,7 +95,7 @@ public class Cli {
                 }
                 case "possible_actions" -> {
                     try {
-                        output.println(api.getPossibleActions(json.getString("player")));
+                        output.println(api.getPossibleActions(new PlayerRef(json.getString("player"))));
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();
@@ -82,7 +107,7 @@ public class Cli {
         }
     }
 
-    public static JSONObject getJsonObject(Scanner input) {
+    private static JSONObject getJsonObject(Scanner input) {
         Pattern oldPattern = input.delimiter();
         StringBuilder sb = new StringBuilder();
         input.useDelimiter("");
