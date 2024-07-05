@@ -11,6 +11,7 @@ import pro.trevor.tankgame.rule.definition.range.UnitRange;
 import pro.trevor.tankgame.rule.definition.range.BooleanRange;
 import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
+import pro.trevor.tankgame.rule.definition.range.FilteredTypeRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
@@ -44,13 +45,18 @@ public class PlayerRules {
                 t.setActions(t.getActions() + n5 * 2 + n3);
                 t.setGold(t.getGold() - gold);
             },
-            new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 5, 8, 10))));
+            new FilteredTypeRange<GenericTank, Integer>(
+                new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 5, 8, 10))),
+                (state, tank, cost) -> Attribute.GOLD.from(tank).orElse(0) >= cost));
 
     public static <T extends GenericTank> PlayerActionRule<T> BuyActionWithGold(int actionCost, int maxBuys) {
         if (actionCost <= 0)
             throw new Error("Illegal Action Cost of " + actionCost + " gold. Must be positive and non-zero.");
         if (maxBuys <= 0)
             throw new Error("illegal max buys of " + maxBuys + ". Must be positive and non-zero.");
+
+        DiscreteIntegerRange goldCostRange = new DiscreteIntegerRange("gold", IntStream.rangeClosed(1, maxBuys).map(n -> n * actionCost).boxed()
+            .collect(Collectors.toSet()));
 
         return new PlayerActionRule<T>(
                 ActionKeys.BUY_ACTION,
@@ -70,8 +76,7 @@ public class PlayerRules {
                     Attribute.ACTION_POINTS.to(tank, Attribute.ACTION_POINTS.unsafeFrom(tank) + boughtActions);
                     Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - goldSpent);
                 },
-                new DiscreteIntegerRange("gold", IntStream.rangeClosed(1, maxBuys).map(n -> n * actionCost).boxed()
-                        .collect(Collectors.toSet())));
+                new FilteredTypeRange<GenericTank, Integer>(goldCostRange, (state, tank, cost) -> Attribute.GOLD.from(tank).orElse(0) >= cost));
     }
 
     public static <T extends GenericTank> PlayerActionRule<T> GetMoveRule(Attribute<Integer> attribute,
