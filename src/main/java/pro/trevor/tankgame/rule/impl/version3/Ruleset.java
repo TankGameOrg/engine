@@ -18,6 +18,7 @@ import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
@@ -65,28 +66,14 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
-        playerRules.put(Tank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
+        playerRules.put(GenericTank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
         playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 8));
         playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
         playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
-        playerRules.put(Tank.class, PlayerRules.SHOOT_V3);
+        playerRules.put(GenericTank.class, PlayerRules.SHOOT_V3);
 
         playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
-        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15));
-        playerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true);
-                },
-                (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
-                    int bounty = toType(n[1], Integer.class);
-                    assert Attribute.COFFER.unsafeFrom(c) >= bounty;
-                    t.setBounty(t.getBounty() + bounty);
-                    Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
-                    Attribute.CAN_BOUNTY.to(c, false);
-                },
-                UnitRange.ALL_LIVING_TANKS,
-                new DiscreteIntegerRange("bounty", 1, 5)));
+        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15, 3));
+        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostBounty(1, 5));
     }
 }

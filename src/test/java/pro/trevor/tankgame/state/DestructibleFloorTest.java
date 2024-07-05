@@ -17,6 +17,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestUtilities;
 
@@ -86,7 +87,7 @@ public class DestructibleFloorTest {
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 3, 3);
         s.getBoard().putFloor(floor);
 
-        PlayerActionRule<Tank> shootRule = PlayerRules.SHOOT_V4;
+        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V4;
         boolean canShoot = shootRule.canApply(s, t, new Position("B1"), true);
         shootRule.apply(s, t, new Position("B1"), true);
 
@@ -103,7 +104,7 @@ public class DestructibleFloorTest {
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
         s.getBoard().putFloor(floor);
 
-        PlayerActionRule<Tank> shootRule = PlayerRules.SHOOT_V4;
+        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V4;
         boolean canShoot = shootRule.canApply(s, t, new Position("B1"), true);
         shootRule.apply(s, t, new Position("B1"), true);
 
@@ -119,7 +120,7 @@ public class DestructibleFloorTest {
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
         s.getBoard().putFloor(floor);
-        PlayerActionRule<Tank> shootRule = PlayerRules.SHOOT_V4;
+        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V4;
         PlayerActionRule<Tank> moveRule = PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1);
 
         // Move onto destructible floor, then move past it
@@ -148,7 +149,7 @@ public class DestructibleFloorTest {
         DestructibleFloor floor = GetTestFloor(new Position("B1"), initialFloorDurability, 3);
         s.getBoard().putFloor(floor);
 
-        PlayerActionRule<Tank> shootRule = PlayerRules.SHOOT_V4;
+        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V4;
         ConditionalRule<Tank> dieOrDestroyRule = ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule();
         shootRule.apply(s, t, new Position("B1"), true);
         dieOrDestroyRule.apply(s, t);
@@ -171,7 +172,7 @@ public class DestructibleFloorTest {
         DestructibleFloor floor = GetTestFloor(new Position("B1"), initialFloorDurability, 3);
         s.getBoard().putFloor(floor);
         
-        PlayerActionRule<Tank> shootRule = PlayerRules.SHOOT_V4;
+        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V4;
         ConditionalRule<BasicWall> destroyWallRule = ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY;
         PlayerActionRule<Tank> moveRule = PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1);
         

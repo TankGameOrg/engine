@@ -13,6 +13,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
 import pro.trevor.tankgame.state.board.floor.IFloor;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestUtilities;
@@ -56,7 +57,7 @@ public class UnwalkableFloorTest {
         IFloor floor = new UnwalkableFloor(new Position("B2"));
         s.getBoard().putFloor(floor);
 
-        PlayerActionRule<Tank> shootRule = PlayerRules.SHOOT_V3;
+        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V3;
 
         assertTrue(LineOfSight.hasLineOfSightV3(s, t.getPosition(), floor.getPosition()));
 
