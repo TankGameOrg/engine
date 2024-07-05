@@ -31,9 +31,9 @@ import pro.trevor.tankgame.util.function.ITriPredicate;
 import static pro.trevor.tankgame.util.Util.*;
 
 public class PlayerRules {
-    public static final PlayerActionRule<Tank> BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerActionRule<>(
+    public static final PlayerActionRule<GenericTank> BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerActionRule<>(
             PlayerRules.ActionKeys.BUY_ACTION,
-            (s, t, n) -> !t.isDead() && t.getGold() >= 3,
+            (s, t, n) -> !Attribute.DEAD.fromOrElse(t, false) && Attribute.GOLD.fromOrElse(t, 0) >= 3,
             (s, t, n) -> {
                 int gold = toType(n[0], Integer.class);
                 int n5 = gold / 5;
@@ -41,8 +41,8 @@ public class PlayerRules {
                 int n3 = rem / 3;
                 assert rem == n3 * 3;
 
-                t.setActions(t.getActions() + n5 * 2 + n3);
-                t.setGold(t.getGold() - gold);
+                Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.fromOrElse(t, 0) + n5 * 2 + n3);
+                Attribute.GOLD.to(t, Attribute.GOLD.unsafeFrom(t) - gold);
             },
             new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 5, 8, 10))));
 
@@ -169,16 +169,16 @@ public class PlayerRules {
         assert lowerBound >= 0 && upperBound >= lowerBound;
         return new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
+                    GenericTank t = toType(n[0], Tank.class);
                     int bounty = toType(n[1], Integer.class);
-                    return !t.isDead() && Attribute.CAN_BOUNTY.fromOrElse(c, true) &&
+                    return !Attribute.DEAD.fromOrElse(t, false) && Attribute.CAN_BOUNTY.fromOrElse(c, true) &&
                             Attribute.COFFER.unsafeFrom(c) >= bounty;
                 },
                 (s, c, n) -> {
-                    Tank t = toType(n[0], Tank.class);
+                    GenericTank t = toType(n[0], Tank.class);
                     int bounty = toType(n[1], Integer.class);
                     assert Attribute.COFFER.unsafeFrom(c) >= bounty;
-                    t.setBounty(t.getBounty() + bounty);
+                    Attribute.BOUNTY.to(t, Attribute.BOUNTY.fromOrElse(t, 0) + bounty);
                     Attribute.COFFER.to(c, Attribute.COFFER.unsafeFrom(c) - bounty);
                     Attribute.CAN_BOUNTY.to(c, false);
                 },
@@ -242,22 +242,22 @@ public class PlayerRules {
         });
     }
 
-    public static final PlayerActionRule<Tank> SHOOT_V3 = SpendActionToShootWithDeathHandle(
+    public static final PlayerActionRule<GenericTank> SHOOT_V3 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV3,
-            (s, t, d) -> t.setGold(t.getGold() + Attribute.GOLD.unsafeFrom(d) + Attribute.BOUNTY.unsafeFrom(d)));
+            (s, t, d) -> Attribute.GOLD.to(t, Attribute.GOLD.fromOrElse(t, 0) + Attribute.GOLD.unsafeFrom(d) + Attribute.BOUNTY.unsafeFrom(d)));
 
-    public static final PlayerActionRule<Tank> SHOOT_V4 = SpendActionToShootWithDeathHandle(
+    public static final PlayerActionRule<GenericTank> SHOOT_V4 = SpendActionToShootWithDeathHandle(
             LineOfSight::hasLineOfSightV4,
             (s, tank, dead) -> {
-                tank.setGold(tank.getGold() + Attribute.BOUNTY.unsafeFrom(dead));
+                Attribute.GOLD.to(tank, Attribute.GOLD.fromOrElse(tank, 0) + Attribute.BOUNTY.unsafeFrom(dead));
                 switch (Attribute.GOLD.unsafeFrom(dead)) {
                     case 0 -> {
                     }
-                    case 1 -> tank.setGold(tank.getGold() + 1);
+                    case 1 -> Attribute.GOLD.to(tank, Attribute.GOLD.fromOrElse(tank, 0) + 1);
                     default -> {
                         // Tax is target tank gold * 0.25 rounded up
                         int tax = (Attribute.GOLD.unsafeFrom(dead) + 2) / 4;
-                        tank.setGold(tank.getGold() + Attribute.GOLD.unsafeFrom(dead) - tax);
+                        Attribute.GOLD.to(tank, Attribute.GOLD.fromOrElse(tank, 0) + Attribute.GOLD.unsafeFrom(dead) - tax);
                         Attribute.COFFER.to(s.getCouncil(), Attribute.COFFER.unsafeFrom(s.getCouncil()) + tax);
                     }
                 }
