@@ -1,0 +1,81 @@
+package pro.trevor.tankgame.rule;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
+import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
+import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.util.TankBuilder;
+import pro.trevor.tankgame.util.TestState;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class CouncilBountyTest {
+
+    private static final PlayerActionRule<Council> BASIC_BOUNTY_RULE = PlayerRules.GetRuleCofferCostBounty(1, 1);
+
+    @Test
+    public void testGrantBountyToLivingTank() {
+        Tank tank = TankBuilder.buildV3Tank()
+                .with(Attribute.BOUNTY, 0)
+                .with(Attribute.DEAD, false)
+                .finish();
+        State state = new TestState();
+        Attribute.COFFER.to(state.getCouncil(), 1);
+
+        BASIC_BOUNTY_RULE.apply(state, state.getCouncil(), tank, 1);
+        assertEquals(1, tank.getBounty());
+    }
+
+    @Test
+    public void testGrantBountyToDeadTank() {
+        Tank tank = TankBuilder.buildV3Tank()
+                .with(Attribute.BOUNTY, 0)
+                .with(Attribute.DEAD, true)
+                .finish();
+        State state = new TestState();
+        Attribute.COFFER.to(state.getCouncil(), 1);
+
+        assertThrows(Error.class, () -> BASIC_BOUNTY_RULE.apply(state, state.getCouncil(), tank, 1));
+        assertEquals(0, tank.getBounty());
+    }
+
+    @Test
+    public void testSubtractGoldFromCoffer() {
+        Tank tank = TankBuilder.buildV3Tank()
+                .with(Attribute.DURABILITY, 1)
+                .with(Attribute.BOUNTY, 0)
+                .finish();
+        State state = new TestState();
+        Attribute.COFFER.to(state.getCouncil(), 1);
+
+        BASIC_BOUNTY_RULE.apply(state, state.getCouncil(), tank, 1);
+        assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
+    }
+
+    @Test
+    public void testBountiesAreAdditive() {
+        Tank tank = TankBuilder.buildV3Tank()
+                .with(Attribute.BOUNTY, 3)
+                .finish();
+        State state = new TestState();
+        Attribute.COFFER.to(state.getCouncil(), 1);
+
+        BASIC_BOUNTY_RULE.apply(state, state.getCouncil(), tank, 1);
+        assertEquals(4, Attribute.BOUNTY.unsafeFrom(tank));
+    }
+
+    @Test
+    public void testErrorOnInsufficientGoldInCoffer() {
+        Tank tank = TankBuilder.buildV3Tank()
+                .with(Attribute.BOUNTY, 0)
+                .finish();
+        State state = new TestState();
+
+        assertThrows(Error.class, () -> BASIC_BOUNTY_RULE.apply(state, state.getCouncil(), tank, 1));
+    }
+}
