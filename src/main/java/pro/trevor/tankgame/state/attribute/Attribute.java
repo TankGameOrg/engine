@@ -5,7 +5,6 @@ import java.util.Optional;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public class Attribute<E> {
@@ -79,7 +78,7 @@ public class Attribute<E> {
                     + ". This generic element has no such attribute");
         return getObject(e);
     }
-        
+
     public void to(AttributeObject e, E o) {
         e.set(attributeName, o);
     }

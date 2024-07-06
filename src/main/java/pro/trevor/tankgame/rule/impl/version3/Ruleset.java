@@ -6,10 +6,7 @@ import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
 import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
-import pro.trevor.tankgame.rule.definition.range.UnitRange;
-import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.impl.util.BaseRuleset;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
@@ -23,7 +20,6 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
 import static pro.trevor.tankgame.rule.impl.shared.rule.TickRules.INCREMENT_DAY_ON_TICK;
-import static pro.trevor.tankgame.util.Util.*;
 
 @RulesetType(name = "default-v3")
 public class Ruleset extends BaseRuleset implements IRuleset {
@@ -32,16 +28,16 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
 
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getDurability, Tank::setDurability, 0));
-        invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getDurability, Tank::setDurability, 3));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getRange, Tank::setRange, 0));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getGold, Tank::setGold, 0));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
-        invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
-        invariants.put(BasicWall.class, new MinimumEnforcer<>(BasicWall::getDurability, BasicWall::setDurability, 0));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
+        invariants.put(Tank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
+        invariants.put(Tank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
+        invariants.put(BasicWall.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
 
-        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER::unsafeFrom, Attribute.COFFER::to, 0));
+        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER, 0));
     }
 
     @Override
