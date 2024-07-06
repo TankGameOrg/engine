@@ -28,13 +28,13 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
 
-        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
-        invariants.put(Tank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
-        invariants.put(Tank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
+        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
+        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
         invariants.put(BasicWall.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
 
         invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER, 0));
@@ -44,8 +44,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerTickRules(RulesetDescription ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
-        tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
+        tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
         tickRules.put(Board.class, INCREMENT_DAY_ON_TICK);
         tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> Attribute.CAN_BOUNTY.to(c, true)));
@@ -54,7 +54,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerConditionalRules(RulesetDescription ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
+        conditionalRules.put(GenericTank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
         conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
@@ -63,9 +63,9 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerPlayerRules(RulesetDescription ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.put(GenericTank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
-        playerRules.put(Tank.class, PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 8));
-        playerRules.put(Tank.class, PlayerRules.GetShareGoldWithTaxRule(1));
-        playerRules.put(Tank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
+        playerRules.put(GenericTank.class, PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 8));
+        playerRules.put(GenericTank.class, PlayerRules.GetShareGoldWithTaxRule(1));
+        playerRules.put(GenericTank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
         playerRules.put(GenericTank.class, PlayerRules.SHOOT_V3);
 
         playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
