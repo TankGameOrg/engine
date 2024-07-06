@@ -9,40 +9,40 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 public class ShareGoldWithTaxRuleTest {
 
     @Test
     public void DeadTankCannotDonateGold() {
-        Tank sender = TankBuilder.buildV3Tank().with(Attribute.GOLD, 3)
+        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, 3)
                 .with(Attribute.DEAD, true).finish();
-        Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
+        GenericTank reciever = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
         assertFalse(rule.canApply(new TestState(), sender, reciever, 3 /* donationAmount */));
     }
 
     @Test
     public void NoGoldCannotDonate() {
-        Tank sender = TankBuilder.buildV3Tank().finish();
-        Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
+        GenericTank sender = TankBuilder.buildTank().finish();
+        GenericTank reciever = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
         assertFalse(rule.canApply(new TestState(), sender, reciever, 3 /* donationAmount */));
     }
 
     @Test
     public void TargetCantHoldGoldCannotDonate() {
-        Tank sender = TankBuilder.buildV3Tank().with(Attribute.GOLD, 5).finish();
-        Tank reciever = TankBuilder.buildV3Tank().finish();
+        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, 5).finish();
+        GenericTank reciever = TankBuilder.buildTank().finish();
 
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
         assertFalse(rule.canApply(new TestState(), sender, reciever, 3 /* donationAmount */));
     }
 
@@ -53,29 +53,29 @@ public class ShareGoldWithTaxRuleTest {
             "2, 3, 0", /* not enough gold to begin with */
     })
     public void NotEnoughGoldCannotDonate(int senderGold, int donation, int tax) {
-        Tank sender = TankBuilder.buildV3Tank().with(Attribute.GOLD, senderGold).finish();
-        Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
+        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, senderGold).finish();
+        GenericTank reciever = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
         assertFalse(rule.canApply(new TestState(), sender, reciever, donation));
     }
 
     @Test
     public void NegativeGoldCannotBeDonated() {
-        Tank sender = TankBuilder.buildV3Tank().with(Attribute.GOLD, 5).finish();
-        Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, 0).finish();
+        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, 5).finish();
+        GenericTank reciever = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
         assertFalse(rule.canApply(new TestState(), sender, reciever, -3 /* donationAmount */));
     }
 
     @Test
     public void CannotDonateToOutOfRangeTank() {
-        Tank sender = TankBuilder.buildV3Tank().with(Attribute.GOLD, 5).with(Attribute.RANGE, 1).finish();
-        Tank reciever = TankBuilder.buildV3Tank()
+        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, 5).with(Attribute.RANGE, 1).finish();
+        GenericTank reciever = TankBuilder.buildTank()
             .at(new Position("A3")).with(Attribute.GOLD, 0).finish();
 
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(1);
         assertFalse(rule.canApply(new TestState(), sender, reciever, 1 /* donationAmount */));
     }
 
@@ -88,8 +88,8 @@ public class ShareGoldWithTaxRuleTest {
             "  15,                 34,                   19,             3,   11",
     })
     public void GoldIsTransferedCorrectly(int senderStartingGold, int recieverStartingGold, int startingCoffer, int tax, int donation) {
-        Tank sender = TankBuilder.buildV3Tank().with(Attribute.GOLD, senderStartingGold).finish();
-        Tank reciever = TankBuilder.buildV3Tank().with(Attribute.GOLD, recieverStartingGold).finish();
+        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, senderStartingGold).finish();
+        GenericTank reciever = TankBuilder.buildTank().with(Attribute.GOLD, recieverStartingGold).finish();
 
         int senderEndingGold = senderStartingGold - (donation + tax);
         int recieverEndingGold = recieverStartingGold + donation;
@@ -97,7 +97,7 @@ public class ShareGoldWithTaxRuleTest {
 
         State state = new TestState();
         Attribute.COFFER.to(state.getCouncil(), startingCoffer);
-        PlayerActionRule<Tank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
+        PlayerActionRule<GenericTank> rule = PlayerRules.GetShareGoldWithTaxRule(tax);
         rule.apply(state, sender, reciever, donation);
         assertEquals(senderEndingGold, Attribute.GOLD.unsafeFrom(sender));
         assertEquals(recieverEndingGold, Attribute.GOLD.unsafeFrom(reciever));

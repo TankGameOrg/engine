@@ -9,8 +9,8 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules.GetRuleCofferCostGrantLife;
@@ -22,13 +22,13 @@ public class CouncilGrantLifeTest {
 
     @Test
     public void testGrantLifeToLivingTank() {
-        Tank tank = TankBuilder.buildV3Tank()
+        GenericTank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = new TestState();
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
-        assertEquals(2, tank.getDurability());
+        assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
     }
 
     @ParameterizedTest
@@ -36,23 +36,23 @@ public class CouncilGrantLifeTest {
             "1", "2", "3"
     })
     public void testGrantLifeToDeadTank(int durability) {
-        Tank tank = TankBuilder.buildV3Tank()
+        GenericTank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, durability)
                 .with(Attribute.DEAD, true)
                 .finish();
         State state = new TestState();
         state.getCouncil().getCouncillors().add(tank.getPlayerRef());
-        
+
         ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
 
-        assertEquals(1, tank.getDurability());
-        assertFalse(tank.isDead());
+        assertEquals(1, Attribute.DURABILITY.unsafeFrom(tank));
+        assertFalse(Attribute.DEAD.unsafeFrom(tank));
         assertFalse(state.getCouncil().getCouncillors().contains(tank.getPlayerRef()));
     }
 
     @Test
     public void testSubtractGoldFromCoffer() {
-        Tank tank = TankBuilder.buildV3Tank()
+        GenericTank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
@@ -64,7 +64,7 @@ public class CouncilGrantLifeTest {
 
     @Test
     public void testErrorOnInsufficientGoldInCoffer() {
-        Tank tank = TankBuilder.buildV3Tank()
+        GenericTank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
