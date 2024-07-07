@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 public class Util {
 
@@ -97,12 +98,23 @@ public class Util {
     }
 
     public static String toString(Collection<?> items) {
-        return toString(items, 2);
+        return toString(items, 0, Object::toString);
+    }
+
+    public static <T> String toString(Collection<T> items, Function<T, String> toStringFunction) {
+        return toString(items, 0, toStringFunction);
     }
 
     public static String toString(Collection<?> items, int indent) {
+        return toString(items, indent, Object::toString);
+    }
+
+    public static <T> String toString(Collection<T> items, int indent, Function<T, String> toStringFunction) {
         StringBuilder sb = new StringBuilder("[\n");
-        items.forEach((x) -> sb.repeat(' ', indent).append(x).append(",\n"));
+        items.forEach((x) -> sb.repeat(' ', indent).append(toStringFunction.apply(x)).append(",\n"));
+        if (!items.isEmpty()) {
+            sb.delete(sb.length() - 2, sb.length());
+        }
         return sb.append("]\n").toString();
     }
 
