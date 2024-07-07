@@ -7,6 +7,7 @@ public interface IPlayerRule<T> {
 
     void apply(State state, T subject, Object... meta);
     boolean canApply(State state, T subject, Object... meta);
+    boolean canApply(State state, T subject);
 
     String name();
     TypeRange<?>[] parameters();

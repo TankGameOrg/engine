@@ -46,6 +46,11 @@ public class PlayerConditionRule<T extends IPlayerElement> implements IPlayerRul
         return validateOptionalTypes(meta) && condition.test(state, subject, meta).isOk();
     }
 
+    @Override
+    public boolean canApply(State state, T subject) {
+        return condition.test(state, subject).isOk();
+    }
+
     public Result<List<String>> canApplyConditional(State state, T subject, Object... meta) {
         if (validateOptionalTypes(meta)) {
             return condition.test(state, subject, meta);

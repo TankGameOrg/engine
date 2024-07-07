@@ -51,6 +51,14 @@ public class PlayerActionRule<T extends IPlayerElement> implements IPlayerRule<T
     }
 
     @Override
+    public boolean canApply(State state, T subject) {
+        // Player action rule requires meta data to actually check if it can be applied
+        // so we assume it always can if we don't have any
+        // TODO: Maybe this should be a separate interface?
+        return true;
+    }
+
+    @Override
     public boolean canApply(State state, T subject, Object... meta) {
         return validateOptionalTypes(meta) && predicate.test(state, subject, meta);
     }

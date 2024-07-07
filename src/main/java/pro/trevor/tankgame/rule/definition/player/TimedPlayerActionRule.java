@@ -90,4 +90,10 @@ public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActio
         return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
     }
 
+    @Override
+    public boolean canApply(State state, T subject) {
+        // We don't know when this action is being applied so we can't check the cooldown
+        return super.canApply(state, subject);
+    }
+
 }

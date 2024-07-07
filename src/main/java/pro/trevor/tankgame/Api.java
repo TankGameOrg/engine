@@ -169,14 +169,19 @@ public class Api {
             actionJson.put("rule", rule.name());
             actionJson.put("subject", type.getSimpleName().toLowerCase());
 
+            boolean canApply = ((IPlayerRule) rule).canApply(state, subject);
+            actionJson.put("canApply", canApply);
+
             // find all states of each parameter
             JSONArray fields = new JSONArray();
-            for (TypeRange<?> field : rule.parameters()) {
-                if (field instanceof VariableTypeRange<?,?> variableField) {
-                    VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
-                    genericField.generate(state, subject);
+            if(canApply) {
+                for (TypeRange<?> field : rule.parameters()) {
+                    if (field instanceof VariableTypeRange<?,?> variableField) {
+                        VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
+                        genericField.generate(state, subject);
+                    }
+                    fields.put(field.toJson());
                 }
-                fields.put(field.toJson());
             }
             actionJson.put("fields", fields);
             actionsArray.put(actionJson);
