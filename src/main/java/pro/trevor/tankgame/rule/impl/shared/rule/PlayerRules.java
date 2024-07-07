@@ -187,7 +187,9 @@ public class PlayerRules {
                     Attribute.CAN_BOUNTY.to(c, false);
                 },
                 UnitRange.ALL_LIVING_TANKS,
-                new DiscreteIntegerRange("bounty", lowerBound, upperBound));
+                new FilteredTypeRange<Council, Integer>(
+                    new DiscreteIntegerRange("bounty", lowerBound, upperBound),
+                    (state, council, bounty) -> Attribute.COFFER.fromOrElse(council, 0) >= bounty));
     }
 
     public static <T extends GenericTank> PlayerActionRule<T> SpendActionToShootGeneric(
