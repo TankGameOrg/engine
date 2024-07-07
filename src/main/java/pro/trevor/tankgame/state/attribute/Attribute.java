@@ -73,7 +73,7 @@ public class Attribute<E> {
     }
 
     public E unsafeFrom(AttributeObject e) {
-        if (!this.in(e))
+        if (!in(e))
             throw new Error("Attempting to get attribute '" + attributeName + "' from generic element " + e
                     + ". This generic element has no such attribute");
         return getObject(e);
