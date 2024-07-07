@@ -14,7 +14,6 @@ import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.IElement;
@@ -169,13 +168,13 @@ public class PlayerRules {
         assert lowerBound >= 0 && upperBound >= lowerBound;
         return new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
-                    GenericTank t = toType(n[0], Tank.class);
+                    GenericTank t = toType(n[0], GenericTank.class);
                     int bounty = toType(n[1], Integer.class);
                     return !Attribute.DEAD.fromOrElse(t, false) && Attribute.CAN_BOUNTY.fromOrElse(c, true) &&
                             Attribute.COFFER.unsafeFrom(c) >= bounty;
                 },
                 (s, c, n) -> {
-                    GenericTank t = toType(n[0], Tank.class);
+                    GenericTank t = toType(n[0], GenericTank.class);
                     int bounty = toType(n[1], Integer.class);
                     assert Attribute.COFFER.unsafeFrom(c) >= bounty;
                     Attribute.BOUNTY.to(t, Attribute.BOUNTY.fromOrElse(t, 0) + bounty);

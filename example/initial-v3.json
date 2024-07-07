@@ -99,7 +99,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -126,7 +126,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -190,7 +190,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -217,7 +217,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -332,7 +332,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -359,7 +359,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -423,7 +423,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -450,7 +450,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -974,7 +974,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1001,7 +1001,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1065,7 +1065,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1092,7 +1092,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1207,7 +1207,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1234,7 +1234,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1298,7 +1298,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0
@@ -1325,7 +1325,7 @@
             "class": "PlayerRef"
           },
           "$DURABILITY": 3,
-          "class": "TankV3",
+          "class": "GenericTank",
           "$BOUNTY": 0,
           "$ACTIONS": 0,
           "$TIME_OF_LAST_ACTION": 0

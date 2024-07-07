@@ -6,17 +6,13 @@ import pro.trevor.tankgame.rule.definition.RulesetDescription;
 import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
 import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
-import pro.trevor.tankgame.rule.definition.range.UnitRange;
-import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.impl.IRuleset;
 import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.rule.TickRules;
 import pro.trevor.tankgame.rule.impl.util.BaseRuleset;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
@@ -27,8 +23,6 @@ import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
 
-import static pro.trevor.tankgame.util.Util.toType;
-
 @RulesetType(name = "default-v4")
 public class Ruleset extends BaseRuleset implements IRuleset {
 
@@ -38,24 +32,23 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     public void registerEnforcerRules(RulesetDescription ruleset) {
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
 
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getDurability, Tank::setDurability, 0));
-        invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getDurability, Tank::setDurability, 3));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getRange, Tank::setRange, 0));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getGold, Tank::setGold, 0));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getActions, Tank::setActions, 0));
-        invariants.put(Tank.class, new MaximumEnforcer<>(Tank::getActions, Tank::setActions, 5));
-        invariants.put(Tank.class, new MinimumEnforcer<>(Tank::getBounty, Tank::setBounty, 0));
-        invariants.put(BasicWall.class, new MinimumEnforcer<>(BasicWall::getDurability, BasicWall::setDurability, 0));
-
-        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER::unsafeFrom, Attribute.COFFER::to, 0));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
+        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
+        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
+        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
+        invariants.put(BasicWall.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
+        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER, 0));
     }
 
     @Override
     public void registerTickRules(RulesetDescription ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(Tank.class, TickRules.GetDistributeGoldToTanksRule());
-        tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
+        tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
@@ -69,10 +62,10 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
         playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.SHOOT_V4, TIMEOUT));
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));
-        playerRules.put(Tank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
+        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
+        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
+        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));
+        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
 
         playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
         playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15, 3));
@@ -82,7 +75,7 @@ public class Ruleset extends BaseRuleset implements IRuleset {
     @Override
     public void registerConditionalRules(RulesetDescription ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(Tank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
+        conditionalRules.put(GenericTank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
 
         conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);

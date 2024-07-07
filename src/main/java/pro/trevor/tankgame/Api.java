@@ -6,11 +6,11 @@ import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.IRuleset;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.*;
@@ -95,7 +95,7 @@ public class Api {
         if (string.equals(COUNCIL)) {
             return state.getCouncil();
         }
-        Optional<Tank> optionalTank = state.getBoard().gatherUnits(Tank.class).stream()
+        Optional<GenericTank> optionalTank = state.getBoard().gatherUnits(GenericTank.class).stream()
                 .filter(t -> t.getPlayerRef().getName().equals(string)).findFirst();
         if (optionalTank.isPresent()) {
             return optionalTank.get();
@@ -147,9 +147,9 @@ public class Api {
             rules = ruleset.getPlayerRules().get(type);
             subject = state.getCouncil();
         } else if (state.getPlayer(player).isPresent()) {
-            type = Tank.class;
+            type = GenericTank.class;
             rules = ruleset.getPlayerRules().get(type);
-            Optional<Tank> tank = state.getBoard().gather(Tank.class).stream()
+            Optional<GenericTank> tank = state.getBoard().gather(GenericTank.class).stream()
                     .filter((t) -> t.getPlayerRef().equals(player))
                     .findFirst();
             if (tank.isPresent()) {
