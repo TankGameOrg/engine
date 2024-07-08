@@ -1,116 +1,77 @@
 package pro.trevor.tankgame.state;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.attribute.AttributeList;
+import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.IGatherable;
 import pro.trevor.tankgame.util.IJsonObject;
-import pro.trevor.tankgame.util.Util;
+import pro.trevor.tankgame.util.JsonType;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class State implements IJsonObject {
+@JsonType(name = "State")
+public class State extends AttributeObject implements IJsonObject, IGatherable {
 
-    private final List<IMetaElement> metaElements;
-    private final Board board;
-    private final Council council;
-    private final Set<String> players;
+    public State(Board board, Council council, AttributeList<Player> players) {
+        Attribute.BOARD.to(this, board);
+        Attribute.COUNCIL.to(this, council);
+        Attribute.TICK.to(this, 0);
+        Attribute.RUNNING.to(this, true);
+        Attribute.WINNER.to(this, "");
 
-    private boolean running;
-    private int tick;
-    private String winner;
-
-    public State(Board board, Council council) {
-        this.board = board;
-        this.players = new HashSet<>();
-        this.council = council;
-        this.tick = 0;
-        this.running = true;
-        this.winner = "";
-
-        this.metaElements = new ArrayList<>(2);
-        this.metaElements.add(board);
-        this.metaElements.add(council);
+        Attribute.PLAYERS.to(this, players);
     }
 
-    public State(int boardWidth, int boardHeight) {
-        this(new Board(boardWidth, boardHeight), new Council());
-    }
-
-    public List<IMetaElement> getMetaElements() {
-        return metaElements;
-    }
-
-    public List<IMetaElement> getMetaElements(Class<?> c) {
-        return metaElements.stream().filter((e) -> c.isAssignableFrom(e.getClass())).collect(Collectors.toList());
+    public State(JSONObject json) {
+        super(json);
     }
 
     public Board getBoard() {
-        return board;
-    }
-
-    public void putPlayer(String name) {
-        players.add(name);
-    }
-
-    public Set<String> getPlayers() {
-        return players;
+        return Attribute.BOARD.unsafeFrom(this);
     }
 
     public Council getCouncil() {
-        return council;
+        return Attribute.COUNCIL.unsafeFrom(this);
     }
 
-    public int getTick() {
-        return tick;
+    public AttributeList<Player> getPlayers() {
+        return Attribute.PLAYERS.unsafeFrom(this);
     }
 
-    public void setTick(int tick) {
-        this.tick = tick;
-    }
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
-    public String getWinner() {
-        return winner;
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
+    public Optional<Player> getPlayer(PlayerRef playerRef) {
+        return playerRef.toPlayer(this);
     }
 
     @Override
-    public JSONObject toJson() {
-        JSONObject output = new JSONObject();
-        output.put("type", "state");
-        output.put("board", board.toJson());
-        output.put("council", council.toJson());
-        output.put("day", tick);
-        output.put("running", running);
-        output.put("winner", winner);
-        return output;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("tick: ").append(tick).append('\n');
-        sb.append("running: ").append(running).append('\n');
-        if (!winner.isEmpty()) {
-            sb.append("winner: ").append(winner).append('\n');
+    public <T> List<T> gather(Class<T> type) {
+        List<T> result = new ArrayList<>();
+        for (Object value : attributes.values()) {
+            if (value instanceof IGatherable gatherable) {
+                result.addAll(gatherable.gather(type));
+            }
+            if (type.isAssignableFrom(value.getClass())) {
+                result.add((T) value);
+            }
         }
-        sb.append(council.toString());
-        sb.append("tanks: ").append(Util.toString(board.gatherUnits(GenericTank.class), 2));
-        sb.append('\n').append(board.toUnitString());
-        sb.append('\n').append(board.toFloorString());
-        return sb.toString();
+        return result;
+    }
+
+    @Override
+    public List<Object> gatherAll() {
+        List<Object> result = new ArrayList<>();
+        for (Object value : attributes.values()) {
+            if (value instanceof IJsonObject) {
+                result.add(value);
+            }
+            if (value instanceof IGatherable gatherable) {
+                result.addAll(gatherable.gatherAll());
+            }
+        }
+        return result;
     }
 }

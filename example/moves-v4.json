@@ -1,0 +1,1982 @@
+[
+    {
+        "day": 1,
+        "action": "start_of_day",
+        "timestamp": 1200
+    },
+    {
+        "subject": "Corey",
+        "action": "move",
+        "target": "E2",
+        "timestamp": 2400
+    },
+    {
+        "subject": "Dan",
+        "action": "move",
+        "target": "H2",
+        "timestamp": 3600
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "J9",
+        "hit": true,
+        "timestamp": 4800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "I10",
+        "hit": true,
+        "timestamp": 6000
+    },
+    {
+        "subject": "Bryan",
+        "action": "move",
+        "target": "K8",
+        "timestamp": 7200
+    },
+    {
+        "subject": "Beyer",
+        "action": "move",
+        "target": "K5",
+        "timestamp": 8400
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D9",
+        "hit": true,
+        "timestamp": 9600
+    },
+    {
+        "subject": "Lena",
+        "action": "move",
+        "target": "E11",
+        "timestamp": 10800
+    },
+    {
+        "subject": "Mike",
+        "action": "move",
+        "target": "H11",
+        "timestamp": 12000
+    },
+    {
+        "subject": "Ty",
+        "action": "move",
+        "target": "B8",
+        "timestamp": 13200
+    },
+    {
+        "subject": "Trevor",
+        "action": "move",
+        "target": "B5",
+        "timestamp": 14400
+    },
+    {
+        "subject": "David",
+        "action": "shoot",
+        "target": "D3",
+        "hit": true,
+        "timestamp": 15600
+    },
+    {
+        "subject": "Xavion",
+        "action": "shoot",
+        "target": "C4",
+        "hit": true,
+        "timestamp": 16800
+    },
+    {
+        "subject": "Isaac",
+        "action": "shoot",
+        "target": "C9",
+        "hit": true,
+        "timestamp": 18000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "I3",
+        "hit": true,
+        "timestamp": 19200
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "J4",
+        "hit": true,
+        "timestamp": 20400
+    },
+    {
+        "subject": "Charlie",
+        "action": "start_of_day",
+        "day": 2,
+        "timestamp": 21600
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "J4",
+        "hit": true,
+        "timestamp": 22800
+    },
+    {
+        "subject": "Beyer",
+        "action": "move",
+        "target": "J4",
+        "timestamp": 24000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "I3",
+        "hit": true,
+        "timestamp": 25200
+    },
+    {
+        "subject": "Dan",
+        "action": "move",
+        "target": "I3",
+        "timestamp": 26400
+    },
+    {
+        "subject": "David",
+        "action": "shoot",
+        "target": "D3",
+        "hit": true,
+        "timestamp": 27600
+    },
+    {
+        "subject": "Corey",
+        "action": "move",
+        "target": "D3",
+        "timestamp": 28800
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "C4",
+        "hit": true,
+        "timestamp": 30000
+    },
+    {
+        "subject": "Xavion",
+        "action": "shoot",
+        "target": "D4",
+        "hit": true,
+        "timestamp": 31200
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "C9",
+        "hit": true,
+        "timestamp": 32400
+    },
+    {
+        "subject": "Isaac",
+        "action": "shoot",
+        "target": "D10",
+        "hit": true,
+        "timestamp": 33600
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D10",
+        "hit": true,
+        "timestamp": 34800
+    },
+    {
+        "subject": "Lena",
+        "action": "move",
+        "target": "D10",
+        "timestamp": 36000
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I10",
+        "hit": true,
+        "timestamp": 37200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "I9",
+        "hit": true,
+        "timestamp": 38400
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "J9",
+        "hit": true,
+        "timestamp": 39600
+    },
+    {
+        "subject": "Ryan",
+        "action": "move",
+        "target": "I9",
+        "timestamp": 40800
+    },
+    {
+        "subject": "Xavion",
+        "action": "start_of_day",
+        "day": 3,
+        "timestamp": 42000
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "I4",
+        "hit": true,
+        "timestamp": 43200
+    },
+    {
+        "subject": "Beyer",
+        "action": "shoot",
+        "target": "K4",
+        "hit": true,
+        "timestamp": 44400
+    },
+    {
+        "subject": "Dan",
+        "action": "shoot",
+        "target": "I2",
+        "hit": true,
+        "timestamp": 45600
+    },
+    {
+        "subject": "Stomp",
+        "action": "move",
+        "target": "H3",
+        "timestamp": 46800
+    },
+    {
+        "subject": "Xavion",
+        "action": "shoot",
+        "target": "B4",
+        "hit": true,
+        "timestamp": 48000
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "B4",
+        "hit": true,
+        "timestamp": 49200
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "D2",
+        "hit": true,
+        "timestamp": 50400
+    },
+    {
+        "subject": "David",
+        "action": "move",
+        "target": "E3",
+        "timestamp": 51600
+    },
+    {
+        "subject": "Schmude",
+        "action": "move",
+        "target": "E10",
+        "timestamp": 52800
+    },
+    {
+        "subject": "Isaac",
+        "action": "move",
+        "target": "C9",
+        "timestamp": 54000
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "B9",
+        "hit": true,
+        "timestamp": 55200
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "D11",
+        "hit": true,
+        "timestamp": 56400
+    },
+    {
+        "subject": "Ryan",
+        "action": "move",
+        "target": "J9",
+        "timestamp": 57600
+    },
+    {
+        "subject": "John",
+        "action": "move",
+        "target": "I10",
+        "timestamp": 58800
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "K9",
+        "hit": true,
+        "timestamp": 60000
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I11",
+        "hit": true,
+        "timestamp": 61200
+    },
+    {
+        "subject": "Mike",
+        "action": "start_of_day",
+        "day": 4,
+        "timestamp": 62400
+    },
+    {
+        "subject": "Charlie",
+        "action": "move",
+        "target": "J5",
+        "timestamp": 63600
+    },
+    {
+        "subject": "Beyer",
+        "action": "shoot",
+        "target": "K4",
+        "hit": true,
+        "timestamp": 64800
+    },
+    {
+        "subject": "Dan",
+        "action": "shoot",
+        "target": "I2",
+        "hit": true,
+        "timestamp": 66000
+    },
+    {
+        "subject": "Xavion",
+        "action": "move",
+        "target": "C4",
+        "timestamp": 67200
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "B4",
+        "hit": true,
+        "timestamp": 68400
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "D2",
+        "hit": true,
+        "timestamp": 69600
+    },
+    {
+        "subject": "David",
+        "action": "shoot",
+        "target": "D2",
+        "hit": true,
+        "timestamp": 70800
+    },
+    {
+        "subject": "Isaac",
+        "action": "shoot",
+        "target": "B9",
+        "hit": true,
+        "timestamp": 72000
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "B9",
+        "hit": true,
+        "timestamp": 73200
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "D11",
+        "hit": true,
+        "timestamp": 74400
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D11",
+        "hit": true,
+        "timestamp": 75600
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I11",
+        "hit": true,
+        "timestamp": 76800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "I11",
+        "hit": true,
+        "timestamp": 78000
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "K9",
+        "hit": true,
+        "timestamp": 79200
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "K9",
+        "hit": true,
+        "timestamp": 80400
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "I2",
+        "hit": true,
+        "timestamp": 81600
+    },
+    {
+        "subject": "Lena",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 82800
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "D11",
+        "hit": true,
+        "timestamp": 84000
+    },
+    {
+        "subject": "Corey",
+        "action": "upgrade_range",
+        "timestamp": 85200
+    },
+    {
+        "subject": "Ryan",
+        "action": "donate",
+        "target": "John",
+        "donation": 3,
+        "timestamp": 86400
+    },
+    {
+        "subject": "Ryan",
+        "action": "start_of_day",
+        "day": 5,
+        "timestamp": 87600
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "C9",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 88800
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "C9",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 90000
+    },
+    {
+        "subject": "Lena",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 91200
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "C9",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 92400
+    },
+    {
+        "subject": "Council",
+        "action": "bounty",
+        "target": "Lena",
+        "bounty": 2,
+        "timestamp": 93600
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "K9",
+        "hit": true,
+        "timestamp": 94800
+    },
+    {
+        "subject": "Ryan",
+        "action": "move",
+        "target": "J8",
+        "timestamp": 96000
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I11",
+        "hit": true,
+        "timestamp": 97200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J11",
+        "hit": true,
+        "timestamp": 98400
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 99600
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "J4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 100800
+    },
+    {
+        "subject": "Beyer",
+        "action": "shoot",
+        "target": "J5",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 102000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "I3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 103200
+    },
+    {
+        "subject": "Dan",
+        "action": "shoot",
+        "target": "H3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 104400
+    },
+    {
+        "subject": "David",
+        "action": "move",
+        "target": "D4",
+        "timestamp": 105600
+    },
+    {
+        "subject": "Xavion",
+        "action": "shoot",
+        "target": "D4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 106800
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "D4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 108000
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "C4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 109200
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 110400
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J11",
+        "hit": true,
+        "timestamp": 111600
+    },
+    {
+        "subject": "Ryan",
+        "action": "donate",
+        "target": "John",
+        "donation": 3,
+        "timestamp": 112800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J11",
+        "hit": true,
+        "timestamp": 114000
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 115200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J11",
+        "hit": true,
+        "timestamp": 116400
+    },
+    {
+        "subject": "Corey",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 117600
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "D4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 118800
+    },
+    {
+        "subject": "Corey",
+        "action": "start_of_day",
+        "day": 6,
+        "timestamp": 120000
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 121200
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "E10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 122400
+    },
+    {
+        "subject": "Lena",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 123600
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "K10",
+        "hit": true,
+        "timestamp": 124800
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "K10",
+        "hit": true,
+        "timestamp": 126000
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "K10",
+        "hit": true,
+        "timestamp": 127200
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I12",
+        "hit": true,
+        "timestamp": 128400
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "J4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 129600
+    },
+    {
+        "subject": "Beyer",
+        "action": "shoot",
+        "target": "J5",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 130800
+    },
+    {
+        "subject": "Dan",
+        "action": "shoot",
+        "target": "H3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 132000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "I3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 133200
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "C4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 134400
+    },
+    {
+        "subject": "Xavion",
+        "action": "shoot",
+        "target": "B5",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 135600
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "C4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 136800
+    },
+    {
+        "subject": "Lena",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 138000
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 139200
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 140400
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "E10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 141600
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "E10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 142800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "K10",
+        "hit": true,
+        "timestamp": 144000
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 145200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "K11",
+        "hit": true,
+        "timestamp": 146400
+    },
+    {
+        "subject": "Corey",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 147600
+    },
+    {
+        "subject": "Xavion",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 148800
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "C4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 150000
+    },
+    {
+        "subject": "Corey",
+        "action": "start_of_day",
+        "day": 7,
+        "timestamp": 151200
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 152400
+    },
+    {
+        "subject": "Lena",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 153600
+    },
+    {
+        "subject": "John",
+        "action": "upgrade_range",
+        "timestamp": 154800
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I12",
+        "hit": true,
+        "timestamp": 156000
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "L10",
+        "hit": true,
+        "timestamp": 157200
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "L9",
+        "hit": true,
+        "timestamp": 158400
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "J4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 159600
+    },
+    {
+        "subject": "Council",
+        "action": "grant_life",
+        "target": "Beyer",
+        "timestamp": 160800
+    },
+    {
+        "subject": "Dan",
+        "action": "shoot",
+        "target": "J4",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 162000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "I3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 163200
+    },
+    {
+        "subject": "Corey",
+        "action": "shoot",
+        "target": "D3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 164400
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "B5",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 165600
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "B8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 166800
+    },
+    {
+        "subject": "Stomp",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 168000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "H3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 169200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "K11",
+        "hit": true,
+        "timestamp": 170400
+    },
+    {
+        "subject": "John",
+        "action": "start_of_day",
+        "day": 8,
+        "timestamp": 171600
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 172800
+    },
+    {
+        "subject": "Lena",
+        "action": "shoot",
+        "target": "E10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 174000
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "B8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 175200
+    },
+    {
+        "subject": "Ty",
+        "action": "shoot",
+        "target": "B8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 176400
+    },
+    {
+        "subject": "Trevor",
+        "action": "shoot",
+        "target": "B5",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 177600
+    },
+    {
+        "subject": "Corey",
+        "action": "move",
+        "target": "E3",
+        "timestamp": 178800
+    },
+    {
+        "subject": "Stomp",
+        "action": "move",
+        "target": "G3",
+        "timestamp": 180000
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Corey",
+        "timestamp": 181200
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Stomp",
+        "timestamp": 182400
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Stomp",
+        "timestamp": 183600
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Stomp",
+        "timestamp": 184800
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "E3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 186000
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "E3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 187200
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "E3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 188400
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "J5",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 189600
+    },
+    {
+        "subject": "Mike",
+        "action": "shoot",
+        "target": "I10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 190800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "H11",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 192000
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 193200
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 194400
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "K8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 195600
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "J8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 196800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "H11",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 198000
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Schmude",
+        "timestamp": 199200
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Charlie",
+        "timestamp": 200400
+    },
+    {
+        "subject": "Charlie",
+        "action": "move",
+        "target": "J6",
+        "timestamp": 201600
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "D10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 202800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "H11",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 204000
+    },
+    {
+        "subject": "John",
+        "action": "start_of_day",
+        "day": 9,
+        "timestamp": 205200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 206400
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "K8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 207600
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "J8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 208800
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "K8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 210000
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 211200
+    },
+    {
+        "subject": "Schmude",
+        "action": "move",
+        "target": "F10",
+        "timestamp": 212400
+    },
+    {
+        "subject": "Stomp",
+        "action": "shoot",
+        "target": "G3",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 213600
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "H11",
+        "hit": true,
+        "timestamp": 214800
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 216000
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Schmude",
+        "timestamp": 217200
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Schmude",
+        "timestamp": 218400
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Charlie",
+        "timestamp": 219600
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Ryan",
+        "timestamp": 220800
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Bryan",
+        "timestamp": 222000
+    },
+    {
+        "subject": "Charlie",
+        "action": "shoot",
+        "target": "K8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 223200
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "J6",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 224400
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "J6",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 225600
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 226800
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Schmude",
+        "timestamp": 228000
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Charlie",
+        "timestamp": 229200
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Ryan",
+        "timestamp": 230400
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Bryan",
+        "timestamp": 231600
+    },
+    {
+        "subject": "Charlie",
+        "action": "move",
+        "target": "J7",
+        "timestamp": 232800
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 234000
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "H11",
+        "hit": true,
+        "timestamp": 235200
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "J7",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 236400
+    },
+    {
+        "subject": "Bryan",
+        "action": "shoot",
+        "target": "J7",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 237600
+    },
+    {
+        "subject": "Schmude",
+        "action": "shoot",
+        "target": "H11",
+        "hit": true,
+        "timestamp": 238800
+    },
+    {
+        "subject": "Schmude",
+        "action": "move",
+        "target": "G10",
+        "timestamp": 240000
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "G10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false
+            ]
+        },
+        "hit": false,
+        "timestamp": 241200
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "G10",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 242400
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 243600
+    },
+    {
+        "subject": "John",
+        "action": "move",
+        "target": "J9",
+        "timestamp": 244800
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 246000
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "K8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 247200
+    },
+    {
+        "subject": "John",
+        "action": "start_of_day",
+        "day": 10,
+        "timestamp": 248400
+    },
+    {
+        "subject": "Ryan",
+        "action": "shoot",
+        "target": "J9",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true,
+                false
+            ]
+        },
+        "hit": true,
+        "timestamp": 249600
+    },
+    {
+        "subject": "Council",
+        "action": "grant_life",
+        "target": "Ryan",
+        "timestamp": 250800
+    },
+    {
+        "subject": "Council",
+        "action": "grant_life",
+        "target": "Ryan",
+        "timestamp": 252000
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                true,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 253200
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 254400
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 255600
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 256800
+    },
+    {
+        "subject": "John",
+        "action": "buy_action",
+        "gold": 3,
+        "timestamp": 258000
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "J8",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                false,
+                false,
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 259200
+    },
+    {
+        "subject": "John",
+        "action": "move",
+        "target": "J10",
+        "timestamp": 260400
+    },
+    {
+        "subject": "Council",
+        "action": "stimulus",
+        "target": "Ryan",
+        "timestamp": 261600
+    },
+    {
+        "subject": "Ryan",
+        "action": "move",
+        "target": "I7",
+        "timestamp": 262800
+    },
+    {
+        "subject": "John",
+        "action": "shoot",
+        "target": "I7",
+        "hit_roll": {
+            "type": "die-roll",
+            "manual": true,
+            "roll": [
+                true
+            ]
+        },
+        "hit": true,
+        "timestamp": 264000
+    }
+]

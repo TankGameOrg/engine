@@ -3,12 +3,12 @@ package pro.trevor.tankgame.rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import pro.trevor.tankgame.rule.impl.version3.Tank;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.util.DummyState;
+import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +19,7 @@ public class TankShootV4Test {
 
         @Test
         void testDeadTankCannotShoot() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -33,7 +33,7 @@ public class TankShootV4Test {
 
         @Test
         void testTankCannotShootWithoutActions() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 0)
                                 .with(Attribute.DURABILITY, 3)
@@ -47,7 +47,7 @@ public class TankShootV4Test {
 
         @Test
         void testShootDecrementsActions() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -55,14 +55,14 @@ public class TankShootV4Test {
                                 .with(Attribute.DEAD, false)
                                 .finish();
 
-                SHOOT_V4.apply(new DummyState(), tank, new Position("A1"), false);
+                SHOOT_V4.apply(new TestState(), tank, new Position("A1"), false);
 
-                assertEquals(0, tank.getActions());
+                assertEquals(0, Attribute.ACTION_POINTS.unsafeFrom(tank));
         }
 
         @Test
         void testShootEmpty() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -77,7 +77,7 @@ public class TankShootV4Test {
 
         @Test
         void testShootDamageWalls() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -94,14 +94,14 @@ public class TankShootV4Test {
 
         @Test
         void testShootDamageTanks() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
                                 .with(Attribute.RANGE, 2)
                                 .with(Attribute.DEAD, false)
                                 .finish();
-                Tank otherTank = TankBuilder.buildV3Tank()
+                GenericTank otherTank = TankBuilder.buildTank()
                                 .at(new Position("A2"))
                                 .with(Attribute.DURABILITY, 3)
                                 .with(Attribute.DEAD, false)
@@ -110,19 +110,19 @@ public class TankShootV4Test {
 
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
 
-                assertEquals(2, otherTank.getDurability());
+                assertEquals(2, Attribute.DURABILITY.unsafeFrom(otherTank));
         }
 
         @Test
         void testShootMissDoesNotDamageTanks() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
                                 .with(Attribute.RANGE, 2)
                                 .with(Attribute.DEAD, false)
                                 .finish();
-                Tank otherTank = TankBuilder.buildV3Tank()
+                GenericTank otherTank = TankBuilder.buildTank()
                                 .at(new Position("A2"))
                                 .with(Attribute.DURABILITY, 3)
                                 .with(Attribute.DEAD, false)
@@ -131,19 +131,19 @@ public class TankShootV4Test {
 
                 SHOOT_V4.apply(state, tank, new Position("A2"), false);
 
-                assertEquals(3, otherTank.getDurability());
+                assertEquals(3, Attribute.DURABILITY.unsafeFrom(otherTank));
         }
 
         @Test
         void testShootDamageDeadTank() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
                                 .with(Attribute.RANGE, 2)
                                 .with(Attribute.DEAD, false)
                                 .finish();
-                Tank otherTank = TankBuilder.buildV3Tank()
+                GenericTank otherTank = TankBuilder.buildTank()
                                 .at(new Position("A2"))
                                 .with(Attribute.DURABILITY, 3)
                                 .with(Attribute.DEAD, true)
@@ -152,12 +152,12 @@ public class TankShootV4Test {
 
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
 
-                assertEquals(2, otherTank.getDurability());
+                assertEquals(2, Attribute.DURABILITY.unsafeFrom(otherTank));
         }
 
         @Test
         void testShootDamageSelf() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -168,12 +168,12 @@ public class TankShootV4Test {
 
                 SHOOT_V4.apply(state, tank, new Position("A1"), true);
 
-                assertEquals(2, tank.getDurability());
+                assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
         }
 
         @Test
         void testShootOutOfBoundsThrows() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -199,7 +199,7 @@ public class TankShootV4Test {
                         "9, 7, 2",
         })
         void testShootKillingLivingTankDistributesGold(int gold, int expectedNewGold, int expectedNewCoffer) {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -207,7 +207,7 @@ public class TankShootV4Test {
                                 .with(Attribute.GOLD, 0)
                                 .with(Attribute.DEAD, false)
                                 .finish();
-                Tank otherTank = TankBuilder.buildV3Tank()
+                GenericTank otherTank = TankBuilder.buildTank()
                                 .at(new Position("A2"))
                                 .with(Attribute.DURABILITY, 1)
                                 .with(Attribute.GOLD, gold)
@@ -218,13 +218,13 @@ public class TankShootV4Test {
 
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
 
-                assertEquals(expectedNewGold, tank.getGold());
-                assertEquals(expectedNewCoffer, state.getCouncil().getCoffer());
+                assertEquals(expectedNewGold, Attribute.GOLD.unsafeFrom(tank));
+                assertEquals(expectedNewCoffer, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
 
         @Test
         void testShootKillingLivingTankDistributesBounty() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -232,7 +232,7 @@ public class TankShootV4Test {
                                 .with(Attribute.RANGE, 2)
                                 .with(Attribute.DEAD, false)
                                 .finish();
-                Tank otherTank = TankBuilder.buildV3Tank()
+                GenericTank otherTank = TankBuilder.buildTank()
                                 .at(new Position("A2"))
                                 .with(Attribute.DURABILITY, 1)
                                 .with(Attribute.GOLD, 0)
@@ -243,13 +243,13 @@ public class TankShootV4Test {
 
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
 
-                assertEquals(5, tank.getGold());
-                assertEquals(0, state.getCouncil().getCoffer());
+                assertEquals(5, Attribute.GOLD.unsafeFrom(tank));
+                assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
 
         @Test
         void testShootKillingLivingTankDistributesBountyAndGold() {
-                Tank tank = TankBuilder.buildV3Tank()
+                GenericTank tank = TankBuilder.buildTank()
                                 .at(new Position("A1"))
                                 .with(Attribute.ACTION_POINTS, 1)
                                 .with(Attribute.DURABILITY, 3)
@@ -257,7 +257,7 @@ public class TankShootV4Test {
                                 .with(Attribute.GOLD, 0)
                                 .with(Attribute.DEAD, false)
                                 .finish();
-                Tank otherTank = TankBuilder.buildV3Tank()
+                GenericTank otherTank = TankBuilder.buildTank()
                                 .at(new Position("A2"))
                                 .with(Attribute.DURABILITY, 1)
                                 .with(Attribute.GOLD, 1)
@@ -266,8 +266,8 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
                 SHOOT_V4.apply(state, tank, new Position("A2"), true);
-                assertEquals(6, tank.getGold());
-                assertEquals(0, state.getCouncil().getCoffer());
+                assertEquals(6, Attribute.GOLD.unsafeFrom(tank));
+                assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
 
 }

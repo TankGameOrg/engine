@@ -6,8 +6,4 @@ public interface IJsonObject {
 
     JSONObject toJson();
 
-    default JSONObject toShortJson() {
-        return toJson();
-    }
-
 }

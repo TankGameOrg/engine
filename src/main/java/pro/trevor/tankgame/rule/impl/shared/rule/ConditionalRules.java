@@ -9,7 +9,7 @@ import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
+import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.stream.Collectors;
 
@@ -25,21 +25,19 @@ public class ConditionalRules {
 
     public static <T extends GenericTank> ConditionalRule<T> GetKillOrDestroyTankOnZeroDurabilityRule() {
         return new ConditionalRule<>(
-                (s, t) -> Attribute.DURABILITY.from(t).orElse(-1) == 0, // -1, so that if a tank doesn't have
-                                                                         // durability, this rule won't apply
+                (s, t) -> Attribute.DURABILITY.from(t).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
                 (s, t) -> {
                     if (Attribute.DEAD.from(t).orElse(false)) {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
-                        String tankPlayer = t.getPlayer();
-                        s.getCouncil().getCouncillors().remove(tankPlayer);
-                        s.getCouncil().getSenators().add(tankPlayer);
+                        s.getCouncil().getCouncillors().remove(t.getPlayerRef());
+                        s.getCouncil().getSenators().add(t.getPlayerRef());
                     } else {
                         Attribute.DEAD.to(t, true);
                         Attribute.ACTION_POINTS.to(t, 0);
                         Attribute.GOLD.to(t, 0);
                         Attribute.BOUNTY.to(t, 0);
                         Attribute.DURABILITY.to(t, 3);
-                        s.getCouncil().getCouncillors().add(t.getPlayer());
+                        s.getCouncil().getCouncillors().add(t.getPlayerRef());
                     }
                 });
     }
@@ -48,16 +46,16 @@ public class ConditionalRules {
             (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
                     .collect(Collectors.toSet()).size() == 1,
             (s, b) -> {
-                s.setRunning(false);
-                s.setWinner(
-                        b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
-                                .findFirst().get().getPlayer());
+                Attribute.RUNNING.to(s, false);
+                Attribute.WINNER.to(s, b.gatherUnits(GenericTank.class).stream()
+                        .filter((t) -> !Attribute.DEAD.from(t).orElse(false))
+                        .findFirst().get().getPlayerRef().getName());
             });
 
-    public static final ConditionalRule<ArmisticeCouncil> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
-            (s, c) -> c.getArmisticeVoteCount() >= c.getArmisticeVoteCap(),
+    public static final ConditionalRule<Council> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
+            (s, c) -> Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) >= Attribute.ARMISTICE_MAX.unsafeFrom(c),
             (s, c) -> {
-                s.setRunning(false);
-                s.setWinner("Council");
+                Attribute.RUNNING.to(s, false);
+                Attribute.WINNER.to(s, "Council");
             });
 }
