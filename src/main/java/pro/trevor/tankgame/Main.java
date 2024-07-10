@@ -2,6 +2,7 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pro.trevor.tankgame.rule.impl.version4.RulesetRegister;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
@@ -20,38 +21,39 @@ public class Main {
                 // Debug the default-v3 ruleset
                 initialFile = new File("example/initial-v3.json");
                 movesFile = new File("example/moves-v3.json");
-                api = new Api(new pro.trevor.tankgame.rule.impl.version3.Ruleset());
+                api = new Api(new pro.trevor.tankgame.rule.impl.version3.RulesetRegister());
             } else {
                 // Default to debugging default-v4 ruleset
                 initialFile = new File("example/initial-v4.json");
                 movesFile = new File("example/moves-v4.json");
-                api = new Api(new pro.trevor.tankgame.rule.impl.version4.Ruleset());
+                api = new Api(new RulesetRegister());
             }
             DEBUG = true;
             try {
                 String initialString = Files.readString(initialFile.toPath());
                 String movesString = Files.readString(movesFile.toPath());
 
-                System.out.println(api.getRules().toString(2));
+                //System.out.println(api.getRules().toString(2));
 
                 JSONObject initial = new JSONObject(initialString);
                 JSONArray moves = new JSONArray(movesString);
+                System.out.println(moves.toString(2));
 
                 api.setState(new State(initial));
-                System.out.println(api.getState().toJson().toString(2));
+                //System.out.println(api.getState().toJson().toString(2));
 
                 for (int i = 0; i < moves.length(); ++i) {
                     JSONObject action = moves.getJSONObject(i);
                     api.ingestAction(action);
                 }
-                System.out.println(api.getState().toString());
+                //System.out.println(api.getState().toString());
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
                 System.exit(1);
             }
         } else if (args.length == 0) {
             // REPL with the newest default ruleset
-            Cli.repl(new pro.trevor.tankgame.rule.impl.version4.Ruleset());
+            Cli.repl(new RulesetRegister());
         } else {
             System.err.println("Expected 0 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4>");
         }

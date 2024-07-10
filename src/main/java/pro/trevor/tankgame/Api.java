@@ -1,15 +1,14 @@
 package pro.trevor.tankgame;
 
-import pro.trevor.tankgame.rule.definition.RulesetDescription;
+import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
-import pro.trevor.tankgame.rule.impl.IRuleset;
+import pro.trevor.tankgame.rule.impl.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Codec;
-import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 
@@ -20,13 +19,13 @@ import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Pair;
 
 public class Api {
-    private final RulesetDescription ruleset;
+    private final Ruleset ruleset;
     private State state;
 
     private static final String COUNCIL = "Council";
 
-    public Api(IRuleset ruleset) {
-        this.ruleset = IRuleset.getRuleset(ruleset);
+    public Api(IRulesetRegister ruleset) {
+        this.ruleset = IRulesetRegister.getRuleset(ruleset);
     }
 
     public State getState() {
@@ -51,7 +50,7 @@ public class Api {
         else if (json.keySet().contains(JsonKeys.DAY)) {
             applyTick(state, ruleset);
         } else {
-            Object subject = json.get(JsonKeys.SUBJECT);
+            JSONObject subject = json.getJSONObject(JsonKeys.SUBJECT);
             String action = json.getString(JsonKeys.ACTION);
             long time = json.optLong(JsonKeys.TIME, 0);
 
@@ -64,23 +63,13 @@ public class Api {
             Class<?> ruleClass = rulePair.left();
             IPlayerRule<Object> rule = (IPlayerRule<Object>) rulePair.right();
 
-            // If the subject given was JSON, try to construct it into an Object of its given class;
-            // otherwise, send the Object through to attempt to be cast to the rule subject type.
-            if (subject instanceof JSONObject subjectJson) {
-                subject = Codec.decodeJson(subjectJson);
-            }
-
-            // Also, if the subject Object is a String, try to decode it as a Tank (via name) or position;
-            // This could result in issues if a tank/player has the same name as a grid space (e.g., B3).
-            if (subject instanceof String subjectString) {
-                subject = fromString(subjectString);
-            }
+            Object decodedSubject = decodeJsonAndHandlePlayerRef(subject);
 
             try {
                 if (rule instanceof TimedPlayerActionRule) {
-                    rule.apply(state, ruleClass.cast(subject), getArgumentsTimed(rule, json, time));
+                    rule.apply(state, ruleClass.cast(decodedSubject), getArgumentsTimed(rule, json, time));
                 } else {
-                    rule.apply(state, ruleClass.cast(subject), getArguments(rule, json));
+                    rule.apply(state, ruleClass.cast(decodedSubject), getArguments(rule, json));
                 }
             } catch (ClassCastException e) {
                 throw new Error("Unable to cast given subject to class " + ruleClass.getSimpleName(), e);
@@ -91,18 +80,12 @@ public class Api {
         applyConditionals(state, ruleset);
     }
 
-    private Object fromString(String string) {
-        if (string.equals(COUNCIL)) {
-            return state.getCouncil();
-        }
-        Optional<GenericTank> optionalTank = state.getBoard().gatherUnits(GenericTank.class).stream()
-                .filter(t -> t.getPlayerRef().getName().equals(string)).findFirst();
-        if (optionalTank.isPresent()) {
-            return optionalTank.get();
-        } else if (Position.isPosition(string)) {
-            return new Position(string);
+    private Object decodeJsonAndHandlePlayerRef(JSONObject json) {
+        Object decodedJson = Codec.decodeJson(json);
+        if (decodedJson instanceof PlayerRef playerRef) {
+            return ruleset.getPlayerObject(state, playerRef);
         } else {
-            throw new Error("Subject string is not a living tank's player nor position: " + string);
+            return decodedJson;
         }
     }
 
@@ -111,9 +94,7 @@ public class Api {
         for (int i = 0; i < arguments.length; ++i) {
             Object input = json.get(rule.parameters()[i].getName());
             if (input instanceof JSONObject inputJson) {
-                arguments[i] = Codec.decodeJson(inputJson);
-            } else if (input instanceof String inputString) {
-                arguments[i] = fromString(inputString);
+                arguments[i] = decodeJsonAndHandlePlayerRef(inputJson);
             } else {
                 // Try to assume that, if it is not JSON or position/tank string, it is a primitive
                 arguments[i] = input;
@@ -186,15 +167,15 @@ public class Api {
         return actions;
     }
 
-    private static void enforceInvariants(State state, RulesetDescription ruleset) {
+    private static void enforceInvariants(State state, Ruleset ruleset) {
         state.gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
     }
 
-    private static void applyConditionals(State state, RulesetDescription ruleset) {
+    private static void applyConditionals(State state, Ruleset ruleset) {
         state.gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
     }
 
-    private static void applyTick(State state, RulesetDescription ruleset) {
+    private static void applyTick(State state, Ruleset ruleset) {
         state.gatherAll().forEach((x) -> ruleset.getTickRules().applyRules(state, x));
     }
 
