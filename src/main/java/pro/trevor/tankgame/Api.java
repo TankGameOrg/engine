@@ -96,7 +96,7 @@ public class Api {
             if (input instanceof JSONObject inputJson) {
                 arguments[i] = decodeJsonAndHandlePlayerRef(inputJson);
             } else {
-                // Try to assume that, if it is not JSON or position/tank string, it is a primitive
+                // Try to assume that, if it is not JSON-encoded object, it is a primitive
                 arguments[i] = input;
             }
         }
