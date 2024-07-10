@@ -34,20 +34,19 @@ public class Main {
                 String initialString = Files.readString(initialFile.toPath());
                 String movesString = Files.readString(movesFile.toPath());
 
-                //System.out.println(api.getRules().toString(2));
+                System.out.println(api.getRules().toString(2));
 
                 JSONObject initial = new JSONObject(initialString);
                 JSONArray moves = new JSONArray(movesString);
-                System.out.println(moves.toString(2));
 
                 api.setState(new State(initial));
-                //System.out.println(api.getState().toJson().toString(2));
+                System.out.println(api.getState().toJson().toString(2));
 
                 for (int i = 0; i < moves.length(); ++i) {
                     JSONObject action = moves.getJSONObject(i);
                     api.ingestAction(action);
                 }
-                //System.out.println(api.getState().toString());
+                System.out.println(api.getState().toString());
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
                 System.exit(1);
