@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.shared.rule;
+package pro.trevor.tankgame.rule.impl.shared;
 
 import java.util.HashSet;
 import java.util.List;

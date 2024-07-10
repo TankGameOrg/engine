@@ -1,7 +1,7 @@
 package pro.trevor.tankgame;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.IRulesetRegister;
+import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ReflectionUtil;

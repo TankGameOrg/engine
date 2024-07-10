@@ -1,11 +1,8 @@
-package pro.trevor.tankgame.rule.impl.util;
+package pro.trevor.tankgame.rule.impl.ruleset;
 
 import pro.trevor.tankgame.rule.definition.Ruleset;
-import pro.trevor.tankgame.rule.impl.IRulesetRegister;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.state.board.IElement;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 

@@ -13,7 +13,7 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules.GetRuleCofferCostGrantLife;
+import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.GetRuleCofferCostGrantLife;
 
 public class CouncilGrantLifeTest {
 

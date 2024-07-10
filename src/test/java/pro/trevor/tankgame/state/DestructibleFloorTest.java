@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import pro.trevor.tankgame.rule.definition.ConditionalRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.impl.shared.rule.ConditionalRules;
-import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
+import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;

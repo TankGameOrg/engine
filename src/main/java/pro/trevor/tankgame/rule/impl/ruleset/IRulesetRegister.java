@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl;
+package pro.trevor.tankgame.rule.impl.ruleset;
 
 import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.state.State;

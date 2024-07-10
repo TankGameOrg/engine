@@ -2,7 +2,8 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.version4.RulesetRegister;
+import pro.trevor.tankgame.rule.impl.ruleset.DefaultV3RulesetRegister;
+import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
@@ -21,12 +22,12 @@ public class Main {
                 // Debug the default-v3 ruleset
                 initialFile = new File("example/initial-v3.json");
                 movesFile = new File("example/moves-v3.json");
-                api = new Api(new pro.trevor.tankgame.rule.impl.version3.RulesetRegister());
+                api = new Api(new DefaultV3RulesetRegister());
             } else {
                 // Default to debugging default-v4 ruleset
                 initialFile = new File("example/initial-v4.json");
                 movesFile = new File("example/moves-v4.json");
-                api = new Api(new RulesetRegister());
+                api = new Api(new DefaultV4RulesetRegister());
             }
             DEBUG = true;
             try {
@@ -53,7 +54,7 @@ public class Main {
             }
         } else if (args.length == 0) {
             // REPL with the newest default ruleset
-            Cli.repl(new RulesetRegister());
+            Cli.repl(new DefaultV4RulesetRegister());
         } else {
             System.err.println("Expected 0 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4>");
         }
