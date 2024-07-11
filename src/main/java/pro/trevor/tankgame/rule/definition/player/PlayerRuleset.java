@@ -2,9 +2,9 @@ package pro.trevor.tankgame.rule.definition.player;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.util.Pair;
 
 import java.util.*;
 
@@ -44,17 +44,14 @@ public class PlayerRuleset {
         return new ArrayList<>(0);
     }
 
-    public Optional<Pair<Class<?>, IPlayerRule<?>>> getByName(String name) {
-        for (Class<?> ruleClass : rules.keySet()) {
-            List<IPlayerRule<?>> list = rules.get(ruleClass);
-            for (IPlayerRule<?> rule : list) {
-                if (rule.name().equals(name)) {
-                    return Optional.of(new Pair<>(ruleClass, rule));
-                }
+    public <T extends IPlayerElement> List<IPlayerRule<T>> applicableRules(Class<T> t, State state, T subject) {
+        List<IPlayerRule<T>> output = new ArrayList<>();
+        for (IPlayerRule<T> rule : getExact(t)) {
+            if (rule instanceof PlayerActionRule<T> conditional && conditional.canApply(state, subject)) {
+                output.add(conditional);
             }
         }
-
-        return Optional.empty();
+        return output;
     }
 
     public Set<Class<?>> keySet() {

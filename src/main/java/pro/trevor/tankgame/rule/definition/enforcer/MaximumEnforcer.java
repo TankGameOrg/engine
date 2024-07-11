@@ -1,10 +1,9 @@
 package pro.trevor.tankgame.rule.definition.enforcer;
 
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import java.util.function.*;
 
-public class MaximumEnforcer <T extends AttributeObject, U extends Comparable<U>> extends AttributePredicateEnforcer<T, U> {
-    public MaximumEnforcer(Attribute<U> attribute, U bound) {
-        super((x) -> attribute.in(x) && attribute.unsafeFrom(x).compareTo(bound) < 0, attribute, bound);
+public class MaximumEnforcer <T, U extends Comparable<U>> extends PredicateEnforcer<T, U> {
+    public MaximumEnforcer(Function<T, U> getter, BiConsumer<T, U> setter, U bound) {
+        super((x) -> getter.apply(x).compareTo(bound) < 0, setter, bound);
     }
 }

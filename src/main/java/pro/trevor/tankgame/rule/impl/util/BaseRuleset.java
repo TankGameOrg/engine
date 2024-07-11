@@ -13,7 +13,17 @@ public abstract class BaseRuleset implements IRuleset {
     }
 
     @Override
+    public void registerMetaEnforcerRules(RulesetDescription ruleset) {
+
+    }
+
+    @Override
     public void registerTickRules(RulesetDescription ruleset) {
+
+    }
+
+    @Override
+    public void registerMetaTickRules(RulesetDescription ruleset) {
 
     }
 
@@ -23,7 +33,17 @@ public abstract class BaseRuleset implements IRuleset {
     }
 
     @Override
+    public void registerMetaConditionalRules(RulesetDescription ruleset) {
+
+    }
+
+    @Override
     public void registerPlayerRules(RulesetDescription ruleset) {
+
+    }
+
+    @Override
+    public void registerMetaPlayerRules(RulesetDescription ruleset) {
 
     }
 }

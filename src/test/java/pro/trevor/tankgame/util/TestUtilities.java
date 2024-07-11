@@ -1,12 +1,9 @@
 package pro.trevor.tankgame.util;
 
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeList;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public class TestUtilities {
     public static State generateBoard(int width, int height, IUnit... units) {
@@ -14,19 +11,18 @@ public class TestUtilities {
         for (IUnit unit : units) {
             board.putUnit(unit);
         }
-        return new State(board, BuildTestCouncil(0, 0, 0), new AttributeList<>());
+        return new State(board, new Council());
     }
 
     public static Council BuildTestCouncil(int coffer, int councilors, int senators) {
-        Council c = new Council();
-        Attribute.COFFER.to(c, coffer);
+        Council c = new Council(coffer);
 
         for (int i = 0; i < councilors; i++) {
-            c.getCouncillors().add(new PlayerRef("Councilor " + i));
+            c.getCouncillors().add("Councilor " + i);
         }
 
         for (int i = 0; i < senators; i++) {
-            c.getSenators().add(new PlayerRef("Senators " + i));
+            c.getSenators().add("Senators " + i);
         }
 
         return c;

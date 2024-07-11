@@ -1,37 +1,59 @@
 package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
-import pro.trevor.tankgame.util.JsonType;
 
+import java.util.HashMap;
 import java.util.Map;
 
-@JsonType(name = "GenericElement")
-public class GenericElement extends AttributeObject implements IElement {
+public abstract class GenericElement implements IElement {
 
-    public GenericElement() {
-        super();
-    }
+    protected final Map<String, Object> attributes;
 
     public GenericElement(Map<String, Object> defaults) {
-        super(defaults);
+        this.attributes = new HashMap<>();
+        for (String attribute : defaults.keySet()) {
+            attributes.put(attribute, defaults.get(attribute));
+        }
     }
 
     public GenericElement(JSONObject json) {
-        super(json);
+        this.attributes = new HashMap<>();
+        JSONObject attributesJsonObject = json.getJSONObject("attributes");
+        for (String key : attributesJsonObject.keySet()) {
+            this.attributes.put(key, attributesJsonObject.get(key));
+        }
     }
 
-    public Position getPosition() {
-        return Attribute.POSITION.unsafeFrom(this);
+    public boolean has(String attribute) {
+        return this.attributes.containsKey(attribute);
     }
 
-    public void setPosition(Position position) {
-        Attribute.POSITION.to(this, position);
+    public Object get(String attribute) {
+        return this.attributes.get(attribute);
+    }
+
+    public void set(String attribute, Object object) {
+        this.attributes.put(attribute, object);
     }
 
     @Override
-    public char toBoardCharacter() {
-        return '?';
+    public JSONObject toJson() {
+        JSONObject output = new JSONObject();
+
+        JSONObject attributesJson = new JSONObject();
+
+        for (String attribute : attributes.keySet()) {
+            Object value = attributes.get(attribute);
+            switch (value) {
+                case Boolean v -> attributesJson.put(attribute, v);
+                case Integer v -> attributesJson.put(attribute, v);
+                case Double v -> attributesJson.put(attribute, v);
+                default ->
+                    throw new Error(String.format("Unhandled type %s for attribute %s", value.getClass(), attribute));
+            }
+        }
+
+        output.put("attributes", attributesJson);
+        return output;
     }
 }
