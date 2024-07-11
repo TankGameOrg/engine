@@ -1,22 +1,23 @@
 package pro.trevor.tankgame.rule.definition.player;
 
+import pro.trevor.tankgame.rule.definition.player.conditional.RuleCondition;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
-import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.IVarTriConsumer;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PlayerConditionRule<T extends IPlayerElement> implements IPlayerRule<T> {
+public class PlayerConditionRule implements IPlayerRule {
 
     protected final String name;
-    protected final Condition<T> condition;
-    protected final IVarTriConsumer<State, T, Object> consumer;
+    protected final RuleCondition condition;
+    protected final IVarTriConsumer<State, PlayerRef, Object> consumer;
     protected final TypeRange<?>[] parameters;
 
-    public PlayerConditionRule(String name, Condition<T> condition, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
+    public PlayerConditionRule(String name, RuleCondition condition, IVarTriConsumer<State, PlayerRef, Object> consumer, TypeRange<?>... parameters) {
         this.name = name;
         this.condition = condition;
         this.consumer = consumer;
@@ -24,7 +25,7 @@ public class PlayerConditionRule<T extends IPlayerElement> implements IPlayerRul
     }
 
     @Override
-    public void apply(State state, T subject, Object... meta) {
+    public void apply(State state, PlayerRef subject, Object... meta) {
         Result<List<String>> canApply = canApplyConditional(state, subject, meta);
         if (canApply.isOk()) {
             consumer.accept(state, subject, meta);
@@ -37,16 +38,17 @@ public class PlayerConditionRule<T extends IPlayerElement> implements IPlayerRul
                     sb.append(",\n");
                 }
             }
+            System.err.println(state.toString(2));
             throw new Error(sb.toString());
         }
     }
 
     @Override
-    public boolean canApply(State state, T subject, Object... meta) {
+    public boolean canApply(State state, PlayerRef subject, Object... meta) {
         return validateOptionalTypes(meta) && condition.test(state, subject, meta).isOk();
     }
 
-    public Result<List<String>> canApplyConditional(State state, T subject, Object... meta) {
+    public Result<List<String>> canApplyConditional(State state, PlayerRef subject, Object... meta) {
         if (validateOptionalTypes(meta)) {
             return condition.test(state, subject, meta);
         } else {

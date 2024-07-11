@@ -2,7 +2,7 @@ package pro.trevor.tankgame;
 
 import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
+import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
@@ -54,26 +54,25 @@ public class Api {
             String action = json.getString(JsonKeys.ACTION);
             long time = json.optLong(JsonKeys.TIME, 0);
 
-            Optional<Pair<Class<?>, IPlayerRule<?>>> optionalRule = ruleset.getPlayerRules().getByName(action);
+            Optional<IPlayerRule> optionalRule = ruleset.getPlayerRules().getByName(action);
             if (optionalRule.isEmpty()) {
                 throw new Error("Unexpected action: " + action);
             }
 
-            Pair<Class<?>, IPlayerRule<?>> rulePair = optionalRule.get();
-            Class<?> ruleClass = rulePair.left();
-            IPlayerRule<Object> rule = (IPlayerRule<Object>) rulePair.right();
+            IPlayerRule rule = optionalRule.get();
 
-            Object decodedSubject = decodeJsonAndHandlePlayerRef(subject);
-
-            try {
-                if (rule instanceof TimedPlayerActionRule) {
-                    rule.apply(state, ruleClass.cast(decodedSubject), getArgumentsTimed(rule, json, time));
+            Object decodedSubject = Codec.decodeJson(subject);
+            if (decodedSubject instanceof PlayerRef player) {
+                if (rule instanceof TimedPlayerConditionRule) {
+                    rule.apply(state, player, getArgumentsTimed(rule, json, time));
                 } else {
-                    rule.apply(state, ruleClass.cast(decodedSubject), getArguments(rule, json));
+                    rule.apply(state, player, getArguments(rule, json));
                 }
-            } catch (ClassCastException e) {
-                throw new Error("Unable to cast given subject to class " + ruleClass.getSimpleName(), e);
+            } else {
+                throw new Error("Subject is not a PlayerRef" + decodedSubject.getClass().getSimpleName());
             }
+
+
         }
 
         enforceInvariants(state, ruleset);
@@ -89,7 +88,7 @@ public class Api {
         }
     }
 
-    private Object[] getArguments(IPlayerRule<?> rule, JSONObject json) {
+    private Object[] getArguments(IPlayerRule rule, JSONObject json) {
         Object[] arguments = new Object[rule.parameters().length];
         for (int i = 0; i < arguments.length; ++i) {
             Object input = json.get(rule.parameters()[i].getName());
@@ -103,7 +102,7 @@ public class Api {
         return arguments;
     }
 
-    private Object[] getArgumentsTimed(IPlayerRule<?> rule, JSONObject json, long time) {
+    private Object[] getArgumentsTimed(IPlayerRule rule, JSONObject json, long time) {
         Object[] args = getArguments(rule, json);
         Object[] out = new Object[args.length + 1];
 
@@ -119,17 +118,15 @@ public class Api {
         actions.put("player", player);
 
         JSONArray actionsArray = new JSONArray();
-        List<IPlayerRule<?>> rules;
+        List<IPlayerRule> rules = ruleset.getPlayerRules().getAllRules();
         Class<?> type;
         Object subject;
 
         if (player.getName().equals(COUNCIL) || state.getCouncil().isPlayerOnCouncil(player)) {
             type = Council.class;
-            rules = ruleset.getPlayerRules().get(type);
             subject = state.getCouncil();
         } else if (state.getPlayer(player).isPresent()) {
             type = GenericTank.class;
-            rules = ruleset.getPlayerRules().get(type);
             Optional<GenericTank> tank = state.getBoard().gather(GenericTank.class).stream()
                     .filter((t) -> t.getPlayerRef().equals(player))
                     .findFirst();
@@ -143,9 +140,7 @@ public class Api {
             throw new Error("Unknown player: " + player);
         }
 
-        assert type.isInstance(subject);
-
-        for (IPlayerRule<?> rule : rules) {
+        for (IPlayerRule rule : rules) {
             JSONObject actionJson = new JSONObject();
             actionJson.put("rule", rule.name());
             actionJson.put("subject", type.getSimpleName().toLowerCase());

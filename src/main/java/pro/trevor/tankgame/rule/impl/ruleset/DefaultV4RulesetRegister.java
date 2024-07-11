@@ -7,7 +7,7 @@ import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
 import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
-import pro.trevor.tankgame.rule.definition.player.TimedPlayerActionRule;
+import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
@@ -60,15 +60,15 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerPlayerRules(Ruleset ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.SHOOT_V4, TIMEOUT));
-        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
-        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetShareGoldWithTaxRule(1), TIMEOUT));
-        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.BuyActionWithGold(3, 1), TIMEOUT));
-        playerRules.put(GenericTank.class, new TimedPlayerActionRule<>(PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.SHOOT_V4, TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
 
-        playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
-        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15, 3));
-        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostBounty(1, 5));
+        playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
+        playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
+        playerRules.add(PlayerRules.getRuleCofferCostBounty(1, 5));
     }
 
     @Override

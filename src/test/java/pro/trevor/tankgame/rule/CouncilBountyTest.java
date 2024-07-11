@@ -1,7 +1,6 @@
 package pro.trevor.tankgame.rule;
 
 import org.junit.jupiter.api.Test;
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CouncilBountyTest {
 
-    private static final PlayerActionRule<Council> BASIC_BOUNTY_RULE = PlayerRules.GetRuleCofferCostBounty(1, 1);
+    private static final PlayerActionRule<Council> BASIC_BOUNTY_RULE = PlayerRules.getRuleCofferCostBounty(1, 1);
 
     @Test
     public void testGrantBountyToLivingTank() {

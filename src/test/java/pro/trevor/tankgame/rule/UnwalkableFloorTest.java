@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -28,7 +27,7 @@ public class UnwalkableFloorTest {
         State s = TestUtilities.generateBoard(3, 2, t);
         s.getBoard().putFloor(new UnwalkableFloor(new Position("B2")));
 
-        PlayerActionRule<GenericTank> moveRule = PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1);
+        PlayerActionRule<GenericTank> moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
         assertFalse(moveRule.canApply(s, t, new Position("B2")));
     }
 

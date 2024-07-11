@@ -62,15 +62,15 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
     @Override
     public void registerPlayerRules(Ruleset ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
-        playerRules.put(GenericTank.class, PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
-        playerRules.put(GenericTank.class, PlayerRules.GetUpgradeRangeRule(Attribute.GOLD, 8));
-        playerRules.put(GenericTank.class, PlayerRules.GetShareGoldWithTaxRule(1));
-        playerRules.put(GenericTank.class, PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1));
-        playerRules.put(GenericTank.class, PlayerRules.SHOOT_V3);
+        playerRules.add(PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
+        playerRules.add(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 8));
+        playerRules.add(PlayerRules.getShareGoldWithTaxRule(1));
+        playerRules.add(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1));
+        playerRules.add(PlayerRules.SHOOT_V3);
 
-        playerRules.put(Council.class, PlayerRules.GetCofferCostStimulusRule(3));
-        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostGrantLife(15, 3));
-        playerRules.put(Council.class, PlayerRules.GetRuleCofferCostBounty(1, 5));
+        playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
+        playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
+        playerRules.add(PlayerRules.getRuleCofferCostBounty(1, 5));
     }
 
     @Override

@@ -8,17 +8,16 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.GetRuleCofferCostGrantLife;
+import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.getRuleCofferCostGrantLife;
 
 public class CouncilGrantLifeTest {
 
-    private static final PlayerActionRule<Council> ZERO_COST_RULE = GetRuleCofferCostGrantLife(0, 0);
-    private static final PlayerActionRule<Council> ONE_COST_RULE = GetRuleCofferCostGrantLife(1, 0);
+    private static final PlayerActionRule<Council> ZERO_COST_RULE = getRuleCofferCostGrantLife(0, 0);
+    private static final PlayerActionRule<Council> ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);
 
     @Test
     public void testGrantLifeToLivingTank() {

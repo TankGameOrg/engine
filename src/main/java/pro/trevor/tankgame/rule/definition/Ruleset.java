@@ -1,10 +1,12 @@
 package pro.trevor.tankgame.rule.definition;
 
 import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
+import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
+import java.util.List;
 import java.util.function.BiFunction;
 
 public class Ruleset {

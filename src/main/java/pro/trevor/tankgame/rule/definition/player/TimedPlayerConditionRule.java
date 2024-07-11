@@ -2,39 +2,38 @@ package pro.trevor.tankgame.rule.definition.player;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.Main;
+import pro.trevor.tankgame.rule.definition.player.conditional.RuleCondition;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
-import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.Player;
-import pro.trevor.tankgame.util.IJsonObject;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.function.IVarTriConsumer;
-import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActionRule<T> {
+public class TimedPlayerConditionRule extends PlayerConditionRule {
 
     // Returns the cooldown for the function based on the state
     private final Function<State, Long> cooldownFunction;
 
-    public TimedPlayerActionRule(String name, Function<State, Long> cooldownFunction, IVarTriPredicate<State, T, Object> predicate, IVarTriConsumer<State, T, Object> consumer, TypeRange<?>... parameters) {
-        super(name, predicate, consumer, parameters);
+    public TimedPlayerConditionRule(String name, Function<State, Long> cooldownFunction, RuleCondition condition, IVarTriConsumer<State, PlayerRef, Object> consumer, TypeRange<?>... parameters) {
+        super(name, condition, consumer, parameters);
         this.cooldownFunction = cooldownFunction;
     }
 
-    public TimedPlayerActionRule(PlayerActionRule<T> rule, Function<State, Long> cooldownFunction) {
-        super(rule.name, rule.predicate, rule.consumer, rule.parameters);
+    public TimedPlayerConditionRule(PlayerConditionRule rule, Function<State, Long> cooldownFunction) {
+        super(rule.name, rule.condition, rule.consumer, rule.parameters);
         this.cooldownFunction = cooldownFunction;
     }
 
     @Override
-    public void apply(State state, T subject, Object... meta) {
+    public void apply(State state, PlayerRef subject, Object... meta) {
         long timeOfAction = (long) meta[0];
         long cooldown = cooldownFunction.apply(state);
-        Player player = subject.getPlayerRef().toPlayer(state).get();
+        Player player = subject.toPlayer(state).get();
 
         long elapsed = timeOfAction - Attribute.TIME_OF_LAST_ACTION.fromOrElse(player, 0L);
         if (elapsed >= cooldown) {
@@ -45,16 +44,10 @@ public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActio
                 JSONObject error = new JSONObject();
                 error.put("error", true);
                 error.put("rule", name);
-
-                if (subject instanceof IJsonObject subjectJson) {
-                    error.put("subject", subjectJson.toJson());
-                } else {
-                    error.put("subject", subject.getPlayerRef());
-                }
-
+                error.put("subject", subject.toJson());
                 if (Main.DEBUG) {
                     System.err.println(error.toString(2));
-                    System.err.println(state.toString());
+                    System.err.println(state);
                 }
                 throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
             }
@@ -65,12 +58,7 @@ public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActio
             error.put("rule", name);
             error.put("cooldown", cooldown);
             error.put("elapsed", elapsed);
-
-            if (subject instanceof IJsonObject subjectJson) {
-                error.put("subject", subjectJson.toJson());
-            } else {
-                error.put("subject", subject.getPlayerRef());
-            }
+            error.put("subject", subject.toJson());
 
             if (Main.DEBUG) {
                 System.err.println(error.toString(2));
@@ -80,10 +68,10 @@ public class TimedPlayerActionRule<T extends IPlayerElement> extends PlayerActio
     }
 
     @Override
-    public boolean canApply(State state, T subject, Object... meta) {
-        Optional<Player> player = subject.getPlayerRef().toPlayer(state);
+    public boolean canApply(State state, PlayerRef subject, Object... meta) {
+        Optional<Player> player = subject.toPlayer(state);
         if (player.isEmpty()) {
-            throw new Error("No player found with name `" + subject.getPlayerRef().getName() + "`");
+            throw new Error("No player found with name `" + subject.getName() + "`");
         }
         long cooldown = cooldownFunction.apply(state);
         long elapsed = (long) meta[0] - Attribute.TIME_OF_LAST_ACTION.fromOrElse(player.get(),0L);
