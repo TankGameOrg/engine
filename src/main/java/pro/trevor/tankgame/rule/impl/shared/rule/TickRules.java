@@ -15,15 +15,18 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.AbstractFloor;
+import pro.trevor.tankgame.state.board.floor.AbstractPositionedFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.meta.ArmisticeCouncil;
 import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules {
     public static final MetaTickActionRule<Board> INCREMENT_DAY_ON_TICK = new MetaTickActionRule<>(
-            (s, n) -> Attribute.TICK.to(s, Attribute.TICK.fromOrElse(s, 0) + 1));
+            (s, n) -> {
+                s.setTick(s.getTick() + 1);
+            });
 
     public static <T extends GenericTank> TickActionRule<T> GetDistributeGoldToTanksRule() {
         return new TickActionRule<T>(
@@ -66,7 +69,7 @@ public class TickRules {
 
     public static final MetaTickActionRule<Board> GOLD_MINE_REMAINDER_GOES_TO_COFFER = new MetaTickActionRule<>(
             (s, b) -> {
-                List<Position> mines = b.gatherFloors(GoldMine.class).stream().map(AbstractFloor::getPosition)
+                List<Position> mines = b.gatherFloors(GoldMine.class).stream().map(AbstractPositionedFloor::getPosition)
                         .toList();
                 List<Set<Position>> allMines = new ArrayList<>();
 
@@ -85,15 +88,14 @@ public class TickRules {
                                     && !Attribute.DEAD.from(tank).orElse(false))
                             .count();
                     int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
-
-                    Attribute.COFFER.to(s.getCouncil(), Attribute.COFFER.fromOrElse(s.getCouncil(), 0) + goldToGain);
+                    s.getCouncil().setCoffer(s.getCouncil().getCoffer() + goldToGain);
                 }
             });
 
-    public static final MetaTickActionRule<Council> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
+    public static final MetaTickActionRule<ArmisticeCouncil> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
             (s, c) -> {
                 int totalCouncilMembers = c.getCouncillors().size() + c.getSenators().size();
-                Attribute.ARMISTICE_COUNT.to(c, Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) + totalCouncilMembers);
+                c.setArmisticeVoteCount(c.getArmisticeVoteCount() + totalCouncilMembers);
             });
 
     public static MetaTickActionRule<Council> GetCouncilBaseIncomeRule(int goldPerCouncilor, int goldPerSenator) {
@@ -109,7 +111,7 @@ public class TickRules {
 
                     int income = (goldPerCouncilor * councilorCount) + (goldPerSenator * senatorCount);
 
-                    Attribute.COFFER.to(c, Attribute.COFFER.fromOrElse(c, 0) + income);
+                    c.setCoffer(c.getCoffer() + income);
                 });
     }
 }

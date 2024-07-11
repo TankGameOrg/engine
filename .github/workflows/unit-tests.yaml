@@ -17,7 +17,5 @@ jobs:
       - run: mvn package
       - name: Build and run unit tests
         run: mvn verify
-      - name: Run debug mode for default-v3
-        run: java -jar target/TankGame-*.jar --debug default-v3
-      - name: Run debug mode for default-v4
-        run: java -jar target/TankGame-*.jar --debug default-v4
+      - name: Run debug mode
+        run: java -jar target/TankGame-*.jar --debug
