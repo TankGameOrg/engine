@@ -4,20 +4,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.util.TestUtilities;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.getRuleCofferCostGrantLife;
 
 public class CouncilGrantLifeTest {
 
-    private static final PlayerActionRule<Council> ZERO_COST_RULE = getRuleCofferCostGrantLife(0, 0);
-    private static final PlayerActionRule<Council> ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);
+    private static final IPlayerRule ZERO_COST_RULE = getRuleCofferCostGrantLife(0, 0);
+    private static final IPlayerRule ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);
+    private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
     @Test
     public void testGrantLifeToLivingTank() {
@@ -25,8 +29,8 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
-        State state = new TestState();
-        ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
+        State state = TestUtilities.generateBoard(1, 1, tank);
+        ZERO_COST_RULE.apply(state, councilPlayer, tank);
         assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
     }
 
@@ -39,10 +43,10 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DURABILITY, durability)
                 .with(Attribute.DEAD, true)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().getCouncillors().add(tank.getPlayerRef());
 
-        ZERO_COST_RULE.apply(state, state.getCouncil(), tank);
+        ZERO_COST_RULE.apply(state, councilPlayer, tank);
 
         assertEquals(1, Attribute.DURABILITY.unsafeFrom(tank));
         assertFalse(Attribute.DEAD.unsafeFrom(tank));
@@ -55,9 +59,9 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
         Attribute.COFFER.to(state.getCouncil(), 1);
-        ONE_COST_RULE.apply(state, state.getCouncil(), tank);
+        ONE_COST_RULE.apply(state, councilPlayer, tank);
         assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
     }
 
@@ -67,8 +71,8 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
-        State state = new TestState();
-        assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, state.getCouncil(), tank));
+        State state = TestUtilities.generateBoard(1, 1, tank);
+        assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, councilPlayer, tank));
     }
 
 }

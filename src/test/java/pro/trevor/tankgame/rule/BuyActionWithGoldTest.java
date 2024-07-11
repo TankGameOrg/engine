@@ -8,17 +8,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import pro.trevor.tankgame.util.TestState;
+import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.util.TestUtilities;
 
 public class BuyActionWithGoldTest {
 
     @Test
     public void TypeCheckTest() {
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 1); // action_cost is a don't care
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1); // action_cost is a don't care
         assertEquals(PlayerRules.ActionKeys.BUY_ACTION, rule.name(),
                 "Asserts that the buy action with gold rule is the right type");
     }
@@ -28,8 +30,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 3)
                 .with(Attribute.DEAD, true).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 1);
-        assertFalse(rule.canApply(new TestState(), tank, 3)); // goldSpent = 3
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
+        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3)); // goldSpent = 3
     }
 
     @Test
@@ -37,8 +39,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 0)
                 .with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 1);
-        assertFalse(rule.canApply(new TestState(), tank, 3)); // goldSpent = 3
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
+        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3)); // goldSpent = 3
     }
 
     @Test
@@ -46,8 +48,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 6)
                 .with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 1);
-        assertFalse(rule.canApply(new TestState(), tank, 6)); // goldSpent = 6
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
+        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 6)); // goldSpent = 6
     }
 
     @Test
@@ -75,8 +77,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 5)
                 .with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 5);
-        assertFalse(rule.canApply(new TestState(), tank, 6)); // goldSpent = 6
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
+        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 6));
     }
 
     @Test
@@ -84,8 +86,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 5)
                 .with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 5);
-        assertFalse(rule.canApply(new TestState(), tank, 4)); // goldSpent = 4
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
+        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 4));
     }
 
     @Test
@@ -93,8 +95,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 3)
                 .with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 1);
-        rule.apply(new TestState(), tank, 3); // goldSpent = 3
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
+        rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3); // goldSpent = 3
 
         assertEquals(0, Attribute.GOLD.unsafeFrom(tank));
         assertEquals(1, Attribute.ACTION_POINTS.unsafeFrom(tank));
@@ -110,8 +112,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, startingActions)
                 .with(Attribute.GOLD, startingGold).with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(3, 5);
-        rule.apply(new TestState(), tank, spentGold);
+        IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
+        rule.apply(TestUtilities.generateBoard(1, 1, tank), new PlayerRef("test"), spentGold);
 
         assertEquals(expectedGold, Attribute.GOLD.unsafeFrom(tank));
         assertEquals(expectedActions, Attribute.ACTION_POINTS.unsafeFrom(tank));
@@ -130,8 +132,8 @@ public class BuyActionWithGoldTest {
         GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, goldSpent)
                 .with(Attribute.DEAD, false).finish();
 
-        PlayerActionRule<GenericTank> rule = PlayerRules.buyActionWithGold(actionCost, 5);
-        rule.apply(new TestState(), tank, goldSpent);
+        IPlayerRule rule = PlayerRules.buyActionWithGold(actionCost, 5);
+        rule.apply(TestUtilities.generateBoard(1, 1, tank), new PlayerRef("test"), goldSpent);
 
         assertEquals(0, Attribute.GOLD.unsafeFrom(tank));
         assertEquals(expectedActions, Attribute.ACTION_POINTS.unsafeFrom(tank));

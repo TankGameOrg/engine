@@ -14,19 +14,19 @@ public class TestUtilities {
         for (IUnit unit : units) {
             board.putUnit(unit);
         }
-        return new State(board, BuildTestCouncil(0, 0, 0), new AttributeList<>());
+        return new State(board, buildTestCouncil(0, 0, 0), new AttributeList<>());
     }
 
-    public static Council BuildTestCouncil(int coffer, int councilors, int senators) {
+    public static Council buildTestCouncil(int coffer, int councilors, int senators) {
         Council c = new Council();
         Attribute.COFFER.to(c, coffer);
 
         for (int i = 0; i < councilors; i++) {
-            c.getCouncillors().add(new PlayerRef("Councilor " + i));
+            c.getCouncillors().add(new PlayerRef("Councilor" + i));
         }
 
         for (int i = 0; i < senators; i++) {
-            c.getSenators().add(new PlayerRef("Senators " + i));
+            c.getSenators().add(new PlayerRef("Senator" + i));
         }
 
         return c;

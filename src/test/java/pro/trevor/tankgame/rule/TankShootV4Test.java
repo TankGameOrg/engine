@@ -28,7 +28,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank);
 
-                assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2")));
+                assertFalse(SHOOT_V4.canApply(state, tank.getPlayerRef(), new Position("A2")));
         }
 
         @Test
@@ -42,7 +42,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank);
 
-                assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2")));
+                assertFalse(SHOOT_V4.canApply(state, tank.getPlayerRef(), new Position("A2")));
         }
 
         @Test
@@ -55,7 +55,7 @@ public class TankShootV4Test {
                                 .with(Attribute.DEAD, false)
                                 .finish();
 
-                SHOOT_V4.apply(new TestState(), tank, new Position("A1"), false);
+                SHOOT_V4.apply(new TestState(), tank.getPlayerRef(), new Position("A1"), false);
 
                 assertEquals(0, Attribute.ACTION_POINTS.unsafeFrom(tank));
         }
@@ -72,7 +72,7 @@ public class TankShootV4Test {
                 State state = generateBoard(2, 2, tank);
 
                 // Has no side effects, this test only ensures that it does not error
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
         }
 
         @Test
@@ -87,7 +87,7 @@ public class TankShootV4Test {
                 BasicWall wall = new BasicWall(new Position("A2"), 3);
                 State state = generateBoard(2, 2, tank, wall);
 
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
 
                 assertEquals(2, wall.getDurability());
         }
@@ -108,7 +108,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
 
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
 
                 assertEquals(2, Attribute.DURABILITY.unsafeFrom(otherTank));
         }
@@ -129,7 +129,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
 
-                SHOOT_V4.apply(state, tank, new Position("A2"), false);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), false);
 
                 assertEquals(3, Attribute.DURABILITY.unsafeFrom(otherTank));
         }
@@ -150,7 +150,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
 
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
 
                 assertEquals(2, Attribute.DURABILITY.unsafeFrom(otherTank));
         }
@@ -166,7 +166,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(1, 1, tank);
 
-                SHOOT_V4.apply(state, tank, new Position("A1"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A1"), true);
 
                 assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
         }
@@ -182,7 +182,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(1, 1, tank);
 
-                assertFalse(SHOOT_V4.canApply(state, tank, new Position("A2"), true));
+                assertFalse(SHOOT_V4.canApply(state, tank.getPlayerRef(), new Position("A2"), true));
         }
 
         @ParameterizedTest
@@ -216,7 +216,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
 
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
 
                 assertEquals(expectedNewGold, Attribute.GOLD.unsafeFrom(tank));
                 assertEquals(expectedNewCoffer, Attribute.COFFER.unsafeFrom(state.getCouncil()));
@@ -241,7 +241,7 @@ public class TankShootV4Test {
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
 
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
 
                 assertEquals(5, Attribute.GOLD.unsafeFrom(tank));
                 assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
@@ -265,7 +265,7 @@ public class TankShootV4Test {
                                 .with(Attribute.DEAD, false)
                                 .finish();
                 State state = generateBoard(2, 2, tank, otherTank);
-                SHOOT_V4.apply(state, tank, new Position("A2"), true);
+                SHOOT_V4.apply(state, tank.getPlayerRef(), new Position("A2"), true);
                 assertEquals(6, Attribute.GOLD.unsafeFrom(tank));
                 assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
         }
