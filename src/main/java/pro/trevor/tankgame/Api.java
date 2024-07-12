@@ -71,8 +71,6 @@ public class Api {
             } else {
                 throw new Error("Subject is not a PlayerRef" + decodedSubject.getClass().getSimpleName());
             }
-
-
         }
 
         enforceInvariants(state, ruleset);

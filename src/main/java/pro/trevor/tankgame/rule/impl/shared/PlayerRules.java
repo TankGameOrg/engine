@@ -17,6 +17,7 @@ import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.IElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
@@ -246,12 +247,13 @@ public class PlayerRules {
 
     public static PlayerConditionRule spendActionToShootWithDeathHandle(
             ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<State, GenericTank, GenericTank> handleDeath) {
-        return spendActionToShootGeneric(lineOfSight, (state, t, element) -> {
+        return spendActionToShootGeneric(lineOfSight, (state, tank, element) -> {
             switch (element) {
-                case GenericTank tank -> {
-                    Attribute.DURABILITY.to(tank, Attribute.DURABILITY.unsafeFrom(tank) - 1);
-                    if (!Attribute.DEAD.unsafeFrom(tank) && Attribute.DURABILITY.unsafeFrom(tank) == 0) {
-                        handleDeath.accept(state, t, tank);
+                case GenericTank otherTank -> {
+                    Attribute.DURABILITY.to(otherTank, Attribute.DURABILITY.unsafeFrom(otherTank) - 1);
+                    if (!Attribute.DEAD.unsafeFrom(otherTank) && Attribute.DURABILITY.unsafeFrom(otherTank) == 0) {
+                        handleDeath.accept(state, tank, otherTank);
+                        Attribute.DEAD.to(otherTank, true);
                     }
                 }
                 case BasicWall wall -> wall.setDurability(wall.getDurability() - 1);
