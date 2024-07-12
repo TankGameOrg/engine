@@ -17,7 +17,6 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
-import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
@@ -79,10 +78,5 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
 
         conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
         conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
-    }
-
-    @Override
-    public Object getPlayerObject(State state, PlayerRef playerRef) {
-        return BaseRulesetRegister.getOnePlayerObject(state, playerRef);
     }
 }

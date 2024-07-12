@@ -10,5 +10,6 @@ public class TestState extends State {
     public TestState() {
         super(new Board(1, 1), new Council(), new AttributeList<>());
         Attribute.COFFER.to(getCouncil(), 0);
+        Attribute.CAN_BOUNTY.to(getCouncil(), true);
     }
 }

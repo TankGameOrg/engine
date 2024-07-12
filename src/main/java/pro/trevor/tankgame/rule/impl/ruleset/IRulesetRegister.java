@@ -1,8 +1,6 @@
 package pro.trevor.tankgame.rule.impl.ruleset;
 
 import pro.trevor.tankgame.rule.definition.Ruleset;
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public interface IRulesetRegister {
 
@@ -15,13 +13,11 @@ public interface IRulesetRegister {
     void registerPlayerRules(Ruleset ruleset);
 
     static Ruleset getRuleset(IRulesetRegister rulesetRegister) {
-        Ruleset ruleset = new Ruleset(rulesetRegister::getPlayerObject);
+        Ruleset ruleset = new Ruleset();
         rulesetRegister.registerEnforcerRules(ruleset);
         rulesetRegister.registerTickRules(ruleset);
         rulesetRegister.registerConditionalRules(ruleset);
         rulesetRegister.registerPlayerRules(ruleset);
         return ruleset;
     }
-
-    Object getPlayerObject(State state, PlayerRef playerRef);
 }

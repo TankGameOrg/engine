@@ -72,9 +72,4 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
         playerRules.add(PlayerRules.getRuleCofferCostBounty(1, 5));
     }
-
-    @Override
-    public Object getPlayerObject(State state, PlayerRef playerRef) {
-        return BaseRulesetRegister.getOnePlayerObject(state, playerRef);
-    }
 }

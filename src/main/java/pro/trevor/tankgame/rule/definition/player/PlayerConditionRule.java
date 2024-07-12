@@ -38,7 +38,6 @@ public class PlayerConditionRule implements IPlayerRule {
                     sb.append(",\n");
                 }
             }
-            System.err.println(state.toString(2));
             throw new Error(sb.toString());
         }
     }

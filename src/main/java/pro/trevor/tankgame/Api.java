@@ -82,7 +82,7 @@ public class Api {
     private Object decodeJsonAndHandlePlayerRef(JSONObject json) {
         Object decodedJson = Codec.decodeJson(json);
         if (decodedJson instanceof PlayerRef playerRef) {
-            return ruleset.getPlayerObject(state, playerRef);
+            return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findFirst().orElse(null);
         } else {
             return decodedJson;
         }

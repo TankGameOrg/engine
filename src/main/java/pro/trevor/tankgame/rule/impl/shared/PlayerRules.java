@@ -80,13 +80,14 @@ public class PlayerRules {
         if (actionCost <= 0)
             throw new Error("Illegal Action Cost of " + actionCost + " gold. Must be positive and non-zero.");
         if (maxBuys <= 0)
-            throw new Error("illegal max buys of " + maxBuys + ". Must be positive and non-zero.");
+            throw new Error("Illegal max buys of " + maxBuys + ". Must be positive and non-zero.");
 
         return new PlayerConditionRule(ActionKeys.BUY_ACTION,
                 new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
                         new GetterPredicate<>(PlayerRules::getTank,
-                                (state, tank, n) -> toType(n[0], Integer.class) <= Attribute.GOLD.fromOrElse(tank, 0),
-                                "Tank has insufficient gold")
+                                (state, tank, n) -> toType(n[0], Integer.class) <= Attribute.GOLD.fromOrElse(tank, 0), "Tank has insufficient gold"),
+                        new RulePredicate((state, player, n) -> toType(n[0], Integer.class) / actionCost <= maxBuys, "Actions bought must be fewer than or equal to " + maxBuys),
+                        new RulePredicate((state, player, n) -> toType(n[0], Integer.class) % actionCost == 0, "Gold spent must be a multiple of the action cost: " + actionCost)
                 ),
                 (state, player, n) -> {
                     GenericTank tank = getTank(state, player);
@@ -138,7 +139,10 @@ public class PlayerRules {
                         new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) ->
                                 getSpacesInRange(state.getBoard(), tank.getPosition(),
                                         Attribute.RANGE.from(tank).orElse(0)).contains(toType(n[0], GenericTank.class).getPosition()),
-                                "Tank has insufficient gold")),
+                                "Tank has insufficient gold"),
+                        new RulePredicate((state, player, n) -> toType(n[1], Integer.class) >= 0,  "Donation must be positive"),
+                        new RulePredicate((state, player, n) -> Attribute.GOLD.in(toType(n[0], GenericTank.class)),  "Target must have gold attribute")
+                ),
                 (state, player, n) -> {
                     GenericTank tank = getTank(state, player);
                     GenericTank other = toType(n[0], GenericTank.class);

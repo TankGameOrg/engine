@@ -55,7 +55,7 @@ public class TankShootV4Test {
                                 .with(Attribute.DEAD, false)
                                 .finish();
 
-                SHOOT_V4.apply(new TestState(), tank.getPlayerRef(), new Position("A1"), false);
+                SHOOT_V4.apply(generateBoard(1, 1, tank), tank.getPlayerRef(), new Position("A1"), false);
 
                 assertEquals(0, Attribute.ACTION_POINTS.unsafeFrom(tank));
         }
