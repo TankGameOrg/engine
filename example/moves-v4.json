@@ -3325,10 +3325,5 @@
       "class": "Position"
     },
     "timestamp": 264000
-  },
-  {
-    "action": "start_of_day",
-    "day": 11,
-    "timestamp": 364000
   }
 ]

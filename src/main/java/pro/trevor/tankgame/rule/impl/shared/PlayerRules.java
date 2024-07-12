@@ -232,8 +232,7 @@ public class PlayerRules {
 
                     Optional<IElement> optionalElement = state.getBoard().getUnitOrFloor(target);
                     if (optionalElement.isEmpty()) {
-                        throw new Error(
-                                String.format("Target position %s is not on the game board", target.toString()));
+                        throw new Error(String.format("Target position %s is not on the game board", target.toString()));
                     }
 
                     if (hit) {
@@ -253,6 +252,8 @@ public class PlayerRules {
                     if (!Attribute.DEAD.unsafeFrom(otherTank) && Attribute.DURABILITY.unsafeFrom(otherTank) == 0) {
                         handleDeath.accept(state, tank, otherTank);
                         Attribute.DEAD.to(otherTank, true);
+                        Attribute.DURABILITY.to(otherTank, 3);
+                        state.getCouncil().getCouncillors().add(otherTank.getPlayerRef());
                     }
                 }
                 case BasicWall wall -> wall.setDurability(wall.getDurability() - 1);

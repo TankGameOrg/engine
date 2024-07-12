@@ -16,7 +16,6 @@ import java.util.*;
 
 import org.json.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.Pair;
 
 public class Api {
     private final Ruleset ruleset;
@@ -45,6 +44,7 @@ public class Api {
 
     public void ingestAction(JSONObject json) {
         if (!Attribute.RUNNING.fromOrElse(state, true)) {
+            System.out.println(state);
             throw new Error("The game is over; no actions can be submitted");
         }
         else if (json.keySet().contains(JsonKeys.DAY)) {
@@ -120,7 +120,7 @@ public class Api {
         Class<?> type;
         Object subject;
 
-        if (player.getName().equals(COUNCIL) || state.getCouncil().isPlayerOnCouncil(player)) {
+        if (player.getName().equals(COUNCIL)) {
             type = Council.class;
             subject = state.getCouncil();
         } else if (state.getPlayer(player).isPresent()) {
