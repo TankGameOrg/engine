@@ -253,6 +253,9 @@ public class PlayerRules {
                         handleDeath.accept(state, tank, otherTank);
                         Attribute.DEAD.to(otherTank, true);
                         Attribute.DURABILITY.to(otherTank, 3);
+                        Attribute.ACTION_POINTS.to(otherTank, 0);
+                        Attribute.GOLD.to(otherTank, 0);
+                        Attribute.BOUNTY.to(otherTank, 0);
                         state.getCouncil().getCouncillors().add(otherTank.getPlayerRef());
                     }
                 }

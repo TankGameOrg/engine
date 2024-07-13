@@ -31,17 +31,4 @@ public abstract class BaseRulesetRegister implements IRulesetRegister {
     public void registerPlayerRules(Ruleset ruleset) {
 
     }
-
-    public static Object getOnePlayerObject(State state, PlayerRef playerRef) {
-        List<IElement> elements = state.getBoard().gatherAllElements().stream()
-                .filter(e -> e instanceof IPlayerElement)
-                .filter(t -> ((IPlayerElement) t).getPlayerRef().equals(playerRef)).toList();
-        if (elements.isEmpty()) {
-            return state.getCouncil();
-        } else if (elements.size() != 1)  {
-            throw new Error("Invalid state: found multiple elements for " + playerRef);
-        } else {
-            return elements.getFirst();
-        }
-    }
 }
