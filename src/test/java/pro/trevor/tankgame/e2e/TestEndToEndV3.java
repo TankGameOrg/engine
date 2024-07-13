@@ -8,7 +8,10 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static pro.trevor.tankgame.e2e.EndToEndTestUtils.*;
 
 public class TestEndToEndV3 {
 
@@ -20,12 +23,13 @@ public class TestEndToEndV3 {
     }
 
     @Test
-    public void testEndGameState() {
+    public void testStateAtEndState() {
         assertFalse(Attribute.RUNNING.unsafeFrom(tester.getState()));
         assertEquals("Corey", Attribute.WINNER.unsafeFrom(tester.getState()));
         assertEquals(18, Attribute.TICK.unsafeFrom(tester.getState()));
         assertEquals(15, tester.getCouncil().allPlayersOnCouncil().size());
         assertEquals(20, Attribute.COFFER.unsafeFrom(tester.getCouncil()));
+
         assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().anyMatch((t) -> t.getPlayerRef().getName().equals("Corey")));
         assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().anyMatch((t) -> t.getPlayerRef().getName().equals("Beyer")));
         assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().noneMatch((t) -> t.getPlayerRef().getName().equals("Dan")));
@@ -35,20 +39,41 @@ public class TestEndToEndV3 {
         assertFalse(tester.getCouncil().isPlayerCouncillor(new PlayerRef("Dan")));
         assertFalse(tester.getCouncil().isPlayerSenator(new PlayerRef("Trevor")));
         assertTrue(tester.getCouncil().isPlayerCouncillor(new PlayerRef("Trevor")));
-        assertEquals(69, Attribute.GOLD.unsafeFrom(tester.getTankByPlayerName("Corey")));
-        assertEquals(5, Attribute.BOUNTY.unsafeFrom(tester.getTankByPlayerName("Corey")));
-        assertEquals(1, Attribute.ACTION_POINTS.unsafeFrom(tester.getTankByPlayerName("Corey")));
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(tester.getTankByPlayerName("Corey")));
-        assertEquals(2, Attribute.RANGE.unsafeFrom(tester.getTankByPlayerName("Corey")));
-        assertEquals(new Position("C6"), tester.getTankByPlayerName("Corey").getPosition());
-        assertEquals(0, Attribute.GOLD.unsafeFrom(tester.getTankByPlayerName("Beyer")));
-        assertEquals(0, Attribute.BOUNTY.unsafeFrom(tester.getTankByPlayerName("Beyer")));
-        assertEquals(0, Attribute.ACTION_POINTS.unsafeFrom(tester.getTankByPlayerName("Beyer")));
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(tester.getTankByPlayerName("Beyer")));
-        assertEquals(2, Attribute.RANGE.unsafeFrom(tester.getTankByPlayerName("Beyer")));
-        assertEquals(new Position("C5"), tester.getTankByPlayerName("Beyer").getPosition());
-        assertTrue(Attribute.DEAD.unsafeFrom(tester.getTankByPlayerName("Beyer")));
-        assertEquals(3, Attribute.RANGE.unsafeFrom(tester.getTankByPlayerName("Stomp")));
+    }
+
+    @Test
+    public void testPlayersAtEndState() {
+        assertPlayerAttributeEquals(tester, "Corey", Attribute.GOLD, 69);
+        assertPlayerAttributeEquals(tester, "Corey", Attribute.BOUNTY, 5);
+        assertPlayerAttributeEquals(tester, "Corey", Attribute.ACTION_POINTS, 1);
+        assertPlayerAttributeEquals(tester, "Corey", Attribute.DURABILITY, 3);
+        assertPlayerAttributeEquals(tester, "Corey", Attribute.RANGE, 2);
+        assertPlayerAttributeEquals(tester, "Corey", Attribute.POSITION, new Position("C6"));
+
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.GOLD, 0);
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.BOUNTY, 0);
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.ACTION_POINTS, 0);
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.DURABILITY, 3);
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.RANGE, 2);
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.DEAD, true);
+        assertPlayerAttributeEquals(tester, "Beyer", Attribute.POSITION, new Position("C5"));
+
+        assertPlayerAttributeEquals(tester, "Stomp", Attribute.RANGE, 3);
+    }
+
+    @Test
+    public void testCouncillorsAndSenatorsAtEndState() {
+        assertExpectedCouncillorsAndSenators(tester,
+                Set.of("Beyer", "Bryan", "David", "Isaac", "Joel", "John", "Lena", "Schmude", "Stomp", "Trevor", "Ty", "Xavion"),
+                Set.of("Dan", "Ryan", "Steve"));
+    }
+
+    @Test
+    public void testPlayersOnBoardAtEndState() {
+        assertExpectedTanksOnBoard(tester,
+                Set.of("Corey"),
+                Set.of("Beyer", "Bryan", "David", "Isaac", "Joel", "John", "Lena", "Schmude", "Stomp", "Trevor", "Ty", "Xavion"),
+                Set.of("Dan", "Ryan", "Steve"));
     }
 
 }
