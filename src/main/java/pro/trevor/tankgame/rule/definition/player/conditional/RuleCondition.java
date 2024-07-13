@@ -1,25 +1,24 @@
-package pro.trevor.tankgame.rule.definition.player;
+package pro.trevor.tankgame.rule.definition.player.conditional;
 
-import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Result;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Condition<T extends IPlayerElement> {
+public class RuleCondition {
 
-    private final Predicate<T>[] predicates;
+    private final RulePredicate[] predicates;
 
-    @SafeVarargs
-    public Condition(Predicate<T>... predicates) {
+    public RuleCondition(RulePredicate... predicates) {
         this.predicates = predicates;
     }
 
-    public Result<List<String>> test(State state, T t, Object... meta) {
+    public Result<List<String>> test(State state, PlayerRef t, Object... meta) {
         List<String> errors = new ArrayList<>();
 
-        for (Predicate<T> predicate : predicates) {
+        for (RulePredicate predicate : predicates) {
             Result<String> error = predicate.test(state, t, meta);
             if (error.isError()) {
                 errors.add(error.getError());

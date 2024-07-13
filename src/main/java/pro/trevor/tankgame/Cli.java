@@ -1,7 +1,7 @@
 package pro.trevor.tankgame;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.IRuleset;
+import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ReflectionUtil;
@@ -18,12 +18,12 @@ import java.util.regex.Pattern;
 
 public class Cli {
 
-    private static final Map<String, IRuleset> RULESETS = new HashMap<>();
+    private static final Map<String, IRulesetRegister> RULESETS = new HashMap<>();
 
     static {
         List<Class<?>> rulesets = ReflectionUtil.allClassesAnnotatedWith(RulesetType.class, "pro.trevor.tankgame");
         for (Class<?> ruleset : rulesets) {
-            Class<? extends IRuleset> rulesetClass = (Class<? extends IRuleset>) ruleset;
+            Class<? extends IRulesetRegister> rulesetClass = (Class<? extends IRulesetRegister>) ruleset;
             RulesetType rulesetType = ruleset.getAnnotation(RulesetType.class);
             try {
                 RULESETS.put(rulesetType.name(), rulesetClass.getConstructor().newInstance());
@@ -36,7 +36,7 @@ public class Cli {
         }
     }
 
-    public static void repl(IRuleset ruleset) {
+    public static void repl(IRulesetRegister ruleset) {
         Api api = new Api(ruleset);
         PrintStream output = System.out;
         InputStream input = System.in;
@@ -67,7 +67,7 @@ public class Cli {
                 }
                 case "version" -> {
                     String version = json.getString("version");
-                    IRuleset newRuleset = RULESETS.get(version);
+                    IRulesetRegister newRuleset = RULESETS.get(version);
                     if (newRuleset == null) {
                         output.println(response("no such version: " + version, true));
                     } else {

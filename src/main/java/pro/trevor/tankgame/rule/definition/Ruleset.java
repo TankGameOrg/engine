@@ -3,14 +3,14 @@ package pro.trevor.tankgame.rule.definition;
 import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 
-public class RulesetDescription {
+public class Ruleset {
 
     private final EnforcerRuleset enforcer;
     private final ApplicableRuleset conditional;
     private final ApplicableRuleset tick;
     private final PlayerRuleset player;
 
-    public RulesetDescription() {
+    public Ruleset() {
         this.enforcer = new EnforcerRuleset();
         this.conditional = new ApplicableRuleset();
         this.tick = new ApplicableRuleset();

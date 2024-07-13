@@ -19,6 +19,11 @@ public class TankBuilder<T extends GenericTank> {
         return this;
     }
 
+    public TankBuilder<T> named(String name) {
+        Attribute.NAME.to(tank, name);
+        return this;
+    }
+
     public TankBuilder<T> at(Position p) {
         tank.setPosition(p);
         return this;
@@ -33,6 +38,8 @@ public class TankBuilder<T extends GenericTank> {
         json.put("class", "GenericTank");
         json.put(Attribute.PLAYER_REF.getJsonName(), new PlayerRef("test").toJson());
         json.put(Attribute.POSITION.getJsonName(), new Position("A1").toJson());
+        json.put(Attribute.DEAD.getJsonName(), false);
+        json.put(Attribute.ACTION_POINTS.getJsonName(), 0);
         return new TankBuilder<>(new GenericTank(json));
     }
 }

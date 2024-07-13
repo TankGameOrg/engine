@@ -126,4 +126,8 @@ public class Util {
         }
     }
 
+    public static <T> T toType(Object o) {
+        return (T) o;
+    }
+
 }

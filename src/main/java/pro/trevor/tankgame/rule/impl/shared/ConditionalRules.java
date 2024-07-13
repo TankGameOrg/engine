@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.shared.rule;
+package pro.trevor.tankgame.rule.impl.shared;
 
 import static pro.trevor.tankgame.util.Util.isOrthAdjToMine;
 
@@ -44,7 +44,7 @@ public class ConditionalRules {
 
     public static final ConditionalRule<Board> TANK_WIN_CONDITION = new ConditionalRule<>(
             (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
-                    .collect(Collectors.toSet()).size() == 1,
+                    .toList().size() == 1,
             (s, b) -> {
                 Attribute.RUNNING.to(s, false);
                 Attribute.WINNER.to(s, b.gatherUnits(GenericTank.class).stream()

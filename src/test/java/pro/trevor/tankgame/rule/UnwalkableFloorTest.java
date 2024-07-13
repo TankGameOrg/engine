@@ -1,12 +1,9 @@
 package pro.trevor.tankgame.rule;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
-import pro.trevor.tankgame.rule.definition.player.PlayerActionRule;
-import pro.trevor.tankgame.rule.impl.shared.rule.PlayerRules;
+import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
@@ -16,6 +13,8 @@ import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestUtilities;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UnwalkableFloorTest {
 
@@ -28,8 +27,8 @@ public class UnwalkableFloorTest {
         State s = TestUtilities.generateBoard(3, 2, t);
         s.getBoard().putFloor(new UnwalkableFloor(new Position("B2")));
 
-        PlayerActionRule<GenericTank> moveRule = PlayerRules.GetMoveRule(Attribute.ACTION_POINTS, 1);
-        assertFalse(moveRule.canApply(s, t, new Position("B2")));
+        IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
+        assertFalse(moveRule.canApply(s, t.getPlayerRef(), new Position("B2")));
     }
 
     @Test
@@ -56,18 +55,18 @@ public class UnwalkableFloorTest {
         IFloor floor = new UnwalkableFloor(new Position("B2"));
         s.getBoard().putFloor(floor);
 
-        PlayerActionRule<GenericTank> shootRule = PlayerRules.SHOOT_V3;
+        IPlayerRule shootRule = PlayerRules.SHOOT_V3;
 
         assertTrue(LineOfSight.hasLineOfSightV3(s, t.getPosition(), floor.getPosition()));
 
-        shootRule.apply(s, t, floor.getPosition(), true);
-        assertTrue(s.getBoard().getFloor(floor.getPosition()).orElse(null) == floor);
+        shootRule.apply(s, t.getPlayerRef(), floor.getPosition(), true);
+        assertSame(s.getBoard().getFloor(floor.getPosition()).orElse(null), floor);
 
-        shootRule.apply(s, t, floor.getPosition(), true);
-        assertTrue(s.getBoard().getFloor(floor.getPosition()).orElse(null) == floor);
+        shootRule.apply(s, t.getPlayerRef(), floor.getPosition(), true);
+        assertSame(s.getBoard().getFloor(floor.getPosition()).orElse(null), floor);
 
-        shootRule.apply(s, t, floor.getPosition(), true);
-        assertTrue(s.getBoard().getFloor(floor.getPosition()).orElse(null) == floor);
+        shootRule.apply(s, t.getPlayerRef(), floor.getPosition(), true);
+        assertSame(s.getBoard().getFloor(floor.getPosition()).orElse(null), floor);
     }
 
 }
