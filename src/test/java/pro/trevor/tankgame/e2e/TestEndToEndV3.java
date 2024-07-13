@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV3RulesetRegister;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.PlayerRef;
 
 import java.util.Set;
 

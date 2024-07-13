@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static pro.trevor.tankgame.e2e.EndToEndTestUtils.readFile;
+
 public class EndToEndTester {
 
     private final Api api;
@@ -45,15 +47,6 @@ public class EndToEndTester {
 
     public GenericTank getTankByPlayerName(String player) {
         return (GenericTank) api.getState().getBoard().getPlayerElement(new PlayerRef(player)).get();
-    }
-
-    private static String readFile(String path) {
-        File file = new File(path);
-        try {
-            return Files.readString(file.toPath());
-        } catch (IOException e) {
-            throw new Error("Failed to read file " +  path, e);
-        }
     }
 
 }

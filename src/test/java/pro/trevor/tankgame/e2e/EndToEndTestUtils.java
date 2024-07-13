@@ -4,12 +4,24 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EndToEndTestUtils {
+
+    public static String readFile(String path) {
+        File file = new File(path);
+        try {
+            return Files.readString(file.toPath());
+        } catch (IOException e) {
+            throw new Error("Failed to read file " +  path, e);
+        }
+    }
 
     public static void assertExpectedCouncillorsAndSenators(EndToEndTester tester, Set<String> councillors, Set<String> senators) {
         Set<String> actualCouncillors = tester.getCouncil().getCouncillors().stream().map(PlayerRef::getName).collect(Collectors.toSet());
