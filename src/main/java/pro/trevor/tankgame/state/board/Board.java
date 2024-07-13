@@ -3,12 +3,14 @@ package pro.trevor.tankgame.state.board;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IMetaElement;
+import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
 import pro.trevor.tankgame.state.board.floor.IFloor;
 import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.IGatherable;
 import pro.trevor.tankgame.util.JsonType;
 
@@ -113,6 +115,10 @@ public class Board implements IMetaElement, IGatherable {
 
     public Optional<IFloor> getFloor(Position p) {
         return getElementOnBoard(floorBoard, p);
+    }
+
+    public Optional<IPlayerElement> getPlayerElement(PlayerRef playerRef) {
+        return gatherUnits(IPlayerElement.class).stream().filter((p) -> p.getPlayerRef().equals(playerRef) ).findAny();
     }
 
     // Returns the unit at the position if there is one.
