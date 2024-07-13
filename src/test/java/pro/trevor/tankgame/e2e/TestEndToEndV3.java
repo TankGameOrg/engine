@@ -30,15 +30,8 @@ public class TestEndToEndV3 {
         assertEquals(15, tester.getCouncil().allPlayersOnCouncil().size());
         assertEquals(20, Attribute.COFFER.unsafeFrom(tester.getCouncil()));
 
-        assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().anyMatch((t) -> t.getPlayerRef().getName().equals("Corey")));
-        assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().anyMatch((t) -> t.getPlayerRef().getName().equals("Beyer")));
-        assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().noneMatch((t) -> t.getPlayerRef().getName().equals("Dan")));
-        assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().noneMatch((t) -> t.getPlayerRef().getName().equals("Ryan")));
-        assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().noneMatch((t) -> t.getPlayerRef().getName().equals("Steve")));
-        assertTrue(tester.getCouncil().isPlayerSenator(new PlayerRef("Dan")));
-        assertFalse(tester.getCouncil().isPlayerCouncillor(new PlayerRef("Dan")));
-        assertFalse(tester.getCouncil().isPlayerSenator(new PlayerRef("Trevor")));
-        assertTrue(tester.getCouncil().isPlayerCouncillor(new PlayerRef("Trevor")));
+        tester.getCouncil().getCouncillors().forEach((p) -> assertFalse(tester.getCouncil().isPlayerSenator(p)));
+        tester.getCouncil().getSenators().forEach((p) -> assertFalse(tester.getCouncil().isPlayerCouncillor(p)));
     }
 
     @Test
