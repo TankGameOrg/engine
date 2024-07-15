@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.e2e;
 
 import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
@@ -29,8 +30,6 @@ public class EndToEndTestUtils {
 
         assertEquals(actualCouncillors, councillors);
         assertEquals(actualSenators, senators);
-
-        assertTrue(tester.getBoard().gatherUnits(GenericTank.class).stream().noneMatch((t) -> t.getPlayerRef().getName().equals("Steve")));
     }
 
     public static void assertExpectedTanksOnBoard(EndToEndTester tester, Set<String> livingTanks, Set<String> deadTanks, Set<String> noTanks) {
@@ -51,8 +50,30 @@ public class EndToEndTestUtils {
                 .anyMatch(p::equals)));
     }
 
-    public static <T> void assertPlayerAttributeEquals(EndToEndTester tester, String player, Attribute<T> attribute, T value) {
+    public static <T> void assertPlayerTankAttributeEquals(EndToEndTester tester, String player, Attribute<T> attribute, T value) {
         assertEquals(value, attribute.unsafeFrom(tester.getTankByPlayerName(player)));
+    }
+
+    public static void testCouncil(EndToEndTester tester, int councillors, int senators) {
+        assertEquals(councillors, tester.getCouncil().getCouncillors().size());
+        assertEquals(senators, tester.getCouncil().getSenators().size());
+
+        tester.getCouncil().getCouncillors().forEach((p) -> assertFalse(tester.getCouncil().isPlayerSenator(p)));
+        tester.getCouncil().getSenators().forEach((p) -> assertFalse(tester.getCouncil().isPlayerCouncillor(p)));
+    }
+
+    public static void testState(EndToEndTester tester, boolean running, String winner, int tick) {
+        assertEquals(running, Attribute.RUNNING.unsafeFrom(tester.getState()));
+        assertEquals(winner, Attribute.WINNER.unsafeFrom(tester.getState()));
+        assertEquals(tick, Attribute.TICK.unsafeFrom(tester.getState()));
+    }
+
+    public static <T> void assertTypeOfFloorAtPosition(EndToEndTester tester, Position position, Class<T> type) {
+        assertEquals(type, tester.getFloorAtPosition(position).getClass());
+    }
+
+    public static <T> void assertTypeOfUnitAtPosition(EndToEndTester tester, Position position, Class<T> type) {
+        assertEquals(type, tester.getUnitAtPosition(position).getClass());
     }
 
 }
