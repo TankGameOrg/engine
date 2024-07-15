@@ -6,8 +6,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-### VS Code ###
+### IDEs ###
 .vscode/
+.idea/
 
 ### Mac OS ###
 .DS_Store
