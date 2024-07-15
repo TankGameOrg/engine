@@ -32,7 +32,7 @@ public class EndToEndTestUtils {
         assertEquals(actualSenators, senators);
     }
 
-    public static void assertExpectedTanksOnBoard(EndToEndTester tester, Set<String> livingTanks, Set<String> deadTanks, Set<String> noTanks) {
+    public static void assertExpectedTanksOnBoard(EndToEndTester tester, Set<String> livingTanks, Set<String> deadTanks) {
         Set<String> actualLivingTanks = tester.getBoard().gatherUnits(GenericTank.class).stream()
                 .filter((t) -> !Attribute.DEAD.unsafeFrom(t))
                 .map((t) -> t.getPlayerRef().getName())
@@ -44,10 +44,6 @@ public class EndToEndTestUtils {
 
         assertEquals(actualLivingTanks, livingTanks);
         assertEquals(actualDeadTanks, deadTanks);
-
-        noTanks.forEach((p) -> assertFalse(tester.getBoard().gatherUnits(GenericTank.class)
-                .stream().map((t) -> t.getPlayerRef().getName())
-                .anyMatch(p::equals)));
     }
 
     public static <T> void assertPlayerTankAttributeEquals(EndToEndTester tester, String player, Attribute<T> attribute, T value) {

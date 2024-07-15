@@ -56,8 +56,7 @@ public class TestEndToEndV4 {
     public void testPlayersOnBoardAtEndState() {
         assertExpectedTanksOnBoard(tester,
                 Set.of("John"),
-                Set.of("Beyer", "Bryan", "Charlie", "Corey", "Dan", "David", "Isaac", "Lena", "Ryan", "Schmude", "Stomp", "Trevor", "Ty", "Xavion"),
-                Set.of("Mike"));
+                Set.of("Beyer", "Bryan", "Charlie", "Corey", "Dan", "David", "Isaac", "Lena", "Ryan", "Schmude", "Stomp", "Trevor", "Ty", "Xavion"));
     }
 
     @Test
