@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ZLSSettings">
     <option name="zlsPath" value="/usr/bin/zls" />
-    <option name="initialAutodetectHasBeenDone" value="true" />
   </component>
   <component name="ZigProjectSettings">
-    <option name="toolchainHomeDirectory" value="/usr/bin" />
     <option name="explicitPathToStd" value="/usr/lib/zig/std" />
+    <option name="toolchainHomeDirectory" value="/usr/bin" />
   </component>
 </project>

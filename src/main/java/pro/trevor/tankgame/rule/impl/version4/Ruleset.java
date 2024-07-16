@@ -30,7 +30,7 @@ import static pro.trevor.tankgame.util.Util.toType;
 
 public class Ruleset extends BaseRuleset implements IRuleset {
 
-    private static final Function<State, Long> TIMEOUT = (s) -> (long) (5 * 60);
+    private static final Function<State, Long> TIMEOUT = (s) -> (long) (60);
 
     @Override
     public void registerEnforcerRules(RulesetDescription ruleset) {
