@@ -35,8 +35,9 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
         long cooldown = cooldownFunction.apply(state);
         Player player = subject.toPlayer(state).get();
 
-        long elapsed = timeOfAction - Attribute.TIME_OF_LAST_ACTION.fromOrElse(player, 0L);
-        if (elapsed >= cooldown) {
+        long cooldownEnd = Attribute.GLOBAL_COOLDOWN_END_TIME.fromOrElse(player, 0L);
+
+        if (cooldownEnd <= timeOfAction) {
             Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length);
             if (super.canApply(state, subject, appliedMeta)) {
                 consumer.accept(state, subject, appliedMeta);
@@ -51,19 +52,19 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
                 }
                 throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
             }
-            Attribute.TIME_OF_LAST_ACTION.to(player, timeOfAction);
+            Attribute.GLOBAL_COOLDOWN_END_TIME.to(player, timeOfAction + cooldown);
         } else {
             JSONObject error = new JSONObject();
             error.put("error", true);
             error.put("rule", name);
             error.put("cooldown", cooldown);
-            error.put("elapsed", elapsed);
+            error.put("cooldown_end", cooldownEnd);
             error.put("subject", subject.toJson());
 
             if (Main.DEBUG) {
                 System.err.println(error.toString(2));
             }
-            throw new Error(String.format("Rule %s has cooldown of %d seconds but only waited %d seconds", name, cooldown, elapsed));
+            throw new Error(String.format("Rule %s has cooldown of %d seconds you have %d seconds remaining", name, cooldown, cooldownEnd - timeOfAction));
         }
     }
 
@@ -73,9 +74,8 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
         if (player.isEmpty()) {
             throw new Error("No player found with name `" + subject.getName() + "`");
         }
-        long cooldown = cooldownFunction.apply(state);
-        long elapsed = (long) meta[0] - Attribute.TIME_OF_LAST_ACTION.fromOrElse(player.get(),0L);
-        return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
+        boolean cooldownEnded = ((long) meta[0]) >= Attribute.GLOBAL_COOLDOWN_END_TIME.fromOrElse(player.get(),0L);
+        return cooldownEnded && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
     }
 
 }

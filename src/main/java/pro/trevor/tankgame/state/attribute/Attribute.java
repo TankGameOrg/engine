@@ -46,7 +46,7 @@ public class Attribute<E> {
 
     // Player attributes
     public static final Attribute<String> NAME = new Attribute<>("NAME", String.class);
-    public static final Attribute<Long> TIME_OF_LAST_ACTION = new Attribute<>("TIME_OF_LAST_ACTION", Long.class);
+    public static final Attribute<Long> GLOBAL_COOLDOWN_END_TIME = new Attribute<>("GLOBAL_COOLDOWN_END_TIME", Long.class);
 
     private final String attributeName;
     private final Class<E> attributeClass;
