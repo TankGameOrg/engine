@@ -3,6 +3,7 @@ package pro.trevor.tankgame.rule.impl.shared;
 import static pro.trevor.tankgame.util.Util.isOrthAdjToMine;
 
 import pro.trevor.tankgame.rule.definition.ConditionalRule;
+import pro.trevor.tankgame.rule.definition.Priority;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
@@ -50,12 +51,12 @@ public class ConditionalRules {
                 Attribute.WINNER.to(s, b.gatherUnits(GenericTank.class).stream()
                         .filter((t) -> !Attribute.DEAD.from(t).orElse(false))
                         .findFirst().get().getPlayerRef().getName());
-            });
+            }, Priority.LOWEST);
 
     public static final ConditionalRule<Council> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
             (s, c) -> Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) >= Attribute.ARMISTICE_MAX.unsafeFrom(c),
             (s, c) -> {
                 Attribute.RUNNING.to(s, false);
                 Attribute.WINNER.to(s, "Council");
-            });
+            }, Priority.LOWEST);
 }

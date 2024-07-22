@@ -251,12 +251,6 @@ public class PlayerRules {
                     Attribute.DURABILITY.to(otherTank, Attribute.DURABILITY.unsafeFrom(otherTank) - 1);
                     if (!Attribute.DEAD.unsafeFrom(otherTank) && Attribute.DURABILITY.unsafeFrom(otherTank) == 0) {
                         handleDeath.accept(state, tank, otherTank);
-                        Attribute.DEAD.to(otherTank, true);
-                        Attribute.DURABILITY.to(otherTank, 3);
-                        Attribute.ACTION_POINTS.to(otherTank, 0);
-                        Attribute.GOLD.to(otherTank, 0);
-                        Attribute.BOUNTY.to(otherTank, 0);
-                        state.getCouncil().getCouncillors().add(otherTank.getPlayerRef());
                     }
                 }
                 case BasicWall wall -> wall.setDurability(wall.getDurability() - 1);

@@ -48,7 +48,7 @@ public class Api {
             throw new Error("The game is over; no actions can be submitted");
         }
         else if (json.keySet().contains(JsonKeys.DAY)) {
-            applyTick(state, ruleset);
+            ruleset.getTickRules().applyRules(state);
         } else {
             JSONObject subject = json.getJSONObject(JsonKeys.SUBJECT);
             String action = json.getString(JsonKeys.ACTION);
@@ -73,8 +73,8 @@ public class Api {
             }
         }
 
-        enforceInvariants(state, ruleset);
-        applyConditionals(state, ruleset);
+        ruleset.getEnforcerRules().enforceRules(state);
+        ruleset.getConditionalRules().applyRules(state);
     }
 
     private Object decodeJsonAndHandlePlayerRef(JSONObject json) {
@@ -161,15 +161,7 @@ public class Api {
     }
 
     private static void enforceInvariants(State state, Ruleset ruleset) {
-        state.gatherAll().forEach((x) -> ruleset.getEnforcerRules().enforceRules(state, x));
-    }
 
-    private static void applyConditionals(State state, Ruleset ruleset) {
-        state.gatherAll().forEach((x) -> ruleset.getConditionalRules().applyRules(state, x));
-    }
-
-    private static void applyTick(State state, Ruleset ruleset) {
-        state.gatherAll().forEach((x) -> ruleset.getTickRules().applyRules(state, x));
     }
 
     private static class JsonKeys {

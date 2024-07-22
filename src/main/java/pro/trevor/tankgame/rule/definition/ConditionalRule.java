@@ -9,10 +9,23 @@ public class ConditionalRule<T> implements IConditionalRule<T> {
 
     private final BiPredicate<State, T> predicate;
     private final BiConsumer<State, T> consumer;
+    private final Priority priority;
 
     public ConditionalRule(BiPredicate<State, T> predicate, BiConsumer<State, T> consumer) {
         this.predicate = predicate;
         this.consumer = consumer;
+        this.priority = Priority.DEFAULT;
+    }
+
+    public ConditionalRule(BiPredicate<State, T> predicate, BiConsumer<State, T> consumer, Priority priority) {
+        this.predicate = predicate;
+        this.consumer = consumer;
+        this.priority = priority;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
