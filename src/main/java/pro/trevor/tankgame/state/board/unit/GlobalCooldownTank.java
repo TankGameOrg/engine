@@ -13,30 +13,30 @@ import java.util.Map;
  */
 public class GlobalCooldownTank extends GenericTank implements ICooldownPlayerElement {
 
-    protected long lastActionTime;
+    protected long cooldownEndTime;
 
     public GlobalCooldownTank(String player, Position position, Map<String, Object> defaults) {
         super(player, position, defaults);
-        this.lastActionTime = 0;
+        this.cooldownEndTime = 0;
     }
 
     public GlobalCooldownTank(JSONObject json) {
         super(json);
-        this.lastActionTime = json.optLong("last_action_time", 0);
+        this.cooldownEndTime = json.optLong("global_cooldown_end_time", 0);
     }
 
     @Override
-    public long getLastUsage(String rule) {
-        return lastActionTime;
+    public long getCooldownEnd(String rule) {
+        return cooldownEndTime;
     }
 
     @Override
-    public void setLastUsage(String rule, long time) {
-        this.lastActionTime = time;
+    public void setCooldownEnd(String rule, long time) {
+        this.cooldownEndTime = time;
     }
 
     @Override
     public JSONObject toJson() {
-        return super.toJson().put("last_action_time", lastActionTime);
+        return super.toJson().put("global_cooldown_end_time", cooldownEndTime);
     }
 }

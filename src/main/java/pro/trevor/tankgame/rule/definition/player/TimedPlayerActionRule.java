@@ -31,8 +31,7 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
     public void apply(State state, T subject, Object... meta) {
         long timeOfAction = (long) meta[0];
         long cooldown = cooldownFunction.apply(state);
-        long elapsed = timeOfAction - subject.getLastUsage(name);
-        if (elapsed >= cooldown) {
+        if (timeOfAction >= subject.getCooldownEnd(name)) {
             Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length);
             if (super.canApply(state, subject, appliedMeta)) {
                 consumer.accept(state, subject, appliedMeta);
@@ -53,13 +52,14 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
                 }
                 throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
             }
-            subject.setLastUsage(name, timeOfAction);
+            subject.setCooldownEnd(name, timeOfAction + cooldown);
         } else {
+            long remaining = subject.getCooldownEnd(name) - timeOfAction;
             JSONObject error = new JSONObject();
             error.put("error", true);
             error.put("rule", name);
             error.put("cooldown", cooldown);
-            error.put("elapsed", elapsed);
+            error.put("remaining", remaining);
 
             if (subject instanceof IJsonObject subjectJson) {
                 error.put("subject", subjectJson.toJson());
@@ -70,15 +70,14 @@ public class TimedPlayerActionRule<T extends ICooldownPlayerElement> extends Pla
             if (Main.DEBUG) {
                 System.err.println(error.toString(2));
             }
-            throw new Error(String.format("Rule %s has cooldown of %d seconds but only waited %d seconds", name, cooldown, elapsed));
+            throw new Error(String.format("Rule %s has cooldown of %d seconds but the cooldown doesn't for another %d seconds", name, cooldown, remaining));
         }
     }
 
     @Override
     public boolean canApply(State state, T subject, Object... meta) {
-        long cooldown = cooldownFunction.apply(state);
-        long elapsed = (long) meta[0] - subject.getLastUsage(name);
-        return elapsed >= cooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
+        boolean isOnCooldown = (long) meta[0] >= subject.getCooldownEnd(name);
+        return isOnCooldown && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
     }
 
 }

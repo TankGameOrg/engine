@@ -96,7 +96,8 @@ public class Ruleset extends BaseRuleset implements IRuleset {
         metaPlayerRules.put(Council.class, new PlayerActionRule<>(PlayerRules.ActionKeys.BOUNTY,
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
-                    return !t.isDead() && c.canBounty();
+                    int bounty = toType(n[1], Integer.class);
+                    return !t.isDead() && c.canBounty() && c.getCoffer() >= bounty;
                 },
                 (s, c, n) -> {
                     Tank t = toType(n[0], Tank.class);
