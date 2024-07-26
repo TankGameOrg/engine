@@ -8,9 +8,21 @@ import java.util.function.BiConsumer;
 public class TickActionRule<T extends ITickElement> implements IApplicableRule<T> {
 
     private final BiConsumer<State, T> consumer;
+    private final Priority priority;
 
     public TickActionRule(BiConsumer<State, T> consumer) {
         this.consumer = consumer;
+        this.priority = Priority.DEFAULT;
+    }
+
+    public TickActionRule(BiConsumer<State, T> consumer, Priority priority) {
+        this.consumer = consumer;
+        this.priority = priority;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override

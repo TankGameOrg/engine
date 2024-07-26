@@ -33,14 +33,28 @@ public class EnforcerRuleset {
         return new ArrayList<>(0);
     }
 
-    public <T> void enforceRules(State state, T subject){
-        Class<?> c = subject.getClass();
-        for (IEnforceable<T> rule : (List<IEnforceable<T>>) (Object) get(c)) {
-            rule.enforce(state, subject);
-        }
-    }
+    public void enforceRules(State state) {
+        List<Object> subjects = state.gatherAll();
+        Map<Class<?>, List<Object>> subjectByClass = new HashMap<>();
 
-    public Set<Class<?>> keySet() {
-        return rules.keySet();
+        for (Object subject : subjects) {
+            subjectByClass.putIfAbsent(subject.getClass(), new ArrayList<>());
+            subjectByClass.get(subject.getClass()).add(subject);
+        }
+
+        for (Map.Entry<Class<?>, List<IEnforceable<?>>> entry : rules.entrySet()) {
+            Class<?> ruleClass = entry.getKey();
+            for (List<Object> subjectList : subjectByClass.entrySet().stream()
+                    .filter((e) -> ruleClass.isAssignableFrom(e.getKey()))
+                    .map(Map.Entry::getValue)
+                    .toList()) {
+                for (Object subject : subjectList) {
+                    for (IEnforceable<?> rule : entry.getValue()) {
+                        IEnforceable<Object> castRule = (IEnforceable<Object>) rule;
+                        castRule.enforce(state, subject);
+                    }
+                }
+            }
+        }
     }
 }
