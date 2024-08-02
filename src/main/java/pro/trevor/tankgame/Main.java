@@ -51,11 +51,20 @@ public class Main {
                 throwable.printStackTrace();
                 System.exit(1);
             }
+        } else if (args.length == 1 && (args[0].equals("-v") || args[0].equals("--version"))) {
+            Main.printVersion();
         } else if (args.length == 0) {
             // REPL with the newest default ruleset
             Cli.repl(new DefaultV4RulesetRegister());
         } else {
-            System.err.println("Expected 0 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4>");
+            System.err.println("Expected 0 or 1 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4|-v|--version>");
         }
+    }
+
+    private static void printVersion() {
+        JSONObject versionInfo = new JSONObject();
+        versionInfo.put("version", Main.class.getPackage().getImplementationVersion());
+        versionInfo.put("supported_rulesets", Cli.getSupportedRulesetNames());
+        System.out.println(versionInfo.toString(4));
     }
 }

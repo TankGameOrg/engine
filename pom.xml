@@ -44,6 +44,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>${exec.mainClass}</mainClass>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

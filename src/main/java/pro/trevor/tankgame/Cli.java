@@ -10,6 +10,7 @@ import pro.trevor.tankgame.util.RulesetType;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,10 @@ public class Cli {
                 throw new Error("Error constructing IRuleset: failed to instantiate class " + rulesetClass, e);
             }
         }
+    }
+
+    public static List<String> getSupportedRulesetNames() {
+        return new ArrayList<String>(RULESETS.keySet());
     }
 
     public static void repl(IRulesetRegister ruleset) {
