@@ -21,8 +21,8 @@ import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
 
-@RulesetType(name = "default-v4")
-public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
+@RulesetType(name = "default-v5-experimental")
+public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
 
     private static final Function<State, Long> TIMEOUT = (s) -> (long) (1 * 60);
 
@@ -47,6 +47,7 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
 
         tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(GenericTank.class, TickRules.GetHealTanksInHealthPoolRule());
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
