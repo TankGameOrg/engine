@@ -111,7 +111,6 @@
             <version>5.11.0-M1</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
         <dependency>
             <groupId>io.github.git-commit-id</groupId>
             <artifactId>git-commit-id-maven-plugin</artifactId>
