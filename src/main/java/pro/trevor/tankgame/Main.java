@@ -7,7 +7,9 @@ import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Properties;
 
 public class Main {
 
@@ -61,10 +63,31 @@ public class Main {
         }
     }
 
+    /**
+     * Print version and git info to stdout as a json object
+     */
     private static void printVersion() {
         JSONObject versionInfo = new JSONObject();
-        versionInfo.put("version", Main.class.getPackage().getImplementationVersion());
+        String version = Main.class.getPackage().getImplementationVersion();
+        versionInfo.put("version", version);
         versionInfo.put("supported_rulesets", Cli.getSupportedRulesetNames());
+
+        String prettyVersion = "Engine " + version;
+
+        try (InputStream in = Main.class.getResourceAsStream("/git.properties")) {
+            // If we can't find the git resource skip it
+            if(in != null) {
+                Properties gitInfo = new Properties();
+                gitInfo.load(in);
+                versionInfo.put("git_branch", gitInfo.getProperty("git.branch"));
+                prettyVersion += " @ " + gitInfo.getProperty("git.commit.id.describe");
+            }
+        }
+        catch(Exception ex) {
+            System.err.println("Failed to read git info: " + ex);
+        }
+
+        versionInfo.put("pretty_version", prettyVersion);
         System.out.println(versionInfo.toString(4));
     }
 }
