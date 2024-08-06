@@ -32,7 +32,7 @@ public class Main {
                 movesFile = new File("example/moves-v4.json");
                 api = new Api(new DefaultV4RulesetRegister());
             } else {
-                // Default to debugging default-v4 ruleset
+                // Default to debugging default-v5 ruleset
                 initialFile = new File("example/initial-v5.json");
                 movesFile = new File("example/moves-v5.json");
                 api = new Api(new DefaultV5RulesetRegister());
