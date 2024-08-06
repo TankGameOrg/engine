@@ -7,7 +7,9 @@ import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Properties;
 
 public class Main {
 
@@ -51,11 +53,41 @@ public class Main {
                 throwable.printStackTrace();
                 System.exit(1);
             }
+        } else if (args.length == 1 && (args[0].equals("-v") || args[0].equals("--version"))) {
+            Main.printVersion();
         } else if (args.length == 0) {
             // REPL with the newest default ruleset
             Cli.repl(new DefaultV4RulesetRegister());
         } else {
-            System.err.println("Expected 0 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4>");
+            System.err.println("Expected 0 or 1 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4|-v|--version>");
         }
+    }
+
+    /**
+     * Print version and git info to stdout as a json object
+     */
+    private static void printVersion() {
+        JSONObject versionInfo = new JSONObject();
+        String version = Main.class.getPackage().getImplementationVersion();
+        versionInfo.put("version", version);
+        versionInfo.put("supported_rulesets", Cli.getSupportedRulesetNames());
+
+        String prettyVersion = "Engine " + version;
+
+        try (InputStream in = Main.class.getResourceAsStream("/git.properties")) {
+            // If we can't find the git resource skip it
+            if(in != null) {
+                Properties gitInfo = new Properties();
+                gitInfo.load(in);
+                versionInfo.put("git_branch", gitInfo.getProperty("git.branch"));
+                prettyVersion += " @ " + gitInfo.getProperty("git.commit.id.describe");
+            }
+        }
+        catch(Exception ex) {
+            System.err.println("Failed to read git info: " + ex);
+        }
+
+        versionInfo.put("pretty_version", prettyVersion);
+        System.out.println(versionInfo.toString(4));
     }
 }
