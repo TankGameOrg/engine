@@ -15,6 +15,7 @@ public class Attribute<E> {
     // Tank attributes
     public static final Attribute<Integer> GOLD = new Attribute<>("GOLD", Integer.class);
     public static final Attribute<Integer> ACTION_POINTS = new Attribute<>("ACTIONS", Integer.class);
+    public static final Attribute<Integer> MAX_ACTION_POINTS = new Attribute<>("MAX_ACTIONS", Integer.class);
     public static final Attribute<Integer> RANGE = new Attribute<>("RANGE", Integer.class);
     public static final Attribute<Integer> BOUNTY = new Attribute<>("BOUNTY", Integer.class);
     public static final Attribute<Boolean> DEAD = new Attribute<>("DEAD", Boolean.class);

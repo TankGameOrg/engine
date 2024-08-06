@@ -21,8 +21,8 @@ import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
 
-@RulesetType(name = "default-v4")
-public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
+@RulesetType(name = "default-v5-experimental")
+public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
 
     private static final Function<State, Long> TIMEOUT = (s) -> (long) (1 * 60);
 
@@ -31,11 +31,11 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
 
         invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
-        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
+        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 3));
         invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
         invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
         invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
-        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
+        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, Attribute.MAX_ACTION_POINTS, 3));
         invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
         invariants.put(BasicWall.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
         invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER, 0));
@@ -47,6 +47,7 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
 
         tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(GenericTank.class, TickRules.GetHealTanksInHealthPoolRule());
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);

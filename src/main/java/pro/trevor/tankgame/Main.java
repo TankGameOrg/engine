@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV3RulesetRegister;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
+import pro.trevor.tankgame.rule.impl.ruleset.DefaultV5RulesetRegister;
 import pro.trevor.tankgame.state.State;
 
 import java.io.File;
@@ -25,11 +26,16 @@ public class Main {
                 initialFile = new File("example/initial-v3.json");
                 movesFile = new File("example/moves-v3.json");
                 api = new Api(new DefaultV3RulesetRegister());
-            } else {
+            } else if (args[1].equals("default-v4")) {
                 // Default to debugging default-v4 ruleset
                 initialFile = new File("example/initial-v4.json");
                 movesFile = new File("example/moves-v4.json");
                 api = new Api(new DefaultV4RulesetRegister());
+            } else {
+                // Default to debugging default-v5 ruleset
+                initialFile = new File("example/initial-v5.json");
+                movesFile = new File("example/moves-v5.json");
+                api = new Api(new DefaultV5RulesetRegister());
             }
             DEBUG = true;
             try {
