@@ -4,24 +4,25 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeObject;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class AttributePredicateEnforcer<T extends AttributeObject, U extends Comparable<U>> implements IEnforceable<T> {
 
     private final Predicate<T> predicate;
     private final Attribute<U> attribute;
-    private final U bound;
+    private final Function<T, U> boundFunction;
 
-    public AttributePredicateEnforcer(Predicate<T> predicate, Attribute<U> attribute, U bound) {
+    public AttributePredicateEnforcer(Predicate<T> predicate, Attribute<U> attribute, Function<T, U> boundFunction) {
         this.predicate = predicate;
         this.attribute = attribute;
-        this.bound = bound;
+        this.boundFunction = boundFunction;
     }
 
     @Override
     public void enforce(State state, T subject) {
         if (!predicate.test(subject)) {
-            attribute.to(subject, bound);
+            attribute.to(subject, boundFunction.apply(subject));
         }
     }
 }
