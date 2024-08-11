@@ -13,10 +13,10 @@ import java.util.function.Predicate;
 public class AttributePredicate<T extends AttributeObject & IPlayerElement> extends GetterPredicate<T> {
 
     public AttributePredicate(BiFunction<State, PlayerRef, T> getter, Function<T, Result<String>> predicate) {
-        super(getter, (s, t, n) -> predicate.apply(t));
+        super(getter, (s, t) -> predicate.apply(t));
     }
 
     public AttributePredicate(BiFunction<State, PlayerRef, T> getter, Predicate<T> predicate, String error) {
-        super(getter, (s, t, n) -> predicate.test(t) ? Result.ok() : Result.error(error));
+        super(getter, (s, t) -> predicate.test(t) ? Result.ok() : Result.error(error));
     }
 }
