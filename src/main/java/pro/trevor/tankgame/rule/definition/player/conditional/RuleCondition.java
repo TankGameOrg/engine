@@ -44,7 +44,7 @@ public class RuleCondition {
             Result<String> error = callPredicate.apply(predicate);
             if (error.isError()) {
                 errors.add(error.getError());
-                break; // Currently a lot of predicates assume that we stop on the first error
+                break; // Currently a lot of predicates getTank without checking if the player exists
             }
         }
 
