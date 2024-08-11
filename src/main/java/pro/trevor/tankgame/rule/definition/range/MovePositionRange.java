@@ -2,13 +2,12 @@ package pro.trevor.tankgame.rule.definition.range;
 
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.Util;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class MovePositionRange extends FunctionVariableRange<GenericTank, Position> {
+public class MovePositionRange extends GenericTankFunctionVariableRange<Position> {
 
     public MovePositionRange(String name) {
         super(name, (state, tank) -> getMoveable(state, tank.getPosition()));

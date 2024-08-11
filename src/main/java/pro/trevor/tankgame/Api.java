@@ -111,44 +111,27 @@ public class Api {
         return out;
     }
 
-    public JSONObject getPossibleActions(PlayerRef player) {
+    public JSONObject getPossibleActions(PlayerRef subject) {
         JSONObject actions = new JSONObject();
         actions.put("error", false);
         actions.put("type", "possible_actions");
-        actions.put("player", player);
+        actions.put("player", subject);
 
         JSONArray actionsArray = new JSONArray();
         List<IPlayerRule> rules = ruleset.getPlayerRules().getAllRules();
-        Class<?> type;
-        Object subject;
 
-        if (player.getName().equals(COUNCIL)) {
-            type = Council.class;
-            subject = state.getCouncil();
-        } else if (state.getPlayer(player).isPresent()) {
-            type = GenericTank.class;
-            Optional<GenericTank> tank = state.getBoard().gather(GenericTank.class).stream()
-                    .filter((t) -> t.getPlayerRef().equals(player))
-                    .findFirst();
-            if (tank.isPresent()) {
-                subject = tank.get();
-            } else {
-                actions.put("actions", actionsArray);
-                return actions;
-            }
-        } else {
-            throw new Error("Unknown player: " + player);
+        if (state.getPlayer(subject).isEmpty()) {
+            throw new Error("Unknown player: " + subject);
         }
 
         for (IPlayerRule rule : rules) {
             JSONObject actionJson = new JSONObject();
             actionJson.put("rule", rule.name());
-            actionJson.put("subject", type.getSimpleName().toLowerCase());
 
             // Check if the rule is applicable to this (state, player) combination
             Result<List<String>> canApplyResult = Result.ok();
             if (rule instanceof PlayerConditionRule conditionRule) {
-                canApplyResult = conditionRule.canApplyConditional(state, player);
+                canApplyResult = conditionRule.canApplyConditional(state, subject);
             }
 
             if(canApplyResult.isOk()) {

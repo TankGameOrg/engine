@@ -34,11 +34,11 @@ import static pro.trevor.tankgame.util.Util.*;
 public class PlayerRules {
 
     private static boolean hasTank(State state, PlayerRef playerRef) {
-        return state.getBoard().gatherUnits(GenericTank.class).stream().map(GenericTank::getPlayerRef).anyMatch(playerRef::equals);
+        return state.getTankForPlayerRef(playerRef).isPresent();
     }
 
     private static GenericTank getTank(State state, PlayerRef playerRef) {
-        return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findAny().get();
+        return state.getTankForPlayerRef(playerRef).get();
     }
 
     private static boolean isCouncil(State state, PlayerRef playerRef) {
