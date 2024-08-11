@@ -12,6 +12,7 @@ import pro.trevor.tankgame.rule.definition.range.UnitRange;
 import pro.trevor.tankgame.rule.definition.range.BooleanRange;
 import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
+import pro.trevor.tankgame.rule.definition.range.FilteredRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
@@ -74,7 +75,9 @@ public class PlayerRules {
                 Attribute.ACTION_POINTS.to(tank, Attribute.ACTION_POINTS.fromOrElse(tank, 0) + n5 * 2 + n3);
                 Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - gold);
             },
-            new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 5, 8, 10))));
+            new FilteredRange<PlayerRef, Integer>(
+                new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 5, 8, 10))),
+                (state, playerRef, goldCost) -> Attribute.GOLD.fromOrElse(PlayerRules.getTank(state, playerRef), 0) >= goldCost));
 
     public static PlayerConditionRule buyActionWithGold(int actionCost, int maxBuys) {
         if (actionCost <= 0)
@@ -97,8 +100,10 @@ public class PlayerRules {
                     Attribute.ACTION_POINTS.to(tank, Attribute.ACTION_POINTS.unsafeFrom(tank) + boughtActions);
                     Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(tank) - goldSpent);
                 },
-                new DiscreteIntegerRange("gold", IntStream.rangeClosed(1, maxBuys).map(n -> n * actionCost).boxed()
-                        .collect(Collectors.toSet())));
+                new FilteredRange<PlayerRef, Integer>(
+                    new DiscreteIntegerRange("gold", IntStream.rangeClosed(1, maxBuys).map(n -> n * actionCost).boxed()
+                            .collect(Collectors.toSet())),
+                    (state, playerRef, goldCost) -> Attribute.GOLD.fromOrElse(PlayerRules.getTank(state, playerRef), 0) >= goldCost));
     }
 
     public static PlayerConditionRule getMoveRule(Attribute<Integer> attribute, int cost) {
@@ -211,7 +216,9 @@ public class PlayerRules {
                     Attribute.CAN_BOUNTY.to(council, false);
                 },
                 UnitRange.ALL_LIVING_TANKS,
-                new DiscreteIntegerRange("bounty", lowerBound, upperBound));
+                new FilteredRange<>(
+                    new DiscreteIntegerRange("bounty", lowerBound, upperBound),
+                    (state, playerRef, bounty) -> Attribute.COFFER.fromOrElse(state.getCouncil(), 0) >= bounty));
     }
 
     public static PlayerConditionRule spendActionToShootGeneric(
