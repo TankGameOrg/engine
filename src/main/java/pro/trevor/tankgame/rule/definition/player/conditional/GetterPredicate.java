@@ -9,7 +9,7 @@ import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 import java.util.function.BiFunction;
 
-public class GetterPredicate<T extends IPlayerElement> extends RulePredicate {
+public class GetterPredicate<T extends IPlayerElement> extends RulePredicateWithMeta {
 
     public GetterPredicate(BiFunction<State, PlayerRef, T> getter, IVarTriFunction<State, T, Object, Result<String>> predicate) {
         super((s, p, n) -> predicate.accept(s, getter.apply(s, p), n));

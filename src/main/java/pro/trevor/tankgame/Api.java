@@ -2,6 +2,7 @@ package pro.trevor.tankgame;
 
 import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
@@ -16,6 +17,7 @@ import java.util.*;
 
 import org.json.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.Result;
 
 public class Api {
     private final Ruleset ruleset;
@@ -143,14 +145,29 @@ public class Api {
             actionJson.put("rule", rule.name());
             actionJson.put("subject", type.getSimpleName().toLowerCase());
 
-            // find all states of each parameter
+            // Check if the rule is applicable to this (state, player) combination
+            Result<List<String>> canApplyResult = Result.ok();
+            if (rule instanceof PlayerConditionRule conditionRule) {
+                canApplyResult = conditionRule.canApplyConditional(state, player);
+            }
+
+            if(canApplyResult.isOk()) {
+                actionJson.put("errors", new JSONArray());
+            }
+            else {
+                actionJson.put("errors", new JSONArray(canApplyResult.getError()));
+            }
+
+            // find all states of each parameter if the rule can be applied
             JSONArray fields = new JSONArray();
-            for (TypeRange<?> field : rule.parameters()) {
-                if (field instanceof VariableTypeRange<?,?> variableField) {
-                    VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
-                    genericField.generate(state, subject);
+            if(canApplyResult.isOk()) {
+                for (TypeRange<?> field : rule.parameters()) {
+                    if (field instanceof VariableTypeRange<?,?> variableField) {
+                        VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
+                        genericField.generate(state, subject);
+                    }
+                    fields.put(field.toJson());
                 }
-                fields.put(field.toJson());
             }
             actionJson.put("fields", fields);
             actionsArray.put(actionJson);
