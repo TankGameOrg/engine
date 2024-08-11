@@ -12,8 +12,6 @@ import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 
-import java.util.stream.Collectors;
-
 public class ConditionalRules {
     public static final ConditionalRule<BasicWall> DESTROY_WALL_ON_ZERO_DURABILITY = new ConditionalRule<>(
             (s, w) -> w.getDurability() == 0,

@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 
 public class DiscreteIntegerRangeTest {
     @Test

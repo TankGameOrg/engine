@@ -11,7 +11,6 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.*;
 
@@ -22,8 +21,6 @@ import pro.trevor.tankgame.util.Result;
 public class Api {
     private final Ruleset ruleset;
     private State state;
-
-    private static final String COUNCIL = "Council";
 
     public Api(IRulesetRegister ruleset) {
         this.ruleset = IRulesetRegister.getRuleset(ruleset);
@@ -158,10 +155,6 @@ public class Api {
 
         actions.put("actions", actionsArray);
         return actions;
-    }
-
-    private static void enforceInvariants(State state, Ruleset ruleset) {
-
     }
 
     private static class JsonKeys {
