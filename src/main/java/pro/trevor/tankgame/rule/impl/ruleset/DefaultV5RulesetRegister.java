@@ -54,7 +54,6 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
         tickRules.put(Council.class, TickRules.GetCouncilBaseIncomeRule(1, 3));
-        tickRules.put(Council.class, TickRules.ARMISTICE_VIA_COUNCIL);
         tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> Attribute.CAN_BOUNTY.to(c, true)));
     }
 
@@ -80,7 +79,6 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         conditionalRules.put(GenericTank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
 
-        conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
         conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
 }
