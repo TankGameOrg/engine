@@ -5,10 +5,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 public class Util {
@@ -38,6 +35,61 @@ public class Util {
         Position[] output = new Position[orthAdj.length + diagAdj.length];
         System.arraycopy(orthAdj, 0, output, 0, orthAdj.length);
         System.arraycopy(diagAdj, 0, output, orthAdj.length, diagAdj.length);
+
+        return output;
+    }
+
+    public static Set<Position> allAdjacentMovablePositions(Board board, Position p) {
+        Set<Position> output = new HashSet<>();
+
+        Position left = new Position(p.x() - 1, p.y());
+        Position right = new Position(p.x() + 1, p.y());
+        Position up = new Position(p.x(), p.y() - 1);
+        Position down = new Position(p.x(), p.y() + 1);
+        Position upLeft = new Position(p.x() - 1, p.y() - 1);
+        Position upRight = new Position(p.x() + 1, p.y() - 1);
+        Position downRight = new Position(p.x() + 1, p.y() + 1);
+        Position downLeft = new Position(p.x() - 1, p.y() + 1);
+
+        if (board.isWalkable(left)) {
+            output.add(left);
+            if (board.isWalkable(upLeft)) {
+                output.add(upLeft);
+            }
+            if (board.isWalkable(downLeft)) {
+                output.add(downLeft);
+            }
+        }
+
+        if (board.isWalkable(right)) {
+            output.add(right);
+            if (board.isWalkable(upRight)) {
+                output.add(upRight);
+            }
+            if (board.isWalkable(downRight)) {
+                output.add(downRight);
+            }
+        }
+
+        if (board.isWalkable(up)) {
+            output.add(up);
+            if (board.isWalkable(upLeft)) {
+                output.add(upLeft);
+            }
+            if (board.isWalkable(upRight)) {
+                output.add(upRight);
+            }
+        }
+
+        if (board.isWalkable(down)) {
+            output.add(down);
+            if (board.isWalkable(downLeft)) {
+                output.add(downLeft);
+            }
+            if (board.isWalkable(downRight)) {
+                output.add(downRight);
+            }
+        }
 
         return output;
     }
@@ -77,8 +129,31 @@ public class Util {
         return output;
     }
 
-    public static boolean canMoveTo(State state, Position s, Position e) {
+    public static Set<Position> possibleMoves(State state, Position p, int speed) {
+        HashMap<Position, Integer> output = new HashMap<>();
+        possibleMovesHelper(output, state, p, speed);
+        return output.keySet();
+    }
+
+    private static void possibleMovesHelper(HashMap<Position, Integer> visited, State state, Position p, int speed) {
+        if (visited.getOrDefault(p, 0) >= speed || !state.getBoard().isWalkable(p)) {
+            return;
+        }
+
+        visited.put(p, speed);
+
+        if (speed == 0) {
+            return;
+        }
+
+        for (Position position : allAdjacentMovablePositions(state.getBoard(), p)) {
+            possibleMovesHelper(visited, state, position, speed - 1);
+        }
+    }
+
+    public static boolean canMoveTo(State state, Position s, Position e, int speed) {
         Position[] adjacent = allAdjacentPositions(s);
+        Set<Position> possibleMoves = new HashSet<>();
         if (!Arrays.stream(adjacent).toList().contains(e)) {
             return false;
         } else if (!state.getBoard().isWalkable(e)) {
