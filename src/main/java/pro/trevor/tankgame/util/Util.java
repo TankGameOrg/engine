@@ -136,7 +136,7 @@ public class Util {
     }
 
     private static void possibleMovesHelper(HashMap<Position, Integer> visited, State state, Position p, int speed) {
-        if (visited.getOrDefault(p, 0) >= speed || !state.getBoard().isWalkable(p)) {
+        if (visited.getOrDefault(p, -1) >= speed || (!state.getBoard().isWalkable(p) && !visited.isEmpty())) {
             return;
         }
 
