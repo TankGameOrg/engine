@@ -152,24 +152,8 @@ public class Util {
     }
 
     public static boolean canMoveTo(State state, Position s, Position e, int speed) {
-        Position[] adjacent = allAdjacentPositions(s);
-        Set<Position> possibleMoves = new HashSet<>();
-        if (!Arrays.stream(adjacent).toList().contains(e)) {
-            return false;
-        } else if (!state.getBoard().isWalkable(e)) {
-            return false;
-        }
-
-        int dx = e.x() - s.x();
-        int dy = e.y() - s.y();
-
-        if (dx == 0 || dy == 0) {
-            return true;
-        } else {
-            Position adjY = new Position(s.x() + dx, s.y());
-            Position adjX = new Position(s.x(), s.y() + dy);
-            return state.getBoard().isWalkable(adjY) || state.getBoard().isWalkable(adjX);
-        }
+        Set<Position> possibleMoves = possibleMoves(state, s, speed);
+        return possibleMoves.contains(e);
     }
 
     public static String toString(Collection<?> items) {
