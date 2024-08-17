@@ -257,4 +257,18 @@ public class Board implements IMetaElement, IGatherable {
         output.put("floor_board", floors);
         return output;
     }
+
+    /**
+     * Return all valid positions on the board
+     * @return
+     */
+    public List<Position> getAllPositions() {
+        List<Position> output = new ArrayList<>();
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                output.add(new Position(x, y));
+            }
+        }
+        return output;
+    }
 }

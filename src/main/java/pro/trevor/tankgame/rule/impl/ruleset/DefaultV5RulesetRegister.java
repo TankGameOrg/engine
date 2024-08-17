@@ -48,6 +48,8 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
         tickRules.put(GenericTank.class, TickRules.GetHealTanksInHealthPoolRule());
+        tickRules.put(GenericTank.class, TickRules.CLEAR_ONLY_LOOTABLE_BY);
+        tickRules.put(GenericTank.class, TickRules.SET_PLAYER_CAN_LOOT);
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
@@ -60,11 +62,12 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerPlayerRules(Ruleset ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        playerRules.add(new TimedPlayerConditionRule(PlayerRules.SHOOT_V4, TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.SHOOT_V5, TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
+        playerRules.add(PlayerRules.LOOT_DEAD_TANK);
 
         playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
         playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
