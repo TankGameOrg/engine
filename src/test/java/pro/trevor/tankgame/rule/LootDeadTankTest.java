@@ -2,6 +2,7 @@ package pro.trevor.tankgame.rule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,22 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 
 public class LootDeadTankTest extends LootActionTestHelper {
+    @Test
+    void playerCanOnlyLootOncePerDay() {
+        setupTest("A1", 0, "B1", 0);
+
+        // First loot attempt works
+        apply(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK, "B1");
+
+        // We've already looted once
+        assertFalse(canApply(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK, "B1"));
+
+        startNewDay();
+
+        // It's a new day so we can loot again
+        assertTrue(canApply(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK, "B1"));
+    }
+
     @Test
     void cantLootLivingTank() {
         setupTest("B2", 0, "B3", 0);

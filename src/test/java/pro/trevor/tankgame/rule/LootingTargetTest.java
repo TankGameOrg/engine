@@ -38,22 +38,6 @@ public class LootingTargetTest extends LootActionTestHelper {
     }
 
     @Test
-    void playerCanOnlyLootOncePerDay() {
-        setupTest("A1", 0, "B1", 0);
-
-        // First loot attempt works
-        apply(getBasicLootRule(), "B1");
-
-        // We've already looted once
-        assertFalse(canApply(getBasicLootRule(), "B1"));
-
-        startNewDay();
-
-        // It's a new day so we can loot again
-        assertTrue(canApply(getBasicLootRule(), "B1"));
-    }
-
-    @Test
     void playerCanOnlyLootTargetsInTheirRange() {
         setupTest("C1", 0, "A3", 0);
 

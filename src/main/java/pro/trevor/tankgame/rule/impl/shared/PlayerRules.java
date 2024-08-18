@@ -225,7 +225,7 @@ public class PlayerRules {
     }
 
     /**
-     * A rule that allows tanks to loot other units or floors if they have the PLAYER_CAN_LOOT attribute
+     * A rule that allows tanks to loot other units or floors
      *
      * If the target has the ONLY_LOOTABLE_BY then only the player specified by the attribute can loot this target
      *
@@ -268,8 +268,7 @@ public class PlayerRules {
         RuleCondition lootCondition = new RuleCondition(
             PLAYER_HAS_TANK_PREDICATE,
             TARGET_IS_IN_RANGE,
-            new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Tank must be alive"),
-            new BooleanPredicate<>(PlayerRules::getTank, Attribute.PLAYER_CAN_LOOT, true, "Players can only loot once per day"),
+            new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Subject's tank must be alive"),
             canLootRule
         );
 
@@ -278,20 +277,21 @@ public class PlayerRules {
             (state, player, meta) -> {
                 Position position = toType(meta[0], Position.class);
                 GenericTank tank = PlayerRules.getTank(state, player);
-
                 AttributeObject targetObject = (AttributeObject) state.getBoard().getUnitOrFloor(position).get();
                 transferLoot.accept(state, tank, targetObject);
-
-                Attribute.PLAYER_CAN_LOOT.remove(PlayerRules.getTank(state, player));
             },
             new PositionRange("target",
                 (state, tank, target) -> lootCondition.test(state, tank.getPlayerRef(), target).isOk()));
     }
 
     /**
-     * Rule that loots gold from dead tanks
+     * Rule that loots gold from dead tanks if the subject has the PLAYER_CAN_LOOT attribute
      */
     public static PlayerConditionRule LOOT_GOLD_FROM_DEAD_TANK = getLootTargetRule((state, tank, targetTank) -> {
+        if(!Attribute.PLAYER_CAN_LOOT.fromOrElse(tank, false)) {
+            return Result.error("Players can only loot once per day");
+        }
+
         if(!(targetTank instanceof GenericTank) || !Attribute.DEAD.fromOrElse(targetTank, false)) {
             return Result.error("You can only loot dead tanks");
         }
@@ -300,6 +300,7 @@ public class PlayerRules {
     }, (state, tank, targetTank) -> {
         Attribute.GOLD.to(tank, Attribute.GOLD.fromOrElse(tank, 0) + Attribute.GOLD.fromOrElse(targetTank, 0));
         Attribute.GOLD.to(targetTank, 0);
+        Attribute.PLAYER_CAN_LOOT.remove(tank);
     });
 
     public static PlayerConditionRule spendActionToShootGeneric(
