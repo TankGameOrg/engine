@@ -125,7 +125,7 @@ public class Board implements IMetaElement, IGatherable {
     // If there is no unit at the position, then the floor is returned.
     public Optional<IElement> getUnitOrFloor(Position p) {
         IElement unit = getUnit(p).orElse(null);
-        if (!(unit instanceof EmptyUnit))
+        if (unit != null && !(unit instanceof EmptyUnit))
             return Optional.of(unit);
         IElement floor = getFloor(p).orElse(null);
         return Optional.ofNullable(floor);

@@ -66,7 +66,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
-        playerRules.add(PlayerRules.LOOT_DEAD_TANK);
+        playerRules.add(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK);
 
         playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
         playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));

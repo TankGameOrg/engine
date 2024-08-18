@@ -3,7 +3,6 @@ package pro.trevor.tankgame.rule.impl.shared;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,11 +29,11 @@ import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.LineOfSight;
+import pro.trevor.tankgame.util.Pair;
 import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriFunction;
 import pro.trevor.tankgame.util.function.ITriPredicate;
-import pro.trevor.tankgame.util.function.IVarTriFunction;
 
 import static pro.trevor.tankgame.util.Util.*;
 
@@ -225,58 +224,80 @@ public class PlayerRules {
                 new DiscreteIntegerRange("bounty", lowerBound, upperBound));
     }
 
-    public static PlayerConditionRule lootTarget(
-            ITriFunction<State, GenericTank, Position, Result<String>> canLootTarget,
-            ITriConsumer<State, GenericTank, IElement> transferLoot) {
+    /**
+     * A rule that allows tanks to loot other units or floors if they have the PLAYER_CAN_LOOT attribute
+     *
+     * If the target has the ONLY_LOOTABLE_BY then only the player specified by the attribute can loot this target
+     *
+     * @param canLootTarget A function that checks if the specified target is lootable
+     * @param transferLoot A callback tansfers the looted targets attributes
+     */
+    public static PlayerConditionRule getLootTargetRule(
+            ITriFunction<State, GenericTank, AttributeObject, Result<String>> canLootTarget,
+            ITriConsumer<State, GenericTank, AttributeObject> transferLoot) {
+
+        RulePredicate canLootRule = new RulePredicate((state, player, meta) -> {
+            // Make sure that the position is an AttributeObject
+            Position position = toType(meta[0], Position.class);
+            Optional<IElement> targetElement = state.getBoard().getUnitOrFloor(position);
+            if(targetElement.isEmpty()) {
+                return Result.error("Target " + position + " is out of bounds");
+            }
+
+            if(!(targetElement.get() instanceof AttributeObject)) {
+                return Result.error("Cannot target " + position + " it's the wrong type");
+            }
+
+            AttributeObject target = (AttributeObject) targetElement.get();
+
+            // Make sure this player is allowed to loot this target
+            if(Attribute.ONLY_LOOTABLE_BY.in(target)) {
+                PlayerRef lootableBy = Attribute.ONLY_LOOTABLE_BY.unsafeFrom(target);
+                if(!lootableBy.equals(player)) {
+                    String targetName = Attribute.NAME.fromOrElse(target, position.toString());
+                    String lootableByName = Attribute.NAME.fromOrElse(lootableBy.toPlayer(state).get(), "somebody");
+                    return Result.error(targetName + " can only be looted by " + lootableByName);
+                }
+            }
+
+            // Check ruleset specific requirements
+            GenericTank tank = PlayerRules.getTank(state, player);
+            return canLootTarget.accept(state, tank, target);
+        });
 
         RuleCondition lootCondition = new RuleCondition(
             PLAYER_HAS_TANK_PREDICATE,
             TARGET_IS_IN_RANGE,
+            new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Tank must be alive"),
             new BooleanPredicate<>(PlayerRules::getTank, Attribute.PLAYER_CAN_LOOT, true, "Players can only loot once per day"),
-            new RulePredicate((state, player, meta) -> {
-                GenericTank tank = PlayerRules.getTank(state, player);
-                Position target = toType(meta[0], Position.class);
-                return canLootTarget.accept(state, tank, target);
-            })
+            canLootRule
         );
 
         return new PlayerConditionRule(PlayerRules.ActionKeys.LOOT,
             lootCondition,
             (state, player, meta) -> {
+                Position position = toType(meta[0], Position.class);
                 GenericTank tank = PlayerRules.getTank(state, player);
-                Position target = toType(meta[0], Position.class);
-                IElement targetElement = state.getBoard().getUnitOrFloor(target).get();
-                transferLoot.accept(state, tank, targetElement);
+
+                AttributeObject targetObject = (AttributeObject) state.getBoard().getUnitOrFloor(position).get();
+                transferLoot.accept(state, tank, targetObject);
+
                 Attribute.PLAYER_CAN_LOOT.remove(PlayerRules.getTank(state, player));
             },
             new PositionRange("target",
                 (state, tank, target) -> lootCondition.test(state, tank.getPlayerRef(), target).isOk()));
     }
 
-    public static PlayerConditionRule LOOT_DEAD_TANK = lootTarget((state, tank, position) -> {
-        Optional<IUnit> optionalTargetElement = state.getBoard().getUnit(position);
-        if(optionalTargetElement.isEmpty()) {
-            return Result.error("Position " + position + " is not on the board (so you can't loot it)");
-        }
-
-        IUnit targetElement = optionalTargetElement.get();
-        if(!(targetElement instanceof GenericTank) || !Attribute.DEAD.fromOrElse((GenericTank) targetElement, false)) {
+    /**
+     * Rule that loots gold from dead tanks
+     */
+    public static PlayerConditionRule LOOT_GOLD_FROM_DEAD_TANK = getLootTargetRule((state, tank, targetTank) -> {
+        if(!(targetTank instanceof GenericTank) || !Attribute.DEAD.fromOrElse(targetTank, false)) {
             return Result.error("You can only loot dead tanks");
         }
 
-        GenericTank targetTank = (GenericTank) targetElement;
-        if(Attribute.ONLY_LOOTABLE_BY.in(targetTank)) {
-            PlayerRef lootableBy = Attribute.ONLY_LOOTABLE_BY.unsafeFrom(targetTank);
-            if(!lootableBy.equals(tank.getPlayerRef())) {
-                String targetName = Attribute.NAME.fromOrElse(targetTank, position.toString());
-                String lootableByName = Attribute.NAME.fromOrElse(lootableBy.toPlayer(state).get(), "somebody");
-                return Result.error(targetName + " can only be looted by " + lootableByName);
-            }
-        }
-
         return Result.ok();
-    }, (state, tank, targetElement) -> {
-        GenericTank targetTank = (GenericTank) targetElement;
+    }, (state, tank, targetTank) -> {
         Attribute.GOLD.to(tank, Attribute.GOLD.fromOrElse(tank, 0) + Attribute.GOLD.fromOrElse(targetTank, 0));
         Attribute.GOLD.to(targetTank, 0);
     });
