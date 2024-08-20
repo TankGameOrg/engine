@@ -1,29 +1,68 @@
 #!/bin/bash
 set -e
 
-if [ "$1" == "help" ]; then
-    echo "Usage: $0 [tag]"
-    echo "       $0 no-pull [tag]"
-    echo
-    echo "TIP: If you want to use the latest development version of tank game ui, check it out run ./scripts/build and then run ./run-web-ui no-pull development"
-    exit 1
+help() {
+    cat <<-EOF
+Usage: $(basename "$0") [-P] [-t <tag>] [-h] -- [ui args]
+    -t <tag>       Use a tag other than the default (default: development)
+    -P             Don't pull/build the latest docker image
+    -b <branch>    Use a specific branch of the UI (default: main)
+    -p <port>      Use a non default UI port (default: 3333)
+    -h             Print this help
+    -v             Debug this script
+    --             Anything after the -- or any unrecognized arguments will be passed to the UI (Print UI help with $(basename "$0") -- help)
+EOF
+    exit
+}
+
+TANK_GAME_WEB_IMAGE="ghcr.io/tankgameorg/ui"
+DOCKER_TAG="development"
+PORT=3333
+
+while getopts ":PTht:b:p:v" OPTION; do
+    case "$OPTION" in
+        P)
+            NO_PULL=1
+            ;;
+        t)
+            DOCKER_TAG="$OPTARG"
+            ;;
+        b)
+            GIT_BRANCH="#$OPTARG"
+            ;;
+        p)
+            PORT="$OPTARG"
+            ;;
+        v)
+            set -x
+            ;;
+        h)
+            help
+            ;;
+    esac
+done
+
+# Remove the arguments parsed by getopts
+shift $((OPTIND-1))
+
+if [ -n "$GIT_BRANCH" ] && [ "$DOCKER_TAG" != "development" ]; then
+    echo "Git branch only works with the development docker tag (i.e. $(basename "$0") -b '$GIT_BRANCH')"
+    exit
 fi
 
 # Cd to repo root
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-TANK_GAME_WEB_IMAGE="ghcr.io/tankgameorg/ui"
-
-if [ "$1" == "no-pull" ]; then
-    shift  # Take the no-pull argument off the stack
-else
-    docker pull "$TANK_GAME_WEB_IMAGE"
+if [ -z "$NO_PULL" ]; then
+    if [ "$DOCKER_TAG" == "development" ]; then
+        docker build -t "${TANK_GAME_WEB_IMAGE}:${DOCKER_TAG}" https://github.com/TankGameOrg/ui.git$GIT_BRANCH
+    else
+        docker pull "$TANK_GAME_WEB_IMAGE"
+    fi
 fi
 
-tag="${1:-latest}"
-
-docker run --rm -it \
-    -p 3333:3333 \
+exec docker run --rm -it \
+    -p "$PORT:3333" \
     --init \
     -v $(pwd)/target:/app/engine \
-    "${TANK_GAME_WEB_IMAGE}:${tag}"
+    "${TANK_GAME_WEB_IMAGE}:${DOCKER_TAG}" "$@"
