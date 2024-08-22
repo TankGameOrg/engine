@@ -43,7 +43,7 @@ public class Api {
     }
 
     public void ingestAction(JSONObject json) {
-        if (!Attribute.RUNNING.fromOrElse(state, true)) {
+        if (!state.getOrElse(Attribute.RUNNING, true)) {
             System.out.println(state);
             throw new Error("The game is over; no actions can be submitted");
         }

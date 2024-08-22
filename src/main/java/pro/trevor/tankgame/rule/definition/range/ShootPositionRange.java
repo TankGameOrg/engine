@@ -14,7 +14,7 @@ public class ShootPositionRange extends FunctionVariableRange<GenericTank, Posit
 
     public ShootPositionRange(String name, ITriPredicate<State, Position, Position> lineOfSight) {
         super(name, (state, tank) -> getShootable(lineOfSight, state, tank.getPosition(),
-                Attribute.RANGE.from(tank).orElse(0)));
+                tank.get(Attribute.RANGE).orElse(0)));
     }
 
     private static Set<Position> getShootable(ITriPredicate<State, Position, Position> lineOfSight, State state,

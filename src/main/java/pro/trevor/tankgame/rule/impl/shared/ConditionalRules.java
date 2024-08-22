@@ -26,9 +26,9 @@ public class ConditionalRules {
 
     public static <T extends GenericTank> ConditionalRule<T> GetKillOrDestroyTankOnZeroDurabilityRule() {
         return new ConditionalRule<>(
-                (s, t) -> Attribute.DURABILITY.from(t).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
+                (s, t) -> t.get(Attribute.DURABILITY).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
                 (s, t) -> {
-                    if (Attribute.DEAD.from(t).orElse(false)) {
+                    if (t.get(Attribute.DEAD).orElse(false)) {
                         s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
                         s.getCouncil().getCouncillors().remove(t.getPlayerRef());
                         s.getCouncil().getSenators().add(t.getPlayerRef());
@@ -44,17 +44,17 @@ public class ConditionalRules {
     }
 
     public static final ConditionalRule<Board> TANK_WIN_CONDITION = new ConditionalRule<>(
-            (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !Attribute.DEAD.from(t).orElse(false))
+            (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                     .toList().size() == 1,
             (s, b) -> {
                 Attribute.RUNNING.to(s, false);
                 Attribute.WINNER.to(s, b.gatherUnits(GenericTank.class).stream()
-                        .filter((t) -> !Attribute.DEAD.from(t).orElse(false))
+                        .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                         .findFirst().get().getPlayerRef().getName());
             }, Priority.LOWEST);
 
     public static final ConditionalRule<Council> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
-            (s, c) -> Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) >= c.getUnsafe(Attribute.ARMISTICE_MAX),
+            (s, c) -> c.getOrElse(Attribute.ARMISTICE_COUNT, 0) >= c.getUnsafe(Attribute.ARMISTICE_MAX),
             (s, c) -> {
                 Attribute.RUNNING.to(s, false);
                 Attribute.WINNER.to(s, "Council");

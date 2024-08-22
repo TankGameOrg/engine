@@ -23,7 +23,7 @@ public class BasicWall extends GenericElement implements IUnit {
     }
 
     public int getDurability() {
-        return Attribute.DURABILITY.from(this).orElse(0);
+        return this.get(Attribute.DURABILITY).orElse(0);
     }
 
     public void setDurability(int durability) {

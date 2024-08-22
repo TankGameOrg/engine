@@ -32,7 +32,7 @@ public class DestructibleFloor extends AbstractFloor {
 
     @Override
     public boolean isWalkable(Board board) {
-        return !Attribute.DESTROYED.from(this).orElse(false);
+        return !this.get(Attribute.DESTROYED).orElse(false);
     }
 
 }

@@ -70,14 +70,6 @@ public class Attribute<E> {
         return e.has(this);
     }
 
-    public Optional<E> from(AttributeContainer e) {
-        return e.get(this);
-    }
-
-    public E fromOrElse(AttributeContainer e, E defaultValue) {
-        return e.getOrElse(this, defaultValue);
-    }
-
     public void to(AttributeContainer e, E o) {
         e.put(this, o);
     }

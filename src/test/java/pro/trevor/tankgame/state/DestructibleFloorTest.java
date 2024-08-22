@@ -92,7 +92,7 @@ public class DestructibleFloorTest {
 
         assertTrue(canShoot);
         assertEquals(2, floor.getUnsafe(Attribute.DURABILITY));
-        assertFalse(Attribute.DESTROYED.from(floor).orElse(false));
+        assertFalse(floor.get(Attribute.DESTROYED).orElse(false));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class DestructibleFloorTest {
 
         assertTrue(canShoot);
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
-        assertTrue(Attribute.DESTROYED.from(floor).orElse(false));
+        assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class DestructibleFloorTest {
         // Shoot at the destructible floor, destroying it
         shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
-        assertTrue(Attribute.DESTROYED.from(floor).orElse(false));
+        assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
 
         // Try to move onto the broken floor, you cannot
         assertFalse(moveRule.canApply(s, new PlayerRef("test"), new Position("B1")));
@@ -154,7 +154,7 @@ public class DestructibleFloorTest {
         // Floor durability is unchanged
         assertEquals(initialFloorDurability, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(tankAbove.getUnsafe(Attribute.DEAD));
-        assertFalse(Attribute.DESTROYED.from(floor).orElse(false));
+        assertFalse(floor.get(Attribute.DESTROYED).orElse(false));
     }
 
     @Test
@@ -177,14 +177,14 @@ public class DestructibleFloorTest {
 
         // Floor durability is unchanged
         assertEquals(initialFloorDurability, floor.getUnsafe(Attribute.DURABILITY));
-        assertFalse(Attribute.DESTROYED.from(floor).orElse(false));
+        assertFalse(floor.get(Attribute.DESTROYED).orElse(false));
 
         //Shoot again
         shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
 
         // Floor is destroyed
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
-        assertTrue(Attribute.DESTROYED.from(floor).orElse(false));
+        assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
 
         // Try to move onto the broken floor, you cannot
         assertFalse(moveRule.canApply(s, new PlayerRef("test"), new Position("B1")));

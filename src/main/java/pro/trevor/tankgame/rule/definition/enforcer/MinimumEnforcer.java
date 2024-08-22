@@ -13,13 +13,13 @@ public class MinimumEnforcer<T extends AttributeContainer, U extends Comparable<
         super(
             (x) -> {
                 if(attribute.in(x)) {
-                    U bound = boundAttribute.fromOrElse(x, defaultBound);
+                    U bound = x.getOrElse(boundAttribute, defaultBound);
                     return x.getUnsafe(attribute).compareTo(bound) > 0;
                 }
 
                 return false;
             },
             attribute,
-            (x) -> boundAttribute.fromOrElse(x, defaultBound));
+            (x) -> x.getOrElse(boundAttribute, defaultBound));
     }
 }

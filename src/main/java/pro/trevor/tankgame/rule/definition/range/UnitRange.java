@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class UnitRange<S, T extends IUnit> extends FunctionVariableRange<S, T> {
 
     public static UnitRange<Council, GenericTank> ALL_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> true);
-    public static UnitRange<Council, GenericTank> ALL_DEAD_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> Attribute.DEAD.from(t).orElse(false));
-    public static UnitRange<Council, GenericTank> ALL_LIVING_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> !Attribute.DEAD.from(t).orElse(false));
+    public static UnitRange<Council, GenericTank> ALL_DEAD_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> t.get(Attribute.DEAD).orElse(false));
+    public static UnitRange<Council, GenericTank> ALL_LIVING_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> !t.get(Attribute.DEAD).orElse(false));
 
     private Class<T> unitClass;
 
