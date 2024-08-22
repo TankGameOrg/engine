@@ -60,7 +60,7 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
-        Attribute.COFFER.to(state.getCouncil(), 1);
+        state.getCouncil().put(Attribute.COFFER, 1);
         ONE_COST_RULE.apply(state, councilPlayer, tank);
         assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }

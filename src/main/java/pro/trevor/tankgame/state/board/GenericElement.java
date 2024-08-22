@@ -27,7 +27,7 @@ public class GenericElement extends AttributeContainer implements IElement {
     }
 
     public void setPosition(Position position) {
-        Attribute.POSITION.to(this, position);
+        this.put(Attribute.POSITION, position);
     }
 
     @Override

@@ -18,13 +18,13 @@ import java.util.*;
 public class State extends AttributeContainer implements IJsonObject, IGatherable {
 
     public State(Board board, Council council, AttributeList<Player> players) {
-        Attribute.BOARD.to(this, board);
-        Attribute.COUNCIL.to(this, council);
-        Attribute.TICK.to(this, 0);
-        Attribute.RUNNING.to(this, true);
-        Attribute.WINNER.to(this, "");
+        this.put(Attribute.BOARD, board);
+        this.put(Attribute.COUNCIL, council);
+        this.put(Attribute.TICK, 0);
+        this.put(Attribute.RUNNING, true);
+        this.put(Attribute.WINNER, "");
 
-        Attribute.PLAYERS.to(this, players);
+        this.put(Attribute.PLAYERS, players);
     }
 
     public State(JSONObject json) {

@@ -13,7 +13,7 @@ public class Player extends AttributeContainer implements IJsonObject {
 
     public Player(String name) {
         super(new HashMap<>());
-        Attribute.NAME.to(this, name);
+        this.put(Attribute.NAME, name);
     }
 
     public Player(JSONObject json) {

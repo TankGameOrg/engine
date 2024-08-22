@@ -14,8 +14,8 @@ public class BasicWall extends GenericElement implements IUnit {
 
     public BasicWall(Position position, int initialDurability) {
         super();
-        Attribute.DURABILITY.to(this, initialDurability);
-        Attribute.POSITION.to(this, position);
+        this.put(Attribute.DURABILITY, initialDurability);
+        this.put(Attribute.POSITION, position);
     }
 
     public BasicWall(JSONObject json) {
@@ -27,7 +27,7 @@ public class BasicWall extends GenericElement implements IUnit {
     }
 
     public void setDurability(int durability) {
-        Attribute.DURABILITY.to(this, durability);
+        this.put(Attribute.DURABILITY, durability);
     }
 
     @Override

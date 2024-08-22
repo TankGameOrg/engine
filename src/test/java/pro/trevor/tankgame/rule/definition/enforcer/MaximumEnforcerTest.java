@@ -11,7 +11,7 @@ public class MaximumEnforcerTest {
     @Test
     public void underMaximum() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 5);
+        attrObj.put(Attribute.DURABILITY, 5);
 
         MaximumEnforcer<AttributeContainer,Integer> max = new MaximumEnforcer<>(Attribute.DURABILITY, 7);
         max.enforce(null, attrObj);
@@ -21,8 +21,8 @@ public class MaximumEnforcerTest {
     @Test
     public void underMaximumWithAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 5);
-        Attribute.MAX_DURABILITY.to(attrObj, 7); // Note: This test uses MAX_DURABILITY as max_DURABILITY
+        attrObj.put(Attribute.DURABILITY, 5);
+        attrObj.put(Attribute.MAX_DURABILITY, 7); // Note: This test uses MAX_DURABILITY as max_DURABILITY
 
         MaximumEnforcer<AttributeContainer,Integer> max = new MaximumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 10);
         max.enforce(null, attrObj);
@@ -32,7 +32,7 @@ public class MaximumEnforcerTest {
     @Test
     public void underMaximumWithoutAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 5);
+        attrObj.put(Attribute.DURABILITY, 5);
 
         MaximumEnforcer<AttributeContainer,Integer> max = new MaximumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 7);
         max.enforce(null, attrObj);
@@ -42,7 +42,7 @@ public class MaximumEnforcerTest {
     @Test
     public void overMaximum() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 8);
+        attrObj.put(Attribute.DURABILITY, 8);
 
         MaximumEnforcer<AttributeContainer,Integer> max = new MaximumEnforcer<>(Attribute.DURABILITY, 4);
         max.enforce(null, attrObj);
@@ -52,8 +52,8 @@ public class MaximumEnforcerTest {
     @Test
     public void overMaximumWithAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 8);
-        Attribute.MAX_DURABILITY.to(attrObj, 6); // Note: This test uses MAX_DURABILITY as max_DURABILITY
+        attrObj.put(Attribute.DURABILITY, 8);
+        attrObj.put(Attribute.MAX_DURABILITY, 6); // Note: This test uses MAX_DURABILITY as max_DURABILITY
 
         MaximumEnforcer<AttributeContainer,Integer> max = new MaximumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 10);
         max.enforce(null, attrObj);
@@ -63,7 +63,7 @@ public class MaximumEnforcerTest {
     @Test
     public void overMaximumWithoutAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 11);
+        attrObj.put(Attribute.DURABILITY, 11);
 
         MaximumEnforcer<AttributeContainer,Integer> max = new MaximumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 9);
         max.enforce(null, attrObj);

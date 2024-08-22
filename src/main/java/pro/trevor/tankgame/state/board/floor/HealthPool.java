@@ -11,7 +11,7 @@ public class HealthPool extends WalkableFloor {
 
     public HealthPool(Position position, int regenerationAmount) {
         super(position);
-        Attribute.REGENERATION.to(this, regenerationAmount);
+        this.put(Attribute.REGENERATION, regenerationAmount);
     }
 
     public HealthPool(JSONObject json) {

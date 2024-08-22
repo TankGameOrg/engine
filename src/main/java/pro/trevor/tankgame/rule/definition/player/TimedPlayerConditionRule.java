@@ -52,7 +52,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
                 }
                 throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
             }
-            Attribute.GLOBAL_COOLDOWN_END_TIME.to(player, timeOfAction + cooldown);
+            player.put(Attribute.GLOBAL_COOLDOWN_END_TIME, timeOfAction + cooldown);
         } else {
             JSONObject error = new JSONObject();
             error.put("error", true);

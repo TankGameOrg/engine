@@ -98,7 +98,7 @@ public class ShareGoldWithTaxRuleTest {
         int endingCoffer = startingCoffer + tax;
 
         State state = TestUtilities.generateBoard(5, 5, sender);
-        Attribute.COFFER.to(state.getCouncil(), startingCoffer);
+        state.getCouncil().put(Attribute.COFFER, startingCoffer);
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxRule(tax);
         rule.apply(state, sender.getPlayerRef(), receiver, donation);
         assertEquals(senderEndingGold, sender.getUnsafe(Attribute.GOLD));

@@ -33,11 +33,11 @@ public class ConditionalRules {
                         s.getCouncil().getCouncillors().remove(t.getPlayerRef());
                         s.getCouncil().getSenators().add(t.getPlayerRef());
                     } else {
-                        Attribute.DEAD.to(t, true);
-                        Attribute.ACTION_POINTS.to(t, 0);
-                        Attribute.GOLD.to(t, 0);
-                        Attribute.BOUNTY.to(t, 0);
-                        Attribute.DURABILITY.to(t, 3);
+                        t.put(Attribute.DEAD, true);
+                        t.put(Attribute.ACTION_POINTS, 0);
+                        t.put(Attribute.GOLD, 0);
+                        t.put(Attribute.BOUNTY, 0);
+                        t.put(Attribute.DURABILITY, 3);
                         s.getCouncil().getCouncillors().add(t.getPlayerRef());
                     }
                 });
@@ -47,8 +47,8 @@ public class ConditionalRules {
             (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                     .toList().size() == 1,
             (s, b) -> {
-                Attribute.RUNNING.to(s, false);
-                Attribute.WINNER.to(s, b.gatherUnits(GenericTank.class).stream()
+                s.put(Attribute.RUNNING, false);
+                s.put(Attribute.WINNER, b.gatherUnits(GenericTank.class).stream()
                         .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                         .findFirst().get().getPlayerRef().getName());
             }, Priority.LOWEST);
@@ -56,7 +56,7 @@ public class ConditionalRules {
     public static final ConditionalRule<Council> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(
             (s, c) -> c.getOrElse(Attribute.ARMISTICE_COUNT, 0) >= c.getUnsafe(Attribute.ARMISTICE_MAX),
             (s, c) -> {
-                Attribute.RUNNING.to(s, false);
-                Attribute.WINNER.to(s, "Council");
+                s.put(Attribute.RUNNING, false);
+                s.put(Attribute.WINNER, "Council");
             }, Priority.LOWEST);
 }

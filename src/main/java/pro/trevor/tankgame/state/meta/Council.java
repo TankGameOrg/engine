@@ -17,8 +17,8 @@ public class Council extends AttributeContainer implements IPlayerElement, IMeta
 
     public Council() {
         super();
-        Attribute.COUNCILLORS.to(this, new AttributeList<>());
-        Attribute.SENATORS.to(this, new AttributeList<>());
+        this.put(Attribute.COUNCILLORS, new AttributeList<>());
+        this.put(Attribute.SENATORS, new AttributeList<>());
     }
 
     public Council(JSONObject json) {

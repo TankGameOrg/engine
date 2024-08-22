@@ -65,10 +65,6 @@ public class Attribute<E> {
         return attributeClass;
     }
 
-    public void to(AttributeContainer e, E o) {
-        e.put(this, o);
-    }
-
     public void toIfNotPresent(AttributeContainer e, E o) {
         if (!e.has(this)) {
             e.put(this, o);

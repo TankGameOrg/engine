@@ -11,7 +11,7 @@ public class MinimumEnforcerTest {
     @Test
     public void overMinimum() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 3);
+        attrObj.put(Attribute.DURABILITY, 3);
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, 1);
         min.enforce(null, attrObj);
@@ -21,8 +21,8 @@ public class MinimumEnforcerTest {
     @Test
     public void overMinimumWithAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 3);
-        Attribute.MAX_DURABILITY.to(attrObj, 1); // Note: This test uses MAX_DURABILITY as MIN_DURABILITY
+        attrObj.put(Attribute.DURABILITY, 3);
+        attrObj.put(Attribute.MAX_DURABILITY, 1); // Note: This test uses MAX_DURABILITY as MIN_DURABILITY
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 5);
         min.enforce(null, attrObj);
@@ -32,7 +32,7 @@ public class MinimumEnforcerTest {
     @Test
     public void overMinimumWithoutAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 3);
+        attrObj.put(Attribute.DURABILITY, 3);
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 1);
         min.enforce(null, attrObj);
@@ -42,7 +42,7 @@ public class MinimumEnforcerTest {
     @Test
     public void underMinimum() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 0);
+        attrObj.put(Attribute.DURABILITY, 0);
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, 1);
         min.enforce(null, attrObj);
@@ -52,8 +52,8 @@ public class MinimumEnforcerTest {
     @Test
     public void underMinimumWithAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 0);
-        Attribute.MAX_DURABILITY.to(attrObj, 1); // Note: This test uses MAX_DURABILITY as MIN_DURABILITY
+        attrObj.put(Attribute.DURABILITY, 0);
+        attrObj.put(Attribute.MAX_DURABILITY, 1); // Note: This test uses MAX_DURABILITY as MIN_DURABILITY
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, -1);
         min.enforce(null, attrObj);
@@ -63,7 +63,7 @@ public class MinimumEnforcerTest {
     @Test
     public void underMinimumWithoutAttributeBound() {
         AttributeContainer attrObj = new AttributeContainer();
-        Attribute.DURABILITY.to(attrObj, 0);
+        attrObj.put(Attribute.DURABILITY, 0);
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 1);
         min.enforce(null, attrObj);

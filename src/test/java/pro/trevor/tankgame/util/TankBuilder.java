@@ -15,12 +15,12 @@ public class TankBuilder<T extends GenericTank> {
     }
 
     public <E> TankBuilder<T> with(Attribute<E> attribute, E value) {
-        attribute.to(tank, value);
+        tank.put(attribute, value);
         return this;
     }
 
     public TankBuilder<T> named(String name) {
-        Attribute.NAME.to(tank, name);
+        tank.put(Attribute.NAME, name);
         return this;
     }
 

@@ -22,7 +22,7 @@ public class AttributePredicateEnforcer<T extends AttributeContainer, U extends 
     @Override
     public void enforce(State state, T subject) {
         if (!predicate.test(subject)) {
-            attribute.to(subject, boundFunction.apply(subject));
+            subject.put(attribute, boundFunction.apply(subject));
         }
     }
 }

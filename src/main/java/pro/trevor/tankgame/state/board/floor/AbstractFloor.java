@@ -9,7 +9,7 @@ public abstract class AbstractFloor extends GenericElement implements IFloor {
 
     public AbstractFloor(Position position) {
         super();
-        Attribute.POSITION.to(this, position);
+        this.put(Attribute.POSITION, position);
     }
 
     public AbstractFloor(JSONObject json) {

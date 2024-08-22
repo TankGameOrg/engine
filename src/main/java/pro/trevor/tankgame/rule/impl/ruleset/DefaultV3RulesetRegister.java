@@ -48,7 +48,7 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
         tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
         tickRules.put(Board.class, INCREMENT_DAY_ON_TICK);
-        tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> Attribute.CAN_BOUNTY.to(c, true)));
+        tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> c.put(Attribute.CAN_BOUNTY, true)));
     }
 
     @Override

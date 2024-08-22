@@ -13,7 +13,7 @@ public class EmptyUnit extends GenericElement implements IUnit {
 
     public EmptyUnit(Position position) {
         super();
-        Attribute.POSITION.to(this, position);
+        this.put(Attribute.POSITION, position);
     }
 
     public EmptyUnit(JSONObject json) {

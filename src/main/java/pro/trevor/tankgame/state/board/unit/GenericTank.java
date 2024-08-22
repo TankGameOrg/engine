@@ -18,8 +18,8 @@ public class GenericTank extends GenericElement implements ITickElement, IPlayer
 
     public GenericTank(String player, Position position, Map<String, Object> defaults) {
         super(defaults);
-        Attribute.POSITION.to(this, position);
-        Attribute.NAME.to(this, player);
+        this.put(Attribute.POSITION, position);
+        this.put(Attribute.NAME, player);
     }
 
     public GenericTank(JSONObject json) {
