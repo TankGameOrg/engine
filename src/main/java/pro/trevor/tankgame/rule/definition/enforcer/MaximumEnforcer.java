@@ -5,7 +5,7 @@ import pro.trevor.tankgame.state.attribute.AttributeContainer;
 
 public class MaximumEnforcer <T extends AttributeContainer, U extends Comparable<U>> extends AttributePredicateEnforcer<T, U> {
     public MaximumEnforcer(Attribute<U> attribute, U bound) {
-        super((x) -> attribute.in(x) && attribute.unsafeFrom(x).compareTo(bound) < 0, attribute, (x) -> bound);
+        super((x) -> attribute.in(x) && x.getUnsafe(attribute).compareTo(bound) < 0, attribute, (x) -> bound);
     }
 
     public MaximumEnforcer(Attribute<U> attribute, Attribute<U> boundAttribute, U defaultBound) {
@@ -13,7 +13,7 @@ public class MaximumEnforcer <T extends AttributeContainer, U extends Comparable
             (x) -> {
                 if(attribute.in(x)) {
                     U bound = boundAttribute.fromOrElse(x, defaultBound);
-                    return attribute.unsafeFrom(x).compareTo(bound) < 0;
+                    return x.getUnsafe(attribute).compareTo(bound) < 0;
                 }
 
                 return false;

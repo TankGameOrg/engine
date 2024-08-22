@@ -11,6 +11,6 @@ import java.util.function.BiFunction;
 public class BooleanPredicate<T extends AttributeContainer & IPlayerElement> extends AttributePredicate<T> {
 
     public BooleanPredicate(BiFunction<State, PlayerRef, T> getter, Attribute<Boolean> attribute, boolean expected, String error) {
-        super(getter, (t) -> attribute.in(t) && attribute.unsafeFrom(t).equals(expected), error);
+        super(getter, (t) -> attribute.in(t) && t.getUnsafe(attribute).equals(expected), error);
     }
 }

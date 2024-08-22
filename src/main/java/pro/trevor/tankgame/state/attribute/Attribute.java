@@ -78,10 +78,6 @@ public class Attribute<E> {
         return e.getOrElse(this, defaultValue);
     }
 
-    public E unsafeFrom(AttributeContainer e) {
-        return e.getUnsafe(this);
-    }
-
     public void to(AttributeContainer e, E o) {
         e.put(this, o);
     }

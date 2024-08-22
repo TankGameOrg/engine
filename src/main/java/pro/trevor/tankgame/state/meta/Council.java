@@ -26,11 +26,11 @@ public class Council extends AttributeContainer implements IPlayerElement, IMeta
     }
 
     public AttributeList<PlayerRef> getCouncillors() {
-        return Attribute.COUNCILLORS.unsafeFrom(this);
+        return this.getUnsafe(Attribute.COUNCILLORS);
     }
 
     public AttributeList<PlayerRef> getSenators() {
-        return Attribute.SENATORS.unsafeFrom(this);
+        return this.getUnsafe(Attribute.SENATORS);
     }
 
     public List<PlayerRef> allPlayersOnCouncil() {

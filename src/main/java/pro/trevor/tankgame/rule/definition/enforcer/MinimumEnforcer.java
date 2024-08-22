@@ -6,7 +6,7 @@ import pro.trevor.tankgame.state.attribute.AttributeContainer;
 public class MinimumEnforcer<T extends AttributeContainer, U extends Comparable<U>> extends AttributePredicateEnforcer<T, U> {
 
     public MinimumEnforcer(Attribute<U> attribute, U bound) {
-        super((x) -> attribute.in(x) && attribute.unsafeFrom(x).compareTo(bound) > 0, attribute, (t) -> bound);
+        super((x) -> attribute.in(x) && x.getUnsafe(attribute).compareTo(bound) > 0, attribute, (t) -> bound);
     }
 
     public MinimumEnforcer(Attribute<U> attribute, Attribute<U> boundAttribute, U defaultBound) {
@@ -14,7 +14,7 @@ public class MinimumEnforcer<T extends AttributeContainer, U extends Comparable<
             (x) -> {
                 if(attribute.in(x)) {
                     U bound = boundAttribute.fromOrElse(x, defaultBound);
-                    return attribute.unsafeFrom(x).compareTo(bound) > 0;
+                    return x.getUnsafe(attribute).compareTo(bound) > 0;
                 }
 
                 return false;

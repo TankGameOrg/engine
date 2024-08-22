@@ -28,7 +28,7 @@ public class GenericTank extends GenericElement implements ITickElement, IPlayer
 
     @Override
     public PlayerRef getPlayerRef() {
-        return Attribute.PLAYER_REF.unsafeFrom(this);
+        return this.getUnsafe(Attribute.PLAYER_REF);
     }
 
     @Override

@@ -62,8 +62,8 @@ public class DestructibleFloorTest {
         DestructibleFloor newFloor = new DestructibleFloor(json);
 
         assertEquals(floor.getPosition(), newFloor.getPosition());
-        assertEquals(Attribute.DURABILITY.unsafeFrom(floor), Attribute.DURABILITY.unsafeFrom(newFloor));
-        assertEquals(Attribute.MAX_DURABILITY.unsafeFrom(floor), Attribute.MAX_DURABILITY.unsafeFrom(newFloor));
+        assertEquals(floor.getUnsafe(Attribute.DURABILITY), newFloor.getUnsafe(Attribute.DURABILITY));
+        assertEquals(floor.getUnsafe(Attribute.MAX_DURABILITY), newFloor.getUnsafe(Attribute.MAX_DURABILITY));
     }
 
     @Test
@@ -74,9 +74,9 @@ public class DestructibleFloorTest {
         DestructibleFloor newFloor = new DestructibleFloor(json);
 
         assertEquals(brokenFloor.getPosition(), newFloor.getPosition());
-        assertEquals(Attribute.DURABILITY.unsafeFrom(brokenFloor), Attribute.DURABILITY.unsafeFrom(newFloor));
-        assertEquals(Attribute.MAX_DURABILITY.unsafeFrom(brokenFloor), Attribute.MAX_DURABILITY.unsafeFrom(newFloor));
-        assertEquals(Attribute.DESTROYED.unsafeFrom(brokenFloor), Attribute.DESTROYED.unsafeFrom(newFloor));
+        assertEquals(brokenFloor.getUnsafe(Attribute.DURABILITY), newFloor.getUnsafe(Attribute.DURABILITY));
+        assertEquals(brokenFloor.getUnsafe(Attribute.MAX_DURABILITY), newFloor.getUnsafe(Attribute.MAX_DURABILITY));
+        assertEquals(brokenFloor.getUnsafe(Attribute.DESTROYED), newFloor.getUnsafe(Attribute.DESTROYED));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class DestructibleFloorTest {
         shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
 
         assertTrue(canShoot);
-        assertEquals(2, Attribute.DURABILITY.unsafeFrom(floor));
+        assertEquals(2, floor.getUnsafe(Attribute.DURABILITY));
         assertFalse(Attribute.DESTROYED.from(floor).orElse(false));
     }
 
@@ -107,7 +107,7 @@ public class DestructibleFloorTest {
         shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
 
         assertTrue(canShoot);
-        assertEquals(0, Attribute.DURABILITY.unsafeFrom(floor));
+        assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(Attribute.DESTROYED.from(floor).orElse(false));
     }
 
@@ -127,7 +127,7 @@ public class DestructibleFloorTest {
 
         // Shoot at the destructible floor, destroying it
         shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
-        assertEquals(0, Attribute.DURABILITY.unsafeFrom(floor));
+        assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(Attribute.DESTROYED.from(floor).orElse(false));
 
         // Try to move onto the broken floor, you cannot
@@ -152,8 +152,8 @@ public class DestructibleFloorTest {
         dieOrDestroyRule.apply(s, tankAbove);
 
         // Floor durability is unchanged
-        assertEquals(initialFloorDurability, Attribute.DURABILITY.unsafeFrom(floor));
-        assertTrue(Attribute.DEAD.unsafeFrom(tankAbove));
+        assertEquals(initialFloorDurability, floor.getUnsafe(Attribute.DURABILITY));
+        assertTrue(tankAbove.getUnsafe(Attribute.DEAD));
         assertFalse(Attribute.DESTROYED.from(floor).orElse(false));
     }
 
@@ -176,14 +176,14 @@ public class DestructibleFloorTest {
         destroyWallRule.apply(s, wall);
 
         // Floor durability is unchanged
-        assertEquals(initialFloorDurability, Attribute.DURABILITY.unsafeFrom(floor));
+        assertEquals(initialFloorDurability, floor.getUnsafe(Attribute.DURABILITY));
         assertFalse(Attribute.DESTROYED.from(floor).orElse(false));
 
         //Shoot again
         shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
 
         // Floor is destroyed
-        assertEquals(0, Attribute.DURABILITY.unsafeFrom(floor));
+        assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(Attribute.DESTROYED.from(floor).orElse(false));
 
         // Try to move onto the broken floor, you cannot

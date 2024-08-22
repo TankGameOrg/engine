@@ -21,7 +21,7 @@ public class Player extends AttributeContainer implements IJsonObject {
     }
 
     public String getName() {
-        return Attribute.NAME.unsafeFrom(this);
+        return this.getUnsafe(Attribute.NAME);
     }
 
     public PlayerRef toRef() {

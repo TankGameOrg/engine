@@ -19,7 +19,7 @@ public class HealthPool extends WalkableFloor {
     }
 
     public int getRegenAmount() {
-        return Attribute.REGENERATION.unsafeFrom(this);
+        return this.getUnsafe(Attribute.REGENERATION);
     }
 
     @Override

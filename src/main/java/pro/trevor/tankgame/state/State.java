@@ -32,15 +32,15 @@ public class State extends AttributeContainer implements IJsonObject, IGatherabl
     }
 
     public Board getBoard() {
-        return Attribute.BOARD.unsafeFrom(this);
+        return this.getUnsafe(Attribute.BOARD);
     }
 
     public Council getCouncil() {
-        return Attribute.COUNCIL.unsafeFrom(this);
+        return this.getUnsafe(Attribute.COUNCIL);
     }
 
     public AttributeList<Player> getPlayers() {
-        return Attribute.PLAYERS.unsafeFrom(this);
+        return this.getUnsafe(Attribute.PLAYERS);
     }
 
     public Optional<Player> getPlayer(PlayerRef playerRef) {

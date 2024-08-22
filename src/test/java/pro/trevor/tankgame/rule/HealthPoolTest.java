@@ -29,7 +29,7 @@ public class HealthPoolTest {
         TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
         rule.apply(state, tank);
 
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class HealthPoolTest {
         TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
         rule.apply(state, tank);
 
-        assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class HealthPoolTest {
         TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
         rule.apply(state, tank);
 
-        assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class HealthPoolTest {
         TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
         rule.apply(state, tank);
 
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -85,8 +85,8 @@ public class HealthPoolTest {
         TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
 
         rule.apply(state, tank);
-        assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
         rule.apply(state, tank);
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
     }
 }

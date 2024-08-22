@@ -37,7 +37,7 @@ public class TickRules {
                                             && !Attribute.DEAD.from(tank).orElse(false))
                                     .count();
                             int goldToGain = mines.size() / tanks;
-                            Attribute.GOLD.to(t, Attribute.GOLD.unsafeFrom(t) + goldToGain);
+                            Attribute.GOLD.to(t, t.getUnsafe(Attribute.GOLD) + goldToGain);
                         }
                     }
                 });
@@ -48,7 +48,7 @@ public class TickRules {
         return new TickActionRule<T>(
                 (s, t) -> {
                     if (!Attribute.DEAD.from(t).orElse(false) && Attribute.ACTION_POINTS.in(t)) {
-                        Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + amount);
+                        Attribute.ACTION_POINTS.to(t, t.getUnsafe(Attribute.ACTION_POINTS) + amount);
                     }
                 });
     }
@@ -59,7 +59,7 @@ public class TickRules {
                     if (Attribute.DEAD.from(t).orElse(false) || !Attribute.DURABILITY.in(t))
                         return;
                     if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool) {
-                        Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + healthPool.getRegenAmount());
+                        Attribute.DURABILITY.to(t, t.getUnsafe(Attribute.DURABILITY) + healthPool.getRegenAmount());
                     }
                 });
     }

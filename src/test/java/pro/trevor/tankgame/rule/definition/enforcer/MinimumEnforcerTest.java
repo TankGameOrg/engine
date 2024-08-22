@@ -15,7 +15,7 @@ public class MinimumEnforcerTest {
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, 1);
         min.enforce(null, attrObj);
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(attrObj));
+        assertEquals(3, attrObj.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class MinimumEnforcerTest {
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 5);
         min.enforce(null, attrObj);
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(attrObj));
+        assertEquals(3, attrObj.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class MinimumEnforcerTest {
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 1);
         min.enforce(null, attrObj);
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom(attrObj));
+        assertEquals(3, attrObj.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class MinimumEnforcerTest {
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, 1);
         min.enforce(null, attrObj);
-        assertEquals(1, Attribute.DURABILITY.unsafeFrom(attrObj));
+        assertEquals(1, attrObj.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class MinimumEnforcerTest {
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, -1);
         min.enforce(null, attrObj);
-        assertEquals(1, Attribute.DURABILITY.unsafeFrom(attrObj));
+        assertEquals(1, attrObj.getUnsafe(Attribute.DURABILITY));
     }
 
     @Test
@@ -67,6 +67,6 @@ public class MinimumEnforcerTest {
 
         MinimumEnforcer<AttributeContainer,Integer> min = new MinimumEnforcer<>(Attribute.DURABILITY, Attribute.MAX_DURABILITY, 1);
         min.enforce(null, attrObj);
-        assertEquals(1, Attribute.DURABILITY.unsafeFrom(attrObj));
+        assertEquals(1, attrObj.getUnsafe(Attribute.DURABILITY));
     }
 }
