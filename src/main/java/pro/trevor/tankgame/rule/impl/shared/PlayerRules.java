@@ -14,19 +14,25 @@ import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
 import pro.trevor.tankgame.rule.definition.range.IntegerRange;
 import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
+import pro.trevor.tankgame.rule.definition.range.PositionRange;
 import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
+import pro.trevor.tankgame.state.attribute.AttributeObject;
 import pro.trevor.tankgame.state.board.IElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.LineOfSight;
+import pro.trevor.tankgame.util.Pair;
+import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.ITriConsumer;
+import pro.trevor.tankgame.util.function.ITriFunction;
 import pro.trevor.tankgame.util.function.ITriPredicate;
 
 import static pro.trevor.tankgame.util.Util.*;
@@ -55,6 +61,10 @@ public class PlayerRules {
     private static final RulePredicate TANK_IS_ALIVE_PREDICATE = new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Tank must not be dead");
 
     private static final RulePredicate PLAYER_IS_COUNCIL_PREDICATE = new RulePredicate((state, player, n) -> isCouncil(state, player), "Player is not council");
+
+    // Check it meta[0] (assumed to be target aka a Position) is withing the subject's range
+    private static final RulePredicate TARGET_IS_IN_RANGE = new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) ->
+        tank.getPosition().distanceFrom(toType(n[0], Position.class)) <= Attribute.RANGE.fromOrElse(tank, 0), "Target position is not in range");
 
     public static final PlayerConditionRule BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerConditionRule(
             PlayerRules.ActionKeys.BUY_ACTION,
@@ -214,14 +224,92 @@ public class PlayerRules {
                 new DiscreteIntegerRange("bounty", lowerBound, upperBound));
     }
 
+    /**
+     * A rule that allows tanks to loot other units or floors
+     *
+     * If the target has the ONLY_LOOTABLE_BY then only the player specified by the attribute can loot this target
+     *
+     * @param canLootTarget A function that checks if the specified target is lootable
+     * @param transferLoot A callback tansfers the looted targets attributes
+     */
+    public static PlayerConditionRule getLootTargetRule(
+            ITriFunction<State, GenericTank, AttributeObject, Result<String>> canLootTarget,
+            ITriConsumer<State, GenericTank, AttributeObject> transferLoot) {
+
+        RulePredicate canLootRule = new RulePredicate((state, player, meta) -> {
+            // Make sure that the position is an AttributeObject
+            Position position = toType(meta[0], Position.class);
+            Optional<IElement> targetElement = state.getBoard().getUnitOrFloor(position);
+            if(targetElement.isEmpty()) {
+                return Result.error("Target " + position + " is out of bounds");
+            }
+
+            if(!(targetElement.get() instanceof AttributeObject)) {
+                return Result.error("Cannot target " + position + " it's a " + targetElement.get().getClass() + " not an AttributeObject");
+            }
+
+            AttributeObject target = (AttributeObject) targetElement.get();
+
+            // Make sure this player is allowed to loot this target
+            if(Attribute.ONLY_LOOTABLE_BY.in(target)) {
+                PlayerRef lootableBy = Attribute.ONLY_LOOTABLE_BY.unsafeFrom(target);
+                if(!lootableBy.equals(player)) {
+                    String targetName = Attribute.NAME.fromOrElse(target, position.toString());
+                    String lootableByName = Attribute.NAME.fromOrElse(lootableBy.toPlayer(state).get(), "somebody");
+                    return Result.error(targetName + " can only be looted by " + lootableByName);
+                }
+            }
+
+            // Check ruleset specific requirements
+            GenericTank tank = PlayerRules.getTank(state, player);
+            return canLootTarget.accept(state, tank, target);
+        });
+
+        RuleCondition lootCondition = new RuleCondition(
+            PLAYER_HAS_TANK_PREDICATE,
+            TARGET_IS_IN_RANGE,
+            new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Subject's tank must be alive"),
+            canLootRule
+        );
+
+        return new PlayerConditionRule(PlayerRules.ActionKeys.LOOT,
+            lootCondition,
+            (state, player, meta) -> {
+                Position position = toType(meta[0], Position.class);
+                GenericTank tank = PlayerRules.getTank(state, player);
+                AttributeObject targetObject = (AttributeObject) state.getBoard().getUnitOrFloor(position).get();
+                transferLoot.accept(state, tank, targetObject);
+            },
+            new PositionRange("target",
+                (state, tank, target) -> lootCondition.test(state, tank.getPlayerRef(), target).isOk()));
+    }
+
+    /**
+     * Rule that loots gold from dead tanks if the subject has the PLAYER_CAN_LOOT attribute
+     */
+    public static PlayerConditionRule LOOT_GOLD_FROM_DEAD_TANK = getLootTargetRule((state, tank, targetTank) -> {
+        if(!Attribute.PLAYER_CAN_LOOT.fromOrElse(tank, false)) {
+            return Result.error("Players can only loot once per day");
+        }
+
+        if(!(targetTank instanceof GenericTank) || !Attribute.DEAD.fromOrElse(targetTank, false)) {
+            return Result.error("You can only loot dead tanks");
+        }
+
+        return Result.ok();
+    }, (state, tank, targetTank) -> {
+        Attribute.GOLD.to(tank, Attribute.GOLD.fromOrElse(tank, 0) + Attribute.GOLD.fromOrElse(targetTank, 0));
+        Attribute.GOLD.to(targetTank, 0);
+        Attribute.PLAYER_CAN_LOOT.remove(tank);
+    });
+
     public static PlayerConditionRule spendActionToShootGeneric(
             ITriPredicate<State, Position, Position> lineOfSight,
             ITriConsumer<State, GenericTank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
                 new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
                         new MinimumPredicate<>(PlayerRules::getTank, Attribute.ACTION_POINTS, 1, "Tank has insufficient action points"),
-                        new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) ->
-                                tank.getPosition().distanceFrom(toType(n[0], Position.class)) <= Attribute.RANGE.fromOrElse(tank, 0), "Target position is not in range"),
+                        TARGET_IS_IN_RANGE,
                         new RulePredicate((state, player, n) -> state.getBoard().isValidPosition(toType(n[0], Position.class)), "Target position is not within the game board"),
                         new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> lineOfSight.test(state, tank.getPosition(), toType(n[0], Position.class)), "Target position is not in line-of-sight")),
                 (state, player, n) -> {
@@ -289,6 +377,13 @@ public class PlayerRules {
                 }
             });
 
+    public static final PlayerConditionRule SHOOT_V5 = spendActionToShootWithDeathHandle(
+        LineOfSight::hasLineOfSightV4,
+        (state, subjectTank, target) -> {
+            Attribute.GOLD.to(target, Attribute.GOLD.fromOrElse(target, 0) + Attribute.BOUNTY.fromOrElse(target, 0));
+            Attribute.ONLY_LOOTABLE_BY.to(target, subjectTank.getPlayerRef());
+        });
+
     public static class ActionKeys {
 
         public static final String SHOOT = "shoot";
@@ -296,6 +391,7 @@ public class PlayerRules {
         public static final String DONATE = "donate";
         public static final String BUY_ACTION = "buy_action";
         public static final String UPGRADE_RANGE = "upgrade_range";
+        public static final String LOOT = "loot";
 
         public static final String STIMULUS = "stimulus";
         public static final String GRANT_LIFE = "grant_life";
