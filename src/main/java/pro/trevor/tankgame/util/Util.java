@@ -129,8 +129,8 @@ public class Util {
         return output;
     }
 
-    public static Set<Position> allPossibleMoves(Board board, Position p, int speed) {
-        return allPossiblePaths(board, p, speed).keySet();
+    public static Set<Position> allPossibleMoves(Board board, Position start, int speed) {
+        return allPossiblePaths(board, start, speed).keySet();
     }
 
     /**
@@ -138,12 +138,12 @@ public class Util {
      * value as a hashmap of Position(Target) -> Pair[Integer(Remaining speed), Position(Previous position)].
      * Ties in optimal paths are arbitrarily broken.
      * @param board The board to check for if positions are valid.
-     * @param p The position to check for paths from.
+     * @param start The position to check for paths from.
      * @param speed The number of spaces to search. Must be non-negative.
      */
-    public static HashMap<Position, Pair<Integer, Position>> allPossiblePaths(Board board, Position p, int speed) {
+    private static HashMap<Position, Pair<Integer, Position>> allPossiblePaths(Board board, Position start, int speed) {
         HashMap<Position, Pair<Integer, Position>> output = new HashMap<>();
-        allPossiblePaths(output, board, p, null, speed);
+        allPossiblePaths(output, board, start, null, speed);
         return output;
     }
 
@@ -153,19 +153,19 @@ public class Util {
      * Ties in optimal paths are arbitrarily broken.
      * @param visited The output parameter. Must be empty.
      * @param board The board to check for if positions are valid.
-     * @param p The position to check for paths from.
+     * @param start The position to check for paths from.
      * @param prev The previous position. Must be null.
      * @param speed The number of spaces to search. Must be non-negative.
      */
-    private static void allPossiblePaths(HashMap<Position, Pair<Integer, Position>> visited, Board board, Position p, Position prev, int speed) {
+    private static void allPossiblePaths(HashMap<Position, Pair<Integer, Position>> visited, Board board, Position start, Position prev, int speed) {
         // If the map of visited positions contains this with an equal or higher speed, return.
         // If the map of visited positions is empty, this is our first node. It might not be walkable since it could be
         // the space that a tank is already occupying.
-        if (visited.getOrDefault(p, Pair.of(-1, null)).left() >= speed || (!visited.isEmpty() && !board.isWalkable(p))) {
+        if (visited.getOrDefault(start, Pair.of(-1, null)).left() >= speed || (!visited.isEmpty() && !board.isWalkable(start))) {
             return;
         }
 
-        visited.put(p, Pair.of(speed, prev));
+        visited.put(start, Pair.of(speed, prev));
 
         if (speed == 0) {
             return;
@@ -173,8 +173,8 @@ public class Util {
 
         // Visit all valid adjacent spaces with a decreased number of remaining moves.
         // Any previously-visited spaces with greater speed values will be ignored.
-        for (Position position : allAdjacentMovablePositions(board, p)) {
-            allPossiblePaths(visited, board, position, p,speed - 1);
+        for (Position position : allAdjacentMovablePositions(board, start)) {
+            allPossiblePaths(visited, board, position, start,speed - 1);
         }
     }
 
