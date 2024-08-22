@@ -245,7 +245,7 @@ public class PlayerRules {
             }
 
             if(!(targetElement.get() instanceof AttributeObject)) {
-                return Result.error("Cannot target " + position + " it's the wrong type");
+                return Result.error("Cannot target " + position + " it's a " + targetElement.get().getClass() + " not an AttributeObject");
             }
 
             AttributeObject target = (AttributeObject) targetElement.get();
@@ -379,9 +379,9 @@ public class PlayerRules {
 
     public static final PlayerConditionRule SHOOT_V5 = spendActionToShootWithDeathHandle(
         LineOfSight::hasLineOfSightV4,
-        (s, tank, dead) -> {
-            Attribute.GOLD.to(dead, Attribute.GOLD.fromOrElse(dead, 0) + Attribute.BOUNTY.unsafeFrom(dead));
-            Attribute.ONLY_LOOTABLE_BY.to(dead, tank.getPlayerRef());
+        (state, subjectTank, target) -> {
+            Attribute.GOLD.to(target, Attribute.GOLD.fromOrElse(target, 0) + Attribute.BOUNTY.fromOrElse(target, 0));
+            Attribute.ONLY_LOOTABLE_BY.to(target, subjectTank.getPlayerRef());
         });
 
     public static class ActionKeys {
