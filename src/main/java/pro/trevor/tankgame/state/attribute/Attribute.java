@@ -57,86 +57,46 @@ public class Attribute<E> {
         this.attributeClass = attributeClass;
     }
 
-    public boolean in(AttributeObject e) {
-        return e.has(attributeName);
-    }
-
-    public Optional<E> from(AttributeObject e) {
-        return Optional.ofNullable(getObject(e));
-    }
-
-    public E fromOrElse(AttributeObject e, E defaultValue) {
-        if (in(e)) {
-            return getObject(e);
-        } else {
-            return defaultValue;
-        }
-    }
-
-    public E unsafeFrom(AttributeObject e) {
-        if (!in(e))
-            throw new Error("Attempting to get attribute '" + attributeName + "' from generic element " + e
-                    + ". This generic element has no such attribute");
-        return getObject(e);
-    }
-
-    public void to(AttributeObject e, E o) {
-        e.set(attributeName, o);
-    }
-
-    public void toIfNotPresent(AttributeObject e, E o) {
-        if (!in(e)) {
-            e.set(attributeName, o);
-        }
-    }
-
-    public E remove(AttributeObject e) {
-        return attributeClass.cast(e.remove(attributeName));
-    }
-
     public String getName() {
         return attributeName;
     }
 
+    public Class<E> getAttributeClass() {
+        return attributeClass;
+    }
+
+
+    public boolean in(AttributeContainer e) {
+        return e.has(this);
+    }
+
+    public Optional<E> from(AttributeContainer e) {
+        return e.get(this);
+    }
+
+    public E fromOrElse(AttributeContainer e, E defaultValue) {
+        return e.getOrElse(this, defaultValue);
+    }
+
+    public E unsafeFrom(AttributeContainer e) {
+        return e.getUnsafe(this);
+    }
+
+    public void to(AttributeContainer e, E o) {
+        e.put(this, o);
+    }
+
+    public void toIfNotPresent(AttributeContainer e, E o) {
+        if (!in(e)) {
+            e.put(this, o);
+        }
+    }
+
+    public E remove(AttributeContainer e) {
+        return e.remove(this);
+    }
+
     public String getJsonName() {
-        return AttributeObject.toAttributeJsonKeyString(attributeName);
-    }
-
-    private enum WrapperClass {
-        Long,
-        Integer,
-        Short,
-        Byte,
-        Double,
-        Float
-    }
-
-    private E numberToE(Number number) {
-        try {
-            WrapperClass wrapper = WrapperClass.valueOf(attributeClass.getSimpleName());
-            return attributeClass.cast(switch (wrapper) {
-                case Long -> number.longValue();
-                case Integer -> number.intValue();
-                case Short -> number.shortValue();
-                case Byte -> number.byteValue();
-                case Double -> number.doubleValue();
-                case Float -> number.floatValue();
-            });
-        } catch (IllegalArgumentException e) {
-            throw new Error("Number class " + attributeClass.getSimpleName() + " is not a primitive Number", e);
-        }
-    }
-
-    private E getObject(AttributeObject e) {
-        Object o = e.get(attributeName);
-        try {
-            return attributeClass.cast(o);
-        } catch (ClassCastException exception) {
-            if (o instanceof Number number && Number.class.isAssignableFrom(attributeClass)) {
-                return numberToE(number);
-            }
-            throw new Error("Error attempting to get attribute '" + attributeName + "' from generic element " + e
-                    + ". Object " + o + " cannot be casted to it's type.", exception);
-        }
+        return AttributeContainer.toAttributeJsonKeyString(attributeName);
     }
 }

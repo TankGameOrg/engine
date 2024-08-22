@@ -7,32 +7,33 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A type that stores its attributes in a map. These attributes are accessible through Attribute objects.
- * All subclasses of AttributeObject must implement a constructor <code>Subclass(JSONObject)</code>.
+ * All subclasses of AttributeContainer must implement a constructor <code>Subclass(JSONObject)</code>.
  * The character `$` is used to prefix each attribute key in JSON. When extending this class, refrain from adding JSON
  * keys that begin with a `$`.
  */
-@JsonType(name = "AttributeObject")
-public class AttributeObject {
+@JsonType(name = "AttributeContainer")
+public class AttributeContainer {
 
     protected final Map<String, Object> attributes;
 
-    public AttributeObject() {
+    public AttributeContainer() {
         this.attributes = new HashMap<>();
     }
 
-    public AttributeObject(Map<String, Object> defaults) {
+    public AttributeContainer(Map<String, Object> defaults) {
         this();
         for (String attribute : defaults.keySet()) {
             attributes.put(attribute, defaults.get(attribute));
         }
     }
 
-    public AttributeObject(JSONObject json) {
+    public AttributeContainer(JSONObject json) {
         this.attributes = new HashMap<>();
-        for (String jsonKey : json.keySet().stream().filter(AttributeObject::isAttributeJsonKey).toList()) {
+        for (String jsonKey : json.keySet().stream().filter(AttributeContainer::isAttributeJsonKey).toList()) {
             Object attribute = json.get(jsonKey);
             String key = toAttributeString(jsonKey);
             if (attribute instanceof JSONObject jsonAttribute) {
@@ -53,22 +54,6 @@ public class AttributeObject {
 
     static boolean isAttributeJsonKey(String attribute) {
         return attribute.startsWith("$");
-    }
-
-    public boolean has(String attribute) {
-        return this.attributes.containsKey(attribute);
-    }
-
-    public Object get(String attribute) {
-        return this.attributes.get(attribute);
-    }
-
-    public void set(String attribute, Object object) {
-        this.attributes.put(attribute, object);
-    }
-
-    public Object remove(String attribute) {
-        return this.attributes.remove(attribute);
     }
 
     public JSONObject toJson() {
@@ -103,7 +88,7 @@ public class AttributeObject {
         for (String attributeKey : attributes.keySet()) {
             Object value = attributes.get(attributeKey);
             output.repeat(" ", indent).append(attributeKey).append(":");
-            if (value instanceof AttributeObject attributeValue) {
+            if (value instanceof AttributeContainer attributeValue) {
                 output.append(System.lineSeparator()).append(attributeValue.toString(indent + 2));
             } else {
                 output.append(' ').append(attributes.get(attributeKey)).append(System.lineSeparator());
@@ -120,10 +105,87 @@ public class AttributeObject {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (!(object instanceof AttributeObject other)) return false;
+        if (!(object instanceof AttributeContainer other)) return false;
         for (String key : attributes.keySet()) {
             if (!attributes.get(key).equals(other.attributes.get(key))) return false;
         }
         return true;
+    }
+
+    public boolean has(Attribute<?> attribute) {
+        return attributes.containsKey(attribute.getName());
+    }
+
+    public <E> Optional<E> get(Attribute<E> attribute) {
+        return Optional.ofNullable(getObject(attribute));
+    }
+
+    public <E> E getOrElse(Attribute<E> attribute, E defaultValue) {
+        if (has(attribute)) {
+            return getObject(attribute);
+        } else {
+            return defaultValue;
+        }
+    }
+
+    public <E> E getUnsafe(Attribute<E> attribute) {
+        if (!has(attribute))
+            throw new Error("Attempting to get attribute '" + attribute.getName() + "' from generic element " + this
+                    + ". This generic element has no such attribute");
+        return getObject(attribute);
+    }
+
+    public <E> void put(Attribute<E> attribute, E value) {
+        attributes.put(attribute.getName(), value);
+    }
+
+    public <E> void putIfNotPresent(Attribute<E> attribute, E value) {
+        if (!has(attribute)) {
+            attributes.put(attribute.getName(), value);
+        }
+    }
+
+    public <E> E remove(Attribute<E> attribute) {
+        return attribute.getAttributeClass().cast(attributes.remove(attribute.getName()));
+    }
+
+    private enum WrapperClass {
+        Long,
+        Integer,
+        Short,
+        Byte,
+        Double,
+        Float
+    }
+
+    private <E> E numberToE(Attribute<E> attribute, Number number) {
+        Class<E> attributeClass = attribute.getAttributeClass();
+
+        try {
+            WrapperClass wrapper = WrapperClass.valueOf(attributeClass.getSimpleName());
+            return attributeClass.cast(switch (wrapper) {
+                case Long -> number.longValue();
+                case Integer -> number.intValue();
+                case Short -> number.shortValue();
+                case Byte -> number.byteValue();
+                case Double -> number.doubleValue();
+                case Float -> number.floatValue();
+            });
+        } catch (IllegalArgumentException e) {
+            throw new Error("Number class " + attributeClass.getSimpleName() + " is not a primitive Number", e);
+        }
+    }
+
+    private <E> E getObject(Attribute<E> attribute) {
+        Object value = attributes.get(attribute.getName());
+        try {
+            return attribute.getAttributeClass().cast(value);
+        } catch (ClassCastException exception) {
+            if (value instanceof Number number && Number.class.isAssignableFrom(attribute.getAttributeClass())) {
+                return numberToE(attribute, number);
+            }
+            throw new Error("Error attempting to get attribute '" + attribute.getName() + "' from attribute container " + this
+                    + ". Object " + value + " cannot be casted to it's type.", exception);
+        }
     }
 }

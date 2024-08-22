@@ -3,7 +3,7 @@ package pro.trevor.tankgame.state;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeList;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
@@ -15,7 +15,7 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.*;
 
 @JsonType(name = "State")
-public class State extends AttributeObject implements IJsonObject, IGatherable {
+public class State extends AttributeContainer implements IJsonObject, IGatherable {
 
     public State(Board board, Council council, AttributeList<Player> players) {
         Attribute.BOARD.to(this, board);

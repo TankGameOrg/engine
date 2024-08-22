@@ -2,12 +2,12 @@ package pro.trevor.tankgame.rule.definition.enforcer;
 
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class AttributePredicateEnforcer<T extends AttributeObject, U extends Comparable<U>> implements IEnforceable<T> {
+public class AttributePredicateEnforcer<T extends AttributeContainer, U extends Comparable<U>> implements IEnforceable<T> {
 
     private final Predicate<T> predicate;
     private final Attribute<U> attribute;

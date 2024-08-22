@@ -2,13 +2,13 @@ package pro.trevor.tankgame.state.board;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.util.JsonType;
 
 import java.util.Map;
 
 @JsonType(name = "GenericElement")
-public class GenericElement extends AttributeObject implements IElement {
+public class GenericElement extends AttributeContainer implements IElement {
 
     public GenericElement() {
         super();
