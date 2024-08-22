@@ -65,16 +65,6 @@ public class Attribute<E> {
         return attributeClass;
     }
 
-    public void toIfNotPresent(AttributeContainer e, E o) {
-        if (!e.has(this)) {
-            e.put(this, o);
-        }
-    }
-
-    public E remove(AttributeContainer e) {
-        return e.remove(this);
-    }
-
     public String getJsonName() {
         return AttributeContainer.toAttributeJsonKeyString(attributeName);
     }
