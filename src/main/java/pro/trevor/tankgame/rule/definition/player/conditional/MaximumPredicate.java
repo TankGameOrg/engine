@@ -11,6 +11,6 @@ import java.util.function.BiFunction;
 public class MaximumPredicate<A extends Comparable<A>, T extends AttributeContainer & IPlayerElement> extends AttributePredicate<T> {
 
     public MaximumPredicate(BiFunction<State, PlayerRef, T> getter, Attribute<A> attribute, A bound, String error) {
-        super(getter, (t) -> (attribute.in(t) && t.getUnsafe(attribute).compareTo(bound) <= 0), error);
+        super(getter, (t) -> (t.has(attribute) && t.getUnsafe(attribute).compareTo(bound) <= 0), error);
     }
 }

@@ -141,7 +141,7 @@ public class PlayerRules {
                                         tank.get(Attribute.RANGE).orElse(0)).contains(toType(n[0], GenericTank.class).getPosition()),
                                 "Tank has insufficient gold"),
                         new RulePredicate((state, player, n) -> toType(n[1], Integer.class) >= 0,  "Donation must be positive"),
-                        new RulePredicate((state, player, n) -> Attribute.GOLD.in(toType(n[0], GenericTank.class)),  "Target must have gold attribute")
+                        new RulePredicate((state, player, n) -> toType(n[0], GenericTank.class).has(Attribute.GOLD),  "Target must have gold attribute")
                 ),
                 (state, player, n) -> {
                     GenericTank tank = getTank(state, player);
@@ -176,7 +176,7 @@ public class PlayerRules {
                 new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
                         new MinimumPredicate<>(PlayerRules::getCouncil, Attribute.COFFER, cost, "Council has insufficient coffer"),
                         new RulePredicate((state, player, n) -> state.getCouncil().allPlayersOnCouncil().size() >= minimumCouncillors, "Council has insufficient members"),
-                        new RulePredicate((state, player, n) -> Attribute.DURABILITY.in(toType(n[0], GenericTank.class)), "Target tank must have durability")
+                        new RulePredicate((state, player, n) -> toType(n[0], GenericTank.class).has(Attribute.DURABILITY), "Target tank must have durability")
                 ),
                 (state, player, n) -> {
                     Council council = state.getCouncil();

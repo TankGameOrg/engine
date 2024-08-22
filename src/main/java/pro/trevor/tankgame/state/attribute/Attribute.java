@@ -65,17 +65,12 @@ public class Attribute<E> {
         return attributeClass;
     }
 
-
-    public boolean in(AttributeContainer e) {
-        return e.has(this);
-    }
-
     public void to(AttributeContainer e, E o) {
         e.put(this, o);
     }
 
     public void toIfNotPresent(AttributeContainer e, E o) {
-        if (!in(e)) {
+        if (!e.has(this)) {
             e.put(this, o);
         }
     }

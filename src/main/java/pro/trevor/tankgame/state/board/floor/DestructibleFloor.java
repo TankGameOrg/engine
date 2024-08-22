@@ -18,11 +18,11 @@ public class DestructibleFloor extends AbstractFloor {
 
     public DestructibleFloor(JSONObject json) {
         super(json);
-        assert Attribute.DURABILITY.in(this);
-        assert Attribute.MAX_DURABILITY.in(this);
+        assert this.has(Attribute.DURABILITY);
+        assert this.has(Attribute.MAX_DURABILITY);
         assert this.getUnsafe(Attribute.DURABILITY) <= this.getUnsafe(Attribute.MAX_DURABILITY);
         assert this.getUnsafe(Attribute.DURABILITY) >= 0;
-        assert this.getUnsafe(Attribute.DURABILITY) != 0 || Attribute.DESTROYED.in(this);
+        assert this.getUnsafe(Attribute.DURABILITY) != 0 || this.has(Attribute.DESTROYED);
     }
 
     @Override

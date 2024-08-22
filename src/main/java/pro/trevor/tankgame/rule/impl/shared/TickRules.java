@@ -28,7 +28,7 @@ public class TickRules {
     public static <T extends GenericTank> TickActionRule<T> GetDistributeGoldToTanksRule() {
         return new TickActionRule<T>(
                 (s, t) -> {
-                    if (!t.get(Attribute.DEAD).orElse(false) && Attribute.GOLD.in(t)) {
+                    if (!t.get(Attribute.DEAD).orElse(false) && t.has(Attribute.GOLD)) {
                         if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
                             Set<Position> mines = new HashSet<>();
                             findAllConnectedMines(mines, s, t.getPosition());
@@ -47,7 +47,7 @@ public class TickRules {
             int amount) {
         return new TickActionRule<T>(
                 (s, t) -> {
-                    if (!t.get(Attribute.DEAD).orElse(false) && Attribute.ACTION_POINTS.in(t)) {
+                    if (!t.get(Attribute.DEAD).orElse(false) && t.has(Attribute.ACTION_POINTS)) {
                         Attribute.ACTION_POINTS.to(t, t.getUnsafe(Attribute.ACTION_POINTS) + amount);
                     }
                 });
@@ -56,7 +56,7 @@ public class TickRules {
     public static TickActionRule<GenericTank> GetHealTanksInHealthPoolRule() {
         return new TickActionRule<>(
                 (s, t) -> {
-                    if (t.get(Attribute.DEAD).orElse(false) || !Attribute.DURABILITY.in(t))
+                    if (t.get(Attribute.DEAD).orElse(false) || !t.has(Attribute.DURABILITY))
                         return;
                     if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool) {
                         Attribute.DURABILITY.to(t, t.getUnsafe(Attribute.DURABILITY) + healthPool.getRegenAmount());
