@@ -6,6 +6,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Util;
 
 import java.util.HashSet;
@@ -18,7 +19,7 @@ public class PathfindingTest {
 
     private static Board generateTestBoard(Position player, Position... walls) {
         Board board = new Board(BOARD_SIZE, BOARD_SIZE);
-        board.putUnit(new GenericTank("Test", player, Map.of()));
+        board.putUnit(new GenericTank(new PlayerRef("Test"), player, Map.of()));
         for (Position wall : walls) {
             assert board.isValidPosition(wall);
             board.putUnit(new BasicWall(wall, 1));

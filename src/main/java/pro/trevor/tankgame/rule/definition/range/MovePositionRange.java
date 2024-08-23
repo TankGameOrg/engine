@@ -12,7 +12,7 @@ import java.util.Set;
 public class MovePositionRange extends FunctionVariableRange<GenericTank, Position> {
 
     public MovePositionRange(String name) {
-        super(name, (state, tank) -> getMoveable(state, tank.getPosition(), Attribute.SPEED.fromOrElse(tank, 1)));
+        super(name, (state, tank) -> getMoveable(state, tank.getPosition(), tank.getOrElse(Attribute.SPEED, 1)));
     }
 
     private static Set<Position> getMoveable(State state, Position start, int speed) {
