@@ -23,8 +23,7 @@ import pro.trevor.tankgame.util.TestUtilities;
 
 public class DestructibleFloorTest {
 
-    private DestructibleFloor GetTestFloor(Position position, int durability, int maxDurability)
-    {
+    private DestructibleFloor GetTestFloor(Position position, int durability, int maxDurability) {
         assert durability >= 0;
         return new DestructibleFloor(position, durability, maxDurability);
     }
@@ -96,7 +95,7 @@ public class DestructibleFloorTest {
         s.getBoard().putFloor(floor);
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
-        boolean canShoot = shootRule.canApply(s, new PlayerRef("test"), new Position("B1"), true);
+        boolean canShoot = shootRule.canApply(s, t.getPlayerRef(), new Position("B1"), true);
         shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
 
         assertTrue(canShoot);
@@ -114,18 +113,18 @@ public class DestructibleFloorTest {
         IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
 
         // Move onto destructible floor, then move past it
-        moveRule.apply(s, new PlayerRef("test"), new Position("B1"));
+        moveRule.apply(s, t.getPlayerRef(), new Position("B1"));
         assertEquals(t.getPosition(), floor.getPosition());
-        moveRule.apply(s, new PlayerRef("test"), new Position("C1"));
+        moveRule.apply(s, t.getPlayerRef(), new Position("C1"));
 
         // Shoot at the destructible floor, destroying it
-        shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
+        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
 
         // Try to move onto the broken floor, you cannot
-        assertFalse(moveRule.canApply(s, new PlayerRef("test"), new Position("B1")));
-        assertThrows(Error.class, () -> moveRule.apply(s, new PlayerRef("test"), new Position("B1")));
+        assertFalse(moveRule.canApply(s, t.getPlayerRef(), new Position("B1")));
+        assertThrows(Error.class, () -> moveRule.apply(s, t.getPlayerRef(), new Position("B1")));
     }
 
     @Test
@@ -140,7 +139,7 @@ public class DestructibleFloorTest {
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
         ConditionalRule<GenericTank> dieOrDestroyRule = ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule();
-        shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
+        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
         dieOrDestroyRule.apply(s, t);
         dieOrDestroyRule.apply(s, tankAbove);
 
@@ -165,7 +164,7 @@ public class DestructibleFloorTest {
         IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
 
         // Shoot once, destroying the wall
-        shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
+        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
         destroyWallRule.apply(s, wall);
 
         // Floor durability is unchanged
@@ -173,14 +172,14 @@ public class DestructibleFloorTest {
         assertFalse(floor.get(Attribute.DESTROYED).orElse(false));
 
         //Shoot again
-        shootRule.apply(s, new PlayerRef("test"), new Position("B1"), true);
+        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
 
         // Floor is destroyed
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
 
         // Try to move onto the broken floor, you cannot
-        assertFalse(moveRule.canApply(s, new PlayerRef("test"), new Position("B1")));
-        assertThrows(Error.class, () -> moveRule.apply(s, new PlayerRef("test"), new Position("B1")));
+        assertFalse(moveRule.canApply(s, t.getPlayerRef(), new Position("B1")));
+        assertThrows(Error.class, () -> moveRule.apply(s, t.getPlayerRef(), new Position("B1")));
     }
 }

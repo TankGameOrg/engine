@@ -113,7 +113,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.GOLD, startingGold).with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
-        rule.apply(TestUtilities.generateBoard(1, 1, tank), new PlayerRef("test"), spentGold);
+        rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), spentGold);
 
         assertEquals(expectedGold, tank.getUnsafe(Attribute.GOLD));
         assertEquals(expectedActions, tank.getUnsafe(Attribute.ACTION_POINTS));
@@ -133,7 +133,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(actionCost, 5);
-        rule.apply(TestUtilities.generateBoard(1, 1, tank), new PlayerRef("test"), goldSpent);
+        rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), goldSpent);
 
         assertEquals(0, tank.getUnsafe(Attribute.GOLD));
         assertEquals(expectedActions, tank.getUnsafe(Attribute.ACTION_POINTS));
