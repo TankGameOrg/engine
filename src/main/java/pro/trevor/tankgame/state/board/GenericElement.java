@@ -23,11 +23,11 @@ public class GenericElement extends AttributeContainer implements IElement {
     }
 
     public Position getPosition() {
-        return this.getUnsafe(Attribute.POSITION);
+        return getUnsafe(Attribute.POSITION);
     }
 
     public void setPosition(Position position) {
-        this.put(Attribute.POSITION, position);
+        put(Attribute.POSITION, position);
     }
 
     @Override

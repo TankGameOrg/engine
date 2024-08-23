@@ -11,7 +11,7 @@ public class HealthPool extends WalkableFloor {
 
     public HealthPool(Position position, int regenerationAmount) {
         super(position);
-        this.put(Attribute.REGENERATION, regenerationAmount);
+        put(Attribute.REGENERATION, regenerationAmount);
     }
 
     public HealthPool(JSONObject json) {
@@ -19,7 +19,7 @@ public class HealthPool extends WalkableFloor {
     }
 
     public int getRegenAmount() {
-        return this.getUnsafe(Attribute.REGENERATION);
+        return getUnsafe(Attribute.REGENERATION);
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Player extends AttributeContainer implements IJsonObject {
 
     public Player(String name) {
         super(new HashMap<>());
-        this.put(Attribute.NAME, name);
+        put(Attribute.NAME, name);
     }
 
     public Player(JSONObject json) {
@@ -21,7 +21,7 @@ public class Player extends AttributeContainer implements IJsonObject {
     }
 
     public String getName() {
-        return this.getUnsafe(Attribute.NAME);
+        return getUnsafe(Attribute.NAME);
     }
 
     public PlayerRef toRef() {

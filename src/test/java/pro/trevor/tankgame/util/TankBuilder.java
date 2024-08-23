@@ -21,11 +21,6 @@ public class TankBuilder<T extends GenericTank> {
         return this;
     }
 
-    public TankBuilder<T> named(String name) {
-        tank.put(Attribute.NAME, name);
-        return this;
-    }
-
     public TankBuilder<T> at(Position p) {
         tank.setPosition(p);
         return this;

@@ -17,8 +17,8 @@ public class GenericTank extends GenericElement implements ITickElement, IPlayer
 
     public GenericTank(PlayerRef player, Position position, Map<Attribute<?>, Object> defaults) {
         super(defaults);
-        this.put(Attribute.POSITION, position);
-        this.put(Attribute.PLAYER_REF, player);
+        put(Attribute.POSITION, position);
+        put(Attribute.PLAYER_REF, player);
     }
 
     public GenericTank(JSONObject json) {
@@ -27,7 +27,7 @@ public class GenericTank extends GenericElement implements ITickElement, IPlayer
 
     @Override
     public PlayerRef getPlayerRef() {
-        return this.getUnsafe(Attribute.PLAYER_REF);
+        return getUnsafe(Attribute.PLAYER_REF);
     }
 
     @Override

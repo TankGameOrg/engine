@@ -18,13 +18,13 @@ import java.util.*;
 public class State extends AttributeContainer implements IJsonObject, IGatherable {
 
     public State(Board board, Council council, AttributeList<Player> players) {
-        this.put(Attribute.BOARD, board);
-        this.put(Attribute.COUNCIL, council);
-        this.put(Attribute.TICK, 0);
-        this.put(Attribute.RUNNING, true);
-        this.put(Attribute.WINNER, "");
+        put(Attribute.BOARD, board);
+        put(Attribute.COUNCIL, council);
+        put(Attribute.TICK, 0);
+        put(Attribute.RUNNING, true);
+        put(Attribute.WINNER, "");
 
-        this.put(Attribute.PLAYERS, players);
+        put(Attribute.PLAYERS, players);
     }
 
     public State(JSONObject json) {
@@ -32,15 +32,15 @@ public class State extends AttributeContainer implements IJsonObject, IGatherabl
     }
 
     public Board getBoard() {
-        return this.getUnsafe(Attribute.BOARD);
+        return getUnsafe(Attribute.BOARD);
     }
 
     public Council getCouncil() {
-        return this.getUnsafe(Attribute.COUNCIL);
+        return getUnsafe(Attribute.COUNCIL);
     }
 
     public AttributeList<Player> getPlayers() {
-        return this.getUnsafe(Attribute.PLAYERS);
+        return getUnsafe(Attribute.PLAYERS);
     }
 
     public Optional<Player> getPlayer(PlayerRef playerRef) {

@@ -17,8 +17,8 @@ public class Council extends AttributeContainer implements IPlayerElement, IMeta
 
     public Council() {
         super();
-        this.put(Attribute.COUNCILLORS, new AttributeList<>());
-        this.put(Attribute.SENATORS, new AttributeList<>());
+        put(Attribute.COUNCILLORS, new AttributeList<>());
+        put(Attribute.SENATORS, new AttributeList<>());
     }
 
     public Council(JSONObject json) {
@@ -26,11 +26,11 @@ public class Council extends AttributeContainer implements IPlayerElement, IMeta
     }
 
     public AttributeList<PlayerRef> getCouncillors() {
-        return this.getUnsafe(Attribute.COUNCILLORS);
+        return getUnsafe(Attribute.COUNCILLORS);
     }
 
     public AttributeList<PlayerRef> getSenators() {
-        return this.getUnsafe(Attribute.SENATORS);
+        return getUnsafe(Attribute.SENATORS);
     }
 
     public List<PlayerRef> allPlayersOnCouncil() {
