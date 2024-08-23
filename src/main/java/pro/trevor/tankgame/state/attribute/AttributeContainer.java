@@ -33,26 +33,26 @@ public class AttributeContainer {
 
     public AttributeContainer(JSONObject json) {
         this.attributes = new HashMap<>();
-        for (String jsonKey : json.keySet().stream().filter(AttributeContainer::isAttributeJsonKey).toList()) {
-            Object attribute = json.get(jsonKey);
-            String key = toAttributeString(jsonKey);
-            if (attribute instanceof JSONObject jsonAttribute) {
-                this.attributes.put(key, Codec.decodeJson(jsonAttribute));
-            } else {
-                this.attributes.put(key, attribute);
+        for (String jsonKey : json.keySet()) {
+            if(isAttributeJsonKey(jsonKey)) {
+                Object attribute = json.get(jsonKey);
+                if (attribute instanceof JSONObject jsonAttribute) {
+                    attribute = Codec.decodeJson(jsonAttribute);
+                }
+                this.attributes.put(toAttributeString(jsonKey), attribute);
             }
         }
     }
 
-    static String toAttributeJsonKeyString(String attribute) {
+    String toAttributeJsonKeyString(String attribute) {
         return "$" + attribute;
     }
 
-    static String toAttributeString(String attributeKey) {
+    String toAttributeString(String attributeKey) {
         return attributeKey.substring(1);
     }
 
-    static boolean isAttributeJsonKey(String attribute) {
+    boolean isAttributeJsonKey(String attribute) {
         return attribute.startsWith("$");
     }
 
