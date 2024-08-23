@@ -21,6 +21,10 @@ public class Attribute<E> {
     public static final Attribute<Boolean> DEAD = new Attribute<>("DEAD", Boolean.class);
     public static final Attribute<PlayerRef> PLAYER_REF = new Attribute<>("PLAYER_REF", PlayerRef.class);
 
+    // Dead tank attributes
+    public static final Attribute<PlayerRef> ONLY_LOOTABLE_BY = new Attribute<>("ONLY_LOOTABLE_BY", PlayerRef.class);
+    public static final Attribute<Boolean> PLAYER_CAN_LOOT = new Attribute<>("PLAYER_CAN_LOOT", Boolean.class);
+
     // Durability attributes
     public static final Attribute<Integer> DURABILITY = new Attribute<>("DURABILITY", Integer.class);
     public static final Attribute<Integer> MAX_DURABILITY = new Attribute<>("MAX_DURABILITY", Integer.class);

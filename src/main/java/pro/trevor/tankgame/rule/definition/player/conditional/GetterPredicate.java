@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule.definition.player.conditional;
 
-import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.IVarTriFunction;
@@ -9,7 +9,7 @@ import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 import java.util.function.BiFunction;
 
-public class GetterPredicate<T extends IPlayerElement> extends RulePredicate {
+public class GetterPredicate<T extends AttributeContainer> extends RulePredicate {
 
     public GetterPredicate(BiFunction<State, PlayerRef, T> getter, IVarTriFunction<State, T, Object, Result<String>> predicate) {
         super((s, p, n) -> predicate.accept(s, getter.apply(s, p), n));

@@ -112,4 +112,16 @@ public class TickRules {
                     c.put(Attribute.COFFER, c.getOrElse(Attribute.COFFER, 0) + income);
                 });
     }
+
+    public static TickActionRule<GenericTank> SET_PLAYER_CAN_LOOT = new TickActionRule<>((state, tank) -> {
+        if(!tank.getOrElse(Attribute.DEAD, false)) {
+            tank.put(Attribute.PLAYER_CAN_LOOT, true);
+        }
+    });
+
+    public static TickActionRule<GenericTank> CLEAR_ONLY_LOOTABLE_BY = new TickActionRule<>((state, tank) -> {
+        if(tank.has(Attribute.ONLY_LOOTABLE_BY)) {
+            tank.remove(Attribute.ONLY_LOOTABLE_BY);
+        }
+    });
 }

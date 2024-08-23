@@ -125,7 +125,7 @@ public class Board implements IMetaElement, IGatherable {
     // If there is no unit at the position, then the floor is returned.
     public Optional<IElement> getUnitOrFloor(Position p) {
         IElement unit = getUnit(p).orElse(null);
-        if (!(unit instanceof EmptyUnit))
+        if (unit != null && !(unit instanceof EmptyUnit))
             return Optional.of(unit);
         IElement floor = getFloor(p).orElse(null);
         return Optional.ofNullable(floor);
@@ -255,6 +255,20 @@ public class Board implements IMetaElement, IGatherable {
         }
         output.put("unit_board", units);
         output.put("floor_board", floors);
+        return output;
+    }
+
+    /**
+     * Return all valid positions on the board
+     * @return
+     */
+    public List<Position> getAllPositions() {
+        List<Position> output = new ArrayList<>();
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                output.add(new Position(x, y));
+            }
+        }
         return output;
     }
 }

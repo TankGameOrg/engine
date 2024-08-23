@@ -10,7 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class AttributePredicate<T extends AttributeContainer & IPlayerElement> extends GetterPredicate<T> {
+public class AttributePredicate<T extends AttributeContainer> extends GetterPredicate<T> {
 
     public AttributePredicate(BiFunction<State, PlayerRef, T> getter, Function<T, Result<String>> predicate) {
         super(getter, (s, t, n) -> predicate.apply(t));
