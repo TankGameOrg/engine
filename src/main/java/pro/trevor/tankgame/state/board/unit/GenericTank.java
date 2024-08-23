@@ -15,7 +15,7 @@ import java.util.*;
 @JsonType(name = "GenericTank")
 public class GenericTank extends GenericElement implements ITickElement, IPlayerElement, IUnit, IElement {
 
-    public GenericTank(PlayerRef player, Position position, Map<String, Object> defaults) {
+    public GenericTank(PlayerRef player, Position position, Map<Attribute<?>, Object> defaults) {
         super(defaults);
         this.put(Attribute.POSITION, position);
         this.put(Attribute.PLAYER_REF, player);

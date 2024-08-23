@@ -40,8 +40,8 @@ public class TankBuilder<T extends GenericTank> {
             new PlayerRef("test"),
             new Position("A1"),
             Map.of(
-                Attribute.DEAD.getName(), false,
-                Attribute.ACTION_POINTS.getName(), 0
+                Attribute.DEAD, false,
+                Attribute.ACTION_POINTS, 0
             )
         );
 

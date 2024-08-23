@@ -14,7 +14,7 @@ public class GenericElement extends AttributeContainer implements IElement {
         super();
     }
 
-    public GenericElement(Map<String, Object> defaults) {
+    public GenericElement(Map<Attribute<?>, Object> defaults) {
         super(defaults);
     }
 

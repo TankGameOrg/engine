@@ -24,10 +24,10 @@ public class AttributeContainer {
         this.attributes = new HashMap<>();
     }
 
-    public AttributeContainer(Map<String, Object> defaults) {
+    public AttributeContainer(Map<Attribute<?>, ?> defaults) {
         this();
-        for (String attribute : defaults.keySet()) {
-            attributes.put(attribute, defaults.get(attribute));
+        for (Attribute<?> attribute : defaults.keySet()) {
+            attributes.put(attribute.getName(), defaults.get(attribute));
         }
     }
 
