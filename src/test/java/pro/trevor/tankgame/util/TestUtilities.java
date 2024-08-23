@@ -19,7 +19,7 @@ public class TestUtilities {
 
     public static Council buildTestCouncil(int coffer, int councilors, int senators) {
         Council c = new Council();
-        Attribute.COFFER.to(c, coffer);
+        c.put(Attribute.COFFER, coffer);
 
         for (int i = 0; i < councilors; i++) {
             c.getCouncillors().add(new PlayerRef("Councilor" + i));

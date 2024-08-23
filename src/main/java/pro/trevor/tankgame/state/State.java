@@ -3,7 +3,7 @@ package pro.trevor.tankgame.state;
 import org.json.JSONObject;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeList;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
@@ -15,16 +15,16 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.*;
 
 @JsonType(name = "State")
-public class State extends AttributeObject implements IJsonObject, IGatherable {
+public class State extends AttributeContainer implements IJsonObject, IGatherable {
 
     public State(Board board, Council council, AttributeList<Player> players) {
-        Attribute.BOARD.to(this, board);
-        Attribute.COUNCIL.to(this, council);
-        Attribute.TICK.to(this, 0);
-        Attribute.RUNNING.to(this, true);
-        Attribute.WINNER.to(this, "");
+        put(Attribute.BOARD, board);
+        put(Attribute.COUNCIL, council);
+        put(Attribute.TICK, 0);
+        put(Attribute.RUNNING, true);
+        put(Attribute.WINNER, "");
 
-        Attribute.PLAYERS.to(this, players);
+        put(Attribute.PLAYERS, players);
     }
 
     public State(JSONObject json) {
@@ -32,15 +32,15 @@ public class State extends AttributeObject implements IJsonObject, IGatherable {
     }
 
     public Board getBoard() {
-        return Attribute.BOARD.unsafeFrom(this);
+        return getUnsafe(Attribute.BOARD);
     }
 
     public Council getCouncil() {
-        return Attribute.COUNCIL.unsafeFrom(this);
+        return getUnsafe(Attribute.COUNCIL);
     }
 
     public AttributeList<Player> getPlayers() {
-        return Attribute.PLAYERS.unsafeFrom(this);
+        return getUnsafe(Attribute.PLAYERS);
     }
 
     public Optional<Player> getPlayer(PlayerRef playerRef) {

@@ -5,7 +5,7 @@ import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeList;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @JsonType(name = "Council")
-public class Council extends AttributeObject implements IPlayerElement, IMetaElement, IJsonObject {
+public class Council extends AttributeContainer implements IPlayerElement, IMetaElement, IJsonObject {
 
     public Council() {
         super();
-        Attribute.COUNCILLORS.to(this, new AttributeList<>());
-        Attribute.SENATORS.to(this, new AttributeList<>());
+        put(Attribute.COUNCILLORS, new AttributeList<>());
+        put(Attribute.SENATORS, new AttributeList<>());
     }
 
     public Council(JSONObject json) {
@@ -26,11 +26,11 @@ public class Council extends AttributeObject implements IPlayerElement, IMetaEle
     }
 
     public AttributeList<PlayerRef> getCouncillors() {
-        return Attribute.COUNCILLORS.unsafeFrom(this);
+        return getUnsafe(Attribute.COUNCILLORS);
     }
 
     public AttributeList<PlayerRef> getSenators() {
-        return Attribute.SENATORS.unsafeFrom(this);
+        return getUnsafe(Attribute.SENATORS);
     }
 
     public List<PlayerRef> allPlayersOnCouncil() {

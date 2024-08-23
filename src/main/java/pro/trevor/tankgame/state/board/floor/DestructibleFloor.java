@@ -12,17 +12,20 @@ public class DestructibleFloor extends AbstractFloor {
 
     public DestructibleFloor(Position position, int durability, int maxDurability) {
         super(position);
-        Attribute.DURABILITY.to(this, durability);
-        Attribute.MAX_DURABILITY.to(this, maxDurability);
+        put(Attribute.DURABILITY, durability);
+        put(Attribute.MAX_DURABILITY, maxDurability);
+        if(durability == 0) {
+            put(Attribute.DESTROYED, true);
+        }
     }
 
     public DestructibleFloor(JSONObject json) {
         super(json);
-        assert Attribute.DURABILITY.in(this);
-        assert Attribute.MAX_DURABILITY.in(this);
-        assert Attribute.DURABILITY.unsafeFrom(this) <= Attribute.MAX_DURABILITY.unsafeFrom(this);
-        assert Attribute.DURABILITY.unsafeFrom(this) >= 0;
-        assert Attribute.DURABILITY.unsafeFrom(this) != 0 || Attribute.DESTROYED.in(this);
+        assert has(Attribute.DURABILITY);
+        assert has(Attribute.MAX_DURABILITY);
+        assert getUnsafe(Attribute.DURABILITY) <= getUnsafe(Attribute.MAX_DURABILITY);
+        assert getUnsafe(Attribute.DURABILITY) >= 0;
+        assert getUnsafe(Attribute.DURABILITY) != 0 || has(Attribute.DESTROYED);
     }
 
     @Override
@@ -32,7 +35,7 @@ public class DestructibleFloor extends AbstractFloor {
 
     @Override
     public boolean isWalkable(Board board) {
-        return !Attribute.DESTROYED.from(this).orElse(false);
+        return !get(Attribute.DESTROYED).orElse(false);
     }
 
 }

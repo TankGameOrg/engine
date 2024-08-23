@@ -98,8 +98,8 @@ public class BuyActionWithGoldTest {
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
         rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3); // goldSpent = 3
 
-        assertEquals(0, Attribute.GOLD.unsafeFrom(tank));
-        assertEquals(1, Attribute.ACTION_POINTS.unsafeFrom(tank));
+        assertEquals(0, tank.getUnsafe(Attribute.GOLD));
+        assertEquals(1, tank.getUnsafe(Attribute.ACTION_POINTS));
     }
 
     @ParameterizedTest()
@@ -115,8 +115,8 @@ public class BuyActionWithGoldTest {
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
         rule.apply(TestUtilities.generateBoard(1, 1, tank), new PlayerRef("test"), spentGold);
 
-        assertEquals(expectedGold, Attribute.GOLD.unsafeFrom(tank));
-        assertEquals(expectedActions, Attribute.ACTION_POINTS.unsafeFrom(tank));
+        assertEquals(expectedGold, tank.getUnsafe(Attribute.GOLD));
+        assertEquals(expectedActions, tank.getUnsafe(Attribute.ACTION_POINTS));
     }
 
     @ParameterizedTest()
@@ -135,7 +135,7 @@ public class BuyActionWithGoldTest {
         IPlayerRule rule = PlayerRules.buyActionWithGold(actionCost, 5);
         rule.apply(TestUtilities.generateBoard(1, 1, tank), new PlayerRef("test"), goldSpent);
 
-        assertEquals(0, Attribute.GOLD.unsafeFrom(tank));
-        assertEquals(expectedActions, Attribute.ACTION_POINTS.unsafeFrom(tank));
+        assertEquals(0, tank.getUnsafe(Attribute.GOLD));
+        assertEquals(expectedActions, tank.getUnsafe(Attribute.ACTION_POINTS));
     }
 }

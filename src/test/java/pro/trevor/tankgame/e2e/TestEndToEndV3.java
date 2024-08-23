@@ -26,15 +26,15 @@ public class TestEndToEndV3 {
     @Test
     public void testStateAtEndState() {
         EndToEndTestUtils.testState(tester, false, "Corey", 18);
-        assertFalse(Attribute.RUNNING.unsafeFrom(tester.getState()));
-        assertEquals("Corey", Attribute.WINNER.unsafeFrom(tester.getState()));
-        assertEquals(18, Attribute.TICK.unsafeFrom(tester.getState()));
+        assertFalse(tester.getState().getUnsafe(Attribute.RUNNING));
+        assertEquals("Corey", tester.getState().getUnsafe(Attribute.WINNER));
+        assertEquals(18, tester.getState().getUnsafe(Attribute.TICK));
     }
 
     @Test
     public void testCouncilAtEndState() {
         EndToEndTestUtils.testCouncil(tester, 12, 3);
-        assertEquals(20, Attribute.COFFER.unsafeFrom(tester.getCouncil()));
+        assertEquals(20, tester.getCouncil().getUnsafe(Attribute.COFFER));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class TestEndToEndV3 {
     @Test
     public void testWallsOnBoardAtEndState() {
         assertTypeOfUnitAtPosition(tester, new Position("D4"), BasicWall.class);
-        assertEquals(3, Attribute.DURABILITY.unsafeFrom((BasicWall) tester.getUnitAtPosition(new Position("D4"))));
+        assertEquals(3, ((BasicWall) tester.getUnitAtPosition(new Position("D4"))).getUnsafe(Attribute.DURABILITY));
     }
 
 }

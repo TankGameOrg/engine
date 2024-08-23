@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class DonateTankRange extends FunctionVariableRange<GenericTank, GenericTank> {
     public DonateTankRange(String name) {
-        super(name, (state, tank) -> getTanksInRange(state, tank.getPosition(), Attribute.RANGE.from(tank).orElse(0)));
+        super(name, (state, tank) -> getTanksInRange(state, tank.getPosition(), tank.getOrElse(Attribute.RANGE, 0)));
     }
 
     private static Set<GenericTank> getTanksInRange(State state, Position center, int range) {

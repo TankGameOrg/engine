@@ -31,7 +31,7 @@ public class CouncilGrantLifeTest {
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
         ZERO_COST_RULE.apply(state, councilPlayer, tank);
-        assertEquals(2, Attribute.DURABILITY.unsafeFrom(tank));
+        assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
     }
 
     @ParameterizedTest
@@ -48,8 +48,8 @@ public class CouncilGrantLifeTest {
 
         ZERO_COST_RULE.apply(state, councilPlayer, tank);
 
-        assertEquals(1, Attribute.DURABILITY.unsafeFrom(tank));
-        assertFalse(Attribute.DEAD.unsafeFrom(tank));
+        assertEquals(1, tank.getUnsafe(Attribute.DURABILITY));
+        assertFalse(tank.getUnsafe(Attribute.DEAD));
         assertFalse(state.getCouncil().getCouncillors().contains(tank.getPlayerRef()));
     }
 
@@ -60,9 +60,9 @@ public class CouncilGrantLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
-        Attribute.COFFER.to(state.getCouncil(), 1);
+        state.getCouncil().put(Attribute.COFFER, 1);
         ONE_COST_RULE.apply(state, councilPlayer, tank);
-        assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
+        assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
 
     @Test

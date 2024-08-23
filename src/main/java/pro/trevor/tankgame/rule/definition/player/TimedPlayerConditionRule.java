@@ -35,7 +35,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
         long cooldown = cooldownFunction.apply(state);
         Player player = subject.toPlayer(state).get();
 
-        long cooldownEnd = Attribute.GLOBAL_COOLDOWN_END_TIME.fromOrElse(player, 0L);
+        long cooldownEnd = player.getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L);
 
         if (cooldownEnd <= timeOfAction) {
             Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length);
@@ -52,7 +52,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
                 }
                 throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
             }
-            Attribute.GLOBAL_COOLDOWN_END_TIME.to(player, timeOfAction + cooldown);
+            player.put(Attribute.GLOBAL_COOLDOWN_END_TIME, timeOfAction + cooldown);
         } else {
             JSONObject error = new JSONObject();
             error.put("error", true);
@@ -74,7 +74,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
         if (player.isEmpty()) {
             throw new Error("No player found with name `" + subject.getName() + "`");
         }
-        boolean cooldownEnded = ((long) meta[0]) >= Attribute.GLOBAL_COOLDOWN_END_TIME.fromOrElse(player.get(),0L);
+        boolean cooldownEnded = ((long) meta[0]) >= player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME,0L);
         return cooldownEnded && super.canApply(state, subject, Arrays.copyOfRange(meta, 1, meta.length));
     }
 

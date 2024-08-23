@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
@@ -19,11 +19,11 @@ import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 
 
-class GoldLootTransfer implements ITriConsumer<State, GenericTank, AttributeObject> {
-    public void accept(State state, GenericTank tank, AttributeObject target) {
+class GoldLootTransfer implements ITriConsumer<State, GenericTank, AttributeContainer> {
+    public void accept(State state, GenericTank tank, AttributeContainer target) {
         // Just set the gold to the other tank's value this method just exists to verify that we called the consumer
-        Attribute.GOLD.to(tank, Attribute.GOLD.unsafeFrom(target));
-        Attribute.GOLD.to(target, 0);
+        tank.put(Attribute.GOLD, target.getUnsafe(Attribute.GOLD));
+        target.put(Attribute.GOLD, 0);
     };
 }
 
@@ -31,7 +31,7 @@ class GoldLootTransfer implements ITriConsumer<State, GenericTank, AttributeObje
 public class LootingTargetTest extends LootActionTestHelper {
     PlayerConditionRule getBasicLootRule() {
         return PlayerRules.getLootTargetRule((state, tank, target) -> {
-            return Attribute.POSITION.unsafeFrom(target).equals(new Position("B3")) ?
+            return target.getUnsafe(Attribute.POSITION).equals(new Position("B3")) ?
                 Result.error("No") :
                 Result.ok();
         }, new GoldLootTransfer());
@@ -48,7 +48,7 @@ public class LootingTargetTest extends LootActionTestHelper {
     @Test
     void deadTanksCantLoot() {
         setupTest("B2", 0, "A3", 0);
-        Attribute.DEAD.to(subjectTank, true);
+        subjectTank.put(Attribute.DEAD, true);
 
         // Subject has a range of 1 so A3 is out of reach (distance 2)
         assertFalse(canApply(getBasicLootRule(), "A3"));
@@ -65,8 +65,8 @@ public class LootingTargetTest extends LootActionTestHelper {
         setupTest("A1", 0, "B1", 5);
         apply(getBasicLootRule(), "B1");
 
-        assertEquals(5, Attribute.GOLD.unsafeFrom(subjectTank));
-        assertEquals(0, Attribute.GOLD.unsafeFrom(targetTank));
+        assertEquals(5, subjectTank.getUnsafe(Attribute.GOLD));
+        assertEquals(0, targetTank.getUnsafe(Attribute.GOLD));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class LootingTargetTest extends LootActionTestHelper {
     @Test
     void cantLootProtectedTankTillNextDay() {
         setupTest("A1", 0, "B1", 5);
-        Attribute.ONLY_LOOTABLE_BY.to(targetTank, new PlayerRef("Pam"));
+        targetTank.put(Attribute.ONLY_LOOTABLE_BY, new PlayerRef("Pam"));
         state.getPlayers().add(new Player("Pam"));
 
         assertFalse(canApply(getBasicLootRule(), "B1"));
@@ -89,7 +89,7 @@ public class LootingTargetTest extends LootActionTestHelper {
     @Test
     void cantLootTankProtectedForUs() {
         setupTest("A1", 0, "B1", 5);
-        Attribute.ONLY_LOOTABLE_BY.to(targetTank, subjectTank.getPlayerRef());
+        targetTank.put(Attribute.ONLY_LOOTABLE_BY, subjectTank.getPlayerRef());
 
         assertTrue(canApply(getBasicLootRule(), "B1"));
     }

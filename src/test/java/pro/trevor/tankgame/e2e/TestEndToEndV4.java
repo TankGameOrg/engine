@@ -31,8 +31,8 @@ public class TestEndToEndV4 {
     @Test
     public void testCouncilAtEndState() {
         EndToEndTestUtils.testCouncil(tester, 14, 1);
-        assertEquals(0, Attribute.COFFER.unsafeFrom(tester.getCouncil()));
-        assertEquals(34, Attribute.ARMISTICE_COUNT.unsafeFrom(tester.getCouncil()));
+        assertEquals(0, tester.getCouncil().getUnsafe(Attribute.COFFER));
+        assertEquals(34, tester.getCouncil().getUnsafe(Attribute.ARMISTICE_COUNT));
     }
 
     @Test
@@ -77,10 +77,10 @@ public class TestEndToEndV4 {
         assertTypeOfUnitAtPosition(tester, new Position("K4"), BasicWall.class);
         assertTypeOfUnitAtPosition(tester, new Position("I12"), BasicWall.class);
         assertTypeOfUnitAtPosition(tester, new Position("J12"), BasicWall.class);
-        assertEquals(1, Attribute.DURABILITY.unsafeFrom((BasicWall) tester.getUnitAtPosition(new Position("B4"))));
-        assertEquals(2, Attribute.DURABILITY.unsafeFrom((BasicWall) tester.getUnitAtPosition(new Position("K4"))));
-        assertEquals(4, Attribute.DURABILITY.unsafeFrom((BasicWall) tester.getUnitAtPosition(new Position("I12"))));
-        assertEquals(6, Attribute.DURABILITY.unsafeFrom((BasicWall) tester.getUnitAtPosition(new Position("J12"))));
+        assertEquals(1, ((BasicWall) tester.getUnitAtPosition(new Position("B4"))).getUnsafe(Attribute.DURABILITY));
+        assertEquals(2, ((BasicWall) tester.getUnitAtPosition(new Position("K4"))).getUnsafe(Attribute.DURABILITY));
+        assertEquals(4, ((BasicWall) tester.getUnitAtPosition(new Position("I12"))).getUnsafe(Attribute.DURABILITY));
+        assertEquals(6, ((BasicWall) tester.getUnitAtPosition(new Position("J12"))).getUnsafe(Attribute.DURABILITY));
     }
 
 }

@@ -31,7 +31,7 @@ public class LootDeadTankTest extends LootActionTestHelper {
     @Test
     void cantLootLivingTank() {
         setupTest("B2", 0, "B3", 0);
-        Attribute.DEAD.to(targetTank, false);
+        targetTank.put(Attribute.DEAD, false);
 
         assertFalse(canApply(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK, "B3"));
     }
@@ -49,7 +49,7 @@ public class LootDeadTankTest extends LootActionTestHelper {
         setupTest("B2", 2, "B3", 3);
         apply(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK, "B3");
 
-        assertEquals(5, Attribute.GOLD.unsafeFrom(subjectTank));
-        assertEquals(0, Attribute.GOLD.unsafeFrom(targetTank));
+        assertEquals(5, subjectTank.getUnsafe(Attribute.GOLD));
+        assertEquals(0, targetTank.getUnsafe(Attribute.GOLD));
     }
 }

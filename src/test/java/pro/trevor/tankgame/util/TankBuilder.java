@@ -1,5 +1,7 @@
 package pro.trevor.tankgame.util;
 
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -15,12 +17,7 @@ public class TankBuilder<T extends GenericTank> {
     }
 
     public <E> TankBuilder<T> with(Attribute<E> attribute, E value) {
-        attribute.to(tank, value);
-        return this;
-    }
-
-    public TankBuilder<T> named(String name) {
-        Attribute.NAME.to(tank, name);
+        tank.put(attribute, value);
         return this;
     }
 
@@ -34,12 +31,15 @@ public class TankBuilder<T extends GenericTank> {
     }
 
     public static TankBuilder<GenericTank> buildTank() {
-        JSONObject json = new JSONObject();
-        json.put("class", "GenericTank");
-        json.put(Attribute.PLAYER_REF.getJsonName(), new PlayerRef("test").toJson());
-        json.put(Attribute.POSITION.getJsonName(), new Position("A1").toJson());
-        json.put(Attribute.DEAD.getJsonName(), false);
-        json.put(Attribute.ACTION_POINTS.getJsonName(), 0);
-        return new TankBuilder<>(new GenericTank(json));
+        GenericTank tank = new GenericTank(
+            new PlayerRef("test"),
+            new Position("A1"),
+            Map.of(
+                Attribute.DEAD, false,
+                Attribute.ACTION_POINTS, 0
+            )
+        );
+
+        return new TankBuilder<>(tank);
     }
 }

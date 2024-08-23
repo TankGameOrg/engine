@@ -24,10 +24,10 @@ public class CouncilBountyTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = new TestState();
-        Attribute.COFFER.to(state.getCouncil(), 1);
+        state.getCouncil().put(Attribute.COFFER, 1);
 
         BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1);
-        assertEquals(1, Attribute.BOUNTY.unsafeFrom(tank));
+        assertEquals(1, tank.getUnsafe(Attribute.BOUNTY));
     }
 
     @Test
@@ -37,10 +37,10 @@ public class CouncilBountyTest {
                 .with(Attribute.DEAD, true)
                 .finish();
         State state = new TestState();
-        Attribute.COFFER.to(state.getCouncil(), 1);
+        state.getCouncil().put(Attribute.COFFER, 1);
 
         assertThrows(Error.class, () -> BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1));
-        assertEquals(0, Attribute.BOUNTY.unsafeFrom(tank));
+        assertEquals(0, tank.getUnsafe(Attribute.BOUNTY));
     }
 
     @Test
@@ -50,10 +50,10 @@ public class CouncilBountyTest {
                 .with(Attribute.BOUNTY, 0)
                 .finish();
         State state = new TestState();
-        Attribute.COFFER.to(state.getCouncil(), 1);
+        state.getCouncil().put(Attribute.COFFER, 1);
 
         BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1);
-        assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
+        assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
 
     @Test
@@ -62,10 +62,10 @@ public class CouncilBountyTest {
                 .with(Attribute.BOUNTY, 3)
                 .finish();
         State state = new TestState();
-        Attribute.COFFER.to(state.getCouncil(), 1);
+        state.getCouncil().put(Attribute.COFFER, 1);
 
         BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1);
-        assertEquals(4, Attribute.BOUNTY.unsafeFrom(tank));
+        assertEquals(4, tank.getUnsafe(Attribute.BOUNTY));
     }
 
     @Test

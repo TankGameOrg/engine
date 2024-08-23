@@ -3,13 +3,13 @@ package pro.trevor.tankgame.state;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pro.trevor.tankgame.state.attribute.AttributeObject;
+import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.attribute.Codec;
 
-public class AttributeObjectTest {
+public class AttributeContainerTest {
 
     @Test
-    void testAttributeObjectCodec() {
+    void testAttributeContainerCodec() {
         JSONObject json = new JSONObject(
 """
 {
@@ -21,10 +21,10 @@ public class AttributeObjectTest {
   },
   "$ACTIONS": 0,
   "$DEAD": false,
-  "class": "AttributeObject"
+  "class": "AttributeContainer"
 }
 """);
-        AttributeObject object = new AttributeObject(json);
+        AttributeContainer object = new AttributeContainer(json);
         Assertions.assertEquals(json.toString(), object.toJson().toString());
         Assertions.assertEquals(object, Codec.decodeJson(object.toJson()));
     }

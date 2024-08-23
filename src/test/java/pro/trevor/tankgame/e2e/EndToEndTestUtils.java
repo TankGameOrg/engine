@@ -34,11 +34,11 @@ public class EndToEndTestUtils {
 
     public static void assertExpectedTanksOnBoard(EndToEndTester tester, Set<String> livingTanks, Set<String> deadTanks) {
         Set<String> actualLivingTanks = tester.getBoard().gatherUnits(GenericTank.class).stream()
-                .filter((t) -> !Attribute.DEAD.unsafeFrom(t))
+                .filter((t) -> !t.getUnsafe(Attribute.DEAD))
                 .map((t) -> t.getPlayerRef().getName())
                 .collect(Collectors.toSet());
         Set<String> actualDeadTanks = tester.getBoard().gatherUnits(GenericTank.class).stream()
-                .filter(Attribute.DEAD::unsafeFrom)
+                .filter(tank -> tank.getUnsafe(Attribute.DEAD))
                 .map((t) -> t.getPlayerRef().getName())
                 .collect(Collectors.toSet());
 
@@ -47,7 +47,7 @@ public class EndToEndTestUtils {
     }
 
     public static <T> void assertPlayerTankAttributeEquals(EndToEndTester tester, String player, Attribute<T> attribute, T value) {
-        assertEquals(value, attribute.unsafeFrom(tester.getTankByPlayerName(player)));
+        assertEquals(value, tester.getTankByPlayerName(player).getUnsafe(attribute));
     }
 
     public static void testCouncil(EndToEndTester tester, int councillors, int senators) {
@@ -59,9 +59,9 @@ public class EndToEndTestUtils {
     }
 
     public static void testState(EndToEndTester tester, boolean running, String winner, int tick) {
-        assertEquals(running, Attribute.RUNNING.unsafeFrom(tester.getState()));
-        assertEquals(winner, Attribute.WINNER.unsafeFrom(tester.getState()));
-        assertEquals(tick, Attribute.TICK.unsafeFrom(tester.getState()));
+        assertEquals(running, tester.getState().getUnsafe(Attribute.RUNNING));
+        assertEquals(winner, tester.getState().getUnsafe(Attribute.WINNER));
+        assertEquals(tick, tester.getState().getUnsafe(Attribute.TICK));
     }
 
     public static <T> void assertTypeOfFloorAtPosition(EndToEndTester tester, Position position, Class<T> type) {

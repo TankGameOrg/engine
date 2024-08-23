@@ -34,10 +34,10 @@ public class TankShootV5Test {
         State state = generateBoard(2, 2, tank, targetTank);
         SHOOT_V5.apply(state, tank.getPlayerRef(), new Position("A2"), true);
 
-        assertEquals(0, Attribute.GOLD.unsafeFrom(tank));
-        assertEquals(6, Attribute.GOLD.unsafeFrom(targetTank));
-        assertEquals(tank.getPlayerRef(), Attribute.ONLY_LOOTABLE_BY.unsafeFrom(targetTank));
-        assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
+        assertEquals(0, tank.getUnsafe(Attribute.GOLD));
+        assertEquals(6, targetTank.getUnsafe(Attribute.GOLD));
+        assertEquals(tank.getPlayerRef(), targetTank.getUnsafe(Attribute.ONLY_LOOTABLE_BY));
+        assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
 
     @Test
@@ -48,9 +48,9 @@ public class TankShootV5Test {
         State state = generateBoard(2, 2, tank, targetTank);
         SHOOT_V5.apply(state, tank.getPlayerRef(), new Position("A1"), true);
 
-        assertEquals(1, Attribute.GOLD.unsafeFrom(tank));
-        assertEquals(4, Attribute.GOLD.unsafeFrom(targetTank));
-        assertEquals(tank.getPlayerRef(), Attribute.ONLY_LOOTABLE_BY.unsafeFrom(targetTank));
-        assertEquals(0, Attribute.COFFER.unsafeFrom(state.getCouncil()));
+        assertEquals(1, tank.getUnsafe(Attribute.GOLD));
+        assertEquals(4, targetTank.getUnsafe(Attribute.GOLD));
+        assertEquals(tank.getPlayerRef(), targetTank.getUnsafe(Attribute.ONLY_LOOTABLE_BY));
+        assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
 }

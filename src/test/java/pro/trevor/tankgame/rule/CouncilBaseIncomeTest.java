@@ -35,7 +35,7 @@ public class CouncilBaseIncomeTest {
 
         rule.apply(new TestState(), c);
 
-        assertEquals(expectedCoffer, Attribute.COFFER.unsafeFrom(c));
+        assertEquals(expectedCoffer, c.getUnsafe(Attribute.COFFER));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class CouncilBaseIncomeTest {
 
         rule.apply(new TestState(), c);
 
-        assertEquals(expectedCoffer, Attribute.COFFER.unsafeFrom(c));
+        assertEquals(expectedCoffer, c.getUnsafe(Attribute.COFFER));
     }
 
     @Test
@@ -81,12 +81,12 @@ public class CouncilBaseIncomeTest {
         State state = new TestState();
 
         rule.apply(state, c);
-        assertEquals(26, Attribute.COFFER.unsafeFrom(c));
+        assertEquals(26, c.getUnsafe(Attribute.COFFER));
 
         rule.apply(state, c);
-        assertEquals(47, Attribute.COFFER.unsafeFrom(c));
+        assertEquals(47, c.getUnsafe(Attribute.COFFER));
 
         rule.apply(state, c);
-        assertEquals(68, Attribute.COFFER.unsafeFrom(c));
+        assertEquals(68, c.getUnsafe(Attribute.COFFER));
     }
 }

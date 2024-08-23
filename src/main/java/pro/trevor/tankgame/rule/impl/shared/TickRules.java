@@ -23,21 +23,21 @@ import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules {
     public static final MetaTickActionRule<Board> INCREMENT_DAY_ON_TICK = new MetaTickActionRule<>(
-            (s, n) -> Attribute.TICK.to(s, Attribute.TICK.fromOrElse(s, 0) + 1));
+            (s, n) -> s.put(Attribute.TICK, s.getOrElse(Attribute.TICK, 0) + 1));
 
     public static <T extends GenericTank> TickActionRule<T> GetDistributeGoldToTanksRule() {
         return new TickActionRule<T>(
                 (s, t) -> {
-                    if (!Attribute.DEAD.from(t).orElse(false) && Attribute.GOLD.in(t)) {
+                    if (!t.get(Attribute.DEAD).orElse(false) && t.has(Attribute.GOLD)) {
                         if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
                             Set<Position> mines = new HashSet<>();
                             findAllConnectedMines(mines, s, t.getPosition());
                             int tanks = (int) mines.stream().filter(
                                     (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
-                                            && !Attribute.DEAD.from(tank).orElse(false))
+                                            && !tank.get(Attribute.DEAD).orElse(false))
                                     .count();
                             int goldToGain = mines.size() / tanks;
-                            Attribute.GOLD.to(t, Attribute.GOLD.unsafeFrom(t) + goldToGain);
+                            t.put(Attribute.GOLD, t.getUnsafe(Attribute.GOLD) + goldToGain);
                         }
                     }
                 });
@@ -47,8 +47,8 @@ public class TickRules {
             int amount) {
         return new TickActionRule<T>(
                 (s, t) -> {
-                    if (!Attribute.DEAD.from(t).orElse(false) && Attribute.ACTION_POINTS.in(t)) {
-                        Attribute.ACTION_POINTS.to(t, Attribute.ACTION_POINTS.unsafeFrom(t) + amount);
+                    if (!t.get(Attribute.DEAD).orElse(false) && t.has(Attribute.ACTION_POINTS)) {
+                        t.put(Attribute.ACTION_POINTS, t.getUnsafe(Attribute.ACTION_POINTS) + amount);
                     }
                 });
     }
@@ -56,10 +56,10 @@ public class TickRules {
     public static TickActionRule<GenericTank> GetHealTanksInHealthPoolRule() {
         return new TickActionRule<>(
                 (s, t) -> {
-                    if (Attribute.DEAD.from(t).orElse(false) || !Attribute.DURABILITY.in(t))
+                    if (t.get(Attribute.DEAD).orElse(false) || !t.has(Attribute.DURABILITY))
                         return;
                     if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof HealthPool healthPool) {
-                        Attribute.DURABILITY.to(t, Attribute.DURABILITY.unsafeFrom(t) + healthPool.getRegenAmount());
+                        t.put(Attribute.DURABILITY, t.getUnsafe(Attribute.DURABILITY) + healthPool.getRegenAmount());
                     }
                 });
     }
@@ -82,18 +82,18 @@ public class TickRules {
                 for (Set<Position> mine : allMines) {
                     int tanks = (int) mine.stream().filter(
                             (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
-                                    && !Attribute.DEAD.from(tank).orElse(false))
+                                    && !tank.get(Attribute.DEAD).orElse(false))
                             .count();
                     int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
 
-                    Attribute.COFFER.to(s.getCouncil(), Attribute.COFFER.fromOrElse(s.getCouncil(), 0) + goldToGain);
+                    s.getCouncil().put(Attribute.COFFER, s.getCouncil().getOrElse(Attribute.COFFER, 0) + goldToGain);
                 }
             });
 
     public static final MetaTickActionRule<Council> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
             (s, c) -> {
                 int totalCouncilMembers = c.getCouncillors().size() + c.getSenators().size();
-                Attribute.ARMISTICE_COUNT.to(c, Attribute.ARMISTICE_COUNT.fromOrElse(c, 0) + totalCouncilMembers);
+                c.put(Attribute.ARMISTICE_COUNT, c.getOrElse(Attribute.ARMISTICE_COUNT, 0) + totalCouncilMembers);
             });
 
     public static MetaTickActionRule<Council> GetCouncilBaseIncomeRule(int goldPerCouncilor, int goldPerSenator) {
@@ -109,19 +109,19 @@ public class TickRules {
 
                     int income = (goldPerCouncilor * councilorCount) + (goldPerSenator * senatorCount);
 
-                    Attribute.COFFER.to(c, Attribute.COFFER.fromOrElse(c, 0) + income);
+                    c.put(Attribute.COFFER, c.getOrElse(Attribute.COFFER, 0) + income);
                 });
     }
 
     public static TickActionRule<GenericTank> SET_PLAYER_CAN_LOOT = new TickActionRule<>((state, tank) -> {
-        if(!Attribute.DEAD.fromOrElse(tank, false)) {
-            Attribute.PLAYER_CAN_LOOT.to(tank, true);
+        if(!tank.getOrElse(Attribute.DEAD, false)) {
+            tank.put(Attribute.PLAYER_CAN_LOOT, true);
         }
     });
 
     public static TickActionRule<GenericTank> CLEAR_ONLY_LOOTABLE_BY = new TickActionRule<>((state, tank) -> {
-        if(Attribute.ONLY_LOOTABLE_BY.in(tank)) {
-            Attribute.ONLY_LOOTABLE_BY.remove(tank);
+        if(tank.has(Attribute.ONLY_LOOTABLE_BY)) {
+            tank.remove(Attribute.ONLY_LOOTABLE_BY);
         }
     });
 }
