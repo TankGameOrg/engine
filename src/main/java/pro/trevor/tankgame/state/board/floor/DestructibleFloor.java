@@ -14,6 +14,9 @@ public class DestructibleFloor extends AbstractFloor {
         super(position);
         this.put(Attribute.DURABILITY, durability);
         this.put(Attribute.MAX_DURABILITY, maxDurability);
+        if(durability == 0) {
+            this.put(Attribute.DESTROYED, true);
+        }
     }
 
     public DestructibleFloor(JSONObject json) {

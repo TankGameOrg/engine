@@ -1,7 +1,5 @@
 package pro.trevor.tankgame.state.attribute;
 
-import java.util.Optional;
-
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
@@ -67,9 +65,5 @@ public class Attribute<E> {
 
     public Class<E> getAttributeClass() {
         return attributeClass;
-    }
-
-    public String getJsonName() {
-        return AttributeContainer.toAttributeJsonKeyString(attributeName);
     }
 }

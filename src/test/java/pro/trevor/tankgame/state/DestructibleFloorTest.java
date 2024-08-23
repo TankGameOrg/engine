@@ -23,17 +23,10 @@ import pro.trevor.tankgame.util.TestUtilities;
 
 public class DestructibleFloorTest {
 
-    private DestructibleFloor GetTestFloor(Position p, int durability, int maxDurability)
+    private DestructibleFloor GetTestFloor(Position position, int durability, int maxDurability)
     {
         assert durability >= 0;
-        JSONObject json = new JSONObject();
-
-        json.put(Attribute.DURABILITY.getJsonName(), durability);
-        json.put(Attribute.MAX_DURABILITY.getJsonName(), maxDurability);
-        json.put(Attribute.POSITION.getJsonName(), p.toJson());
-        if (durability == 0) json.put(Attribute.DESTROYED.getJsonName(), true);
-
-        return new DestructibleFloor(json);
+        return new DestructibleFloor(position, durability, maxDurability);
     }
 
     @Test
