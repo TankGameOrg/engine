@@ -5,10 +5,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 public class Util {
@@ -38,6 +35,61 @@ public class Util {
         Position[] output = new Position[orthAdj.length + diagAdj.length];
         System.arraycopy(orthAdj, 0, output, 0, orthAdj.length);
         System.arraycopy(diagAdj, 0, output, orthAdj.length, diagAdj.length);
+
+        return output;
+    }
+
+    public static Set<Position> allAdjacentMovablePositions(Board board, Position p) {
+        Set<Position> output = new HashSet<>();
+
+        Position left = new Position(p.x() - 1, p.y());
+        Position right = new Position(p.x() + 1, p.y());
+        Position up = new Position(p.x(), p.y() - 1);
+        Position down = new Position(p.x(), p.y() + 1);
+        Position upLeft = new Position(p.x() - 1, p.y() - 1);
+        Position upRight = new Position(p.x() + 1, p.y() - 1);
+        Position downRight = new Position(p.x() + 1, p.y() + 1);
+        Position downLeft = new Position(p.x() - 1, p.y() + 1);
+
+        if (board.isWalkable(left)) {
+            output.add(left);
+            if (board.isWalkable(upLeft)) {
+                output.add(upLeft);
+            }
+            if (board.isWalkable(downLeft)) {
+                output.add(downLeft);
+            }
+        }
+
+        if (board.isWalkable(right)) {
+            output.add(right);
+            if (board.isWalkable(upRight)) {
+                output.add(upRight);
+            }
+            if (board.isWalkable(downRight)) {
+                output.add(downRight);
+            }
+        }
+
+        if (board.isWalkable(up)) {
+            output.add(up);
+            if (board.isWalkable(upLeft)) {
+                output.add(upLeft);
+            }
+            if (board.isWalkable(upRight)) {
+                output.add(upRight);
+            }
+        }
+
+        if (board.isWalkable(down)) {
+            output.add(down);
+            if (board.isWalkable(downLeft)) {
+                output.add(downLeft);
+            }
+            if (board.isWalkable(downRight)) {
+                output.add(downRight);
+            }
+        }
 
         return output;
     }
@@ -77,24 +129,58 @@ public class Util {
         return output;
     }
 
-    public static boolean canMoveTo(State state, Position s, Position e) {
-        Position[] adjacent = allAdjacentPositions(s);
-        if (!Arrays.stream(adjacent).toList().contains(e)) {
-            return false;
-        } else if (!state.getBoard().isWalkable(e)) {
-            return false;
+    public static Set<Position> allPossibleMoves(Board board, Position start, int speed) {
+        return allPossiblePaths(board, start, speed).keySet();
+    }
+
+    /**
+     * Finds the shortest path to each space within the unit's speed. The result of this is stored into the return
+     * value as a hashmap of Position(Target) -> Pair[Integer(Remaining speed), Position(Previous position)].
+     * Ties in optimal paths are arbitrarily broken.
+     * @param board The board to check for if positions are valid.
+     * @param start The position to check for paths from.
+     * @param speed The number of spaces to search. Must be non-negative.
+     */
+    private static HashMap<Position, Pair<Integer, Position>> allPossiblePaths(Board board, Position start, int speed) {
+        HashMap<Position, Pair<Integer, Position>> output = new HashMap<>();
+        allPossiblePaths(output, board, start, null, speed);
+        return output;
+    }
+
+    /**
+     * Finds the shortest path to each space within the unit's speed. This information is stored into the first
+     * parameter as a hashmap of Position(Target) -> Pair[Integer(Remaining speed), Position(Previous position)].
+     * Ties in optimal paths are arbitrarily broken.
+     * @param visited The output parameter. Must be empty.
+     * @param board The board to check for if positions are valid.
+     * @param start The position to check for paths from.
+     * @param prev The previous position. Must be null.
+     * @param speed The number of spaces to search. Must be non-negative.
+     */
+    private static void allPossiblePaths(HashMap<Position, Pair<Integer, Position>> visited, Board board, Position start, Position prev, int speed) {
+        // If the map of visited positions contains this with an equal or higher speed, return.
+        // If the map of visited positions is empty, this is our first node. It might not be walkable since it could be
+        // the space that a tank is already occupying.
+        if (visited.getOrDefault(start, Pair.of(-1, null)).left() >= speed || (!visited.isEmpty() && !board.isWalkable(start))) {
+            return;
         }
 
-        int dx = e.x() - s.x();
-        int dy = e.y() - s.y();
+        visited.put(start, Pair.of(speed, prev));
 
-        if (dx == 0 || dy == 0) {
-            return true;
-        } else {
-            Position adjY = new Position(s.x() + dx, s.y());
-            Position adjX = new Position(s.x(), s.y() + dy);
-            return state.getBoard().isWalkable(adjY) || state.getBoard().isWalkable(adjX);
+        if (speed == 0) {
+            return;
         }
+
+        // Visit all valid adjacent spaces with a decreased number of remaining moves.
+        // Any previously-visited spaces with greater speed values will be ignored.
+        for (Position position : allAdjacentMovablePositions(board, start)) {
+            allPossiblePaths(visited, board, position, start,speed - 1);
+        }
+    }
+
+    public static boolean canMoveTo(State state, Position s, Position e, int speed) {
+        Set<Position> possibleMoves = allPossibleMoves(state.getBoard(), s, speed);
+        return possibleMoves.contains(e);
     }
 
     public static String toString(Collection<?> items) {

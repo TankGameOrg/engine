@@ -17,6 +17,7 @@ public class Attribute<E> {
     public static final Attribute<Integer> ACTION_POINTS = new Attribute<>("ACTIONS", Integer.class);
     public static final Attribute<Integer> MAX_ACTION_POINTS = new Attribute<>("MAX_ACTIONS", Integer.class);
     public static final Attribute<Integer> RANGE = new Attribute<>("RANGE", Integer.class);
+    public static final Attribute<Integer> SPEED = new Attribute<>("SPEED", Integer.class);
     public static final Attribute<Integer> BOUNTY = new Attribute<>("BOUNTY", Integer.class);
     public static final Attribute<Boolean> DEAD = new Attribute<>("DEAD", Boolean.class);
     public static final Attribute<PlayerRef> PLAYER_REF = new Attribute<>("PLAYER_REF", PlayerRef.class);

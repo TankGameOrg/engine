@@ -116,7 +116,7 @@ public class PlayerRules {
                 new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
                         new MinimumPredicate<>(PlayerRules::getTank, attribute, cost, "Tank has insufficient " + attribute.getName()),
                         new GetterPredicate<>(PlayerRules::getTank,
-                                (state, tank, n)-> canMoveTo(state, tank.getPosition(), toType(n[0], Position.class)),
+                                (state, tank, n) -> canMoveTo(state, tank.getPosition(), toType(n[0], Position.class), Attribute.SPEED.fromOrElse(tank, 1)),
                                 "Tank cannot move to target position"))
                 ,
                 (state, player, n) -> {
