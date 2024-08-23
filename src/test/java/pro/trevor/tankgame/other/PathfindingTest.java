@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Pathfinding {
+public class PathfindingTest {
 
     private static final int BOARD_SIZE = 13;
 
@@ -31,11 +31,17 @@ public class Pathfinding {
         Assertions.assertEquals(moves, generatedMoves);
     }
 
-    private Set<Position> positions(int xOffset, int yOffset, int speed) {
+    /**
+     * Finds all positions in a given radius about a given offset. Does not do bounds checking.
+     * @param offset the middle of the radius.
+     * @param radius the radius about the midpoint that positions will be generated for.
+     * @return the set of all positions in the radius.
+     */
+    private Set<Position> positionsInRadius(Position offset, int radius) {
         Set<Position> positions = new HashSet<>();
 
-        for (int i = xOffset - speed; i <= xOffset + speed; ++i) {
-            for (int j = yOffset - speed; j <= yOffset + speed; ++j) {
+        for (int i = offset.x() - radius; i <= offset.x() + radius; ++i) {
+            for (int j = offset.y() - radius; j <= offset.y() + radius; ++j) {
                 positions.add(new Position(i, j));
             }
         }
@@ -44,7 +50,7 @@ public class Pathfinding {
     }
 
     private void testVariableSpeedMoves(int speed) {
-        testPossibleMovesIsExactly(generateTestBoard(new Position(speed, speed)), new Position(speed, speed), speed, positions(speed, speed, speed));
+        testPossibleMovesIsExactly(generateTestBoard(new Position(speed, speed)), new Position(speed, speed), speed, positionsInRadius(new Position(speed, speed), speed));
     }
 
     @Test
@@ -58,7 +64,7 @@ public class Pathfinding {
     public void testCannotMoveOntoWall() {
         Position start = new Position(1, 1);
         Board board = generateTestBoard(start, new Position(0, 1));
-        Set<Position> expected = positions(1, 1, 1);
+        Set<Position> expected = positionsInRadius(start, 1);
         expected.remove(new Position(0, 1));
         testPossibleMovesIsExactly(board, start, 1, expected);
     }
@@ -67,7 +73,7 @@ public class Pathfinding {
     public void testCannotMoveThroughCorner() {
         Position start = new Position(1, 1);
         Board board = generateTestBoard(start, new Position(0, 1), new Position(1, 0));
-        Set<Position> expected = positions(1, 1, 1);
+        Set<Position> expected = positionsInRadius(start, 1);
         expected.remove(new Position(0, 0));
         expected.remove(new Position(0, 1));
         expected.remove(new Position(1, 0));
@@ -96,7 +102,7 @@ public class Pathfinding {
      */
     @Test
     public void testLongRangePathfinding() {
-        Position start = new Position(0, 0);
+        Position start = new Position(0, 1);
         Board board = generateTestBoard(start, new Position(0, 0), new Position(1, 1));
         Assertions.assertTrue(Util.allPossibleMoves(board, start, 3).contains(new Position(1, 0)));
     }
