@@ -130,7 +130,7 @@ public class AttributeContainer {
 
     public <E> E getUnsafe(Attribute<E> attribute) {
         if (!has(attribute))
-            throw new Error("Attempting to get attribute '" + attribute.getName() + "' from generic element " + this
+            throw new Error("Attempting to get attribute '" + attribute.getName() + "' from attribute container " + this
                     + ". This generic element has no such attribute");
         return getObject(attribute);
     }
