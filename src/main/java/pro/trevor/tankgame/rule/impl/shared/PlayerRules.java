@@ -25,11 +25,9 @@ import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.LineOfSight;
-import pro.trevor.tankgame.util.Pair;
 import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriFunction;
@@ -43,38 +41,39 @@ public class PlayerRules {
         return state.getBoard().gatherUnits(GenericTank.class).stream().map(GenericTank::getPlayerRef).anyMatch(playerRef::equals);
     }
 
-    private static GenericTank getTank(State state, PlayerRef playerRef) {
-        return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findAny().get();
+    private static Optional<GenericTank> getTank(State state, PlayerRef playerRef) {
+        return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findAny();
     }
 
     private static boolean isCouncil(State state, PlayerRef playerRef) {
         return playerRef.getName().equals("Council") || state.getCouncil().allPlayersOnCouncil().contains(playerRef);
     }
 
-    private static Council getCouncil(State state, PlayerRef playerRef) {
-        return state.getCouncil();
+    private static Optional<Council> getCouncil(State state, PlayerRef playerRef) {
+        return Optional.of(state.getCouncil());
     }
 
     private static final RulePredicate PLAYER_HAS_TANK_PREDICATE = new RulePredicate((state, player, n) ->
             hasTank(state, player), "Player has no corresponding tank");
 
-    private static final RulePredicate TANK_IS_ALIVE_PREDICATE = new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Tank must not be dead");
+    private static final RulePredicate PLAYER_TANK_IS_ALIVE_PREDICATE = new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> !tank.getOrElse(Attribute.DEAD, false), "Tank must not be dead");
+
+    private static final RulePredicate PLAYER_TANK_IS_DEAD_PREDICATE = new OptionalGetterPredicate<>(PlayerRules::getTank, (state, oTank, n) -> oTank.map((t) -> t.getOrElse(Attribute.DEAD, false)).orElse(true),"Player tank must be dead");
 
     private static final RulePredicate PLAYER_IS_COUNCIL_PREDICATE = new RulePredicate((state, player, n) -> isCouncil(state, player), "Player is not council");
 
     // Check it meta[0] (assumed to be target aka a Position) is withing the subject's range
-    private static final RulePredicate TARGET_IS_IN_RANGE = new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) ->
-        tank.getPosition().distanceFrom(toType(n[0], Position.class)) <= tank.getOrElse(Attribute.RANGE, 0), "Target position is not in range");
+    private static final RulePredicate TARGET_IS_IN_RANGE = new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> tank.getPosition().distanceFrom(toType(n[0], Position.class)) <= tank.getOrElse(Attribute.RANGE, 0), "Target position is not in range");
 
     public static final PlayerConditionRule BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerConditionRule(
             PlayerRules.ActionKeys.BUY_ACTION,
-            new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
+            new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                     new GetterPredicate<>(PlayerRules::getTank,
                             (state, tank, n) -> toType(n[0], Integer.class) <= tank.getOrElse(Attribute.GOLD, 0),
                             "Tank has insufficient gold")
             ),
             (state, player, n) -> {
-                GenericTank tank = getTank(state, player);
+                GenericTank tank = getTank(state, player).get();
                 int gold = toType(n[0], Integer.class);
                 int n5 = gold / 5;
                 int rem = gold - n5 * 5;
@@ -93,14 +92,14 @@ public class PlayerRules {
             throw new Error("Illegal max buys of " + maxBuys + ". Must be positive and non-zero.");
 
         return new PlayerConditionRule(ActionKeys.BUY_ACTION,
-                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                         new GetterPredicate<>(PlayerRules::getTank,
                                 (state, tank, n) -> toType(n[0], Integer.class) <= tank.getOrElse(Attribute.GOLD, 0), "Tank has insufficient gold"),
                         new RulePredicate((state, player, n) -> toType(n[0], Integer.class) / actionCost <= maxBuys, "Actions bought must be fewer than or equal to " + maxBuys),
                         new RulePredicate((state, player, n) -> toType(n[0], Integer.class) % actionCost == 0, "Gold spent must be a multiple of the action cost: " + actionCost)
                 ),
                 (state, player, n) -> {
-                    GenericTank tank = getTank(state, player);
+                    GenericTank tank = getTank(state, player).get();
                     int goldSpent = toType(n[0], Integer.class);
                     int boughtActions = goldSpent / actionCost;
 
@@ -113,14 +112,14 @@ public class PlayerRules {
 
     public static PlayerConditionRule getMoveRule(Attribute<Integer> attribute, int cost) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.MOVE,
-                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                         new MinimumPredicate<>(PlayerRules::getTank, attribute, cost, "Tank has insufficient " + attribute.getName()),
                         new GetterPredicate<>(PlayerRules::getTank,
                                 (state, tank, n) -> canMoveTo(state, tank.getPosition(), toType(n[0], Position.class), tank.getOrElse(Attribute.SPEED, 1)),
                                 "Tank cannot move to target position"))
                 ,
                 (state, player, n) -> {
-                    GenericTank tank = getTank(state, player);
+                    GenericTank tank = getTank(state, player).get();
                     tank.put(attribute, tank.getUnsafe(attribute) - cost);
                     state.getBoard().putUnit(new EmptyUnit(tank.getPosition()));
                     tank.setPosition(toType(n[0], Position.class));
@@ -131,10 +130,10 @@ public class PlayerRules {
 
     public static PlayerConditionRule getUpgradeRangeRule(Attribute<Integer> attribute, int cost) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.UPGRADE_RANGE,
-                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                         new MinimumPredicate<>(PlayerRules::getTank, attribute, cost, "Tank has insufficient " + attribute.getName())),
                 (state, player, n) -> {
-                    GenericTank tank = getTank(state, player);
+                    GenericTank tank = getTank(state, player).get();
                     tank.put(Attribute.RANGE, tank.getOrElse(Attribute.RANGE, 0) + 1);
                     tank.put(attribute, tank.getUnsafe(attribute) - cost);
                 });
@@ -142,7 +141,7 @@ public class PlayerRules {
 
     public static PlayerConditionRule getShareGoldWithTaxRule(int taxAmount) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.DONATE,
-                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                         new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) ->
                             tank.getOrElse(Attribute.GOLD,0) >= toType(n[1], Integer.class) + taxAmount,
                                 "Tank has insufficient gold"),
@@ -154,7 +153,7 @@ public class PlayerRules {
                         new RulePredicate((state, player, n) -> toType(n[0], GenericTank.class).has(Attribute.GOLD),  "Target must have gold attribute")
                 ),
                 (state, player, n) -> {
-                    GenericTank tank = getTank(state, player);
+                    GenericTank tank = getTank(state, player).get();
                     GenericTank other = toType(n[0], GenericTank.class);
                     int donation = toType(n[1], Integer.class);
 
@@ -261,7 +260,7 @@ public class PlayerRules {
             }
 
             // Check ruleset specific requirements
-            GenericTank tank = PlayerRules.getTank(state, player);
+            GenericTank tank = PlayerRules.getTank(state, player).get();
             return canLootTarget.accept(state, tank, target);
         });
 
@@ -275,8 +274,8 @@ public class PlayerRules {
         return new PlayerConditionRule(PlayerRules.ActionKeys.LOOT,
             lootCondition,
             (state, player, meta) -> {
+                GenericTank tank = PlayerRules.getTank(state, player).get();
                 Position position = toType(meta[0], Position.class);
-                GenericTank tank = PlayerRules.getTank(state, player);
                 AttributeContainer targetObject = (AttributeContainer) state.getBoard().getUnitOrFloor(position).get();
                 transferLoot.accept(state, tank, targetObject);
             },
@@ -307,13 +306,13 @@ public class PlayerRules {
             ITriPredicate<State, Position, Position> lineOfSight,
             ITriConsumer<State, GenericTank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
-                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, TANK_IS_ALIVE_PREDICATE,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                         new MinimumPredicate<>(PlayerRules::getTank, Attribute.ACTION_POINTS, 1, "Tank has insufficient action points"),
                         TARGET_IS_IN_RANGE,
                         new RulePredicate((state, player, n) -> state.getBoard().isValidPosition(toType(n[0], Position.class)), "Target position is not within the game board"),
                         new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> lineOfSight.test(state, tank.getPosition(), toType(n[0], Position.class)), "Target position is not in line-of-sight")),
                 (state, player, n) -> {
-                    GenericTank tank = getTank(state, player);
+                    GenericTank tank = getTank(state, player).get();
                     Position target = toType(n[0], Position.class);
                     boolean hit = toType(n[1], Boolean.class);
                     tank.put(Attribute.ACTION_POINTS, tank.getUnsafe(Attribute.ACTION_POINTS) - 1);

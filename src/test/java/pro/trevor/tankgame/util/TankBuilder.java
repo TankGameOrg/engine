@@ -30,9 +30,12 @@ public class TankBuilder<T extends GenericTank> {
         return tank;
     }
 
+
+    private static int count = 0;
+
     public static TankBuilder<GenericTank> buildTank() {
         GenericTank tank = new GenericTank(
-            new PlayerRef("test"),
+            new PlayerRef("test " + count),
             new Position("A1"),
             Map.of(
                 Attribute.DEAD, false,
