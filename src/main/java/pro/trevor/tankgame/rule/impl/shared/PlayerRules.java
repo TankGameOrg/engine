@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.conditional.*;
 import pro.trevor.tankgame.rule.definition.range.UnitRange;
+import pro.trevor.tankgame.rule.impl.util.LootTable;
 import pro.trevor.tankgame.rule.definition.range.BooleanRange;
 import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
 import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
@@ -288,30 +289,33 @@ public class PlayerRules {
     /**
      * Rule that loots gold from dead tanks or loot boxes if the subject has the PLAYER_CAN_LOOT attribute
      */
-    public static PlayerConditionRule LOOT_RULE = getLootTargetRule((state, tank, target) -> {
-        if(!tank.getOrElse(Attribute.PLAYER_CAN_LOOT, false)) {
-            return Result.error("Players can only loot once per day");
-        }
+    public static PlayerConditionRule getLootRule(LootTable lootTable) {
+        return getLootTargetRule((state, tank, target) -> {
+            if(!tank.getOrElse(Attribute.PLAYER_CAN_LOOT, false)) {
+                return Result.error("Players can only loot once per day");
+            }
 
-        if(target instanceof GenericTank && target.getOrElse(Attribute.DEAD, false)) {
-            return Result.ok();
-        }
+            if(target instanceof GenericTank && target.getOrElse(Attribute.DEAD, false)) {
+                return Result.ok();
+            }
 
-        if(target instanceof LootBox) {
-            return Result.ok();
-        }
+            if(target instanceof LootBox) {
+                return Result.ok();
+            }
 
-        return Result.error("You can only loot dead tanks or loot boxes");
-    }, (state, tank, target) -> {
-        if(target instanceof GenericTank) {
-            tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.GOLD, 0));
-            target.put(Attribute.GOLD, 0);
-        } else if (target instanceof LootBox lootBox) {
-            lootBox.transferLoot(tank);
-        }
+            return Result.error("You can only loot dead tanks or loot boxes");
+        }, (state, tank, target) -> {
+            if(target instanceof GenericTank) {
+                tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.GOLD, 0));
+                target.put(Attribute.GOLD, 0);
+            } else if (target instanceof LootBox lootBox) {
+                lootTable.grantLoot(state, tank);
+                lootBox.setHasBeenLooted();
+            }
 
-        tank.remove(Attribute.PLAYER_CAN_LOOT);
-    });
+            tank.remove(Attribute.PLAYER_CAN_LOOT);
+        });
+    }
 
     public static PlayerConditionRule spendActionToShootGeneric(
             ITriPredicate<State, Position, Position> lineOfSight,

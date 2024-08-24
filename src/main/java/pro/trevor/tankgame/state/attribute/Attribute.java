@@ -30,6 +30,9 @@ public class Attribute<E> {
     public static final Attribute<Integer> MAX_DURABILITY = new Attribute<>("MAX_DURABILITY", Integer.class);
     public static final Attribute<Boolean> DESTROYED = new Attribute<>("DESTROYED", Boolean.class);
 
+    // LootBox attributes
+    public static Attribute<Boolean> HAS_BEEN_LOOTED = new Attribute<>("HAS_BEEN_LOOTED", Boolean.class);
+
     // Floor attributes
     public static final Attribute<Integer> REGENERATION = new Attribute<>("REGENERATION", Integer.class);
 

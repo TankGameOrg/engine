@@ -7,9 +7,15 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
+import pro.trevor.tankgame.rule.definition.Priority;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
+import pro.trevor.tankgame.rule.impl.util.RandomManager;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.GenericElement;
@@ -149,4 +155,43 @@ public class TickRules {
             state.getBoard().putFloor(new WalkableFloor(element.getPosition()));
         }
     });
+
+    public static MetaTickActionRule<Board> spawnInRandomEmptySpace(int spawnedPerDay, Predicate<State> canSpawnToday, BiPredicate<State, Position> isSpawnable, BiConsumer<State, Position> spawn, Priority priority) {
+        return new MetaTickActionRule<>((state, board) -> {
+            if(!canSpawnToday.test(state)) return;
+
+            List<Position> spawnableLocations = new ArrayList<>(
+                board.getAllPositions().stream()
+                    .filter((position) -> board.isEmpty(position) && isSpawnable.test(state, position))
+                    .toList());
+
+            if(spawnableLocations.isEmpty()) return;
+
+            int remainingToSpawn = spawnedPerDay;
+            while(remainingToSpawn-- > 0 && spawnableLocations.size() > 0) {
+                int index = RandomManager.randomizer.nextInt(spawnableLocations.size());
+                Position spawnLocation = spawnableLocations.remove(index);
+                spawn.accept(state, spawnLocation);
+            }
+        }, priority);
+    }
+
+    public static MetaTickActionRule<Board> spawnLootBoxInRandomSpace(int daysBetweenSpawn, int daysRemaining, int spawnedPerDay) {
+        Predicate<State> canSpawnToday = (state) -> state.getUnsafe(Attribute.TICK) % daysBetweenSpawn == 0;
+
+        BiPredicate<State, Position> isSpawnable = (state, position) -> {
+            return state.getBoard()
+                .gather(GenericTank.class).stream()
+                .filter((tank) -> !tank.getOrElse(Attribute.DEAD, false) && tank.getPosition().distanceFrom(position) <= 2)
+                .findAny().isEmpty();
+        };
+
+        BiConsumer<State, Position> spawnLootBox = (state, position) -> {
+            LootBox lootBox = new LootBox(position);
+            lootBox.put(Attribute.DAYS_REMAINING, daysRemaining);
+            state.getBoard().putUnit(lootBox);
+        };
+
+        return spawnInRandomEmptySpace(spawnedPerDay, canSpawnToday, isSpawnable, spawnLootBox, Priority.LOWER);
+    }
 }

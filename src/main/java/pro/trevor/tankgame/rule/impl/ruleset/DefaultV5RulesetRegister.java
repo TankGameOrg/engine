@@ -11,6 +11,7 @@ import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
+import pro.trevor.tankgame.rule.impl.util.LootTable;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
@@ -21,6 +22,7 @@ import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
+import java.util.List;
 import java.util.function.Function;
 
 @RulesetType(name = "default-v5-experimental")
@@ -53,6 +55,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         tickRules.put(GenericTank.class, TickRules.CLEAR_ONLY_LOOTABLE_BY);
         tickRules.put(GenericTank.class, TickRules.SET_PLAYER_CAN_LOOT);
         tickRules.put(GenericElement.class, TickRules.DECAY_TIMEBOUND_ELEMENT);
+        tickRules.put(Board.class, TickRules.spawnLootBoxInRandomSpace(4, 4, 2));
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
@@ -69,7 +72,13 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
-        playerRules.add(PlayerRules.LOOT_RULE);
+
+        playerRules.add(PlayerRules.getLootRule(new LootTable(
+            List.of(
+                new LootTable.Entry((state, looter) -> looter.put(Attribute.DURABILITY, 1)),
+                new LootTable.Entry((state, looter) -> looter.put(Attribute.DURABILITY, 2))
+            )
+        )));
 
         playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
         playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
