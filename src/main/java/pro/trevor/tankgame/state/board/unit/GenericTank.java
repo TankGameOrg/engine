@@ -2,7 +2,6 @@ package pro.trevor.tankgame.state.board.unit;
 
 import org.json.JSONObject;
 import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.IElement;
@@ -13,7 +12,7 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.*;
 
 @JsonType(name = "GenericTank")
-public class GenericTank extends GenericElement implements ITickElement, IPlayerElement, IUnit, IElement {
+public class GenericTank extends GenericElement implements IPlayerElement, IUnit, IElement {
 
     public GenericTank(PlayerRef player, Position position, Map<Attribute<?>, Object> defaults) {
         super(defaults);

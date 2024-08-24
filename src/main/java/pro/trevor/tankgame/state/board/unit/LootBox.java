@@ -2,14 +2,13 @@ package pro.trevor.tankgame.state.board.unit;
 
 import org.json.JSONObject;
 
-import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.util.JsonType;
 
 @JsonType(name = "LootBox")
-public class LootBox extends GenericElement implements ITickElement {
+public class LootBox extends GenericElement implements IUnit {
     public enum LootBoxType {
         HEALTH_PACK("health_pack", Attribute.DURABILITY);
 

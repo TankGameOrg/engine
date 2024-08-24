@@ -10,7 +10,6 @@ import java.util.Set;
 
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
-import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.GenericElement;
@@ -47,7 +46,7 @@ public class TickRules {
                 });
     }
 
-    public static <T extends GenericElement & ITickElement> TickActionRule<T> GetGrantActionPointsOnTickRule(
+    public static <T extends GenericElement> TickActionRule<T> GetGrantActionPointsOnTickRule(
             int amount) {
         return new TickActionRule<T>(
                 (s, t) -> {
