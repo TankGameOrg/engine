@@ -61,7 +61,7 @@ public class TickRules {
                 if (t.get(Attribute.DEAD).orElse(false) || !t.has(Attribute.DURABILITY))
                     return;
                 if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof Lava lava) {
-                    t.put(Attribute.DURABILITY, t.getUnsafe(Attribute.DURABILITY) + lava.getDamage());
+                    t.put(Attribute.DURABILITY, t.getUnsafe(Attribute.DURABILITY) - lava.getDamage());
                 }
             });
 
@@ -91,8 +91,8 @@ public class TickRules {
 
     public static final MetaTickActionRule<Player> DEAD_PLAYERS_GAIN_POWER = new MetaTickActionRule<>(
             (s, p) -> {
-                if (p.getOrElse(Attribute.DEAD, false)) {
-                    p.put(Attribute.POWER, p.getOrElse(Attribute.POWER, 0));
+                if (s.getCouncil().isPlayerOnCouncil(p.toRef())) {
+                    p.put(Attribute.POWER, p.getOrElse(Attribute.POWER, 0) + 1);
                 }
             }
     );

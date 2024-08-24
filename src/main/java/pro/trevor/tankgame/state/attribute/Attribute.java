@@ -55,7 +55,7 @@ public class Attribute<E> {
     // Player attributes
     public static final Attribute<String> NAME = new Attribute<>("NAME", String.class);
     public static final Attribute<String> TEAM = new Attribute<>("TEAM", String.class);
-    public static final Attribute<Integer> POWER = new Attribute<>("NAME", Integer.class);
+    public static final Attribute<Integer> POWER = new Attribute<>("POWER", Integer.class);
     public static final Attribute<Long> GLOBAL_COOLDOWN_END_TIME = new Attribute<>("GLOBAL_COOLDOWN_END_TIME", Long.class);
 
     private final String attributeName;
