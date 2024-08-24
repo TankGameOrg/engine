@@ -155,7 +155,7 @@ public class PlayerRules {
                 });
     }
 
-    public static PlayerConditionRule getShareGoldWithTaxRule(int taxAmount) {
+    public static PlayerConditionRule getShareGoldWithTaxToCofferRule(int taxAmount) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.DONATE,
                 new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
                         new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> tank.getOrElse(Attribute.GOLD,0) >= toType(n[1], Integer.class) + taxAmount, "Tank has insufficient gold"),
@@ -171,6 +171,26 @@ public class PlayerRules {
                     tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - (donation + taxAmount));
                     other.put(Attribute.GOLD, other.getUnsafe(Attribute.GOLD) + donation);
                     state.getCouncil().put(Attribute.COFFER, state.getCouncil().getUnsafe(Attribute.COFFER) + taxAmount);
+                },
+                new DonateTankRange("target"),
+                new IntegerRange("donation"));
+    }
+
+    public static PlayerConditionRule getShareGoldWithTaxRule(int taxAmount) {
+        return new PlayerConditionRule(PlayerRules.ActionKeys.DONATE,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE,
+                        new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> tank.getOrElse(Attribute.GOLD,0) >= toType(n[1], Integer.class) + taxAmount, "Tank has insufficient gold"),
+                        new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> getSpacesInRange(state.getBoard(), tank.getPosition(), tank.get(Attribute.RANGE).orElse(0)).contains(toType(n[0], GenericTank.class).getPosition()), "Tank has insufficient range"),
+                        new RulePredicate((state, player, n) -> toType(n[1], Integer.class) >= 0,  "Donation must be positive"),
+                        new RulePredicate((state, player, n) -> toType(n[0], GenericTank.class).has(Attribute.GOLD),  "Target must have gold attribute")
+                ),
+                (state, player, n) -> {
+                    GenericTank tank = getTank(state, player).get();
+                    GenericTank other = toType(n[0], GenericTank.class);
+                    int donation = toType(n[1], Integer.class);
+
+                    tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - (donation + taxAmount));
+                    other.put(Attribute.GOLD, other.getUnsafe(Attribute.GOLD) + donation);
                 },
                 new DonateTankRange("target"),
                 new IntegerRange("donation"));

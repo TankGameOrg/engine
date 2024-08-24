@@ -61,7 +61,7 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
 
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.SHOOT_V4, TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
-        playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxToCofferRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
 

@@ -15,7 +15,6 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.util.RulesetType;
 
@@ -41,8 +40,6 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         invariants.put(BasicWall.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
 
         invariants.put(Player.class, new MinimumEnforcer<>(Attribute.POWER, 0));
-
-        invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER, 0));
     }
 
     @Override
@@ -59,7 +56,6 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Player.class, TickRules.DEAD_PLAYERS_GAIN_POWER);
-        tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
     }
 
     @Override
@@ -87,7 +83,6 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         conditionalRules.put(GenericTank.class, ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY);
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
 
-        conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
         conditionalRules.put(Board.class, ConditionalRules.TEAM_WIN_CONDITION);
     }
 }

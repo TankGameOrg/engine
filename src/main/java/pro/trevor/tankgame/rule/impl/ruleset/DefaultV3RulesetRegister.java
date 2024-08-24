@@ -62,7 +62,7 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.add(PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
         playerRules.add(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 8));
-        playerRules.add(PlayerRules.getShareGoldWithTaxRule(1));
+        playerRules.add(PlayerRules.getShareGoldWithTaxToCofferRule(1));
         playerRules.add(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1));
         playerRules.add(PlayerRules.SHOOT_V3);
 
