@@ -59,8 +59,8 @@ public class LootActionTestHelper {
      * @return
      */
     protected Set<Position> getLootablePositions(PlayerConditionRule rule) {
-        FunctionVariableRange<GenericTank, Position> lootablePositionRange = (FunctionVariableRange<GenericTank, Position>) rule.parameters()[0];
-        lootablePositionRange.generate(state, subjectTank);
+        FunctionVariableRange<PlayerRef, Position> lootablePositionRange = (FunctionVariableRange<PlayerRef, Position>) rule.parameters()[0];
+        lootablePositionRange.generate(state, subjectTank.getPlayerRef());
         return lootablePositionRange.getElements();
     }
 
