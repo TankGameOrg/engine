@@ -72,9 +72,9 @@ public class PlayerRules {
 
     private static final RulePredicate PLAYER_HAS_TANK_PREDICATE = new RulePredicate(PlayerRules::hasTank, "Player has no corresponding tank");
 
-    private static final RulePredicate PLAYER_TANK_IS_ALIVE_PREDICATE = new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> !tank.getOrElse(Attribute.DEAD, false), "Tank must not be dead");
+    private static final RulePredicate PLAYER_TANK_IS_ALIVE_PREDICATE = new GetterPredicate<>(PlayerRules::getTank, (state, tank) -> !tank.getOrElse(Attribute.DEAD, false), "Tank must not be dead");
 
-    private static final RulePredicate PLAYER_TANK_IS_DEAD_PREDICATE = new OptionalGetterPredicate<>(PlayerRules::getTank, (state, oTank, n) -> oTank.map((t) -> t.getOrElse(Attribute.DEAD, false)).orElse(true),"Player tank must be dead");
+    private static final RulePredicate PLAYER_TANK_IS_DEAD_PREDICATE = new OptionalGetterPredicate<>(PlayerRules::getTank, (state, tank) -> tank.map((t) -> t.getOrElse(Attribute.DEAD, false)).orElse(true),"Player tank must be dead");
 
     private static final RulePredicate PLAYER_IS_COUNCIL_PREDICATE = new RulePredicate(PlayerRules::isCouncil, "Player is not council");
 
@@ -178,7 +178,9 @@ public class PlayerRules {
 
     public static PlayerConditionRule getCofferCostStimulusRule(int cost) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.STIMULUS,
-                new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE, new MinimumPredicate<>(PlayerRules::getCouncilOptional, Attribute.COFFER, cost, "Council has insufficient coffer"), new RulePredicate((state, player, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, false), "Target tank must not be dead")
+                new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+                        new MinimumPredicate<>(PlayerRules::getCouncilOptional, Attribute.COFFER, cost, "Council has insufficient coffer"),
+                        new RulePredicate((state, player, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, false), "Target tank must not be dead")
                 ),
                 (state, player, n) -> {
                     Council council = state.getCouncil();

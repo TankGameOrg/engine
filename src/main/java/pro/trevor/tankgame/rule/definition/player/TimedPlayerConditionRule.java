@@ -8,9 +8,11 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.IVarTriConsumer;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -39,8 +41,10 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
 
         if (cooldownEnd <= timeOfAction) {
             Object[] appliedMeta = Arrays.copyOfRange(meta, 1, meta.length);
-            if (super.canApply(state, subject, appliedMeta)) {
+            Result<List<String>> canApply = canApplyConditional(state, subject, appliedMeta);
+            if (canApply.isOk()) {
                 consumer.accept(state, subject, appliedMeta);
+                player.put(Attribute.GLOBAL_COOLDOWN_END_TIME, timeOfAction + cooldown);
             } else {
                 JSONObject error = new JSONObject();
                 error.put("error", true);
@@ -50,9 +54,16 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
                     System.err.println(error.toString(2));
                     System.err.println(state);
                 }
-                throw new Error(String.format("Failed to apply `%s` to `%s` given `%s`", name, subject, Arrays.toString(meta)));
+                StringBuilder sb = new StringBuilder(String.format("Cannot apply '%s' with subject '%s' and arguments %s:\n", name, subject.toString(), Arrays.toString(meta)));
+                List<String> errors = canApply.getError();
+                for (int i = 0; i < errors.size(); ++i) {
+                    sb.append(errors.get(i));
+                    if (i < errors.size() - 1) {
+                        sb.append(",\n");
+                    }
+                }
+                throw new Error(sb.toString());
             }
-            player.put(Attribute.GLOBAL_COOLDOWN_END_TIME, timeOfAction + cooldown);
         } else {
             JSONObject error = new JSONObject();
             error.put("error", true);
