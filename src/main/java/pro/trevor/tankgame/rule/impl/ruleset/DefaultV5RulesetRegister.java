@@ -75,8 +75,8 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
 
         playerRules.add(PlayerRules.getLootRule(new LootTable(
             List.of(
-                new LootTable.Entry((state, looter) -> looter.put(Attribute.DURABILITY, 1)),
-                new LootTable.Entry((state, looter) -> looter.put(Attribute.DURABILITY, 2))
+                new LootTable.Entry(50, (state, looter) -> looter.put(Attribute.DURABILITY, 1)),
+                new LootTable.Entry(1, (state, looter) -> looter.put(Attribute.DURABILITY, 2))
             )
         )));
 
