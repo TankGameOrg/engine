@@ -244,7 +244,7 @@ public class PlayerRules {
                     Position target = toType(n[0], Position.class);
                     player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                     state.getBoard().putUnit(new BasicWall(target, durability));
-                }, new PositionRange("target", (state, tank, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
+                }, new PositionRange("target", (state, player, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
     }
 
     public static PlayerConditionRule getSpawnLavaWithCostRule(int cost, int damage) {
@@ -256,7 +256,7 @@ public class PlayerRules {
                     Position target = toType(n[0], Position.class);
                     player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                     state.getBoard().putFloor(new Lava(target, damage));
-                }, new PositionRange("target", (state, tank, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
+                }, new PositionRange("target", (state, player, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
     }
 
     public static PlayerConditionRule getSmiteRule(int cost, int health) {
@@ -369,8 +369,7 @@ public class PlayerRules {
                 AttributeContainer targetObject = (AttributeContainer) state.getBoard().getUnitOrFloor(position).get();
                 transferLoot.accept(state, tank, targetObject);
             },
-            new PositionRange("target",
-                (state, tank, target) -> lootCondition.test(state, tank.getPlayerRef(), target).isOk()));
+            new PositionRange("target", (state, player, target) -> lootCondition.test(state, player, target).isOk()));
     }
 
     /**
