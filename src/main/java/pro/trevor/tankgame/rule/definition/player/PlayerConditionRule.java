@@ -47,6 +47,27 @@ public class PlayerConditionRule implements IPlayerRule {
         return validateOptionalTypes(meta) && condition.test(state, subject, meta).isOk();
     }
 
+    /**
+     * Get a result indicating whether this action can be applied before a log entry has been created.
+     * The result may change depending on the contents of the actual log entry so the overloaded version
+     * should always be called after a log entry is created.
+     *
+     * @param state The state to test
+     * @param subject The player who will be applying the rule
+     * @return A result indicating if the rule can be applied or the reason(s) why it can't be
+     */
+    public Result<List<String>> canApplyConditionalWithoutMeta(State state, PlayerRef subject) {
+        return condition.testForPossibleActions(state, subject);
+    }
+
+    /**
+     * Get a result indicating whether this action can be applied before a log entry has been created.
+     * 
+     * @param state The state to test
+     * @param subject The player who will be appling the rule
+     * @param meta The metadata from the log entry
+     * @return A result indicating if the rule can be applied or the reason(s) why it can't be
+     */
     public Result<List<String>> canApplyConditional(State state, PlayerRef subject, Object... meta) {
         if (validateOptionalTypes(meta)) {
             return condition.test(state, subject, meta);

@@ -2,6 +2,7 @@ package pro.trevor.tankgame;
 
 import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
@@ -10,18 +11,16 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.Council;
 
 import java.util.*;
 
 import org.json.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.Result;
 
 public class Api {
     private final Ruleset ruleset;
     private State state;
-
-    private static final String COUNCIL = "Council";
 
     public Api(IRulesetRegister ruleset) {
         this.ruleset = IRulesetRegister.getRuleset(ruleset);
@@ -109,48 +108,46 @@ public class Api {
         return out;
     }
 
-    public JSONObject getPossibleActions(PlayerRef player) {
+    public JSONObject getPossibleActions(PlayerRef subject) {
         JSONObject actions = new JSONObject();
         actions.put("error", false);
         actions.put("type", "possible_actions");
-        actions.put("player", player);
+        actions.put("player", subject);
 
         JSONArray actionsArray = new JSONArray();
         List<IPlayerRule> rules = ruleset.getPlayerRules().getAllRules();
-        Class<?> type;
-        Object subject;
 
-        if (player.getName().equals(COUNCIL)) {
-            type = Council.class;
-            subject = state.getCouncil();
-        } else if (state.getPlayer(player).isPresent()) {
-            type = GenericTank.class;
-            Optional<GenericTank> tank = state.getBoard().gather(GenericTank.class).stream()
-                    .filter((t) -> t.getPlayerRef().equals(player))
-                    .findFirst();
-            if (tank.isPresent()) {
-                subject = tank.get();
-            } else {
-                actions.put("actions", actionsArray);
-                return actions;
-            }
-        } else {
-            throw new Error("Unknown player: " + player);
+        if (state.getPlayer(subject).isEmpty()) {
+            throw new Error("Unknown player: " + subject);
         }
 
         for (IPlayerRule rule : rules) {
             JSONObject actionJson = new JSONObject();
             actionJson.put("rule", rule.name());
-            actionJson.put("subject", type.getSimpleName().toLowerCase());
 
-            // find all states of each parameter
+            // Check if the rule is applicable to this (state, player) combination
+            Result<List<String>> canApplyResult = Result.ok();
+            if (rule instanceof PlayerConditionRule conditionRule) {
+                canApplyResult = conditionRule.canApplyConditionalWithoutMeta(state, subject);
+            }
+
+            if(canApplyResult.isOk()) {
+                actionJson.put("errors", new JSONArray());
+            }
+            else {
+                actionJson.put("errors", new JSONArray(canApplyResult.getError()));
+            }
+
+            // find all states of each parameter if the rule can be applied
             JSONArray fields = new JSONArray();
-            for (TypeRange<?> field : rule.parameters()) {
-                if (field instanceof VariableTypeRange<?,?> variableField) {
-                    VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
-                    genericField.generate(state, subject);
+            if(canApplyResult.isOk()) {
+                for (TypeRange<?> field : rule.parameters()) {
+                    if (field instanceof VariableTypeRange<?,?> variableField) {
+                        VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
+                        genericField.generate(state, subject);
+                    }
+                    fields.put(field.toJson());
                 }
-                fields.put(field.toJson());
             }
             actionJson.put("fields", fields);
             actionsArray.put(actionJson);
@@ -158,10 +155,6 @@ public class Api {
 
         actions.put("actions", actionsArray);
         return actions;
-    }
-
-    private static void enforceInvariants(State state, Ruleset ruleset) {
-
     }
 
     private static class JsonKeys {

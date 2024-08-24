@@ -7,8 +7,6 @@ import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.util.JsonType;
 
-import java.util.Collections;
-
 @JsonType(name = "Wall")
 public class BasicWall extends GenericElement implements IUnit {
 

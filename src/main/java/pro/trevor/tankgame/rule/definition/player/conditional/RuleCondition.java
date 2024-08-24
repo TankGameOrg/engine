@@ -15,13 +15,32 @@ public class RuleCondition {
         this.predicates = predicates;
     }
 
-    public Result<List<String>> test(State state, PlayerRef t, Object... meta) {
+    public Result<List<String>> test(State state, PlayerRef player, Object... meta) {
         List<String> errors = new ArrayList<>();
 
         for (RulePredicate predicate : predicates) {
-            Result<String> error = predicate.test(state, t, meta);
+            Result<String> error = predicate.test(state, player, meta);
             if (error.isError()) {
                 errors.add(error.getError());
+            }
+        }
+
+        if (errors.isEmpty()) {
+            return Result.ok();
+        } else {
+            return Result.error(errors);
+        }
+    }
+
+    public Result<List<String>> testForPossibleActions(State state, PlayerRef player) {
+        List<String> errors = new ArrayList<>();
+
+        for (RulePredicate predicate : predicates) {
+            if (predicate.isCheckable()) {
+                Result<String> error = predicate.test(state, player);
+                if (error.isError()) {
+                    errors.add(error.getError());
+                }
             }
         }
 

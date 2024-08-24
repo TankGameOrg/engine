@@ -12,8 +12,6 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.TestUtilities;
