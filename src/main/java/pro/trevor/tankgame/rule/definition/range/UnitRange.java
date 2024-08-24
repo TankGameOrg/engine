@@ -14,7 +14,7 @@ public class UnitRange<S, T extends IUnit> extends FunctionVariableRange<S, T> {
     public static UnitRange<Council, GenericTank> ALL_DEAD_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> t.get(Attribute.DEAD).orElse(false));
     public static UnitRange<Council, GenericTank> ALL_LIVING_TANKS = new UnitRange<>("target", GenericTank.class, (t) -> !t.get(Attribute.DEAD).orElse(false));
 
-    private Class<T> unitClass;
+    private final Class<T> unitClass;
 
     private UnitRange(String name, Class<T> unitClass, Predicate<T> filter) {
         super(name, (state, subject) -> state.getBoard().gatherUnits(unitClass).stream().filter(filter).collect(Collectors.toSet()));

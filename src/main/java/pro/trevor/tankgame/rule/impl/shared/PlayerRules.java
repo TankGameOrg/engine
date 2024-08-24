@@ -22,13 +22,17 @@ import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.IElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
+import pro.trevor.tankgame.state.board.floor.Lava;
+import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
+import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.LineOfSight;
 import pro.trevor.tankgame.util.Result;
+import pro.trevor.tankgame.util.function.IQuadConsumer;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriFunction;
 import pro.trevor.tankgame.util.function.ITriPredicate;
@@ -51,6 +55,10 @@ public class PlayerRules {
 
     private static Optional<Council> getCouncil(State state, PlayerRef playerRef) {
         return Optional.of(state.getCouncil());
+    }
+
+    private static Optional<Player> getPlayer(State state, PlayerRef playerRef) {
+        return playerRef.toPlayer(state);
     }
 
     private static final RulePredicate PLAYER_HAS_TANK_PREDICATE = new RulePredicate((state, player, n) ->
@@ -223,6 +231,85 @@ public class PlayerRules {
                 new DiscreteIntegerRange("bounty", lowerBound, upperBound));
     }
 
+    public static PlayerConditionRule getSpawnWallWithCostRule(int cost, int durability) {
+        return new PlayerConditionRule(ActionKeys.SPAWN_WALL, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
+                new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
+                new RulePredicate((state, playerRef, n) -> state.getBoard().getUnitOrFloor(toType(n[0], Position.class)).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false), "Target space is not empty")
+        ),
+                (state, playerRef, n) -> {
+                    Player player = getPlayer(state, playerRef).get();
+                    Position target = toType(n, Position.class);
+                    player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
+                    state.getBoard().putUnit(new BasicWall(target, durability));
+                }, new PositionRange("target", (state, tank, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
+    }
+
+    public static PlayerConditionRule getSpawnLavaWithCostRule(int cost, int damage) {
+        return new PlayerConditionRule(ActionKeys.SPAWN_LAVA, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
+                new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
+                new RulePredicate((state, playerRef, n) -> state.getBoard().getUnitOrFloor(toType(n[0], Position.class)).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false), "Target space is not empty")),
+                (state, playerRef, n) -> {
+                    Player player = getPlayer(state, playerRef).get();
+                    Position target = toType(n, Position.class);
+                    player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
+                    state.getBoard().putFloor(new Lava(target, damage));
+                }, new PositionRange("target", (state, tank, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
+    }
+
+    public static PlayerConditionRule getSmiteRule(int cost, int health) {
+        return new PlayerConditionRule(ActionKeys.SMITE, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
+                new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
+                new RulePredicate((state, playerRef, n) -> !toType(n, GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank")),
+                (state, playerRef, n) -> {
+                    Player player = getPlayer(state, playerRef).get();
+                    GenericTank target = toType(n[0], GenericTank.class);
+                    player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
+                    target.put(Attribute.DURABILITY, target.getUnsafe(Attribute.DURABILITY) - health);
+                }, UnitRange.ALL_LIVING_TANKS);
+    }
+
+    public static PlayerConditionRule getHealRule(int cost, int health) {
+        return new PlayerConditionRule(ActionKeys.HEAL, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
+                new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
+                new RulePredicate((state, playerRef, n) -> !toType(n, GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank")),
+                (state, playerRef, n) -> {
+                    Player player = getPlayer(state, playerRef).get();
+                    GenericTank target = toType(n[0], GenericTank.class);
+                    player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
+                    target.put(Attribute.DURABILITY, target.getUnsafe(Attribute.DURABILITY) + health);
+                }, UnitRange.ALL_LIVING_TANKS);
+    }
+
+    public static PlayerConditionRule getSlowRule(int cost, int modifier) {
+        return new PlayerConditionRule(ActionKeys.SLOW, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
+                new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
+                new RulePredicate((state, playerRef, n) -> !toType(n, GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank"),
+                new RulePredicate((state, playerRef, n) -> !toType(n, GenericTank.class).getOrElse(Attribute.SLOWED, false), "Target must not already be slowed")),
+                (state, playerRef, n) -> {
+                    Player player = getPlayer(state, playerRef).get();
+                    GenericTank tank = toType(n[0], GenericTank.class);
+                    player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
+                    tank.put(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED));
+                    tank.put(Attribute.SPEED, tank.getUnsafe(Attribute.SPEED) - modifier);
+                    tank.put(Attribute.SLOWED, true);
+                }, UnitRange.ALL_LIVING_TANKS);
+    }
+
+    public static PlayerConditionRule getHastenRule(int cost, int modifier) {
+        return new PlayerConditionRule(ActionKeys.HASTEN, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
+                new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
+                new RulePredicate((state, playerRef, n) -> !toType(n, GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank"),
+                new RulePredicate((state, playerRef, n) -> !toType(n, GenericTank.class).getOrElse(Attribute.HASTENED, false), "Target must not already be hastened")),
+                (state, playerRef, n) -> {
+                    Player player = getPlayer(state, playerRef).get();
+                    GenericTank tank = toType(n[0], GenericTank.class);
+                    player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
+                    tank.put(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED));
+                    tank.put(Attribute.SPEED, tank.getUnsafe(Attribute.SPEED) + modifier);
+                    tank.put(Attribute.HASTENED, true);
+                }, UnitRange.ALL_LIVING_TANKS);
+    }
+
     /**
      * A rule that allows tanks to loot other units or floors
      *
@@ -302,7 +389,7 @@ public class PlayerRules {
         tank.remove(Attribute.PLAYER_CAN_LOOT);
     });
 
-    public static PlayerConditionRule spendActionToShootGeneric(
+    public static PlayerConditionRule spendActionToShootGenericWithHitBoolean(
             ITriPredicate<State, Position, Position> lineOfSight,
             ITriConsumer<State, GenericTank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
@@ -330,9 +417,34 @@ public class PlayerRules {
                 new BooleanRange("hit"));
     }
 
-    public static PlayerConditionRule spendActionToShootWithDeathHandle(
+    public static PlayerConditionRule spendActionToShootGenericWithHitDamage(
+            ITriPredicate<State, Position, Position> lineOfSight,
+            IQuadConsumer<State, GenericTank, IElement, Integer> handleHit) {
+        return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
+                new RuleCondition(PLAYER_HAS_TANK_PREDICATE, PLAYER_TANK_IS_ALIVE_PREDICATE, TARGET_IS_IN_RANGE,
+                        new MinimumPredicate<>(PlayerRules::getTank, Attribute.ACTION_POINTS, 1, "Tank has insufficient action points"),
+                        new RulePredicate((state, player, n) -> state.getBoard().isValidPosition(toType(n[0], Position.class)), "Target position is not within the game board"),
+                        new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> lineOfSight.test(state, tank.getPosition(), toType(n[0], Position.class)), "Target position is not in line-of-sight")),
+                (state, player, n) -> {
+                    GenericTank tank = getTank(state, player).get();
+                    Position target = toType(n[0], Position.class);
+                    int damage = toType(n[1], Integer.class);
+                    tank.put(Attribute.ACTION_POINTS, tank.getUnsafe(Attribute.ACTION_POINTS) - 1);
+
+                    Optional<IElement> optionalElement = state.getBoard().getUnitOrFloor(target);
+                    if (optionalElement.isEmpty()) {
+                        throw new Error(String.format("Target position %s is not on the game board", target.toString()));
+                    }
+
+                    handleHit.accept(state, tank, optionalElement.get(), damage);
+                },
+                new ShootPositionRange("target", lineOfSight),
+                new BooleanRange("hit"));
+    }
+
+    public static PlayerConditionRule spendActionToShootWithDeathHandleHitBoolean(
             ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<State, GenericTank, GenericTank> handleDeath) {
-        return spendActionToShootGeneric(lineOfSight, (state, tank, element) -> {
+        return spendActionToShootGenericWithHitBoolean(lineOfSight, (state, tank, element) -> {
             switch (element) {
                 case GenericTank otherTank -> {
                     otherTank.put(Attribute.DURABILITY, otherTank.getUnsafe(Attribute.DURABILITY) - 1);
@@ -355,11 +467,36 @@ public class PlayerRules {
         });
     }
 
-    public static final PlayerConditionRule SHOOT_V3 = spendActionToShootWithDeathHandle(
+    public static PlayerConditionRule spendActionToShootWithDeathHandleHitDamage(
+            ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<State, GenericTank, GenericTank> handleDeath) {
+        return spendActionToShootGenericWithHitDamage(lineOfSight, (state, tank, element, damage) -> {
+            switch (element) {
+                case GenericTank otherTank -> {
+                    otherTank.put(Attribute.DURABILITY, otherTank.getUnsafe(Attribute.DURABILITY) - damage);
+                    if (!otherTank.getUnsafe(Attribute.DEAD) && otherTank.getUnsafe(Attribute.DURABILITY) == 0) {
+                        handleDeath.accept(state, tank, otherTank);
+                    }
+                }
+                case BasicWall wall -> wall.setDurability(wall.getDurability() - damage);
+                case DestructibleFloor floor -> {
+                    if (floor.get(Attribute.DESTROYED).orElse(false))
+                        return;
+                    floor.put(Attribute.DURABILITY, floor.getUnsafe(Attribute.DURABILITY) - damage);
+                    if (floor.getUnsafe(Attribute.DURABILITY) <= 0) {
+                        floor.put(Attribute.DESTROYED, true);
+                    }
+                }
+                default -> {
+                }
+            }
+        });
+    }
+
+    public static final PlayerConditionRule SHOOT_V3 = spendActionToShootWithDeathHandleHitBoolean(
             LineOfSight::hasLineOfSightV3,
             (s, t, d) -> t.put(Attribute.GOLD, t.getOrElse(Attribute.GOLD, 0) + d.getUnsafe(Attribute.GOLD) + d.getUnsafe(Attribute.BOUNTY)));
 
-    public static final PlayerConditionRule SHOOT_V4 = spendActionToShootWithDeathHandle(
+    public static final PlayerConditionRule SHOOT_V4 = spendActionToShootWithDeathHandleHitBoolean(
             LineOfSight::hasLineOfSightV4,
             (s, tank, dead) -> {
                 tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + dead.getUnsafe(Attribute.BOUNTY));
@@ -376,10 +513,18 @@ public class PlayerRules {
                 }
             });
 
-    public static final PlayerConditionRule SHOOT_V5 = spendActionToShootWithDeathHandle(
+    public static final PlayerConditionRule PROPOSED_SHOOT_V5 = spendActionToShootWithDeathHandleHitDamage(
+            LineOfSight::hasLineOfSightV4,
+            (state, subject, target) -> {
+                target.put(Attribute.GOLD, target.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.BOUNTY, 0));
+                target.put(Attribute.ONLY_LOOTABLE_BY, subject.getPlayerRef());
+            }
+    );
+
+    public static final PlayerConditionRule SHOOT_V5 = spendActionToShootWithDeathHandleHitBoolean(
         LineOfSight::hasLineOfSightV4,
         (state, subjectTank, target) -> {
-            target.put(Attribute.GOLD, target.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.BOUNTY, null));
+            target.put(Attribute.GOLD, target.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.BOUNTY, 0));
             target.put(Attribute.ONLY_LOOTABLE_BY, subjectTank.getPlayerRef());
         });
 
@@ -391,6 +536,13 @@ public class PlayerRules {
         public static final String BUY_ACTION = "buy_action";
         public static final String UPGRADE_RANGE = "upgrade_range";
         public static final String LOOT = "loot";
+
+        public static final String SPAWN_WALL = "spawn_wall";
+        public static final String SPAWN_LAVA = "spawn_lava";
+        public static final String SMITE = "smite";
+        public static final String HEAL = "heal";
+        public static final String SLOW = "slow";
+        public static final String HASTEN = "hasten";
 
         public static final String STIMULUS = "stimulus";
         public static final String GRANT_LIFE = "grant_life";

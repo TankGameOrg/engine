@@ -24,24 +24,23 @@ public class ConditionalRules {
                 }
             });
 
-    public static <T extends GenericTank> ConditionalRule<T> GetKillOrDestroyTankOnZeroDurabilityRule() {
-        return new ConditionalRule<>(
-                (s, t) -> t.get(Attribute.DURABILITY).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
-                (s, t) -> {
-                    if (t.get(Attribute.DEAD).orElse(false)) {
-                        s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
-                        s.getCouncil().getCouncillors().remove(t.getPlayerRef());
-                        s.getCouncil().getSenators().add(t.getPlayerRef());
-                    } else {
-                        t.put(Attribute.DEAD, true);
-                        t.put(Attribute.ACTION_POINTS, 0);
-                        t.put(Attribute.GOLD, 0);
-                        t.put(Attribute.BOUNTY, 0);
-                        t.put(Attribute.DURABILITY, 3);
-                        s.getCouncil().getCouncillors().add(t.getPlayerRef());
-                    }
-                });
-    }
+
+    public static ConditionalRule<GenericTank> HANDLE_TANK_ON_ZERO_DURABILITY = new ConditionalRule<>(
+            (s, t) -> t.get(Attribute.DURABILITY).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
+            (s, t) -> {
+                if (t.get(Attribute.DEAD).orElse(false)) {
+                    s.getBoard().putUnit(new EmptyUnit(t.getPosition()));
+                    s.getCouncil().getCouncillors().remove(t.getPlayerRef());
+                    s.getCouncil().getSenators().add(t.getPlayerRef());
+                } else {
+                    t.put(Attribute.DEAD, true);
+                    t.put(Attribute.ACTION_POINTS, 0);
+                    t.put(Attribute.GOLD, 0);
+                    t.put(Attribute.BOUNTY, 0);
+                    t.put(Attribute.DURABILITY, 3);
+                    s.getCouncil().getCouncillors().add(t.getPlayerRef());
+                }
+            });
 
     public static final ConditionalRule<Board> TANK_WIN_CONDITION = new ConditionalRule<>(
             (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !t.get(Attribute.DEAD).orElse(false))
@@ -51,6 +50,19 @@ public class ConditionalRules {
                 s.put(Attribute.WINNER, b.gatherUnits(GenericTank.class).stream()
                         .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                         .findFirst().get().getPlayerRef().getName());
+            }, Priority.LOWEST);
+
+    public static final ConditionalRule<Board> TEAM_WIN_CONDITION = new ConditionalRule<>(
+            (s, b) -> b.gatherUnits(GenericTank.class).stream()
+                    .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
+                    .map((t) -> t.getPlayerRef().toPlayer(s).get().getUnsafe(Attribute.TEAM))
+                    .collect(Collectors.toSet()).size() == 1,
+            (s, b) -> {
+                s.put(Attribute.RUNNING, false);
+                s.put(Attribute.WINNER, b.gatherUnits(GenericTank.class).stream()
+                        .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
+                        .map((t) -> t.getPlayerRef().toPlayer(s).get().getUnsafe(Attribute.TEAM))
+                        .findAny().get());
             }, Priority.LOWEST);
 
     public static final ConditionalRule<Council> ARMISTICE_COUNCIL_WIN_CONDITION = new ConditionalRule<>(

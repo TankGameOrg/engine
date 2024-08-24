@@ -26,7 +26,7 @@ public class HealthPoolTest {
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
+        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
@@ -40,7 +40,7 @@ public class HealthPoolTest {
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
+        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
@@ -54,7 +54,7 @@ public class HealthPoolTest {
         HealthPool hp = new HealthPool(new Position("B2"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
+        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
@@ -68,7 +68,7 @@ public class HealthPoolTest {
         HealthPool hp = new HealthPool(new Position("A1"), 2);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
+        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
@@ -82,7 +82,7 @@ public class HealthPoolTest {
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.GetHealTanksInHealthPoolRule();
+        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
 
         rule.apply(state, tank);
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));

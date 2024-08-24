@@ -24,7 +24,7 @@ import java.util.function.Function;
 @RulesetType(name = "default-v4")
 public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
 
-    private static final Function<State, Long> TIMEOUT = (s) -> (long) (1 * 60);
+    private static final Function<State, Long> TIMEOUT = (s) -> (long) (1 * 60); // 60 seconds
 
     @Override
     public void registerEnforcerRules(Ruleset ruleset) {
@@ -45,8 +45,8 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerTickRules(Ruleset ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(GenericTank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS);
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
@@ -73,7 +73,7 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
     @Override
     public void registerConditionalRules(Ruleset ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(GenericTank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
+        conditionalRules.put(GenericTank.class, ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY);
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
 
         conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);
