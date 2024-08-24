@@ -14,8 +14,10 @@ import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
@@ -50,6 +52,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         tickRules.put(GenericTank.class, TickRules.GetHealTanksInHealthPoolRule());
         tickRules.put(GenericTank.class, TickRules.CLEAR_ONLY_LOOTABLE_BY);
         tickRules.put(GenericTank.class, TickRules.SET_PLAYER_CAN_LOOT);
+        tickRules.put(GenericElement.class, TickRules.DECAY_TIMEBOUND_ELEMENT);
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
@@ -66,7 +69,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
-        playerRules.add(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK);
+        playerRules.add(PlayerRules.LOOT_RULE);
 
         playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
         playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
@@ -78,6 +81,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
         conditionalRules.put(GenericTank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
+        conditionalRules.put(LootBox.class, ConditionalRules.DESTORY_EMPTY_LOOT_BOXES);
 
         conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }

@@ -26,6 +26,7 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.board.unit.IUnit;
+import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.LineOfSight;
@@ -285,21 +286,30 @@ public class PlayerRules {
     }
 
     /**
-     * Rule that loots gold from dead tanks if the subject has the PLAYER_CAN_LOOT attribute
+     * Rule that loots gold from dead tanks or loot boxes if the subject has the PLAYER_CAN_LOOT attribute
      */
-    public static PlayerConditionRule LOOT_GOLD_FROM_DEAD_TANK = getLootTargetRule((state, tank, targetTank) -> {
+    public static PlayerConditionRule LOOT_RULE = getLootTargetRule((state, tank, target) -> {
         if(!tank.getOrElse(Attribute.PLAYER_CAN_LOOT, false)) {
             return Result.error("Players can only loot once per day");
         }
 
-        if(!(targetTank instanceof GenericTank) || !targetTank.getOrElse(Attribute.DEAD, false)) {
-            return Result.error("You can only loot dead tanks");
+        if(target instanceof GenericTank && target.getOrElse(Attribute.DEAD, false)) {
+            return Result.ok();
         }
 
-        return Result.ok();
-    }, (state, tank, targetTank) -> {
-        tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + targetTank.getOrElse(Attribute.GOLD, 0));
-        targetTank.put(Attribute.GOLD, 0);
+        if(target instanceof LootBox) {
+            return Result.ok();
+        }
+
+        return Result.error("You can only loot dead tanks or loot boxes");
+    }, (state, tank, target) -> {
+        if(target instanceof GenericTank) {
+            tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.GOLD, 0));
+            target.put(Attribute.GOLD, 0);
+        } else if (target instanceof LootBox lootBox) {
+            lootBox.transferLoot(tank);
+        }
+
         tank.remove(Attribute.PLAYER_CAN_LOOT);
     });
 

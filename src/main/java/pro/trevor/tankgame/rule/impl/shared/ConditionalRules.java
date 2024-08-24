@@ -10,9 +10,8 @@ import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
-
-import java.util.stream.Collectors;
 
 public class ConditionalRules {
     public static final ConditionalRule<BasicWall> DESTROY_WALL_ON_ZERO_DURABILITY = new ConditionalRule<>(
@@ -59,4 +58,8 @@ public class ConditionalRules {
                 s.put(Attribute.RUNNING, false);
                 s.put(Attribute.WINNER, "Council");
             }, Priority.LOWEST);
+
+    public static final ConditionalRule<LootBox> DESTORY_EMPTY_LOOT_BOXES = new ConditionalRule<>(
+        (state, box) -> box.isEmpty(),
+        (state, box) -> state.getBoard().putUnit(new EmptyUnit(box.getPosition())));
 }

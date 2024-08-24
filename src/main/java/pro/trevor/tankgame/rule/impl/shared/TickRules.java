@@ -18,7 +18,11 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.AbstractFloor;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
+import pro.trevor.tankgame.state.board.floor.WalkableFloor;
+import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.IUnit;
+import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 
 public class TickRules {
@@ -122,6 +126,28 @@ public class TickRules {
     public static TickActionRule<GenericTank> CLEAR_ONLY_LOOTABLE_BY = new TickActionRule<>((state, tank) -> {
         if(tank.has(Attribute.ONLY_LOOTABLE_BY)) {
             tank.remove(Attribute.ONLY_LOOTABLE_BY);
+        }
+    });
+
+    /**
+     * This rule counts down the DAYS_REMAINING for any element that has the attribute and removes the element
+     * when it reaches zero
+     */
+    public static final TickActionRule<GenericElement> DECAY_TIMEBOUND_ELEMENT = new TickActionRule<>((state, element) -> {
+        if(!element.has(Attribute.DAYS_REMAINING)) return;
+
+        int remaining = element.getUnsafe(Attribute.DAYS_REMAINING);
+        --remaining;
+
+        if(remaining > 0) {
+            element.put(Attribute.DAYS_REMAINING, remaining);
+            return;
+        }
+
+        if(element instanceof IUnit) {
+            state.getBoard().putUnit(new EmptyUnit(element.getPosition()));
+        } else {
+            state.getBoard().putFloor(new WalkableFloor(element.getPosition()));
         }
     });
 }

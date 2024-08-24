@@ -9,6 +9,7 @@ public class Attribute<E> {
 
     // Element attributes
     public static final Attribute<Position> POSITION = new Attribute<>("POSITION", Position.class);
+    public static final Attribute<Integer> DAYS_REMAINING = new Attribute<>("DAYS_REMAINING", Integer.class);
 
     // Tank attributes
     public static final Attribute<Integer> GOLD = new Attribute<>("GOLD", Integer.class);
