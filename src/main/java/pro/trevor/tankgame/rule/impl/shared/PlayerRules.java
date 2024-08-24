@@ -309,7 +309,8 @@ public class PlayerRules {
         return new PlayerConditionRule(ActionKeys.SLOW, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank"),
-                new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.SLOWED, false), "Target must not already be slowed")),
+                new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.SLOWED, false), "Target must not already be slowed"),
+                new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> tank.getOrElse(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED)).equals(tank.getUnsafe(Attribute.SPEED)), "Target must have no other speed modifications")),
                 (state, playerRef, n) -> {
                     Player player = getPlayer(state, playerRef).get();
                     GenericTank tank = toType(n[0], GenericTank.class);
@@ -324,7 +325,8 @@ public class PlayerRules {
         return new PlayerConditionRule(ActionKeys.HASTEN, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank"),
-                new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.HASTENED, false), "Target must not already be hastened")),
+                new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.HASTENED, false), "Target must not already be hastened"),
+                new GetterPredicate<>(PlayerRules::getTank, (state, tank, n) -> tank.getOrElse(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED)).equals(tank.getUnsafe(Attribute.SPEED)), "Target must have no other speed modifications")),
                 (state, playerRef, n) -> {
                     Player player = getPlayer(state, playerRef).get();
                     GenericTank tank = toType(n[0], GenericTank.class);
