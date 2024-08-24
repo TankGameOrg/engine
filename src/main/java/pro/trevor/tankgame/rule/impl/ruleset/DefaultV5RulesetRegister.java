@@ -9,9 +9,9 @@ import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
+import pro.trevor.tankgame.rule.impl.shared.LootTables;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
-import pro.trevor.tankgame.rule.impl.util.LootTable;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
@@ -22,7 +22,6 @@ import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
-import java.util.List;
 import java.util.function.Function;
 
 @RulesetType(name = "default-v5-experimental")
@@ -72,13 +71,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
-
-        playerRules.add(PlayerRules.getLootRule(new LootTable(
-            List.of(
-                new LootTable.Entry(50, (state, looter) -> looter.put(Attribute.DURABILITY, 1)),
-                new LootTable.Entry(1, (state, looter) -> looter.put(Attribute.DURABILITY, 2))
-            )
-        )));
+        playerRules.add(PlayerRules.getLootRule(LootTables.V5_LOOT_BOX_LOOT));
 
         playerRules.add(PlayerRules.getCofferCostStimulusRule(3));
         playerRules.add(PlayerRules.getRuleCofferCostGrantLife(15, 3));
