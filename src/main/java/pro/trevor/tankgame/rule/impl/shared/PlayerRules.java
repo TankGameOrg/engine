@@ -391,6 +391,9 @@ public class PlayerRules {
             PLAYER_HAS_TANK_PREDICATE,
             TARGET_IS_IN_RANGE,
             new BooleanPredicate<>(PlayerRules::getTank, Attribute.DEAD, false, "Subject's tank must be alive"),
+            new GetterPredicate<>(PlayerRules::getTank,
+                (state, tank, n) -> LineOfSight.hasLineOfSightV4(state, tank.getPosition(), toType(n[0], Position.class)),
+                "Target position is not in line-of-sight"),
             canLootRule
         );
 

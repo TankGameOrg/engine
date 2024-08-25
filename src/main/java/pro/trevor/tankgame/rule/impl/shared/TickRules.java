@@ -198,7 +198,7 @@ public class TickRules {
     }
 
     public static MetaTickActionRule<Board> spawnLootBoxInRandomSpace(int daysBetweenSpawn, int daysRemaining, int spawnedPerDay) {
-        Predicate<State> canSpawnToday = (state) -> state.getUnsafe(Attribute.TICK) % daysBetweenSpawn == 0;
+        Predicate<State> canSpawnToday = (state) -> state.getUnsafe(Attribute.TICK) % daysBetweenSpawn == 1;
 
         BiPredicate<State, Position> isSpawnable = (state, position) -> {
             return state.getBoard()

@@ -27,7 +27,7 @@ import java.util.function.Function;
 @RulesetType(name = "default-v5-experimental")
 public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
 
-    private static final Function<State, Long> TIMEOUT = (s) -> (long) (1 * 60); // 60 seconds
+    private static final Function<State, Long> TIMEOUT = (s) -> (long) (15); // 15 seconds
 
     @Override
     public void registerEnforcerRules(Ruleset ruleset) {

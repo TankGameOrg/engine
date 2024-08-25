@@ -198,7 +198,7 @@ public class Board implements IMetaElement, IGatherable {
      */
     public boolean isEmpty(Position position) {
         return getUnitOrFloor(position)
-            .map((element) -> element instanceof WalkableFloor)
+            .map((element) -> element.getClass().equals(WalkableFloor.class))
             .orElse(false); // Position is not on the board
     }
 
