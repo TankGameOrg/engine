@@ -8,14 +8,18 @@ import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
+import pro.trevor.tankgame.rule.impl.shared.LootTables;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.board.GenericElement;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.state.board.unit.LootBox;
+import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;
@@ -53,6 +57,8 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         tickRules.put(GenericTank.class, TickRules.RELEASE_SPEED_MODIFICATIONS);
         tickRules.put(GenericTank.class, TickRules.CLEAR_ONLY_LOOTABLE_BY);
         tickRules.put(GenericTank.class, TickRules.SET_PLAYER_CAN_LOOT);
+        tickRules.put(GenericElement.class, TickRules.DECAY_TIMEBOUND_ELEMENT);
+        tickRules.put(Board.class, TickRules.spawnLootBoxInRandomSpace(4, 4, 2));
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Player.class, TickRules.DEAD_PLAYERS_GAIN_POWER);
@@ -67,7 +73,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));
-        playerRules.add(PlayerRules.LOOT_GOLD_FROM_DEAD_TANK);
+        playerRules.add(PlayerRules.getLootRule(LootTables.V5_LOOT_BOX_LOOT));
 
         playerRules.add(PlayerRules.getSpawnWallWithCostRule(2, 2));
         playerRules.add(PlayerRules.getSpawnLavaWithCostRule(3, 2));
@@ -82,6 +88,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
         conditionalRules.put(GenericTank.class, ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY);
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
+        conditionalRules.put(LootBox.class, ConditionalRules.DESTORY_EMPTY_LOOT_BOXES);
 
         conditionalRules.put(Board.class, ConditionalRules.TEAM_WIN_CONDITION);
     }

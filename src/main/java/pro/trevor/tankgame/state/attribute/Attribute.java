@@ -9,6 +9,7 @@ public class Attribute<E> {
 
     // Element attributes
     public static final Attribute<Position> POSITION = new Attribute<>("POSITION", Position.class);
+    public static final Attribute<Integer> DAYS_REMAINING = new Attribute<>("DAYS_REMAINING", Integer.class);
 
     // Tank attributes
     public static final Attribute<PlayerRef> PLAYER_REF = new Attribute<>("PLAYER_REF", PlayerRef.class);
@@ -31,6 +32,9 @@ public class Attribute<E> {
     public static final Attribute<Integer> DURABILITY = new Attribute<>("DURABILITY", Integer.class);
     public static final Attribute<Integer> MAX_DURABILITY = new Attribute<>("MAX_DURABILITY", Integer.class);
     public static final Attribute<Boolean> DESTROYED = new Attribute<>("DESTROYED", Boolean.class);
+
+    // LootBox attributes
+    public static Attribute<Boolean> HAS_BEEN_LOOTED = new Attribute<>("HAS_BEEN_LOOTED", Boolean.class);
 
     // Floor attributes
     public static final Attribute<Integer> REGENERATION = new Attribute<>("REGENERATION", Integer.class);
