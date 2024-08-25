@@ -62,7 +62,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerPlayerRules(Ruleset ruleset) {
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
-        playerRules.add(new TimedPlayerConditionRule(PlayerRules.SHOOT_V5, TIMEOUT));
+        playerRules.add(new TimedPlayerConditionRule(PlayerRules.PROPOSED_SHOOT_V5, TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
