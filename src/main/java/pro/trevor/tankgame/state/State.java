@@ -76,6 +76,11 @@ public class State extends AttributeContainer implements IJsonObject, IGatherabl
         return result;
     }
 
+    /**
+     * Search the state for a tank controled by the same player (ref)
+     * @param playerRef
+     * @return
+     */
     public Optional<GenericTank> getTankForPlayerRef(PlayerRef playerRef) {
         return gather(GenericTank.class)
             .stream().filter((t) -> t.getPlayerRef().equals(playerRef))

@@ -20,16 +20,16 @@ public class RulePredicate {
     }
 
     public RulePredicate(IVarTriPredicate<State, PlayerRef, Object> predicate, String message) {
-        this((state, player, n) -> predicate.test(state, player, n) ? Result.ok() : Result.error(message));
+        this((state, player, meta) -> predicate.test(state, player, meta) ? Result.ok() : Result.error(message));
     }
 
     public RulePredicate(BiFunction<State, PlayerRef, Result<String>> getter) {
-        this.predicate = (state, player , n) -> getter.apply(state, player);
+        this.predicate = (state, player, meta) -> getter.apply(state, player);
         this.isCheckable = true;
     }
 
     public RulePredicate(BiPredicate<State, PlayerRef> getter, String message) {
-        this.predicate = (state, player , n) -> getter.test(state, player) ? Result.ok() : Result.error(message);
+        this.predicate = (state, player, meta) -> getter.test(state, player) ? Result.ok() : Result.error(message);
         this.isCheckable = true;
     }
 
