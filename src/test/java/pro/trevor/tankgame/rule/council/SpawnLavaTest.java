@@ -29,7 +29,7 @@ public class SpawnLavaTest {
     }
 
     @Test
-    public void testCannotHaveZeroDurability() {
+    public void testCannotHaveZeroDamage() {
         Assertions.assertThrows(AssertionError.class, () -> PlayerRules.getSpawnLavaWithCostRule(0, 0));
     }
 

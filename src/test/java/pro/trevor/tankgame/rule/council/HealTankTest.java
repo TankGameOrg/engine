@@ -26,7 +26,7 @@ public class HealTankTest {
     }
 
     @Test
-    public void testCannotHaveZeroDurability() {
+    public void testCannotHaveZeroHealth() {
         Assertions.assertThrows(AssertionError.class, () -> PlayerRules.getHealRule(0, 0));
     }
 
