@@ -9,7 +9,7 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.rule.impl.util.RandomManager;
 
-public class LootTable {
+public class LootTable implements ILootProvider {
     public static class Entry implements Comparable<Integer> {
         protected BiConsumer<State, AttributeContainer> grantLoot;
         protected int weight;
@@ -64,7 +64,7 @@ public class LootTable {
         weightedTotal += entry.weight;
     }
 
-    public void grantLoot(State state, AttributeContainer looter) {
+    public void grantLoot(State state, AttributeContainer target, AttributeContainer looter) {
         // No loot was applicable RIP you get nothing
         if(lootTable.isEmpty()) return;
 

@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.conditional.*;
 import pro.trevor.tankgame.rule.definition.range.UnitRange;
+import pro.trevor.tankgame.rule.impl.util.ILootProvider;
 import pro.trevor.tankgame.rule.impl.util.LootTable;
 import pro.trevor.tankgame.rule.definition.range.BooleanRange;
 import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
@@ -411,7 +412,7 @@ public class PlayerRules {
     /**
      * Rule that loots gold from dead tanks or loot boxes if the subject has the PLAYER_CAN_LOOT attribute
      */
-    public static PlayerConditionRule getLootRule(LootTable lootTable) {
+    public static PlayerConditionRule getLootRule(ILootProvider lootTable) {
         return getLootTargetRule((state, tank, target) -> {
             if(!tank.getOrElse(Attribute.PLAYER_CAN_LOOT, false)) {
                 return Result.error("Players can only loot once per day");
@@ -431,7 +432,7 @@ public class PlayerRules {
                 tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.GOLD, 0));
                 target.put(Attribute.GOLD, 0);
             } else if (target instanceof LootBox lootBox) {
-                lootTable.grantLoot(state, tank);
+                lootTable.grantLoot(state, target, tank);
                 lootBox.setHasBeenLooted();
             }
 
