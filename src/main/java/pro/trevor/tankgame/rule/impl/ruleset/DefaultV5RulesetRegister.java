@@ -19,7 +19,6 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.board.unit.LootBox;
-import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
 import java.util.function.Function;

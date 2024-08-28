@@ -260,6 +260,8 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule getSpawnWallWithCostRule(int cost, int durability) {
+        assert cost >= 0;
+        assert durability > 0;
         return new PlayerConditionRule(ActionKeys.SPAWN_WALL, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> state.getBoard().getUnitOrFloor(toType(n[0], Position.class)).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false), "Target space is not empty")
@@ -273,6 +275,8 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule getSpawnLavaWithCostRule(int cost, int damage) {
+        assert cost >= 0;
+        assert damage > 0;
         return new PlayerConditionRule(ActionKeys.SPAWN_LAVA, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> state.getBoard().getUnitOrFloor(toType(n[0], Position.class)).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false), "Target space is not empty")),
@@ -285,6 +289,8 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule getSmiteRule(int cost, int health) {
+        assert cost >= 0;
+        assert health > 0;
         return new PlayerConditionRule(ActionKeys.SMITE, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank")),
@@ -297,6 +303,8 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule getHealRule(int cost, int health) {
+        assert cost >= 0;
+        assert health > 0;
         return new PlayerConditionRule(ActionKeys.HEAL, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank")),
@@ -309,6 +317,8 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule getSlowRule(int cost, int modifier) {
+        assert cost >= 0;
+        assert modifier > 0;
         return new PlayerConditionRule(ActionKeys.SLOW, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank"),
@@ -328,6 +338,8 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule getHastenRule(int cost, int modifier) {
+        assert cost >= 0;
+        assert modifier > 0;
         return new PlayerConditionRule(ActionKeys.HASTEN, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
                 new MinimumPredicate<>(PlayerRules::getPlayer, Attribute.POWER, cost, "Player has insufficient power"),
                 new RulePredicate((state, playerRef, n) -> !toType(n[0], GenericTank.class).getOrElse(Attribute.DEAD, true), "Target must be a living tank"),
@@ -352,7 +364,7 @@ public class PlayerRules {
      * If the target has the ONLY_LOOTABLE_BY then only the player specified by the attribute can loot this target
      *
      * @param canLootTarget A function that checks if the specified target is lootable
-     * @param transferLoot A callback tansfers the looted targets attributes
+     * @param transferLoot A callback transfers the looted targets attributes
      */
     public static PlayerConditionRule getLootTargetRule(
             ITriFunction<State, GenericTank, AttributeContainer, Result<String>> canLootTarget,
