@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule;
+package pro.trevor.tankgame.rule.council;
 
 import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
@@ -12,7 +12,7 @@ import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CouncilBountyTest {
+public class BountyTankTest {
 
     private static final IPlayerRule BASIC_BOUNTY_RULE = PlayerRules.getRuleCofferCostBounty(1, 1);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");

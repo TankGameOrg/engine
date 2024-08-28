@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule;
+package pro.trevor.tankgame.rule.council;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +15,7 @@ import pro.trevor.tankgame.util.TestUtilities;
 import static org.junit.jupiter.api.Assertions.*;
 import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.getRuleCofferCostGrantLife;
 
-public class CouncilGrantLifeTest {
+public class GrantTankLifeTest {
 
     private static final IPlayerRule ZERO_COST_RULE = getRuleCofferCostGrantLife(0, 0);
     private static final IPlayerRule ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);

@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule;
+package pro.trevor.tankgame.rule.council;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +15,7 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TestUtilities;
 
-public class CouncilBaseIncomeTest {
+public class BaseIncomeTest {
 
     @ParameterizedTest()
     @CsvSource({
