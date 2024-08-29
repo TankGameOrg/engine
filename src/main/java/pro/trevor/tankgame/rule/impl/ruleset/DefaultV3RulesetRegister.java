@@ -42,8 +42,8 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerTickRules(Ruleset ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(GenericTank.class, TickRules.GetDistributeGoldToTanksRule());
         tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(GenericTank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
         tickRules.put(Board.class, INCREMENT_DAY_ON_TICK);
         tickRules.put(Council.class, new MetaTickActionRule<>((s, c) -> c.put(Attribute.CAN_BOUNTY, true)));
@@ -52,7 +52,7 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
     @Override
     public void registerConditionalRules(Ruleset ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(GenericTank.class, ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule());
+        conditionalRules.put(GenericTank.class, ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY);
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
         conditionalRules.put(Board.class, ConditionalRules.TANK_WIN_CONDITION);
     }
@@ -62,7 +62,7 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
         PlayerRuleset playerRules = ruleset.getPlayerRules();
         playerRules.add(PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
         playerRules.add(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 8));
-        playerRules.add(PlayerRules.getShareGoldWithTaxRule(1));
+        playerRules.add(PlayerRules.getShareGoldWithTaxToCofferRule(1));
         playerRules.add(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1));
         playerRules.add(PlayerRules.SHOOT_V3);
 

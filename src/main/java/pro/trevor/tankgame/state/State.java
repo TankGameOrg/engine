@@ -5,6 +5,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeList;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.Board;
+import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
@@ -73,5 +74,16 @@ public class State extends AttributeContainer implements IJsonObject, IGatherabl
             }
         }
         return result;
+    }
+
+    /**
+     * Search the state for a tank controled by the same player (ref)
+     * @param playerRef
+     * @return
+     */
+    public Optional<GenericTank> getTankForPlayerRef(PlayerRef playerRef) {
+        return gather(GenericTank.class)
+            .stream().filter((t) -> t.getPlayerRef().equals(playerRef))
+            .findAny();
     }
 }

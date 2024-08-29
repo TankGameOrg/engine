@@ -192,6 +192,16 @@ public class Board implements IMetaElement, IGatherable {
                 && (getFloor(p).orElse(new UnwalkableFloor(p)).isWalkable(this));
     }
 
+    /**
+     * Check if a location is on the board and not occupied by a unit or floor
+     * @return
+     */
+    public boolean isEmpty(Position position) {
+        return getUnitOrFloor(position)
+            .map((element) -> element.getClass().equals(WalkableFloor.class))
+            .orElse(false); // Position is not on the board
+    }
+
     public boolean isAbleToShootThrough(Position p) {
         return getUnit(p).orElse(null) instanceof EmptyUnit;
     }

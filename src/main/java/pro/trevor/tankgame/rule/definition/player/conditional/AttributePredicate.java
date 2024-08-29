@@ -10,6 +10,6 @@ import java.util.function.Predicate;
 
 public class AttributePredicate<T extends AttributeContainer> extends GetterPredicate<T> {
     public AttributePredicate(BiFunction<State, PlayerRef, Optional<T>> getter, Predicate<T> predicate, String error) {
-        super(getter, (state, t, n) -> predicate.test(t), error);
+        super(getter, (state, playerRef) -> predicate.test(playerRef), error);
     }
 }

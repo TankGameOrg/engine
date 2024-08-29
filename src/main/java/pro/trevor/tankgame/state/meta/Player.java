@@ -1,6 +1,7 @@
 package pro.trevor.tankgame.state.meta;
 
 import org.json.JSONObject;
+import pro.trevor.tankgame.rule.type.IMetaElement;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.util.IJsonObject;
@@ -9,7 +10,7 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.HashMap;
 
 @JsonType(name = "Player")
-public class Player extends AttributeContainer implements IJsonObject {
+public class Player extends AttributeContainer implements IJsonObject, IMetaElement {
 
     public Player(String name) {
         super(new HashMap<>());

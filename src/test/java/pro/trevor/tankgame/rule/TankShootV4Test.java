@@ -8,7 +8,6 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;

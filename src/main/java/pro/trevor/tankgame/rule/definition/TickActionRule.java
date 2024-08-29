@@ -1,11 +1,10 @@
 package pro.trevor.tankgame.rule.definition;
 
-import pro.trevor.tankgame.rule.type.ITickElement;
 import pro.trevor.tankgame.state.State;
 
 import java.util.function.BiConsumer;
 
-public class TickActionRule<T extends ITickElement> implements IApplicableRule<T> {
+public class TickActionRule<T> implements IApplicableRule<T> {
 
     private final BiConsumer<State, T> consumer;
     private final Priority priority;

@@ -33,24 +33,28 @@ public class LootActionTestHelper {
      * @param targetPosition
      * @param targetGold
      */
-    protected void setupTest(String subjectPosition, int subjectGold, String targetPosition, int targetGold) {
+    protected void setupTest(String subjectPosition, int subjectGold) {
         subject = new Player("Ted");
         subjectTank = TankBuilder.buildTank()
             .at(new Position(subjectPosition))
             .with(Attribute.PLAYER_REF, new PlayerRef("Ted"))
-            .with(Attribute.RANGE, 1)
+            .with(Attribute.RANGE, 2)
             .with(Attribute.GOLD, subjectGold)
             .with(Attribute.PLAYER_CAN_LOOT, true)
             .finish();
 
+        state = generateBoard(4, 4, subjectTank);
+        state.getPlayers().add(subject);
+    }
+
+    protected void addTargetTank(String targetPosition, int targetGold) {
         targetTank = TankBuilder.buildTank()
             .at(new Position(targetPosition))
             .with(Attribute.GOLD, targetGold)
             .with(Attribute.DEAD, true)
             .finish();
 
-        state = generateBoard(3, 3, subjectTank, targetTank);
-        state.getPlayers().add(subject);
+        state.getBoard().putUnit(targetTank);
     }
 
     /**
@@ -59,8 +63,8 @@ public class LootActionTestHelper {
      * @return
      */
     protected Set<Position> getLootablePositions(PlayerConditionRule rule) {
-        FunctionVariableRange<GenericTank, Position> lootablePositionRange = (FunctionVariableRange<GenericTank, Position>) rule.parameters()[0];
-        lootablePositionRange.generate(state, subjectTank);
+        FunctionVariableRange<PlayerRef, Position> lootablePositionRange = (FunctionVariableRange<PlayerRef, Position>) rule.parameters()[0];
+        lootablePositionRange.generate(state, subjectTank.getPlayerRef());
         return lootablePositionRange.getElements();
     }
 
@@ -95,6 +99,9 @@ public class LootActionTestHelper {
      */
     protected void startNewDay() {
         TickRules.SET_PLAYER_CAN_LOOT.apply(state, subjectTank);
-        TickRules.CLEAR_ONLY_LOOTABLE_BY.apply(state, targetTank);
+
+        if(targetTank != null) {
+            TickRules.CLEAR_ONLY_LOOTABLE_BY.apply(state, targetTank);
+        }
     }
 }

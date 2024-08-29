@@ -6,20 +6,39 @@ import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.IVarTriFunction;
 import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+
 public class RulePredicate {
 
     protected final IVarTriFunction<State, PlayerRef, Object, Result<String>> predicate;
+    private final boolean isCheckable;
 
     public RulePredicate(IVarTriFunction<State, PlayerRef, Object, Result<String>> predicate) {
         this.predicate = predicate;
+        this.isCheckable = false;
     }
 
     public RulePredicate(IVarTriPredicate<State, PlayerRef, Object> predicate, String message) {
-        this.predicate = (state, t, v) -> predicate.test(state, t, v) ? Result.ok() : Result.error(message);
+        this((state, player, meta) -> predicate.test(state, player, meta) ? Result.ok() : Result.error(message));
     }
 
-    public Result<String> test(State state, PlayerRef t, Object... meta) {
-        return predicate.accept(state, t, meta);
+    public RulePredicate(BiFunction<State, PlayerRef, Result<String>> getter) {
+        this.predicate = (state, player, meta) -> getter.apply(state, player);
+        this.isCheckable = true;
+    }
+
+    public RulePredicate(BiPredicate<State, PlayerRef> getter, String message) {
+        this.predicate = (state, player, meta) -> getter.test(state, player) ? Result.ok() : Result.error(message);
+        this.isCheckable = true;
+    }
+
+    public boolean isCheckable() {
+        return isCheckable;
+    }
+
+    public Result<String> test(State state, PlayerRef player, Object... meta) {
+        return predicate.accept(state, player, meta);
     }
 
     public RuleCondition toCondition() {

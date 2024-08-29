@@ -17,7 +17,6 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
-import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestUtilities;
 
@@ -138,7 +137,7 @@ public class DestructibleFloorTest {
         s.getBoard().putFloor(floor);
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
-        ConditionalRule<GenericTank> dieOrDestroyRule = ConditionalRules.GetKillOrDestroyTankOnZeroDurabilityRule();
+        ConditionalRule<GenericTank> dieOrDestroyRule = ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY;
         shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
         dieOrDestroyRule.apply(s, t);
         dieOrDestroyRule.apply(s, tankAbove);

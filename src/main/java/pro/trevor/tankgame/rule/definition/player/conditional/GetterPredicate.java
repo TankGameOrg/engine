@@ -7,12 +7,20 @@ import pro.trevor.tankgame.util.function.IVarTriPredicate;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 public class GetterPredicate<T extends AttributeContainer> extends RulePredicate {
     public GetterPredicate(BiFunction<State, PlayerRef, Optional<T>> getter, IVarTriPredicate<State, T, Object> predicate, String message) {
         super((state, player, n) -> {
             Optional<T> optionalT = getter.apply(state, player);
             return optionalT.isPresent() && predicate.test(state, optionalT.get(), n);
+        }, message);
+    }
+
+    public GetterPredicate(BiFunction<State, PlayerRef, Optional<T>> getter, BiPredicate<State, T> predicate, String message) {
+        super((state, player) -> {
+            Optional<T> optionalT = getter.apply(state, player);
+            return optionalT.isPresent() && predicate.test(state, optionalT.get());
         }, message);
     }
 }

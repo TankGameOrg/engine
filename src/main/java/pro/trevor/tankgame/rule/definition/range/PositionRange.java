@@ -5,18 +5,18 @@ import java.util.stream.Collectors;
 
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.function.ITriPredicate;
 
-public class PositionRange extends FunctionVariableRange<GenericTank, Position> {
+public class PositionRange extends FunctionVariableRange<PlayerRef, Position> {
 
-    public PositionRange(String name, ITriPredicate<State, GenericTank, Position> shouldIncludeTarget) {
-        super(name, (state, tank) -> generateRange(state, tank, shouldIncludeTarget));
+    public PositionRange(String name, ITriPredicate<State, PlayerRef, Position> shouldIncludeTarget) {
+        super(name, (state, player) -> generateRange(state, player, shouldIncludeTarget));
     }
 
-    private static Set<Position> generateRange(State state, GenericTank tank, ITriPredicate<State, GenericTank, Position> shouldIncludeTarget) {
+    private static Set<Position> generateRange(State state, PlayerRef player, ITriPredicate<State, PlayerRef, Position> shouldIncludeTarget) {
         return state.getBoard().getAllPositions()
-            .stream().filter((position) -> shouldIncludeTarget.test(state, tank, position))
+            .stream().filter((position) -> shouldIncludeTarget.test(state, player, position))
             .collect(Collectors.toSet());
     }
 
