@@ -1,15 +1,13 @@
 package pro.trevor.tankgame.rule.definition.player;
 
+import java.util.List;
+
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public interface IPlayerRule {
-
-    void apply(State state, PlayerRef subject, Object... meta);
-    boolean canApply(State state, PlayerRef subject, Object... meta);
+    void apply(PlayerRuleContext context);
+    List<PlayerRuleError> canApply(PlayerRuleContext context);
 
     String name();
     TypeRange<?>[] parameters();
-
 }

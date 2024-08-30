@@ -1,11 +1,11 @@
 package pro.trevor.tankgame.util;
 
-public class Result<E> {
-    private static final Result<?> OK = new Result<>(null);
-
+public class Result<V, E> {
+    private final V value;
     private final E error;
 
-    protected Result(E error) {
+    protected Result(V value, E error) {
+        this.value = null;
         this.error = error;
     }
 
@@ -17,6 +17,14 @@ public class Result<E> {
         return error != null;
     }
 
+    public V getValue() {
+        if (error != null) {
+            throw new Error(String.format("No value is present (error = %s)", error));
+        } else {
+            return value;
+        }
+    }
+
     public E getError() {
         if (error == null) {
             throw new Error("No error is present");
@@ -25,11 +33,11 @@ public class Result<E> {
         }
     }
 
-    public static <E> Result<E> ok() {
-        return (Result<E>) OK;
+    public static <V, E> Result<V, E> ok(V value) {
+        return new Result<>(value, null);
     }
 
-    public static <E> Result<E> error(E error) {
-        return new Result<>(error);
+    public static <V, E> Result<V, E> error(E error) {
+        return new Result<>(null, error);
     }
 }
