@@ -1,5 +1,8 @@
 package pro.trevor.tankgame.util;
 
+import java.util.Optional;
+
+
 public class Result<V, E> {
     private final V value;
     private final E error;
@@ -31,6 +34,10 @@ public class Result<V, E> {
         } else {
             return error;
         }
+    }
+
+    public Optional<E> asOptionalError() {
+        return Optional.ofNullable(error);
     }
 
     public static <V, E> Result<V, E> ok(V value) {

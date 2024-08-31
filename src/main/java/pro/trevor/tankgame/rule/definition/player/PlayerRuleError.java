@@ -6,6 +6,7 @@ public class PlayerRuleError {
         GENERIC,
         INSUFFICIENT_DATA,
         INSUFFICENT_RESOURCES,
+        FATAL,
     }
 
     // For each category define a static helper to make life easier
@@ -24,6 +25,10 @@ public class PlayerRuleError {
 
     public static PlayerRuleError insufficientResources(String format, Object... formatArgs) {
         return new PlayerRuleError(Category.INSUFFICENT_RESOURCES, format, formatArgs);
+    }
+
+    public static PlayerRuleError fatal(String format, Object... formatArgs) {
+        return new PlayerRuleError(Category.FATAL, format, formatArgs);
     }
 
     Category category;
