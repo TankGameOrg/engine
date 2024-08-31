@@ -8,7 +8,7 @@ public class Result<V, E> {
     private final E error;
 
     protected Result(V value, E error) {
-        this.value = null;
+        this.value = value;
         this.error = error;
     }
 

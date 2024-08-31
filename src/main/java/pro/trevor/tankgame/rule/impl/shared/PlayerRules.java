@@ -66,10 +66,9 @@ public class PlayerRules {
         .map(PredicateHelpers.getAttribute(Attribute.DEAD, false))
         .filter((context, dead) -> !dead, PlayerRuleError.notApplicable("Tank must be alive"));
 
-    private static final IRulePredicate PLAYER_IS_COUNCIL_PREDICATE = (context) -> {
-        return context.getState().getCouncil().allPlayersOnCouncil().contains(context.getPlayerRef()) ?
-            Optional.empty() : Optional.of(PlayerRuleError.notApplicable("Player must be a councilor"));
-    };
+    private static final IRulePredicate PLAYER_IS_COUNCIL_PREDICATE = new BasicRulePredicate((context) -> {
+        return context.getState().getCouncil().allPlayersOnCouncil().contains(context.getPlayerRef());
+    }, PlayerRuleError.notApplicable("Player must be a councilor"));
 
     // Check if TARGET_POSITION is within the subject's range
     private static final IRulePredicate TARGET_IS_IN_RANGE = new RulePredicateStream<>(PredicateHelpers::getTank)
@@ -101,13 +100,13 @@ public class PlayerRules {
             return Optional.empty();
         });
 
-    private static final IRulePredicate TARGET_POSITION_IS_EMPTY_SPACE = new RulePredicateStream<>((context) -> null)
+    private static final IRulePredicate TARGET_POSITION_IS_EMPTY_SPACE = new RulePredicateStream<>()
         .filter(PredicateHelpers::hasLogEntry)
         .filter((context, unused) -> context.getState().getBoard().isEmpty(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)), PlayerRuleError.generic("Target space is not empty"));
 
     private static final IRulePredicate TARGET_TANK_IS_ALIVE = new RulePredicateStream<>(PredicateHelpers::getTargetTank)
         .map(PredicateHelpers.getAttribute(Attribute.DEAD, true))
-        .filter((context, dead) -> dead, PlayerRuleError.generic("Target must be a living tank"));
+        .filter((context, dead) -> !dead, PlayerRuleError.generic("Target must be a living tank"));
 
     private static final IRulePredicate TARGET_TANKS_SPEED_IS_NOT_MODIFIED = new RulePredicateStream<>(PredicateHelpers::getTargetTank)
         .filter((context, targetTank) -> {
@@ -202,7 +201,7 @@ public class PlayerRules {
                     new BasicRulePredicate((context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, "Donation must be positive"),
                     new RulePredicateStream<>(PredicateHelpers::getTank)
                         .filter(PredicateHelpers::hasLogEntry)
-                        .filter(PredicateHelpers.minimum(Attribute.GOLD, (context) -> PredicateHelpers.getLogField(context, Attribute.GOLD) + taxAmount)),
+                        .filter(PredicateHelpers.minimum(Attribute.GOLD, (context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) + taxAmount)),
                     new RulePredicateStream<>(PredicateHelpers::getTargetTank)
                         .filter((context, targetTank) -> targetTank.has(Attribute.GOLD), PlayerRuleError.generic("Target must have gold attribute")),
                     TARGET_TANK_IS_IN_RANGE
@@ -247,9 +246,7 @@ public class PlayerRules {
         return new PlayerConditionRule(PlayerRules.ActionKeys.STIMULUS,
                 new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
                     cofferCost(cost),
-                    new RulePredicateStream<>(PredicateHelpers::getTargetTank)
-                        .map(PredicateHelpers.getAttribute(Attribute.DEAD, false))
-                        .filter((context, dead) -> dead, PlayerRuleError.generic("Target tank must not be dead"))
+                    TARGET_TANK_IS_ALIVE
                 ),
                 (context) -> {
                     Council council = context.getState().getCouncil();
@@ -290,8 +287,7 @@ public class PlayerRules {
                     new RulePredicateStream<>(PredicateHelpers::getCouncil)
                         .map(PredicateHelpers.getAttribute(Attribute.CAN_BOUNTY, true))
                         .filter((context, canBounty) -> canBounty, PlayerRuleError.insufficientResources("Council cannot bounty")),
-                    new RulePredicateStream<>(PredicateHelpers::getTargetTank)
-                        .filter((context, targetTank) -> targetTank.getOrElse(Attribute.DEAD, false), PlayerRuleError.generic("Target tank must not be dead")),
+                    TARGET_TANK_IS_ALIVE,
                     new RulePredicateStream<>(PredicateHelpers::getCouncil)
                         .map(PredicateHelpers.getAttribute(Attribute.COFFER, 0))
                         .filter((context, coffer) -> coffer >= PredicateHelpers.getLogField(context, Attribute.BOUNTY), PlayerRuleError.insufficientResources("Council has insufficient coffer"))

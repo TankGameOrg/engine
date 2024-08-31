@@ -13,7 +13,6 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
-import pro.trevor.tankgame.rule.definition.player.conditional.RulePredicateStream;
 import pro.trevor.tankgame.util.Result;
 
 public abstract class PredicateHelpers {
@@ -52,6 +51,7 @@ public abstract class PredicateHelpers {
      */
     public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> minimum(Attribute<Integer> attribute, Function<PlayerRuleContext, Integer> valueFunction) {
         return (context, container) -> {
+            assert container != null;
             Result<Integer, PlayerRuleError> result = PredicateHelpers.getAttribute(attribute).apply(context, container);
             if(result.isError()) {
                 return Optional.of(result.getError());
@@ -85,12 +85,12 @@ public abstract class PredicateHelpers {
      * Get the the player who initiated the current context
      */
     public static Result<Player, PlayerRuleError> getPlayer(PlayerRuleContext context) {
-        Optional<Player> tank = context.getState().getPlayer(context.getPlayerRef());
-        if(tank.isEmpty()) {
+        Optional<Player> player = context.getState().getPlayer(context.getPlayerRef());
+        if(player.isEmpty()) {
             return Result.error(PlayerRuleError.notApplicable("Could not find player %s", context.getPlayerRef()));
         }
 
-        return Result.ok(tank.get());
+        return Result.ok(player.get());
     }
 
     /**

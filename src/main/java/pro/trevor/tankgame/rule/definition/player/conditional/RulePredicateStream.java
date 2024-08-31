@@ -23,6 +23,10 @@ public class RulePredicateStream<T> implements IRulePredicate {
         this.function = function;
     }
 
+    public RulePredicateStream() {
+        this((context) -> Result.ok(null));
+    }
+
     /**
      * Return a stream with any values that pass the filter function (didn't result in an error)
      * @param predicate A function that returns an error if a value should not continue

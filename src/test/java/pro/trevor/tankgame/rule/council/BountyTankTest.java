@@ -9,6 +9,7 @@ import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestState;
+import pro.trevor.tankgame.util.TestUtilities;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,8 +34,9 @@ public class BountyTankTest {
                 .with(Attribute.BOUNTY, 0)
                 .with(Attribute.DEAD, false)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().put(Attribute.COFFER, 1);
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
         applyBasicBounty(state, tank);
         assertEquals(1, tank.getUnsafe(Attribute.BOUNTY));
@@ -46,8 +48,9 @@ public class BountyTankTest {
                 .with(Attribute.BOUNTY, 0)
                 .with(Attribute.DEAD, true)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().put(Attribute.COFFER, 1);
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
         assertThrows(Error.class, () -> applyBasicBounty(state, tank));
         assertEquals(0, tank.getUnsafe(Attribute.BOUNTY));
@@ -59,8 +62,9 @@ public class BountyTankTest {
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.BOUNTY, 0)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().put(Attribute.COFFER, 1);
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
         applyBasicBounty(state, tank);
         assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
@@ -71,8 +75,9 @@ public class BountyTankTest {
         GenericTank tank = TankBuilder.buildTank()
                 .with(Attribute.BOUNTY, 3)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().put(Attribute.COFFER, 1);
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
         applyBasicBounty(state, tank);
         assertEquals(4, tank.getUnsafe(Attribute.BOUNTY));
@@ -83,7 +88,8 @@ public class BountyTankTest {
         GenericTank tank = TankBuilder.buildTank()
                 .with(Attribute.BOUNTY, 0)
                 .finish();
-        State state = new TestState();
+        State state = TestUtilities.generateBoard(1, 1, tank);
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
         assertThrows(Error.class, () -> applyBasicBounty(state, tank));
     }

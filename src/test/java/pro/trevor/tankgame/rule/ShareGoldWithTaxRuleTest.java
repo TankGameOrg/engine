@@ -24,7 +24,7 @@ public class ShareGoldWithTaxRuleTest {
     PlayerRuleContext makeContext(State state, PlayerRef subject, GenericTank reciever, int gold) {
         return new ContextBuilder(state, subject)
             .withTarget(reciever)
-            .with(Attribute.GOLD, gold)
+            .with(Attribute.DONATION, gold)
             .finish();
     }
 

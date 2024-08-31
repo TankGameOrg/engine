@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
+import pro.trevor.tankgame.rule.definition.player.conditional.PredicateHelpers;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -14,6 +16,7 @@ import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
+import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TestUtilities;
@@ -58,6 +61,10 @@ public class SlowTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.SPEED, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
+
+        Result<Player, PlayerRuleError> result = PredicateHelpers.getPlayer(makeContext(state, player.toRef(), otherTank));
+        assert result.getValue() != null;
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
@@ -70,6 +77,7 @@ public class SlowTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.SPEED, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
@@ -81,6 +89,7 @@ public class SlowTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.SPEED, 3).finish();
         State state = TestUtilities.generateBoard(1, 1, otherTank);
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
@@ -95,6 +104,7 @@ public class SlowTankTest {
                 .with(Attribute.SPEED, 3)
                 .finish();
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         Assertions.assertFalse(canApply(ONE_COST_RULE, state, player.toRef(), tank));
@@ -110,6 +120,7 @@ public class SlowTankTest {
                 .with(Attribute.SPEED, 3)
                 .finish();
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         Assertions.assertTrue(canApply(ONE_COST_RULE, state, player.toRef(), tank));
@@ -127,6 +138,7 @@ public class SlowTankTest {
                 .with(Attribute.SPEED, 3)
                 .finish();
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         PlayerRules.getSlowRule(POWER_COST, 1).apply(makeContext(state, player.toRef(), tank));
@@ -144,6 +156,7 @@ public class SlowTankTest {
                 .with(Attribute.PREVIOUS_SPEED, 2)
                 .finish();
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), tank));
@@ -161,6 +174,7 @@ public class SlowTankTest {
                 .with(Attribute.SPEED, INITIAL_SPEED)
                 .finish();
         state.getPlayers().add(player);
+        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         PlayerRules.getSlowRule(0, MODIFIER).apply(makeContext(state, player.toRef(), tank));

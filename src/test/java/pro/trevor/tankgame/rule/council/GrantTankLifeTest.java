@@ -37,6 +37,7 @@ public class GrantTankLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
+        state.getCouncil().getCouncillors().add(councilPlayer);
         apply(ZERO_COST_RULE, state, tank);
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
     }
@@ -52,6 +53,7 @@ public class GrantTankLifeTest {
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().getCouncillors().add(tank.getPlayerRef());
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
         apply(ZERO_COST_RULE, state, tank);
 
@@ -68,6 +70,7 @@ public class GrantTankLifeTest {
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().put(Attribute.COFFER, 1);
+        state.getCouncil().getCouncillors().add(councilPlayer);
         apply(ONE_COST_RULE, state, tank);
         assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
@@ -79,6 +82,7 @@ public class GrantTankLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
+        state.getCouncil().getCouncillors().add(councilPlayer);
         assertThrows(Error.class, () -> apply(ONE_COST_RULE, state, tank));
     }
 
