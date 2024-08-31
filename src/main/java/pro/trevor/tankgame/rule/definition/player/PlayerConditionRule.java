@@ -8,10 +8,10 @@ import java.util.function.Consumer;
 
 public class PlayerConditionRule implements IPlayerRule {
 
-    protected final String name;
-    protected final RuleCondition condition;
-    protected final Consumer<PlayerRuleContext> consumer;
-    protected final TypeRange<?>[] parameters;
+    private final String name;
+    private final RuleCondition condition;
+    private final Consumer<PlayerRuleContext> consumer;
+    private final TypeRange<?>[] parameters;
 
     public PlayerConditionRule(String name, RuleCondition condition, Consumer<PlayerRuleContext> consumer, TypeRange<?>... parameters) {
         this.name = name;
@@ -20,16 +20,19 @@ public class PlayerConditionRule implements IPlayerRule {
         this.parameters = parameters;
     }
 
+    protected PlayerConditionRule(PlayerConditionRule rule) {
+        this(rule.name, rule.condition, rule.consumer, rule.parameters);
+    }
+
     @Override
     public void apply(PlayerRuleContext context) {
-        if(context.getLogEntry().isEmpty()) {
-            throw new Error("Log entry is required to apply a player condition rule");
-        }
+        canApplyOrThrow(context);
+        consumer.accept(context);
+    }
 
+    protected void canApplyOrThrow(PlayerRuleContext context) {
         List<PlayerRuleError> errors = canApply(context);
-        if (errors.isEmpty()) {
-            consumer.accept(context);
-        } else {
+        if(!errors.isEmpty()) {
             StringBuilder sb = new StringBuilder(String.format("Cannot apply '%s' with subject '%s' and arguments %s:\n", name, context.getPlayerRef(), context.getLogEntry()));
             for (int i = 0; i < errors.size(); ++i) {
                 sb.append(errors.get(i));
