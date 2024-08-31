@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
-import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.Position;
@@ -15,13 +18,12 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 
 
-class GoldLootTransfer implements ITriConsumer<State, GenericTank, AttributeContainer> {
-    public void accept(State state, GenericTank tank, AttributeContainer target) {
+class GoldLootTransfer implements ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> {
+    public void accept(PlayerRuleContext context, GenericTank tank, AttributeContainer target) {
         // Just set the gold to the other tank's value this method just exists to verify that we called the consumer
         tank.put(Attribute.GOLD, target.getUnsafe(Attribute.GOLD));
         target.put(Attribute.GOLD, 0);
@@ -31,10 +33,10 @@ class GoldLootTransfer implements ITriConsumer<State, GenericTank, AttributeCont
 
 public class LootingTargetTest extends LootActionTestHelper {
     PlayerConditionRule getBasicLootRule() {
-        return PlayerRules.getLootTargetRule((state, tank, target) -> {
+        return PlayerRules.getLootTargetRule((context, tank, target) -> {
             return target.getUnsafe(Attribute.POSITION).equals(new Position("B3")) ?
-                Result.error("No") :
-                Result.ok();
+                Optional.of(PlayerRuleError.generic("No")) :
+                Optional.empty();
         }, new GoldLootTransfer());
     }
 

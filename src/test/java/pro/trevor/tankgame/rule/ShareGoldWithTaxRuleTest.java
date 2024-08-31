@@ -8,15 +8,29 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.TestUtilities;
 
 public class ShareGoldWithTaxRuleTest {
+
+    PlayerRuleContext makeContext(State state, PlayerRef subject, GenericTank reciever, int gold) {
+        return new ContextBuilder(state, subject)
+            .withTarget(reciever)
+            .with(Attribute.GOLD, gold)
+            .finish();
+    }
+
+    boolean canApply(IPlayerRule rule, State state, PlayerRef subject, GenericTank reciever, int gold) {
+        return rule.canApply(makeContext(state, subject, reciever, gold)).isEmpty();
+    }
 
     @Test
     public void DeadTankCannotDonateGold() {
@@ -25,7 +39,7 @@ public class ShareGoldWithTaxRuleTest {
         GenericTank receiver = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, 3));
+        assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, 3));
     }
 
     @Test
@@ -34,7 +48,7 @@ public class ShareGoldWithTaxRuleTest {
         GenericTank receiver = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, 3));
+        assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, 3));
     }
 
     @Test
@@ -43,7 +57,7 @@ public class ShareGoldWithTaxRuleTest {
         GenericTank receiver = TankBuilder.buildTank().finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, 3));
+        assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, 3));
     }
 
     @ParameterizedTest()
@@ -57,7 +71,7 @@ public class ShareGoldWithTaxRuleTest {
         GenericTank receiver = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(tax);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, donation));
+        assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, donation));
     }
 
     @Test
@@ -66,7 +80,7 @@ public class ShareGoldWithTaxRuleTest {
         GenericTank receiver = TankBuilder.buildTank().with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, -3));
+        assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender), sender.getPlayerRef(), receiver, -3));
     }
 
     @Test
@@ -76,7 +90,7 @@ public class ShareGoldWithTaxRuleTest {
             .at(new Position("A3")).with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(3, 3, sender), sender.getPlayerRef(), receiver, 1));
+        assertFalse(canApply(rule, TestUtilities.generateBoard(3, 3, sender), sender.getPlayerRef(), receiver, 1));
     }
 
     @ParameterizedTest()
@@ -98,7 +112,7 @@ public class ShareGoldWithTaxRuleTest {
         State state = TestUtilities.generateBoard(5, 5, sender);
         state.getCouncil().put(Attribute.COFFER, startingCoffer);
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(tax);
-        rule.apply(state, sender.getPlayerRef(), receiver, donation);
+        rule.apply(makeContext(state, sender.getPlayerRef(), receiver, donation));
         assertEquals(senderEndingGold, sender.getUnsafe(Attribute.GOLD));
         assertEquals(receiverEndingGold, receiver.getUnsafe(Attribute.GOLD));
         assertEquals(endingCoffer, state.getCouncil().getUnsafe(Attribute.COFFER));

@@ -6,6 +6,7 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
@@ -17,6 +18,15 @@ public class BountyTankTest {
     private static final IPlayerRule BASIC_BOUNTY_RULE = PlayerRules.getRuleCofferCostBounty(1, 1);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
+    void applyBasicBounty(State state, GenericTank tank) {
+        BASIC_BOUNTY_RULE.apply(
+            new ContextBuilder(state, councilPlayer)
+                .withTarget(tank)
+                .with(Attribute.BOUNTY, 1)
+                .finish()
+        );
+    }
+
     @Test
     public void testGrantBountyToLivingTank() {
         GenericTank tank = TankBuilder.buildTank()
@@ -26,7 +36,7 @@ public class BountyTankTest {
         State state = new TestState();
         state.getCouncil().put(Attribute.COFFER, 1);
 
-        BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1);
+        applyBasicBounty(state, tank);
         assertEquals(1, tank.getUnsafe(Attribute.BOUNTY));
     }
 
@@ -39,7 +49,7 @@ public class BountyTankTest {
         State state = new TestState();
         state.getCouncil().put(Attribute.COFFER, 1);
 
-        assertThrows(Error.class, () -> BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1));
+        assertThrows(Error.class, () -> applyBasicBounty(state, tank));
         assertEquals(0, tank.getUnsafe(Attribute.BOUNTY));
     }
 
@@ -52,7 +62,7 @@ public class BountyTankTest {
         State state = new TestState();
         state.getCouncil().put(Attribute.COFFER, 1);
 
-        BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1);
+        applyBasicBounty(state, tank);
         assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
 
@@ -64,7 +74,7 @@ public class BountyTankTest {
         State state = new TestState();
         state.getCouncil().put(Attribute.COFFER, 1);
 
-        BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1);
+        applyBasicBounty(state, tank);
         assertEquals(4, tank.getUnsafe(Attribute.BOUNTY));
     }
 
@@ -75,6 +85,6 @@ public class BountyTankTest {
                 .finish();
         State state = new TestState();
 
-        assertThrows(Error.class, () -> BASIC_BOUNTY_RULE.apply(state, councilPlayer, tank, 1));
+        assertThrows(Error.class, () -> applyBasicBounty(state, tank));
     }
 }

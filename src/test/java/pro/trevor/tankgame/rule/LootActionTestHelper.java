@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
+import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.range.FunctionVariableRange;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.State;
@@ -14,6 +16,7 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
 
@@ -57,12 +60,18 @@ public class LootActionTestHelper {
         state.getBoard().putUnit(targetTank);
     }
 
+    protected PlayerRuleContext makeLootContext(State state, GenericTank subjectTank, String targetPosition) {
+        return new ContextBuilder(state, subjectTank.getPlayerRef())
+            .withTarget(new Position(targetPosition))
+            .finish();
+    }
+
     /**
      * Get the range of positions that will be shown to players as lootable locations
      * @param rule
      * @return
      */
-    protected Set<Position> getLootablePositions(PlayerConditionRule rule) {
+    protected Set<Position> getLootablePositions(IPlayerRule rule) {
         FunctionVariableRange<PlayerRef, Position> lootablePositionRange = (FunctionVariableRange<PlayerRef, Position>) rule.parameters()[0];
         lootablePositionRange.generate(state, subjectTank.getPlayerRef());
         return lootablePositionRange.getElements();
@@ -74,8 +83,8 @@ public class LootActionTestHelper {
      * @param targetPosition
      * @return
      */
-    protected boolean canApply(PlayerConditionRule rule, String targetPosition) {
-        boolean canApplyRule = rule.canApplyConditional(state, subjectTank.getPlayerRef(), new Position(targetPosition)).isOk();
+    protected boolean canApply(IPlayerRule rule, String targetPosition) {
+        boolean canApplyRule = rule.canApply(makeLootContext(state, subjectTank, targetPosition)).isEmpty();
         Set<Position> lootablePositions = getLootablePositions(rule);
 
         assertEquals(canApplyRule, lootablePositions.contains(new Position(targetPosition)),
@@ -89,9 +98,9 @@ public class LootActionTestHelper {
      * @param rule
      * @param targetPosition
      */
-    protected void apply(PlayerConditionRule rule, String targetPosition) {
+    protected void apply(IPlayerRule rule, String targetPosition) {
         assertTrue(canApply(rule, targetPosition));
-        rule.apply(state, subjectTank.getPlayerRef(), new Position(targetPosition));
+        rule.apply(makeLootContext(state, subjectTank, targetPosition));
     }
 
     /**

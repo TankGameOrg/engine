@@ -8,6 +8,10 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 
 public class LogEntry extends AttributeContainer {
+    public LogEntry() {
+        super();
+    }
+
     public LogEntry(Map<Attribute<?>, ?> defaults) {
         super(defaults);
     }
