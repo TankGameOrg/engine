@@ -469,7 +469,7 @@ public class PlayerRules {
                 transferLoot.accept(context, tank, targetObject);
             },
             new PositionRange("target", (state, player, target) -> {
-                PlayerRuleContext context = new PlayerRuleContext(state, player, Optional.of(new LogEntry(Map.of(Attribute.TARGET_POSITION, target))));
+                PlayerRuleContext context = new PlayerRuleContext(state, player, new LogEntry(Map.of(Attribute.TARGET_POSITION, target)));
                 return lootCondition.test(context).isEmpty();
             }));
     }

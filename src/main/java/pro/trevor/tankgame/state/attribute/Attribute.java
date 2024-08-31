@@ -69,6 +69,9 @@ public class Attribute<E> {
     public static final Attribute<Boolean> HIT = new Attribute<>("HIT", Boolean.class);
     public static final Attribute<Integer> DAMAGAE = new Attribute<>("DAMAGAE", Integer.class);
     public static final Attribute<Long> TIMESTAMP = new Attribute<>("TIMESTAMP", Long.class);
+    public static final Attribute<Integer> DAY = new Attribute<>("DAY", Integer.class);
+    public static final Attribute<PlayerRef> SUBJECT = new Attribute<>("SUBJECT", PlayerRef.class);
+    public static final Attribute<String> ACTION = new Attribute<>("ACTION", String.class);
 
     private final String attributeName;
     private final Class<E> attributeClass;

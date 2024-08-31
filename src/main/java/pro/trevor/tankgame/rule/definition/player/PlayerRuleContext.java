@@ -12,7 +12,15 @@ public class PlayerRuleContext {
     PlayerRef playerRef;
     Optional<LogEntry> logEntry;
 
-    public PlayerRuleContext(State state, PlayerRef playerRef, Optional<LogEntry> logEntry) {
+    public PlayerRuleContext(State state, PlayerRef playerRef) {
+        this(state, playerRef, Optional.empty());
+    }
+
+    public PlayerRuleContext(State state, PlayerRef playerRef, LogEntry logEntry) {
+        this(state, playerRef, Optional.of(logEntry));
+    }
+
+    private PlayerRuleContext(State state, PlayerRef playerRef, Optional<LogEntry> logEntry) {
         this.state = state;
         this.playerRef = playerRef;
         this.logEntry = logEntry;
