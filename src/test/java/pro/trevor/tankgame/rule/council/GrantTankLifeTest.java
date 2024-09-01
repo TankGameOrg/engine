@@ -22,7 +22,7 @@ public class GrantTankLifeTest {
     private static final IPlayerRule ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
-    void apply(IPlayerRule rule, State state, GenericTank tank) {
+    private void apply(IPlayerRule rule, State state, GenericTank tank) {
         rule.apply(
             new ContextBuilder(state, councilPlayer)
                 .withTarget(tank)

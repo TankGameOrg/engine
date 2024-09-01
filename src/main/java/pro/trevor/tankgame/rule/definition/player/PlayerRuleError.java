@@ -59,9 +59,9 @@ public class PlayerRuleError {
         return new PlayerRuleError(Category.COOLDOWN, cooldownEnd, format, formatArgs);
     }
 
-    Category category;
-    String message;
-    Optional<Long> errorExpirationTime;
+    private Category category;
+    private String message;
+    private Optional<Long> errorExpirationTime;
 
     public PlayerRuleError(Category category, String format, Object... formatArgs) {
         this.category = category;

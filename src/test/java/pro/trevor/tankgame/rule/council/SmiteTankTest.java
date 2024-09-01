@@ -25,13 +25,13 @@ public class SmiteTankTest {
     private static final PlayerConditionRule ZERO_COST_RULE = PlayerRules.getSmiteRule(0, HEALTH);
     private static final PlayerConditionRule ONE_COST_RULE = PlayerRules.getSmiteRule(1, HEALTH);
 
-    PlayerRuleContext makeContext(State state, PlayerRef playerRef, GenericTank tank) {
+    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, GenericTank tank) {
         return new ContextBuilder(state, playerRef)
             .withTarget(tank)
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, GenericTank tank) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, GenericTank tank) {
         return rule.canApply(makeContext(state, playerRef, tank)).isEmpty();
     }
 

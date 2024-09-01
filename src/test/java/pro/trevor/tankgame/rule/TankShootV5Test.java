@@ -16,7 +16,7 @@ import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
 
 public class TankShootV5Test {
 
-    PlayerRuleContext makeContext(State state, PlayerRef plyaer, Position position, boolean hit) {
+    private PlayerRuleContext makeContext(State state, PlayerRef plyaer, Position position, boolean hit) {
         return new ContextBuilder(state, plyaer)
             .withTarget(position)
             .with(Attribute.HIT, hit)
@@ -36,7 +36,7 @@ public class TankShootV5Test {
     }
 
     @Test
-    void testShootKillingLivingTankWithBountyAndGold() {
+    public void testShootKillingLivingTankWithBountyAndGold() {
         GenericTank tank = buildTank("A1", 0, 0, "player1");
         GenericTank targetTank = buildTank("A2", 1, 5, "player2");
 
@@ -50,7 +50,7 @@ public class TankShootV5Test {
     }
 
     @Test
-    void testShootKillingLivingTankKeepsGold() {
+    public void testShootKillingLivingTankKeepsGold() {
         GenericTank tank = buildTank("B2", 1, 0, "player2");
         GenericTank targetTank = buildTank("A1", 4, 0, "player1");
 

@@ -28,13 +28,13 @@ public class SlowTankTest {
     private static final PlayerConditionRule ZERO_COST_RULE = PlayerRules.getSlowRule(0, MODIFIER);
     private static final PlayerConditionRule ONE_COST_RULE = PlayerRules.getSlowRule(1, MODIFIER);
 
-    PlayerRuleContext makeContext(State state, PlayerRef playerRef, GenericTank tank) {
+    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, GenericTank tank) {
         return new ContextBuilder(state, playerRef)
             .withTarget(tank)
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, GenericTank tank) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, GenericTank tank) {
         return rule.canApply(makeContext(state, playerRef, tank)).isEmpty();
     }
 
@@ -61,9 +61,6 @@ public class SlowTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.SPEED, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
-
-        Result<Player, PlayerRuleError> result = PredicateHelpers.getPlayer(makeContext(state, player.toRef(), otherTank));
-        assert result.getValue() != null;
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }

@@ -27,13 +27,13 @@ public class SpawnWallTest {
     private static final PlayerConditionRule ZERO_COST_RULE = PlayerRules.getSpawnWallWithCostRule(0, DURABILITY);
     private static final PlayerConditionRule ONE_COST_RULE = PlayerRules.getSpawnWallWithCostRule(1, DURABILITY);
 
-    PlayerRuleContext makeContext(State state, PlayerRef playerRef, Position target) {
+    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, Position target) {
         return new ContextBuilder(state, playerRef)
             .withTarget(target)
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, Position target) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, Position target) {
         return rule.canApply(makeContext(state, playerRef, target)).isEmpty();
     }
 

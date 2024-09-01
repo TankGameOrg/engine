@@ -40,13 +40,13 @@ public class HastenTankTest {
         Assertions.assertThrows(AssertionError.class, () -> PlayerRules.getHastenRule(0, -1));
     }
 
-    PlayerRuleContext makeContext(State state, PlayerRef player, GenericTank target) {
+    private PlayerRuleContext makeContext(State state, PlayerRef player, GenericTank target) {
         return new ContextBuilder(state, player)
             .withTarget(target)
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef player, GenericTank target) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef player, GenericTank target) {
         return rule.canApply(makeContext(state, player, target)).isEmpty();
     }
 

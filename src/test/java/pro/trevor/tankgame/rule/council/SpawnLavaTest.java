@@ -27,13 +27,13 @@ public class SpawnLavaTest {
     private static final PlayerConditionRule ZERO_COST_RULE = PlayerRules.getSpawnLavaWithCostRule(0, DAMAGE);
     private static final PlayerConditionRule ONE_COST_RULE = PlayerRules.getSpawnLavaWithCostRule(1, DAMAGE);
 
-    PlayerRuleContext makeContext(State state, PlayerRef playerRef, Position target) {
+    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, Position target) {
         return new ContextBuilder(state, playerRef)
             .withTarget(target)
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, Position target) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, Position target) {
         return rule.canApply(makeContext(state, playerRef, target)).isEmpty();
     }
 

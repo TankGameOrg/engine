@@ -21,14 +21,14 @@ import pro.trevor.tankgame.util.TestUtilities;
 
 public class ShareGoldWithTaxRuleTest {
 
-    PlayerRuleContext makeContext(State state, PlayerRef subject, GenericTank reciever, int gold) {
+    private PlayerRuleContext makeContext(State state, PlayerRef subject, GenericTank reciever, int gold) {
         return new ContextBuilder(state, subject)
             .withTarget(reciever)
             .with(Attribute.DONATION, gold)
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef subject, GenericTank reciever, int gold) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, GenericTank reciever, int gold) {
         return rule.canApply(makeContext(state, subject, reciever, gold)).isEmpty();
     }
 

@@ -20,7 +20,7 @@ import pro.trevor.tankgame.util.TestUtilities;
 
 public class BuyActionWithGoldTest {
 
-    PlayerRuleContext makeContext(GenericTank tank, int gold) {
+    private PlayerRuleContext makeContext(GenericTank tank, int gold) {
         State state = TestUtilities.generateBoard(1, 1, tank);
 
         return new ContextBuilder(state, tank.getPlayerRef())
@@ -28,11 +28,11 @@ public class BuyActionWithGoldTest {
             .finish();
     }
 
-    boolean canApply(IPlayerRule rule, GenericTank tank, int gold) {
+    private boolean canApply(IPlayerRule rule, GenericTank tank, int gold) {
         return rule.canApply(makeContext(tank, gold)).isEmpty();
     }
 
-    void apply(IPlayerRule rule, GenericTank tank, int gold) {
+    private void apply(IPlayerRule rule, GenericTank tank, int gold) {
         rule.apply(makeContext(tank, gold));
     }
 

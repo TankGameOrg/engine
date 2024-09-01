@@ -8,9 +8,9 @@ import java.util.Optional;
 import pro.trevor.tankgame.log.LogEntry;
 
 public class PlayerRuleContext {
-    State state;
-    PlayerRef playerRef;
-    Optional<LogEntry> logEntry;
+    private State state;
+    private PlayerRef playerRef;
+    private Optional<LogEntry> logEntry;
 
     public PlayerRuleContext(State state, PlayerRef playerRef) {
         this(state, playerRef, Optional.empty());

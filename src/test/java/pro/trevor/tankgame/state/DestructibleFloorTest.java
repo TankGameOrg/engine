@@ -29,7 +29,7 @@ public class DestructibleFloorTest {
         return new DestructibleFloor(position, durability, maxDurability);
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Position target, boolean hit) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Position target, boolean hit) {
         return rule.canApply(
             new ContextBuilder(state, subject)
                 .withTarget(target)
@@ -38,7 +38,7 @@ public class DestructibleFloorTest {
         ).isEmpty();
     }
 
-    boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Position target) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Position target) {
         return rule.canApply(
             new ContextBuilder(state, subject)
                 .withTarget(target)
@@ -47,7 +47,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testGetPosition() {
+    public void testGetPosition() {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 3, 3);
 
         Position p = floor.getPosition();
@@ -56,7 +56,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testIsWalkable() {
+    public void testIsWalkable() {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 1, 3);
         DestructibleFloor brokeFloor = GetTestFloor(new Position("A1"), 0, 3);
 
@@ -65,7 +65,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testUnbrokenToJson() {
+    public void testUnbrokenToJson() {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 1, 3);
 
         JSONObject json = floor.toJson();
@@ -77,7 +77,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testBrokenToJson() {
+    public void testBrokenToJson() {
         DestructibleFloor brokenFloor = GetTestFloor(new Position("A1"), 0, 3);
 
         JSONObject json = brokenFloor.toJson();
@@ -90,7 +90,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void shootFloorTest() {
+    public void shootFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 3, 3);
@@ -111,7 +111,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void destroyFloorTest() {
+    public void destroyFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
@@ -132,7 +132,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void walkAcrossThenDestroyFloorTest() {
+    public void walkAcrossThenDestroyFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
@@ -175,7 +175,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void shootUnitAboveFloorTest() {
+    public void shootUnitAboveFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
         GenericTank tankAbove = TankBuilder.buildTank().with(Attribute.DURABILITY, 1).with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.GOLD, 0).with(Attribute.BOUNTY, 0).at(new Position("B1")).finish();
 
@@ -202,7 +202,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void destroyUnitAboveFloorTest() {
+    public void destroyUnitAboveFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
         BasicWall wall = new BasicWall(new Position("B1"), 1);
 

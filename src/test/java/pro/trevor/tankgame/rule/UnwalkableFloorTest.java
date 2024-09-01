@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UnwalkableFloorTest {
 
-    PlayerRuleContext makeContext(State state, PlayerRef player, Position target, boolean hit) {
+    private PlayerRuleContext makeContext(State state, PlayerRef player, Position target, boolean hit) {
         return new ContextBuilder(state, player)
             .withTarget(target)
             .with(Attribute.HIT, hit)

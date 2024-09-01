@@ -22,16 +22,15 @@ import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 
 
-class GoldLootTransfer implements ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> {
-    public void accept(PlayerRuleContext context, GenericTank tank, AttributeContainer target) {
-        // Just set the gold to the other tank's value this method just exists to verify that we called the consumer
-        tank.put(Attribute.GOLD, target.getUnsafe(Attribute.GOLD));
-        target.put(Attribute.GOLD, 0);
-    };
-}
-
-
 public class LootingTargetTest extends LootActionTestHelper {
+    private static class GoldLootTransfer implements ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> {
+        public void accept(PlayerRuleContext context, GenericTank tank, AttributeContainer target) {
+            // Just set the gold to the other tank's value this method just exists to verify that we called the consumer
+            tank.put(Attribute.GOLD, target.getUnsafe(Attribute.GOLD));
+            target.put(Attribute.GOLD, 0);
+        };
+    }
+
     PlayerConditionRule getBasicLootRule() {
         return PlayerRules.getLootTargetRule((context, tank, target) -> {
             return target.getUnsafe(Attribute.POSITION).equals(new Position("B3")) ?

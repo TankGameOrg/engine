@@ -8,7 +8,6 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
-import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TestUtilities;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 
@@ -19,7 +18,7 @@ public class BountyTankTest {
     private static final IPlayerRule BASIC_BOUNTY_RULE = PlayerRules.getRuleCofferCostBounty(1, 1);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
-    void applyBasicBounty(State state, GenericTank tank) {
+    private void applyBasicBounty(State state, GenericTank tank) {
         BASIC_BOUNTY_RULE.apply(
             new ContextBuilder(state, councilPlayer)
                 .withTarget(tank)
