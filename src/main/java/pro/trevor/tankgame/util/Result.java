@@ -22,7 +22,7 @@ public class Result<V, E> {
 
     public V getValue() {
         if (error != null) {
-            throw new Error(String.format("No value is present (error = %s)", error));
+            throw new Error(String.format("No value is present: error is '%s'", error));
         } else {
             return value;
         }
