@@ -306,7 +306,7 @@ public class PlayerRules {
                 new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
                     new RulePredicateStream<>(PredicateHelpers::getCouncil)
                         .map(PredicateHelpers.getAttribute(Attribute.CAN_BOUNTY, true))
-                        .filter((context, canBounty) -> canBounty, PlayerRuleError.insufficientResources("Council cannot bounty")),
+                        .filter((context, canBounty) -> canBounty, PlayerRuleError.insufficientResources("Council can only bounty once per day")),
                     TARGET_TANK_IS_ALIVE,
                     new RulePredicateStream<>(PredicateHelpers::getCouncil)
                         .filter(PredicateHelpers::hasLogEntry)
