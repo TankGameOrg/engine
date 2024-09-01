@@ -39,7 +39,6 @@ public abstract class PredicateHelpers {
 
     /**
      * Ensure that the given attribute is greater to or equal to cost
-     * @return
      */
     public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> minimum(Attribute<Integer> attribute, int value) {
         return minimum(attribute, (context) -> value);
@@ -47,7 +46,6 @@ public abstract class PredicateHelpers {
 
     /**
      * Ensure that the given attribute is greater to or equal to cost
-     * @return
      */
     public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> minimum(Attribute<Integer> attribute, Function<PlayerRuleContext, Integer> valueFunction) {
         return (context, container) -> {

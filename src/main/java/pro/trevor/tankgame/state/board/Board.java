@@ -194,7 +194,6 @@ public class Board implements IMetaElement, IGatherable {
 
     /**
      * Check if a location is on the board and not occupied by a unit or floor
-     * @return
      */
     public boolean isEmpty(Position position) {
         return getUnitOrFloor(position)
@@ -270,7 +269,6 @@ public class Board implements IMetaElement, IGatherable {
 
     /**
      * Return all valid positions on the board
-     * @return
      */
     public List<Position> getAllPositions() {
         List<Position> output = new ArrayList<>();

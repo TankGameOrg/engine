@@ -31,10 +31,6 @@ public class LootActionTestHelper {
 
     /**
      * Setup a basic scenario with a subject who can shot and a target to loot
-     * @param subjectPosition
-     * @param subjectGold
-     * @param targetPosition
-     * @param targetGold
      */
     protected void setupTest(String subjectPosition, int subjectGold) {
         subject = new Player("Ted");
@@ -68,8 +64,6 @@ public class LootActionTestHelper {
 
     /**
      * Get the range of positions that will be shown to players as lootable locations
-     * @param rule
-     * @return
      */
     protected Set<Position> getLootablePositions(IPlayerRule rule) {
         FunctionVariableRange<PlayerRef, Position> lootablePositionRange = (FunctionVariableRange<PlayerRef, Position>) rule.parameters()[0];
@@ -79,9 +73,6 @@ public class LootActionTestHelper {
 
     /**
      * Check if the rule can be applied to a specific location
-     * @param rule
-     * @param targetPosition
-     * @return
      */
     protected boolean canApply(IPlayerRule rule, String targetPosition) {
         boolean canApplyRule = rule.canApply(makeLootContext(state, subjectTank, targetPosition)).isEmpty();
@@ -95,8 +86,6 @@ public class LootActionTestHelper {
 
     /**
      * Assert that the rule can be applied and apply it
-     * @param rule
-     * @param targetPosition
      */
     protected void apply(IPlayerRule rule, String targetPosition) {
         assertTrue(canApply(rule, targetPosition));

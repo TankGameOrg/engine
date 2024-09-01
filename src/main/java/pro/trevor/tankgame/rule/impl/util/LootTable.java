@@ -27,8 +27,6 @@ public class LootTable implements ILootProvider {
 
         /**
          * Check if the given index is before, inside, or after our weight range i.e. weightedIndex (inclusive) to weightedIndex + weight (exclusive)
-         * @param searchWeightedIndex
-         * @return
          */
         public int compareTo(Integer searchWeightedIndex) {
             if(searchWeightedIndex < weightedIndex) {

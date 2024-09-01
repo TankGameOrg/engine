@@ -18,7 +18,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
 
     /**
      * Construct a stream with a function that gets the starting value
-     * @param function
      */
     public RulePredicateStream(Function<PlayerRuleContext, Result<T, PlayerRuleError>> function) {
         this.function = function;
@@ -31,7 +30,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
     /**
      * Return a stream with any values that pass the filter function (didn't result in an error)
      * @param predicate A function that returns an error if a value should not continue
-     * @return
      */
     public RulePredicateStream<T> filter(BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> predicate) {
         return new RulePredicateStream<>((context) -> {
@@ -52,7 +50,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
     /**
      * Return a stream with any values that pass the filter function (didn't result in an error)
      * @param predicate A function that returns an error if a value should not continue
-     * @return
      */
     public RulePredicateStream<T> filter(Function<PlayerRuleContext, Optional<PlayerRuleError>> predicate) {
         return filter((context, value) -> predicate.apply(context));
@@ -62,7 +59,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * Return a stream with any values where the filter function returned true
      * @param predicate A function that returns false if a value should not continue
      * @param error The error to pass along if the predicate returns false
-     * @return
      */
     public RulePredicateStream<T> filter(BiPredicate<PlayerRuleContext, T> predicate, PlayerRuleError error) {
         return filter((context, value) -> predicate.test(context, value) ? Optional.empty() : Optional.of(error));
@@ -72,7 +68,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * Return a stream with any values where the filter function returned true
      * @param predicate A function that returns false if a value should not continue
      * @param error The error to pass along if the predicate returns false
-     * @return
      */
     public RulePredicateStream<T> filter(Predicate<PlayerRuleContext> predicate, PlayerRuleError error) {
         return filter((context, value) -> predicate.test(context) ? Optional.empty() : Optional.of(error));
@@ -82,7 +77,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * Return a stream where the elements have been replaced with the ones returned by the map function
      * @param <E> The return type for the map function
      * @param mapFunction A function that maps the values from the stream to values for the new stream
-     * @return
      */
     public <E> RulePredicateStream<E> map(BiFunction<PlayerRuleContext, T, Result<E, PlayerRuleError>> mapFunction) {
         return new RulePredicateStream<>((context) -> {
@@ -99,7 +93,6 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * Create a predicate with any errors from this stream
      *
      * The final value of the stream will be discarded
-     * @return
      */
     public Optional<PlayerRuleError> test(PlayerRuleContext context) {
         Result<T, PlayerRuleError> result = function.apply(context);

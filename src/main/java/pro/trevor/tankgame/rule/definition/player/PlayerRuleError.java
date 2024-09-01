@@ -17,7 +17,6 @@ public class PlayerRuleError {
      * The current action is not applicable to the current player's role i.e. tank, councilor, senator
      * @param format The message to go with the error as a format string
      * @param formatArgs The arguments for the message format string
-     * @return
      */
     public static PlayerRuleError notApplicable(String format, Object... formatArgs) {
         return new PlayerRuleError(Category.NOT_APPLICABLE, format, formatArgs);
@@ -27,7 +26,6 @@ public class PlayerRuleError {
      * Any error that doesn't fit into one of the other categories
      * @param format The message to go with the error as a format string
      * @param formatArgs The arguments for the message format string
-     * @return
      */
     public static PlayerRuleError generic(String format, Object... formatArgs) {
         return new PlayerRuleError(Category.GENERIC, format, formatArgs);
@@ -37,7 +35,6 @@ public class PlayerRuleError {
      * The context did not include enough information to apply the action or complete all canApply checks
      * @param format The message to go with the error as a format string
      * @param formatArgs The arguments for the message format string
-     * @return
      */
     public static PlayerRuleError insufficientData(String format, Object... formatArgs) {
         return new PlayerRuleError(Category.INSUFFICIENT_DATA, format, formatArgs);
@@ -47,7 +44,6 @@ public class PlayerRuleError {
      * The client needs to aquire more resources to perform this action
      * @param format The message to go with the error as a format string
      * @param formatArgs The arguments for the message format string
-     * @return
      */
     public static PlayerRuleError insufficientResources(String format, Object... formatArgs) {
         return new PlayerRuleError(Category.INSUFFICENT_RESOURCES, format, formatArgs);
@@ -58,7 +54,6 @@ public class PlayerRuleError {
      * @param cooldownEnd The unix timestamp for when the cooldown ends
      * @param format The message to go with the error as a format string
      * @param formatArgs The arguments for the message format string
-     * @return
      */
     public static PlayerRuleError cooldown(long cooldownEnd, String format, Object... formatArgs) {
         return new PlayerRuleError(Category.COOLDOWN, cooldownEnd, format, formatArgs);
@@ -90,7 +85,6 @@ public class PlayerRuleError {
 
     /**
      * Get a unix timestamp of when the error is no longer applciable i.e. cooldown end
-     * @return
      */
     public Optional<Long> getErrorExpirationTime() {
         return errorExpirationTime;
