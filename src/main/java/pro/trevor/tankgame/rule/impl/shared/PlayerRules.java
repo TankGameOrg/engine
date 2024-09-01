@@ -468,10 +468,10 @@ public class PlayerRules {
         RuleCondition lootCondition = new RuleCondition(
             TARGET_IS_IN_RANGE,
             PLAYER_TANK_IS_ALIVE_PREDICATE,
-            // new RulePredicateStream<>(PredicateHelpers::getTank)
-            //     .filter(PredicateHelpers::hasLogEntry)
-            //     .filter((context, tank) -> LineOfSight.hasLineOfSightV4(context.getState(), tank.getPosition(), PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
-            //         PlayerRuleError.insufficientResources("Target position is not in line-of-sight")),
+            new RulePredicateStream<>(PredicateHelpers::getTank)
+                .filter(PredicateHelpers::hasLogEntry)
+                .filter((context, tank) -> LineOfSight.hasLineOfSightV4(context.getState(), tank.getPosition(), PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
+                    PlayerRuleError.insufficientResources("Target position is not in line-of-sight")),
             canLootRule
         );
 
