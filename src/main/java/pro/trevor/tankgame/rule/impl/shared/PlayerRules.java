@@ -430,6 +430,11 @@ public class PlayerRules {
             ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> transferLoot) {
 
         IRulePredicate canLootRule = (context) -> {
+            Optional<PlayerRuleError> logEntryError = PredicateHelpers.hasLogEntry(context, null);
+            if(logEntryError.isPresent()) {
+                return logEntryError;
+            }
+
             State state = context.getState();
             PlayerRef player = context.getPlayerRef();
             // Make sure that the position is an AttributeContainer
@@ -463,10 +468,10 @@ public class PlayerRules {
         RuleCondition lootCondition = new RuleCondition(
             TARGET_IS_IN_RANGE,
             PLAYER_TANK_IS_ALIVE_PREDICATE,
-            new RulePredicateStream<>(PredicateHelpers::getTank)
-                .filter(PredicateHelpers::hasLogEntry)
-                .filter((context, tank) -> LineOfSight.hasLineOfSightV4(context.getState(), tank.getPosition(), PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
-                    PlayerRuleError.insufficientResources("Target position is not in line-of-sight")),
+            // new RulePredicateStream<>(PredicateHelpers::getTank)
+            //     .filter(PredicateHelpers::hasLogEntry)
+            //     .filter((context, tank) -> LineOfSight.hasLineOfSightV4(context.getState(), tank.getPosition(), PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
+            //         PlayerRuleError.insufficientResources("Target position is not in line-of-sight")),
             canLootRule
         );
 
@@ -509,6 +514,9 @@ public class PlayerRules {
             } else if (target instanceof LootBox lootBox) {
                 lootTable.grantLoot(context.getState(), target, tank);
                 lootBox.setHasBeenLooted();
+            }
+            else {
+                throw new Error("Fell through");
             }
 
             tank.remove(Attribute.PLAYER_CAN_LOOT);
@@ -602,7 +610,7 @@ public class PlayerRules {
     public static PlayerConditionRule spendActionToShootWithDeathHandleHitDamage(
             ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, GenericTank, GenericTank> handleDeath) {
         return spendActionToShootGeneric(lineOfSight, (context, tank, element) -> {
-            int damage = PredicateHelpers.getLogField(context, Attribute.DAMAGAE);
+            int damage = PredicateHelpers.getLogField(context, Attribute.DAMAGE);
 
             switch (element) {
                 case GenericTank otherTank -> {
