@@ -75,7 +75,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
             ruleErrors.add(PlayerRuleError.insufficientData("Log entry required"));
         }
 
-        return List.of();
+        return ruleErrors;
     }
 
 }

@@ -93,7 +93,7 @@ public class Api {
 
             List<JSONObject> jsonErrors = canApplyErrors.stream()
                 // Remove any errors that the client shouldn't see i.e. insufficent data
-                .filter((error) -> errorsToFilterOut.contains(error.getCategory()))
+                .filter((error) -> !errorsToFilterOut.contains(error.getCategory()))
                 .map((error) -> {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("category", error.getCategory().toString());
@@ -101,6 +101,11 @@ public class Api {
                     return jsonError;
                 })
                 .toList();
+
+            // If any actions are not applicable to the current player don't send them to UI
+            if(canApplyErrors.stream().filter((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE).findAny().isPresent()) {
+                continue;
+            }
 
             // If canApply didn't return any errors or all of they get filtered out this will be an empty array aka no error
             actionJson.put("errors", new JSONArray(jsonErrors));
