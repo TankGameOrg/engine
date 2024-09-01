@@ -1,6 +1,6 @@
 package pro.trevor.tankgame.rule.definition.player;
 
-import org.joda.time.LocalDateTime;
+import java.time.Instant;
 import org.json.JSONObject;
 import pro.trevor.tankgame.Main;
 import pro.trevor.tankgame.log.LogEntry;
@@ -9,8 +9,6 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -74,7 +72,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
 
         long cooldownEnd = player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L);
         if(timestamp < player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L)) {
-            String cooldownEndTime = new LocalDateTime(cooldownEnd).toString("hh:mma").toLowerCase();
+            String cooldownEndTime = Instant.ofEpochSecond(cooldownEnd).toString();
             ruleErrors.add(PlayerRuleError.cooldown(cooldownEnd, "Action '%s' is on cooldown can cannot be taken until %s", name(), cooldownEndTime));
         }
 

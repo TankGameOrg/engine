@@ -108,7 +108,7 @@ public class Api {
                 })
                 .toList();
 
-            // If any actions are not applicable to the current player don't send them to UI
+            // If this action is not applicable to the current player don't send it to UI
             if(canApplyErrors.stream().filter((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE).findAny().isPresent()) {
                 continue;
             }
