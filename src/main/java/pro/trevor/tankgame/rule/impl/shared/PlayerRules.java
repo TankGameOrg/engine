@@ -102,7 +102,7 @@ public class PlayerRules {
 
     private static final IRulePredicate TARGET_POSITION_IS_EMPTY_SPACE = new RulePredicateStream<>()
         .filter(PredicateHelpers::hasLogEntry)
-        .filter((context, unused) -> context.getState().getBoard().isEmpty(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)), PlayerRuleError.generic("Target space is not empty"));
+        .filter((context) -> context.getState().getBoard().isEmpty(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)), PlayerRuleError.generic("Target space is not empty"));
 
     private static final IRulePredicate TARGET_TANK_IS_ALIVE = new RulePredicateStream<>(PredicateHelpers::getTargetTank)
         .map(PredicateHelpers.getAttribute(Attribute.DEAD, true))
@@ -115,14 +115,16 @@ public class PlayerRules {
 
     private static final IRulePredicate TARGET_POSITION_IS_ON_BOARD = new RulePredicateStream<>()
         .filter(PredicateHelpers::hasLogEntry)
-        .filter((context, unused) -> context.getState().getBoard().isValidPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
+        .filter((context) -> context.getState().getBoard().isValidPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
             PlayerRuleError.generic("Target position is not within the game board"));
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final PlayerConditionRule BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerConditionRule(
             PlayerRules.ActionKeys.BUY_ACTION,
-            new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TANK_HAS_ENOUGH_GOLD_TO_BUY_ACTION),
+            new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TANK_HAS_ENOUGH_GOLD_TO_BUY_ACTION,
+                new RulePredicateStream<>(PredicateHelpers::getTank)
+                    .filter(PredicateHelpers.minimum(Attribute.GOLD, 3))),
             (context) -> {
                 GenericTank tank = PredicateHelpers.getTank(context).getValue();
                 int gold = PredicateHelpers.getLogField(context, Attribute.GOLD);
@@ -147,12 +149,14 @@ public class PlayerRules {
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TANK_HAS_ENOUGH_GOLD_TO_BUY_ACTION,
                     new RulePredicateStream<>()
                         .filter(PredicateHelpers::hasLogEntry)
-                        .filter((context, unused) -> PredicateHelpers.getLogField(context, Attribute.GOLD) / actionCost <= maxBuys,
+                        .filter((context) -> PredicateHelpers.getLogField(context, Attribute.GOLD) / actionCost <= maxBuys,
                             PlayerRuleError.generic("Actions bought must be fewer than or equal to %s", maxBuys)),
                     new RulePredicateStream<>()
                         .filter(PredicateHelpers::hasLogEntry)
-                        .filter((context, unused) -> PredicateHelpers.getLogField(context, Attribute.GOLD) % actionCost == 0,
-                            PlayerRuleError.generic("Gold spent must be a multiple of the action cost: %s", maxBuys))
+                        .filter((context) -> PredicateHelpers.getLogField(context, Attribute.GOLD) % actionCost == 0,
+                            PlayerRuleError.generic("Gold spent must be a multiple of the action cost: %s", maxBuys)),
+                    new RulePredicateStream<>(PredicateHelpers::getTank)
+                        .filter(PredicateHelpers.minimum(Attribute.GOLD, actionCost))
                 ),
                 (context) -> {
                     GenericTank tank = PredicateHelpers.getTank(context).getValue();
@@ -207,13 +211,15 @@ public class PlayerRules {
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE,
                     new RulePredicateStream<>()
                         .filter(PredicateHelpers::hasLogEntry)
-                        .filter((context, unused) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, PlayerRuleError.generic("Donation must be positive")),
+                        .filter((context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, PlayerRuleError.generic("Donation must be positive")),
                     new RulePredicateStream<>(PredicateHelpers::getTank)
                         .filter(PredicateHelpers::hasLogEntry)
                         .filter(PredicateHelpers.minimum(Attribute.GOLD, (context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) + taxAmount)),
                     new RulePredicateStream<>(PredicateHelpers::getTargetTank)
                         .filter((context, targetTank) -> targetTank.has(Attribute.GOLD), PlayerRuleError.generic("Target must have gold attribute")),
-                    TARGET_TANK_IS_IN_RANGE
+                    TARGET_TANK_IS_IN_RANGE,
+                    new RulePredicateStream<>(PredicateHelpers::getTank)
+                        .filter(PredicateHelpers.minimum(Attribute.GOLD, taxAmount + 1))
                 ),
                 (context) -> {
                     GenericTank tank = PredicateHelpers.getTank(context).getValue();
@@ -238,9 +244,11 @@ public class PlayerRules {
                     TARGET_TANK_IS_IN_RANGE,
                     new RulePredicateStream<>()
                         .filter(PredicateHelpers::hasLogEntry)
-                        .filter((context, unused) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, PlayerRuleError.generic("Donation must be positive")),
+                        .filter((context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, PlayerRuleError.generic("Donation must be positive")),
                     new RulePredicateStream<>(PredicateHelpers::getTargetTank)
-                        .filter((context, targetTank) -> targetTank.has(Attribute.GOLD), PlayerRuleError.generic("Target must have gold attribute"))
+                        .filter((context, targetTank) -> targetTank.has(Attribute.GOLD), PlayerRuleError.generic("Target must have gold attribute")),
+                    new RulePredicateStream<>(PredicateHelpers::getTank)
+                        .filter(PredicateHelpers.minimum(Attribute.GOLD, taxAmount + 1))
                 ),
                 (context) -> {
                     GenericTank tank = PredicateHelpers.getTank(context).getValue();
@@ -430,7 +438,7 @@ public class PlayerRules {
             ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> transferLoot) {
 
         IRulePredicate canLootRule = (context) -> {
-            Optional<PlayerRuleError> logEntryError = PredicateHelpers.hasLogEntry(context, null);
+            Optional<PlayerRuleError> logEntryError = PredicateHelpers.hasLogEntry(context);
             if(logEntryError.isPresent()) {
                 return logEntryError;
             }

@@ -105,7 +105,7 @@ public abstract class PredicateHelpers {
         return entry.get().getUnsafe(attribute);
     }
 
-    public static <T> Optional<PlayerRuleError> hasLogEntry(PlayerRuleContext context, Object unused) {
+    public static <T> Optional<PlayerRuleError> hasLogEntry(PlayerRuleContext context) {
         return context.getLogEntry().isPresent() ?
             Optional.empty() :
             Optional.of(PlayerRuleError.insufficientData("A log entry is required"));

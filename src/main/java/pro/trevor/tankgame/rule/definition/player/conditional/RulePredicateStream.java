@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
@@ -49,6 +50,15 @@ public class RulePredicateStream<T> implements IRulePredicate {
     }
 
     /**
+     * Return a stream with any values that pass the filter function (didn't result in an error)
+     * @param predicate A function that returns an error if a value should not continue
+     * @return
+     */
+    public RulePredicateStream<T> filter(Function<PlayerRuleContext, Optional<PlayerRuleError>> predicate) {
+        return filter((context, value) -> predicate.apply(context));
+    }
+
+    /**
      * Return a stream with any values where the filter function returned true
      * @param predicate A function that returns false if a value should not continue
      * @param error The error to pass along if the predicate returns false
@@ -56,6 +66,16 @@ public class RulePredicateStream<T> implements IRulePredicate {
      */
     public RulePredicateStream<T> filter(BiPredicate<PlayerRuleContext, T> predicate, PlayerRuleError error) {
         return filter((context, value) -> predicate.test(context, value) ? Optional.empty() : Optional.of(error));
+    }
+
+    /**
+     * Return a stream with any values where the filter function returned true
+     * @param predicate A function that returns false if a value should not continue
+     * @param error The error to pass along if the predicate returns false
+     * @return
+     */
+    public RulePredicateStream<T> filter(Predicate<PlayerRuleContext> predicate, PlayerRuleError error) {
+        return filter((context, value) -> predicate.test(context) ? Optional.empty() : Optional.of(error));
     }
 
     /**
