@@ -123,7 +123,7 @@ public abstract class PredicateHelpers {
         PlayerRef targetRef = optionalEntry.get().getUnsafe(Attribute.TARGET_PLAYER);
         Optional<GenericTank> optionalTank = context.getState().getTankForPlayerRef(targetRef);
         if(optionalTank.isEmpty()) {
-            return Result.error(PlayerRuleError.fatal("Could not find a tank for %s", targetRef));
+            return Result.error(PlayerRuleError.generic("Could not find a tank for %s", targetRef));
         }
 
         return Result.ok(optionalTank.get());
