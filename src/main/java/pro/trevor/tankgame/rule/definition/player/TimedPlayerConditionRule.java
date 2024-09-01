@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.rule.definition.player;
 
+import org.joda.time.LocalDateTime;
 import org.json.JSONObject;
 import pro.trevor.tankgame.Main;
 import pro.trevor.tankgame.log.LogEntry;
@@ -8,6 +9,8 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,15 +67,15 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
         List<PlayerRuleError> ruleErrors = new ArrayList<>(super.canApply(context));
 
         Optional<LogEntry> logEntry = context.getLogEntry();
+        long timestamp = System.currentTimeMillis() / 1000L;
         if(logEntry.isPresent()) {
-            long timestamp = logEntry.get().getOrElse(Attribute.TIMESTAMP, 0L);
-            long cooldownEnd = player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L);
-            if(timestamp < player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L)) {
-                ruleErrors.add(PlayerRuleError.rateLimitExceeded("%s cannot be taken for another %d seconds", name(), cooldownEnd - timestamp));
-            }
+            timestamp = logEntry.get().getOrElse(Attribute.TIMESTAMP, 0L);
         }
-        else {
-            ruleErrors.add(PlayerRuleError.insufficientData("Log entry required"));
+
+        long cooldownEnd = player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L);
+        if(timestamp < player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L)) {
+            String cooldownEndTime = new LocalDateTime(cooldownEnd).toString("hh:mma").toLowerCase();
+            ruleErrors.add(PlayerRuleError.cooldown(cooldownEnd, "Action '%s' is on cooldown can cannot be taken until %s", name(), cooldownEndTime));
         }
 
         return ruleErrors;

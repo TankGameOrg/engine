@@ -98,6 +98,12 @@ public class Api {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("category", error.getCategory().toString());
                     jsonError.put("message", error.getMessage());
+
+                    Optional<Long> errorExpiration = error.getErrorExpirationTime();
+                    if(errorExpiration.isPresent()) {
+                        jsonError.put("expiration", errorExpiration.get());
+                    }
+
                     return jsonError;
                 })
                 .toList();
