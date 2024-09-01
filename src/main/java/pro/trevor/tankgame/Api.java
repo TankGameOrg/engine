@@ -5,6 +5,7 @@ import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
+import pro.trevor.tankgame.rule.definition.player.TimedPlayerRuleError;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
@@ -99,9 +100,9 @@ public class Api {
                     jsonError.put("category", error.getCategory().toString());
                     jsonError.put("message", error.getMessage());
 
-                    Optional<Long> errorExpiration = error.getErrorExpirationTime();
-                    if(errorExpiration.isPresent()) {
-                        jsonError.put("expiration", errorExpiration.get());
+                    if(error instanceof TimedPlayerRuleError timedError) {
+                        long errorExpiration = timedError.getErrorExpirationTime();
+                        jsonError.put("expiration", errorExpiration);
                     }
 
                     return jsonError;

@@ -73,7 +73,11 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
         long cooldownEnd = player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L);
         if(timestamp < player.get().getOrElse(Attribute.GLOBAL_COOLDOWN_END_TIME, 0L)) {
             String cooldownEndTime = Instant.ofEpochSecond(cooldownEnd).toString();
-            ruleErrors.add(PlayerRuleError.cooldown(cooldownEnd, "Action '%s' is on cooldown can cannot be taken until %s", name(), cooldownEndTime));
+            ruleErrors.add(
+                new TimedPlayerRuleError(
+                    PlayerRuleError.Category.COOLDOWN,
+                    cooldownEnd,
+                    "Action '%s' is on cooldown can cannot be taken until %s", name(), cooldownEndTime));
         }
 
         return ruleErrors;

@@ -63,8 +63,8 @@ public class Attribute<E> {
     public static final Attribute<Long> GLOBAL_COOLDOWN_END_TIME = new Attribute<>("GLOBAL_COOLDOWN_END_TIME", Long.class);
 
     // Log entry attributes
-    public static final Attribute<Position> TARGET_POSITION = new Attribute<>("TARGET", Position.class);
-    public static final Attribute<PlayerRef> TARGET_PLAYER = new Attribute<>("TARGET", PlayerRef.class);
+    public static final Attribute<Position> TARGET_POSITION = new Attribute<>("TARGET_POSITION", Position.class);
+    public static final Attribute<PlayerRef> TARGET_PLAYER = new Attribute<>("TARGET_PLAYER", PlayerRef.class);
     public static final Attribute<Integer> DONATION = new Attribute<>("DONATION", Integer.class);
     public static final Attribute<Boolean> HIT = new Attribute<>("HIT", Boolean.class);
     public static final Attribute<Long> TIMESTAMP = new Attribute<>("TIMESTAMP", Long.class);
