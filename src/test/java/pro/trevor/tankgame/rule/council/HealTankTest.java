@@ -1,5 +1,7 @@
 package pro.trevor.tankgame.rule.council;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +59,6 @@ public class HealTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }

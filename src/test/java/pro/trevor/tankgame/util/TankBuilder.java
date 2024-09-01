@@ -34,6 +34,7 @@ public class TankBuilder<T extends GenericTank> {
     private static int count = 0;
 
     public static TankBuilder<GenericTank> buildTank() {
+        ++count;
         GenericTank tank = new GenericTank(
             new PlayerRef("test " + count),
             new Position("A1"),

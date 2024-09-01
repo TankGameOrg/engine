@@ -58,7 +58,6 @@ public class SmiteTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }

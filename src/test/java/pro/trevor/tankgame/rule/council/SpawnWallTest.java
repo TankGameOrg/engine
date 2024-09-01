@@ -59,7 +59,6 @@ public class SpawnWallTest {
         GenericTank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, false).finish();
         State state = TestUtilities.generateBoard(2, 2, tank);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), new Position(0, 0)));
     }
