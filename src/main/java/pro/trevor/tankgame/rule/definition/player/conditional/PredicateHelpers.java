@@ -61,7 +61,7 @@ public abstract class PredicateHelpers {
             Integer amount = result.getValue();
             if(amount.compareTo(requiredCost) < 0) {
                 return Optional.of(
-                    PlayerRuleError.insufficientResources("%s does not have enough %s needed %d but had %d",
+                    PlayerRuleError.insufficientResources("%s does not have enough %s needs %d but has %d",
                         context.getPlayerRef(), attribute.getName().toLowerCase(), requiredCost, amount));
             }
 
