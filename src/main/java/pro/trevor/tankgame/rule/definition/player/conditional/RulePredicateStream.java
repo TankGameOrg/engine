@@ -1,6 +1,5 @@
 package pro.trevor.tankgame.rule.definition.player.conditional;
 
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -34,16 +33,16 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * Return a stream with any values that pass the filter function (didn't result in an error)
      * @param predicate A function that returns an error if a value should not continue
      */
-    public RulePredicateStream<T> filter(BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> predicate) {
+    public RulePredicateStream<T> filter(BiFunction<PlayerRuleContext, T, Result<Void, PlayerRuleError>> predicate) {
         return new RulePredicateStream<>((context) -> {
             Result<T, PlayerRuleError> result = function.apply(context);
             if(result.isError()) {
                 return result;
             }
 
-            Optional<PlayerRuleError> optionalError = predicate.apply(context, result.getValue());
-            if(optionalError.isPresent()) {
-                return Result.error(optionalError.get());
+            Result<Void, PlayerRuleError> optionalError = predicate.apply(context, result.getValue());
+            if(optionalError.isError()) {
+                return Result.error(optionalError.getError());
             }
 
             return result;
@@ -54,7 +53,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * Return a stream with any values that pass the filter function (didn't result in an error)
      * @param predicate A function that returns an error if a value should not continue
      */
-    public RulePredicateStream<T> filter(Function<PlayerRuleContext, Optional<PlayerRuleError>> predicate) {
+    public RulePredicateStream<T> filter(Function<PlayerRuleContext, Result<Void, PlayerRuleError>> predicate) {
         return filter((context, value) -> predicate.apply(context));
     }
 
@@ -64,7 +63,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * @param error The error to pass along if the predicate returns false
      */
     public RulePredicateStream<T> filter(BiPredicate<PlayerRuleContext, T> predicate, PlayerRuleError error) {
-        return filter((context, value) -> predicate.test(context, value) ? Optional.empty() : Optional.of(error));
+        return filter((context, value) -> predicate.test(context, value) ? Result.ok() : Result.error(error));
     }
 
     /**
@@ -73,7 +72,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * @param error The error to pass along if the predicate returns false
      */
     public RulePredicateStream<T> filter(Predicate<PlayerRuleContext> predicate, PlayerRuleError error) {
-        return filter((context, value) -> predicate.test(context) ? Optional.empty() : Optional.of(error));
+        return filter((context, value) -> predicate.test(context) ? Result.ok() : Result.error(error));
     }
 
     /**
@@ -85,7 +84,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
         return new RulePredicateStream<>((context) -> {
             Result<T, PlayerRuleError> result = function.apply(context);
             if(result.isError()) {
-                return (Result<E, PlayerRuleError>) result;
+                return Result.error(result.getError());
             }
 
             return mapFunction.apply(context, result.getValue());
@@ -97,12 +96,12 @@ public class RulePredicateStream<T> implements IRulePredicate {
      *
      * The final value of the stream will be discarded
      */
-    public Optional<PlayerRuleError> test(PlayerRuleContext context) {
+    public Result<Void, PlayerRuleError> test(PlayerRuleContext context) {
         Result<T, PlayerRuleError> result = function.apply(context);
         if(result.isError()) {
-            return Optional.of(result.getError());
+            return Result.error(result.getError());
         }
 
-        return Optional.empty();
+        return Result.ok();
     }
 }

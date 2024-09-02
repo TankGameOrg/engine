@@ -40,30 +40,30 @@ public abstract class PredicateHelpers {
     /**
      * Ensure that the given attribute is greater to or equal to cost
      */
-    public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> minimum(Attribute<Integer> attribute, int value) {
+    public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Result<Void, PlayerRuleError>> minimum(Attribute<Integer> attribute, int value) {
         return minimum(attribute, (context) -> value);
     }
 
     /**
      * Ensure that the given attribute is greater to or equal to cost
      */
-    public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Optional<PlayerRuleError>> minimum(Attribute<Integer> attribute, Function<PlayerRuleContext, Integer> valueFunction) {
+    public static <T extends AttributeContainer> BiFunction<PlayerRuleContext, T, Result<Void, PlayerRuleError>> minimum(Attribute<Integer> attribute, Function<PlayerRuleContext, Integer> valueFunction) {
         return (context, container) -> {
             assert container != null;
             Result<Integer, PlayerRuleError> result = PredicateHelpers.getAttribute(attribute).apply(context, container);
             if(result.isError()) {
-                return Optional.of(result.getError());
+                return Result.error(result.getError());
             }
 
             Integer requiredCost = valueFunction.apply(context);
             Integer amount = result.getValue();
             if(amount.compareTo(requiredCost) < 0) {
-                return Optional.of(
+                return Result.error(
                     new PlayerRuleError(PlayerRuleError.Category.INSUFFICENT_RESOURCES, "%s does not have enough %s needs %d but has %d",
                         context.getPlayerRef(), attribute.getName().toLowerCase(), requiredCost, amount));
             }
 
-            return Optional.empty();
+            return Result.ok();
         };
     }
 
@@ -103,10 +103,10 @@ public abstract class PredicateHelpers {
         return entry.get().getUnsafe(attribute);
     }
 
-    public static <T> Optional<PlayerRuleError> hasLogEntry(PlayerRuleContext context) {
+    public static <T> Result<Void, PlayerRuleError> hasLogEntry(PlayerRuleContext context) {
         return context.getLogEntry().isPresent() ?
-            Optional.empty() :
-            Optional.of(new PlayerRuleError(PlayerRuleError.Category.INSUFFICIENT_DATA, "A log entry is required"));
+            Result.ok() :
+            Result.error(new PlayerRuleError(PlayerRuleError.Category.INSUFFICIENT_DATA, "A log entry is required"));
     }
 
     /**

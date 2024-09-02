@@ -87,17 +87,17 @@ public class PlayerRules {
         .filter((context, tank) -> {
             Result<GenericTank, PlayerRuleError> result = PredicateHelpers.getTargetTank(context);
             if(result.isError()) {
-                return result.asOptionalError();
+                return Result.error(result.getError());
             }
 
             GenericTank targetTank = result.getValue();
 
             Set<Position> positionsInRange = getSpacesInRange(context.getState().getBoard(), tank.getPosition(), tank.get(Attribute.RANGE).orElse(0));
             if(!positionsInRange.contains(targetTank.getPosition())) {
-                return Optional.of(new PlayerRuleError(PlayerRuleError.Category.INSUFFICENT_RESOURCES, "Tank has insufficient range"));
+                return Result.error(new PlayerRuleError(PlayerRuleError.Category.INSUFFICENT_RESOURCES, "Tank has insufficient range"));
             }
 
-            return Optional.empty();
+            return Result.ok();
         });
 
     private static final IRulePredicate TARGET_POSITION_IS_EMPTY_SPACE = RulePredicateStream.empty()
@@ -440,12 +440,12 @@ public class PlayerRules {
      * @param transferLoot A callback transfers the looted targets attributes
      */
     public static PlayerConditionRule getLootTargetRule(
-            ITriFunction<PlayerRuleContext, GenericTank, AttributeContainer, Optional<PlayerRuleError>> canLootTarget,
+            ITriFunction<PlayerRuleContext, GenericTank, AttributeContainer, Result<Void, PlayerRuleError>> canLootTarget,
             ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> transferLoot) {
 
         IRulePredicate canLootRule = (context) -> {
-            Optional<PlayerRuleError> logEntryError = PredicateHelpers.hasLogEntry(context);
-            if(logEntryError.isPresent()) {
+            Result<Void, PlayerRuleError> logEntryError = PredicateHelpers.hasLogEntry(context);
+            if(logEntryError.isError()) {
                 return logEntryError;
             }
 
@@ -455,11 +455,11 @@ public class PlayerRules {
             Position position = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
             Optional<IElement> targetElement = state.getBoard().getUnitOrFloor(position);
             if(targetElement.isEmpty()) {
-                return Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Target " + position + " is out of bounds"));
+                return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Target " + position + " is out of bounds"));
             }
 
             if(!(targetElement.get() instanceof AttributeContainer)) {
-                return Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Cannot target " + position + " it's a " + targetElement.get().getClass() + " not an AttributeContainer"));
+                return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Cannot target " + position + " it's a " + targetElement.get().getClass() + " not an AttributeContainer"));
             }
 
             AttributeContainer target = (AttributeContainer) targetElement.get();
@@ -470,7 +470,7 @@ public class PlayerRules {
                 if(!lootableBy.equals(player)) {
                     String targetName = target.getOrElse(Attribute.NAME, position.toString());
                     String lootableByName = lootableBy.toPlayer(state).get().getOrElse(Attribute.NAME, "somebody");
-                    return Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, targetName + " can only be looted by " + lootableByName));
+                    return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, targetName + " can only be looted by " + lootableByName));
                 }
             }
 
@@ -509,18 +509,18 @@ public class PlayerRules {
     public static PlayerConditionRule getLootRule(ILootProvider lootTable) {
         return getLootTargetRule((context, tank, target) -> {
             if(!tank.getOrElse(Attribute.PLAYER_CAN_LOOT, false)) {
-                return Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Players can only loot once per day"));
+                return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Players can only loot once per day"));
             }
 
             if(target instanceof GenericTank && target.getOrElse(Attribute.DEAD, false)) {
-                return Optional.empty();
+                return Result.ok();
             }
 
             if(target instanceof LootBox) {
-                return Optional.empty();
+                return Result.ok();
             }
 
-            return Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "You can only loot dead tanks or loot boxes"));
+            return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "You can only loot dead tanks or loot boxes"));
         }, (context, tank, target) -> {
             if(target instanceof GenericTank) {
                 tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.GOLD, 0));

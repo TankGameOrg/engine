@@ -2,10 +2,10 @@ package pro.trevor.tankgame.rule.definition.player.conditional;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
+import pro.trevor.tankgame.util.Result;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class RuleCondition {
 
@@ -19,9 +19,9 @@ public class RuleCondition {
         List<PlayerRuleError> errors = new ArrayList<>();
 
         for (IRulePredicate predicate : predicates) {
-            Optional<PlayerRuleError> error = predicate.test(context);
-            if (error.isPresent()) {
-                errors.add(error.get());
+            Result<Void, PlayerRuleError> error = predicate.test(context);
+            if (error.isError()) {
+                errors.add(error.getError());
             }
         }
 

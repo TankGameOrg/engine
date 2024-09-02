@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
@@ -18,6 +16,7 @@ import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 
@@ -34,8 +33,8 @@ public class LootingTargetTest extends LootActionTestHelper {
     PlayerConditionRule getBasicLootRule() {
         return PlayerRules.getLootTargetRule((context, tank, target) -> {
             return target.getUnsafe(Attribute.POSITION).equals(new Position("B3")) ?
-                Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "No")) :
-                Optional.empty();
+                Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "No")) :
+                Result.ok();
         }, new GoldLootTransfer());
     }
 

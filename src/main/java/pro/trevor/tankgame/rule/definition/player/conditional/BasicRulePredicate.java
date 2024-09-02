@@ -1,10 +1,10 @@
 package pro.trevor.tankgame.rule.definition.player.conditional;
 
 import java.util.function.Predicate;
-import java.util.Optional;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
+import pro.trevor.tankgame.util.Result;
 
 public class BasicRulePredicate implements IRulePredicate {
     private Predicate<PlayerRuleContext> predicate;
@@ -19,7 +19,7 @@ public class BasicRulePredicate implements IRulePredicate {
         this(predicate, new PlayerRuleError(PlayerRuleError.Category.GENERIC, message));
     }
 
-    public Optional<PlayerRuleError> test(PlayerRuleContext context) {
-        return predicate.test(context) ? Optional.empty() : Optional.of(error);
+    public Result<Void, PlayerRuleError> test(PlayerRuleContext context) {
+        return predicate.test(context) ? Result.ok() : Result.error(error);
     }
 }
