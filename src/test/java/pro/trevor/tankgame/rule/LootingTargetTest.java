@@ -34,7 +34,7 @@ public class LootingTargetTest extends LootActionTestHelper {
     PlayerConditionRule getBasicLootRule() {
         return PlayerRules.getLootTargetRule((context, tank, target) -> {
             return target.getUnsafe(Attribute.POSITION).equals(new Position("B3")) ?
-                Optional.of(PlayerRuleError.generic("No")) :
+                Optional.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "No")) :
                 Optional.empty();
         }, new GoldLootTransfer());
     }

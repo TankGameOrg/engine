@@ -23,7 +23,7 @@ public abstract class PredicateHelpers {
         return (context, container) -> {
             Optional<E> value = container.get(attribute);
             if(value.isEmpty()) {
-                return Result.error(PlayerRuleError.generic("Expected %s to have the attribute %s", container, attribute));
+                return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Expected %s to have the attribute %s", container, attribute));
             }
 
             return Result.ok(value.get());
@@ -59,7 +59,7 @@ public abstract class PredicateHelpers {
             Integer amount = result.getValue();
             if(amount.compareTo(requiredCost) < 0) {
                 return Optional.of(
-                    PlayerRuleError.insufficientResources("%s does not have enough %s needs %d but has %d",
+                    new PlayerRuleError(PlayerRuleError.Category.INSUFFICENT_RESOURCES, "%s does not have enough %s needs %d but has %d",
                         context.getPlayerRef(), attribute.getName().toLowerCase(), requiredCost, amount));
             }
 
@@ -73,7 +73,7 @@ public abstract class PredicateHelpers {
     public static Result<GenericTank, PlayerRuleError> getTank(PlayerRuleContext context) {
         Optional<GenericTank> tank = context.getState().getTankForPlayerRef(context.getPlayerRef());
         if(tank.isEmpty()) {
-            return Result.error(PlayerRuleError.notApplicable("Expected player %s to have a tank", context.getPlayerRef()));
+            return Result.error(new PlayerRuleError(PlayerRuleError.Category.NOT_APPLICABLE, "Expected player %s to have a tank", context.getPlayerRef()));
         }
 
         return Result.ok(tank.get());
@@ -85,7 +85,7 @@ public abstract class PredicateHelpers {
     public static Result<Player, PlayerRuleError> getPlayer(PlayerRuleContext context) {
         Optional<Player> player = context.getState().getPlayer(context.getPlayerRef());
         if(player.isEmpty()) {
-            return Result.error(PlayerRuleError.notApplicable("Could not find player %s", context.getPlayerRef()));
+            return Result.error(new PlayerRuleError(PlayerRuleError.Category.NOT_APPLICABLE, "Could not find player %s", context.getPlayerRef()));
         }
 
         return Result.ok(player.get());
@@ -106,7 +106,7 @@ public abstract class PredicateHelpers {
     public static <T> Optional<PlayerRuleError> hasLogEntry(PlayerRuleContext context) {
         return context.getLogEntry().isPresent() ?
             Optional.empty() :
-            Optional.of(PlayerRuleError.insufficientData("A log entry is required"));
+            Optional.of(new PlayerRuleError(PlayerRuleError.Category.INSUFFICIENT_DATA, "A log entry is required"));
     }
 
     /**
@@ -115,13 +115,13 @@ public abstract class PredicateHelpers {
     public static Result<GenericTank, PlayerRuleError> getTargetTank(PlayerRuleContext context) {
         Optional<LogEntry> optionalEntry = context.getLogEntry();
         if(optionalEntry.isEmpty()) {
-            return Result.error(PlayerRuleError.insufficientData("A log entry is required"));
+            return Result.error(new PlayerRuleError(PlayerRuleError.Category.INSUFFICIENT_DATA, "A log entry is required"));
         }
 
         PlayerRef targetRef = optionalEntry.get().getUnsafe(Attribute.TARGET_PLAYER);
         Optional<GenericTank> optionalTank = context.getState().getTankForPlayerRef(targetRef);
         if(optionalTank.isEmpty()) {
-            return Result.error(PlayerRuleError.generic("Could not find a tank for %s", targetRef));
+            return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Could not find a tank for %s", targetRef));
         }
 
         return Result.ok(optionalTank.get());

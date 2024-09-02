@@ -16,7 +16,7 @@ public class BasicRulePredicate implements IRulePredicate {
     }
 
     public BasicRulePredicate(Predicate<PlayerRuleContext> predicate, String message) {
-        this(predicate, PlayerRuleError.generic(message));
+        this(predicate, new PlayerRuleError(PlayerRuleError.Category.GENERIC, message));
     }
 
     public Optional<PlayerRuleError> test(PlayerRuleContext context) {
