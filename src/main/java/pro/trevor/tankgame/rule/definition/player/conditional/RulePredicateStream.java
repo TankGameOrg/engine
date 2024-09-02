@@ -23,8 +23,11 @@ public class RulePredicateStream<T> implements IRulePredicate {
         this.function = function;
     }
 
-    public RulePredicateStream() {
-        this((context) -> Result.ok(null));
+    /**
+     * Construct a rule predicate stream with no value
+     */
+    public static RulePredicateStream<Void> empty() {
+        return new RulePredicateStream<>((context) -> Result.ok());
     }
 
     /**

@@ -100,7 +100,7 @@ public class PlayerRules {
             return Optional.empty();
         });
 
-    private static final IRulePredicate TARGET_POSITION_IS_EMPTY_SPACE = new RulePredicateStream<>()
+    private static final IRulePredicate TARGET_POSITION_IS_EMPTY_SPACE = RulePredicateStream.empty()
         .filter(PredicateHelpers::hasLogEntry)
         .filter((context) -> context.getState().getBoard().isEmpty(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)), PlayerRuleError.generic("Target space is not empty"));
 
@@ -113,7 +113,7 @@ public class PlayerRules {
             return targetTank.getOrElse(Attribute.PREVIOUS_SPEED, targetTank.getUnsafe(Attribute.SPEED)).equals(targetTank.getUnsafe(Attribute.SPEED));
         }, PlayerRuleError.generic("Your target's speed has already been modified you can't modify it until the previous modification is removed"));
 
-    private static final IRulePredicate TARGET_POSITION_IS_ON_BOARD = new RulePredicateStream<>()
+    private static final IRulePredicate TARGET_POSITION_IS_ON_BOARD = RulePredicateStream.empty()
         .filter(PredicateHelpers::hasLogEntry)
         .filter((context) -> context.getState().getBoard().isValidPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
             PlayerRuleError.generic("Target position is not within the game board"));
@@ -147,11 +147,11 @@ public class PlayerRules {
 
         return new PlayerConditionRule(ActionKeys.BUY_ACTION,
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TANK_HAS_ENOUGH_GOLD_TO_BUY_ACTION,
-                    new RulePredicateStream<>()
+                    RulePredicateStream.empty()
                         .filter(PredicateHelpers::hasLogEntry)
                         .filter((context) -> PredicateHelpers.getLogField(context, Attribute.GOLD) / actionCost <= maxBuys,
                             PlayerRuleError.generic("Actions bought must be fewer than or equal to %s", maxBuys)),
-                    new RulePredicateStream<>()
+                    RulePredicateStream.empty()
                         .filter(PredicateHelpers::hasLogEntry)
                         .filter((context) -> PredicateHelpers.getLogField(context, Attribute.GOLD) % actionCost == 0,
                             PlayerRuleError.generic("Gold spent must be a multiple of the action cost: %s", maxBuys)),
@@ -209,7 +209,7 @@ public class PlayerRules {
     public static PlayerConditionRule getShareGoldWithTaxToCofferRule(int taxAmount) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.DONATE,
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE,
-                    new RulePredicateStream<>()
+                    RulePredicateStream.empty()
                         .filter(PredicateHelpers::hasLogEntry)
                         .filter((context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, PlayerRuleError.generic("Donation must be positive")),
                     new RulePredicateStream<>(PredicateHelpers::getTank)
@@ -242,7 +242,7 @@ public class PlayerRules {
                         .filter(PredicateHelpers::hasLogEntry)
                         .filter(PredicateHelpers.minimum(Attribute.GOLD, (context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) + taxAmount)),
                     TARGET_TANK_IS_IN_RANGE,
-                    new RulePredicateStream<>()
+                    RulePredicateStream.empty()
                         .filter(PredicateHelpers::hasLogEntry)
                         .filter((context) -> PredicateHelpers.getLogField(context, Attribute.DONATION) > 0, PlayerRuleError.generic("Donation must be positive")),
                     new RulePredicateStream<>(PredicateHelpers::getTargetTank)

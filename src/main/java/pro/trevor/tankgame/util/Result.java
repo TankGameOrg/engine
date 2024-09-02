@@ -8,7 +8,6 @@ public class Result<V, E> {
     private final E error;
 
     protected Result(V value, E error) {
-        assert value != null || error != null;
         this.value = value;
         this.error = error;
     }
@@ -41,11 +40,16 @@ public class Result<V, E> {
         return Optional.ofNullable(error);
     }
 
+    public static <E> Result<Void, E> ok() {
+        return new Result<>(null, null);
+    }
+
     public static <V, E> Result<V, E> ok(V value) {
         return new Result<>(value, null);
     }
 
     public static <V, E> Result<V, E> error(E error) {
+        assert error != null;
         return new Result<>(null, error);
     }
 }
