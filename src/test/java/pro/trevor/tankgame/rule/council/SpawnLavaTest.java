@@ -69,7 +69,6 @@ public class SpawnLavaTest {
         GenericTank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, true).finish();
         State state = TestUtilities.generateBoard(2, 2, tank);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), new Position(0, 0)));
     }
@@ -80,7 +79,6 @@ public class SpawnLavaTest {
         player.put(Attribute.POWER, 0);
         State state = TestUtilities.generateBoard(1, 1);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), new Position(0, 0)));
     }
@@ -91,7 +89,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         state.getBoard().putUnit(new BasicWall(new Position(0, 0), 1));
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), new Position(0, 0)));
@@ -103,7 +100,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         state.getBoard().putFloor(new UnwalkableFloor(new Position(0, 0)));
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), new Position(0, 0)));
@@ -115,7 +111,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertFalse(canApply(ONE_COST_RULE, state, player.toRef(), new Position(0, 0)));
     }
@@ -126,7 +121,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), new Position(0, 0)));
     }
@@ -137,7 +131,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, 1);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ONE_COST_RULE, state, player.toRef(), new Position(0, 0)));
     }
@@ -150,7 +143,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, POWER);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         PlayerRules.getSpawnLavaWithCostRule(POWER_COST, 1).apply(makeContext(state, player.toRef(), new Position(0, 0)));
         Assertions.assertEquals(POWER - POWER_COST, player.getUnsafe(Attribute.POWER));
@@ -162,7 +154,6 @@ public class SpawnLavaTest {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         ZERO_COST_RULE.apply(makeContext(state, player.toRef(), new Position(0, 0)));
         Object lava = state.getBoard().getFloor(new Position(0, 0)).get();

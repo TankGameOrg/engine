@@ -118,6 +118,12 @@ public class PlayerRules {
         .filter((context) -> context.getState().getBoard().isValidPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
             new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Target position is not within the game board"));
 
+    private static final IRulePredicate PLAYER_TANK_IS_DEAD_PREDICATE = new BasicRulePredicate((context) -> {
+        return context.getState().getTankForPlayerRef(context.getPlayerRef())
+            .map((tank) -> tank.getOrElse(Attribute.DEAD, false))
+            .orElse(true);
+    }, new PlayerRuleError(PlayerRuleError.Category.NOT_APPLICABLE, "Player tank must be dead"));
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final PlayerConditionRule BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerConditionRule(
@@ -331,7 +337,7 @@ public class PlayerRules {
     public static PlayerConditionRule getSpawnWallWithCostRule(int cost, int durability) {
         assert cost >= 0;
         assert durability > 0;
-        return new PlayerConditionRule(ActionKeys.SPAWN_WALL, new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+        return new PlayerConditionRule(ActionKeys.SPAWN_WALL, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
             new RulePredicateStream<>(PredicateHelpers::getPlayer)
                 .filter(PredicateHelpers.minimum(Attribute.POWER, cost)),
             TARGET_POSITION_IS_EMPTY_SPACE
@@ -347,7 +353,7 @@ public class PlayerRules {
     public static PlayerConditionRule getSpawnLavaWithCostRule(int cost, int damage) {
         assert cost >= 0;
         assert damage > 0;
-        return new PlayerConditionRule(ActionKeys.SPAWN_LAVA, new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+        return new PlayerConditionRule(ActionKeys.SPAWN_LAVA, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
             new RulePredicateStream<>(PredicateHelpers::getPlayer)
                 .filter(PredicateHelpers.minimum(Attribute.POWER, cost)),
             TARGET_POSITION_IS_EMPTY_SPACE),
@@ -362,7 +368,7 @@ public class PlayerRules {
     public static PlayerConditionRule getSmiteRule(int cost, int health) {
         assert cost >= 0;
         assert health > 0;
-        return new PlayerConditionRule(ActionKeys.SMITE, new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+        return new PlayerConditionRule(ActionKeys.SMITE, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
             new RulePredicateStream<>(PredicateHelpers::getPlayer)
                 .filter(PredicateHelpers.minimum(Attribute.POWER, cost)),
             TARGET_TANK_IS_ALIVE),
@@ -377,7 +383,7 @@ public class PlayerRules {
     public static PlayerConditionRule getHealRule(int cost, int health) {
         assert cost >= 0;
         assert health > 0;
-        return new PlayerConditionRule(ActionKeys.HEAL, new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+        return new PlayerConditionRule(ActionKeys.HEAL, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
             new RulePredicateStream<>(PredicateHelpers::getPlayer)
                 .filter(PredicateHelpers.minimum(Attribute.POWER, cost)),
             TARGET_TANK_IS_ALIVE),
@@ -392,7 +398,7 @@ public class PlayerRules {
     public static PlayerConditionRule getSlowRule(int cost, int modifier) {
         assert cost >= 0;
         assert modifier > 0;
-        return new PlayerConditionRule(ActionKeys.SLOW, new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+        return new PlayerConditionRule(ActionKeys.SLOW, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
             new RulePredicateStream<>(PredicateHelpers::getPlayer)
                 .filter(PredicateHelpers.minimum(Attribute.POWER, cost)),
             TARGET_TANK_IS_ALIVE,
@@ -410,7 +416,7 @@ public class PlayerRules {
     public static PlayerConditionRule getHastenRule(int cost, int modifier) {
         assert cost >= 0;
         assert modifier > 0;
-        return new PlayerConditionRule(ActionKeys.HASTEN, new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
+        return new PlayerConditionRule(ActionKeys.HASTEN, new RuleCondition(PLAYER_TANK_IS_DEAD_PREDICATE,
             new RulePredicateStream<>(PredicateHelpers::getPlayer)
                 .filter(PredicateHelpers.minimum(Attribute.POWER, cost)),
             TARGET_TANK_IS_ALIVE,

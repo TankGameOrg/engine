@@ -70,7 +70,6 @@ public class HastenTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.SPEED, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
@@ -82,7 +81,6 @@ public class HastenTankTest {
         GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.SPEED, 3).finish();
         State state = TestUtilities.generateBoard(1, 1, otherTank);
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
 
         Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
@@ -97,7 +95,6 @@ public class HastenTankTest {
                 .with(Attribute.SPEED, 3)
                 .finish();
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         Assertions.assertFalse(canApply(ONE_COST_RULE, state, player.toRef(), tank));
@@ -113,7 +110,6 @@ public class HastenTankTest {
                 .with(Attribute.SPEED, 3)
                 .finish();
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         Assertions.assertTrue(canApply(ONE_COST_RULE, state, player.toRef(), tank));
@@ -131,7 +127,6 @@ public class HastenTankTest {
                 .with(Attribute.SPEED, 3)
                 .finish();
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         PlayerRules.getHastenRule(POWER_COST, 1).apply(makeContext(state, player.toRef(), tank));
@@ -149,7 +144,6 @@ public class HastenTankTest {
                 .with(Attribute.PREVIOUS_SPEED, 2)
                 .finish();
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), tank));
@@ -167,7 +161,6 @@ public class HastenTankTest {
                 .with(Attribute.SPEED, INITIAL_SPEED)
                 .finish();
         state.getPlayers().add(player);
-        state.getCouncil().getCouncillors().add(player.toRef());
         state.getBoard().putUnit(tank);
 
         PlayerRules.getHastenRule(0, MODIFIER).apply(makeContext(state, player.toRef(), tank));
