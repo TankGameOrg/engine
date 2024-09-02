@@ -1,4984 +1,4984 @@
 [
-  {
-    "type": "action",
-    "day": 1
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 9,
-      "class": "Position"
+    {
+        "type": "action",
+        "day": 1
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 2
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 3
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 4
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 5
+    },
+    {
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 6
+    },
+    {
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 7
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 8
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 1,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 9
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 10
+    },
+    {
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 11
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "donate",
+        "donation": 2,
+        "type": "action",
+        "target_player": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Joel",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 0,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 10,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ty",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 12
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 10,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 0,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Steve",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "John",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 13
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 14
+    },
+    {
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "upgrade_range",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "donate",
+        "donation": 3,
+        "type": "action",
+        "target_player": {
+            "name": "Dan",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Bryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "upgrade_range",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "bounty": 5,
+        "action": "bounty",
+        "type": "action",
+        "target_player": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Ryan",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "upgrade_range",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 9,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 15
+    },
+    {
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "upgrade_range",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "upgrade_range",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "donate",
+        "donation": 5,
+        "type": "action",
+        "target_player": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "David",
+            "class": "PlayerRef"
+        },
+        "action": "donate",
+        "donation": 3,
+        "type": "action",
+        "target_player": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "donate",
+        "donation": 5,
+        "type": "action",
+        "target_player": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Isaac",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 3,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Trevor",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 1,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "stimulus",
+        "type": "action",
+        "target_player": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "stimulus",
+        "type": "action",
+        "target_player": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "stimulus",
+        "type": "action",
+        "target_player": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "stimulus",
+        "type": "action",
+        "target_player": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "stimulus",
+        "type": "action",
+        "target_player": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "subject": {
+            "name": "Schmude",
+            "class": "PlayerRef"
+        },
+        "action": "stimulus",
+        "type": "action",
+        "target_player": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Beyer",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Lena",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Stomp",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "upgrade_range",
+        "type": "action"
+    },
+    {
+        "type": "action",
+        "day": 16
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 9,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 8,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Xavion",
+            "class": "PlayerRef"
+        },
+        "action": "donate",
+        "donation": 5,
+        "type": "action",
+        "target_player": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        }
+    },
+    {
+        "gold": 5,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 8,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 3,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 2,
+            "class": "Position"
+        }
+    },
+    {
+        "type": "action",
+        "day": 17
+    },
+    {
+        "type": "action",
+        "day": 18
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 7,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 6,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 5,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 4,
+            "y": 8,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 3,
+            "y": 7,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 6,
+            "class": "Position"
+        }
+    },
+    {
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "move",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 5,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "gold": 10,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "buy_action",
+        "type": "action"
+    },
+    {
+        "hit": false,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
+    },
+    {
+        "hit": true,
+        "subject": {
+            "name": "Corey",
+            "class": "PlayerRef"
+        },
+        "action": "shoot",
+        "type": "action",
+        "target_position": {
+            "x": 2,
+            "y": 4,
+            "class": "Position"
+        }
     }
-  },
-  {
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 2
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 3
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 4
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 5
-  },
-  {
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 6
-  },
-  {
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 7
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 8
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 1,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 9
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 10
-  },
-  {
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 11
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "donate",
-    "donation": 2,
-    "type": "action",
-    "target": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Joel",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 0,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 10,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ty",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 12
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 10,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 0,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Steve",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "John",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 13
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 14
-  },
-  {
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "upgrade_range",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "donate",
-    "donation": 3,
-    "type": "action",
-    "target": {
-      "name": "Dan",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Bryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "upgrade_range",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "bounty": 5,
-    "action": "bounty",
-    "type": "action",
-    "target": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Ryan",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "upgrade_range",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 9,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 15
-  },
-  {
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "upgrade_range",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "upgrade_range",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "donate",
-    "donation": 5,
-    "type": "action",
-    "target": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "David",
-      "class": "PlayerRef"
-    },
-    "action": "donate",
-    "donation": 3,
-    "type": "action",
-    "target": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "donate",
-    "donation": 5,
-    "type": "action",
-    "target": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Isaac",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 3,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Trevor",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 1,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "stimulus",
-    "type": "action",
-    "target": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "stimulus",
-    "type": "action",
-    "target": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "stimulus",
-    "type": "action",
-    "target": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "stimulus",
-    "type": "action",
-    "target": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "stimulus",
-    "type": "action",
-    "target": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "subject": {
-      "name": "Schmude",
-      "class": "PlayerRef"
-    },
-    "action": "stimulus",
-    "type": "action",
-    "target": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Beyer",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Lena",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Stomp",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "upgrade_range",
-    "type": "action"
-  },
-  {
-    "type": "action",
-    "day": 16
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 9,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 8,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Xavion",
-      "class": "PlayerRef"
-    },
-    "action": "donate",
-    "donation": 5,
-    "type": "action",
-    "target": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    }
-  },
-  {
-    "gold": 5,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 8,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 3,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 2,
-      "class": "Position"
-    }
-  },
-  {
-    "type": "action",
-    "day": 17
-  },
-  {
-    "type": "action",
-    "day": 18
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 7,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 6,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 5,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 4,
-      "y": 8,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 3,
-      "y": 7,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 6,
-      "class": "Position"
-    }
-  },
-  {
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "move",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 5,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "gold": 10,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "buy_action",
-    "type": "action"
-  },
-  {
-    "hit": false,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  },
-  {
-    "hit": true,
-    "subject": {
-      "name": "Corey",
-      "class": "PlayerRef"
-    },
-    "action": "shoot",
-    "type": "action",
-    "target": {
-      "x": 2,
-      "y": 4,
-      "class": "Position"
-    }
-  }
 ]
