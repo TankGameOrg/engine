@@ -38,9 +38,7 @@ public class Api {
         this.state = state;
     }
 
-    public void ingestAction(JSONObject json) {
-        LogEntry logEntry = new LogEntry(json);
-
+    public void ingestAction(LogEntry logEntry) {
         if (!state.getOrElse(Attribute.RUNNING, true)) {
             System.out.println(state);
             throw new Error("The game is over; no actions can be submitted");

@@ -31,19 +31,7 @@ public class PossibleActionsEncoder {
     private static JSONObject encodePossibleAction(PossibleAction action) {
         JSONArray errors = new JSONArray(
             action.getErrors().stream()
-                .map((error) -> {
-                    JSONObject jsonError = new JSONObject();
-                    jsonError.put("category", error.getCategory().toString());
-                    jsonError.put("message", error.getMessage());
-
-                    if(error instanceof TimedPlayerRuleError timedError) {
-                        long errorExpiration = timedError.getErrorExpirationTime();
-                        jsonError.put("expiration", errorExpiration);
-                    }
-
-                    return jsonError;
-                })
-                .toList()
+                .map((error) -> PlayerRuleErrorEncoder.encode(error))
         );
 
         JSONObject actionJson = new JSONObject();

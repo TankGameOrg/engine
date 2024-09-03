@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pro.trevor.tankgame.e2e.EndToEndTestUtils.readFile;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class PossibleActionsTest {
@@ -31,9 +32,9 @@ public class PossibleActionsTest {
         Api api = new Api(rulesetRegister);
         api.setState((State) Codec.decodeJson(new JSONObject(readFile(initialStatePath))));
 
-        JSONObject startDay1 = new JSONObject();
-        startDay1.put("day", 1);
-        api.ingestAction(startDay1);
+        api.ingestAction(new LogEntry(Map.of(
+            Attribute.DAY, 1
+        )));
 
         testAllPossibleActions(api);
     }

@@ -3,6 +3,7 @@ package pro.trevor.tankgame.e2e;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.trevor.tankgame.Api;
+import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Codec;
@@ -24,7 +25,7 @@ public class EndToEndTester {
         this.api = new Api(rulesetRegister);
         api.setState((State) Codec.decodeJson(initialState));
         for (int i = 0; i < moves.length(); ++i) {
-            api.ingestAction(moves.getJSONObject(i));
+            api.ingestAction(new LogEntry(moves.getJSONObject(i)));
         }
     }
 
