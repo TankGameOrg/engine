@@ -99,7 +99,14 @@ public class Cli {
                 }
                 case "possible_actions" -> {
                     try {
-                        output.println(api.getPossibleActions(new PlayerRef(json.getString("player"))));
+                        String subject = json.getString("player");
+                        JSONObject actions = new JSONObject();
+                        actions.put("error", false);
+                        actions.put("type", "possible_actions");
+                        actions.put("player", subject);
+                        actions.put("actions", PossibleActionsEncoder.encodePossibleActions(
+                            api.getPossibleActions(new PlayerRef(subject))));
+                        output.println(actions);
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();

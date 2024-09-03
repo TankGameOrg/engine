@@ -2,10 +2,11 @@ package pro.trevor.tankgame;
 
 import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.rule.definition.Ruleset;
+import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
+import pro.trevor.tankgame.rule.definition.actions.PossibleAction;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
-import pro.trevor.tankgame.rule.definition.player.TimedPlayerRuleError;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -63,13 +64,8 @@ public class Api {
         ruleset.getConditionalRules().applyRules(state);
     }
 
-    public JSONObject getPossibleActions(PlayerRef subject) {
-        JSONObject actions = new JSONObject();
-        actions.put("error", false);
-        actions.put("type", "possible_actions");
-        actions.put("player", subject);
-
-        JSONArray actionsArray = new JSONArray();
+    public List<PossibleAction> getPossibleActions(PlayerRef subject) {
+        List<PossibleAction> actions = new ArrayList<>();
         List<IPlayerRule> rules = ruleset.getPlayerRules().getAllRules();
 
         if (state.getPlayer(subject).isEmpty()) {
@@ -77,28 +73,13 @@ public class Api {
         }
 
         for (IPlayerRule rule : rules) {
-            JSONObject actionJson = new JSONObject();
-            actionJson.put("rule", rule.name());
-
             // Check if the rule is applicable to this (state, player) combination
             PlayerRuleContext context = new PlayerRuleContext(state, subject);
             List<PlayerRuleError> canApplyErrors = rule.canApply(context);
 
-            List<JSONObject> jsonErrors = canApplyErrors.stream()
+            List<PlayerRuleError> errors = canApplyErrors.stream()
                 // Remove any errors that the client shouldn't see i.e. insufficent data
                 .filter((error) -> !errorsToFilterOut.contains(error.getCategory()))
-                .map((error) -> {
-                    JSONObject jsonError = new JSONObject();
-                    jsonError.put("category", error.getCategory().toString());
-                    jsonError.put("message", error.getMessage());
-
-                    if(error instanceof TimedPlayerRuleError timedError) {
-                        long errorExpiration = timedError.getErrorExpirationTime();
-                        jsonError.put("expiration", errorExpiration);
-                    }
-
-                    return jsonError;
-                })
                 .toList();
 
             // If this action is not applicable to the current player don't send it to UI
@@ -106,19 +87,14 @@ public class Api {
                 continue;
             }
 
-            // If canApply didn't return any errors or all of they get filtered out this will be an empty array aka no error
-            actionJson.put("errors", new JSONArray(jsonErrors));
-
             // find all states of each parameter if the rule can be applied
-            JSONArray fields = jsonErrors.isEmpty() ?
-                PossibleActionsEncoder.encodeAllFields(rule.getFieldSpecs(context)) :
-                new JSONArray();
+            List<LogFieldSpec<?>> fields = errors.isEmpty() ?
+                rule.getFieldSpecs(context) :
+                List.of();
 
-            actionJson.put("fields", fields);
-            actionsArray.put(actionJson);
+            actions.add(new PossibleAction(rule.name(), errors, fields));
         }
 
-        actions.put("actions", actionsArray);
         return actions;
     }
 }

@@ -8,15 +8,53 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
+import pro.trevor.tankgame.rule.definition.actions.PossibleAction;
+import pro.trevor.tankgame.rule.definition.player.TimedPlayerRuleError;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.util.IJsonObject;
 
 
 public class PossibleActionsEncoder {
     /**
-     * Encode an array of log field specs into a json format that the UI can use to build actions
+     * Encode an array of possible actions into a json format that the UI can use to build actions
+     * @return
      */
-    public static JSONArray encodeAllFields(List<LogFieldSpec<?>> logFieldSpecs) {
+    public static JSONArray encodePossibleActions(List<PossibleAction> actions) {
+        JSONArray jsonActions = new JSONArray();
+        for(PossibleAction action : actions) {
+            jsonActions.put(encodePossibleAction(action));
+        }
+
+        return jsonActions;
+    }
+
+    private static JSONObject encodePossibleAction(PossibleAction action) {
+        JSONArray errors = new JSONArray(
+            action.getErrors().stream()
+                .map((error) -> {
+                    JSONObject jsonError = new JSONObject();
+                    jsonError.put("category", error.getCategory().toString());
+                    jsonError.put("message", error.getMessage());
+
+                    if(error instanceof TimedPlayerRuleError timedError) {
+                        long errorExpiration = timedError.getErrorExpirationTime();
+                        jsonError.put("expiration", errorExpiration);
+                    }
+
+                    return jsonError;
+                })
+                .toList()
+        );
+
+        JSONObject actionJson = new JSONObject();
+        actionJson.put("rule", action.getRuleName());
+        // If the action doesn't have any errors this will be an empty array aka no error
+        actionJson.put("errors", errors);
+        actionJson.put("fields", encodeAllFields(action.getFieldSpecs()));
+        return actionJson;
+    }
+
+    private static JSONArray encodeAllFields(List<LogFieldSpec<?>> logFieldSpecs) {
         JSONArray fields = new JSONArray();
         for(LogFieldSpec<?> spec : logFieldSpecs) {
             fields.put(encodeField(spec));
