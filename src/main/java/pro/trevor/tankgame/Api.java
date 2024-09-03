@@ -38,13 +38,6 @@ public class Api {
         this.state = state;
     }
 
-    public JSONObject getRules() {
-        JSONObject rules = new JSONObject();
-        rules.put("type", "rules");
-        rules.put("rules", ruleset.getPlayerRules().toJsonRequirements());
-        return rules;
-    }
-
     public void ingestAction(JSONObject json) {
         LogEntry logEntry = new LogEntry(json);
 

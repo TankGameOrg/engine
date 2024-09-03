@@ -42,8 +42,6 @@ public class Main {
                 String initialString = Files.readString(initialFile.toPath());
                 String movesString = Files.readString(movesFile.toPath());
 
-                System.out.println(api.getRules().toString(2));
-
                 JSONObject initial = new JSONObject(initialString);
                 JSONArray moves = new JSONArray(movesString);
 

@@ -61,7 +61,6 @@ public class Cli {
                 case "command" -> {
                     String command = json.getString("command");
                     switch (command) {
-                        case "rules" -> output.println(api.getRules().toString());
                         case "display" -> output.println(api.getState().toJson().toString());
                         case "exit" -> {
                             output.println(response("exiting", false));
