@@ -15,6 +15,7 @@ public class LogFieldValueDescriptor<T> {
     public LogFieldValueDescriptor(T value, String prettyName) {
         this.value = value;
         this.prettyName = prettyName;
+        this.nestedSpecs = List.of();
     }
 
     public LogFieldValueDescriptor(T value, List<LogFieldSpec<?>> nestedSpecs) {

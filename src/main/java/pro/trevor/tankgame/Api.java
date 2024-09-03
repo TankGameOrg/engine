@@ -15,6 +15,7 @@ import java.util.*;
 
 import org.json.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.Result;
 
 public class Api {
     private final Ruleset ruleset;
@@ -47,21 +48,50 @@ public class Api {
         else if (logEntry.has(Attribute.DAY)) {
             ruleset.getTickRules().applyRules(state);
         } else {
-            PlayerRef subject = logEntry.getUnsafe(Attribute.SUBJECT);
-            String action = logEntry.getUnsafe(Attribute.ACTION);
-
-            Optional<IPlayerRule> optionalRule = ruleset.getPlayerRules().getByName(action);
-            if (optionalRule.isEmpty()) {
-                throw new Error("Unexpected action: " + action);
+            Result<IPlayerRule, PlayerRuleError> result = getPlayerRuleForLogEntry(logEntry);
+            if(result.isError()) {
+                throw new Error(result.getError().toString());
             }
 
-            IPlayerRule rule = optionalRule.get();
-            PlayerRuleContext context = new PlayerRuleContext(state, subject, logEntry);
-            rule.apply(context);
+            PlayerRuleContext context = getContextForLogEntry(logEntry);
+            result.getValue().apply(context);
         }
 
         ruleset.getEnforcerRules().enforceRules(state);
         ruleset.getConditionalRules().applyRules(state);
+    }
+
+    public List<PlayerRuleError> canIngestAction(LogEntry logEntry) {
+        if (!state.getOrElse(Attribute.RUNNING, true)) {
+            return List.of(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "The game is over; no actions can be submitted"));
+        }
+        else if (logEntry.has(Attribute.DAY)) {
+            return List.of();
+        }
+        else {
+            Result<IPlayerRule, PlayerRuleError> result = getPlayerRuleForLogEntry(logEntry);
+            if(result.isError()) {
+                return List.of(result.getError());
+            }
+
+            PlayerRuleContext context = getContextForLogEntry(logEntry);
+            return result.getValue().canApply(context);
+        }
+    }
+
+    private Result<IPlayerRule, PlayerRuleError> getPlayerRuleForLogEntry(LogEntry logEntry) {
+        String action = logEntry.getUnsafe(Attribute.ACTION);
+
+        Optional<IPlayerRule> optionalRule = ruleset.getPlayerRules().getByName(action);
+        if (optionalRule.isEmpty()) {
+            return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Unexpected action: %s", action));
+        }
+
+        return Result.ok(optionalRule.get());
+    }
+
+    private PlayerRuleContext getContextForLogEntry(LogEntry logEntry) {
+        return new PlayerRuleContext(state, logEntry.getUnsafe(Attribute.SUBJECT), logEntry);
     }
 
     public List<PossibleAction> getPossibleActions(PlayerRef subject) {

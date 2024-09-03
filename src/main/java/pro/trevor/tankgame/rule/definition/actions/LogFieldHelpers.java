@@ -68,7 +68,7 @@ public abstract class LogFieldHelpers {
     public static EnumeratedLogFieldSpec<Position> getMovablePositionsSpec(PlayerRuleContext context) {
         GenericTank tank = PredicateHelpers.getTank(context).getValue();
         Set<Position> movableSpaces = Util.allPossibleMoves(context.getState().getBoard(), tank.getPosition(), tank.getOrElse(Attribute.SPEED, 1));
-        return makeLogFieldSpec(Attribute.POSITION, movableSpaces.stream());
+        return makeLogFieldSpec(Attribute.TARGET_POSITION, movableSpaces.stream());
     }
 
     /**
