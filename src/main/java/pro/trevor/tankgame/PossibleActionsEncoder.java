@@ -8,24 +8,15 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
-import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.util.IJsonObject;
 
 
 public class PossibleActionsEncoder {
     /**
-     * Encode the possible actions for the given (rule, context) to a format that can be used by the UI
+     * Encode an array of log field specs into a json format that the UI can use to build actions
      */
-    public static JSONObject encodePossibleActions(IPlayerRule rule, PlayerRuleContext context) {
-        JSONObject action = new JSONObject();
-        action.put("rule", rule.name());
-        action.put("fields", encodeAllFields(null)); // TODO: Use actual fields
-        return action;
-    }
-
-    private static JSONArray encodeAllFields(List<LogFieldSpec<?>> logFieldSpecs) {
+    public static JSONArray encodeAllFields(List<LogFieldSpec<?>> logFieldSpecs) {
         JSONArray fields = new JSONArray();
         for(LogFieldSpec<?> spec : logFieldSpecs) {
             fields.put(encodeField(spec));

@@ -6,8 +6,6 @@ import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerRuleError;
-import pro.trevor.tankgame.rule.definition.range.TypeRange;
-import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -83,7 +81,8 @@ public class Api {
             actionJson.put("rule", rule.name());
 
             // Check if the rule is applicable to this (state, player) combination
-            List<PlayerRuleError> canApplyErrors = rule.canApply(new PlayerRuleContext(state, subject));
+            PlayerRuleContext context = new PlayerRuleContext(state, subject);
+            List<PlayerRuleError> canApplyErrors = rule.canApply(context);
 
             List<JSONObject> jsonErrors = canApplyErrors.stream()
                 // Remove any errors that the client shouldn't see i.e. insufficent data
@@ -111,16 +110,10 @@ public class Api {
             actionJson.put("errors", new JSONArray(jsonErrors));
 
             // find all states of each parameter if the rule can be applied
-            JSONArray fields = new JSONArray();
-            if(jsonErrors.isEmpty()) {
-                for (TypeRange<?> field : rule.parameters()) {
-                    if (field instanceof VariableTypeRange<?,?> variableField) {
-                        VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
-                        genericField.generate(state, subject);
-                    }
-                    fields.put(field.toJson());
-                }
-            }
+            JSONArray fields = jsonErrors.isEmpty() ?
+                PossibleActionsEncoder.encodeAllFields(rule.getFieldSpecs(context)) :
+                new JSONArray();
+
             actionJson.put("fields", fields);
             actionsArray.put(actionJson);
         }

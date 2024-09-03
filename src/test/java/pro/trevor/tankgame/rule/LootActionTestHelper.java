@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
-import pro.trevor.tankgame.rule.definition.range.FunctionVariableRange;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -65,18 +65,23 @@ public class LootActionTestHelper {
     /**
      * Get the range of positions that will be shown to players as lootable locations
      */
-    protected Set<Position> getLootablePositions(IPlayerRule rule) {
-        FunctionVariableRange<PlayerRef, Position> lootablePositionRange = (FunctionVariableRange<PlayerRef, Position>) rule.parameters()[0];
-        lootablePositionRange.generate(state, subjectTank.getPlayerRef());
-        return lootablePositionRange.getElements();
+    protected Set<Position> getLootablePositions(IPlayerRule rule, PlayerRuleContext context) {
+        EnumeratedLogFieldSpec<Position> positionsSpec = (EnumeratedLogFieldSpec<Position>) rule.getFieldSpecs(context).stream()
+            .filter((spec) -> spec.getAttribute().equals(Attribute.TARGET_POSITION))
+            .findAny().get();
+
+        return positionsSpec.getValueDescriptors().stream()
+            .map((descriptor) -> descriptor.getValue())
+            .collect(Collectors.toSet());
     }
 
     /**
      * Check if the rule can be applied to a specific location
      */
     protected boolean canApply(IPlayerRule rule, String targetPosition) {
-        boolean canApplyRule = rule.canApply(makeLootContext(state, subjectTank, targetPosition)).isEmpty();
-        Set<Position> lootablePositions = getLootablePositions(rule);
+        PlayerRuleContext context = makeLootContext(state, subjectTank, targetPosition);
+        boolean canApplyRule = rule.canApply(context).isEmpty();
+        Set<Position> lootablePositions = getLootablePositions(rule, context);
 
         assertEquals(canApplyRule, lootablePositions.contains(new Position(targetPosition)),
             "Expected the lootable position range to match canApplyConditional");
