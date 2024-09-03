@@ -23,7 +23,7 @@ public abstract class LogFieldHelpers {
     /**
      * Find all positions within RANGE of the current player's tank
      */
-    public static Set<Position> getTargetsInRange(PlayerRuleContext context) {
+    public static Set<Position> getPositionsInRange(PlayerRuleContext context) {
         Board board = context.getState().getBoard();
         GenericTank tank = PredicateHelpers.getTank(context).getValue();
 
@@ -36,7 +36,7 @@ public abstract class LogFieldHelpers {
     public static Stream<Position> getTargetsInLineOfSight(PlayerRuleContext context, ITriPredicate<State, Position, Position> lineOfSight) {
         GenericTank tank = PredicateHelpers.getTank(context).getValue();
 
-        return getTargetsInRange(context).stream()
+        return getPositionsInRange(context).stream()
             .filter((position) -> lineOfSight.test(context.getState(), tank.getPosition(), position));
     }
 
@@ -54,7 +54,7 @@ public abstract class LogFieldHelpers {
     public static EnumeratedLogFieldSpec<PlayerRef> getPlayersInDonationRangeSpec(PlayerRuleContext context) {
         Board board = context.getState().getBoard();
 
-        Stream<PlayerRef> players = getTargetsInRange(context).stream()
+        Stream<PlayerRef> players = getPositionsInRange(context).stream()
             .map((position) -> board.getUnit(position))
             .filter((optionalUnit) -> optionalUnit.isPresent() && optionalUnit.get() instanceof GenericTank)
             .map((optionalUnit) -> ((GenericTank) optionalUnit.get()).getPlayerRef());

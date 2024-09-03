@@ -1,28 +1,21 @@
 package pro.trevor.tankgame.rule.impl.shared;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import pro.trevor.tankgame.log.LogEntry;
+import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
+import pro.trevor.tankgame.rule.definition.actions.LogFieldHelpers;
+import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
 import pro.trevor.tankgame.rule.definition.player.conditional.*;
-import pro.trevor.tankgame.rule.definition.range.UnitRange;
 import pro.trevor.tankgame.rule.impl.util.ILootProvider;
-import pro.trevor.tankgame.rule.definition.range.BooleanRange;
-import pro.trevor.tankgame.rule.definition.range.DiscreteIntegerRange;
-import pro.trevor.tankgame.rule.definition.range.DonateTankRange;
-import pro.trevor.tankgame.rule.definition.range.FilteredRange;
-import pro.trevor.tankgame.rule.definition.range.IntegerRange;
-import pro.trevor.tankgame.rule.definition.range.MovePositionRange;
-import pro.trevor.tankgame.rule.definition.range.PositionRange;
-import pro.trevor.tankgame.rule.definition.range.ShootPositionRange;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
@@ -30,7 +23,6 @@ import pro.trevor.tankgame.state.board.IElement;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.floor.Lava;
-import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
@@ -39,6 +31,7 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.LineOfSight;
+import pro.trevor.tankgame.util.Pair;
 import pro.trevor.tankgame.util.Result;
 import pro.trevor.tankgame.util.function.ITriConsumer;
 import pro.trevor.tankgame.util.function.ITriFunction;
@@ -47,14 +40,6 @@ import pro.trevor.tankgame.util.function.ITriPredicate;
 import static pro.trevor.tankgame.util.Util.*;
 
 public class PlayerRules {
-
-    public static GenericTank getTankUnsafe(State state, PlayerRef playerRef) {
-        return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findAny().get();
-    }
-
-    public static Optional<GenericTank> getTank(State state, PlayerRef playerRef) {
-        return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findAny();
-    }
 
     private static IRulePredicate cofferCost(int cost) {
         return new RulePredicateStream<>(PredicateHelpers::getCouncil)
@@ -126,6 +111,14 @@ public class PlayerRules {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private static int translateGoldCostPlusDiscount(int gold) {
+        int n5 = gold / 5;
+        int rem = gold - n5 * 5;
+        int n3 = rem / 3;
+        assert rem == n3 * 3;
+        return n5 * 2 + n3;
+    }
+
     public static final PlayerConditionRule BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerConditionRule(
             PlayerRules.ActionKeys.BUY_ACTION,
             new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TANK_HAS_ENOUGH_GOLD_TO_BUY_ACTION,
@@ -134,16 +127,20 @@ public class PlayerRules {
             (context) -> {
                 GenericTank tank = PredicateHelpers.getTank(context).getValue();
                 int gold = PredicateHelpers.getLogField(context, Attribute.GOLD);
-                int n5 = gold / 5;
-                int rem = gold - n5 * 5;
-                int n3 = rem / 3;
-                assert rem == n3 * 3;
+                int actions = translateGoldCostPlusDiscount(gold);
 
-                tank.put(Attribute.ACTION_POINTS, tank.getOrElse(Attribute.ACTION_POINTS, 0) + n5 * 2 + n3);
+                tank.put(Attribute.ACTION_POINTS, tank.getOrElse(Attribute.ACTION_POINTS, 0) + actions);
                 tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - gold);
             },
-            new FilteredRange<PlayerRef, Integer>(
-                new DiscreteIntegerRange("gold", new HashSet<>(List.of(3, 5, 8, 10))), (state, playerRef, goldCost) -> PlayerRules.getTankUnsafe(state, playerRef).getOrElse(Attribute.GOLD, 0)>= goldCost));
+            (context) -> {
+                Stream<Pair<Integer, Integer>> exchangeOptions = Stream.of(3, 5, 8, 10)
+                    .filter((goldCost) -> PredicateHelpers.getTank(context).getValue().getOrElse(Attribute.GOLD, 0) >= goldCost)
+                    .map((goldCost) -> new Pair<>(goldCost, translateGoldCostPlusDiscount(goldCost)));
+
+                return List.of(
+                    LogFieldHelpers.getExchangeSpec(Attribute.GOLD, Attribute.ACTION_POINTS, exchangeOptions)
+                );
+            });
 
     public static PlayerConditionRule buyActionWithGold(int actionCost, int maxBuys) {
         if (actionCost <= 0)
@@ -172,10 +169,15 @@ public class PlayerRules {
                     tank.put(Attribute.ACTION_POINTS, tank.getUnsafe(Attribute.ACTION_POINTS) + boughtActions);
                     tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - goldSpent);
                 },
-                new FilteredRange<PlayerRef, Integer>(
-                    new DiscreteIntegerRange("gold", IntStream.rangeClosed(1, maxBuys).map(n -> n * actionCost).boxed()
-                            .collect(Collectors.toSet())),
-                    (state, playerRef, goldCost) -> PlayerRules.getTankUnsafe(state, playerRef).getOrElse(Attribute.GOLD, 0) >= goldCost));
+                (context) -> {
+                    Stream<Pair<Integer, Integer>> exchangeOptions = IntStream.rangeClosed(1, maxBuys).boxed()
+                        .map((actions) -> new Pair<>(actions * actionCost, actions))
+                        .filter((exchangeRate) -> PredicateHelpers.getTank(context).getValue().getOrElse(Attribute.GOLD, 0) >= exchangeRate.left());
+
+                    return List.of(
+                        LogFieldHelpers.getExchangeSpec(Attribute.GOLD, Attribute.ACTION_POINTS, exchangeOptions)
+                    );
+                });
     }
 
     public static PlayerConditionRule getMoveRule(Attribute<Integer> attribute, int cost) {
@@ -197,7 +199,7 @@ public class PlayerRules {
                     tank.setPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION));
                     context.getState().getBoard().putUnit(tank);
                 },
-                new MovePositionRange("target"));
+                (context) -> List.of(LogFieldHelpers.getMovablePositionsSpec(context)));
     }
 
     public static PlayerConditionRule getUpgradeRangeRule(Attribute<Integer> attribute, int cost) {
@@ -209,7 +211,8 @@ public class PlayerRules {
                     GenericTank tank = PredicateHelpers.getTank(context).getValue();
                     tank.put(Attribute.RANGE, tank.getOrElse(Attribute.RANGE, 0) + 1);
                     tank.put(attribute, tank.getUnsafe(attribute) - cost);
-                });
+                },
+                (context) -> List.of());
     }
 
     public static PlayerConditionRule getShareGoldWithTaxToCofferRule(int taxAmount) {
@@ -237,8 +240,14 @@ public class PlayerRules {
                     Council council = context.getState().getCouncil();
                     council.put(Attribute.COFFER, council.getUnsafe(Attribute.COFFER) + taxAmount);
                 },
-                new DonateTankRange("target"),
-                new IntegerRange("donation"));
+                (context) -> {
+                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+
+                    return List.of(
+                        LogFieldHelpers.getPlayersInDonationRangeSpec(context),
+                        LogFieldHelpers.getIntegerSpec(Attribute.DONATION, 1, tank.getUnsafe(Attribute.GOLD) - taxAmount)
+                    );
+                });
     }
 
     public static PlayerConditionRule getShareGoldWithTaxRule(int taxAmount) {
@@ -264,8 +273,14 @@ public class PlayerRules {
                     tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - (donation + taxAmount));
                     other.put(Attribute.GOLD, other.getUnsafe(Attribute.GOLD) + donation);
                 },
-                new DonateTankRange("target"),
-                new IntegerRange("donation"));
+                (context) -> {
+                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+
+                    return List.of(
+                        LogFieldHelpers.getPlayersInDonationRangeSpec(context),
+                        LogFieldHelpers.getIntegerSpec(Attribute.DONATION, 1, tank.getUnsafe(Attribute.GOLD) - taxAmount)
+                    );
+                });
     }
 
     public static PlayerConditionRule getCofferCostStimulusRule(int cost) {
@@ -280,7 +295,7 @@ public class PlayerRules {
                     target.put(Attribute.ACTION_POINTS, target.getOrElse(Attribute.ACTION_POINTS, 0) + 1);
                     council.put(Attribute.COFFER, council.getUnsafe(Attribute.COFFER) - cost);
                 },
-                UnitRange.ALL_LIVING_TANKS);
+                (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
     }
 
     public static PlayerConditionRule getRuleCofferCostGrantLife(int cost, int minimumCouncillors) {
@@ -303,7 +318,7 @@ public class PlayerRules {
                         targetTank.put(Attribute.DURABILITY, targetTank.getUnsafe(Attribute.DURABILITY) + 1);
                     }
                 },
-                UnitRange.ALL_TANKS);
+                (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
     }
 
     public static PlayerConditionRule getRuleCofferCostBounty(int lowerBound, int upperBound) {
@@ -328,10 +343,14 @@ public class PlayerRules {
                     council.put(Attribute.COFFER, council.getUnsafe(Attribute.COFFER) - bounty);
                     council.put(Attribute.CAN_BOUNTY, false);
                 },
-                UnitRange.ALL_LIVING_TANKS,
-                new FilteredRange<>(
-                    new DiscreteIntegerRange("bounty", lowerBound, upperBound),
-                    (state, playerRef, bounty) -> state.getCouncil().getOrElse(Attribute.COFFER, 0) >= bounty));
+                (context) -> {
+                    int coffer = context.getState().getCouncil().getOrElse(Attribute.COFFER, 0);
+
+                    return List.of(
+                        LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context),
+                        LogFieldHelpers.getIntegerSpec(Attribute.BOUNTY, lowerBound, Math.min(upperBound, coffer))
+                    );
+                });
     }
 
     public static PlayerConditionRule getSpawnWallWithCostRule(int cost, int durability) {
@@ -347,7 +366,8 @@ public class PlayerRules {
             Position target = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
             player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
             context.getState().getBoard().putUnit(new BasicWall(target, durability));
-        }, new PositionRange("target", (state, player, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
+        },
+        (context) -> List.of(LogFieldHelpers.getEmptyPositionsSpec(context)));
     }
 
     public static PlayerConditionRule getSpawnLavaWithCostRule(int cost, int damage) {
@@ -362,7 +382,8 @@ public class PlayerRules {
                 Position target = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 context.getState().getBoard().putFloor(new Lava(target, damage));
-            }, new PositionRange("target", (state, player, position) -> state.getBoard().getUnitOrFloor(position).map((e) -> e.getClass().equals(WalkableFloor.class)).orElse(false)));
+            },
+            (context) -> List.of(LogFieldHelpers.getEmptyPositionsSpec(context)));
     }
 
     public static PlayerConditionRule getSmiteRule(int cost, int health) {
@@ -377,7 +398,8 @@ public class PlayerRules {
                 GenericTank target = PredicateHelpers.getTargetTank(context).getValue();
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 target.put(Attribute.DURABILITY, target.getUnsafe(Attribute.DURABILITY) - health);
-            }, UnitRange.ALL_LIVING_TANKS);
+            },
+            (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
     }
 
     public static PlayerConditionRule getHealRule(int cost, int health) {
@@ -392,7 +414,8 @@ public class PlayerRules {
                 GenericTank target = PredicateHelpers.getTargetTank(context).getValue();
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 target.put(Attribute.DURABILITY, target.getUnsafe(Attribute.DURABILITY) + health);
-            }, UnitRange.ALL_LIVING_TANKS);
+            },
+            (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
     }
 
     public static PlayerConditionRule getSlowRule(int cost, int modifier) {
@@ -410,7 +433,8 @@ public class PlayerRules {
                 tank.put(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED));
                 tank.put(Attribute.SPEED, tank.getUnsafe(Attribute.SPEED) - modifier);
                 tank.put(Attribute.SLOWED, true);
-            }, UnitRange.ALL_LIVING_TANKS);
+            },
+            (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
     }
 
     public static PlayerConditionRule getHastenRule(int cost, int modifier) {
@@ -428,7 +452,8 @@ public class PlayerRules {
                 tank.put(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED));
                 tank.put(Attribute.SPEED, tank.getUnsafe(Attribute.SPEED) + modifier);
                 tank.put(Attribute.HASTENED, true);
-            }, UnitRange.ALL_LIVING_TANKS);
+            },
+            (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
     }
 
     /**
@@ -475,7 +500,7 @@ public class PlayerRules {
             }
 
             // Check ruleset specific requirements
-            GenericTank tank = PlayerRules.getTank(state, player).get();
+            GenericTank tank = PredicateHelpers.getTank(context).getValue();
             return canLootTarget.accept(context, tank, target);
         };
 
@@ -497,10 +522,14 @@ public class PlayerRules {
                 AttributeContainer targetObject = (AttributeContainer) context.getState().getBoard().getUnitOrFloor(position).get();
                 transferLoot.accept(context, tank, targetObject);
             },
-            new PositionRange("target", (state, player, target) -> {
-                PlayerRuleContext context = new PlayerRuleContext(state, player, new LogEntry(Map.of(Attribute.TARGET_POSITION, target)));
-                return lootCondition.test(context).isEmpty();
-            }));
+            (context) -> {
+                Stream<Position> lootablePositions = LogFieldHelpers.getPositionsInRange(context).stream().filter((position) -> {
+                    PlayerRuleContext testContext = new PlayerRuleContext(context.getState(), context.getPlayerRef(), new LogEntry(Map.of(Attribute.TARGET_POSITION, position)));
+                    return lootCondition.test(testContext).isEmpty();
+                });
+
+                return List.of(LogFieldHelpers.makeLogFieldSpec(Attribute.TARGET_POSITION, lootablePositions));
+            });
     }
 
     /**
@@ -564,8 +593,15 @@ public class PlayerRules {
                         handleHit.accept(context, tank, optionalElement.get());
                     }
                 },
-                new ShootPositionRange("target", lineOfSight),
-                new BooleanRange("hit"));
+                (context) -> {
+                    return List.of(
+                        LogFieldHelpers.getShootablePositionsSpec(context, lineOfSight, (position) -> List.of()),
+                        new EnumeratedLogFieldSpec<>(Attribute.HIT, List.of(
+                            new LogFieldValueDescriptor<>(true, "hit"),
+                            new LogFieldValueDescriptor<>(false, "miss")
+                        ))
+                    );
+                });
     }
 
     public static PlayerConditionRule spendActionToShootGeneric(
@@ -592,8 +628,15 @@ public class PlayerRules {
 
                     handleHit.accept(context, tank, optionalElement.get());
                 },
-                new ShootPositionRange("target", lineOfSight),
-                new IntegerRange("damage"));
+                (context) -> {
+                    return List.of(
+                        LogFieldHelpers.getShootablePositionsSpec(context, lineOfSight, (position) -> List.of()),
+                        new EnumeratedLogFieldSpec<>(Attribute.HIT, List.of(
+                            new LogFieldValueDescriptor<>(true, "hit"),
+                            new LogFieldValueDescriptor<>(false, "miss")
+                        ))
+                    );
+                });
     }
 
     public static PlayerConditionRule spendActionToShootWithDeathHandleHitBoolean(
