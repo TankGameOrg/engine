@@ -9,7 +9,6 @@ import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
 import pro.trevor.tankgame.rule.definition.actions.PossibleAction;
-import pro.trevor.tankgame.rule.definition.player.TimedPlayerRuleError;
 import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.util.IJsonObject;
 
@@ -32,6 +31,7 @@ public class PossibleActionsEncoder {
         JSONArray errors = new JSONArray(
             action.getErrors().stream()
                 .map((error) -> PlayerRuleErrorEncoder.encode(error))
+                .toList()
         );
 
         JSONObject actionJson = new JSONObject();
@@ -81,6 +81,8 @@ public class PossibleActionsEncoder {
             if(!nested.isEmpty()) {
                 option.put("nested_fields", encodeAllFields(nested));
             }
+
+            options.put(option);
         }
 
         jsonSpec.put("options", options);

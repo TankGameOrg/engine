@@ -318,7 +318,7 @@ public class PlayerRules {
                         targetTank.put(Attribute.DURABILITY, targetTank.getUnsafe(Attribute.DURABILITY) + 1);
                     }
                 },
-                (context) -> List.of(LogFieldHelpers.getAllPlayersWithLivingTanksSpec(context)));
+                (context) -> List.of(LogFieldHelpers.getAllPlayersWithTanksSpec(context)));
     }
 
     public static PlayerConditionRule getRuleCofferCostBounty(int lowerBound, int upperBound) {
