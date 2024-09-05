@@ -124,8 +124,6 @@ public class PlayerRules {
             .orElse(true);
     }, new PlayerRuleError(PlayerRuleError.Category.NOT_APPLICABLE, "Player tank must be dead"));
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public static final PlayerConditionRule BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT = new PlayerConditionRule(
             PlayerRules.ActionKeys.BUY_ACTION,
             new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TANK_HAS_ENOUGH_GOLD_TO_BUY_ACTION,
@@ -528,9 +526,6 @@ public class PlayerRules {
             } else if (target instanceof LootBox lootBox) {
                 lootTable.grantLoot(context.getState(), target, tank);
                 lootBox.setHasBeenLooted();
-            }
-            else {
-                throw new Error("Fell through");
             }
 
             tank.remove(Attribute.PLAYER_CAN_LOOT);

@@ -21,6 +21,10 @@ public class Result<V, E> {
     }
 
     public V getValue() {
+        if(value == null && error == null) {
+            throw new Error("You can't call getValue() on a Result<Void, ?>");
+        }
+
         if (error != null) {
             throw new Error(String.format("No value is present: error is '%s'", error));
         } else {
@@ -45,6 +49,7 @@ public class Result<V, E> {
     }
 
     public static <V, E> Result<V, E> ok(V value) {
+        assert value != null;
         return new Result<>(value, null);
     }
 
