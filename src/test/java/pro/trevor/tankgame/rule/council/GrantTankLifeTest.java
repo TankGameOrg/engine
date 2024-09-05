@@ -8,6 +8,7 @@ import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.TestUtilities;
@@ -21,6 +22,14 @@ public class GrantTankLifeTest {
     private static final IPlayerRule ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
+    private void apply(IPlayerRule rule, State state, GenericTank tank) {
+        rule.apply(
+            new ContextBuilder(state, councilPlayer)
+                .withTarget(tank)
+                .finish()
+        );
+    }
+
     @Test
     public void testGrantLifeToLivingTank() {
         GenericTank tank = TankBuilder.buildTank()
@@ -28,7 +37,8 @@ public class GrantTankLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
-        ZERO_COST_RULE.apply(state, councilPlayer, tank);
+        state.getCouncil().getCouncillors().add(councilPlayer);
+        apply(ZERO_COST_RULE, state, tank);
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
     }
 
@@ -43,8 +53,9 @@ public class GrantTankLifeTest {
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().getCouncillors().add(tank.getPlayerRef());
+        state.getCouncil().getCouncillors().add(councilPlayer);
 
-        ZERO_COST_RULE.apply(state, councilPlayer, tank);
+        apply(ZERO_COST_RULE, state, tank);
 
         assertEquals(1, tank.getUnsafe(Attribute.DURABILITY));
         assertFalse(tank.getUnsafe(Attribute.DEAD));
@@ -59,7 +70,8 @@ public class GrantTankLifeTest {
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
         state.getCouncil().put(Attribute.COFFER, 1);
-        ONE_COST_RULE.apply(state, councilPlayer, tank);
+        state.getCouncil().getCouncillors().add(councilPlayer);
+        apply(ONE_COST_RULE, state, tank);
         assertEquals(0, state.getCouncil().getUnsafe(Attribute.COFFER));
     }
 
@@ -70,7 +82,8 @@ public class GrantTankLifeTest {
                 .with(Attribute.DEAD, false)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
-        assertThrows(Error.class, () -> ONE_COST_RULE.apply(state, councilPlayer, tank));
+        state.getCouncil().getCouncillors().add(councilPlayer);
+        assertThrows(Error.class, () -> apply(ONE_COST_RULE, state, tank));
     }
 
 }

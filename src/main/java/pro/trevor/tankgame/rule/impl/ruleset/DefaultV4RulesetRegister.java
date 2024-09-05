@@ -6,12 +6,12 @@ import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.enforcer.EnforcerRuleset;
 import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
-import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
@@ -24,7 +24,7 @@ import java.util.function.Function;
 @RulesetType(name = "default-v4")
 public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRulesetRegister {
 
-    private static final Function<State, Long> TIMEOUT = (s) -> (long) (1 * 60); // 60 seconds
+    private static final Function<PlayerRuleContext, Long> TIMEOUT = (s) -> (long) (1 * 60); // 60 seconds
 
     @Override
     public void registerEnforcerRules(Ruleset ruleset) {

@@ -1,26 +1,30 @@
 package pro.trevor.tankgame;
 
+import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.rule.definition.Ruleset;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
-import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
+import pro.trevor.tankgame.rule.definition.player.TimedPlayerRuleError;
 import pro.trevor.tankgame.rule.definition.range.TypeRange;
 import pro.trevor.tankgame.rule.definition.range.VariableTypeRange;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.Codec;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
 
 import java.util.*;
 
 import org.json.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.Result;
 
 public class Api {
     private final Ruleset ruleset;
     private State state;
+
+    // A list of errors that should not be send back to the client when requesting possible actions
+    private static final Set<PlayerRuleError.Category> errorsToFilterOut = Set.of(
+        PlayerRuleError.Category.INSUFFICIENT_DATA
+    );
 
     public Api(IRulesetRegister ruleset) {
         this.ruleset = IRulesetRegister.getRuleset(ruleset);
@@ -42,16 +46,17 @@ public class Api {
     }
 
     public void ingestAction(JSONObject json) {
+        LogEntry logEntry = new LogEntry(json);
+
         if (!state.getOrElse(Attribute.RUNNING, true)) {
             System.out.println(state);
             throw new Error("The game is over; no actions can be submitted");
         }
-        else if (json.keySet().contains(JsonKeys.DAY)) {
+        else if (logEntry.has(Attribute.DAY)) {
             ruleset.getTickRules().applyRules(state);
         } else {
-            JSONObject subject = json.getJSONObject(JsonKeys.SUBJECT);
-            String action = json.getString(JsonKeys.ACTION);
-            long time = json.optLong(JsonKeys.TIME, 0);
+            PlayerRef subject = logEntry.getUnsafe(Attribute.SUBJECT);
+            String action = logEntry.getUnsafe(Attribute.ACTION);
 
             Optional<IPlayerRule> optionalRule = ruleset.getPlayerRules().getByName(action);
             if (optionalRule.isEmpty()) {
@@ -59,53 +64,12 @@ public class Api {
             }
 
             IPlayerRule rule = optionalRule.get();
-
-            Object decodedSubject = Codec.decodeJson(subject);
-            if (decodedSubject instanceof PlayerRef player) {
-                if (rule instanceof TimedPlayerConditionRule) {
-                    rule.apply(state, player, getArgumentsTimed(rule, json, time));
-                } else {
-                    rule.apply(state, player, getArguments(rule, json));
-                }
-            } else {
-                throw new Error("Subject is not a PlayerRef" + decodedSubject.getClass().getSimpleName());
-            }
+            PlayerRuleContext context = new PlayerRuleContext(state, subject, logEntry);
+            rule.apply(context);
         }
 
         ruleset.getEnforcerRules().enforceRules(state);
         ruleset.getConditionalRules().applyRules(state);
-    }
-
-    private Object decodeJsonAndHandlePlayerRef(JSONObject json) {
-        Object decodedJson = Codec.decodeJson(json);
-        if (decodedJson instanceof PlayerRef playerRef) {
-            return state.getBoard().gatherUnits(GenericTank.class).stream().filter((t) -> t.getPlayerRef().equals(playerRef)).findFirst().orElse(null);
-        } else {
-            return decodedJson;
-        }
-    }
-
-    private Object[] getArguments(IPlayerRule rule, JSONObject json) {
-        Object[] arguments = new Object[rule.parameters().length];
-        for (int i = 0; i < arguments.length; ++i) {
-            Object input = json.get(rule.parameters()[i].getName());
-            if (input instanceof JSONObject inputJson) {
-                arguments[i] = decodeJsonAndHandlePlayerRef(inputJson);
-            } else {
-                // Try to assume that, if it is not JSON-encoded object, it is a primitive
-                arguments[i] = input;
-            }
-        }
-        return arguments;
-    }
-
-    private Object[] getArgumentsTimed(IPlayerRule rule, JSONObject json, long time) {
-        Object[] args = getArguments(rule, json);
-        Object[] out = new Object[args.length + 1];
-
-        System.arraycopy(args, 0, out, 1, args.length);
-        out[0] = time;
-        return out;
     }
 
     public JSONObject getPossibleActions(PlayerRef subject) {
@@ -126,21 +90,36 @@ public class Api {
             actionJson.put("rule", rule.name());
 
             // Check if the rule is applicable to this (state, player) combination
-            Result<List<String>> canApplyResult = Result.ok();
-            if (rule instanceof PlayerConditionRule conditionRule) {
-                canApplyResult = conditionRule.canApplyConditionalWithoutMeta(state, subject);
+            List<PlayerRuleError> canApplyErrors = rule.canApply(new PlayerRuleContext(state, subject));
+
+            List<JSONObject> jsonErrors = canApplyErrors.stream()
+                // Remove any errors that the client shouldn't see i.e. insufficent data
+                .filter((error) -> !errorsToFilterOut.contains(error.getCategory()))
+                .map((error) -> {
+                    JSONObject jsonError = new JSONObject();
+                    jsonError.put("category", error.getCategory().toString());
+                    jsonError.put("message", error.getMessage());
+
+                    if(error instanceof TimedPlayerRuleError timedError) {
+                        long errorExpiration = timedError.getErrorExpirationTime();
+                        jsonError.put("expiration", errorExpiration);
+                    }
+
+                    return jsonError;
+                })
+                .toList();
+
+            // If this action is not applicable to the current player don't send it to UI
+            if(canApplyErrors.stream().filter((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE).findAny().isPresent()) {
+                continue;
             }
 
-            if(canApplyResult.isOk()) {
-                actionJson.put("errors", new JSONArray());
-            }
-            else {
-                actionJson.put("errors", new JSONArray(canApplyResult.getError()));
-            }
+            // If canApply didn't return any errors or all of they get filtered out this will be an empty array aka no error
+            actionJson.put("errors", new JSONArray(jsonErrors));
 
             // find all states of each parameter if the rule can be applied
             JSONArray fields = new JSONArray();
-            if(canApplyResult.isOk()) {
+            if(jsonErrors.isEmpty()) {
                 for (TypeRange<?> field : rule.parameters()) {
                     if (field instanceof VariableTypeRange<?,?> variableField) {
                         VariableTypeRange<Object, ?> genericField = (VariableTypeRange<Object, ?>) variableField;
@@ -155,12 +134,5 @@ public class Api {
 
         actions.put("actions", actionsArray);
         return actions;
-    }
-
-    private static class JsonKeys {
-        public static final String DAY = "day";
-        public static final String SUBJECT = "subject";
-        public static final String ACTION = "action";
-        public static final String TIME = "timestamp";
     }
 }

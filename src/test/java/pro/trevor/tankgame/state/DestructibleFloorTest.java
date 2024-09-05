@@ -17,6 +17,8 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestUtilities;
 
@@ -27,8 +29,25 @@ public class DestructibleFloorTest {
         return new DestructibleFloor(position, durability, maxDurability);
     }
 
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Position target, boolean hit) {
+        return rule.canApply(
+            new ContextBuilder(state, subject)
+                .withTarget(target)
+                .with(Attribute.HIT, hit)
+                .finish()
+        ).isEmpty();
+    }
+
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Position target) {
+        return rule.canApply(
+            new ContextBuilder(state, subject)
+                .withTarget(target)
+                .finish()
+        ).isEmpty();
+    }
+
     @Test
-    void testGetPosition() {
+    public void testGetPosition() {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 3, 3);
 
         Position p = floor.getPosition();
@@ -37,7 +56,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testIsWalkable() {
+    public void testIsWalkable() {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 1, 3);
         DestructibleFloor brokeFloor = GetTestFloor(new Position("A1"), 0, 3);
 
@@ -46,7 +65,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testUnbrokenToJson() {
+    public void testUnbrokenToJson() {
         DestructibleFloor floor = GetTestFloor(new Position("A1"), 1, 3);
 
         JSONObject json = floor.toJson();
@@ -58,7 +77,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void testBrokenToJson() {
+    public void testBrokenToJson() {
         DestructibleFloor brokenFloor = GetTestFloor(new Position("A1"), 0, 3);
 
         JSONObject json = brokenFloor.toJson();
@@ -71,15 +90,20 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void shootFloorTest() {
+    public void shootFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 3, 3);
         s.getBoard().putFloor(floor);
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
-        boolean canShoot = shootRule.canApply(s, t.getPlayerRef(), new Position("B1"), true);
-        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
+        boolean canShoot = canApply(shootRule, s, t.getPlayerRef(), new Position("B1"), true);
+        shootRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .with(Attribute.HIT, true)
+                .finish()
+        );
 
         assertTrue(canShoot);
         assertEquals(2, floor.getUnsafe(Attribute.DURABILITY));
@@ -87,15 +111,20 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void destroyFloorTest() {
+    public void destroyFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
         s.getBoard().putFloor(floor);
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
-        boolean canShoot = shootRule.canApply(s, t.getPlayerRef(), new Position("B1"), true);
-        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
+        boolean canShoot = canApply(shootRule, s, t.getPlayerRef(), new Position("B1"), true);
+        shootRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .with(Attribute.HIT, true)
+                .finish()
+        );
 
         assertTrue(canShoot);
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
@@ -103,7 +132,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void walkAcrossThenDestroyFloorTest() {
+    public void walkAcrossThenDestroyFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
@@ -112,22 +141,41 @@ public class DestructibleFloorTest {
         IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
 
         // Move onto destructible floor, then move past it
-        moveRule.apply(s, t.getPlayerRef(), new Position("B1"));
+        moveRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .finish()
+        );
         assertEquals(t.getPosition(), floor.getPosition());
-        moveRule.apply(s, t.getPlayerRef(), new Position("C1"));
+        moveRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("C1"))
+                .finish()
+        );;
 
         // Shoot at the destructible floor, destroying it
-        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
+        shootRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .with(Attribute.HIT, true)
+                .finish()
+        );
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
 
         // Try to move onto the broken floor, you cannot
-        assertFalse(moveRule.canApply(s, t.getPlayerRef(), new Position("B1")));
-        assertThrows(Error.class, () -> moveRule.apply(s, t.getPlayerRef(), new Position("B1")));
+        assertFalse(canApply(moveRule, s, t.getPlayerRef(), new Position("B1")));
+        assertThrows(Error.class, () -> {
+            moveRule.apply(
+                new ContextBuilder(s, t.getPlayerRef())
+                    .withTarget(new Position("B1"))
+                    .finish()
+            );
+        });
     }
 
     @Test
-    void shootUnitAboveFloorTest() {
+    public void shootUnitAboveFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
         GenericTank tankAbove = TankBuilder.buildTank().with(Attribute.DURABILITY, 1).with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.GOLD, 0).with(Attribute.BOUNTY, 0).at(new Position("B1")).finish();
 
@@ -138,7 +186,12 @@ public class DestructibleFloorTest {
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
         ConditionalRule<GenericTank> dieOrDestroyRule = ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY;
-        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
+        shootRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .with(Attribute.HIT, true)
+                .finish()
+        );
         dieOrDestroyRule.apply(s, t);
         dieOrDestroyRule.apply(s, tankAbove);
 
@@ -149,7 +202,7 @@ public class DestructibleFloorTest {
     }
 
     @Test
-    void destroyUnitAboveFloorTest() {
+    public void destroyUnitAboveFloorTest() {
         GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
         BasicWall wall = new BasicWall(new Position("B1"), 1);
 
@@ -163,7 +216,12 @@ public class DestructibleFloorTest {
         IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
 
         // Shoot once, destroying the wall
-        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
+        shootRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .with(Attribute.HIT, true)
+                .finish()
+        );
         destroyWallRule.apply(s, wall);
 
         // Floor durability is unchanged
@@ -171,14 +229,25 @@ public class DestructibleFloorTest {
         assertFalse(floor.get(Attribute.DESTROYED).orElse(false));
 
         //Shoot again
-        shootRule.apply(s, t.getPlayerRef(), new Position("B1"), true);
+        shootRule.apply(
+            new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .with(Attribute.HIT, true)
+                .finish()
+        );
 
         // Floor is destroyed
         assertEquals(0, floor.getUnsafe(Attribute.DURABILITY));
         assertTrue(floor.get(Attribute.DESTROYED).orElse(false));
 
         // Try to move onto the broken floor, you cannot
-        assertFalse(moveRule.canApply(s, t.getPlayerRef(), new Position("B1")));
-        assertThrows(Error.class, () -> moveRule.apply(s, t.getPlayerRef(), new Position("B1")));
+        assertFalse(canApply(moveRule, s, t.getPlayerRef(), new Position("B1")));
+        assertThrows(Error.class, () -> {
+            moveRule.apply(
+                new ContextBuilder(s, t.getPlayerRef())
+                .withTarget(new Position("B1"))
+                .finish()
+            );
+        });
     }
 }

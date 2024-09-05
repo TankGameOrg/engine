@@ -9,14 +9,32 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.util.TestUtilities;
 
 public class BuyActionWithGoldTest {
+
+    private PlayerRuleContext makeContext(GenericTank tank, int gold) {
+        State state = TestUtilities.generateBoard(1, 1, tank);
+
+        return new ContextBuilder(state, tank.getPlayerRef())
+            .with(Attribute.GOLD, gold)
+            .finish();
+    }
+
+    private boolean canApply(IPlayerRule rule, GenericTank tank, int gold) {
+        return rule.canApply(makeContext(tank, gold)).isEmpty();
+    }
+
+    private void apply(IPlayerRule rule, GenericTank tank, int gold) {
+        rule.apply(makeContext(tank, gold));
+    }
 
     @Test
     public void TypeCheckTest() {
@@ -31,7 +49,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, true).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3)); // goldSpent = 3
+        assertFalse(canApply(rule, tank, 3)); // goldSpent = 3
     }
 
     @Test
@@ -40,7 +58,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3)); // goldSpent = 3
+        assertFalse(canApply(rule, tank, 3)); // goldSpent = 3
     }
 
     @Test
@@ -49,7 +67,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 6)); // goldSpent = 6
+        assertFalse(canApply(rule, tank, 6)); // goldSpent = 6
     }
 
     @Test
@@ -78,7 +96,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 6));
+        assertFalse(canApply(rule, tank, 6));
     }
 
     @Test
@@ -87,7 +105,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
-        assertFalse(rule.canApply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 4));
+        assertFalse(canApply(rule, tank, 4));
     }
 
     @Test
@@ -96,7 +114,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
-        rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), 3); // goldSpent = 3
+        apply(rule, tank, 3); // goldSpent = 3
 
         assertEquals(0, tank.getUnsafe(Attribute.GOLD));
         assertEquals(1, tank.getUnsafe(Attribute.ACTION_POINTS));
@@ -113,7 +131,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.GOLD, startingGold).with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
-        rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), spentGold);
+        apply(rule, tank, spentGold);
 
         assertEquals(expectedGold, tank.getUnsafe(Attribute.GOLD));
         assertEquals(expectedActions, tank.getUnsafe(Attribute.ACTION_POINTS));
@@ -133,7 +151,7 @@ public class BuyActionWithGoldTest {
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(actionCost, 5);
-        rule.apply(TestUtilities.generateBoard(1, 1, tank), tank.getPlayerRef(), goldSpent);
+        apply(rule, tank, goldSpent);
 
         assertEquals(0, tank.getUnsafe(Attribute.GOLD));
         assertEquals(expectedActions, tank.getUnsafe(Attribute.ACTION_POINTS));

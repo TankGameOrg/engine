@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule.definition.player.conditional;
 
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
 import pro.trevor.tankgame.util.Result;
 
 import java.util.ArrayList;
@@ -9,45 +9,22 @@ import java.util.List;
 
 public class RuleCondition {
 
-    private final RulePredicate[] predicates;
+    private final IRulePredicate[] predicates;
 
-    public RuleCondition(RulePredicate... predicates) {
+    public RuleCondition(IRulePredicate... predicates) {
         this.predicates = predicates;
     }
 
-    public Result<List<String>> test(State state, PlayerRef player, Object... meta) {
-        List<String> errors = new ArrayList<>();
+    public List<PlayerRuleError> test(PlayerRuleContext context) {
+        List<PlayerRuleError> errors = new ArrayList<>();
 
-        for (RulePredicate predicate : predicates) {
-            Result<String> error = predicate.test(state, player, meta);
+        for (IRulePredicate predicate : predicates) {
+            Result<Void, PlayerRuleError> error = predicate.test(context);
             if (error.isError()) {
                 errors.add(error.getError());
             }
         }
 
-        if (errors.isEmpty()) {
-            return Result.ok();
-        } else {
-            return Result.error(errors);
-        }
-    }
-
-    public Result<List<String>> testForPossibleActions(State state, PlayerRef player) {
-        List<String> errors = new ArrayList<>();
-
-        for (RulePredicate predicate : predicates) {
-            if (predicate.isCheckable()) {
-                Result<String> error = predicate.test(state, player);
-                if (error.isError()) {
-                    errors.add(error.getError());
-                }
-            }
-        }
-
-        if (errors.isEmpty()) {
-            return Result.ok();
-        } else {
-            return Result.error(errors);
-        }
+        return errors;
     }
 }

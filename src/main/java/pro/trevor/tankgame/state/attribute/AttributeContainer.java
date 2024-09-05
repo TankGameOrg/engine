@@ -44,15 +44,15 @@ public class AttributeContainer {
         }
     }
 
-    String toAttributeJsonKeyString(String attribute) {
+    protected String toAttributeJsonKeyString(String attribute) {
         return "$" + attribute;
     }
 
-    String toAttributeString(String attributeKey) {
+    protected String toAttributeString(String attributeKey) {
         return attributeKey.substring(1);
     }
 
-    boolean isAttributeJsonKey(String attribute) {
+    protected boolean isAttributeJsonKey(String attribute) {
         return attribute.startsWith("$");
     }
 

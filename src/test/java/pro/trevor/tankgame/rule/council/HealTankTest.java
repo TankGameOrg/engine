@@ -1,8 +1,13 @@
 package pro.trevor.tankgame.rule.council;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
+import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
@@ -10,6 +15,7 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TestUtilities;
@@ -19,6 +25,16 @@ public class HealTankTest {
 
     private static final PlayerConditionRule ZERO_COST_RULE = PlayerRules.getHealRule(0, HEALTH);
     private static final PlayerConditionRule ONE_COST_RULE = PlayerRules.getHealRule(1, HEALTH);
+
+    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, GenericTank tank) {
+        return new ContextBuilder(state, playerRef)
+            .withTarget(tank)
+            .finish();
+    }
+
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, GenericTank tank) {
+        return rule.canApply(makeContext(state, playerRef, tank)).isEmpty();
+    }
 
     @Test
     public void testCannotHaveNegativeCost() {
@@ -44,7 +60,7 @@ public class HealTankTest {
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
 
-        Assertions.assertFalse(ZERO_COST_RULE.canApply(state, player.toRef(), otherTank));
+        Assertions.assertFalse(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
 
     @Test
@@ -56,7 +72,7 @@ public class HealTankTest {
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
 
-        Assertions.assertTrue(ZERO_COST_RULE.canApply(state, player.toRef(), otherTank));
+        Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
 
     @Test
@@ -67,7 +83,7 @@ public class HealTankTest {
         State state = TestUtilities.generateBoard(1, 1, otherTank);
         state.getPlayers().add(player);
 
-        Assertions.assertTrue(ZERO_COST_RULE.canApply(state, player.toRef(), otherTank));
+        Assertions.assertTrue(canApply(ZERO_COST_RULE, state, player.toRef(), otherTank));
     }
 
     @Test
@@ -82,7 +98,7 @@ public class HealTankTest {
         state.getPlayers().add(player);
         state.getBoard().putUnit(tank);
 
-        Assertions.assertFalse(ONE_COST_RULE.canApply(state, player.toRef(), tank));
+        Assertions.assertFalse(canApply(ONE_COST_RULE, state, player.toRef(), tank));
     }
 
     @Test
@@ -97,7 +113,7 @@ public class HealTankTest {
         state.getPlayers().add(player);
         state.getBoard().putUnit(tank);
 
-        Assertions.assertTrue(ONE_COST_RULE.canApply(state, player.toRef(), tank));
+        Assertions.assertTrue(canApply(ONE_COST_RULE, state, player.toRef(), tank));
     }
 
     @Test
@@ -114,7 +130,7 @@ public class HealTankTest {
         state.getPlayers().add(player);
         state.getBoard().putUnit(tank);
 
-        PlayerRules.getHealRule(POWER_COST, 1).apply(state, player.toRef(), tank);
+        PlayerRules.getHealRule(POWER_COST, 1).apply(makeContext(state, player.toRef(), tank));
         Assertions.assertEquals(POWER - POWER_COST, player.getUnsafe(Attribute.POWER));
     }
 
@@ -132,7 +148,7 @@ public class HealTankTest {
         state.getPlayers().add(player);
         state.getBoard().putUnit(tank);
 
-        PlayerRules.getHealRule(0, HEALTH).apply(state, player.toRef(), tank);
+        PlayerRules.getHealRule(0, HEALTH).apply(makeContext(state, player.toRef(), tank));
         Assertions.assertEquals(INITIAL_DURABILITY + HEALTH, tank.getUnsafe(Attribute.DURABILITY));
     }
 }
