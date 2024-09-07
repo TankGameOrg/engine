@@ -2,14 +2,14 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.ruleset.DefaultV3RulesetRegister;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
-import pro.trevor.tankgame.rule.impl.ruleset.DefaultV5RulesetRegister;
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.ui.Cli;
 
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Optional;
 import java.util.Properties;
 
 public class Main {
@@ -18,25 +18,15 @@ public class Main {
 
     public static void main(String[] args) {
         if (args.length == 2 && (args[0].equals("--debug") || args[0].equals("-d"))) {
-            File initialFile;
-            File movesFile;
-            Api api;
-            if (args[1].equals("default-v3")) {
-                // Debug the default-v3 ruleset
-                initialFile = new File("example/initial-v3.json");
-                movesFile = new File("example/moves-v3.json");
-                api = new Api(new DefaultV3RulesetRegister());
-            } else if (args[1].equals("default-v4")) {
-                // Default to debugging default-v4 ruleset
-                initialFile = new File("example/initial-v4.json");
-                movesFile = new File("example/moves-v4.json");
-                api = new Api(new DefaultV4RulesetRegister());
-            } else {
-                // Default to debugging default-v5 ruleset
-                initialFile = new File("example/initial-v5.json");
-                movesFile = new File("example/moves-v5.json");
-                api = new Api(new DefaultV5RulesetRegister());
+            String rulesetName = args[1];
+            Optional<Api> maybeApi = RulesetRegistry.createApi(rulesetName);
+            if(maybeApi.isEmpty()) {
+                System.out.println("The ruleset " + rulesetName + " is not supported");
+                System.exit(1);
             }
+            File initialFile = new File("example/initial-" + rulesetName + ".json");
+            File movesFile = new File("example/moves-" + rulesetName + ".json");
+            Api api = maybeApi.get();
             DEBUG = true;
             try {
                 String initialString = Files.readString(initialFile.toPath());
@@ -76,7 +66,7 @@ public class Main {
         JSONObject versionInfo = new JSONObject();
         String version = Main.class.getPackage().getImplementationVersion();
         versionInfo.put("version", version);
-        versionInfo.put("supported_rulesets", Cli.getSupportedRulesetNames());
+        versionInfo.put("supported_rulesets", RulesetRegistry.getSupportedRulesetNames());
 
         String prettyVersion = "Engine " + version;
 
