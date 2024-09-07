@@ -45,7 +45,7 @@ public class Cli {
         while(handler.canProcessRequests()) {
             json = getJsonObject(scanner);
             if (!json.has("method")) {
-                output.println(response(new Error("Request does not have the required method field")));
+                output.println(response(new Error("Request does not have the required field method")));
                 continue;
             }
 
@@ -60,7 +60,10 @@ public class Cli {
                 output.println(method.invoke(handler, json));
             }
             catch(IllegalAccessException | InvocationTargetException ex) {
-                output.println(response(ex));
+                // Typically these exceptions are the result of the method being called throwing an error so we want to send
+                // that error to the UI
+                System.err.println("Got " + ex.getCause() + " reporting cause to UI. Original message: " + ex.getMessage());
+                output.println(response(ex.getCause()));
             }
             catch(Throwable ex) {
                 output.println(response(ex));
