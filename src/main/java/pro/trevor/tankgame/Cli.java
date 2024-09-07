@@ -105,12 +105,13 @@ public class Cli {
                         JSONArray errors = new JSONArray(
                             api.canIngestAction(new LogEntry(json)).stream()
                                 .map((error) -> PlayerRuleErrorEncoder.encode(error))
+                                .toList()
                         );
 
                         JSONObject response = new JSONObject();
                         response.put("errors", errors);
                         response.put("error", false);
-                        output.println(errors);
+                        output.println(response);
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();

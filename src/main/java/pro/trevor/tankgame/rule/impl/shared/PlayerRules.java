@@ -564,9 +564,6 @@ public class PlayerRules {
                 lootTable.grantLoot(context.getState(), target, tank);
                 lootBox.setHasBeenLooted();
             }
-            else {
-                throw new Error("Fell through");
-            }
 
             tank.remove(Attribute.PLAYER_CAN_LOOT);
         });
