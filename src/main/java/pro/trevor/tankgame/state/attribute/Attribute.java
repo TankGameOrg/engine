@@ -1,5 +1,6 @@
 package pro.trevor.tankgame.state.attribute;
 
+import pro.trevor.tankgame.rule.definition.actions.DieRollResult;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
@@ -71,6 +72,7 @@ public class Attribute<E> {
     public static final Attribute<Integer> DAY = new Attribute<>("DAY", Integer.class);
     public static final Attribute<PlayerRef> SUBJECT = new Attribute<>("SUBJECT", PlayerRef.class);
     public static final Attribute<String> ACTION = new Attribute<>("ACTION", String.class);
+    public static final Attribute<DieRollResult> HIT_ROLL = new Attribute<>("HIT_ROLL", DieRollResult.class); // DieRollResult<Boolean>
 
     private final String attributeName;
     private final Class<E> attributeClass;

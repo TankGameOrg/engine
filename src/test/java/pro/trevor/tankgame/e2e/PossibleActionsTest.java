@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import pro.trevor.tankgame.Api;
 import pro.trevor.tankgame.log.LogEntry;
+import pro.trevor.tankgame.rule.definition.actions.DieRollLogFieldSpec;
+import pro.trevor.tankgame.rule.definition.actions.DieRollResult;
 import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
@@ -20,6 +22,7 @@ import pro.trevor.tankgame.state.meta.Player;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pro.trevor.tankgame.e2e.EndToEndTestUtils.readFile;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -71,6 +74,7 @@ public class PossibleActionsTest {
         LogFieldSpec<?> spec = fieldSpecs.get(index);
         switch(spec) {
             case EnumeratedLogFieldSpec<?> enumSpec -> enumerateField(api, fieldSpecs, logEntryBuilder, index, enumSpec);
+            case DieRollLogFieldSpec<?> dieRoll -> enumerateField(api, fieldSpecs, logEntryBuilder, index, dieRoll, new LinkedList<>(), 0, 0);
             default -> throw new IllegalArgumentException("Unsupported log field spec: " + spec.getClass().getName());
         }
     }
@@ -86,6 +90,26 @@ public class PossibleActionsTest {
             }
 
             buildAllPermutations(api, fieldSpecs, logEntryBuilderWithValue, index + 1);
+        }
+    }
+
+    private void enumerateField(Api api, List<LogFieldSpec<?>> fieldSpecs, LinkedAttributeList<?> logEntryBuilder, int index, DieRollLogFieldSpec<?> dieRoll, LinkedList<Object> rollResults, int setIndex, int dieIndex) {
+        if(setIndex == dieRoll.getDiceSets().size()) {
+            Attribute<?> attribute = dieRoll.getAttribute();
+            LinkedAttributeList<?> logEntryBuilderWithValue = logEntryBuilder.with((Attribute<Object>) attribute, new DieRollResult<>(rollResults));
+            buildAllPermutations(api, fieldSpecs, logEntryBuilderWithValue, index + 1);
+            return;
+        }
+
+        if(dieIndex == dieRoll.getDiceSets().get(setIndex).expandDice().size()) {
+            enumerateField(api, fieldSpecs, logEntryBuilder, index, dieRoll, rollResults, setIndex + 1, 0);
+            return;
+        }
+
+        for(Object value : dieRoll.getDiceSets().get(setIndex).expandDice().get(dieIndex).getSides()) {
+            LinkedList<Object> modifiedResults = (LinkedList<Object>) rollResults.clone();
+            modifiedResults.add(value);
+            enumerateField(api, fieldSpecs, logEntryBuilder, index, dieRoll, modifiedResults, setIndex, dieIndex + 1);
         }
     }
 

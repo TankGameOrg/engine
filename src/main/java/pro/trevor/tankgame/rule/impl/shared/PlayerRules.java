@@ -6,10 +6,15 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.function.*;
 
 import pro.trevor.tankgame.log.LogEntry;
+import pro.trevor.tankgame.rule.definition.actions.DiceSet;
+import pro.trevor.tankgame.rule.definition.actions.DieRollLogFieldSpec;
+import pro.trevor.tankgame.rule.definition.actions.DieRollResult;
 import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldHelpers;
+import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
 import pro.trevor.tankgame.rule.definition.player.PlayerConditionRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
@@ -568,6 +573,7 @@ public class PlayerRules {
 
     public static PlayerConditionRule spendActionToShootGenericWithHitBoolean(
             ITriPredicate<State, Position, Position> lineOfSight,
+            BiFunction<PlayerRuleContext, IElement, List<LogFieldSpec<?>>> diceForPosition,
             ITriConsumer<PlayerRuleContext, GenericTank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TARGET_IS_IN_RANGE,
@@ -581,7 +587,17 @@ public class PlayerRules {
                 (context) -> {
                     GenericTank tank = PredicateHelpers.getTank(context).getValue();
                     Position target = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
-                    boolean hit = PredicateHelpers.getLogField(context, Attribute.HIT);
+
+                    boolean hit = false;
+                    LogEntry logEntry = context.getLogEntry().get();
+                    if(logEntry.has(Attribute.HIT_ROLL)) {
+                        hit = ((DieRollResult<Boolean>) logEntry.getUnsafe(Attribute.HIT_ROLL)).getResults()
+                            .stream().reduce(false, (currentHit, dieRoll) -> currentHit || dieRoll);
+                    }
+                    else if(logEntry.has(Attribute.HIT)) {
+                        hit = logEntry.getUnsafe(Attribute.HIT);
+                    }
+
                     tank.put(Attribute.ACTION_POINTS, tank.getUnsafe(Attribute.ACTION_POINTS) - 1);
 
                     Optional<IElement> optionalElement = context.getState().getBoard().getUnitOrFloor(target);
@@ -595,11 +611,10 @@ public class PlayerRules {
                 },
                 (context) -> {
                     return List.of(
-                        LogFieldHelpers.getShootablePositionsSpec(context, lineOfSight, (position) -> List.of()),
-                        new EnumeratedLogFieldSpec<>(Attribute.HIT, List.of(
-                            new LogFieldValueDescriptor<>(true, "hit"),
-                            new LogFieldValueDescriptor<>(false, "miss")
-                        ))
+                        LogFieldHelpers.getShootablePositionsSpec(context, lineOfSight, (position) -> {
+                            IElement element = context.getState().getBoard().getUnitOrFloor(position).get();
+                            return diceForPosition.apply(context, element);
+                        })
                     );
                 });
     }
@@ -641,7 +656,27 @@ public class PlayerRules {
 
     public static PlayerConditionRule spendActionToShootWithDeathHandleHitBoolean(
             ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, GenericTank, GenericTank> handleDeath) {
-        return spendActionToShootGenericWithHitBoolean(lineOfSight, (context, tank, element) -> {
+        return spendActionToShootGenericWithHitBoolean(lineOfSight,
+        (context, targetElement) -> {
+            GenericTank subjectTank = PredicateHelpers.getTank(context).getValue();
+
+            // We are guarenteed to hit unless we are shooting a tank
+            // Indicate this to the user by showing a field with only one option "hit"
+            LogFieldSpec<?> hitRoll = new EnumeratedLogFieldSpec<>(Attribute.HIT, List.of(
+                new LogFieldValueDescriptor<>(true, "hit")
+            ));
+
+            if(targetElement instanceof GenericTank genericTank && !genericTank.getOrElse(Attribute.DEAD, false)) {
+                int distance = subjectTank.getPosition().distanceFrom(targetElement.getPosition());
+                int numDice = (subjectTank.getOrElse(Attribute.RANGE, 0) - distance) + 1;
+                hitRoll = new DieRollLogFieldSpec<>(Attribute.HIT_ROLL, List.of(new DiceSet<>(numDice, DiceSet.HIT_DIE)));
+            }
+
+            return List.of(
+                hitRoll
+            );
+        },
+        (context, tank, element) -> {
             switch (element) {
                 case GenericTank otherTank -> {
                     otherTank.put(Attribute.DURABILITY, otherTank.getUnsafe(Attribute.DURABILITY) - 1);

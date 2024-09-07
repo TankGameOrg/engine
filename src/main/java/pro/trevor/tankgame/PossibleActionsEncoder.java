@@ -5,6 +5,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import pro.trevor.tankgame.rule.definition.actions.DiceSet;
+import pro.trevor.tankgame.rule.definition.actions.DieRollLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.EnumeratedLogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.actions.LogFieldValueDescriptor;
@@ -58,6 +60,7 @@ public class PossibleActionsEncoder {
 
         switch(spec) {
             case EnumeratedLogFieldSpec<?> enumSpec -> encodeField(jsonSpec, enumSpec);
+            case DieRollLogFieldSpec<?> diceSpec -> encodeField(jsonSpec, diceSpec);
             default -> throw new IllegalArgumentException("Unsupported log field spec: " + spec.getClass().getName());
         }
 
@@ -86,5 +89,26 @@ public class PossibleActionsEncoder {
         }
 
         jsonSpec.put("options", options);
+    }
+
+    private static void encodeField(JSONObject jsonSpec, DieRollLogFieldSpec<?> diceSpec) {
+        JSONArray jsonDiceSets = new JSONArray();
+        for(DiceSet<?> diceSet : diceSpec.getDiceSets()) {
+            JSONArray jsonSides = new JSONArray();
+            for(Object side : diceSet.getDie().getSides()) {
+                jsonSides.put(side);
+            }
+
+            JSONObject jsonDie = new JSONObject();
+            jsonDie.put("name", diceSet.getDie().getName());
+            jsonDie.put("sides", jsonSides);
+
+            JSONObject jsonDiceSet = new JSONObject();
+            jsonDiceSet.put("die", jsonDie);
+            jsonDiceSet.put("num_dice", diceSet.getNumDice());
+            jsonDiceSets.put(jsonDiceSet);
+        }
+
+        jsonSpec.put("dice", jsonDiceSets);
     }
 }

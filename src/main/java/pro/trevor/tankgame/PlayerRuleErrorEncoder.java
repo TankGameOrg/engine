@@ -1,6 +1,5 @@
 package pro.trevor.tankgame;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;

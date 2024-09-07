@@ -13,7 +13,6 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 
 import java.util.*;
 
-import org.json.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Result;
 
