@@ -2,103 +2,73 @@ package pro.trevor.tankgame.ui;
 
 import org.json.JSONObject;
 
-import pro.trevor.tankgame.Api;
-import pro.trevor.tankgame.RulesetRegistry;
-import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.ReflectionUtil;
-import pro.trevor.tankgame.util.RulesetType;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Cli {
+    IRpcHandler handler;
+    Map<String, Method> methodMap;
 
+    public Cli(IRpcHandler handler) {
+        this.handler = handler;
+        methodMap = new HashMap<>();
 
+        for(Method method : handler.getClass().getMethods()) {
+            RpcMethod rpcMethod = method.getAnnotation(RpcMethod.class);
+            if(rpcMethod == null) continue;
 
+            if(!method.getReturnType().equals(JSONObject.class)) {
+                throw new Error("Rpc method " + method.getName() + " aka " + rpcMethod.type() + " does not return a JSONObject");
+            }
 
+            if(method.getParameterTypes().length != 1 || !method.getParameterTypes()[0].equals(JSONObject.class)) {
+                throw new Error("Rpc method " + method.getName() + " aka " + rpcMethod.type() + " must accept exactly 1 JSONObject parameter");
+            }
 
-    public static void repl(IRulesetRegister ruleset) {
-        Api api = new Api(ruleset);
-        PrintStream output = System.out;
-        InputStream input = System.in;
+            methodMap.put(rpcMethod.type(), method);
+        }
+    }
+
+    public void startRepl() {
+        startRepl(System.in, System.out);
+    }
+
+    public void startRepl(InputStream input, PrintStream output) {
         Scanner scanner = new Scanner(input);
-        boolean exit = false;
         JSONObject json;
-        while (!exit) {
+        while(handler.canProcessRequests()) {
             json = getJsonObject(scanner);
             if (!json.has("type")) {
-                output.println(response("input does not have a type", true));
+                output.println(response(new Error("Input does not have a type field")));
                 continue;
             }
 
-            String type = json.getString("type");
+            String methodName = json.getString("type");
+            Method method = methodMap.get(methodName);
+            if(method == null) {
+                output.println(response(new Error("The method " + methodName + " does not exist")));
+                continue;
+            }
 
-            switch (type) {
-                case "command" -> {
-                    String command = json.getString("command");
-                    switch (command) {
-                        case "rules" -> output.println(api.getRules().toString());
-                        case "display" -> output.println(api.getState().toJson().toString());
-                        case "exit" -> {
-                            output.println(response("exiting", false));
-                            exit = true;
-                        }
-                        default -> output.println(response("unexpected command: " + command, true));
-                    }
-                }
-                case "version" -> {
-                    String version = json.getString("version");
-                    Optional<Api> newRuleset = RulesetRegistry.createApi(version);
-                    if (newRuleset.isEmpty()) {
-                        output.println(response("no such version: " + version, true));
-                    } else {
-                        api = newRuleset.get();
-                        output.println(response("switched to version: " + version, false));
-                    }
-                }
-                case "state" -> {
-                    try {
-                        api.setState(new State(json));
-                        output.println(response("state successfully ingested", false));
-                    } catch (Throwable throwable) {
-                        output.println(response(throwable.getMessage(), true));
-                        throwable.printStackTrace();
-                    }
-                }
-                case "action" -> {
-                    try {
-                        api.ingestAction(json);
-                        output.println(response("action successfully ingested", false));
-                    } catch (Throwable throwable) {
-                        output.println(response(throwable.getMessage(), true));
-                        throwable.printStackTrace();
-                    }
-                }
-                case "possible_actions" -> {
-                    try {
-                        output.println(api.getPossibleActions(new PlayerRef(json.getString("player"))));
-                    } catch (Throwable throwable) {
-                        output.println(response(throwable.getMessage(), true));
-                        throwable.printStackTrace();
-                    }
-                }
-
-                default -> output.println(response("unexpected type: " + type, true));
+            try {
+                output.println(method.invoke(handler, json));
+            }
+            catch(IllegalAccessException | InvocationTargetException ex) {
+                output.println(response(ex));
+            }
+            catch(Throwable ex) {
+                output.println(response(ex));
             }
         }
     }
 
-    private static JSONObject getJsonObject(Scanner input) {
+    private JSONObject getJsonObject(Scanner input) {
         Pattern oldPattern = input.delimiter();
         StringBuilder sb = new StringBuilder();
         input.useDelimiter("");
@@ -128,12 +98,21 @@ public class Cli {
         }
     }
 
-    private static JSONObject response(String string, boolean error) {
+    private JSONObject encodeThrowable(Throwable error) {
         JSONObject output = new JSONObject();
-        output.put("type", "response");
-        output.put("response", string);
-        output.put("error", error);
+        output.put("message", error.getMessage());
+        output.put("stack", error.getStackTrace());
+        if(error.getCause() != null) {
+            output.put("cause", encodeThrowable(error.getCause()));
+        }
         return output;
     }
 
+    private JSONObject response(Throwable error) {
+        JSONObject output = new JSONObject();
+        output.put("error", encodeThrowable(error));
+        // Previous versions of the Cli sent the error message as response
+        output.put("respose", error.getMessage());
+        return output;
+    }
 }

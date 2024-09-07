@@ -2,9 +2,10 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
+
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.ui.Cli;
+import pro.trevor.tankgame.ui.RpcHandler;
 
 import java.io.File;
 import java.io.InputStream;
@@ -53,7 +54,8 @@ public class Main {
             Main.printVersion();
         } else if (args.length == 0) {
             // REPL with the newest default ruleset
-            Cli.repl(new DefaultV4RulesetRegister());
+            Cli cli = new Cli(new RpcHandler());
+            cli.startRepl();
         } else {
             System.err.println("Expected 0 or 1 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4|-v|--version>");
         }
