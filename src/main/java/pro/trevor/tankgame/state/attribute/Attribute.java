@@ -73,6 +73,7 @@ public class Attribute<E> {
     public static final Attribute<PlayerRef> SUBJECT = new Attribute<>("SUBJECT", PlayerRef.class);
     public static final Attribute<String> ACTION = new Attribute<>("ACTION", String.class);
     public static final Attribute<DieRollResult> HIT_ROLL = new Attribute<>("HIT_ROLL", DieRollResult.class); // DieRollResult<Boolean>
+    public static final Attribute<DieRollResult> DAMAGE_ROLL = new Attribute<>("DAMAGE_ROLL", DieRollResult.class); // DieRollResult<Integer>
 
     private final String attributeName;
     private final Class<E> attributeClass;

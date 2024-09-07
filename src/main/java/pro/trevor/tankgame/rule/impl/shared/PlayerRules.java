@@ -621,6 +621,7 @@ public class PlayerRules {
 
     public static PlayerConditionRule spendActionToShootGeneric(
             ITriPredicate<State, Position, Position> lineOfSight,
+            BiFunction<PlayerRuleContext, IElement, List<LogFieldSpec<?>>> diceForPosition,
             ITriConsumer<PlayerRuleContext, GenericTank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TARGET_IS_IN_RANGE,
@@ -645,11 +646,10 @@ public class PlayerRules {
                 },
                 (context) -> {
                     return List.of(
-                        LogFieldHelpers.getShootablePositionsSpec(context, lineOfSight, (position) -> List.of()),
-                        new EnumeratedLogFieldSpec<>(Attribute.HIT, List.of(
-                            new LogFieldValueDescriptor<>(true, "hit"),
-                            new LogFieldValueDescriptor<>(false, "miss")
-                        ))
+                        LogFieldHelpers.getShootablePositionsSpec(context, lineOfSight, (position) -> {
+                            IElement element = context.getState().getBoard().getUnitOrFloor(position).get();
+                            return diceForPosition.apply(context, element);
+                        })
                     );
                 });
     }
@@ -701,8 +701,14 @@ public class PlayerRules {
 
     public static PlayerConditionRule spendActionToShootWithDeathHandleHitDamage(
             ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, GenericTank, GenericTank> handleDeath) {
-        return spendActionToShootGeneric(lineOfSight, (context, tank, element) -> {
-            int damage = PredicateHelpers.getLogField(context, Attribute.DAMAGE);
+        return spendActionToShootGeneric(lineOfSight, (context, targetElement) -> {
+            return List.of(
+                new DieRollLogFieldSpec<>(Attribute.DAMAGE_ROLL, List.of(new DiceSet<>(1, DiceSet.D4)))
+            );
+        },
+        (context, tank, element) -> {
+            int damage = ((DieRollResult<Integer>) PredicateHelpers.getLogField(context, Attribute.DAMAGE_ROLL)).getResults()
+                .stream().reduce(0, (totalDamage, die) -> totalDamage + die);
 
             switch (element) {
                 case GenericTank otherTank -> {
