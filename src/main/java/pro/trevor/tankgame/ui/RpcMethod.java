@@ -14,5 +14,4 @@ import java.lang.annotation.Target;
  * @note The annotated methods must accept and return a JSONObject
  */
 public @interface RpcMethod {
-    String type();
 }

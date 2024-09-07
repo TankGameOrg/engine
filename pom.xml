@@ -7,7 +7,7 @@
 
     <groupId>TankGame</groupId>
     <artifactId>TankGame</artifactId>
-    <version>beta-0.2.0</version>
+    <version>beta-0.3.0</version>
     <description>A simple tank game</description>
 
     <properties>

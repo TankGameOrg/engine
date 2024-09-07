@@ -24,14 +24,14 @@ public class Cli {
             if(rpcMethod == null) continue;
 
             if(!method.getReturnType().equals(JSONObject.class)) {
-                throw new Error("Rpc method " + method.getName() + " aka " + rpcMethod.type() + " does not return a JSONObject");
+                throw new Error("Rpc method " + method.getName() + " does not return a JSONObject");
             }
 
             if(method.getParameterTypes().length != 1 || !method.getParameterTypes()[0].equals(JSONObject.class)) {
-                throw new Error("Rpc method " + method.getName() + " aka " + rpcMethod.type() + " must accept exactly 1 JSONObject parameter");
+                throw new Error("Rpc method " + method.getName() + " must accept exactly 1 JSONObject parameter");
             }
 
-            methodMap.put(rpcMethod.type(), method);
+            methodMap.put(method.getName(), method);
         }
     }
 
@@ -44,12 +44,12 @@ public class Cli {
         JSONObject json;
         while(handler.canProcessRequests()) {
             json = getJsonObject(scanner);
-            if (!json.has("type")) {
-                output.println(response(new Error("Input does not have a type field")));
+            if (!json.has("method")) {
+                output.println(response(new Error("Request does not have the required method field")));
                 continue;
             }
 
-            String methodName = json.getString("type");
+            String methodName = json.getString("method");
             Method method = methodMap.get(methodName);
             if(method == null) {
                 output.println(response(new Error("The method " + methodName + " does not exist")));
@@ -111,8 +111,6 @@ public class Cli {
     private JSONObject response(Throwable error) {
         JSONObject output = new JSONObject();
         output.put("error", encodeThrowable(error));
-        // Previous versions of the Cli sent the error message as response
-        output.put("respose", error.getMessage());
         return output;
     }
 }

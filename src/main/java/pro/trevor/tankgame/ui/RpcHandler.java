@@ -22,10 +22,11 @@ public class RpcHandler implements IRpcHandler {
     }
 
     private Api getApi(JSONObject request) {
-        String instance = "default";
-        if(request.has("instance")) {
-            instance = request.getString("instance");
+        if(!request.has("instance")) {
+            throw new Error("You must specify an instance to call");
         }
+
+        String instance = request.getString("instance");
 
         if(!apis.containsKey(instance)) {
             throw new Error("No such instance " + instance + ". You need to run the create_instance command.");
@@ -34,31 +35,18 @@ public class RpcHandler implements IRpcHandler {
         return apis.get(instance);
     }
 
-    @RpcMethod(type = "command")
-    public JSONObject command(JSONObject request) {
-        String command = request.getString("command");
-        switch (command) {
-            case "display" -> {
-                return getApi(request).getState().toJson();
-            }
-            case "exit" -> {
-                isRunning = false;
-                return response("exiting");
-            }
-            default -> {
-                throw new Error("Unexpected command: " + command);
-            }
-        }
+    @RpcMethod
+    public JSONObject exit(JSONObject request) {
+        isRunning = false;
+        return response("exiting");
     }
 
-    @RpcMethod(type = "version")
-    public JSONObject version(JSONObject request) {
-        System.err.println("Warning the version command is deprectated and will be removed.  Use create_instance instead");
-        request.put("ruleset", request.getString("version"));
-        return createInstance(request);
+    @RpcMethod
+    public JSONObject getState(JSONObject request) {
+        return getApi(request).getState().toJson();
     }
 
-    @RpcMethod(type = "create_instance")
+    @RpcMethod
     public JSONObject createInstance(JSONObject request) {
         String rulesetName = request.getString("ruleset");
         Optional<Api> newRuleset = RulesetRegistry.createApi(rulesetName);
@@ -75,7 +63,7 @@ public class RpcHandler implements IRpcHandler {
         }
     }
 
-    @RpcMethod(type = "destroy_instance")
+    @RpcMethod
     public JSONObject destroyInstance(JSONObject request) {
         String instance = "default";
         if(request.has("instance")) {
@@ -86,19 +74,19 @@ public class RpcHandler implements IRpcHandler {
         return response("Destroyed instance " + instance);
     }
 
-    @RpcMethod(type = "state")
+    @RpcMethod
     public JSONObject setState(JSONObject request) {
         getApi(request).setState(new State(request));
         return response("state successfully ingested");
     }
 
-    @RpcMethod(type = "action")
+    @RpcMethod
     public JSONObject ingestAction(JSONObject request) {
         getApi(request).ingestAction(new LogEntry(request));
         return response("action successfully ingested");
     }
 
-    @RpcMethod(type = "can_ingest_action")
+    @RpcMethod
     public JSONObject canIngestAction(JSONObject request) {
         JSONArray errors = new JSONArray(
             getApi(request).canIngestAction(new LogEntry(request)).stream()
@@ -111,7 +99,7 @@ public class RpcHandler implements IRpcHandler {
         return response;
     }
 
-    @RpcMethod(type = "possible_actions")
+    @RpcMethod
     public JSONObject getPossibleActions(JSONObject request) {
         String subject = request.getString("player");
         JSONObject actions = new JSONObject();
