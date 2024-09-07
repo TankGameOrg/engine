@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.ui;
+package pro.trevor.tankgame.ui.rpc;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

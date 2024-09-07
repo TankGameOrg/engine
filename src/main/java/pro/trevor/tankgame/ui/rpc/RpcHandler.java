@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.ui;
+package pro.trevor.tankgame.ui.rpc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +12,11 @@ import pro.trevor.tankgame.RulesetRegistry;
 import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.ui.encoders.PlayerRuleErrorEncoder;
+import pro.trevor.tankgame.ui.encoders.PossibleActionsEncoder;
 
-public class RpcHandler implements IRpcHandler {
+
+public class RpcHandler {
     private boolean isRunning = true;
     private Map<String, Api> apis = new HashMap<>();
 

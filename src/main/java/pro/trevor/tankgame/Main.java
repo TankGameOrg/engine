@@ -4,8 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.ui.Cli;
-import pro.trevor.tankgame.ui.RpcHandler;
+import pro.trevor.tankgame.ui.rpc.Cli;
+import pro.trevor.tankgame.ui.rpc.RpcHandler;
 
 import java.io.File;
 import java.io.InputStream;

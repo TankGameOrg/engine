@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.ui;
+package pro.trevor.tankgame.ui.rpc;
 
 import org.json.JSONObject;
 
@@ -12,10 +12,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Cli {
-    IRpcHandler handler;
+    RpcHandler handler;
     Map<String, Method> methodMap;
 
-    public Cli(IRpcHandler handler) {
+    public Cli(RpcHandler handler) {
         this.handler = handler;
         methodMap = new HashMap<>();
 
