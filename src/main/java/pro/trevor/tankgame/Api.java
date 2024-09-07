@@ -119,7 +119,7 @@ public class Api {
                 rule.getFieldSpecs(context) :
                 List.of();
 
-            actions.add(new PossibleAction(rule.name(), errors, fields));
+            actions.add(new PossibleAction(rule.name(), rule.getDescription(), errors, fields));
         }
 
         return actions;

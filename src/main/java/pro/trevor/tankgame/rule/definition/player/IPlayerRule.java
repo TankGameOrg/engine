@@ -9,5 +9,6 @@ public interface IPlayerRule {
     List<PlayerRuleError> canApply(PlayerRuleContext context);
 
     String name();
+    String getDescription();
     List<LogFieldSpec<?>> getFieldSpecs(PlayerRuleContext context);
 }

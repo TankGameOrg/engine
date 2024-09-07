@@ -10,19 +10,29 @@ import java.util.function.Function;
 public class PlayerConditionRule implements IPlayerRule {
 
     private final String name;
+    private final String description;
     private final RuleCondition condition;
     private final Consumer<PlayerRuleContext> consumer;
     private final Function<PlayerRuleContext, List<LogFieldSpec<?>>> logFieldSource;
 
+    public PlayerConditionRule(String name, String description, RuleCondition condition, Consumer<PlayerRuleContext> consumer, Function<PlayerRuleContext, List<LogFieldSpec<?>>> logFieldSource) {
+        this.name = name;
+        this.description = description;
+        this.condition = condition;
+        this.consumer = consumer;
+        this.logFieldSource = logFieldSource;
+    }
+
     public PlayerConditionRule(String name, RuleCondition condition, Consumer<PlayerRuleContext> consumer, Function<PlayerRuleContext, List<LogFieldSpec<?>>> logFieldSource) {
         this.name = name;
+        this.description = "";
         this.condition = condition;
         this.consumer = consumer;
         this.logFieldSource = logFieldSource;
     }
 
     protected PlayerConditionRule(PlayerConditionRule rule) {
-        this(rule.name, rule.condition, rule.consumer, rule.logFieldSource);
+        this(rule.name, rule.description, rule.condition, rule.consumer, rule.logFieldSource);
     }
 
     @Override
@@ -58,5 +68,10 @@ public class PlayerConditionRule implements IPlayerRule {
     @Override
     public List<LogFieldSpec<?>> getFieldSpecs(PlayerRuleContext context) {
         return logFieldSource.apply(context);
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 }

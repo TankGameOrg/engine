@@ -6,13 +6,15 @@ import pro.trevor.tankgame.rule.definition.player.PlayerRuleError;
 
 public class PossibleAction {
     private String ruleName;
+    private String description;
     private List<PlayerRuleError> errors;
     private List<LogFieldSpec<?>> fieldSpecs;
 
-    public PossibleAction(String ruleName, List<PlayerRuleError> errors, List<LogFieldSpec<?>> fieldSpecs) {
+    public PossibleAction(String ruleName, String description, List<PlayerRuleError> errors, List<LogFieldSpec<?>> fieldSpecs) {
         this.ruleName = ruleName;
         this.errors = errors;
         this.fieldSpecs = fieldSpecs;
+        this.description = description;
     }
 
     public String getRuleName() {
@@ -25,5 +27,9 @@ public class PossibleAction {
 
     public List<LogFieldSpec<?>> getFieldSpecs() {
         return fieldSpecs;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

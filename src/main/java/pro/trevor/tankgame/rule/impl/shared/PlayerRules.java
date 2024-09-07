@@ -222,6 +222,7 @@ public class PlayerRules {
 
     public static PlayerConditionRule getShareGoldWithTaxToCofferRule(int taxAmount) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.DONATE,
+                "Donate gold to another tank within your range",
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE,
                     RulePredicateStream.empty()
                         .filter(PredicateHelpers::hasLogEntry)
@@ -257,6 +258,7 @@ public class PlayerRules {
 
     public static PlayerConditionRule getShareGoldWithTaxRule(int taxAmount) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.DONATE,
+                "Donate gold to another tank within your range",
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE,
                     new RulePredicateStream<>(PredicateHelpers::getTank)
                         .filter(PredicateHelpers::hasLogEntry)
@@ -290,6 +292,7 @@ public class PlayerRules {
 
     public static PlayerConditionRule getCofferCostStimulusRule(int cost) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.STIMULUS,
+                "Grant an action to a living tank",
                 new RuleCondition(PLAYER_IS_COUNCIL_PREDICATE,
                     cofferCost(cost),
                     TARGET_TANK_IS_ALIVE
@@ -664,7 +667,7 @@ public class PlayerRules {
             // Indicate this to the user by showing a field with only one option "hit"
             LogFieldSpec<?> hitRoll = new EnumeratedLogFieldSpec<>(Attribute.HIT, List.of(
                 new LogFieldValueDescriptor<>(true, "hit")
-            ));
+            )).setDescription("Like the broad side of a barn you can't miss this target!");
 
             if(targetElement instanceof GenericTank genericTank && !genericTank.getOrElse(Attribute.DEAD, false)) {
                 int distance = subjectTank.getPosition().distanceFrom(targetElement.getPosition());

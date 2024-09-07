@@ -38,6 +38,10 @@ public class PossibleActionsEncoder {
 
         JSONObject actionJson = new JSONObject();
         actionJson.put("rule", action.getRuleName());
+        if(!action.getDescription().isEmpty()) {
+            actionJson.put("description", action.getDescription());
+        }
+
         // If the action doesn't have any errors this will be an empty array aka no error
         actionJson.put("errors", errors);
         actionJson.put("fields", encodeAllFields(action.getFieldSpecs()));
@@ -57,6 +61,9 @@ public class PossibleActionsEncoder {
         JSONObject jsonSpec = new JSONObject();
         jsonSpec.put("field_name", spec.getAttribute().getName().toLowerCase());
         jsonSpec.put("data_type", Codec.getTypeFromClass(spec.getAttribute().getAttributeClass()));
+        if(!spec.getDescription().isEmpty()) {
+            jsonSpec.put("description", spec.getDescription());
+        }
 
         switch(spec) {
             case EnumeratedLogFieldSpec<?> enumSpec -> encodeField(jsonSpec, enumSpec);
