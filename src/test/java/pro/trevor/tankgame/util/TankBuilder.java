@@ -2,8 +2,6 @@ package pro.trevor.tankgame.util;
 
 import java.util.Map;
 
-import org.json.JSONObject;
-
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.GenericTank;

@@ -1,7 +1,5 @@
 package pro.trevor.tankgame.rule.council;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
