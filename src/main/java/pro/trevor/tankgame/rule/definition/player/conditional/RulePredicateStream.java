@@ -34,19 +34,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * @param predicate A function that returns an error if a value should not continue
      */
     public RulePredicateStream<T> filter(BiFunction<PlayerRuleContext, T, Result<Void, PlayerRuleError>> predicate) {
-        return new RulePredicateStream<>((context) -> {
-            Result<T, PlayerRuleError> result = function.apply(context);
-            if(result.isError()) {
-                return result;
-            }
-
-            Result<Void, PlayerRuleError> optionalError = predicate.apply(context, result.getValue());
-            if(optionalError.isError()) {
-                return Result.error(optionalError.getError());
-            }
-
-            return result;
-        });
+        return filterInternal((context, prevResult) -> predicate.apply(context, prevResult.getValue()));
     }
 
     /**
@@ -54,7 +42,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * @param predicate A function that returns an error if a value should not continue
      */
     public RulePredicateStream<T> filter(Function<PlayerRuleContext, Result<Void, PlayerRuleError>> predicate) {
-        return filter((context, value) -> predicate.apply(context));
+        return filterInternal((context, prevResult) -> predicate.apply(context));
     }
 
     /**
@@ -63,7 +51,7 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * @param error The error to pass along if the predicate returns false
      */
     public RulePredicateStream<T> filter(BiPredicate<PlayerRuleContext, T> predicate, PlayerRuleError error) {
-        return filter((context, value) -> predicate.test(context, value) ? Result.ok() : Result.error(error));
+        return filterInternal((context, prevResult) -> predicate.test(context, prevResult.getValue()) ? Result.ok() : Result.error(error));
     }
 
     /**
@@ -72,7 +60,23 @@ public class RulePredicateStream<T> implements IRulePredicate {
      * @param error The error to pass along if the predicate returns false
      */
     public RulePredicateStream<T> filter(Predicate<PlayerRuleContext> predicate, PlayerRuleError error) {
-        return filter((context, value) -> predicate.test(context) ? Result.ok() : Result.error(error));
+        return filterInternal((context, prevResult) -> predicate.test(context) ? Result.ok() : Result.error(error));
+    }
+
+    private RulePredicateStream<T> filterInternal(BiFunction<PlayerRuleContext, Result<T, PlayerRuleError>, Result<Void, PlayerRuleError>> predicate) {
+        return new RulePredicateStream<>((context) -> {
+            Result<T, PlayerRuleError> result = function.apply(context);
+            if(result.isError()) {
+                return result;
+            }
+
+            Result<Void, PlayerRuleError> optionalError = predicate.apply(context, result);
+            if(optionalError.isError()) {
+                return Result.error(optionalError.getError());
+            }
+
+            return result;
+        });
     }
 
     /**

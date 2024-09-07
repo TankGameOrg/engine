@@ -114,8 +114,6 @@ public class PlayerRules {
             .orElse(true);
     }, new PlayerRuleError(PlayerRuleError.Category.NOT_APPLICABLE, "Player tank must be dead"));
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     private static int translateGoldCostPlusDiscount(int gold) {
         int n5 = gold / 5;
         int rem = gold - n5 * 5;
