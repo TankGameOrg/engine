@@ -1,11 +1,5 @@
 package pro.trevor.tankgame.rule.definition.player;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import pro.trevor.tankgame.rule.definition.range.TypeRange;
-import pro.trevor.tankgame.state.attribute.Codec;
-import pro.trevor.tankgame.state.meta.PlayerRef;
-
 import java.util.*;
 
 public class PlayerRuleset {
@@ -32,24 +26,5 @@ public class PlayerRuleset {
 
     public List<IPlayerRule> getAllRules() {
         return rules;
-    }
-
-    public JSONArray toJsonRequirements() {
-        JSONArray rulesJson = new JSONArray();
-        for (IPlayerRule rule : rules) {
-            JSONObject ruleJson = new JSONObject();
-            ruleJson.put("name", rule.name());
-            ruleJson.put("subject", Codec.typeFromClass(PlayerRef.class));
-
-            JSONArray meta = new JSONArray();
-            TypeRange<?>[] ruleParameters = rule.parameters();
-            for (TypeRange<?> ruleParameter : ruleParameters) {
-                meta.put(ruleParameter.toJson());
-            }
-            ruleJson.put("fields", meta);
-
-            rulesJson.put(ruleJson);
-        }
-        return rulesJson;
     }
 }

@@ -2,6 +2,8 @@ package pro.trevor.tankgame;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV3RulesetRegister;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV4RulesetRegister;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV5RulesetRegister;
@@ -42,8 +44,6 @@ public class Main {
                 String initialString = Files.readString(initialFile.toPath());
                 String movesString = Files.readString(movesFile.toPath());
 
-                System.out.println(api.getRules().toString(2));
-
                 JSONObject initial = new JSONObject(initialString);
                 JSONArray moves = new JSONArray(movesString);
 
@@ -52,7 +52,7 @@ public class Main {
 
                 for (int i = 0; i < moves.length(); ++i) {
                     JSONObject action = moves.getJSONObject(i);
-                    api.ingestAction(action);
+                    api.ingestAction(new LogEntry(action));
                 }
                 System.out.println(api.getState().toString());
             } catch (Throwable throwable) {

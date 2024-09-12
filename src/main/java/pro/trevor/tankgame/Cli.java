@@ -1,6 +1,9 @@
 package pro.trevor.tankgame;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.PlayerRef;
@@ -61,7 +64,6 @@ public class Cli {
                 case "command" -> {
                     String command = json.getString("command");
                     switch (command) {
-                        case "rules" -> output.println(api.getRules().toString());
                         case "display" -> output.println(api.getState().toJson().toString());
                         case "exit" -> {
                             output.println(response("exiting", false));
@@ -91,8 +93,25 @@ public class Cli {
                 }
                 case "action" -> {
                     try {
-                        api.ingestAction(json);
+                        api.ingestAction(new LogEntry(json));
                         output.println(response("action successfully ingested", false));
+                    } catch (Throwable throwable) {
+                        output.println(response(throwable.getMessage(), true));
+                        throwable.printStackTrace();
+                    }
+                }
+                case "can_ingest_action" -> {
+                    try {
+                        JSONArray errors = new JSONArray(
+                            api.canIngestAction(new LogEntry(json)).stream()
+                                .map((error) -> PlayerRuleErrorEncoder.encode(error))
+                                .toList()
+                        );
+
+                        JSONObject response = new JSONObject();
+                        response.put("errors", errors);
+                        response.put("error", false);
+                        output.println(response);
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();
@@ -100,7 +119,14 @@ public class Cli {
                 }
                 case "possible_actions" -> {
                     try {
-                        output.println(api.getPossibleActions(new PlayerRef(json.getString("player"))));
+                        String subject = json.getString("player");
+                        JSONObject actions = new JSONObject();
+                        actions.put("error", false);
+                        actions.put("type", "possible_actions");
+                        actions.put("player", subject);
+                        actions.put("actions", PossibleActionsEncoder.encodePossibleActions(
+                            api.getPossibleActions(new PlayerRef(subject))));
+                        output.println(actions);
                     } catch (Throwable throwable) {
                         output.println(response(throwable.getMessage(), true));
                         throwable.printStackTrace();

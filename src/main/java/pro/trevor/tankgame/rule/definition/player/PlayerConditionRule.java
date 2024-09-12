@@ -1,27 +1,38 @@
 package pro.trevor.tankgame.rule.definition.player;
 
+import pro.trevor.tankgame.rule.definition.actions.LogFieldSpec;
 import pro.trevor.tankgame.rule.definition.player.conditional.RuleCondition;
-import pro.trevor.tankgame.rule.definition.range.TypeRange;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class PlayerConditionRule implements IPlayerRule {
 
     private final String name;
+    private final String description;
     private final RuleCondition condition;
     private final Consumer<PlayerRuleContext> consumer;
-    private final TypeRange<?>[] parameters;
+    private final Function<PlayerRuleContext, List<LogFieldSpec<?>>> logFieldSource;
 
-    public PlayerConditionRule(String name, RuleCondition condition, Consumer<PlayerRuleContext> consumer, TypeRange<?>... parameters) {
+    public PlayerConditionRule(String name, String description, RuleCondition condition, Consumer<PlayerRuleContext> consumer, Function<PlayerRuleContext, List<LogFieldSpec<?>>> logFieldSource) {
         this.name = name;
+        this.description = description;
         this.condition = condition;
         this.consumer = consumer;
-        this.parameters = parameters;
+        this.logFieldSource = logFieldSource;
+    }
+
+    public PlayerConditionRule(String name, RuleCondition condition, Consumer<PlayerRuleContext> consumer, Function<PlayerRuleContext, List<LogFieldSpec<?>>> logFieldSource) {
+        this.name = name;
+        this.description = "";
+        this.condition = condition;
+        this.consumer = consumer;
+        this.logFieldSource = logFieldSource;
     }
 
     protected PlayerConditionRule(PlayerConditionRule rule) {
-        this(rule.name, rule.condition, rule.consumer, rule.parameters);
+        this(rule.name, rule.description, rule.condition, rule.consumer, rule.logFieldSource);
     }
 
     @Override
@@ -55,7 +66,12 @@ public class PlayerConditionRule implements IPlayerRule {
     }
 
     @Override
-    public TypeRange<?>[] parameters() {
-        return parameters;
+    public List<LogFieldSpec<?>> getFieldSpecs(PlayerRuleContext context) {
+        return logFieldSource.apply(context);
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 }

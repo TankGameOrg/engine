@@ -77,7 +77,7 @@ public class TimedPlayerConditionRule extends PlayerConditionRule {
                 new TimedPlayerRuleError(
                     PlayerRuleError.Category.COOLDOWN,
                     cooldownEnd,
-                    "Action '%s' is on cooldown can cannot be taken until %s", name(), cooldownEndTime));
+                    "Action '%s' is on cooldown and cannot be taken until %s", name(), cooldownEndTime));
         }
 
         return ruleErrors;
