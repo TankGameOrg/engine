@@ -23,7 +23,7 @@ public class Cli {
             RpcMethod rpcMethod = method.getAnnotation(RpcMethod.class);
             if(rpcMethod == null) continue;
 
-            if(!method.getReturnType().equals(JSONObject.class)) {
+            if(!method.getReturnType().isInstance(JSONObject.class)) {
                 throw new Error("Rpc method " + method.getName() + " does not return a JSONObject");
             }
 
@@ -58,15 +58,13 @@ public class Cli {
 
             try {
                 output.println(method.invoke(handler, json));
-            }
-            catch(IllegalAccessException | InvocationTargetException ex) {
+            } catch(IllegalAccessException | InvocationTargetException exception) {
                 // Typically these exceptions are the result of the method being called throwing an error so we want to send
                 // that error to the UI
-                System.err.println("Got " + ex.getCause() + " reporting cause to UI. Original message: " + ex.getMessage());
-                output.println(response(ex.getCause()));
-            }
-            catch(Throwable ex) {
-                output.println(response(ex));
+                System.err.println("Got " + exception.getCause() + " reporting cause to UI. Original message: " + exception.getMessage());
+                output.println(response(exception.getCause()));
+            } catch(Throwable exception) {
+                output.println(response(exception));
             }
         }
     }
@@ -96,7 +94,7 @@ public class Cli {
 
         try {
             return new JSONObject(sb.toString());
-        } catch (Exception e) {
+        } catch (Exception exception) {
             return new JSONObject();
         }
     }
