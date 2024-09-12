@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import pro.trevor.tankgame.util.JsonType;
-
-@JsonType(name = "DieRollResult")
 public class DieRollResult<T> {
     private List<T> results;
 

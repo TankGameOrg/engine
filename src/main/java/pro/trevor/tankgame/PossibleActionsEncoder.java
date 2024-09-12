@@ -18,7 +18,6 @@ import pro.trevor.tankgame.util.IJsonObject;
 public class PossibleActionsEncoder {
     /**
      * Encode an array of possible actions into a json format that the UI can use to build actions
-     * @return
      */
     public static JSONArray encodePossibleActions(List<PossibleAction> actions) {
         JSONArray jsonActions = new JSONArray();
