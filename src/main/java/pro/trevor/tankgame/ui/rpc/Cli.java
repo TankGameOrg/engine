@@ -23,7 +23,7 @@ public class Cli {
             RpcMethod rpcMethod = method.getAnnotation(RpcMethod.class);
             if(rpcMethod == null) continue;
 
-            if(!method.getReturnType().isInstance(JSONObject.class)) {
+            if(!JSONObject.class.isAssignableFrom(method.getReturnType())) {
                 throw new Error("Rpc method " + method.getName() + " does not return a JSONObject");
             }
 
