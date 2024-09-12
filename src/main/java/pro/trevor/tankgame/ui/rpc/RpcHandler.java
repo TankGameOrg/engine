@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import pro.trevor.tankgame.Api;
+import pro.trevor.tankgame.PlayerRuleErrorEncoder;
+import pro.trevor.tankgame.PossibleActionsEncoder;
 import pro.trevor.tankgame.RulesetRegistry;
+import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
@@ -81,13 +85,34 @@ public class RpcHandler {
 
     @RpcMethod
     public JSONObject ingestAction(JSONObject request) {
-        getApi(request).ingestAction(request);
+        getApi(request).ingestAction(new LogEntry(request));
         return response("action successfully ingested");
     }
 
     @RpcMethod
     public JSONObject getPossibleActions(JSONObject request) {
-        return getApi(request).getPossibleActions(new PlayerRef(request.getString("player")));
+        String subject = request.getString("player");
+        JSONObject actions = new JSONObject();
+        actions.put("error", false);
+        actions.put("type", "possible_actions");
+        actions.put("player", subject);
+        actions.put("actions", PossibleActionsEncoder.encodePossibleActions(
+            getApi(request).getPossibleActions(new PlayerRef(subject))));
+        return actions;
+    }
+
+    @RpcMethod
+    public JSONObject canInjestAction(JSONObject request) {
+        JSONArray errors = new JSONArray(
+            getApi(request).canIngestAction(new LogEntry(request)).stream()
+                .map((error) -> PlayerRuleErrorEncoder.encode(error))
+                .toList()
+        );
+
+        JSONObject response = new JSONObject();
+        response.put("errors", errors);
+        response.put("error", false);
+        return response;
     }
 
     private JSONObject response(String message) {
