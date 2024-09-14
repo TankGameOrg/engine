@@ -102,7 +102,7 @@ public class RpcHandler {
     }
 
     @RpcMethod
-    public JSONObject canInjestAction(JSONObject request) {
+    public JSONObject canIngestAction(JSONObject request) {
         JSONArray errors = new JSONArray(
             getApi(request).canIngestAction(new LogEntry(request)).stream()
                 .map((error) -> PlayerRuleErrorEncoder.encode(error))
