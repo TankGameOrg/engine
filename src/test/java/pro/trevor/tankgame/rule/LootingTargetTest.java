@@ -13,7 +13,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Result;
@@ -26,7 +26,7 @@ public class LootingTargetTest extends LootActionTestHelper {
             return target.getUnsafe(Attribute.POSITION).equals(new Position("B3")) ?
                 Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "No")) :
                 Result.ok();
-        }, (PlayerRuleContext context, GenericTank tank, AttributeContainer target) -> {
+        }, (PlayerRuleContext context, Tank tank, AttributeContainer target) -> {
             // Just set the gold to the other tank's value this method just exists to verify that we called the consumer
             tank.put(Attribute.GOLD, target.getUnsafe(Attribute.GOLD));
             target.put(Attribute.GOLD, 0);

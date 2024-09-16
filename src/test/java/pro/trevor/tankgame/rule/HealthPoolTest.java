@@ -12,7 +12,7 @@ import pro.trevor.tankgame.state.attribute.AttributeList;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.HealthPool;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.TestState;
 import pro.trevor.tankgame.util.TankBuilder;
@@ -20,13 +20,13 @@ import pro.trevor.tankgame.util.TankBuilder;
 public class HealthPoolTest {
     @Test
     public void GainHealthInHealthPool() {
-        GenericTank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
+        Tank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
                 .with(Attribute.DEAD, false).finish();
         TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
+        TickActionRule<Tank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
@@ -34,13 +34,13 @@ public class HealthPoolTest {
 
     @Test
     public void DeadTankInHealthPool() {
-        GenericTank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
+        Tank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
                 .with(Attribute.DEAD, true).finish();
         TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
+        TickActionRule<Tank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
@@ -48,13 +48,13 @@ public class HealthPoolTest {
 
     @Test
     public void TankNotInHealthPool() {
-        GenericTank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
+        Tank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 2)
                 .with(Attribute.DEAD, false).finish();
         State state = new State(new Board(2, 2), new Council(), new AttributeList<>());
         HealthPool hp = new HealthPool(new Position("B2"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
+        TickActionRule<Tank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));
@@ -62,13 +62,13 @@ public class HealthPoolTest {
 
     @Test
     public void HealthPoolTwoRegen() {
-        GenericTank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 1)
+        Tank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false).finish();
         TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 2);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
+        TickActionRule<Tank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
         rule.apply(state, tank);
 
         assertEquals(3, tank.getUnsafe(Attribute.DURABILITY));
@@ -76,13 +76,13 @@ public class HealthPoolTest {
 
     @Test
     public void HealthPoolMultipleApplications() {
-        GenericTank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 1)
+        Tank tank = TankBuilder.buildTank().at(new Position("A1")).with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false).finish();
         TestState state = new TestState();
         HealthPool hp = new HealthPool(new Position("A1"), 1);
         state.getBoard().putFloor(hp);
 
-        TickActionRule<GenericTank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
+        TickActionRule<Tank> rule = TickRules.HEAL_TANK_IN_HEAL_POOL;
 
         rule.apply(state, tank);
         assertEquals(2, tank.getUnsafe(Attribute.DURABILITY));

@@ -2,7 +2,7 @@ package pro.trevor.tankgame.e2e;
 
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
 import java.io.File;
@@ -33,11 +33,11 @@ public class EndToEndTestUtils {
     }
 
     public static void assertExpectedTanksOnBoard(EndToEndTester tester, Set<String> livingTanks, Set<String> deadTanks) {
-        Set<String> actualLivingTanks = tester.getBoard().gatherUnits(GenericTank.class).stream()
+        Set<String> actualLivingTanks = tester.getBoard().gatherUnits(Tank.class).stream()
                 .filter((t) -> !t.getUnsafe(Attribute.DEAD))
                 .map((t) -> t.getPlayerRef().getName())
                 .collect(Collectors.toSet());
-        Set<String> actualDeadTanks = tester.getBoard().gatherUnits(GenericTank.class).stream()
+        Set<String> actualDeadTanks = tester.getBoard().gatherUnits(Tank.class).stream()
                 .filter(tank -> tank.getUnsafe(Attribute.DEAD))
                 .map((t) -> t.getPlayerRef().getName())
                 .collect(Collectors.toSet());

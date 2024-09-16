@@ -15,28 +15,28 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.TestUtilities;
 
 public class ShareGoldWithTaxRuleTest {
 
-    private PlayerRuleContext makeContext(State state, PlayerRef subject, GenericTank reciever, int gold) {
+    private PlayerRuleContext makeContext(State state, PlayerRef subject, Tank reciever, int gold) {
         return new ContextBuilder(state, subject)
             .withTarget(reciever)
             .with(Attribute.DONATION, gold)
             .finish();
     }
 
-    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, GenericTank reciever, int gold) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef subject, Tank reciever, int gold) {
         return rule.canApply(makeContext(state, subject, reciever, gold)).isEmpty();
     }
 
     @Test
     public void DeadTankCannotDonateGold() {
-        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, 3)
+        Tank sender = TankBuilder.buildTank().with(Attribute.GOLD, 3)
                 .with(Attribute.DEAD, true).with(Attribute.RANGE, 1).finish();
-        GenericTank receiver = TankBuilder.buildTank()
+        Tank receiver = TankBuilder.buildTank()
             .at(new Position("B1")).with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
@@ -45,8 +45,8 @@ public class ShareGoldWithTaxRuleTest {
 
     @Test
     public void NoGoldCannotDonate() {
-        GenericTank sender = TankBuilder.buildTank().with(Attribute.RANGE, 1).finish();
-        GenericTank receiver = TankBuilder.buildTank()
+        Tank sender = TankBuilder.buildTank().with(Attribute.RANGE, 1).finish();
+        Tank receiver = TankBuilder.buildTank()
             .at(new Position("B1")).with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
@@ -55,9 +55,9 @@ public class ShareGoldWithTaxRuleTest {
 
     @Test
     public void TargetCantHoldGoldCannotDonate() {
-        GenericTank sender = TankBuilder.buildTank()
+        Tank sender = TankBuilder.buildTank()
             .with(Attribute.RANGE, 1).with(Attribute.GOLD, 5).finish();
-        GenericTank receiver = TankBuilder.buildTank().at(new Position("B1")).finish();
+        Tank receiver = TankBuilder.buildTank().at(new Position("B1")).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
         assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender, receiver), sender.getPlayerRef(), receiver, 3));
@@ -70,9 +70,9 @@ public class ShareGoldWithTaxRuleTest {
             "2, 3, 0", /* not enough gold to begin with */
     })
     public void NotEnoughGoldCannotDonate(int senderGold, int donation, int tax) {
-        GenericTank sender = TankBuilder.buildTank()
+        Tank sender = TankBuilder.buildTank()
             .with(Attribute.RANGE, 1).with(Attribute.GOLD, senderGold).finish();
-        GenericTank receiver = TankBuilder.buildTank().at(new Position("B1")).with(Attribute.GOLD, 0).finish();
+        Tank receiver = TankBuilder.buildTank().at(new Position("B1")).with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(tax);
         assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender, receiver), sender.getPlayerRef(), receiver, donation));
@@ -80,9 +80,9 @@ public class ShareGoldWithTaxRuleTest {
 
     @Test
     public void NegativeGoldCannotBeDonated() {
-        GenericTank sender = TankBuilder.buildTank()
+        Tank sender = TankBuilder.buildTank()
             .with(Attribute.RANGE, 1).with(Attribute.GOLD, 5).finish();
-        GenericTank receiver = TankBuilder.buildTank().at(new Position("B1")).with(Attribute.GOLD, 0).finish();
+        Tank receiver = TankBuilder.buildTank().at(new Position("B1")).with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
         assertFalse(canApply(rule, TestUtilities.generateBoard(1, 1, sender, receiver), sender.getPlayerRef(), receiver, -3));
@@ -90,8 +90,8 @@ public class ShareGoldWithTaxRuleTest {
 
     @Test
     public void CannotDonateToOutOfRangeTank() {
-        GenericTank sender = TankBuilder.buildTank().with(Attribute.GOLD, 5).with(Attribute.RANGE, 1).finish();
-        GenericTank receiver = TankBuilder.buildTank()
+        Tank sender = TankBuilder.buildTank().with(Attribute.GOLD, 5).with(Attribute.RANGE, 1).finish();
+        Tank receiver = TankBuilder.buildTank()
             .at(new Position("A3")).with(Attribute.GOLD, 0).finish();
 
         IPlayerRule rule = PlayerRules.getShareGoldWithTaxToCofferRule(1);
@@ -107,9 +107,9 @@ public class ShareGoldWithTaxRuleTest {
             "  15,                 34,                   19,             3,   11",
     })
     public void GoldIsTransferredCorrectly(int senderStartingGold, int receiverStartingGold, int startingCoffer, int tax, int donation) {
-        GenericTank sender = TankBuilder.buildTank()
+        Tank sender = TankBuilder.buildTank()
             .with(Attribute.RANGE, 1).with(Attribute.GOLD, senderStartingGold).finish();
-        GenericTank receiver = TankBuilder.buildTank()
+        Tank receiver = TankBuilder.buildTank()
             .at(new Position("B1")).with(Attribute.GOLD, receiverStartingGold).finish();
 
         int senderEndingGold = senderStartingGold - (donation + tax);

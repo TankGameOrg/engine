@@ -9,7 +9,7 @@ import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.util.TestUtilities;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +18,7 @@ public class BountyTankTest {
     private static final IPlayerRule BASIC_BOUNTY_RULE = PlayerRules.getRuleCofferCostBounty(1, 1);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
-    private void applyBasicBounty(State state, GenericTank tank) {
+    private void applyBasicBounty(State state, Tank tank) {
         BASIC_BOUNTY_RULE.apply(
             new ContextBuilder(state, councilPlayer)
                 .withTarget(tank)
@@ -29,7 +29,7 @@ public class BountyTankTest {
 
     @Test
     public void testGrantBountyToLivingTank() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.BOUNTY, 0)
                 .with(Attribute.DEAD, false)
                 .finish();
@@ -43,7 +43,7 @@ public class BountyTankTest {
 
     @Test
     public void testGrantBountyToDeadTank() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.BOUNTY, 0)
                 .with(Attribute.DEAD, true)
                 .finish();
@@ -57,7 +57,7 @@ public class BountyTankTest {
 
     @Test
     public void testSubtractGoldFromCoffer() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.BOUNTY, 0)
                 .finish();
@@ -71,7 +71,7 @@ public class BountyTankTest {
 
     @Test
     public void testBountiesAreAdditive() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.BOUNTY, 3)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);
@@ -84,7 +84,7 @@ public class BountyTankTest {
 
     @Test
     public void testErrorOnInsufficientGoldInCoffer() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.BOUNTY, 0)
                 .finish();
         State state = TestUtilities.generateBoard(1, 1, tank);

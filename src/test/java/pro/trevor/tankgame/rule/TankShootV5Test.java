@@ -1,7 +1,7 @@
 package pro.trevor.tankgame.rule;
 
 import org.junit.jupiter.api.Test;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.state.State;
@@ -23,7 +23,7 @@ public class TankShootV5Test {
             .finish();
     }
 
-    private GenericTank buildTank(String position, int gold, int bounty, String playerName) {
+    private Tank buildTank(String position, int gold, int bounty, String playerName) {
         return TankBuilder.buildTank()
             .at(new Position(position))
             .with(Attribute.PLAYER_REF, new PlayerRef(playerName))
@@ -37,8 +37,8 @@ public class TankShootV5Test {
 
     @Test
     public void testShootKillingLivingTankWithBountyAndGold() {
-        GenericTank tank = buildTank("A1", 0, 0, "player1");
-        GenericTank targetTank = buildTank("A2", 1, 5, "player2");
+        Tank tank = buildTank("A1", 0, 0, "player1");
+        Tank targetTank = buildTank("A2", 1, 5, "player2");
 
         State state = generateBoard(2, 2, tank, targetTank);
         SHOOT_V5.apply(makeContext(state, tank.getPlayerRef(), new Position("A2"), true));
@@ -51,8 +51,8 @@ public class TankShootV5Test {
 
     @Test
     public void testShootKillingLivingTankKeepsGold() {
-        GenericTank tank = buildTank("B2", 1, 0, "player2");
-        GenericTank targetTank = buildTank("A1", 4, 0, "player1");
+        Tank tank = buildTank("B2", 1, 0, "player2");
+        Tank targetTank = buildTank("A1", 4, 0, "player1");
 
         State state = generateBoard(2, 2, tank, targetTank);
         SHOOT_V5.apply(makeContext(state, tank.getPlayerRef(), new Position("A1"), true));

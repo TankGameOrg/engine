@@ -20,7 +20,7 @@ import pro.trevor.tankgame.state.board.floor.HealthPool;
 import pro.trevor.tankgame.state.board.floor.Lava;
 import pro.trevor.tankgame.state.board.floor.WalkableFloor;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
@@ -31,14 +31,14 @@ public class TickRules {
     public static final MetaTickActionRule<Board> INCREMENT_DAY_ON_TICK = new MetaTickActionRule<>(
             (s, n) -> s.put(Attribute.TICK, s.getOrElse(Attribute.TICK, 0) + 1));
 
-    public static final TickActionRule<GenericTank> DISTRIBUTE_GOLD_TO_TANKS = new TickActionRule<>(
+    public static final TickActionRule<Tank> DISTRIBUTE_GOLD_TO_TANKS = new TickActionRule<>(
             (s, t) -> {
                 if (!t.get(Attribute.DEAD).orElse(false) && t.has(Attribute.GOLD)) {
                     if (s.getBoard().getFloor(t.getPosition()).orElse(null) instanceof GoldMine) {
                         Set<Position> mines = new HashSet<>();
                         Util.findAllConnectedMines(mines, s, t.getPosition());
                         int tanks = (int) mines.stream().filter(
-                                        (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
+                                        (p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank
                                                 && !tank.get(Attribute.DEAD).orElse(false))
                                 .count();
                         int goldToGain = mines.size() / tanks;
@@ -56,7 +56,7 @@ public class TickRules {
                 });
     }
 
-    public static final TickActionRule<GenericTank> HEAL_TANK_IN_HEAL_POOL = new TickActionRule<>(
+    public static final TickActionRule<Tank> HEAL_TANK_IN_HEAL_POOL = new TickActionRule<>(
             (s, t) -> {
                 if (t.get(Attribute.DEAD).orElse(false) || !t.has(Attribute.DURABILITY))
                     return;
@@ -65,7 +65,7 @@ public class TickRules {
                 }
             });
 
-    public static final TickActionRule<GenericTank> DAMAGE_TANK_IN_LAVA = new TickActionRule<>(
+    public static final TickActionRule<Tank> DAMAGE_TANK_IN_LAVA = new TickActionRule<>(
             (s, t) -> {
                 if (t.get(Attribute.DEAD).orElse(false) || !t.has(Attribute.DURABILITY))
                     return;
@@ -74,7 +74,7 @@ public class TickRules {
                 }
             });
 
-    public static final TickActionRule<GenericTank> RELEASE_SPEED_MODIFICATIONS = new TickActionRule<>(
+    public static final TickActionRule<Tank> RELEASE_SPEED_MODIFICATIONS = new TickActionRule<>(
             (s, t) -> {
                 Optional<Integer> previousSpeed = t.get(Attribute.PREVIOUS_SPEED);
                 if (previousSpeed.isPresent()) {
@@ -86,13 +86,13 @@ public class TickRules {
             }
     );
 
-    public static TickActionRule<GenericTank> SET_PLAYER_CAN_LOOT = new TickActionRule<>((state, tank) -> {
+    public static TickActionRule<Tank> SET_PLAYER_CAN_LOOT = new TickActionRule<>((state, tank) -> {
         if(!tank.getOrElse(Attribute.DEAD, false)) {
             tank.put(Attribute.PLAYER_CAN_LOOT, true);
         }
     });
 
-    public static TickActionRule<GenericTank> CLEAR_ONLY_LOOTABLE_BY = new TickActionRule<>((state, tank) -> {
+    public static TickActionRule<Tank> CLEAR_ONLY_LOOTABLE_BY = new TickActionRule<>((state, tank) -> {
         if(tank.has(Attribute.ONLY_LOOTABLE_BY)) {
             tank.remove(Attribute.ONLY_LOOTABLE_BY);
         }
@@ -123,7 +123,7 @@ public class TickRules {
 
                 for (Set<Position> mine : allMines) {
                     int tanks = (int) mine.stream().filter(
-                            (p) -> s.getBoard().getUnit(p).orElse(null) instanceof GenericTank tank
+                            (p) -> s.getBoard().getUnit(p).orElse(null) instanceof Tank tank
                                     && !tank.get(Attribute.DEAD).orElse(false))
                             .count();
                     int goldToGain = (tanks == 0) ? mine.size() : (mine.size() % tanks);
@@ -202,7 +202,7 @@ public class TickRules {
 
         BiPredicate<State, Position> isSpawnable = (state, position) -> {
             return state.getBoard()
-                .gather(GenericTank.class).stream()
+                .gather(Tank.class).stream()
                 .filter((tank) -> !tank.getOrElse(Attribute.DEAD, false) && tank.getPosition().distanceFrom(position) <= 2)
                 .findAny().isEmpty();
         };

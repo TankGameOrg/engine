@@ -11,7 +11,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 
@@ -26,7 +26,7 @@ public class ConditionalRules {
             });
 
 
-    public static final ConditionalRule<GenericTank> HANDLE_TANK_ON_ZERO_DURABILITY = new ConditionalRule<>(
+    public static final ConditionalRule<Tank> HANDLE_TANK_ON_ZERO_DURABILITY = new ConditionalRule<>(
             (s, t) -> t.get(Attribute.DURABILITY).orElse(-1) == 0, // -1, so that if a tank doesn't have durability, this rule won't apply
             (s, t) -> {
                 if (t.get(Attribute.DEAD).orElse(false)) {
@@ -44,23 +44,23 @@ public class ConditionalRules {
             });
 
     public static final ConditionalRule<Board> TANK_WIN_CONDITION = new ConditionalRule<>(
-            (s, b) -> b.gatherUnits(GenericTank.class).stream().filter((t) -> !t.get(Attribute.DEAD).orElse(false))
+            (s, b) -> b.gatherUnits(Tank.class).stream().filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                     .toList().size() == 1,
             (s, b) -> {
                 s.put(Attribute.RUNNING, false);
-                s.put(Attribute.WINNER, b.gatherUnits(GenericTank.class).stream()
+                s.put(Attribute.WINNER, b.gatherUnits(Tank.class).stream()
                         .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                         .findFirst().get().getPlayerRef().getName());
             }, Priority.LOWEST);
 
     public static final ConditionalRule<Board> TEAM_WIN_CONDITION = new ConditionalRule<>(
-            (s, b) -> b.gatherUnits(GenericTank.class).stream()
+            (s, b) -> b.gatherUnits(Tank.class).stream()
                     .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                     .map((t) -> t.getPlayerRef().toPlayer(s).get().getUnsafe(Attribute.TEAM))
                     .collect(Collectors.toSet()).size() == 1,
             (s, b) -> {
                 s.put(Attribute.RUNNING, false);
-                s.put(Attribute.WINNER, b.gatherUnits(GenericTank.class).stream()
+                s.put(Attribute.WINNER, b.gatherUnits(Tank.class).stream()
                         .filter((t) -> !t.get(Attribute.DEAD).orElse(false))
                         .map((t) -> t.getPlayerRef().toPlayer(s).get().getUnsafe(Attribute.TEAM))
                         .findAny().get());

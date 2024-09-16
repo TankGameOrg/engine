@@ -4,10 +4,10 @@ import java.util.Map;
 
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
-public class TankBuilder<T extends GenericTank> {
+public class TankBuilder<T extends Tank> {
     private final T tank;
 
     public TankBuilder(T tank) {
@@ -31,9 +31,9 @@ public class TankBuilder<T extends GenericTank> {
 
     private static int count = 0;
 
-    public static TankBuilder<GenericTank> buildTank() {
+    public static TankBuilder<Tank> buildTank() {
         ++count;
-        GenericTank tank = new GenericTank(
+        Tank tank = new Tank(
             new PlayerRef("test " + count),
             new Position("A1"),
             Map.of(

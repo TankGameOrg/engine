@@ -16,7 +16,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
@@ -91,7 +91,7 @@ public class DestructibleFloorTest {
 
     @Test
     public void shootFloorTest() {
-        GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
+        Tank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 3, 3);
         s.getBoard().putFloor(floor);
@@ -112,7 +112,7 @@ public class DestructibleFloorTest {
 
     @Test
     public void destroyFloorTest() {
-        GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
+        Tank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
         s.getBoard().putFloor(floor);
@@ -133,7 +133,7 @@ public class DestructibleFloorTest {
 
     @Test
     public void walkAcrossThenDestroyFloorTest() {
-        GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
+        Tank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).at(new Position("A1")).finish();
         State s = TestUtilities.generateBoard(3, 1, t);
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
         s.getBoard().putFloor(floor);
@@ -176,8 +176,8 @@ public class DestructibleFloorTest {
 
     @Test
     public void shootUnitAboveFloorTest() {
-        GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
-        GenericTank tankAbove = TankBuilder.buildTank().with(Attribute.DURABILITY, 1).with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.GOLD, 0).with(Attribute.BOUNTY, 0).at(new Position("B1")).finish();
+        Tank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
+        Tank tankAbove = TankBuilder.buildTank().with(Attribute.DURABILITY, 1).with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.GOLD, 0).with(Attribute.BOUNTY, 0).at(new Position("B1")).finish();
 
         State s = TestUtilities.generateBoard(3, 1, t, tankAbove);
         int initialFloorDurability = 1;
@@ -185,7 +185,7 @@ public class DestructibleFloorTest {
         s.getBoard().putFloor(floor);
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
-        ConditionalRule<GenericTank> dieOrDestroyRule = ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY;
+        ConditionalRule<Tank> dieOrDestroyRule = ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY;
         shootRule.apply(
             new ContextBuilder(s, t.getPlayerRef())
                 .withTarget(new Position("B1"))
@@ -203,7 +203,7 @@ public class DestructibleFloorTest {
 
     @Test
     public void destroyUnitAboveFloorTest() {
-        GenericTank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
+        Tank t = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 3).with(Attribute.DEAD, false).with(Attribute.RANGE, 2).with(Attribute.GOLD, 0).at(new Position("A1")).finish();
         BasicWall wall = new BasicWall(new Position("B1"), 1);
 
         State s = TestUtilities.generateBoard(3, 1, t, wall);

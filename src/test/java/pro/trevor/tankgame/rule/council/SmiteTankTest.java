@@ -10,7 +10,7 @@ import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
@@ -25,13 +25,13 @@ public class SmiteTankTest {
     private static final PlayerConditionRule ZERO_COST_RULE = PlayerRules.getSmiteRule(0, HEALTH);
     private static final PlayerConditionRule ONE_COST_RULE = PlayerRules.getSmiteRule(1, HEALTH);
 
-    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, GenericTank tank) {
+    private PlayerRuleContext makeContext(State state, PlayerRef playerRef, Tank tank) {
         return new ContextBuilder(state, playerRef)
             .withTarget(tank)
             .finish();
     }
 
-    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, GenericTank tank) {
+    private boolean canApply(IPlayerRule rule, State state, PlayerRef playerRef, Tank tank) {
         return rule.canApply(makeContext(state, playerRef, tank)).isEmpty();
     }
 
@@ -54,8 +54,8 @@ public class SmiteTankTest {
     public void testPlayerCannotHaveLivingTank() {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, false).finish();
-        GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
+        Tank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, false).finish();
+        Tank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
 
@@ -66,8 +66,8 @@ public class SmiteTankTest {
     public void testPlayerCanHaveDeadTank() {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, true).finish();
-        GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
+        Tank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, true).finish();
+        Tank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
         State state = TestUtilities.generateBoard(2, 2, tank, otherTank);
         state.getPlayers().add(player);
 
@@ -78,7 +78,7 @@ public class SmiteTankTest {
     public void testPlayerCanHaveNoTank() {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
-        GenericTank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
+        Tank otherTank = TankBuilder.buildTank().at(new Position(0, 0)).with(Attribute.PLAYER_REF, new PlayerRef("other")).with(Attribute.DEAD, false).with(Attribute.DURABILITY, 3).finish();
         State state = TestUtilities.generateBoard(1, 1, otherTank);
         state.getPlayers().add(player);
 
@@ -90,7 +90,7 @@ public class SmiteTankTest {
         State state = new TestState();
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(0, 0))
+        Tank tank = TankBuilder.buildTank().at(new Position(0, 0))
                 .with(Attribute.NAME, "tank")
                 .with(Attribute.DURABILITY, 10)
                 .finish();
@@ -105,7 +105,7 @@ public class SmiteTankTest {
         State state = new TestState();
         Player player = new Player("test");
         player.put(Attribute.POWER, 1);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(0, 0))
+        Tank tank = TankBuilder.buildTank().at(new Position(0, 0))
                 .with(Attribute.NAME, "tank")
                 .with(Attribute.DURABILITY, 10)
                 .finish();
@@ -122,7 +122,7 @@ public class SmiteTankTest {
         State state = new TestState();
         Player player = new Player("test");
         player.put(Attribute.POWER, POWER);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(0, 0))
+        Tank tank = TankBuilder.buildTank().at(new Position(0, 0))
                 .with(Attribute.NAME, "tank")
                 .with(Attribute.DURABILITY, 10)
                 .finish();
@@ -140,7 +140,7 @@ public class SmiteTankTest {
         State state = new TestState();
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(0, 0))
+        Tank tank = TankBuilder.buildTank().at(new Position(0, 0))
                 .with(Attribute.NAME, "tank")
                 .with(Attribute.DURABILITY, INITIAL_DURABILITY)
                 .finish();

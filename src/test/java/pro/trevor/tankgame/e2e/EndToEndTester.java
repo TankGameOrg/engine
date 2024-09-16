@@ -10,7 +10,7 @@ import pro.trevor.tankgame.state.attribute.Codec;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.IFloor;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
@@ -45,8 +45,8 @@ public class EndToEndTester {
         return api.getState().getBoard();
     }
 
-    public GenericTank getTankByPlayerName(String player) {
-        return (GenericTank) api.getState().getBoard().getPlayerElement(new PlayerRef(player)).get();
+    public Tank getTankByPlayerName(String player) {
+        return (Tank) api.getState().getBoard().getPlayerElement(new PlayerRef(player)).get();
     }
 
     public IFloor getFloorAtPosition(Position position) {

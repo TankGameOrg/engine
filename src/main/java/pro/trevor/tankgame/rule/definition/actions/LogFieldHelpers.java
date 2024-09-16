@@ -13,7 +13,7 @@ import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Pair;
 import pro.trevor.tankgame.util.Util;
@@ -25,7 +25,7 @@ public abstract class LogFieldHelpers {
      */
     public static Set<Position> getPositionsInRange(PlayerRuleContext context) {
         Board board = context.getState().getBoard();
-        GenericTank tank = PredicateHelpers.getTank(context).getValue();
+        Tank tank = PredicateHelpers.getTank(context).getValue();
 
         return Util.getSpacesInRange(board, tank.getPosition(), tank.getOrElse(Attribute.RANGE, 0));
     }
@@ -34,7 +34,7 @@ public abstract class LogFieldHelpers {
      * Find all positions withing RANGE and line of sight of the current player's tank
      */
     public static Stream<Position> getTargetsInLineOfSight(PlayerRuleContext context, ITriPredicate<State, Position, Position> lineOfSight) {
-        GenericTank tank = PredicateHelpers.getTank(context).getValue();
+        Tank tank = PredicateHelpers.getTank(context).getValue();
 
         return getPositionsInRange(context).stream()
             .filter((position) -> lineOfSight.test(context.getState(), tank.getPosition(), position));
@@ -56,8 +56,8 @@ public abstract class LogFieldHelpers {
 
         Stream<PlayerRef> players = getPositionsInRange(context).stream()
             .map((position) -> board.getUnit(position))
-            .filter((optionalUnit) -> optionalUnit.isPresent() && optionalUnit.get() instanceof GenericTank)
-            .map((optionalUnit) -> ((GenericTank) optionalUnit.get()).getPlayerRef());
+            .filter((optionalUnit) -> optionalUnit.isPresent() && optionalUnit.get() instanceof Tank)
+            .map((optionalUnit) -> ((Tank) optionalUnit.get()).getPlayerRef());
 
         return makeLogFieldSpec(Attribute.TARGET_PLAYER, players);
     }
@@ -66,7 +66,7 @@ public abstract class LogFieldHelpers {
      * Get list of positions that the current player can move to
      */
     public static EnumeratedLogFieldSpec<Position> getMovablePositionsSpec(PlayerRuleContext context) {
-        GenericTank tank = PredicateHelpers.getTank(context).getValue();
+        Tank tank = PredicateHelpers.getTank(context).getValue();
         Set<Position> movableSpaces = Util.allPossibleMoves(context.getState().getBoard(), tank.getPosition(), tank.getOrElse(Attribute.SPEED, 1));
         return makeLogFieldSpec(Attribute.TARGET_POSITION, movableSpaces.stream());
     }
@@ -98,9 +98,9 @@ public abstract class LogFieldHelpers {
     /**
      * Get the players assosiated with all of the tanks that match the filter
      */
-    public static EnumeratedLogFieldSpec<PlayerRef> getAllTanksWithFilter(PlayerRuleContext context, Predicate<GenericTank> filter) {
+    public static EnumeratedLogFieldSpec<PlayerRef> getAllTanksWithFilter(PlayerRuleContext context, Predicate<Tank> filter) {
         Stream<PlayerRef> players = context.getState().getBoard()
-            .gatherUnits(GenericTank.class).stream()
+            .gatherUnits(Tank.class).stream()
             .filter(filter)
             .map((tank) -> tank.getPlayerRef());
 
