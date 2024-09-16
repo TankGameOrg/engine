@@ -45,39 +45,32 @@ public class Board implements IMetaElement, IGatherable {
     }
 
     public Board(JSONObject json) {
-        JSONArray unitBoard = json.getJSONArray("unit_board");
-        JSONArray floorBoard = json.getJSONArray("floor_board");
+        this(json.getInt("width"), json.getInt("height"));
 
-        assert unitBoard.length() == floorBoard.length();
-        assert unitBoard.getJSONArray(0).length() == floorBoard.getJSONArray(0).length();
+        JSONArray units = json.getJSONArray("units");
+        JSONArray floors = json.getJSONArray("floors");
 
-        this.height = unitBoard.length();
-        this.width = unitBoard.getJSONArray(0).length();
+        for(int i = 0; i < units.length(); ++i) {
+            Object decodedUnit = Codec.decodeJson(units.getJSONObject(i));
 
-        this.unitBoard = new IUnit[height][width];
-        this.floorBoard = new IFloor[height][width];
-
-        for (int y = 0; y < height; ++y) {
-            JSONArray unitBoardRow = unitBoard.getJSONArray(y);
-            JSONArray floorBoardRow = floorBoard.getJSONArray(y);
-            for (int x = 0; x < width; ++x) {
-                JSONObject unitJson = unitBoardRow.getJSONObject(x);
-                JSONObject floorJson = floorBoardRow.getJSONObject(x);
-
-                Object decodedUnit = Codec.decodeJson(unitJson);
-                Object decodedFloor = Codec.decodeJson(floorJson);
-
-                if (decodedUnit instanceof IUnit unit) {
-                    putUnit(unit);
-                } else {
-                    throw new Error("JSON contains a class that is not IUnit: " + decodedUnit.getClass().getName());
+            if (decodedUnit instanceof IUnit unit) {
+                if(!putUnit(unit)) {
+                    throw new Error("The unit at " + unit.getPosition() + " is not in valid position. Unit: " + decodedUnit);
                 }
+            } else {
+                throw new Error("JSON contains a class that is not IUnit: " + decodedUnit.getClass().getName());
+            }
+        }
 
-                if (decodedFloor instanceof IFloor floor) {
-                    putFloor(floor);
-                } else {
-                    throw new Error("JSON contains a class that is not IFloor: " + decodedFloor.getClass().getName());
+        for(int i = 0; i < floors.length(); ++i) {
+            Object decodedFloor = Codec.decodeJson(floors.getJSONObject(i));
+
+            if (decodedFloor instanceof IFloor floor) {
+                if(!putFloor(floor)) {
+                    throw new Error("The floor at " + floor.getPosition() + " is not in valid position. Floor: " + decodedFloor);
                 }
+            } else {
+                throw new Error("JSON contains a class that is not IFloor: " + decodedFloor.getClass().getName());
             }
         }
     }
@@ -250,20 +243,14 @@ public class Board implements IMetaElement, IGatherable {
     @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-        JSONArray units = new JSONArray();
-        JSONArray floors = new JSONArray();
-        for (int y = 0; y < height; ++y) {
-            JSONArray unit = new JSONArray();
-            JSONArray floor = new JSONArray();
-            for (int x = 0; x < width; ++x) {
-                unit.put(unitBoard[y][x].toJson());
-                floor.put(floorBoard[y][x].toJson());
-            }
-            units.put(unit);
-            floors.put(floor);
-        }
-        output.put("unit_board", units);
-        output.put("floor_board", floors);
+        output.put("width", width);
+        output.put("height", height);
+        output.put("units", gather(IUnit.class).stream()
+            .filter(unit -> !unit.getClass().equals(EmptyUnit.class))
+            .map(unit -> unit.toJson()).toList());
+        output.put("floors", gather(IFloor.class).stream()
+            .filter(floor -> !floor.getClass().equals(WalkableFloor.class))
+            .map(floor -> floor.toJson()).toList());
         return output;
     }
 
