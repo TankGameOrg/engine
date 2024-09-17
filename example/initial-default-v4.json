@@ -5,13 +5,13 @@
             "class": "AttributeList"
         },
         "$COFFER": 0,
-        "$ARMISTICE_MAX": 35,
+        "$MAX_ARMISTICE": 35,
         "$COUNCILLORS": {
             "elements": [],
             "class": "AttributeList"
         },
         "class": "Council",
-        "$ARMISTICE_COUNT": 0
+        "$ARMISTICE": 0
     },
     "$TICK": 0,
     "$PLAYERS": {

@@ -135,7 +135,7 @@ public class TickRules {
     public static final MetaTickActionRule<Council> ARMISTICE_VIA_COUNCIL = new MetaTickActionRule<>(
             (s, c) -> {
                 int totalCouncilMembers = c.getCouncillors().size() + c.getSenators().size();
-                c.put(Attribute.ARMISTICE_COUNT, c.getOrElse(Attribute.ARMISTICE_COUNT, 0) + totalCouncilMembers);
+                c.put(Attribute.ARMISTICE, c.getOrElse(Attribute.ARMISTICE, 0) + totalCouncilMembers);
             });
 
     public static MetaTickActionRule<Council> GetCouncilBaseIncomeRule(int goldPerCouncilor, int goldPerSenator) {
