@@ -13,7 +13,7 @@ import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
@@ -25,8 +25,8 @@ import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
  */
 public class LootActionTestHelper {
     protected Player subject;
-    protected GenericTank subjectTank;
-    protected GenericTank targetTank;
+    protected Tank subjectTank;
+    protected Tank targetTank;
     protected State state;
 
     /**
@@ -56,7 +56,7 @@ public class LootActionTestHelper {
         state.getBoard().putUnit(targetTank);
     }
 
-    protected PlayerRuleContext makeLootContext(State state, GenericTank subjectTank, String targetPosition) {
+    protected PlayerRuleContext makeLootContext(State state, Tank subjectTank, String targetPosition) {
         return new ContextBuilder(state, subjectTank.getPlayerRef())
             .withTarget(new Position(targetPosition))
             .finish();

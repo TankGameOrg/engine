@@ -11,16 +11,16 @@ import pro.trevor.tankgame.util.JsonType;
 
 import java.util.*;
 
-@JsonType(name = "GenericTank")
-public class GenericTank extends GenericElement implements IPlayerElement, IUnit, IElement {
+@JsonType(name = "Tank")
+public class Tank extends GenericElement implements IPlayerElement, IUnit, IElement {
 
-    public GenericTank(PlayerRef player, Position position, Map<Attribute<?>, Object> defaults) {
+    public Tank(PlayerRef player, Position position, Map<Attribute<?>, Object> defaults) {
         super(defaults);
         put(Attribute.POSITION, position);
         put(Attribute.PLAYER_REF, player);
     }
 
-    public GenericTank(JSONObject json) {
+    public Tank(JSONObject json) {
         super(json);
     }
 

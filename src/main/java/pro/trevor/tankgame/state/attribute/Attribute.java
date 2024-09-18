@@ -54,8 +54,8 @@ public class Attribute<E> {
     public static final Attribute<AttributeList> SENATORS = new Attribute<>("SENATORS", AttributeList.class); // AttributeList<Player>
     public static final Attribute<Integer> COFFER = new Attribute<>("COFFER", Integer.class);
     public static final Attribute<Boolean> CAN_BOUNTY = new Attribute<>("CAN_BOUNTY", Boolean.class);
-    public static final Attribute<Integer> ARMISTICE_COUNT = new Attribute<>("ARMISTICE_COUNT", Integer.class);
-    public static final Attribute<Integer> ARMISTICE_MAX = new Attribute<>("ARMISTICE_MAX", Integer.class);
+    public static final Attribute<Integer> ARMISTICE = new Attribute<>("ARMISTICE", Integer.class);
+    public static final Attribute<Integer> MAX_ARMISTICE = new Attribute<>("MAX_ARMISTICE", Integer.class);
 
     // Player attributes
     public static final Attribute<String> NAME = new Attribute<>("NAME", String.class);

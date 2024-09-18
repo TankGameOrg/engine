@@ -12,7 +12,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
@@ -56,7 +56,7 @@ public class SpawnWallTest {
     @Test
     public void testPlayerCannotHaveLivingTank() {
         Player player = new Player("test");
-        GenericTank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, false).finish();
+        Tank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, false).finish();
         State state = TestUtilities.generateBoard(2, 2, tank);
         state.getPlayers().add(player);
 
@@ -67,7 +67,7 @@ public class SpawnWallTest {
     public void testPlayerCanHaveDeadTank() {
         Player player = new Player("test");
         player.put(Attribute.POWER, 0);
-        GenericTank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, true).finish();
+        Tank tank = TankBuilder.buildTank().at(new Position(1, 1)).with(Attribute.PLAYER_REF, player.toRef()).with(Attribute.DEAD, true).finish();
         State state = TestUtilities.generateBoard(2, 2, tank);
         state.getPlayers().add(player);
 

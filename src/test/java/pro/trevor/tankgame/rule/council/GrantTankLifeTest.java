@@ -10,7 +10,7 @@ import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.util.TestUtilities;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +22,7 @@ public class GrantTankLifeTest {
     private static final IPlayerRule ONE_COST_RULE = getRuleCofferCostGrantLife(1, 0);
     private static final PlayerRef councilPlayer = new PlayerRef("Council");
 
-    private void apply(IPlayerRule rule, State state, GenericTank tank) {
+    private void apply(IPlayerRule rule, State state, Tank tank) {
         rule.apply(
             new ContextBuilder(state, councilPlayer)
                 .withTarget(tank)
@@ -32,7 +32,7 @@ public class GrantTankLifeTest {
 
     @Test
     public void testGrantLifeToLivingTank() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
@@ -47,7 +47,7 @@ public class GrantTankLifeTest {
             "1", "2", "3"
     })
     public void testGrantLifeToDeadTank(int durability) {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, durability)
                 .with(Attribute.DEAD, true)
                 .finish();
@@ -64,7 +64,7 @@ public class GrantTankLifeTest {
 
     @Test
     public void testSubtractGoldFromCoffer() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();
@@ -77,7 +77,7 @@ public class GrantTankLifeTest {
 
     @Test
     public void testErrorOnInsufficientGoldInCoffer() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.DEAD, false)
                 .finish();

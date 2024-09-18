@@ -30,7 +30,7 @@ import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
 import pro.trevor.tankgame.state.board.floor.Lava;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
@@ -75,12 +75,12 @@ public class PlayerRules {
     private static final IRulePredicate TARGET_TANK_IS_IN_RANGE = new RulePredicateStream<>(PredicateHelpers::getTank)
         .filter(PredicateHelpers::hasLogEntry)
         .filter((context, tank) -> {
-            Result<GenericTank, PlayerRuleError> result = PredicateHelpers.getTargetTank(context);
+            Result<Tank, PlayerRuleError> result = PredicateHelpers.getTargetTank(context);
             if(result.isError()) {
                 return Result.error(result.getError());
             }
 
-            GenericTank targetTank = result.getValue();
+            Tank targetTank = result.getValue();
 
             Set<Position> positionsInRange = getSpacesInRange(context.getState().getBoard(), tank.getPosition(), tank.get(Attribute.RANGE).orElse(0));
             if(!positionsInRange.contains(targetTank.getPosition())) {
@@ -128,7 +128,7 @@ public class PlayerRules {
                 new RulePredicateStream<>(PredicateHelpers::getTank)
                     .filter(PredicateHelpers.minimum(Attribute.GOLD, 3))),
             (context) -> {
-                GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                Tank tank = PredicateHelpers.getTank(context).getValue();
                 int gold = PredicateHelpers.getLogField(context, Attribute.GOLD);
                 int actions = translateGoldCostPlusDiscount(gold);
 
@@ -165,7 +165,7 @@ public class PlayerRules {
                         .filter(PredicateHelpers.minimum(Attribute.GOLD, actionCost))
                 ),
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
                     int goldSpent = PredicateHelpers.getLogField(context, Attribute.GOLD);
                     int boughtActions = goldSpent / actionCost;
 
@@ -196,7 +196,7 @@ public class PlayerRules {
                             }, new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Tank cannot move to target position")))
                 ,
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
                     tank.put(attribute, tank.getUnsafe(attribute) - cost);
                     context.getState().getBoard().putUnit(new EmptyUnit(tank.getPosition()));
                     tank.setPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION));
@@ -211,7 +211,7 @@ public class PlayerRules {
                         new RulePredicateStream<>(PredicateHelpers::getTank)
                             .filter(PredicateHelpers.minimum(attribute, cost))),
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
                     tank.put(Attribute.RANGE, tank.getOrElse(Attribute.RANGE, 0) + 1);
                     tank.put(attribute, tank.getUnsafe(attribute) - cost);
                 },
@@ -235,8 +235,8 @@ public class PlayerRules {
                         .filter(PredicateHelpers.minimum(Attribute.GOLD, taxAmount + 1))
                 ),
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
-                    GenericTank other = PredicateHelpers.getTargetTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank other = PredicateHelpers.getTargetTank(context).getValue();
                     int donation = PredicateHelpers.getLogField(context, Attribute.DONATION);
 
                     tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - (donation + taxAmount));
@@ -245,7 +245,7 @@ public class PlayerRules {
                     council.put(Attribute.COFFER, council.getUnsafe(Attribute.COFFER) + taxAmount);
                 },
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
 
                     return List.of(
                         LogFieldHelpers.getPlayersInDonationRangeSpec(context),
@@ -271,15 +271,15 @@ public class PlayerRules {
                         .filter(PredicateHelpers.minimum(Attribute.GOLD, taxAmount + 1))
                 ),
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
-                    GenericTank other = PredicateHelpers.getTargetTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank other = PredicateHelpers.getTargetTank(context).getValue();
                     int donation = PredicateHelpers.getLogField(context, Attribute.DONATION);
 
                     tank.put(Attribute.GOLD, tank.getUnsafe(Attribute.GOLD) - (donation + taxAmount));
                     other.put(Attribute.GOLD, other.getUnsafe(Attribute.GOLD) + donation);
                 },
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
 
                     return List.of(
                         LogFieldHelpers.getPlayersInDonationRangeSpec(context),
@@ -297,7 +297,7 @@ public class PlayerRules {
                 ),
                 (context) -> {
                     Council council = context.getState().getCouncil();
-                    GenericTank target = PredicateHelpers.getTargetTank(context).getValue();
+                    Tank target = PredicateHelpers.getTargetTank(context).getValue();
                     target.put(Attribute.ACTION_POINTS, target.getOrElse(Attribute.ACTION_POINTS, 0) + 1);
                     council.put(Attribute.COFFER, council.getUnsafe(Attribute.COFFER) - cost);
                 },
@@ -315,7 +315,7 @@ public class PlayerRules {
                 (context) -> {
                     Council council = context.getState().getCouncil();
                     council.put(Attribute.COFFER, council.getUnsafe(Attribute.COFFER) - cost);
-                    GenericTank targetTank = PredicateHelpers.getTargetTank(context).getValue();
+                    Tank targetTank = PredicateHelpers.getTargetTank(context).getValue();
                     if (targetTank.getOrElse(Attribute.DEAD, false)) {
                         targetTank.put(Attribute.DEAD, false);
                         targetTank.put(Attribute.DURABILITY, 1);
@@ -342,7 +342,7 @@ public class PlayerRules {
                 ),
                 (context) -> {
                     Council council = context.getState().getCouncil();
-                    GenericTank targetTank = PredicateHelpers.getTargetTank(context).getValue();
+                    Tank targetTank = PredicateHelpers.getTargetTank(context).getValue();
                     int bounty = PredicateHelpers.getLogField(context, Attribute.BOUNTY);
                     assert council.getUnsafe(Attribute.COFFER) >= bounty;
                     targetTank.put(Attribute.BOUNTY, targetTank.getOrElse(Attribute.BOUNTY, 0) + bounty);
@@ -401,7 +401,7 @@ public class PlayerRules {
             TARGET_TANK_IS_ALIVE),
             (context) -> {
                 Player player = PredicateHelpers.getPlayer(context).getValue();
-                GenericTank target = PredicateHelpers.getTargetTank(context).getValue();
+                Tank target = PredicateHelpers.getTargetTank(context).getValue();
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 target.put(Attribute.DURABILITY, target.getUnsafe(Attribute.DURABILITY) - health);
             },
@@ -417,7 +417,7 @@ public class PlayerRules {
             TARGET_TANK_IS_ALIVE),
             (context) -> {
                 Player player = PredicateHelpers.getPlayer(context).getValue();
-                GenericTank target = PredicateHelpers.getTargetTank(context).getValue();
+                Tank target = PredicateHelpers.getTargetTank(context).getValue();
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 target.put(Attribute.DURABILITY, target.getUnsafe(Attribute.DURABILITY) + health);
             },
@@ -434,7 +434,7 @@ public class PlayerRules {
             TARGET_TANKS_SPEED_IS_NOT_MODIFIED),
             (context) -> {
                 Player player = PredicateHelpers.getPlayer(context).getValue();
-                GenericTank tank = PredicateHelpers.getTargetTank(context).getValue();
+                Tank tank = PredicateHelpers.getTargetTank(context).getValue();
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 tank.put(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED));
                 tank.put(Attribute.SPEED, tank.getUnsafe(Attribute.SPEED) - modifier);
@@ -453,7 +453,7 @@ public class PlayerRules {
             TARGET_TANKS_SPEED_IS_NOT_MODIFIED),
             (context) -> {
                 Player player = PredicateHelpers.getPlayer(context).getValue();
-                GenericTank tank = PredicateHelpers.getTargetTank(context).getValue();
+                Tank tank = PredicateHelpers.getTargetTank(context).getValue();
                 player.put(Attribute.POWER, player.getUnsafe(Attribute.POWER) - cost);
                 tank.put(Attribute.PREVIOUS_SPEED, tank.getUnsafe(Attribute.SPEED));
                 tank.put(Attribute.SPEED, tank.getUnsafe(Attribute.SPEED) + modifier);
@@ -471,8 +471,8 @@ public class PlayerRules {
      * @param transferLoot A callback transfers the looted targets attributes
      */
     public static PlayerConditionRule getLootTargetRule(
-            ITriFunction<PlayerRuleContext, GenericTank, AttributeContainer, Result<Void, PlayerRuleError>> canLootTarget,
-            ITriConsumer<PlayerRuleContext, GenericTank, AttributeContainer> transferLoot) {
+            ITriFunction<PlayerRuleContext, Tank, AttributeContainer, Result<Void, PlayerRuleError>> canLootTarget,
+            ITriConsumer<PlayerRuleContext, Tank, AttributeContainer> transferLoot) {
 
         IRulePredicate canLootRule = (context) -> {
             Result<Void, PlayerRuleError> logEntryError = PredicateHelpers.hasLogEntry(context);
@@ -506,7 +506,7 @@ public class PlayerRules {
             }
 
             // Check ruleset specific requirements
-            GenericTank tank = PredicateHelpers.getTank(context).getValue();
+            Tank tank = PredicateHelpers.getTank(context).getValue();
             return canLootTarget.accept(context, tank, target);
         };
 
@@ -523,7 +523,7 @@ public class PlayerRules {
         return new PlayerConditionRule(PlayerRules.ActionKeys.LOOT,
             lootCondition,
             (context) -> {
-                GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                Tank tank = PredicateHelpers.getTank(context).getValue();
                 Position position = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
                 AttributeContainer targetObject = (AttributeContainer) context.getState().getBoard().getUnitOrFloor(position).get();
                 transferLoot.accept(context, tank, targetObject);
@@ -547,7 +547,7 @@ public class PlayerRules {
                 return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Players can only loot once per day"));
             }
 
-            if(target instanceof GenericTank && target.getOrElse(Attribute.DEAD, false)) {
+            if(target instanceof Tank && target.getOrElse(Attribute.DEAD, false)) {
                 return Result.ok();
             }
 
@@ -557,7 +557,7 @@ public class PlayerRules {
 
             return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "You can only loot dead tanks or loot boxes"));
         }, (context, tank, target) -> {
-            if(target instanceof GenericTank) {
+            if(target instanceof Tank) {
                 tank.put(Attribute.GOLD, tank.getOrElse(Attribute.GOLD, 0) + target.getOrElse(Attribute.GOLD, 0));
                 target.put(Attribute.GOLD, 0);
             } else if (target instanceof LootBox lootBox) {
@@ -572,7 +572,7 @@ public class PlayerRules {
     public static PlayerConditionRule spendActionToShootGenericWithHitBoolean(
             ITriPredicate<State, Position, Position> lineOfSight,
             BiFunction<PlayerRuleContext, IElement, List<LogFieldSpec<?>>> diceForPosition,
-            ITriConsumer<PlayerRuleContext, GenericTank, IElement> handleHit) {
+            ITriConsumer<PlayerRuleContext, Tank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TARGET_IS_IN_RANGE,
                     new RulePredicateStream<>(PredicateHelpers::getTank)
@@ -583,7 +583,7 @@ public class PlayerRules {
                         .filter((context, tank) -> lineOfSight.test(context.getState(), tank.getPosition(), PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
                             new PlayerRuleError(PlayerRuleError.Category.INSUFFICENT_RESOURCES, "Target position is not in line-of-sight"))),
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
                     Position target = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
 
                     boolean hit = false;
@@ -620,7 +620,7 @@ public class PlayerRules {
     public static PlayerConditionRule spendActionToShootGeneric(
             ITriPredicate<State, Position, Position> lineOfSight,
             BiFunction<PlayerRuleContext, IElement, List<LogFieldSpec<?>>> diceForPosition,
-            ITriConsumer<PlayerRuleContext, GenericTank, IElement> handleHit) {
+            ITriConsumer<PlayerRuleContext, Tank, IElement> handleHit) {
         return new PlayerConditionRule(PlayerRules.ActionKeys.SHOOT,
                 new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE, TARGET_IS_IN_RANGE,
                     new RulePredicateStream<>(PredicateHelpers::getTank)
@@ -631,7 +631,7 @@ public class PlayerRules {
                         .filter((context, tank) -> lineOfSight.test(context.getState(), tank.getPosition(), PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION)),
                             new PlayerRuleError(PlayerRuleError.Category.INSUFFICENT_RESOURCES, "Target position is not in line-of-sight"))),
                 (context) -> {
-                    GenericTank tank = PredicateHelpers.getTank(context).getValue();
+                    Tank tank = PredicateHelpers.getTank(context).getValue();
                     Position target = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
                     tank.put(Attribute.ACTION_POINTS, tank.getUnsafe(Attribute.ACTION_POINTS) - 1);
 
@@ -653,10 +653,10 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule spendActionToShootWithDeathHandleHitBoolean(
-            ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, GenericTank, GenericTank> handleDeath) {
+            ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, Tank, Tank> handleDeath) {
         return spendActionToShootGenericWithHitBoolean(lineOfSight,
         (context, targetElement) -> {
-            GenericTank subjectTank = PredicateHelpers.getTank(context).getValue();
+            Tank subjectTank = PredicateHelpers.getTank(context).getValue();
 
             // We are guarenteed to hit unless we are shooting a tank
             // Indicate this to the user by showing a field with only one option "hit"
@@ -664,7 +664,7 @@ public class PlayerRules {
                 new LogFieldValueDescriptor<>(true, "hit")
             )).setDescription("Like the broad side of a barn you can't miss this target!");
 
-            if(targetElement instanceof GenericTank genericTank && !genericTank.getOrElse(Attribute.DEAD, false)) {
+            if(targetElement instanceof Tank Tank && !Tank.getOrElse(Attribute.DEAD, false)) {
                 int distance = subjectTank.getPosition().distanceFrom(targetElement.getPosition());
                 int numDice = (subjectTank.getOrElse(Attribute.RANGE, 0) - distance) + 1;
                 hitRoll = new DieRollLogFieldSpec<>(Attribute.HIT_ROLL, List.of(new DiceSet<>(numDice, DiceSet.HIT_DIE)));
@@ -676,7 +676,7 @@ public class PlayerRules {
         },
         (context, tank, element) -> {
             switch (element) {
-                case GenericTank otherTank -> {
+                case Tank otherTank -> {
                     otherTank.put(Attribute.DURABILITY, otherTank.getUnsafe(Attribute.DURABILITY) - 1);
                     if (!otherTank.getUnsafe(Attribute.DEAD) && otherTank.getUnsafe(Attribute.DURABILITY) == 0) {
                         handleDeath.accept(context, tank, otherTank);
@@ -698,7 +698,7 @@ public class PlayerRules {
     }
 
     public static PlayerConditionRule spendActionToShootWithDeathHandleHitDamage(
-            ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, GenericTank, GenericTank> handleDeath) {
+            ITriPredicate<State, Position, Position> lineOfSight, ITriConsumer<PlayerRuleContext, Tank, Tank> handleDeath) {
         return spendActionToShootGeneric(lineOfSight, (context, targetElement) -> {
             return List.of(
                 new DieRollLogFieldSpec<>(Attribute.DAMAGE_ROLL, List.of(new DiceSet<>(1, DiceSet.D4)))
@@ -709,7 +709,7 @@ public class PlayerRules {
                 .stream().reduce(0, (totalDamage, die) -> totalDamage + die);
 
             switch (element) {
-                case GenericTank otherTank -> {
+                case Tank otherTank -> {
                     otherTank.put(Attribute.DURABILITY, otherTank.getUnsafe(Attribute.DURABILITY) - damage);
                     if (!otherTank.getUnsafe(Attribute.DEAD) && otherTank.getUnsafe(Attribute.DURABILITY) == 0) {
                         handleDeath.accept(context, tank, otherTank);

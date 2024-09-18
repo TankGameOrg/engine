@@ -15,12 +15,12 @@ import pro.trevor.tankgame.util.TankBuilder;
 import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.util.TestUtilities;
 
 public class BuyActionWithGoldTest {
 
-    private PlayerRuleContext makeContext(GenericTank tank, int gold) {
+    private PlayerRuleContext makeContext(Tank tank, int gold) {
         State state = TestUtilities.generateBoard(1, 1, tank);
 
         return new ContextBuilder(state, tank.getPlayerRef())
@@ -28,11 +28,11 @@ public class BuyActionWithGoldTest {
             .finish();
     }
 
-    private boolean canApply(IPlayerRule rule, GenericTank tank, int gold) {
+    private boolean canApply(IPlayerRule rule, Tank tank, int gold) {
         return rule.canApply(makeContext(tank, gold)).isEmpty();
     }
 
-    private void apply(IPlayerRule rule, GenericTank tank, int gold) {
+    private void apply(IPlayerRule rule, Tank tank, int gold) {
         rule.apply(makeContext(tank, gold));
     }
 
@@ -45,7 +45,7 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void DeadTankCannotBuyAction() {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 3)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 3)
                 .with(Attribute.DEAD, true).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
@@ -54,7 +54,7 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void NoGoldCannotBuyAction() {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 0)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 0)
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
@@ -63,7 +63,7 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void OneMaxBuyAttemptBuyTwo() {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 6)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 6)
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
@@ -92,7 +92,7 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void TooFewGoldCannotBuyAction() {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 5)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 5)
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
@@ -101,7 +101,7 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void EnsureGoldSpentDivisibleByCost() {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 5)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 5)
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
@@ -110,7 +110,7 @@ public class BuyActionWithGoldTest {
 
     @Test
     public void BuyActionGainAction() {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 3)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, 3)
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 1);
@@ -127,7 +127,7 @@ public class BuyActionWithGoldTest {
     })
     public void BuyActionsGainActions(int startingGold, int startingActions, int spentGold, int expectedActions,
             int expectedGold) {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, startingActions)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, startingActions)
                 .with(Attribute.GOLD, startingGold).with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(3, 5);
@@ -147,7 +147,7 @@ public class BuyActionWithGoldTest {
             "5,  25,  5"
     })
     public void CostMultiplesWork(int actionCost, int goldSpent, int expectedActions) {
-        GenericTank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, goldSpent)
+        Tank tank = TankBuilder.buildTank().with(Attribute.ACTION_POINTS, 0).with(Attribute.GOLD, goldSpent)
                 .with(Attribute.DEAD, false).finish();
 
         IPlayerRule rule = PlayerRules.buyActionWithGold(actionCost, 5);

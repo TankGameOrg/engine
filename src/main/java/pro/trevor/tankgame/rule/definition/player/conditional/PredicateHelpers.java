@@ -8,7 +8,7 @@ import pro.trevor.tankgame.log.LogEntry;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
@@ -70,8 +70,8 @@ public abstract class PredicateHelpers {
     /**
      * Get the tank assosiated with the player who initiated the current context
      */
-    public static Result<GenericTank, PlayerRuleError> getTank(PlayerRuleContext context) {
-        Optional<GenericTank> tank = context.getState().getTankForPlayerRef(context.getPlayerRef());
+    public static Result<Tank, PlayerRuleError> getTank(PlayerRuleContext context) {
+        Optional<Tank> tank = context.getState().getTankForPlayerRef(context.getPlayerRef());
         if(tank.isEmpty()) {
             return Result.error(new PlayerRuleError(PlayerRuleError.Category.NOT_APPLICABLE, "Expected player %s to have a tank", context.getPlayerRef()));
         }
@@ -112,14 +112,14 @@ public abstract class PredicateHelpers {
     /**
      * Lookup the tank for the TARGET_PLAYER from the log entry
      */
-    public static Result<GenericTank, PlayerRuleError> getTargetTank(PlayerRuleContext context) {
+    public static Result<Tank, PlayerRuleError> getTargetTank(PlayerRuleContext context) {
         Optional<LogEntry> optionalEntry = context.getLogEntry();
         if(optionalEntry.isEmpty()) {
             return Result.error(new PlayerRuleError(PlayerRuleError.Category.INSUFFICIENT_DATA, "A log entry is required"));
         }
 
         PlayerRef targetRef = optionalEntry.get().getUnsafe(Attribute.TARGET_PLAYER);
-        Optional<GenericTank> optionalTank = context.getState().getTankForPlayerRef(targetRef);
+        Optional<Tank> optionalTank = context.getState().getTankForPlayerRef(targetRef);
         if(optionalTank.isEmpty()) {
             return Result.error(new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Could not find a tank for %s", targetRef));
         }

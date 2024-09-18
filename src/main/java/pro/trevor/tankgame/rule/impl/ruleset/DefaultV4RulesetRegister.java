@@ -15,7 +15,7 @@ import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.unit.BasicWall;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.util.RulesetType;
 
@@ -30,13 +30,13 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerEnforcerRules(Ruleset ruleset) {
         EnforcerRuleset invariants = ruleset.getEnforcerRules();
 
-        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
-        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
-        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
-        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
-        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
-        invariants.put(GenericTank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
-        invariants.put(GenericTank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
+        invariants.put(Tank.class, new MaximumEnforcer<>(Attribute.DURABILITY, 3));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.RANGE, 0));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.GOLD, 0));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.ACTION_POINTS, 0));
+        invariants.put(Tank.class, new MaximumEnforcer<>(Attribute.ACTION_POINTS, 5));
+        invariants.put(Tank.class, new MinimumEnforcer<>(Attribute.BOUNTY, 0));
         invariants.put(BasicWall.class, new MinimumEnforcer<>(Attribute.DURABILITY, 0));
         invariants.put(Council.class, new MinimumEnforcer<>(Attribute.COFFER, 0));
     }
@@ -45,8 +45,8 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
     public void registerTickRules(Ruleset ruleset) {
         ApplicableRuleset tickRules = ruleset.getTickRules();
 
-        tickRules.put(GenericTank.class, TickRules.GetGrantActionPointsOnTickRule(1));
-        tickRules.put(GenericTank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS);
+        tickRules.put(Tank.class, TickRules.GetGrantActionPointsOnTickRule(1));
+        tickRules.put(Tank.class, TickRules.DISTRIBUTE_GOLD_TO_TANKS);
 
         tickRules.put(Board.class, TickRules.INCREMENT_DAY_ON_TICK);
         tickRules.put(Board.class, TickRules.GOLD_MINE_REMAINDER_GOES_TO_COFFER);
@@ -73,7 +73,7 @@ public class DefaultV4RulesetRegister extends BaseRulesetRegister implements IRu
     @Override
     public void registerConditionalRules(Ruleset ruleset) {
         ApplicableRuleset conditionalRules = ruleset.getConditionalRules();
-        conditionalRules.put(GenericTank.class, ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY);
+        conditionalRules.put(Tank.class, ConditionalRules.HANDLE_TANK_ON_ZERO_DURABILITY);
         conditionalRules.put(BasicWall.class, ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY);
 
         conditionalRules.put(Council.class, ConditionalRules.ARMISTICE_COUNCIL_WIN_CONDITION);

@@ -5,7 +5,7 @@ import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public class ContextBuilder {
@@ -32,7 +32,7 @@ public class ContextBuilder {
         return with(Attribute.TARGET_PLAYER, player);
     }
 
-    public ContextBuilder withTarget(GenericTank tank) {
+    public ContextBuilder withTarget(Tank tank) {
         return withTarget(tank.getPlayerRef());
     }
 

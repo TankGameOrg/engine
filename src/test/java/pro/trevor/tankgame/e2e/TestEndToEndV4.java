@@ -32,7 +32,7 @@ public class TestEndToEndV4 {
     public void testCouncilAtEndState() {
         EndToEndTestUtils.testCouncil(tester, 14, 1);
         assertEquals(0, tester.getCouncil().getUnsafe(Attribute.COFFER));
-        assertEquals(34, tester.getCouncil().getUnsafe(Attribute.ARMISTICE_COUNT));
+        assertEquals(34, tester.getCouncil().getUnsafe(Attribute.ARMISTICE));
     }
 
     @Test

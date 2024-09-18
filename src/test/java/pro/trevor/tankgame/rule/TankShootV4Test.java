@@ -3,7 +3,7 @@ package pro.trevor.tankgame.rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import pro.trevor.tankgame.state.board.unit.GenericTank;
+import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.state.State;
@@ -28,7 +28,7 @@ public class TankShootV4Test {
 
     @Test
     public void testDeadTankCannotShoot() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -42,7 +42,7 @@ public class TankShootV4Test {
 
     @Test
     public void testTankCannotShootWithoutActions() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 0)
                 .with(Attribute.DURABILITY, 3)
@@ -56,7 +56,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootDecrementsActions() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -71,7 +71,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootEmpty() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -86,7 +86,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootDamageWalls() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -103,14 +103,14 @@ public class TankShootV4Test {
 
     @Test
     public void testShootDamageTanks() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
                 .with(Attribute.RANGE, 2)
                 .with(Attribute.DEAD, false)
                 .finish();
-        GenericTank otherTank = TankBuilder.buildTank()
+        Tank otherTank = TankBuilder.buildTank()
                 .at(new Position("A2"))
                 .with(Attribute.DURABILITY, 3)
                 .with(Attribute.DEAD, false)
@@ -124,14 +124,14 @@ public class TankShootV4Test {
 
     @Test
     public void testShootMissDoesNotDamageTanks() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
                 .with(Attribute.RANGE, 2)
                 .with(Attribute.DEAD, false)
                 .finish();
-        GenericTank otherTank = TankBuilder.buildTank()
+        Tank otherTank = TankBuilder.buildTank()
                 .at(new Position("A2"))
                 .with(Attribute.DURABILITY, 3)
                 .with(Attribute.DEAD, false)
@@ -145,14 +145,14 @@ public class TankShootV4Test {
 
     @Test
     public void testShootDamageDeadTank() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
                 .with(Attribute.RANGE, 2)
                 .with(Attribute.DEAD, false)
                 .finish();
-        GenericTank otherTank = TankBuilder.buildTank()
+        Tank otherTank = TankBuilder.buildTank()
                 .at(new Position("A2"))
                 .with(Attribute.DURABILITY, 3)
                 .with(Attribute.DEAD, true)
@@ -166,7 +166,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootDamageSelf() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -182,7 +182,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootOutOfBoundsThrows() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -208,7 +208,7 @@ public class TankShootV4Test {
             "9, 7, 2",
     })
     public void testShootKillingLivingTankDistributesGold(int gold, int expectedNewGold, int expectedNewCoffer) {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -216,7 +216,7 @@ public class TankShootV4Test {
                 .with(Attribute.GOLD, 0)
                 .with(Attribute.DEAD, false)
                 .finish();
-        GenericTank otherTank = TankBuilder.buildTank()
+        Tank otherTank = TankBuilder.buildTank()
                 .at(new Position("A2"))
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.GOLD, gold)
@@ -233,7 +233,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootKillingLivingTankDistributesBounty() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -241,7 +241,7 @@ public class TankShootV4Test {
                 .with(Attribute.RANGE, 2)
                 .with(Attribute.DEAD, false)
                 .finish();
-        GenericTank otherTank = TankBuilder.buildTank()
+        Tank otherTank = TankBuilder.buildTank()
                 .at(new Position("A2"))
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.GOLD, 0)
@@ -258,7 +258,7 @@ public class TankShootV4Test {
 
     @Test
     public void testShootKillingLivingTankDistributesBountyAndGold() {
-        GenericTank tank = TankBuilder.buildTank()
+        Tank tank = TankBuilder.buildTank()
                 .at(new Position("A1"))
                 .with(Attribute.ACTION_POINTS, 1)
                 .with(Attribute.DURABILITY, 3)
@@ -266,7 +266,7 @@ public class TankShootV4Test {
                 .with(Attribute.GOLD, 0)
                 .with(Attribute.DEAD, false)
                 .finish();
-        GenericTank otherTank = TankBuilder.buildTank()
+        Tank otherTank = TankBuilder.buildTank()
                 .at(new Position("A2"))
                 .with(Attribute.DURABILITY, 1)
                 .with(Attribute.GOLD, 1)
