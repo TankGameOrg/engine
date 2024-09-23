@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 import pro.trevor.tankgame.state.State;
+import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
-import pro.trevor.tankgame.rule.impl.util.RandomManager;
+import pro.trevor.tankgame.util.Random;
 
 public class LootTable implements ILootProvider {
     public static class Entry implements Comparable<Integer> {
@@ -66,7 +67,7 @@ public class LootTable implements ILootProvider {
         // No loot was applicable RIP you get nothing
         if(lootTable.isEmpty()) return;
 
-        int weightedIndex = RandomManager.randomizer.nextInt(weightedTotal);
+        int weightedIndex = state.getOrElse(Attribute.RANDOM, new Random(0)).nextInt(weightedTotal);
         int index = Collections.binarySearch(lootTable, weightedIndex);
         Entry loot = lootTable.get(index);
         loot.grantLoot.accept(state, looter);
