@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.attribute.AttributeContainer;
 
+@JsonType(name = "Random")
 public class Random extends AttributeContainer implements IRandom {
 
     protected static final long MULTIPLIER = 0x5DEECE66DL;
