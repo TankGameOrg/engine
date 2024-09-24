@@ -67,7 +67,7 @@ public class LootTable implements ILootProvider {
         // No loot was applicable RIP you get nothing
         if(lootTable.isEmpty()) return;
 
-        int weightedIndex = state.getOrElse(Attribute.RANDOM, new Random(0)).nextInt(weightedTotal);
+        int weightedIndex = state.getUnsafe(Attribute.RANDOM).nextInt(weightedTotal);
         int index = Collections.binarySearch(lootTable, weightedIndex);
         Entry loot = lootTable.get(index);
         loot.grantLoot.accept(state, looter);

@@ -190,7 +190,7 @@ public class TickRules {
 
             int remainingToSpawn = spawnedPerDay;
             while(remainingToSpawn-- > 0 && spawnableLocations.size() > 0) {
-                int index = state.getOrElse(Attribute.RANDOM, new Random(0)).nextInt(spawnableLocations.size());
+                int index = state.getUnsafe(Attribute.RANDOM).nextInt(spawnableLocations.size());
                 Position spawnLocation = spawnableLocations.remove(index);
                 spawn.accept(state, spawnLocation);
             }

@@ -1,8 +1,9 @@
 package pro.trevor.tankgame.rule.definition.actions;
 
+import pro.trevor.tankgame.util.Random;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class DiceSet<T> {
     public static class Die<T> {
