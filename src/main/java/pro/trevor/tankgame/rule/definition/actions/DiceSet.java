@@ -2,7 +2,6 @@ package pro.trevor.tankgame.rule.definition.actions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class DiceSet<T> {
     public static class Die<T> {
@@ -20,10 +19,6 @@ public class DiceSet<T> {
 
         public List<T> getSides() {
             return sides;
-        }
-
-        public T roll(Random random) {
-            return sides.get(random.nextInt(sides.size()));
         }
     }
 

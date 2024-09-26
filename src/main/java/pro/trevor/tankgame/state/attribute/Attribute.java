@@ -5,6 +5,7 @@ import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
+import pro.trevor.tankgame.util.IRandom;
 
 public class Attribute<E> {
 
@@ -48,6 +49,7 @@ public class Attribute<E> {
     public static final Attribute<AttributeList> PLAYERS = new Attribute<>("PLAYERS", AttributeList.class); // AttributeList<Player>
     public static final Attribute<Council> COUNCIL = new Attribute<>("COUNCIL", Council.class);
     public static final Attribute<Board> BOARD = new Attribute<>("BOARD", Board.class);
+    public static final Attribute<IRandom> RANDOM = new Attribute<>("RANDOM", IRandom.class);
 
     // Council attributes
     public static final Attribute<AttributeList> COUNCILLORS = new Attribute<>("COUNCILLORS", AttributeList.class); // AttributeList<Player>
@@ -74,6 +76,9 @@ public class Attribute<E> {
     public static final Attribute<String> ACTION = new Attribute<>("ACTION", String.class);
     public static final Attribute<DieRollResult> HIT_ROLL = new Attribute<>("HIT_ROLL", DieRollResult.class); // DieRollResult<Boolean>
     public static final Attribute<DieRollResult> DAMAGE_ROLL = new Attribute<>("DAMAGE_ROLL", DieRollResult.class); // DieRollResult<Integer>
+
+    // Random number generation attributes
+    public static final Attribute<Long> RNG_SEED = new Attribute<>("RNG_SEED", Long.class);
 
     private final String attributeName;
     private final Class<E> attributeClass;

@@ -8,7 +8,6 @@ import java.util.function.Predicate;
 import pro.trevor.tankgame.rule.definition.MetaTickActionRule;
 import pro.trevor.tankgame.rule.definition.Priority;
 import pro.trevor.tankgame.rule.definition.TickActionRule;
-import pro.trevor.tankgame.rule.impl.util.RandomManager;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
@@ -25,6 +24,7 @@ import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.LootBox;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.Player;
+import pro.trevor.tankgame.util.Random;
 import pro.trevor.tankgame.util.Util;
 
 public class TickRules {
@@ -190,7 +190,7 @@ public class TickRules {
 
             int remainingToSpawn = spawnedPerDay;
             while(remainingToSpawn-- > 0 && spawnableLocations.size() > 0) {
-                int index = RandomManager.randomizer.nextInt(spawnableLocations.size());
+                int index = state.getUnsafe(Attribute.RANDOM).nextInt(spawnableLocations.size());
                 Position spawnLocation = spawnableLocations.remove(index);
                 spawn.accept(state, spawnLocation);
             }
