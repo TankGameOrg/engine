@@ -6,7 +6,6 @@ import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.IRandom;
-import pro.trevor.tankgame.util.Random;
 
 public class Attribute<E> {
 

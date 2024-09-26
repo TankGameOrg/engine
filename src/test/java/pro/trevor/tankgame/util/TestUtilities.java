@@ -14,9 +14,7 @@ public class TestUtilities {
         for (IUnit unit : units) {
             board.putUnit(unit);
         }
-        State state = new State(board, buildTestCouncil(0, 0, 0), new AttributeList<>());
-        state.put(Attribute.RANDOM, new Random(0));
-        return state;
+        return new State(board, buildTestCouncil(0, 0, 0), new AttributeList<>());
     }
 
     public static Council buildTestCouncil(int coffer, int councilors, int senators) {

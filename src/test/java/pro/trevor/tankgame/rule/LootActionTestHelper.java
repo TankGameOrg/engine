@@ -17,6 +17,7 @@ import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.Player;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.ContextBuilder;
+import pro.trevor.tankgame.util.Random;
 import pro.trevor.tankgame.util.TankBuilder;
 import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
 
@@ -43,6 +44,7 @@ public class LootActionTestHelper {
             .finish();
 
         state = generateBoard(4, 4, subjectTank);
+        state.put(Attribute.RANDOM, new Random(0));
         state.getPlayers().add(subject);
     }
 

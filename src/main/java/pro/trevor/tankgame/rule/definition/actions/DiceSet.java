@@ -1,7 +1,5 @@
 package pro.trevor.tankgame.rule.definition.actions;
 
-import pro.trevor.tankgame.util.Random;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +19,6 @@ public class DiceSet<T> {
 
         public List<T> getSides() {
             return sides;
-        }
-
-        public T roll(Random random) {
-            return sides.get(random.nextInt(sides.size()));
         }
     }
 
