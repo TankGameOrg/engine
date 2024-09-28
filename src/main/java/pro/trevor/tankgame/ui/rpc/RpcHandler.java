@@ -62,7 +62,7 @@ public class RpcHandler {
             }
 
             apis.put(instance, newRuleset.get());
-            return response("Created instance " + instance + " with rulset " + rulesetName);
+            return response("Created instance " + instance + " with ruleset " + rulesetName);
         }
     }
 
