@@ -1,0 +1,15 @@
+{
+  "get": {
+    "LIST_GAMES": "/games",
+    "LIST_ENGINES": "/engine/",
+    "GET_GAME": "/game/{gameName}",
+    "GET_GAME_TURN": "/game/{gameName}/turn/{turnId}",
+    "GET_POSSIBLE_ACTIONS": "game/{gameName}/possible-actions/{playerName}/{lastTurnId}"
+  },
+  "post": {
+    "RELOAD_ALL": "/games/reload",
+    "RELOAD_GAME": "/game/{gameId}/reload",
+    "POST_TURN": "/game/{gameName}/turn",
+    "POST_ENGINE_VERSION": "/engine/game-version/{gameVersion}"
+  }
+}

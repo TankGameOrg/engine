@@ -16,11 +16,11 @@ import java.util.*;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.Result;
 
-public class Api {
-    private final Ruleset ruleset;
+public class Api implements Cloneable {
+    private Ruleset ruleset;
     private State state;
 
-    // A list of errors that should not be send back to the client when requesting possible actions
+    // A list of errors that should not be sent back to the client when requesting possible actions
     private static final Set<PlayerRuleError.Category> errorsToFilterOut = Set.of(
         PlayerRuleError.Category.INSUFFICIENT_DATA
     );
@@ -105,12 +105,12 @@ public class Api {
             List<PlayerRuleError> canApplyErrors = rule.canApply(context);
 
             List<PlayerRuleError> errors = canApplyErrors.stream()
-                // Remove any errors that the client shouldn't see i.e. insufficent data
+                // Remove any errors that the client shouldn't see i.e. insufficient data
                 .filter((error) -> !errorsToFilterOut.contains(error.getCategory()))
                 .toList();
 
             // If this action is not applicable to the current player don't send it to UI
-            if(canApplyErrors.stream().filter((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE).findAny().isPresent()) {
+            if(canApplyErrors.stream().anyMatch((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE)) {
                 continue;
             }
 
@@ -123,5 +123,17 @@ public class Api {
         }
 
         return actions;
+    }
+
+    @Override
+    public Api clone() {
+        try {
+            Api clone = (Api) super.clone();
+            clone.state = state.clone();
+            clone.ruleset = ruleset.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

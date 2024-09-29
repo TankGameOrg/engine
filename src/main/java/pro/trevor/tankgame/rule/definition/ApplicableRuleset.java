@@ -5,7 +5,7 @@ import pro.trevor.tankgame.util.Pair;
 
 import java.util.*;
 
-public class ApplicableRuleset {
+public class ApplicableRuleset implements Cloneable {
 
     PriorityQueue<Pair<Class<?>, IApplicableRule<?>>> sortedRules;
 
@@ -40,6 +40,17 @@ public class ApplicableRuleset {
                     castRule.apply(state, subject);
                 }
             }
+        }
+    }
+
+    @Override
+    public ApplicableRuleset clone() {
+        try {
+            ApplicableRuleset clone = (ApplicableRuleset) super.clone();
+            clone.sortedRules.addAll(this.sortedRules);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 }

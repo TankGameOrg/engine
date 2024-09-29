@@ -4,7 +4,7 @@ import pro.trevor.tankgame.state.State;
 
 import java.util.*;
 
-public class EnforcerRuleset {
+public class EnforcerRuleset implements Cloneable {
 
     private final Map<Class<?>, List<IEnforceable<?>>> rules;
 
@@ -55,6 +55,17 @@ public class EnforcerRuleset {
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public EnforcerRuleset clone() {
+        try {
+            EnforcerRuleset clone = (EnforcerRuleset) super.clone();
+            clone.rules.putAll(this.rules);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 }

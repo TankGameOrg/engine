@@ -16,7 +16,7 @@ import java.util.Optional;
  * keys that begin with a `$`.
  */
 @JsonType(name = "AttributeContainer")
-public class AttributeContainer {
+public class AttributeContainer implements Cloneable {
 
     protected final Map<String, Object> attributes;
 
@@ -147,6 +147,17 @@ public class AttributeContainer {
 
     public <E> E remove(Attribute<E> attribute) {
         return attribute.getAttributeClass().cast(attributes.remove(attribute.getName()));
+    }
+
+    @Override
+    public AttributeContainer clone() {
+        try {
+            AttributeContainer clone = (AttributeContainer) super.clone();
+            clone.attributes.putAll(this.attributes);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
     private enum WrapperClass {

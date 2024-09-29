@@ -31,6 +31,10 @@ public class Interface {
         }
     }
 
+    public RpcHandler manualHandler() {
+        return this.handler;
+    }
+
     public JSONObject handleJson(JSONObject json) {
         if (!json.has("method")) {
             return response(new Error("Request does not have the required field method"));

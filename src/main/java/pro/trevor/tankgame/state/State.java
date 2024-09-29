@@ -16,7 +16,7 @@ import pro.trevor.tankgame.util.JsonType;
 import java.util.*;
 
 @JsonType(name = "State")
-public class State extends AttributeContainer implements IJsonObject, IGatherable {
+public class State extends AttributeContainer implements Cloneable, IJsonObject, IGatherable {
 
     public State(Board board, Council council, AttributeList<Player> players) {
         put(Attribute.BOARD, board);
@@ -77,11 +77,16 @@ public class State extends AttributeContainer implements IJsonObject, IGatherabl
     }
 
     /**
-     * Search the state for a tank controled by the same player (ref)
+     * Search the state for a tank controlled by the same player (ref)
      */
     public Optional<Tank> getTankForPlayerRef(PlayerRef playerRef) {
         return gather(Tank.class)
             .stream().filter((t) -> t.getPlayerRef().equals(playerRef))
             .findAny();
+    }
+
+    @Override
+    public State clone() {
+        return (State) super.clone();
     }
 }

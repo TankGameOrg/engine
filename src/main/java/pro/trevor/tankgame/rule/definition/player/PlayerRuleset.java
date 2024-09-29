@@ -2,7 +2,7 @@ package pro.trevor.tankgame.rule.definition.player;
 
 import java.util.*;
 
-public class PlayerRuleset {
+public class PlayerRuleset implements Cloneable {
 
     private final List<IPlayerRule> rules;
 
@@ -26,5 +26,16 @@ public class PlayerRuleset {
 
     public List<IPlayerRule> getAllRules() {
         return rules;
+    }
+
+    @Override
+    public PlayerRuleset clone() {
+        try {
+            PlayerRuleset clone = (PlayerRuleset) super.clone();
+            clone.rules.addAll(this.rules);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

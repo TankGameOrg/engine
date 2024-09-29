@@ -18,7 +18,7 @@ import pro.trevor.tankgame.state.meta.PlayerRef;
 
 public class RpcHandler {
     private boolean isRunning = true;
-    private Map<String, Api> apis = new HashMap<>();
+    private final Map<String, Api> apis = new HashMap<>();
 
     public boolean canProcessRequests() {
         return isRunning;
@@ -105,7 +105,7 @@ public class RpcHandler {
     public JSONObject canIngestAction(JSONObject request) {
         JSONArray errors = new JSONArray(
             getApi(request).canIngestAction(new LogEntry(request)).stream()
-                .map((error) -> PlayerRuleErrorEncoder.encode(error))
+                .map(PlayerRuleErrorEncoder::encode)
                 .toList()
         );
 

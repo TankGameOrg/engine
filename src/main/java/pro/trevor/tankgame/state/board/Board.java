@@ -14,6 +14,7 @@ import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.IGatherable;
 import pro.trevor.tankgame.util.JsonType;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +22,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @JsonType(name = "Board")
-public class Board implements IMetaElement, IGatherable {
+public class Board implements Cloneable, IMetaElement, IGatherable {
 
-    private final IUnit[][] unitBoard;
-    private final IFloor[][] floorBoard;
+    private IUnit[][] unitBoard;
+    private IFloor[][] floorBoard;
 
     private final int width;
     private final int height;
@@ -265,5 +266,23 @@ public class Board implements IMetaElement, IGatherable {
             }
         }
         return output;
+    }
+
+    @Override
+    public Board clone() {
+        try {
+            Board clone = (Board) super.clone();
+            clone.unitBoard = new IUnit[height][width];
+            clone.floorBoard = new IFloor[height][width];
+            for (int y = 0; y < height; ++y) {
+                for (int x = 0; x < width; ++x) {
+                    clone.unitBoard[y][x] = (IUnit) this.unitBoard[y][x].clone();
+                    clone.floorBoard[y][x] = (IFloor) this.floorBoard[y][x].clone();
+                }
+            }
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
