@@ -12,11 +12,15 @@ import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.IGatherable;
+import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,8 +42,8 @@ public class Board implements IMetaElement, IGatherable {
         this.floorBoard = new IFloor[height][width];
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
-                unitBoard[y][x] = new EmptyUnit(new Position(x, y));
-                floorBoard[y][x] = new WalkableFloor(new Position(x, y));
+                unitBoard[y][x] = null;
+                floorBoard[y][x] = null;
             }
         }
     }
@@ -87,19 +91,16 @@ public class Board implements IMetaElement, IGatherable {
         return false;
     }
 
-    private <T extends IElement> Optional<T> getElementOnBoard(T[][] board, Position p) {
-        if (isValidPosition(p)) {
-            return Optional.of(board[p.y()][p.x()]);
-        }
-        return Optional.empty();
-    }
-
     public boolean putUnit(IUnit unit) {
         return putElementOnBoard(unitBoard, unit);
     }
 
     public Optional<IUnit> getUnit(Position p) {
-        return getElementOnBoard(unitBoard, p);
+        if (!isValidPosition(p)) {
+            return Optional.empty();
+        }
+        IUnit unit = unitBoard[p.y()][p.x()];
+        return Optional.of(Objects.requireNonNullElseGet(unit, () -> new EmptyUnit(p)));
     }
 
     public boolean putFloor(IFloor floor) {
@@ -107,7 +108,11 @@ public class Board implements IMetaElement, IGatherable {
     }
 
     public Optional<IFloor> getFloor(Position p) {
-        return getElementOnBoard(floorBoard, p);
+        if (!isValidPosition(p)) {
+            return Optional.empty();
+        }
+        IFloor floor = floorBoard[p.y()][p.x()];
+        return Optional.of(Objects.requireNonNullElseGet(floor, () -> new WalkableFloor(p)));
     }
 
     public Optional<IPlayerElement> getPlayerElement(PlayerRef playerRef) {
@@ -198,29 +203,29 @@ public class Board implements IMetaElement, IGatherable {
         return getUnit(p).orElse(null) instanceof EmptyUnit;
     }
 
-    private static <T extends IElement> String toGridString(T[][] board) {
+    private static <T extends IElement> String toGridString(Board board, BiFunction<Board, Position, Character> getChar) {
 
-        int pad = (int) Math.log10(board.length) + 1;
+        int pad = (int) Math.log10(board.width) + 1;
 
         StringBuilder sb = new StringBuilder();
 
         sb.repeat(' ', 2 * pad);
 
-        for (int i = 0; i < board.length; ++i) {
+        for (int i = 0; i < board.width; ++i) {
             sb.append((char) ('A' + i)).append(' ');
         }
 
         sb.append("\n").repeat(' ', pad).append("+-");
 
-        sb.repeat("--", board.length);
+        sb.repeat("--", board.width);
 
         sb.append('\n');
 
-        for (int i = 0; i < board.length; ++i) {
+        for (int i = 0; i < board.width; ++i) {
             String paddedNumber = String.format(("%1$" + pad + "s"), (i + 1));
             sb.append(paddedNumber).append("| ");
-            for (int j = 0; j < board[0].length; ++j) {
-                sb.append(board[i][j].toBoardCharacter()).append(' ');
+            for (int j = 0; j < board.height; ++j) {
+                sb.append(getChar.apply(board, new Position(j, i))).append(' ');
             }
             sb.append('\n');
         }
@@ -228,11 +233,11 @@ public class Board implements IMetaElement, IGatherable {
     }
 
     public String toUnitString() {
-        return toGridString(unitBoard);
+        return toGridString(this, (b, p) -> b.getUnit(p).get().toBoardCharacter());
     }
 
     public String toFloorString() {
-        return toGridString(floorBoard);
+        return toGridString(this, (b, p) -> b.getFloor(p).get().toBoardCharacter());
     }
 
     @Override
@@ -245,12 +250,8 @@ public class Board implements IMetaElement, IGatherable {
         JSONObject output = new JSONObject();
         output.put("width", width);
         output.put("height", height);
-        output.put("units", gather(IUnit.class).stream()
-            .filter(unit -> !unit.getClass().equals(EmptyUnit.class))
-            .map(unit -> unit.toJson()).toList());
-        output.put("floors", gather(IFloor.class).stream()
-            .filter(floor -> !floor.getClass().equals(WalkableFloor.class))
-            .map(floor -> floor.toJson()).toList());
+        output.put("units", gather(IUnit.class).stream().map(IJsonObject::toJson).toList());
+        output.put("floors", gather(IFloor.class).stream().map(IJsonObject::toJson).toList());
         return output;
     }
 

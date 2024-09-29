@@ -7,7 +7,13 @@ import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 import pro.trevor.tankgame.util.IRandom;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Attribute<E> {
+
+    // This element must be declared before any attributes since it is used in the constructor.
+    private static final Map<String, Attribute<?>> attributes = new HashMap<>();
 
     // Element attributes
     public static final Attribute<Position> POSITION = new Attribute<>("POSITION", Position.class);
@@ -86,6 +92,12 @@ public class Attribute<E> {
     public Attribute(String name, Class<E> attributeClass) {
         this.attributeName = name;
         this.attributeClass = attributeClass;
+        assert !attributes.containsKey(attributeName);
+        attributes.put(attributeName, this);
+    }
+
+    public static Attribute<?> fromName(String name) {
+        return attributes.get(name);
     }
 
     public String getName() {
@@ -94,5 +106,10 @@ public class Attribute<E> {
 
     public Class<E> getAttributeClass() {
         return attributeClass;
+    }
+
+    @Override
+    public String toString() {
+        return attributeName;
     }
 }

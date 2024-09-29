@@ -4,10 +4,7 @@ import org.json.JSONObject;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * A type that stores its attributes in a map. These attributes are accessible through Attribute objects.
@@ -18,28 +15,28 @@ import java.util.Optional;
 @JsonType(name = "AttributeContainer")
 public class AttributeContainer {
 
-    protected final Map<String, Object> attributes;
+    protected final MiniMap attributes;
 
     public AttributeContainer() {
-        this.attributes = new HashMap<>();
+        this.attributes = new MiniMap();
     }
 
     public AttributeContainer(Map<Attribute<?>, ?> defaults) {
         this();
         for (Attribute<?> attribute : defaults.keySet()) {
-            attributes.put(attribute.getName(), defaults.get(attribute));
+            attributes.put(attribute, defaults.get(attribute));
         }
     }
 
     public AttributeContainer(JSONObject json) {
-        this.attributes = new HashMap<>();
+        this.attributes = new MiniMap();
         for (String jsonKey : json.keySet()) {
             if(isAttributeJsonKey(jsonKey)) {
                 Object attribute = json.get(jsonKey);
                 if (attribute instanceof JSONObject jsonAttribute) {
                     attribute = Codec.decodeJson(jsonAttribute);
                 }
-                this.attributes.put(toAttributeString(jsonKey), attribute);
+                this.attributes.put(Attribute.fromName(toAttributeString(jsonKey)), attribute);
             }
         }
     }
@@ -58,9 +55,9 @@ public class AttributeContainer {
 
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
-        for (String attribute : attributes.keySet()) {
+        for (Attribute<?> attribute : attributes.keySet()) {
             Object value = attributes.get(attribute);
-            String attributeKey = toAttributeJsonKeyString(attribute);
+            String attributeKey = toAttributeJsonKeyString(attribute.getName());
             switch (value) {
                 case Boolean v -> output.put(attributeKey, v);
                 case Integer v -> output.put(attributeKey, v);
@@ -85,7 +82,7 @@ public class AttributeContainer {
 
     public String toString(int indent) {
         StringBuilder output = new StringBuilder();
-        for (String attributeKey : attributes.keySet()) {
+        for (Attribute<?> attributeKey : attributes.keySet()) {
             Object value = attributes.get(attributeKey);
             output.repeat(" ", indent).append(attributeKey).append(":");
             if (value instanceof AttributeContainer attributeValue) {
@@ -106,14 +103,14 @@ public class AttributeContainer {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof AttributeContainer other)) return false;
-        for (String key : attributes.keySet()) {
+        for (Attribute<?> key : attributes.keySet()) {
             if (!attributes.get(key).equals(other.attributes.get(key))) return false;
         }
         return true;
     }
 
     public boolean has(Attribute<?> attribute) {
-        return attributes.containsKey(attribute.getName());
+        return attributes.containsKey(attribute);
     }
 
     public <E> Optional<E> get(Attribute<E> attribute) {
@@ -136,17 +133,17 @@ public class AttributeContainer {
     }
 
     public <E> void put(Attribute<E> attribute, E value) {
-        attributes.put(attribute.getName(), value);
+        attributes.put(attribute, value);
     }
 
     public <E> void putIfNotPresent(Attribute<E> attribute, E value) {
         if (!has(attribute)) {
-            attributes.put(attribute.getName(), value);
+            attributes.put(attribute, value);
         }
     }
 
     public <E> E remove(Attribute<E> attribute) {
-        return attribute.getAttributeClass().cast(attributes.remove(attribute.getName()));
+        return attribute.getAttributeClass().cast(attributes.remove(attribute));
     }
 
     private enum WrapperClass {
@@ -177,7 +174,7 @@ public class AttributeContainer {
     }
 
     private <E> E getObject(Attribute<E> attribute) {
-        Object value = attributes.get(attribute.getName());
+        Object value = attributes.get(attribute);
         try {
             return attribute.getAttributeClass().cast(value);
         } catch (ClassCastException exception) {
