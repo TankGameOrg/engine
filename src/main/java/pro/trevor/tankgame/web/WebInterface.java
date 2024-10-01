@@ -9,6 +9,8 @@ import pro.trevor.tankgame.ui.rpc.EngineInstance;
 import pro.trevor.tankgame.util.JsonReader;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -40,14 +42,30 @@ public class WebInterface {
         if (!gameFile.exists()) {
             throw new Error(String.format("Game file `%s` does not exist", id + ".json"));
         }
+        if (!gameFile.canRead()) {
+            throw new Error(String.format("Game file `%s` is not readable", id + ".json"));
+        }
         JSONObject gameJson = JsonReader.readJson(gameFile);
         EngineInstance instance = new EngineInstance(gameJson);
+        instances.put(id, instance);
     }
 
     public void saveInstance(String id) {
         File gameFile = new File(directory, id + ".json");
+        if (!gameFile.canWrite()) {
+            throw new Error(String.format("Game file `%s` is not writable", id + ".json"));
+        }
         EngineInstance instance = getInstance(id);
+        JSONObject gameJson = instance.toJson();
+        try (FileWriter fileWriter = new FileWriter(gameFile)) {
+            fileWriter.write(gameJson.toString());
+        } catch (IOException exception) {
+            throw new Error(exception);
+        }
+    }
 
+    public Set<String> getInstanceIds() {
+        return instances.keySet();
     }
 
     public void newInstance(String id, String version) {
