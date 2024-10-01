@@ -16,6 +16,15 @@ public class ApiLogBook {
         states.add(base);
     }
 
+
+    public int size() {
+        return states.size();
+    }
+
+    public int logEntriesSize() {
+        return logEntries.size();
+    }
+
     public List<PlayerRuleError> ingestLogEntry(LogEntry logEntry) {
         List<PlayerRuleError> errors = states.getLast().canIngestAction(logEntry);
         if (errors.isEmpty()) {
@@ -25,6 +34,14 @@ public class ApiLogBook {
             logEntries.add(logEntry);
         }
         return errors;
+    }
+
+    public Api getState(int index) {
+        return states.get(index);
+    }
+
+    public LogEntry getLogEntry(int index) {
+        return logEntries.get(index);
     }
 
     public Api currentState() {
