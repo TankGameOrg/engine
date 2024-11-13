@@ -14,7 +14,7 @@ import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.util.TestUtilities;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.getRuleCofferCostGrantLife;
+import static pro.trevor.tankgame.rule.impl.shared.player.PlayerRules.getRuleCofferCostGrantLife;
 
 public class GrantTankLifeTest {
 

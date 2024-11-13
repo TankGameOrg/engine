@@ -11,7 +11,7 @@ import pro.trevor.tankgame.util.ContextBuilder;
 import pro.trevor.tankgame.util.TankBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static pro.trevor.tankgame.rule.impl.shared.PlayerRules.SHOOT_V5;
+import static pro.trevor.tankgame.rule.impl.shared.player.PlayerRules.SHOOT_V5;
 import static pro.trevor.tankgame.util.TestUtilities.generateBoard;
 
 public class TankShootV5Test {

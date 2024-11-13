@@ -1,4 +1,4 @@
-package pro.trevor.tankgame.rule.impl.shared;
+package pro.trevor.tankgame.rule.impl.shared.player;
 
 import java.util.List;
 import java.util.Map;
@@ -181,28 +181,6 @@ public class PlayerRules {
                         LogFieldHelpers.getExchangeSpec(Attribute.GOLD, Attribute.ACTION_POINTS, exchangeOptions)
                     );
                 });
-    }
-
-    public static PlayerConditionRule getMoveRule(Attribute<Integer> attribute, int cost) {
-        return new PlayerConditionRule(PlayerRules.ActionKeys.MOVE,
-                new RuleCondition(PLAYER_TANK_IS_ALIVE_PREDICATE,
-                        new RulePredicateStream<>(PredicateHelpers::getTank)
-                            .filter(PredicateHelpers.minimum(attribute, cost)),
-                        new RulePredicateStream<>(PredicateHelpers::getTank)
-                            .filter(PredicateHelpers::hasLogEntry)
-                            .filter((context, tank) -> {
-                                Position target = PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION);
-                                return canMoveTo(context.getState(), tank.getPosition(), target, tank.getOrElse(Attribute.SPEED, 1));
-                            }, new PlayerRuleError(PlayerRuleError.Category.GENERIC, "Tank cannot move to target position")))
-                ,
-                (context) -> {
-                    Tank tank = PredicateHelpers.getTank(context).getValue();
-                    tank.put(attribute, tank.getUnsafe(attribute) - cost);
-                    context.getState().getBoard().putUnit(new EmptyUnit(tank.getPosition()));
-                    tank.setPosition(PredicateHelpers.getLogField(context, Attribute.TARGET_POSITION));
-                    context.getState().getBoard().putUnit(tank);
-                },
-                (context) -> List.of(LogFieldHelpers.getMovablePositionsSpec(context)));
     }
 
     public static PlayerConditionRule getUpgradeRangeRule(Attribute<Integer> attribute, int cost) {
@@ -530,7 +508,7 @@ public class PlayerRules {
             },
             (context) -> {
                 Stream<Position> lootablePositions = LogFieldHelpers.getPositionsInRange(context).stream().filter((position) -> {
-                    PlayerRuleContext testContext = new PlayerRuleContext(context.getState(), context.getPlayerRef(), new LogEntry(Map.of(Attribute.TARGET_POSITION, position)));
+                    PlayerRuleContext testContext = new PlayerRuleContext(context.getState(), context.getPlayerRef(), context.getRule(), context.getRuleset(), new LogEntry(Map.of(Attribute.TARGET_POSITION, position)));
                     return lootCondition.test(testContext).isEmpty();
                 });
 

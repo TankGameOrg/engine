@@ -10,7 +10,8 @@ import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.definition.player.TimedPlayerConditionRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
 import pro.trevor.tankgame.rule.impl.shared.LootTables;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.player.Move;
+import pro.trevor.tankgame.rule.impl.shared.player.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
@@ -68,7 +69,7 @@ public class DefaultV5RulesetRegister extends BaseRulesetRegister implements IRu
         PlayerRuleset playerRules = ruleset.getPlayerRules();
 
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.PROPOSED_SHOOT_V5, TIMEOUT));
-        playerRules.add(new TimedPlayerConditionRule(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1), TIMEOUT));
+        playerRules.add(new Move(Attribute.ACTION_POINTS, 1));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getShareGoldWithTaxRule(1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.buyActionWithGold(3, 1), TIMEOUT));
         playerRules.add(new TimedPlayerConditionRule(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 5), TIMEOUT));

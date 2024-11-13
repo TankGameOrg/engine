@@ -2,7 +2,7 @@ package pro.trevor.tankgame.rule.council;
 
 import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.player.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.meta.PlayerRef;

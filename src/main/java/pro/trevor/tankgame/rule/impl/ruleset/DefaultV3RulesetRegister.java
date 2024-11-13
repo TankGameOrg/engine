@@ -8,7 +8,8 @@ import pro.trevor.tankgame.rule.definition.enforcer.MaximumEnforcer;
 import pro.trevor.tankgame.rule.definition.enforcer.MinimumEnforcer;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleset;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.player.Move;
+import pro.trevor.tankgame.rule.impl.shared.player.PlayerRules;
 import pro.trevor.tankgame.rule.impl.shared.TickRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Board;
@@ -63,7 +64,7 @@ public class DefaultV3RulesetRegister extends BaseRulesetRegister implements IRu
         playerRules.add(PlayerRules.BUY_ACTION_WITH_GOLD_PLUS_DISCOUNT);
         playerRules.add(PlayerRules.getUpgradeRangeRule(Attribute.GOLD, 8));
         playerRules.add(PlayerRules.getShareGoldWithTaxToCofferRule(1));
-        playerRules.add(PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1));
+        playerRules.add(new Move(Attribute.ACTION_POINTS, 1));
         playerRules.add(PlayerRules.SHOOT_V3);
 
         playerRules.add(PlayerRules.getCofferCostStimulusRule(3));

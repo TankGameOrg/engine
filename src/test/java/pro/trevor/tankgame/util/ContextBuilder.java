@@ -37,6 +37,6 @@ public class ContextBuilder {
     }
 
     public PlayerRuleContext finish() {
-        return new PlayerRuleContext(state, subject, logEntry);
+        return new PlayerRuleContext(state, subject, null, null, logEntry);
     }
 }

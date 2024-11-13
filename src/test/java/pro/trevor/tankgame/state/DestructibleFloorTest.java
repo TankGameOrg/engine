@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.definition.ConditionalRule;
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.impl.shared.ConditionalRules;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.player.Move;
+import pro.trevor.tankgame.rule.impl.shared.player.PlayerRules;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
 import pro.trevor.tankgame.state.board.floor.DestructibleFloor;
@@ -138,7 +139,7 @@ public class DestructibleFloorTest {
         DestructibleFloor floor = GetTestFloor(new Position("B1"), 1, 3);
         s.getBoard().putFloor(floor);
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
-        IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
+        IPlayerRule moveRule = new Move(Attribute.ACTION_POINTS, 1);
 
         // Move onto destructible floor, then move past it
         moveRule.apply(
@@ -213,7 +214,7 @@ public class DestructibleFloorTest {
 
         IPlayerRule shootRule = PlayerRules.SHOOT_V4;
         ConditionalRule<BasicWall> destroyWallRule = ConditionalRules.DESTROY_WALL_ON_ZERO_DURABILITY;
-        IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
+        IPlayerRule moveRule = new Move(Attribute.ACTION_POINTS, 1);
 
         // Shoot once, destroying the wall
         shootRule.apply(

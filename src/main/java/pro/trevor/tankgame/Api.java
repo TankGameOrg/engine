@@ -50,7 +50,7 @@ public class Api {
                 throw new Error(result.getError().toString());
             }
 
-            PlayerRuleContext context = getContextForLogEntry(logEntry);
+            PlayerRuleContext context = getContextForLogEntry(logEntry, result.getValue(), ruleset);
             result.getValue().apply(context);
         }
 
@@ -71,7 +71,7 @@ public class Api {
                 return List.of(result.getError());
             }
 
-            PlayerRuleContext context = getContextForLogEntry(logEntry);
+            PlayerRuleContext context = getContextForLogEntry(logEntry, result.getValue(), ruleset);
             return result.getValue().canApply(context);
         }
     }
@@ -87,8 +87,8 @@ public class Api {
         return Result.ok(optionalRule.get());
     }
 
-    private PlayerRuleContext getContextForLogEntry(LogEntry logEntry) {
-        return new PlayerRuleContext(state, logEntry.getUnsafe(Attribute.SUBJECT), logEntry);
+    private PlayerRuleContext getContextForLogEntry(LogEntry logEntry, IPlayerRule rule, Ruleset ruleset) {
+        return new PlayerRuleContext(state, logEntry.getUnsafe(Attribute.SUBJECT), rule, ruleset, logEntry);
     }
 
     public List<PossibleAction> getPossibleActions(PlayerRef subject) {
@@ -101,7 +101,7 @@ public class Api {
 
         for (IPlayerRule rule : rules) {
             // Check if the rule is applicable to this (state, player) combination
-            PlayerRuleContext context = new PlayerRuleContext(state, subject);
+            PlayerRuleContext context = new PlayerRuleContext(state, subject, rule, ruleset);
             List<PlayerRuleError> canApplyErrors = rule.canApply(context);
 
             List<PlayerRuleError> errors = canApplyErrors.stream()
@@ -110,7 +110,7 @@ public class Api {
                 .toList();
 
             // If this action is not applicable to the current player don't send it to UI
-            if(canApplyErrors.stream().filter((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE).findAny().isPresent()) {
+            if(canApplyErrors.stream().anyMatch((error) -> error.getCategory() == PlayerRuleError.Category.NOT_APPLICABLE)) {
                 continue;
             }
 

@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import pro.trevor.tankgame.rule.definition.player.IPlayerRule;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
-import pro.trevor.tankgame.rule.impl.shared.PlayerRules;
+import pro.trevor.tankgame.rule.impl.shared.player.Move;
+import pro.trevor.tankgame.rule.impl.shared.player.PlayerRules;
 import pro.trevor.tankgame.state.State;
 import pro.trevor.tankgame.state.attribute.Attribute;
 import pro.trevor.tankgame.state.board.Position;
@@ -37,7 +38,7 @@ public class UnwalkableFloorTest {
         State s = TestUtilities.generateBoard(3, 2, t);
         s.getBoard().putFloor(new UnwalkableFloor(new Position("B2")));
 
-        IPlayerRule moveRule = PlayerRules.getMoveRule(Attribute.ACTION_POINTS, 1);
+        IPlayerRule moveRule = new Move(Attribute.ACTION_POINTS, 1);
         assertFalse(moveRule.canApply(makeContext(s, t.getPlayerRef(), new Position("B2"), true)).isEmpty());
     }
 
