@@ -1,7 +1,5 @@
 package pro.trevor.tankgame.util;
 
-import pro.trevor.tankgame.state.board.Position;
-
 import java.util.Objects;
 
 public record PointF(float x, float y) {

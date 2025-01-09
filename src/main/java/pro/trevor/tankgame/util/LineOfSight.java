@@ -1,7 +1,6 @@
 package pro.trevor.tankgame.util;
 
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.board.Position;
 
 import java.util.HashSet;
 import java.util.Set;

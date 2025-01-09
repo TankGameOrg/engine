@@ -2,26 +2,22 @@ package pro.trevor.tankgame.state.board;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.state.attribute.Codec;
-import pro.trevor.tankgame.state.board.floor.UnwalkableFloor;
-import pro.trevor.tankgame.state.board.floor.IFloor;
+import pro.trevor.tankgame.attribute.Codec;
+import pro.trevor.tankgame.attribute.Entity;
+import pro.trevor.tankgame.state.board.floor.ImpassibleFloor;
 import pro.trevor.tankgame.state.board.floor.WalkableFloor;
-import pro.trevor.tankgame.state.board.unit.IUnit;
 import pro.trevor.tankgame.state.board.unit.EmptyUnit;
-import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.IGatherable;
+import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
+import pro.trevor.tankgame.util.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @JsonType(name = "Board")
-public class Board implements IMetaElement, IGatherable {
+public class Board implements IJsonObject, Entity {
 
     private final IUnit[][] unitBoard;
     private final IFloor[][] floorBoard;
@@ -110,10 +106,6 @@ public class Board implements IMetaElement, IGatherable {
         return getElementOnBoard(floorBoard, p);
     }
 
-    public Optional<IPlayerElement> getPlayerElement(PlayerRef playerRef) {
-        return gatherUnits(IPlayerElement.class).stream().filter((p) -> p.getPlayerRef().equals(playerRef) ).findAny();
-    }
-
     // Returns the unit at the position if there is one.
     // If there is no unit at the position, then the floor is returned.
     public Optional<IElement> getUnitOrFloor(Position p) {
@@ -124,7 +116,7 @@ public class Board implements IMetaElement, IGatherable {
         return Optional.ofNullable(floor);
     }
 
-    public <T> List<T> gatherUnits(Class<T> t) {
+    public <T> Stream<T> gatherUnits(Class<T> t) {
         List<T> output = new ArrayList<>();
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
@@ -134,10 +126,10 @@ public class Board implements IMetaElement, IGatherable {
                 }
             }
         }
-        return output;
+        return output.stream();
     }
 
-    public <T> List<T> gatherFloors(Class<T> t) {
+    public <T> Stream<T> gatherFloors(Class<T> t) {
         List<T> output = new ArrayList<>();
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
@@ -147,42 +139,16 @@ public class Board implements IMetaElement, IGatherable {
                 }
             }
         }
-        return output;
+        return output.stream();
     }
 
-    @Override
-    public <T> List<T> gather(Class<T> t) {
-        if (Position.class.isAssignableFrom(t)) {
-            List<T> positions = new ArrayList<>();
-            for (int y = 0; y < height; ++y) {
-                for (int x = 0; x < width; ++x) {
-                    positions.add((T) new Position(x, y));
-                }
-            }
-            return positions;
-        }
-
-        if (IUnit.class.isAssignableFrom(t)) {
-            return gatherUnits(t);
-        } else if (IFloor.class.isAssignableFrom(t)) {
-            return gatherFloors(t);
-        } else {
-            throw new Error("Unexpected class: " + t.getSimpleName());
-        }
-    }
-
-    @Override
-    public List<Object> gatherAll() {
-        return Stream.concat(gatherAllElements().stream(), gather(Position.class).stream()).collect(Collectors.toList());
-    }
-
-    public List<IElement> gatherAllElements() {
-        return Stream.concat(gather(IUnit.class).stream(), gather(IFloor.class).stream()).collect(Collectors.toList());
+    public Stream<Object> gather() {
+        return Stream.concat(gatherUnits(IElement.class), gatherFloors(IElement.class));
     }
 
     public boolean isWalkable(Position p) {
         return (getUnit(p).orElse(null) instanceof EmptyUnit)
-                && (getFloor(p).orElse(new UnwalkableFloor(p)).isWalkable(this));
+                && (getFloor(p).orElse(new ImpassibleFloor(p)).isWalkable(this));
     }
 
     /**
@@ -240,17 +206,16 @@ public class Board implements IMetaElement, IGatherable {
         return '\n' + toUnitString() + '\n' + toFloorString();
     }
 
-    @Override
     public JSONObject toJson() {
         JSONObject output = new JSONObject();
         output.put("width", width);
         output.put("height", height);
-        output.put("units", gather(IUnit.class).stream()
+        output.put("units", gather(IUnit.class)
             .filter(unit -> !unit.getClass().equals(EmptyUnit.class))
-            .map(unit -> unit.toJson()).toList());
-        output.put("floors", gather(IFloor.class).stream()
+            .map(IJsonObject::toJson).toList());
+        output.put("floors", gather(IFloor.class)
             .filter(floor -> !floor.getClass().equals(WalkableFloor.class))
-            .map(floor -> floor.toJson()).toList());
+            .map(IJsonObject::toJson).toList());
         return output;
     }
 

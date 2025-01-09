@@ -1,11 +1,9 @@
 package pro.trevor.tankgame.state.meta;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.rule.type.IMetaElement;
-import pro.trevor.tankgame.rule.type.IPlayerElement;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeList;
-import pro.trevor.tankgame.state.attribute.AttributeContainer;
+import pro.trevor.tankgame.attribute.Attribute;
+import pro.trevor.tankgame.attribute.ListEntity;
+import pro.trevor.tankgame.attribute.AttributeEntity;
 import pro.trevor.tankgame.util.IJsonObject;
 import pro.trevor.tankgame.util.JsonType;
 
@@ -13,23 +11,23 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @JsonType(name = "Council")
-public class Council extends AttributeContainer implements IPlayerElement, IMetaElement, IJsonObject {
+public class Council extends AttributeEntity implements IJsonObject {
 
     public Council() {
         super();
-        put(Attribute.COUNCILLORS, new AttributeList<>());
-        put(Attribute.SENATORS, new AttributeList<>());
+        put(Attribute.COUNCILLORS, new ListEntity<>());
+        put(Attribute.SENATORS, new ListEntity<>());
     }
 
     public Council(JSONObject json) {
         super(json);
     }
 
-    public AttributeList<PlayerRef> getCouncillors() {
+    public ListEntity<PlayerRef> getCouncillors() {
         return getUnsafe(Attribute.COUNCILLORS);
     }
 
-    public AttributeList<PlayerRef> getSenators() {
+    public ListEntity<PlayerRef> getSenators() {
         return getUnsafe(Attribute.SENATORS);
     }
 
@@ -47,10 +45,5 @@ public class Council extends AttributeContainer implements IPlayerElement, IMeta
 
     public boolean isPlayerOnCouncil(PlayerRef playerRef) {
         return allPlayersOnCouncil().stream().anyMatch(playerRef::equals);
-    }
-
-    @Override
-    public PlayerRef getPlayerRef() {
-        return new PlayerRef("Council");
     }
 }

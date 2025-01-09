@@ -3,11 +3,11 @@ package pro.trevor.tankgame.e2e;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.rule.impl.ruleset.DefaultV3RulesetRegister;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.attribute.Attribute;
+import pro.trevor.tankgame.util.Position;
 import pro.trevor.tankgame.state.board.floor.GoldMine;
 import pro.trevor.tankgame.state.board.floor.WalkableFloor;
-import pro.trevor.tankgame.state.board.unit.BasicWall;
+import pro.trevor.tankgame.state.board.unit.Wall;
 
 import java.util.Set;
 
@@ -84,8 +84,8 @@ public class TestEndToEndV3 {
 
     @Test
     public void testWallsOnBoardAtEndState() {
-        assertTypeOfUnitAtPosition(tester, new Position("D4"), BasicWall.class);
-        assertEquals(3, ((BasicWall) tester.getUnitAtPosition(new Position("D4"))).getUnsafe(Attribute.DURABILITY));
+        assertTypeOfUnitAtPosition(tester, new Position("D4"), Wall.class);
+        assertEquals(3, ((Wall) tester.getUnitAtPosition(new Position("D4"))).getUnsafe(Attribute.DURABILITY));
     }
 
 }

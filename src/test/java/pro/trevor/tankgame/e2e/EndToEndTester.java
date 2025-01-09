@@ -2,16 +2,15 @@ package pro.trevor.tankgame.e2e;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pro.trevor.tankgame.Api;
-import pro.trevor.tankgame.log.LogEntry;
+import pro.trevor.tankgame.rule.action.LogEntry;
 import pro.trevor.tankgame.rule.impl.ruleset.IRulesetRegister;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Codec;
+import pro.trevor.tankgame.attribute.Codec;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.floor.IFloor;
+import pro.trevor.tankgame.util.Position;
+import pro.trevor.tankgame.state.board.IFloor;
 import pro.trevor.tankgame.state.board.unit.Tank;
-import pro.trevor.tankgame.state.board.unit.IUnit;
+import pro.trevor.tankgame.state.board.IUnit;
 import pro.trevor.tankgame.state.meta.Council;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 
@@ -46,7 +45,7 @@ public class EndToEndTester {
     }
 
     public Tank getTankByPlayerName(String player) {
-        return (Tank) api.getState().getBoard().getPlayerElement(new PlayerRef(player)).get();
+        return api.getState().getTankForPlayerRef(new PlayerRef(player)).get();
     }
 
     public IFloor getFloorAtPosition(Position position) {

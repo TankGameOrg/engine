@@ -1,29 +1,28 @@
 package pro.trevor.tankgame.state.board.floor;
 
 import org.json.JSONObject;
-
 import pro.trevor.tankgame.state.board.Board;
 import pro.trevor.tankgame.util.Position;
 import pro.trevor.tankgame.util.JsonType;
 
-@JsonType(name = "WalkableFloor")
-public class WalkableFloor extends AbstractFloor {
+@JsonType(name = "ImpassibleFloor")
+public class ImpassibleFloor extends AbstractFloor {
 
-    public WalkableFloor(Position position) {
+    public ImpassibleFloor(Position position) {
         super(position);
     }
 
-    public WalkableFloor(JSONObject json) {
+    public ImpassibleFloor(JSONObject json) {
         super(json);
     }
 
     @Override
-    public char toBoardCharacter() {
-        return '_';
+    public boolean isWalkable(Board board) {
+        return false;
     }
 
     @Override
-    public boolean isWalkable(Board board) {
-        return true;
+    public char toBoardCharacter() {
+        return 'X';
     }
 }

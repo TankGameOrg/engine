@@ -3,11 +3,11 @@ package pro.trevor.tankgame.other;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pro.trevor.tankgame.state.board.Board;
-import pro.trevor.tankgame.state.board.Position;
-import pro.trevor.tankgame.state.board.unit.BasicWall;
+import pro.trevor.tankgame.util.Position;
+import pro.trevor.tankgame.state.board.unit.Wall;
 import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
-import pro.trevor.tankgame.util.Util;
+import pro.trevor.tankgame.util.MathUtil;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -22,13 +22,13 @@ public class PathfindingTest {
         board.putUnit(new Tank(new PlayerRef("Test"), player, Map.of()));
         for (Position wall : walls) {
             assert board.isValidPosition(wall);
-            board.putUnit(new BasicWall(wall, 1));
+            board.putUnit(new Wall(wall, 1));
         }
         return board;
     }
 
     private void testPossibleMovesIsExactly(Board board, Position start, int speed, Set<Position> moves) {
-        Set<Position> generatedMoves = Util.allPossibleMoves(board, start, speed);
+        Set<Position> generatedMoves = MathUtil.allPossibleMoves(board, start, speed);
         Assertions.assertEquals(moves, generatedMoves);
     }
 
@@ -105,7 +105,7 @@ public class PathfindingTest {
     public void testLongRangePathfinding() {
         Position start = new Position(0, 1);
         Board board = generateTestBoard(start, new Position(0, 0), new Position(1, 1));
-        Assertions.assertTrue(Util.allPossibleMoves(board, start, 3).contains(new Position(1, 0)));
+        Assertions.assertTrue(MathUtil.allPossibleMoves(board, start, 3).contains(new Position(1, 0)));
     }
 
 }

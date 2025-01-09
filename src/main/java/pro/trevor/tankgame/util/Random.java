@@ -1,11 +1,11 @@
 package pro.trevor.tankgame.util;
 
 import org.json.JSONObject;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.attribute.AttributeContainer;
+import pro.trevor.tankgame.attribute.Attribute;
+import pro.trevor.tankgame.attribute.AttributeEntity;
 
 @JsonType(name = "Random")
-public class Random extends AttributeContainer implements IRandom {
+public class Random extends AttributeEntity implements IRandom {
 
     protected static final long MULTIPLIER = 0x5DEECE66DL;
     protected static final long ADDEND = 0xBL;

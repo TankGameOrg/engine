@@ -1,10 +1,9 @@
 package pro.trevor.tankgame.util;
 
-import pro.trevor.tankgame.log.LogEntry;
+import pro.trevor.tankgame.rule.action.LogEntry;
 import pro.trevor.tankgame.rule.definition.player.PlayerRuleContext;
 import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.attribute.Attribute;
 import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 

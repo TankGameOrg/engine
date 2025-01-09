@@ -2,8 +2,7 @@ package pro.trevor.tankgame.util;
 
 import java.util.Map;
 
-import pro.trevor.tankgame.state.attribute.Attribute;
-import pro.trevor.tankgame.state.board.Position;
+import pro.trevor.tankgame.attribute.Attribute;
 import pro.trevor.tankgame.state.board.unit.Tank;
 import pro.trevor.tankgame.state.meta.PlayerRef;
 

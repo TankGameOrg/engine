@@ -1,17 +1,8 @@
 package pro.trevor.tankgame;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import pro.trevor.tankgame.log.LogEntry;
-import pro.trevor.tankgame.state.State;
-import pro.trevor.tankgame.ui.rpc.Cli;
-import pro.trevor.tankgame.ui.rpc.RpcHandler;
-
-import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.Optional;
 import java.util.Properties;
 
 public class Main {
@@ -19,44 +10,13 @@ public class Main {
     public static boolean DEBUG = false;
 
     public static void main(String[] args) {
-        if (args.length == 2 && (args[0].equals("--debug") || args[0].equals("-d"))) {
-            String rulesetName = args[1];
-            Optional<Api> maybeApi = RulesetRegistry.createApi(rulesetName);
-            if(maybeApi.isEmpty()) {
-                System.out.println("The ruleset " + rulesetName + " is not supported");
-                System.exit(1);
-            }
-            File initialFile = new File("example/initial-" + rulesetName + ".json");
-            File movesFile = new File("example/moves-" + rulesetName + ".json");
-            Api api = maybeApi.get();
-            DEBUG = true;
-            try {
-                String initialString = Files.readString(initialFile.toPath());
-                String movesString = Files.readString(movesFile.toPath());
-
-                JSONObject initial = new JSONObject(initialString);
-                JSONArray moves = new JSONArray(movesString);
-
-                api.setState(new State(initial));
-                System.out.println(api.getState().toJson().toString(2));
-
-                for (int i = 0; i < moves.length(); ++i) {
-                    JSONObject action = moves.getJSONObject(i);
-                    api.ingestAction(new LogEntry(action));
-                }
-                System.out.println(api.getState().toString());
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-                System.exit(1);
-            }
-        } else if (args.length == 1 && (args[0].equals("-v") || args[0].equals("--version"))) {
+        if (args.length == 1 && (args[0].equals("-v") || args[0].equals("--version"))) {
             Main.printVersion();
         } else if (args.length == 0) {
-            // REPL with the newest default ruleset
-            Cli cli = new Cli(new RpcHandler());
-            cli.startRepl();
+            // TODO
+            System.err.println("CLI is not yet implemented");
         } else {
-            System.err.println("Expected 0 or 1 or 2 arguments:\n    tankgame <-d|--debug default-v3|default-v4|-v|--version>");
+            System.err.println("Expected 0 or 1 arguments:\n    tankgame <-v|--version>");
         }
     }
 
@@ -67,7 +27,6 @@ public class Main {
         JSONObject versionInfo = new JSONObject();
         String version = Main.class.getPackage().getImplementationVersion();
         versionInfo.put("version", version);
-        versionInfo.put("supported_rulesets", RulesetRegistry.getSupportedRulesetNames());
 
         String prettyVersion = "Engine " + version;
 
@@ -80,8 +39,8 @@ public class Main {
                 prettyVersion += " @ " + gitInfo.getProperty("git.commit.id.describe");
             }
         }
-        catch(Exception ex) {
-            System.err.println("Failed to read git info: " + ex);
+        catch(Exception e) {
+            System.err.println("Failed to read git info: " + e.getMessage());
         }
 
         versionInfo.put("pretty_version", prettyVersion);
